@@ -12,6 +12,10 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "ngx-sfc-common": [
+        "dist/ngx-sfc-common/ngx-sfc-common",
+        "dist/ngx-sfc-common"
+      ],
       "ngx-sfc-components": [
         "dist/ngx-sfc-components/ngx-sfc-components",
         "dist/ngx-sfc-components"
