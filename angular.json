@@ -3,5 +3,37 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "ngx-sfc-inputs": {
+      "projectType": "library",
+      "root": "projects/ngx-sfc-inputs",
+      "sourceRoot": "projects/ngx-sfc-inputs/src",
+      "prefix": "sfc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-sfc-inputs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-sfc-inputs/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-sfc-inputs/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-sfc-inputs/src/test.ts",
+            "tsConfig": "projects/ngx-sfc-inputs/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-sfc-inputs/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-sfc-inputs"
 }

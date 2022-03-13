@@ -11,6 +11,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "ngx-sfc-inputs": [
+        "dist/ngx-sfc-inputs/ngx-sfc-inputs",
+        "dist/ngx-sfc-inputs"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
