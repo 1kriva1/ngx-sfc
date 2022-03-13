@@ -12,6 +12,10 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "ngx-sfc-components": [
+        "dist/ngx-sfc-components/ngx-sfc-components",
+        "dist/ngx-sfc-components"
+      ],
       "ngx-sfc-inputs": [
         "dist/ngx-sfc-inputs/ngx-sfc-inputs",
         "dist/ngx-sfc-inputs"
