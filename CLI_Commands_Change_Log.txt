@@ -1,0 +1,15 @@
+C:\Users\andriik\AppData\Local\Temp\ng-haPJyG\angular-errors.log
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+ng new sfc --no-create-application --prefix sfc --skip-install --style scss -d
+
+ng generate library ngx-sfc-inputs --prefix sfc --skip-install true -d
+
+ng generate library ngx-sfc-components --prefix sfc --skip-install true -d
+
+ng generate library ngx-sfc-common --prefix sfc --skip-install true -d
+
+ng generate application sfc-inputs-app --prefix sfc-inputs-app --skip-install true --style scss --skip-tests true --routing true -d
+
+ng generate application sfc-components-app --prefix sfc-components-app --skip-install true --style scss --skip-tests true --routing true -d

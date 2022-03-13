@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",    
+    "start": "ng serve",
     "start:inputs": "ng serve sfc-inputs-app",
     "start:components": "ng serve sfc-components-app",
     "build": "ng build",
+    "build:common": "ng build ngx-sfc-common",
     "build:inputs": "ng build ngx-sfc-inputs",
     "build:components": "ng build ngx-sfc-components",
-    "build:all": "ng build ngx-sfc-inputs && ng build ngx-sfc-components",
+    "build:all": "ng build ngx-sfc-common && ng build ngx-sfc-inputs && ng build ngx-sfc-components",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
