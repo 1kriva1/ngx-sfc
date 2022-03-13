@@ -283,6 +283,37 @@
           }
         }
       }
+    },
+    "ngx-sfc-components": {
+      "projectType": "library",
+      "root": "projects/ngx-sfc-components",
+      "sourceRoot": "projects/ngx-sfc-components/src",
+      "prefix": "sfc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-sfc-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-sfc-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-sfc-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-sfc-components/src/test.ts",
+            "tsConfig": "projects/ngx-sfc-components/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-sfc-components/karma.conf.js"
+          }
+        }
+      }
     }},
   "defaultProject": "sfc-inputs-app"
 }
