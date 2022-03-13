@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:components": "ng serve sfc-components-app",
+    "start:inputs": "ng serve sfc-inputs-app",
     "build": "ng build",
     "build:inputs": "ng build ngx-sfc-inputs",
     "watch": "ng build --watch --configuration development",
