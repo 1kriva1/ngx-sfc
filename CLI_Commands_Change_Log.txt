@@ -41,3 +41,29 @@ ng generate class utils/index --project ngx-sfc-common --skip-tests true -d
 ng generate class constants/index --project ngx-sfc-common --skip-tests true -d
 
 ng generate class enums/index --project ngx-sfc-common --skip-tests true -d
+
+Services:
+
+ng generate service services/document-ref --project ngx-sfc-common --skip-tests true -d
+
+ng generate service services/window-ref --project ngx-sfc-common --skip-tests true -d
+
+ng generate service services/resize --project ngx-sfc-common --skip-tests true -d
+
+ng generate class services/index --project ngx-sfc-common --skip-tests true -d
+
+Directives:
+
+ng generate directive directives/click-outside --project ngx-sfc-common --skip-tests false --export true --flat false -d
+
+ng generate class directives/click-outside/click-outside --project ngx-sfc-common --skip-tests true --type event -d
+
+ng generate directive directives/show-hide-element --project ngx-sfc-common --skip-tests false --export true --flat false -d
+
+ng generate directive directives/throw-element-on-hover --project ngx-sfc-common --skip-tests false --export true --flat false -d
+
+ng generate directive directives/template-reference --project ngx-sfc-common --skip-tests false --export true --flat false -d
+
+ng generate directive directives/mouse-down --project ngx-sfc-common --skip-tests false --export true --flat false -d
+
+ng generate class directives/index --project ngx-sfc-common --skip-tests true -d
