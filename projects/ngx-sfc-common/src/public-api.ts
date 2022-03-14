@@ -3,3 +3,6 @@
  */
 
 export * from './lib/ngx-sfc-common.module';
+export * from './lib/constants';
+export * from './lib/enums';
+export * from './lib/utils';
