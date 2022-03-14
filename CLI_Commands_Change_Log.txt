@@ -13,3 +13,31 @@ ng generate library ngx-sfc-common --prefix sfc --skip-install true -d
 ng generate application sfc-inputs-app --prefix sfc-inputs-app --skip-install true --style scss --skip-tests true --routing true -d
 
 ng generate application sfc-components-app --prefix sfc-components-app --skip-install true --style scss --skip-tests true --routing true -d
+
+Utils:
+
+ng generate class utils/collections --project ngx-sfc-common --skip-tests true --type utils -d
+
+ng generate class utils/common --project ngx-sfc-common --skip-tests true --type utils -d
+
+ng generate class utils/string --project ngx-sfc-common --skip-tests true --type utils -d
+
+ng generate class utils/date-time --project ngx-sfc-common --skip-tests true --type utils -d
+
+ng generate class utils/file --project ngx-sfc-common --skip-tests true --type utils -d
+
+ng generate class utils/ui --project ngx-sfc-common --skip-tests true --type utils -d
+
+ng generate class constants/common --project ngx-sfc-common --skip-tests true --type constants -d
+
+ng generate class constants/date-time --project ngx-sfc-common --skip-tests true --type constants -d
+
+ng generate class constants/ui --project ngx-sfc-common --skip-tests true --type constants -d
+
+ng generate class enums/common --project ngx-sfc-common --skip-tests true --type enum -d
+
+ng generate class utils/index --project ngx-sfc-common --skip-tests true -d
+
+ng generate class constants/index --project ngx-sfc-common --skip-tests true -d
+
+ng generate class enums/index --project ngx-sfc-common --skip-tests true -d
