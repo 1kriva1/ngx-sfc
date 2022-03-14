@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ResizeService, ClickOutsideEvent } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-inputs-app-root',
