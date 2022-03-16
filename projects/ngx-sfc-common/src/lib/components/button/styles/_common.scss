@@ -1,0 +1,11 @@
+@mixin border() {
+    border: solid 2px;
+    @include themeValue(color, $color-default, $color-dark, '&:not(:hover):not(.disabled)');
+    @include themeValue(border-color, $color-default, $color-dark, '&:not(:hover):not(.disabled)');
+}
+
+@mixin filled($color) {
+    color: $color-filled-default !important;
+    border-color: $color;
+    background: $color;
+}

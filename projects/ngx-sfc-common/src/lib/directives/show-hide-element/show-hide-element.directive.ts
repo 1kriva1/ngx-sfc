@@ -18,7 +18,7 @@ export class ShowHideElementDirective {
 
   @Input('transition-delay')
   set transitionDelay(delay: number) {
-    this.style.transition = this.getTransitionValue(delay);;
+    this.style.transition = this.getTransitionValue(delay);
   };
 
   private get style(): any {

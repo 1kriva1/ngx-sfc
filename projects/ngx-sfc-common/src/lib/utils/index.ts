@@ -44,10 +44,8 @@ export {
 } from './file.utils'
 
 export {
-    getCssLikePx,
-    getCssLikePercentage,
-    getCssLikeDegrees,
-    getValueFromCssLikePx,
+    getCssLikeValue,
+    getValueFromCssLikeValue,
     addClasses,
     removeClasses
 } from './ui.utils'

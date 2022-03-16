@@ -1,0 +1,94 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Bordered:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-button></sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button text="Custom text"></sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button text="Custom text Custom text Custom text Custom text">
+            </sfc-button>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-button icon-before="fa fa-star" text=""></sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button icon-before="fa fa-star" text="Custom text">
+            </sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button icon-before="fa fa-star" text="Custom text" icon-after="fa fa-car">
+            </sfc-button>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-button [disabled]="true" icon-after="fa fa-car" text="Disabled text">
+            </sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button [disabled]="true" icon-after="fa fa-car" text="">
+            </sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button [disabled]="true" text="Disabled text Disabled text Disabled text Disabled text">
+            </sfc-button>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-button text="Small text" [sfc-component-size]="ComponentSize.Small">
+            </sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button text="Medium text" [sfc-component-size]="ComponentSize.Medium">
+            </sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button text="Large text" [sfc-component-size]="ComponentSize.Large">
+            </sfc-button>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-button text="Custom size text" [sfc-component-size]="ComponentSize.Custom"
+                [custom-component-size]="0.2">
+            </sfc-button>
+        </div>
+
+        <div class="component-column">
+            <sfc-button text="Custom size text" [sfc-component-size]="ComponentSize.Custom" [custom-component-size]="4"
+                icon-after="fa fa-car">
+            </sfc-button>
+        </div>
+
+    </div>
+</div>

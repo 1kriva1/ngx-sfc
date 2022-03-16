@@ -6,26 +6,9 @@ import { isDefined } from "./common.utils";
  * @param value Value as number
  * @returns Value as '1px'
  */
-export function getCssLikePx(value: number): string {
-    return value + UIConstants.CSS_PIXELS;
-}
-
-/**
- * Return CSS like value
- * @param value Value as number
- * @returns Value as '1%'
- */
-export function getCssLikePercentage(value: number): string {
-    return value + UIConstants.CSS_PERCENTAGE;
-}
-
-/**
- * Return CSS like value
- * @param value Value as number
- * @returns Value as '1deg'
- */
-export function getCssLikeDegrees(value: number): string {
-    return value + UIConstants.CSS_DEGREES;
+export function getCssLikeValue(value: number,
+    type: string = UIConstants.CSS_PIXELS): string {
+    return value + type;
 }
 
 /**
@@ -33,8 +16,9 @@ export function getCssLikeDegrees(value: number): string {
  * @param value CSS like value
  * @returns Number value
  */
-export function getValueFromCssLikePx(value: string): number {
-    return +value.replace(UIConstants.CSS_PIXELS, CommonConstants.EMPTY_STRING);
+export function getValueFromCssLikeValue(value: string,
+    type: string = UIConstants.CSS_PIXELS): number {
+    return +value.replace(type, CommonConstants.EMPTY_STRING);
 }
 
 /**

@@ -1,0 +1,35 @@
+@import "./color-variables";
+
+.component-container {
+    padding: 0 20px;
+
+    > .title {
+        text-align: center;
+        color: $color-dark;
+
+        :host-context(.sfc-dark-theme) & {
+            color: $color-common;
+        }
+
+        h3 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    .component-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+
+        .component-column {
+            display: flex;
+            justify-content: center;
+            flex-basis: 30%;
+            padding: 5px;
+        }
+    }
+}

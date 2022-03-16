@@ -5,5 +5,6 @@ export { ShowHideElementDirective } from './show-hide-element/show-hide-element.
 export { ThrowElementOnHoverDirective }
     from './throw-element-on-hover/throw-element-on-hover.directive';
 export { TemplateReferenceDirective }
-    from './template-reference/template-reference.directive'
-export { MouseDownDirective } from './mouse-down/mouse-down.directive'
+    from './template-reference/template-reference.directive';
+export { MouseDownDirective } from './mouse-down/mouse-down.directive';
+export { ComponentSizeDirective } from './component-size/component-size.directive'
