@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { ResizeService, ClickOutsideEvent } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-inputs-app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'sfc-inputs-app';

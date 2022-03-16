@@ -1,13 +1,13 @@
-@mixin squareSize($fontSize) {
-    width: $fontSize * 5;
-    height: $fontSize * 5;
+@mixin square-size($fontSize) {
+  width: $fontSize * 5;
+  height: $fontSize * 5;
 }
 
-@mixin themeValue($property, $value-common, $value-dark, $selector: &) {
-    :host-context(.sfc-default-theme) #{$selector} {
-        #{$property}: $value-common;
-    }
-    :host-context(.sfc-dark-theme) #{$selector} {
-        #{$property}: $value-dark;
-    }
+@mixin theme-value($property, $value-common, $value-dark, $selector: &) {
+  :host-context(.sfc-default-theme) #{$selector} {
+    #{$property}: $value-common;
+  }
+  :host-context(.sfc-dark-theme) #{$selector} {
+    #{$property}: $value-dark;
+  }
 }

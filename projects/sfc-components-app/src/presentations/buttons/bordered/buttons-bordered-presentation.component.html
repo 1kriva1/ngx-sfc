@@ -23,16 +23,16 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-button icon-before="fa fa-star" text=""></sfc-button>
+            <sfc-button iconBefore="fa fa-star" text=""></sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button icon-before="fa fa-star" text="Custom text">
+            <sfc-button iconBefore="fa fa-star" text="Custom text">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button icon-before="fa fa-star" text="Custom text" icon-after="fa fa-car">
+            <sfc-button iconBefore="fa fa-star" text="Custom text" iconAfter="fa fa-car">
             </sfc-button>
         </div>
 
@@ -41,12 +41,12 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-button [disabled]="true" icon-after="fa fa-car" text="Disabled text">
+            <sfc-button [disabled]="true" iconAfter="fa fa-car" text="Disabled text">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button [disabled]="true" icon-after="fa fa-car" text="">
+            <sfc-button [disabled]="true" iconAfter="fa fa-car" text="">
             </sfc-button>
         </div>
 
@@ -60,17 +60,17 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-button text="Small text" [sfc-component-size]="ComponentSize.Small">
+            <sfc-button text="Small text" [sfcComponentSize]="ComponentSize.Small">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button text="Medium text" [sfc-component-size]="ComponentSize.Medium">
+            <sfc-button text="Medium text" [sfcComponentSize]="ComponentSize.Medium">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button text="Large text" [sfc-component-size]="ComponentSize.Large">
+            <sfc-button text="Large text" [sfcComponentSize]="ComponentSize.Large">
             </sfc-button>
         </div>
 
@@ -79,14 +79,14 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-button text="Custom size text" [sfc-component-size]="ComponentSize.Custom"
-                [custom-component-size]="0.2">
+            <sfc-button text="Custom size text" [sfcComponentSize]="ComponentSize.Custom"
+                [customSize]="0.2">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button text="Custom size text" [sfc-component-size]="ComponentSize.Custom" [custom-component-size]="4"
-                icon-after="fa fa-car">
+            <sfc-button text="Custom size text" [sfcComponentSize]="ComponentSize.Custom" [customSize]="4"
+                iconAfter="fa fa-car">
             </sfc-button>
         </div>
 

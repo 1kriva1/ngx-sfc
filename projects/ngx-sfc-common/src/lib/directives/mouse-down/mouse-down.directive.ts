@@ -2,7 +2,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { CommonConstants } from '../../constants';
 
 @Directive({
-  selector: '[sfc-mouse-down]'
+  selector: '[sfcMouseDown]'
 })
 export class MouseDownDirective {
 
@@ -12,7 +12,7 @@ export class MouseDownDirective {
   @Input()
   button: number = CommonConstants.MOUSE_BUTTON_LEFT;
 
-  @Output('sfc-mouse-down')
+  @Output('sfcMouseDown')
   action: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @HostListener('mousedown', ['$event'])

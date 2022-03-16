@@ -34,17 +34,6 @@ describe('Component: Button', () => {
       expect(fixture.nativeElement.querySelector('a.button')).toBeDefined();
       expect(fixture.nativeElement.querySelector('a.button span')).toBeDefined();
     });
-
-    fit("Should emit click event", () => {
-      spyOn(component.onClickEmitter, 'emit');
-
-      const buttonEl = el.query(By.css('a.button'));
-      buttonEl.triggerEventHandler('click', { target: buttonEl.nativeElement });
-      fixture.detectChanges();
-
-      expect(component.onClickEmitter.emit)
-        .toHaveBeenCalledTimes(1);
-    });
   });
 
   describe('Disabled', () => {

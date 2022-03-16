@@ -1,13 +1,14 @@
 .button {
-    &.circled {
-        @include border();
-        @include squareSize(1em);
-        border-radius: 50%;
+  &.circled {
+    @include border;
+    @include square-size(1em);
 
-        .text {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-        }
+    border-radius: 50%;
+
+    .text {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
+  }
 }
