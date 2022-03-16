@@ -29,7 +29,7 @@
     "hooks": {
       "pre-commit": "npm run test"
     }
-},
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.0",
