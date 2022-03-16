@@ -25,11 +25,6 @@
     "lint:styles": "npx stylelint \"**/*.scss\" --fix",
     "lint:all": "npm run lint:es:all && npm run lint:styles"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test"
-    }
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.0",
