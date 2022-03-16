@@ -15,7 +15,7 @@ export class ButtonComponent {
   @Input()
   text: string = this.BUTTON_DEFAULT_TEXT;
 
-  @Input('icon-ddefore')
+  @Input('icon-ddaefore')
   iconBefore: string | null = null;
 
   @Input()
