@@ -17,6 +17,7 @@
     "test:inputs": "ng test ngx-sfc-inputs",
     "test:components": "ng test ngx-sfc-components",
     "test:all": "npm run test:common && npm run test:inputs && npm run test:components",
+    "test:no-browser:all": "ng test ngx-sfc-common --watch=false --browsers=ChromeHeadless && ng test ngx-sfc-inputs --watch=false --browsers=ChromeHeadless && ng test ngx-sfc-components --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:es:common": "ng lint ngx-sfc-common",
     "lint:es:inputs": "ng lint ngx-sfc-inputs",
