@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./shared/styles/color-variables";
+
+button {
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    width: 90px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    background: $button-background-default;
+    color: $color-common;
+
+    &:hover {
+        background: $button-background-hover;
+    }
+
+    &.active {
+        background-color: $button-background-active;
+    }
+}
+
+.component-routing {
+    display: flex;
+    flex-wrap: wrap;
+
+    .routing-link {
+        &.menu-active {
+            button {
+                background: $button-background-active;
+                color: $color-dark;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .component-routing {
+        justify-content: center;
+    }
+}

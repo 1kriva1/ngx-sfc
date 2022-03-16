@@ -1,0 +1,53 @@
+@import '../shared/styles/variables';
+@import '../shared/styles/mixins';
+@import './styles/common';
+@import './styles/texted';
+@import './styles/bordered';
+@import './styles/filled';
+@import './styles/rounded';
+@import './styles/circled';
+
+:host {
+    display: inline-block;
+    font-size: 1em;
+}
+
+.button {
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 0.8em;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.5s ease, border-color 0.5s ease, background 0.5s ease;
+
+    &:hover {
+        color: $color-hover-default;
+        border-color: $color-hover-default;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        @include themeValue(color, $color-disabled-default, $color-disabled-dark);
+        @include themeValue(border-color, $color-disabled-default, $color-disabled-dark);
+    }
+
+    .icon {
+        padding: 3px;
+    }
+
+    .text {
+        padding: 3px;
+        white-space: initial;
+
+        &:empty {
+            display: none;
+        }
+    }
+}

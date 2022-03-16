@@ -66,4 +66,18 @@ ng generate directive directives/template-reference --project ngx-sfc-common --s
 
 ng generate directive directives/mouse-down --project ngx-sfc-common --skip-tests false --export true --flat false -d
 
+ng generate directive directives/component-size --project ngx-sfc-common --skip-tests false --export true --flat false -d
+
 ng generate class directives/index --project ngx-sfc-common --skip-tests true -d
+
+Components:
+
+ng generate component components/button --project ngx-sfc-common --export true --flat false --style scss -d
+
+ng generate class components/button --project ngx-sfc-common --skip-tests true --type enum -d
+
+ng generate class components/index --project ngx-sfc-common --skip-tests true -d
+
+Demo:
+
+ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d

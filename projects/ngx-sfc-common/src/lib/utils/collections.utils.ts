@@ -8,8 +8,8 @@ import { isNullOrEmptyString } from "./string.utils";
  * @param collection Array of items
  * @returns True if collection not empty
  */
-export function any<T>(collection: Array<T>): boolean {
-    return isDefined(collection) && collection.length > 0;
+export function any<T>(collection: Array<T>| null): boolean {
+    return isDefined(collection) && (collection as Array<T>).length > 0;
 }
 
 /**

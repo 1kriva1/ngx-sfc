@@ -1,0 +1,26 @@
+<div class="buttons-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="bordered"
+                [queryParams]="{theme: theme}">Bordered</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="filled" [queryParams]="{theme: theme}">Filled</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="rounded" [queryParams]="{theme: theme}">Rounded</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="texted" [queryParams]="{theme: theme}">Texted</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="circled" [queryParams]="{theme: theme}">Circled</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="rounded-filled" [queryParams]="{theme: theme}">Rounded &
+                Filled</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

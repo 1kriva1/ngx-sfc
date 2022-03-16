@@ -1,0 +1,13 @@
+.button {
+    &.filled {
+        @include filled($color-default);
+
+        &:hover {
+            @include filled($color-hover-filled-default);
+        }
+
+        &.disabled {
+            @include filled($color-disabled-default);
+        }
+    }
+}

@@ -1,0 +1,13 @@
+.button {
+    &.circled {
+        @include border();
+        @include squareSize(1em);
+        border-radius: 50%;
+
+        .text {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+}

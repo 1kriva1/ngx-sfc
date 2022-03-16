@@ -5,8 +5,11 @@ import {
   ShowHideElementDirective,
   ThrowElementOnHoverDirective,
   TemplateReferenceDirective,
-  MouseDownDirective
+  MouseDownDirective,
+  ComponentSizeDirective
 } from './directives';
+import { ButtonComponent } from './components'
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -15,9 +18,14 @@ import {
     ShowHideElementDirective,
     ThrowElementOnHoverDirective,
     TemplateReferenceDirective,
-    MouseDownDirective
+    MouseDownDirective,
+    ComponentSizeDirective,
+    // components
+    ButtonComponent,
+    
   ],
   imports: [
+    CommonModule
   ],
   exports: [
     // directives
@@ -25,7 +33,10 @@ import {
     ShowHideElementDirective,
     ThrowElementOnHoverDirective,
     TemplateReferenceDirective,
-    MouseDownDirective
+    MouseDownDirective,
+    ComponentSizeDirective,
+    // components
+    ButtonComponent    
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService]
 })

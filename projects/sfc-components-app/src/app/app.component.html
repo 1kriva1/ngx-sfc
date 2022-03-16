@@ -1,1 +1,30 @@
-SFC COMPONENTS APPLICATION
+<header>
+
+    <div class="routing-container">
+        <a routerLink="" class="logo">SFC components</a>
+        <div class="routing-links" routerLinkActive="menu-active">
+            <a routerLinkActive="menu-active" routerLink="buttons" [queryParams]="{theme: theme}">Buttons</a>
+        </div>
+    </div>
+
+</header>
+
+<main>
+
+    <div class="presentation-container" [ngClass]="theme == ThemeType.Default 
+        ? UIConstants.DEFAULT_THEME : UIConstants.DARK_THEME">
+        <div class="theme-switcher">
+            <button [class.active]="theme == ThemeType.Default" class="common"
+                (click)="changeTheme(ThemeType.Default)">Common</button>
+            <button [class.active]="theme == ThemeType.Dark" class="dark"
+                (click)="changeTheme(ThemeType.Dark)">Dark</button>
+        </div>
+
+        <div class="components-container">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+
+</main>

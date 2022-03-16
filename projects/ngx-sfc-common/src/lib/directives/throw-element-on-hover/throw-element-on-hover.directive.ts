@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { getCssLikePx } from '../../utils';
+import { getCssLikeValue } from '../../utils';
 
 @Directive({
   selector: '[sfc-throw-element-on-hover]'
@@ -24,6 +24,6 @@ export class ThrowElementOnHoverDirective {
   constructor(private el: ElementRef) { }
 
   private throw(value: number | null) {
-    this.style.transform = value ? `translateY(${getCssLikePx(value)})` : null;
+    this.style.transform = value ? `translateY(${getCssLikeValue(value)})` : null;
   }
 }

@@ -12,7 +12,11 @@
     "build:components": "ng build ngx-sfc-components",
     "build:all": "ng build ngx-sfc-common && ng build ngx-sfc-inputs && ng build ngx-sfc-components",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:common": "ng test ngx-sfc-common",
+    "test:inputs": "ng test ngx-sfc-inputs",
+    "test:components": "ng test ngx-sfc-components",
+    "test:all": "ng test ngx-sfc-common && ng test ngx-sfc-inputs && ng test ngx-sfc-components"
   },
   "private": true,
   "dependencies": {
