@@ -2,13 +2,13 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { UIConstants } from '../../constants';
 
 @Directive({
-  selector: '[sfc-show-hide-element]'
+  selector: '[sfcShowHideElement]'
 })
 export class ShowHideElementDirective {
 
   private readonly SHOW_HIDE_TRANSITION_DELAY_DEFAULT: number = 0.5;  
 
-  @Input('sfc-show-hide-element')
+  @Input('sfcShowHideElement')
   set showHideElement(show: boolean) {
     this.style.visibility = show
       ? UIConstants.CSS_VISIBILITY_VISIBLE
@@ -16,9 +16,9 @@ export class ShowHideElementDirective {
     this.style.opacity = show ? 1 : 0;
   }
 
-  @Input('transition-delay')
-  set transitionDelay(delay: number) {
-    this.style.transition = this.getTransitionValue(delay);
+  @Input()
+  set delay(value: number) {
+    this.style.transition = this.getTransitionValue(value);
   };
 
   private get style(): any {

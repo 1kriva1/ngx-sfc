@@ -7,21 +7,21 @@ import { DOCUMENT } from '../../services';
 import { ClickOutsideEvent } from './click-outside.event';
 
 @Directive({
-  selector: '[sfc-click-outside]'
+  selector: '[sfcClickOutside]'
 })
 export class ClickOutsideDirective implements OnInit, OnDestroy {
 
   /**
    * Toggler for checking ouside click event
    */
-  @Input('sfc-click-outside')
+  @Input('sfcClickOutside')
   public listening: boolean = false;
 
   /**
    * Emitter for click event
    */
-  @Output('on-click-outside')
-  public onClickOutSide: EventEmitter<ClickOutsideEvent>
+  @Output()
+  public action: EventEmitter<ClickOutsideEvent>
     = new EventEmitter<ClickOutsideEvent>();
 
   private onClickSubscription: Subscription;
@@ -51,7 +51,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
         value: !this.isDescendant(this.elementRef.nativeElement, event.target as HTMLElement)
       };
 
-      this.onClickOutSide.emit(clickOutsideEvent);
+      this.action.emit(clickOutsideEvent);
     }
   }
 

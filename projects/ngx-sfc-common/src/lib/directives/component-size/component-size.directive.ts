@@ -4,16 +4,16 @@ import { ComponentSize } from '../../enums';
 import { getCssLikeValue } from '../../utils';
 
 @Directive({
-  selector: '[sfc-component-size]'
+  selector: '[sfcComponentSize]'
 })
 export class ComponentSizeDirective {
 
-  @Input('sfc-component-size')
+  @Input('sfcComponentSize')
   set size(value: ComponentSize) {
     this.style.fontSize = this.getSizeValue(value);
   }
 
-  @Input('custom-component-size')
+  @Input()
   set customSize(value: number) {
     this.style.fontSize = getCssLikeValue(value, UIConstants.CSS_EM);
   }

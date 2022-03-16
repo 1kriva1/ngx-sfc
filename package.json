@@ -10,13 +10,20 @@
     "build:common": "ng build ngx-sfc-common",
     "build:inputs": "ng build ngx-sfc-inputs",
     "build:components": "ng build ngx-sfc-components",
-    "build:all": "ng build ngx-sfc-common && ng build ngx-sfc-inputs && ng build ngx-sfc-components",
+    "build:all": "npm run build:common && npm run build:inputs && npm run build:components",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:common": "ng test ngx-sfc-common",
     "test:inputs": "ng test ngx-sfc-inputs",
     "test:components": "ng test ngx-sfc-components",
-    "test:all": "ng test ngx-sfc-common && ng test ngx-sfc-inputs && ng test ngx-sfc-components"
+    "test:all": "npm run test:common && npm run test:inputs && npm run test:components",
+    "lint": "ng lint",
+    "lint:es:common": "ng lint ngx-sfc-common",
+    "lint:es:inputs": "ng lint ngx-sfc-inputs",
+    "lint:es:components": "ng lint ngx-sfc-components",
+    "lint:es:all": "npm run lint:es:common && npm run lint:es:inputs && npm run lint:es:components",
+    "lint:styles": "npx stylelint \"**/*.scss\" --fix",
+    "lint:all": "npm run lint:es:all && npm run lint:styles"
   },
   "private": true,
   "dependencies": {
@@ -34,10 +41,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.6",
+    "@angular-eslint/builder": "13.1.0",
+    "@angular-eslint/eslint-plugin": "13.1.0",
+    "@angular-eslint/eslint-plugin-template": "13.1.0",
+    "@angular-eslint/schematics": "13.1.0",
+    "@angular-eslint/template-parser": "13.1.0",
     "@angular/cli": "~13.2.6",
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "5.11.0",
+    "@typescript-eslint/parser": "5.11.0",
+    "eslint": "^8.2.0",
+    "husky": "^7.0.4",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -45,6 +61,8 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^13.0.0",
+    "stylelint": "^14.6.0",
+    "stylelint-config-standard-scss": "^3.0.0",
     "typescript": "~4.5.2"
   }
 }

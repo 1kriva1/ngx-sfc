@@ -1,5 +1,5 @@
 .button {
-    &.bordered {
-        @include border()
-    }
+  &.bordered {
+    @include border;
+  }
 }

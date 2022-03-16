@@ -156,6 +156,15 @@
             "tsConfig": "projects/ngx-sfc-inputs/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-sfc-inputs/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-sfc-inputs/**/*.ts",
+              "projects/ngx-sfc-inputs/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -312,6 +321,15 @@
             "tsConfig": "projects/ngx-sfc-components/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-sfc-components/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-sfc-components/**/*.ts",
+              "projects/ngx-sfc-components/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -343,8 +361,18 @@
             "tsConfig": "projects/ngx-sfc-common/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-sfc-common/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-sfc-common/**/*.ts",
+              "projects/ngx-sfc-common/**/*.html"
+            ]
+          }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "sfc-inputs-app"
 }

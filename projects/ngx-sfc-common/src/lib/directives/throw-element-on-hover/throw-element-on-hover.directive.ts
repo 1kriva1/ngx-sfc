@@ -2,11 +2,11 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { getCssLikeValue } from '../../utils';
 
 @Directive({
-  selector: '[sfc-throw-element-on-hover]'
+  selector: '[sfcThrowElementOnHover]'
 })
 export class ThrowElementOnHoverDirective {
 
-  @Input('sfc-throw-element-on-hover')
+  @Input('sfcThrowElementOnHover')
   throwValue: number | null = null;
 
   @HostListener('mouseenter') onMouseEnter() {

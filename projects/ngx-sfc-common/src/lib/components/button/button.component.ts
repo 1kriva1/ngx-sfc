@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UIClass } from '../../enums';
 import { distinct } from '../../utils';
 import { ButtonType } from './button-type.enum';
@@ -15,10 +15,10 @@ export class ButtonComponent {
   @Input()
   text: string = this.BUTTON_DEFAULT_TEXT;
 
-  @Input('icon-before')
+  @Input('icon-defore')
   iconBefore: string | null = null;
 
-  @Input('icon-after')
+  @Input()
   iconAfter: string | null = null;
 
   @Input()
@@ -26,9 +26,6 @@ export class ButtonComponent {
 
   @Input()
   types: Array<ButtonType> = [ButtonType.Bordered];
-
-  @Output('on-click')
-  onClickEmitter: EventEmitter<Event> = new EventEmitter<Event>();
 
   get classes() {
     const classes: any = {}
@@ -39,9 +36,5 @@ export class ButtonComponent {
     distinct(this.types).forEach(type => classes[type] = true);
 
     return classes;
-  }
-
-  onClick(event: Event) {
-    this.onClickEmitter.emit(event);
   }
 }
