@@ -1,5 +1,7 @@
 export {
     SortingDirection,
     UIClass,
-    ComponentSize
+    ComponentSize,
+    Position,
+    MediaLimits
 } from './common.enums'

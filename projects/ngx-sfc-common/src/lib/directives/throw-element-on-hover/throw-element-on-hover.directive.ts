@@ -7,7 +7,7 @@ import { getCssLikeValue } from '../../utils';
 export class ThrowElementOnHoverDirective {
 
   @Input('sfcThrowElementOnHover')
-  throwValue: number | null = null;
+  throwValue?: number;
 
   @HostListener('mouseenter') onMouseEnter() {
     this.throw(this.throwValue);
@@ -23,7 +23,7 @@ export class ThrowElementOnHoverDirective {
 
   constructor(private el: ElementRef) { }
 
-  private throw(value: number | null) {
+  private throw(value?: number | null) {
     this.style.transform = value ? `translateY(${getCssLikeValue(value)})` : null;
   }
 }

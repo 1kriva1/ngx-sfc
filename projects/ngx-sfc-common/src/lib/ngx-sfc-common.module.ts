@@ -10,6 +10,7 @@ import {
 } from './directives';
 import { ButtonComponent } from './components'
 import { CommonModule } from '@angular/common';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CommonModule } from '@angular/common';
     ComponentSizeDirective,
     // components
     ButtonComponent,
+    TooltipComponent,
     
   ],
   imports: [
@@ -36,7 +38,8 @@ import { CommonModule } from '@angular/common';
     MouseDownDirective,
     ComponentSizeDirective,
     // components
-    ButtonComponent    
+    ButtonComponent,
+    TooltipComponent    
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService]
 })

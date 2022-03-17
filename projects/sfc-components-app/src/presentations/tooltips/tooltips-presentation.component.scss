@@ -1,0 +1,13 @@
+@import "../../shared/styles/color-variables";
+
+a,
+p {
+  text-align: center;
+}
+
+:host-context(.sfc-dark-theme) {
+  a,
+  p {
+    color: $color-common;
+  }
+}

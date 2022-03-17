@@ -6,7 +6,8 @@ import {
     ButtonsTextedPresentationComponent,
     ButtonsRoundedPresentationComponent,
     ButtonsCircledPresentationComponent,
-    ButtonsRoundedFilledPresentationComponent
+    ButtonsRoundedFilledPresentationComponent,
+    TooltipsPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -59,6 +60,10 @@ export const routes: Routes = [
                 component: ButtonsBorderedPresentationComponent
             }
         ]
+    },
+    {
+        path: 'tooltips',
+        component: TooltipsPresentationComponent
     },
     fallbackRoute,
     indexRoute

@@ -6,3 +6,4 @@ export { ButtonsTextedPresentationComponent } from './buttons/texted/buttons-tex
 export { ButtonsRoundedPresentationComponent } from './buttons/rounded/buttons-rounded-presentation.component';
 export { ButtonsCircledPresentationComponent } from './buttons/circled/buttons-circled-presentation.component';
 export { ButtonsRoundedFilledPresentationComponent } from './buttons/rounded-filled/buttons-rounded-filled-presentation.component';
+export { TooltipsPresentationComponent } from './tooltips/tooltips-presentation.component';

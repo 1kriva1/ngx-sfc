@@ -1,0 +1,33 @@
+/* Tooltip + arrow */
+
+&[position="left"]::before,
+&[position="left"]::after {
+    left: auto;
+    right: calc(100% + 5px);
+    bottom: 50%;
+}
+
+/* Tooltip */
+
+&[position="left"]::before {
+    transform: translate(-0.25em, 50%) scale(0.5);
+}
+
+&[position="left"]:hover::before,
+&[position="left"].show::before {
+    transform: translate(-0.31em, 50%) scale(1);
+}
+
+/* Arrow */
+
+&[position="left"]::after {
+    border-width: 0.25em 0 0.25em 0.25em;
+    border-color: transparent transparent transparent $color-default;
+    transform-origin: left;
+    transform: translateY(50%) scaleX(0);
+}
+
+&[position="left"]:hover::after,
+&[position="left"].show::after {
+    transform: translateY(50%) scaleX(1);
+}

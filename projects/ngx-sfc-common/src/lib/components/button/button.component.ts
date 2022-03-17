@@ -16,10 +16,10 @@ export class ButtonComponent {
   text: string = this.BUTTON_DEFAULT_TEXT;
 
   @Input()
-  iconBefore: string | null = null;
+  iconBefore?: string;
 
   @Input()
-  iconAfter: string | null = null;
+  iconAfter?: string;
 
   @Input()
   disabled: boolean = false;

@@ -1,0 +1,90 @@
+@import "../shared/styles/variables";
+@import "../shared/styles/mixins";
+
+:host {
+  position: relative;
+
+  /* Positioning and visibility settings of the tooltip */
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 5px);
+    pointer-events: none;
+    transition: 0.2s;
+    will-change: transform;
+  }
+
+  /* The actual tooltip with a dynamic width */
+
+  &:hover::before,
+  &.show::before {
+    content: attr(value);
+    padding: 0.4em 0.7em;
+    font-size: 0.8em;
+    font-weight: initial;
+    width: inherit;
+    max-width: 18.75em;
+    border-radius: 6px;
+    background-color: $color-default;
+    box-shadow: 0 0 20.25em $color-shadow-default;
+    color: $color-filled-default;
+    text-align: center;
+    white-space: pre-wrap;
+    overflow: hidden;
+    word-wrap: break-word;
+    z-index: 9999;
+  }
+
+  /* Tooltip arrow */
+
+  &::after {
+    content: "";
+    border-style: solid;
+    transition-duration: 0s;
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  &[type="hover"]::before,
+  &[type="hover"]::after,
+  &:not(.show)::before,
+  &:not(.show)::after {
+    @include visibility(false);
+  }
+
+  /* Tooltip becomes visible at hover */
+
+  &[type="hover"]:hover::before,
+  &[type="hover"]:hover::after,
+  &.show::before,
+  &.show::after {
+    @include visibility(true);
+  }
+
+  /* Scales from 0.5 to 1 -> grow effect */
+
+  &[type="hover"]:hover::before,
+  &.show::before {
+    transition-delay: 0.1s;
+  }
+
+  /* Slide down effect only on mouseenter (NOT on mouseleave) */
+
+  &[type="hover"]:hover::after,
+  &.show::after {
+    transition-delay: 0.3s;
+
+    /* Starting after the grow effect */
+    transition-duration: 0.2s;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  @import "./styles/top";
+
+  @import "./styles/left";
+
+  @import "./styles/right";
+
+  @import "./styles/bottom";
+}

@@ -9,7 +9,8 @@ import {
   ButtonsTextedPresentationComponent,
   ButtonsRoundedPresentationComponent,
   ButtonsCircledPresentationComponent,
-  ButtonsRoundedFilledPresentationComponent
+  ButtonsRoundedFilledPresentationComponent,
+  TooltipsPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,13 +18,16 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
+    // buttons
     ButtonsPresentationComponent,
     ButtonsBorderedPresentationComponent,
     ButtonsFilledPresentationComponent,
     ButtonsTextedPresentationComponent,
     ButtonsRoundedPresentationComponent,
     ButtonsCircledPresentationComponent,
-    ButtonsRoundedFilledPresentationComponent
+    ButtonsRoundedFilledPresentationComponent,
+    // tooltip
+    TooltipsPresentationComponent
   ],
   imports: [
     BrowserModule,
