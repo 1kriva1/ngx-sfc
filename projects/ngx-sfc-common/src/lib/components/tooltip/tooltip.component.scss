@@ -80,11 +80,10 @@
     transform: translateX(-50%) scaleY(1);
   }
 
+  /* stylelint-disable no-invalid-position-at-import-rule */
   @import "./styles/top";
-
   @import "./styles/left";
-
   @import "./styles/right";
-
   @import "./styles/bottom";
+  /* stylelint-enable no-invalid-position-at-import-rule */
 }

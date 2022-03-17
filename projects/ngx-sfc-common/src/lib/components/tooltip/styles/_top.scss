@@ -1,20 +1,20 @@
 &[position="top"]::before,
 &[position="top"]::after {
-    left: 50%;
-    bottom: calc(100% + 5px);
+  left: 50%;
+  bottom: calc(100% + 5px);
 }
 
 &[position="top"]::before {
-    transform: translate(-50%, -5px) scale(0.5);
+  transform: translate(-50%, -5px) scale(0.5);
 }
 
 &[position="top"]:hover::before,
 &[position="top"].show::before {
-    transform: translate(-50%, -0.25em) scale(1);
+  transform: translate(-50%, -0.25em) scale(1);
 }
 
 &[position="top"]::after {
-    border-width: 0.25em 0.25em 0;
-    border-color: $color-default transparent transparent transparent;
-    transform-origin: top;
+  border-width: 0.25em 0.25em 0;
+  border-color: $color-default transparent transparent transparent;
+  transform-origin: top;
 }
