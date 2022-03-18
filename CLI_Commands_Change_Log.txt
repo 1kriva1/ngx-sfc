@@ -80,6 +80,9 @@ ng generate component components/tooltip --project ngx-sfc-common --export true 
 
 ng generate class components/tooltip-type --project ngx-sfc-common --skip-tests true --type enum -d
 
+ng generate component components/delimeter --project ngx-sfc-common --export true --flat false --style scss --inlineTemplate true 
+--inlineStyle true --skipTests true -d
+
 ng generate class components/index --project ngx-sfc-common --skip-tests true -d
 
 Demo:
