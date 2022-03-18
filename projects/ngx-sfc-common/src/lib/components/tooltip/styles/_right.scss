@@ -1,0 +1,26 @@
+&[position="right"]::before,
+&[position="right"]::after {
+  left: calc(100% + 5px);
+  bottom: 50%;
+}
+
+&[position="right"]::before {
+  transform: translate(5px, 50%) scale(0.5);
+}
+
+&[position="right"]:hover::before,
+&[position="right"].show::before {
+  transform: translate(0.31em, 50%) scale(1);
+}
+
+&[position="right"]::after {
+  border-width: 0.25em 0.25em 0.25em 0;
+  border-color: transparent $color-default transparent transparent;
+  transform-origin: right;
+  transform: translateY(50%) scaleX(0);
+}
+
+&[position="right"]:hover::after,
+&[position="right"].show::after {
+  transform: translateY(50%) scaleX(1);
+}

@@ -37,3 +37,22 @@ export enum UIClass {
     Animated = 'animated',
     Expanded = 'expanded'
 };
+
+/**
+ * Position directions
+ */
+export enum Position {
+    Top = 'top',
+    Bottom = 'bottom',
+    Left = 'left',
+    Right = 'right'
+}
+
+/**
+ * CSS Media limits
+ */
+export enum MediaLimits {
+    Laptop = 1200,
+    Tablet = 767,
+    Phone = 430
+}

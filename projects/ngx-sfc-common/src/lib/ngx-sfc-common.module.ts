@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { DOCUMENT_PROVIDERS, ResizeService, WINDOW_PROVIDERS } from './services';
+import { CommonModule } from '@angular/common';
+import {
+  DOCUMENT_PROVIDERS,
+  ResizeService, WINDOW_PROVIDERS
+} from './services';
 import {
   ClickOutsideDirective,
   ShowHideElementDirective,
@@ -8,8 +12,12 @@ import {
   MouseDownDirective,
   ComponentSizeDirective
 } from './directives';
-import { ButtonComponent } from './components'
-import { CommonModule } from '@angular/common';
+import {
+  ButtonComponent,
+  TooltipComponent,
+  DelimeterComponent
+} from './components'
+
 
 @NgModule({
   declarations: [
@@ -22,7 +30,9 @@ import { CommonModule } from '@angular/common';
     ComponentSizeDirective,
     // components
     ButtonComponent,
-    
+    TooltipComponent,
+    DelimeterComponent,
+
   ],
   imports: [
     CommonModule
@@ -36,7 +46,9 @@ import { CommonModule } from '@angular/common';
     MouseDownDirective,
     ComponentSizeDirective,
     // components
-    ButtonComponent    
+    ButtonComponent,
+    TooltipComponent,
+    DelimeterComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService]
 })

@@ -11,3 +11,13 @@
     #{$property}: $value-dark;
   }
 }
+
+@mixin visibility($show) {
+  @if $show {
+    visibility: visible;
+    opacity: 1;
+  } @else {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
