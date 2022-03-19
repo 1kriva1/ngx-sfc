@@ -7,3 +7,7 @@ export { ButtonsRoundedPresentationComponent } from './buttons/rounded/buttons-r
 export { ButtonsCircledPresentationComponent } from './buttons/circled/buttons-circled-presentation.component';
 export { ButtonsRoundedFilledPresentationComponent } from './buttons/rounded-filled/buttons-rounded-filled-presentation.component';
 export { TooltipsPresentationComponent } from './tooltips/tooltips-presentation.component';
+export { LoadersPresentationComponent } from './loaders/loaders-presentation.component';
+export { LoadersBouncePresentationComponent } from './loaders/bounce/loaders-bounce-presentation.component';
+export { LoadersCirclePresentationComponent } from './loaders/circle/loaders-circle-presentation.component';
+export { LoadersCircleFadingPresentationComponent } from './loaders/circle-fading/loaders-circle-fading-presentation.component';

@@ -35,7 +35,8 @@ export enum UIClass {
     Visible = 'visible',
     Hidden = 'hidden',
     Animated = 'animated',
-    Expanded = 'expanded'
+    Expanded = 'expanded',
+    Fixed = 'fixed'
 };
 
 /**

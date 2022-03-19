@@ -15,8 +15,10 @@ import {
 import {
   ButtonComponent,
   TooltipComponent,
-  DelimeterComponent
-} from './components'
+  DelimeterComponent,
+  BounceLoaderComponent,
+  CircleLoaderComponent
+} from './components';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import {
     ButtonComponent,
     TooltipComponent,
     DelimeterComponent,
+    BounceLoaderComponent,
+    CircleLoaderComponent
 
   ],
   imports: [
@@ -48,7 +52,9 @@ import {
     // components
     ButtonComponent,
     TooltipComponent,
-    DelimeterComponent
+    DelimeterComponent,
+    BounceLoaderComponent,
+    CircleLoaderComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService]
 })

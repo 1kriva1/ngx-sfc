@@ -1,0 +1,144 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Circle:</h3>
+    </div>
+
+    <sfc-circle-loader></sfc-circle-loader>
+    <button id="global-button" (click)="showLoader()">Show global loader</button>
+
+    <div class="component-row">
+
+        <div class="component-column loader-container small">
+
+            <button (click)="showLoader('smallcircle')">Show</button>
+            <button (click)="hideLoader('smallcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="smallcircle" [sfcComponentSize]="ComponentSize.Small" [start]="true">
+                </sfc-circle-loader>
+                small circle loader
+            </div>
+
+        </div>
+
+        <div class=" component-column loader-container small">
+
+            <button (click)="showLoader('mediumcircle')">Show</button>
+            <button (click)="hideLoader('mediumcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="mediumcircle" [sfcComponentSize]="ComponentSize.Medium" [start]="true">
+                </sfc-circle-loader>
+                medium circle loader
+            </div>
+
+        </div>
+
+        <div class=" component-column loader-container small">
+
+            <button (click)="showLoader('largecircle')">Show</button>
+            <button (click)="hideLoader('largecircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="largecircle" [sfcComponentSize]="ComponentSize.Large" [start]="true">
+                </sfc-circle-loader>
+                large circle loader
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column loader-container small">
+
+            <button (click)="showLoader('smallCustomcircle')">Show</button>
+            <button (click)="hideLoader('smallCustomcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="smallCustomcircle" [sfcComponentSize] [customSize]="0.2" [start]="true">
+                </sfc-circle-loader>
+                small custom circle loader
+            </div>
+
+        </div>
+
+        <div class=" component-column loader-container small">
+
+            <button (click)="showLoader('largeCustomcircle')">Show</button>
+            <button (click)="hideLoader('largeCustomcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="largeCustomcircle" [sfcComponentSize] [customSize]="4.2" [start]="true">
+                </sfc-circle-loader>
+                large custom circle loader
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column loader-container small">
+
+            <button (click)="showLoader('notStartedcircle')">Show</button>
+            <button (click)="hideLoader('notStartedcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="notStartedcircle" [start]="false">
+                </sfc-circle-loader>
+                not started circle loader
+            </div>
+
+        </div>
+
+        <div class=" component-column loader-container small">
+
+            <button (click)="showLoader('notBackgroundcircle')">Show</button>
+            <button (click)="hideLoader('notBackgroundcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="notBackgroundcircle" [start]="true" [background]="false">
+                </sfc-circle-loader>
+                not backgrounded circle loader
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column loader-container medium">
+
+            <button (click)="showLoader('containerMediumcircle')">Show</button>
+            <button (click)="hideLoader('containerMediumcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="containerMediumcircle" [start]="true">
+                </sfc-circle-loader>
+                medium container circle loader
+            </div>
+
+        </div>
+
+        <div class="component-column loader-container large">
+
+            <button (click)="showLoader('containerLargecircle')">Show</button>
+            <button (click)="hideLoader('containerLargecircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="containerLargecircle" [start]="true">
+                </sfc-circle-loader>
+                large container circle loader
+            </div>
+
+        </div>
+
+        <div class="component-column loader-container round">
+
+            <button (click)="showLoader('containerRoundcircle')">Show</button>
+            <button (click)="hideLoader('containerRoundcircle')">Hide</button>
+            <div class="content">
+                <sfc-circle-loader id="containerRoundcircle" [start]="true">
+                </sfc-circle-loader>
+                rounded circle loader
+            </div>
+
+        </div>
+
+    </div>
+</div>

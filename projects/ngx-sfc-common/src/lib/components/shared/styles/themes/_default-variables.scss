@@ -5,9 +5,9 @@ $color-filled-default: #fff !default;
 $color-hover-filled-default: #aab2bd !default;
 $color-shadow-default: #0003 !default;
 $background-gradient-default: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.3) 17%,
-    rgba(0, 0, 0, 0.3) 83%,
-    rgba(0, 0, 0, 0) 100%
+  to right,
+  rgb(0 0 0 / 0%) 0%,
+  rgb(0 0 0 / 30%) 17%,
+  rgb(0 0 0 / 30%) 83%,
+  rgb(0 0 0 / 0%) 100%
 );

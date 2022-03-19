@@ -1,0 +1,27 @@
+@import "../../shared/styles/mixins";
+@import "../../shared/styles/variables";
+@import "../styles/common";
+
+.spinner {
+  text-align: center;
+
+  .bounce {
+    @include theme-value(background-color, $color-default, $color-filled-default);
+
+    border-radius: 100%;
+    display: inline-block;
+    animation: bounce-delay 1.4s infinite ease-in-out both;
+
+    @include square-size(1em);
+
+    &:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
+    @include bounce-delay;
+  }
+}

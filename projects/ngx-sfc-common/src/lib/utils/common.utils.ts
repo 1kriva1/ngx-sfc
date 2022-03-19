@@ -86,3 +86,10 @@ export function mergeDeep(target: any, ...sources: any[]): any {
 
     return mergeDeep(target, ...sources);
 }
+
+/**
+ * Get type's property name safety
+ * @param name KeyOf property
+ * @returns Type's property name
+ */
+export const nameof = <T>(name: keyof T) => name;

@@ -1,7 +1,7 @@
 .button {
   &.circled {
     @include border;
-    @include square-size(1em);
+    @include square-size(1em, 5);
 
     border-radius: 50%;
 
