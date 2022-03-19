@@ -1,0 +1,31 @@
+@mixin bounce-delay() {
+  @keyframes bounce-delay {
+    0%,
+    80%,
+    100% {
+      transform: scale(0);
+    }
+
+    40% {
+      transform: scale(1);
+    }
+  }
+}
+
+@mixin circles() {
+  $incremet-rotate: 30;
+  $incremet-delay: -1.1;
+
+  @for $i from 2 through 12 {
+    .circle#{$i} {
+      transform: rotate(#{$incremet-rotate}deg);
+    }
+
+    .circle#{$i}:before {
+      animation-delay: #{$incremet-delay}s;
+    }
+
+    $incremet-rotate: $incremet-rotate + 30;
+    $incremet-delay: $incremet-delay + 0.1;
+  }
+}

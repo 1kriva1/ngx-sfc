@@ -4,7 +4,8 @@ export {
     isAsyncData,
     addPropertyToObject,
     removePropertyFromObject,
-    mergeDeep
+    mergeDeep,
+    nameof
 } from './common.utils'
 
 export {
@@ -67,6 +68,8 @@ export {
     sum,
     max,
     remove,
+    addItem,
     removeItem,
+    updateItem,
     getCollectionOrEmpty
 } from './collections.utils'

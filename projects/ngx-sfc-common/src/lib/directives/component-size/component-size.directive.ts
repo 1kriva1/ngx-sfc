@@ -9,7 +9,7 @@ import { getCssLikeValue } from '../../utils';
 export class ComponentSizeDirective {
 
   @Input('sfcComponentSize')
-  set size(value: ComponentSize) {
+  set size(value: ComponentSize | null | undefined) {
     this.style.fontSize = this.getSizeValue(value);
   }
 
@@ -26,7 +26,7 @@ export class ComponentSizeDirective {
     this.style.fontSize = this.getSizeValue(this.size);
   }
 
-  private getSizeValue(value: ComponentSize): string {
+  private getSizeValue(value: ComponentSize | null| undefined): string {
     switch (value) {
       case ComponentSize.Small:
         return getCssLikeValue(0.5, UIConstants.CSS_EM);

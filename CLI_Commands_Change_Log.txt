@@ -83,6 +83,20 @@ ng generate class components/tooltip-type --project ngx-sfc-common --skip-tests 
 ng generate component components/delimeter --project ngx-sfc-common --export true --flat false --style scss --inlineTemplate true 
 --inlineStyle true --skipTests true -d
 
+ng generate class components/loader/loader-base --project ngx-sfc-common --type components -d
+
+ng generate service components/loader/loader --project ngx-sfc-common --skip-tests false --flat false -d
+
+ng generate component components/loader/bounce/bounce-loader --project ngx-sfc-common --export true --flat true --style scss --skip-tests true -d
+
+ng generate component components/loader/circle/circle-loader --project ngx-sfc-common --export true --flat true --style scss --skip-tests true -d
+
+ng generate component components/loader/circle-fading/circle-fading-loader --project ngx-sfc-common --export true --flat true --style scss --skip-tests true -d
+
+ng generate class components/loader/loader-event --project ngx-sfc-common --type event --skip-tests true -d
+
+ng generate class components/loader/loader --project ngx-sfc-common --type constants --skip-tests true -d 
+
 ng generate class components/index --project ngx-sfc-common --skip-tests true -d
 
 Demo:

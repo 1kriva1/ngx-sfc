@@ -10,7 +10,11 @@ import {
   ButtonsRoundedPresentationComponent,
   ButtonsCircledPresentationComponent,
   ButtonsRoundedFilledPresentationComponent,
-  TooltipsPresentationComponent
+  TooltipsPresentationComponent,
+  LoadersPresentationComponent,
+  LoadersBouncePresentationComponent,
+  LoadersCirclePresentationComponent,
+  LoadersCircleFadingPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +31,12 @@ import { AppComponent } from './app.component';
     ButtonsCircledPresentationComponent,
     ButtonsRoundedFilledPresentationComponent,
     // tooltip
-    TooltipsPresentationComponent
+    TooltipsPresentationComponent,
+    // loaders
+    LoadersPresentationComponent,
+    LoadersBouncePresentationComponent,
+    LoadersCirclePresentationComponent,
+    LoadersCircleFadingPresentationComponent
   ],
   imports: [
     BrowserModule,

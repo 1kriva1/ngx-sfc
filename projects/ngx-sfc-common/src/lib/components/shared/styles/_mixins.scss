@@ -1,9 +1,9 @@
-@mixin square-size($fontSize) {
-  width: $fontSize * 5;
-  height: $fontSize * 5;
+@mixin square-size($fontSize, $multiplier: 1) {
+  width: $fontSize * $multiplier;
+  height: $fontSize * $multiplier;
 }
 
-@mixin theme-value($property, $value-common, $value-dark, $selector: &) {
+@mixin theme-value($property, $value-common, $value-dark, $selector: "&") {
   :host-context(.sfc-default-theme) #{$selector} {
     #{$property}: $value-common;
   }

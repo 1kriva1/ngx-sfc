@@ -7,7 +7,11 @@ import {
     ButtonsRoundedPresentationComponent,
     ButtonsCircledPresentationComponent,
     ButtonsRoundedFilledPresentationComponent,
-    TooltipsPresentationComponent
+    TooltipsPresentationComponent,
+    LoadersPresentationComponent,
+    LoadersBouncePresentationComponent,
+    LoadersCirclePresentationComponent,
+    LoadersCircleFadingPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -64,6 +68,32 @@ export const routes: Routes = [
     {
         path: 'tooltips',
         component: TooltipsPresentationComponent
+    },
+    {
+        path: 'loaders',
+        component: LoadersPresentationComponent,
+        children: [
+            {
+                path: 'bounce',
+                component: LoadersBouncePresentationComponent
+            },
+            {
+                path: 'circle',
+                component: LoadersCirclePresentationComponent
+            },
+            {
+                path: 'circle-fading',
+                component: LoadersCircleFadingPresentationComponent
+            },
+            {
+                path: '',
+                component: LoadersBouncePresentationComponent
+            },
+            {
+                path: '**',
+                component: LoadersBouncePresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

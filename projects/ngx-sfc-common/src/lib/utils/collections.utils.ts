@@ -8,7 +8,7 @@ import { isNullOrEmptyString } from "./string.utils";
  * @param collection Array of items
  * @returns True if collection not empty
  */
-export function any<T>(collection: Array<T>| null): boolean {
+export function any<T>(collection: Array<T> | null): boolean {
     return isDefined(collection) && (collection as Array<T>).length > 0;
 }
 
@@ -224,15 +224,56 @@ export function remove<T>(collection: Array<T>, predicate: (item: T) => boolean)
 }
 
 /**
+ * Add item to collection
+ * @param collection Array of items
+ * @param item New item
+ * @param predicate Function to define if allowed to add new item
+ * @returns True if successfully added
+ */
+export function addItem<T>(collection: Array<T>, item: T,
+    predicate: (item: T) => boolean): boolean {
+
+    if (!isDefined(collection))
+        collection = new Array<T>();
+
+    if (isDefined(predicate) && predicate(item))
+        return false;
+
+    collection.push(item);
+
+    return true;
+}
+
+/**
  * Delete item from collection by predicate
  * @param collection Array of items
  * @param predicate Function to define remove logic
+ * @returns True if successfully removed
  */
-export function removeItem<T>(collection: Array<T>, predicate: (item: T) => boolean): void {
+export function removeItem<T>(collection: Array<T>, predicate: (item: T) => boolean): boolean {
     const foundItem: T | null | undefined = firstOrDefault(collection, predicate);
     if (isDefined(foundItem)) {
         collection.splice(collection.indexOf(foundItem as T), 1);
+        return true;
     }
+
+    return false;
+}
+
+export function updateItem<T>(collection: Array<T>, predicate: (item: T) => boolean, newItem: T)
+    : Array<T> | null {
+    const itemIndex = collection.findIndex(predicate);
+
+    if (itemIndex !== CommonConstants.NOT_FOUND_INDEX) {
+        const result = collection.slice(0);
+        result[itemIndex] = {
+            ...collection[itemIndex],
+            ...newItem
+        };
+        return result
+    }
+
+    return null;
 }
 
 /**

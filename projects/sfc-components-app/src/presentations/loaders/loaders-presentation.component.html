@@ -1,0 +1,16 @@
+<div class="loaders-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="bounce" [queryParams]="{theme: theme}">Bounce</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="circle" [queryParams]="{theme: theme}">Circle</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="circle-fading" [queryParams]="{theme: theme}">Circle
+                Fading</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

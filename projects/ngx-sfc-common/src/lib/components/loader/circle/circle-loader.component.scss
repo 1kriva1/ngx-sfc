@@ -1,0 +1,53 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+@import "../styles/common";
+
+.circles-container {
+  position: relative;
+
+  @include square-size(2.5em);
+
+  div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &::before {
+      content: "";
+      display: block;
+      margin: 0 auto;
+      width: 15%;
+      height: 15%;
+
+      @include theme-value(background-color, $color-default, $color-filled-default);
+
+      border-radius: 100%;
+      animation: bounce-delay 1.2s infinite ease-in-out both;
+    }
+  }
+
+  &.fading {
+    div {
+      &::before {
+        animation-name: circle-fade-delay;
+      }
+    }
+  }
+
+  @include circles;
+  @include bounce-delay;
+
+  @keyframes circle-fade-delay {
+    0%,
+    39%,
+    100% {
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+  }
+}
