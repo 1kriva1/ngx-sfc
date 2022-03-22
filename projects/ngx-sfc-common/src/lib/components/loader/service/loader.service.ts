@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, filter, map, Observable } from 'rxjs';
-import { addItem, firstOrDefault, hasObjectItem, isDefined, nameof, removeItem, updateItem } from '../../../utils';
+import { addItem, any, firstOrDefault, hasObjectItem, isDefined, nameof, removeItem, updateItem } from '../../../utils';
 import { LoaderConstants } from '../loader.constants';
-import { LoaderEvent } from '../loader.event';
+import { ILoaderEvent } from '../loader.event';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderService {
 
-  private loaderSubject: BehaviorSubject<LoaderEvent[]> = new BehaviorSubject<LoaderEvent[]>([]);
+  private loaderSubject: BehaviorSubject<ILoaderEvent[]> = new BehaviorSubject<ILoaderEvent[]>([]);
 
-  private loaders$: Observable<LoaderEvent[]> = this.loaderSubject
+  private loaders$: Observable<ILoaderEvent[]> = this.loaderSubject
     .asObservable()
     .pipe(
-      filter<LoaderEvent[]>(Boolean),
+      filter<ILoaderEvent[]>(loaders => any(loaders)),
       distinctUntilChanged()
     );
 
@@ -24,7 +24,7 @@ export class LoaderService {
    * @param register If true register loader and show it
    */
   public showLoader(id: string = LoaderConstants.GLOBAL_LOADER_ID, register: boolean = false)
-    : Observable<LoaderEvent> | null {
+    : Observable<ILoaderEvent> | null {
     return this.setLoaderStatus(id, true, register);
   }
 
@@ -41,12 +41,12 @@ export class LoaderService {
    * @param event Loader event
    * @returns Registred loade observable
    */
-  public registerLoader(event: LoaderEvent): Observable<LoaderEvent> {
+  public registerLoader(event: ILoaderEvent): Observable<ILoaderEvent> {
 
     const loaders = this.loaderSubject.getValue();
 
     if (addItem(loaders, event,
-      () => hasObjectItem(loaders, nameof<LoaderEvent>('id'), event.id))) {
+      () => hasObjectItem(loaders, nameof<ILoaderEvent>('id'), event.id))) {
       this.loaderSubject.next(loaders);
     }
 
@@ -65,30 +65,30 @@ export class LoaderService {
     }
   }
 
-  private selectLoaderById(id: string): Observable<LoaderEvent> {
+  private selectLoaderById(id: string): Observable<ILoaderEvent> {
     return this.loaders$
       .pipe(
-        map(loaders => loaders.find(loader => loader.id == id) as LoaderEvent),
+        map(loaders => loaders.find(loader => loader.id == id) as ILoaderEvent),
         distinctUntilChanged()
       );
   }
 
-  private setLoaderStatus(id: string, status: boolean, register: boolean = false): Observable<LoaderEvent> | null {
+  private setLoaderStatus(id: string, status: boolean, register: boolean = false): Observable<ILoaderEvent> | null {
     const loaders = this.loaderSubject.getValue(),
-      loaderEvent: LoaderEvent = { id, status },
+      ILoaderEvent: ILoaderEvent = { id, status },
       loader = firstOrDefault(loaders, (loader) => loader.id == id);
 
     if (isDefined(loader) && loader?.status == status)
       return this.selectLoaderById(id);
 
-    const updatedLoaders = updateItem(loaders, (loader) => loader.id == id, loaderEvent);
+    const updatedLoaders = updateItem(loaders, (loader) => loader.id == id, ILoaderEvent);
 
     if (isDefined(updatedLoaders)) {
-      this.loaderSubject.next(updatedLoaders as LoaderEvent[]);
+      this.loaderSubject.next(updatedLoaders as ILoaderEvent[]);
     }
 
     if (register) {
-      return this.registerLoader(loaderEvent);
+      return this.registerLoader(ILoaderEvent);
     }
 
     return null;

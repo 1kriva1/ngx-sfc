@@ -1,0 +1,32 @@
+@import "../../../shared/styles/variables";
+
+:host {
+  display: inline-flex;
+  width: 100%;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    sfc-button:first-child {
+      padding-right: 0.3em;
+    }
+
+    sfc-button:nth-child(2) {
+      padding-left: 0.3em;
+    }
+
+    ::ng-deep sfc-button .button {
+      &.rounded {
+        width: 5em;
+      }
+
+      &:not(:hover) {
+        color: $color-default !important;
+        border-color: $color-default !important;
+      }
+    }
+  }
+}

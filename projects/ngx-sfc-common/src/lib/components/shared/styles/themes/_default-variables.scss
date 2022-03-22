@@ -2,6 +2,7 @@ $color-default: #545e61 !default;
 $color-hover-default: #2bbbad !default;
 $color-disabled-default: #bdbdbd !default;
 $color-filled-default: #fff !default;
+$color-filled-fade-default: #f5f7fa !default;
 $color-hover-filled-default: #aab2bd !default;
 $color-shadow-default: #0003 !default;
 $background-gradient-default: linear-gradient(
@@ -11,3 +12,4 @@ $background-gradient-default: linear-gradient(
   rgb(0 0 0 / 30%) 83%,
   rgb(0 0 0 / 0%) 100%
 );
+$color-background-default: #0009;

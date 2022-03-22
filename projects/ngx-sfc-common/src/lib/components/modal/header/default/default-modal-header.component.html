@@ -1,0 +1,7 @@
+<div class="container">
+    <i *ngIf="model?.icon" class="icon" class="{{model?.icon}}"></i>
+    <span *ngIf="model?.text" class="label">{{model?.text}}</span>
+    <span *ngIf="model?.showCloseIcon" class="close" (click)="onClose()">
+        <i class="fa fa-times"></i>
+    </span>
+</div>

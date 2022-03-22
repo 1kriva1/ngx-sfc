@@ -99,6 +99,16 @@ ng generate class components/loader/loader --project ngx-sfc-common --type const
 
 ng generate class components/index --project ngx-sfc-common --skip-tests true -d
 
+ng generate component components/modal --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
+
+ng generate service components/modal/modal --project ngx-sfc-common --skip-tests false --flat false -d
+
+ng generate directive components/modal/directive/modal-open-on-click --project ngx-sfc-common --skip-tests false --flat true -d
+
+ng generate component components/modal/header/default/default-modal-header --project ngx-sfc-common --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/modal/footer/default/default-modal-footer --project ngx-sfc-common --export true --flat true --style scss --skip-tests false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d

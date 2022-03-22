@@ -1,0 +1,60 @@
+@import "../shared/styles/variables";
+@import "../shared/styles/mixins";
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: $color-background-default;
+  backface-visibility: visible;
+  animation: expand-overlay 0.4s cubic-bezier(0.55, 0, 0.1, 1);
+
+  @keyframes expand-overlay {
+    from {
+      @include visibility(false);
+    }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.7em;
+    margin: auto;
+    background-color: $color-filled-fade-default;
+    max-width: calc(100% - 3em);
+    max-height: calc(100% - 3em);
+    border-radius: 3px;
+    overflow-y: auto;
+    box-shadow: 0 0.125em 0.625em $color-shadow-default;
+    transform: scale(1);
+    flex-direction: column;
+    animation: expand-modal 0.4s cubic-bezier(0.55, 0, 0.1, 1);
+
+    @keyframes expand-modal {
+      from {
+        @include visibility(false);
+
+        transform: scale(1.2);
+      }
+    }
+
+    > div {
+      width: 100%;
+      flex: 0 0 auto;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: $color-default;
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

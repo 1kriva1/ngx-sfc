@@ -1,0 +1,39 @@
+@import "../../../shared/styles/variables";
+
+:host {
+  display: inline-flex;
+  width: 100%;
+
+  .container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+
+    i {
+      font-size: 1em;
+    }
+
+    .icon {
+      padding-right: 0.7em;
+    }
+
+    .label {
+      font-size: 1.2em;
+      font-weight: bold;
+      user-select: none;
+      padding: 0 0.7em;
+    }
+
+    .close {
+      color: $color-default;
+      cursor: pointer;
+      display: flex;
+      padding-left: 0.7em;
+    }
+
+    .close:hover {
+      color: $color-hover-default;
+    }
+  }
+}

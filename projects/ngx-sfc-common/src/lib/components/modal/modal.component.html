@@ -1,0 +1,53 @@
+<div class="overlay" [@hideOverlay] (click)="hideOnClickOutside && close()">
+    <div class="content" [@hideContent] (click)="$event.stopPropagation()">
+
+        <div class="header">
+
+            <ng-container *ngIf="header;else headerTemplate">
+                <ng-container *ngTemplateOutlet="header;"></ng-container>
+            </ng-container>
+
+            <ng-template #headerTemplate>
+                <ng-container *ngTemplateOutlet="getTemplate(ModalTemplate.Header)">
+                </ng-container>
+            </ng-template>
+
+            <ng-container *ngIf="isShowDefault(ModalTemplate.Header)">
+                <sfc-default-modal-header [model]="defaultHeaderModel">
+                </sfc-default-modal-header>
+            </ng-container>
+
+        </div>
+
+        <div class="body">
+
+            <ng-container *ngIf="body;else bodyTemplate">
+                <ng-container *ngTemplateOutlet="body;"></ng-container>
+            </ng-container>
+
+            <ng-template #bodyTemplate>
+                <ng-container #bodyTemplate *ngTemplateOutlet="getTemplate(ModalTemplate.Body)">
+                </ng-container>
+            </ng-template>
+
+        </div>
+
+        <div class="footer">
+
+            <ng-container *ngIf="footer;else footerTemplate">
+                <ng-container *ngTemplateOutlet="footer;"></ng-container>
+            </ng-container>
+
+            <ng-template #footerTemplate>
+                <ng-container *ngTemplateOutlet="getTemplate(ModalTemplate.Footer)">
+                </ng-container>
+            </ng-template>
+
+            <ng-container *ngIf="isShowDefault(ModalTemplate.Footer)">
+                <sfc-default-modal-footer [model]="defaultFooterModel">
+                </sfc-default-modal-footer>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

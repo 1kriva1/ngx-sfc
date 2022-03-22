@@ -1,0 +1,8 @@
+<div class="container">
+    <sfc-button *ngIf="model?.applyButton" [sfcComponentSize] [customSize]="BUTTON_CUSTOM_SIZE" text="Ok"
+        [types]="[ButtonType.Rounded]" (click)="onButtonClick()">
+    </sfc-button>
+    <sfc-button *ngIf="model?.cancelButton" [sfcComponentSize] [customSize]="BUTTON_CUSTOM_SIZE" text="Cancel"
+        [types]="[ButtonType.Rounded]" (click)="onButtonClick(true)">
+    </sfc-button>
+</div>

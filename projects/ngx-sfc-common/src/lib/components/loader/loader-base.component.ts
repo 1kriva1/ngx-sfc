@@ -2,7 +2,7 @@ import { Directive, Input, OnInit } from "@angular/core";
 import { EMPTY, map, Observable } from "rxjs";
 import { UIClass } from "../../enums";
 import { LoaderConstants } from "./loader.constants";
-import { LoaderEvent } from "./loader.event";
+import { ILoaderEvent } from "./loader.event";
 import { LoaderService } from "./service/loader.service";
 
 @Directive()
@@ -37,7 +37,7 @@ export abstract class LoaderBaseComponent implements OnInit {
         // register new loader
         this.show$ = this.loaderService.registerLoader({ id: this.id, status: this.start })
             .pipe(
-                map((event: LoaderEvent) => this.id === event.id && event.status)
+                map((event: ILoaderEvent) => this.id === event.id && event.status)
             );
     }
 
