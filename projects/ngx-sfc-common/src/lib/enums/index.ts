@@ -3,5 +3,6 @@ export {
     UIClass,
     ComponentSize,
     Position,
-    MediaLimits
+    MediaLimits,
+    Direction
 } from './common.enums'

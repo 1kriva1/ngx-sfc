@@ -23,7 +23,9 @@ import {
   ModalOpenOnClickDirective,
   DefaultModalHeaderComponent,
   DefaultModalFooterComponent,
-  ModalService
+  ModalService,
+  HamburgerComponent,
+  DotsComponent
 } from './components';
 
 
@@ -46,7 +48,10 @@ import {
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent
+    DefaultModalFooterComponent,
+    // hamburger
+    HamburgerComponent,
+    DotsComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +75,10 @@ import {
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent
+    DefaultModalFooterComponent,
+    // hamburger
+    HamburgerComponent,
+    DotsComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService, ModalService]
 })
