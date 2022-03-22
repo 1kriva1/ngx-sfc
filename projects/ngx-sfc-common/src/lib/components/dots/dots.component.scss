@@ -37,6 +37,7 @@
       .dot {
         @include square-size(0.3125em);
         @include theme-value(background, $color-default, $color-dark);
+
         transition: background 0.3s ease;
         margin: 0.06em;
         border-radius: 50%;
