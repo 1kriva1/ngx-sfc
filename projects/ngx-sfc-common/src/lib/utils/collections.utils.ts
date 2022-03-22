@@ -8,7 +8,7 @@ import { isNullOrEmptyString } from "./string.utils";
  * @param collection Array of items
  * @returns True if collection not empty
  */
-export function any<T>(collection: Array<T> | null): boolean {
+export function any<T>(collection: Array<T> | null | undefined): boolean {
     return isDefined(collection) && (collection as Array<T>).length > 0;
 }
 
@@ -54,9 +54,10 @@ export function hasObjectItem<T>(collection: Array<any>, // TODO <-- Array<T>
  * @param predicate Function to define search logic
  * @returns Value from collection
  */
-export function firstOrDefault<T>(collection: Array<T>, predicate: (item: T) => boolean)
-    : T | null | undefined {
-    return any(collection) ? collection.find(predicate) : null;
+export function firstOrDefault<T>(collection: Array<T> | null | undefined,
+    predicate: (item: T) => boolean)
+    : T | undefined {
+    return any(collection) ? collection?.find(predicate) : undefined;
 }
 
 /**

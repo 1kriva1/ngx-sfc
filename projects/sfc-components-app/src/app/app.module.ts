@@ -14,7 +14,8 @@ import {
   LoadersPresentationComponent,
   LoadersBouncePresentationComponent,
   LoadersCirclePresentationComponent,
-  LoadersCircleFadingPresentationComponent
+  LoadersCircleFadingPresentationComponent,
+  ModalsPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +37,9 @@ import { AppComponent } from './app.component';
     LoadersPresentationComponent,
     LoadersBouncePresentationComponent,
     LoadersCirclePresentationComponent,
-    LoadersCircleFadingPresentationComponent
+    LoadersCircleFadingPresentationComponent,
+    // modal
+    ModalsPresentationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   DOCUMENT_PROVIDERS,
   ResizeService, WINDOW_PROVIDERS
@@ -17,7 +18,12 @@ import {
   TooltipComponent,
   DelimeterComponent,
   BounceLoaderComponent,
-  CircleLoaderComponent
+  CircleLoaderComponent,
+  ModalComponent,
+  ModalOpenOnClickDirective,
+  DefaultModalHeaderComponent,
+  DefaultModalFooterComponent,
+  ModalService
 } from './components';
 
 
@@ -35,11 +41,16 @@ import {
     TooltipComponent,
     DelimeterComponent,
     BounceLoaderComponent,
-    CircleLoaderComponent
-
+    CircleLoaderComponent,
+    // modal
+    ModalComponent,
+    ModalOpenOnClickDirective,
+    DefaultModalHeaderComponent,
+    DefaultModalFooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   exports: [
     // directives
@@ -54,8 +65,13 @@ import {
     TooltipComponent,
     DelimeterComponent,
     BounceLoaderComponent,
-    CircleLoaderComponent
+    CircleLoaderComponent,
+    // modal
+    ModalComponent,
+    ModalOpenOnClickDirective,
+    DefaultModalHeaderComponent,
+    DefaultModalFooterComponent
   ],
-  providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService]
+  providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService, ModalService]
 })
 export class NgxSfcCommonModule { }

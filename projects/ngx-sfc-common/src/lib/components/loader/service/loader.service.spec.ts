@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { LoaderEvent } from '../loader.event';
+import { ILoaderEvent } from '../loader.event';
 import { LoaderService } from './loader.service';
 
 describe('Service: Loader', () => {
@@ -21,7 +21,7 @@ describe('Service: Loader', () => {
       const loaderId = 'test_loader';
 
       service.registerLoader({ id: loaderId, status: false })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event).toBeDefined();
           expect(event.id).toEqual(loaderId);
           expect(event.status).toBeFalsy();
@@ -34,14 +34,14 @@ describe('Service: Loader', () => {
         loaderId2 = 'test_loader2';
 
       service.registerLoader({ id: loaderId1, status: false })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event).toBeDefined();
           expect(event.id).toEqual(loaderId1);
           expect(event.status).toBeFalsy();
         });
 
       service.registerLoader({ id: loaderId2, status: true })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event).toBeTruthy();
           expect(event.id).toEqual(loaderId2);
           expect(event.status).toBeTruthy();
@@ -54,14 +54,14 @@ describe('Service: Loader', () => {
       const loaderId1 = 'test_loader1';
 
       service.registerLoader({ id: loaderId1, status: false })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event).toBeDefined();
           expect(event.id).toEqual(loaderId1);
           expect(event.status).toBeFalsy();
         });
 
       service.registerLoader({ id: loaderId1, status: true })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event).toBeDefined();
           expect(event.id).toEqual(loaderId1);
           expect(event.status).toBeFalsy();
@@ -77,7 +77,7 @@ describe('Service: Loader', () => {
       let isShow = false;
 
       service.registerLoader({ id: loaderId1, status: isShow })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event.status).toEqual(isShow);
         });
 
@@ -96,13 +96,13 @@ describe('Service: Loader', () => {
         calledCount2 = 0;
 
       service.registerLoader({ id: loaderId1, status: false })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount1++;
           expect(event.status).toEqual(isShow1);
         });
 
       service.registerLoader({ id: loaderId2, status: false })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount2++;
           expect(event.status).toBeFalse();
         });
@@ -124,7 +124,7 @@ describe('Service: Loader', () => {
         calledCount = 0;
 
       service.registerLoader({ id: loaderId, status: isShow })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount++;
           expect(event.status).toEqual(isShow);
           done();
@@ -147,7 +147,7 @@ describe('Service: Loader', () => {
       const loaderId = 'test_loader';
 
       service.showLoader(loaderId, true)
-        ?.subscribe((event: LoaderEvent) => {
+        ?.subscribe((event: ILoaderEvent) => {
           expect(event.status).toBeTruthy();
           done();
         });
@@ -160,7 +160,7 @@ describe('Service: Loader', () => {
       let isShow = true;
 
       service.registerLoader({ id: loaderId1, status: isShow })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           expect(event.status).toEqual(isShow);
         });
 
@@ -179,13 +179,13 @@ describe('Service: Loader', () => {
         calledCount2 = 0;
 
       service.registerLoader({ id: loaderId1, status: true })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount1++;
           expect(event.status).toEqual(isShow1);
         });
 
       service.registerLoader({ id: loaderId2, status: true })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount2++;
           expect(event.status).toBeTruthy();
         });
@@ -207,7 +207,7 @@ describe('Service: Loader', () => {
         calledCount = 0;
 
       service.registerLoader({ id: loaderId, status: isShow })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount++;
           expect(event.status).toEqual(isShow);
           done();
@@ -227,7 +227,7 @@ describe('Service: Loader', () => {
         calledCount = 0;
 
       service.registerLoader({ id: loaderId, status: isShow })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount++;
           expect(event).toBeDefined();
           expect(event.id).toEqual(loaderId);
@@ -236,7 +236,7 @@ describe('Service: Loader', () => {
 
       isShow = true;
       service.showLoader(loaderId)
-        ?.subscribe((event: LoaderEvent) => {
+        ?.subscribe((event: ILoaderEvent) => {
           expect(event.status).toBeTruthy();
         });
 
@@ -260,7 +260,7 @@ describe('Service: Loader', () => {
         calledCount = 0;
 
       service.registerLoader({ id: loaderId, status: isShow })
-        .subscribe((event: LoaderEvent) => {
+        .subscribe((event: ILoaderEvent) => {
           calledCount++;
           expect(event).toBeDefined();
           expect(event.id).toEqual(loaderId);
@@ -269,7 +269,7 @@ describe('Service: Loader', () => {
 
       isShow = true;
       service.showLoader(loaderId)
-        ?.subscribe((event: LoaderEvent) => {
+        ?.subscribe((event: ILoaderEvent) => {
           expect(event.status).toBeTruthy();
         });
 
