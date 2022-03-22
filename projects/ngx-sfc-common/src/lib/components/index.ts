@@ -15,3 +15,4 @@ export { ModalService } from './modal/service/modal.service';
 export { DefaultModalHeaderComponent } from './modal/header/default/default-modal-header.component';
 export { DefaultModalFooterComponent } from './modal/footer/default/default-modal-footer.component';
 export { ModalTemplate } from './modal/modal-template.enum';
+export { HamburgerComponent } from './hamburger/hamburger.component';
