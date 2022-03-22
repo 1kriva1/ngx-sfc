@@ -57,3 +57,11 @@ export enum MediaLimits {
     Tablet = 767,
     Phone = 430
 }
+
+/**
+ * Direction types
+ */
+export enum Direction {
+    Horizontal = 'horizontal',
+    Vertical = 'vertical'
+}

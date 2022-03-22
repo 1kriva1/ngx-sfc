@@ -16,3 +16,4 @@ export { DefaultModalHeaderComponent } from './modal/header/default/default-moda
 export { DefaultModalFooterComponent } from './modal/footer/default/default-modal-footer.component';
 export { ModalTemplate } from './modal/modal-template.enum';
 export { HamburgerComponent } from './hamburger/hamburger.component';
+export { DotsComponent } from './dots/dots.component';

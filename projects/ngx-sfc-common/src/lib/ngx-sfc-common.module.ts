@@ -24,7 +24,8 @@ import {
   DefaultModalHeaderComponent,
   DefaultModalFooterComponent,
   ModalService,
-  HamburgerComponent
+  HamburgerComponent,
+  DotsComponent
 } from './components';
 
 
@@ -49,7 +50,8 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // hamburger
-    HamburgerComponent
+    HamburgerComponent,
+    DotsComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +77,8 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // hamburger
-    HamburgerComponent
+    HamburgerComponent,
+    DotsComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService, ModalService]
 })

@@ -111,6 +111,8 @@ ng generate component components/modal/footer/default/default-modal-footer --pro
 
 ng generate component components/hamburger --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
 
+ng generate component components/dots --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
