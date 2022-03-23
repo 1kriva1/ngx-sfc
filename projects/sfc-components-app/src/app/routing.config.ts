@@ -12,7 +12,8 @@ import {
     LoadersBouncePresentationComponent,
     LoadersCirclePresentationComponent,
     LoadersCircleFadingPresentationComponent,
-    ModalsPresentationComponent
+    ModalsPresentationComponent,
+    ToggleSwitchersPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -99,6 +100,10 @@ export const routes: Routes = [
     {
         path: 'modals',
         component: ModalsPresentationComponent
+    },
+    {
+        path: 'toggle-switchers',
+        component: ToggleSwitchersPresentationComponent
     },
     fallbackRoute,
     indexRoute

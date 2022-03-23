@@ -12,3 +12,4 @@ export { LoadersBouncePresentationComponent } from './loaders/bounce/loaders-bou
 export { LoadersCirclePresentationComponent } from './loaders/circle/loaders-circle-presentation.component';
 export { LoadersCircleFadingPresentationComponent } from './loaders/circle-fading/loaders-circle-fading-presentation.component';
 export { ModalsPresentationComponent } from './modals/modals-presentation.component';
+export {ToggleSwitchersPresentationComponent} from './toggle-switchers/toggle-switchers-presentation.component';

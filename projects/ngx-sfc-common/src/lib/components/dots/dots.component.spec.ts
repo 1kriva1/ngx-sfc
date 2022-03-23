@@ -28,32 +28,32 @@ describe('Component: DotsComponent', () => {
       expect(fixture.nativeElement.querySelector('div.dots-container')).toBeDefined();
       expect(fixture.nativeElement.querySelectorAll('div.dot').length).toEqual(3);
     });
+  });
 
-    describe('Open', () => {
-      fit("Should not have open class", () => {
-        expect(fixture.nativeElement.className).not.toContain(UIClass.Open);
-      });
+  describe('Open', () => {
+    fit("Should not have open class", () => {
+      expect(fixture.nativeElement.className).not.toContain(UIClass.Open);
+    });
 
-      fit("Should have open class", () => {
-        component.open = true;
-        fixture.detectChanges();
+    fit("Should have open class", () => {
+      component.open = true;
+      fixture.detectChanges();
 
-        expect(fixture.nativeElement.className).toContain(UIClass.Open);
-      });
+      expect(fixture.nativeElement.className).toContain(UIClass.Open);
+    });
 
-      fit("Should have open class, when toggle component", () => {
-        expect(fixture.nativeElement.className).not.toContain(UIClass.Open);
+    fit("Should have open class, when toggle component", () => {
+      expect(fixture.nativeElement.className).not.toContain(UIClass.Open);
 
-        fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
-        fixture.detectChanges();
+      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
+      fixture.detectChanges();
 
-        expect(fixture.nativeElement.className).toContain(UIClass.Open);
+      expect(fixture.nativeElement.className).toContain(UIClass.Open);
 
-        fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
-        fixture.detectChanges();
+      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
+      fixture.detectChanges();
 
-        expect(fixture.nativeElement.className).not.toContain(UIClass.Open);
-      });
+      expect(fixture.nativeElement.className).not.toContain(UIClass.Open);
     });
   });
 

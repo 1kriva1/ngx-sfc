@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CircleLoaderType, ComponentSize } from 'ngx-sfc-common';
-import { LoadesPresentationBase } from '../loaders-presentation-base.component';
+import { LoadersPresentationBase } from '../loaders-presentation-base.component';
 
 @Component({
     templateUrl: './loaders-circle-fading-presentation.component.html',
@@ -9,7 +9,7 @@ import { LoadesPresentationBase } from '../loaders-presentation-base.component';
         '../loaders-presentation-base.component.scss'
     ]
 })
-export class LoadersCircleFadingPresentationComponent extends LoadesPresentationBase {
+export class LoadersCircleFadingPresentationComponent extends LoadersPresentationBase {
     public ComponentSize = ComponentSize;
     public CircleLoaderType = CircleLoaderType;
 }

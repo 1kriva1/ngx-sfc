@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentSize } from 'ngx-sfc-common';
-import { LoadesPresentationBase } from '../loaders-presentation-base.component';
+import { LoadersPresentationBase } from '../loaders-presentation-base.component';
 
 @Component({
     templateUrl: './loaders-bounce-presentation.component.html',
@@ -9,6 +9,6 @@ import { LoadesPresentationBase } from '../loaders-presentation-base.component';
         '../loaders-presentation-base.component.scss'
     ]
 })
-export class LoadersBouncePresentationComponent extends LoadesPresentationBase {
+export class LoadersBouncePresentationComponent extends LoadersPresentationBase {
     public ComponentSize = ComponentSize;
 }

@@ -1,0 +1,65 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Toggle switchers:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-toggle-switcher></sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [active]="true"></sfc-toggle-switcher>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-toggle-switcher [leftModel]="{label:'test1', icon:'fa fa-car'}"></sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [leftModel]="{label:'', icon:'fa fa-car'}"></sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [leftModel]="{label:'test1'}"></sfc-toggle-switcher>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-toggle-switcher [rightModel]="{label:'test1', icon:'fa fa-car'}"></sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [rightModel]="{label:'', icon:'fa fa-car'}"></sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [rightModel]="{label:'test1'}"></sfc-toggle-switcher>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-toggle-switcher [leftModel]="{label:'test1', icon:'fa fa-car'}"
+                [rightModel]="{label:'test1', icon:'fa fa-star'}" [sfcComponentSize]="ComponentSize.Small">
+            </sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [leftModel]="{label:'test1', icon:'fa fa-car'}"
+                [rightModel]="{label:'test1', icon:'fa fa-star'}" [sfcComponentSize]="ComponentSize.Medium">
+            </sfc-toggle-switcher>
+        </div>
+
+        <div class="component-column">
+            <sfc-toggle-switcher [leftModel]="{label:'test1', icon:'fa fa-car'}"
+                [rightModel]="{label:'test1', icon:'fa fa-star'}" [sfcComponentSize]="ComponentSize.Large">
+            </sfc-toggle-switcher>
+        </div>
+    </div>
+</div>
