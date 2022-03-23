@@ -19,3 +19,4 @@ export { HamburgerComponent } from './hamburger/hamburger.component';
 export { DotsComponent } from './dots/dots.component';
 export { ToggleSwitcherComponent } from './toggle-switcher/toggle-switcher.component';
 export { IToggleSwitcherModel } from './toggle-switcher/toggle-switcher.model';
+export { CheckmarkComponent } from './checkmark/checkmark.component';
