@@ -25,7 +25,8 @@ import {
   DefaultModalFooterComponent,
   HamburgerComponent,
   DotsComponent,
-  ToggleSwitcherComponent
+  ToggleSwitcherComponent,
+  CheckmarkComponent
 } from './components';
 
 @NgModule({
@@ -54,7 +55,8 @@ import {
     // dots
     DotsComponent,
     //toggle
-    ToggleSwitcherComponent
+    ToggleSwitcherComponent,
+    CheckmarkComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +87,8 @@ import {
     // dots
     DotsComponent,
     //toggle
-    ToggleSwitcherComponent
+    ToggleSwitcherComponent,
+    CheckmarkComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

@@ -1,0 +1,68 @@
+@import "../shared/styles/variables";
+@import "../shared/styles/mixins";
+
+:host {
+  display: inline-block;
+
+  .check {
+    border-radius: 50%;
+    border: 0.18em solid;
+    background: $color-filled-default;
+    border-color: $color-dark;
+
+    @include square-size(1em);
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease;
+
+    i {
+      @include theme-value(opacity, 0.5, 0.8);
+
+      font-size: 0.8em;
+      transition: opacity 0.3s ease;
+      color: transparent;
+      -webkit-text-stroke: 1px $color-shadow-default;
+    }
+
+    &:hover {
+      border-color: $color-hover-default;
+
+      i {
+        @include theme-value(opacity, 0.8, 1);
+
+        -webkit-text-stroke: initial;
+        color: $color-hover-default;
+      }
+    }
+  }
+
+  &.active {
+    .check {
+      border-color: $color-hover-default;
+      background: $color-hover-default;
+
+      i {
+        opacity: 1;
+        transform: scale(0);
+        color: $color-filled-default;
+        -webkit-text-stroke: 0;
+        animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards;
+
+        @keyframes icon {
+          from {
+            opacity: 0;
+            transform: scale(0.3);
+          }
+
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+}
