@@ -15,7 +15,8 @@ import {
   LoadersBouncePresentationComponent,
   LoadersCirclePresentationComponent,
   LoadersCircleFadingPresentationComponent,
-  ModalsPresentationComponent
+  ModalsPresentationComponent,
+  ToggleSwitchersPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +40,9 @@ import { AppComponent } from './app.component';
     LoadersCirclePresentationComponent,
     LoadersCircleFadingPresentationComponent,
     // modal
-    ModalsPresentationComponent
+    ModalsPresentationComponent,
+    // toggle switchers
+    ToggleSwitchersPresentationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,4 +53,5 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

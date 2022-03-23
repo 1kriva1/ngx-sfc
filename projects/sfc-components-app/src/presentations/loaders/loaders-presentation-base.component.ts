@@ -2,7 +2,7 @@ import { Directive } from "@angular/core";
 import { LoaderService } from "ngx-sfc-common";
 
 @Directive()
-export abstract class LoadesPresentationBase {
+export abstract class LoadersPresentationBase {
 
     constructor(private loaderService: LoaderService) { }
 

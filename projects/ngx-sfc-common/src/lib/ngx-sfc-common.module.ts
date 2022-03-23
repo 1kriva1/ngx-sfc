@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   DOCUMENT_PROVIDERS,
-  ResizeService, WINDOW_PROVIDERS
+  WINDOW_PROVIDERS
 } from './services';
 import {
   ClickOutsideDirective,
@@ -23,11 +23,10 @@ import {
   ModalOpenOnClickDirective,
   DefaultModalHeaderComponent,
   DefaultModalFooterComponent,
-  ModalService,
   HamburgerComponent,
-  DotsComponent
+  DotsComponent,
+  ToggleSwitcherComponent
 } from './components';
-
 
 @NgModule({
   declarations: [
@@ -42,6 +41,7 @@ import {
     ButtonComponent,
     TooltipComponent,
     DelimeterComponent,
+    // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
     // modal
@@ -51,7 +51,10 @@ import {
     DefaultModalFooterComponent,
     // hamburger
     HamburgerComponent,
-    DotsComponent
+    // dots
+    DotsComponent,
+    //toggle
+    ToggleSwitcherComponent
   ],
   imports: [
     CommonModule,
@@ -69,6 +72,7 @@ import {
     ButtonComponent,
     TooltipComponent,
     DelimeterComponent,
+    // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
     // modal
@@ -78,8 +82,11 @@ import {
     DefaultModalFooterComponent,
     // hamburger
     HamburgerComponent,
-    DotsComponent
+    // dots
+    DotsComponent,
+    //toggle
+    ToggleSwitcherComponent
   ],
-  providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS, ResizeService, ModalService]
+  providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })
-export class NgxSfcCommonModule { }
+export class NgxSfcCommonModule {}
