@@ -10,7 +10,7 @@ export class ModalService {
 
   private subjectOpen = new Subject<any>();
 
-  close$: Observable<any> = this.subjectClose.asObservable();
+  close$: Observable<void> = this.subjectClose.asObservable();
 
   open$: Observable<any> = this.subjectOpen.asObservable();
 

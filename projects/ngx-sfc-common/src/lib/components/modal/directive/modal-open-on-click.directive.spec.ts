@@ -27,7 +27,7 @@ describe('Directive: ModalOpenOnClickDirective', () => {
 
   beforeEach(async () => {
     modalServiceSpy = jasmine.createSpyObj('ModalService', ['open', 'close', 'close$']);
-    modalServiceSpy.close$ = of({});
+    modalServiceSpy.close$ = of();
 
     await TestBed.configureTestingModule({
       declarations: [ModalOpenOnClickDirective, TestModalOpenOnClickComponent],
