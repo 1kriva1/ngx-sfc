@@ -23,7 +23,7 @@ export class LoaderService {
    * @param id Loader Id
    * @param register If true register loader and show it
    */
-  public showLoader(id: string = LoaderConstants.GLOBAL_LOADER_ID, register: boolean = false)
+  public show(id: string = LoaderConstants.GLOBAL_LOADER_ID, register: boolean = false)
     : Observable<ILoaderEvent> | null {
     return this.setLoaderStatus(id, true, register);
   }
@@ -32,7 +32,7 @@ export class LoaderService {
    * Hide loader
    * @param id Loader Id
    */
-  public hideLoader(id: string = LoaderConstants.GLOBAL_LOADER_ID): void {
+  public hide(id: string = LoaderConstants.GLOBAL_LOADER_ID): void {
     this.setLoaderStatus(id, false);
   }
 
@@ -41,7 +41,7 @@ export class LoaderService {
    * @param event Loader event
    * @returns Registred loade observable
    */
-  public registerLoader(event: ILoaderEvent): Observable<ILoaderEvent> {
+  public register(event: ILoaderEvent): Observable<ILoaderEvent> {
 
     const loaders = this.loaderSubject.getValue();
 
@@ -57,7 +57,7 @@ export class LoaderService {
    * Remove loader
    * @param id Loader Id
    */
-  public removeLoader(id: string = LoaderConstants.GLOBAL_LOADER_ID): void {
+  public remove(id: string = LoaderConstants.GLOBAL_LOADER_ID): void {
     const loaders = this.loaderSubject.getValue();
 
     if (removeItem(loaders, loader => loader.id == id)) {
@@ -88,7 +88,7 @@ export class LoaderService {
     }
 
     if (register) {
-      return this.registerLoader(ILoaderEvent);
+      return this.register(ILoaderEvent);
     }
 
     return null;

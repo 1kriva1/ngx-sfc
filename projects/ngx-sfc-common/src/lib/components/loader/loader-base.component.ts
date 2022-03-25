@@ -35,7 +35,7 @@ export abstract class LoaderBaseComponent implements OnInit {
 
     public ngOnInit(): void {
         // register new loader
-        this.show$ = this.loaderService.registerLoader({ id: this.id, status: this.start })
+        this.show$ = this.loaderService.register({ id: this.id, status: this.start })
             .pipe(
                 map((event: ILoaderEvent) => this.id === event.id && event.status)
             );

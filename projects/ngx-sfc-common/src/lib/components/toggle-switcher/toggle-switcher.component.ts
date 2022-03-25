@@ -26,5 +26,4 @@ export class ToggleSwitcherComponent {
     this.leftModel = { label: 'Left' };
     this.rightModel = { label: 'Right' };
   }
-
 }

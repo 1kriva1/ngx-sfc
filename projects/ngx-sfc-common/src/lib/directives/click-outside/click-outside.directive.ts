@@ -2,7 +2,7 @@ import {
   Directive, ElementRef, EventEmitter,
   Inject, Input, OnDestroy, OnInit, Output
 } from '@angular/core';
-import { delay, fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { DOCUMENT } from '../../services';
 import { ClickOutsideEvent } from './click-outside.event';
 
@@ -24,30 +24,28 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
   public action: EventEmitter<ClickOutsideEvent>
     = new EventEmitter<ClickOutsideEvent>();
 
-  private onClickSubscription: Subscription;
+  private _clickSubscription?: Subscription;
 
   constructor(
     private elementRef: ElementRef,
     @Inject(DOCUMENT) private document: Document) {
-    this.onClickSubscription = null as unknown as Subscription;
   }
 
   ngOnInit() {
-    this.onClickSubscription = fromEvent(this.document, 'click')
-      .pipe(delay(1))
+    this._clickSubscription = fromEvent(this.document, 'click')
       .subscribe(event => {
         this.onClick(event);
       });
   }
 
   ngOnDestroy() {
-    this.onClickSubscription.unsubscribe();
+    this._clickSubscription?.unsubscribe();
   }
 
   private onClick(event: Event) {
     if (event instanceof MouseEvent && this.listening) {
       const clickOutsideEvent: ClickOutsideEvent = {
-        target: (event.target || null),
+        target: event.target,
         value: !this.isDescendant(this.elementRef.nativeElement, event.target as HTMLElement)
       };
 

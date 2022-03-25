@@ -48,7 +48,7 @@ describe('Component: LoaderComponent', () => {
         fit("Should exist, when call show loader", () => {
             initLoader();
 
-            loaderService.showLoader(component.id);
+            loaderService.show(component.id);
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('div.preloader')).toBeDefined();
@@ -57,7 +57,7 @@ describe('Component: LoaderComponent', () => {
         fit("Should not exist, if call show loader with wrong id", () => {
             initLoader();
 
-            loaderService.showLoader(component.id + 'wrong');
+            loaderService.show(component.id + 'wrong');
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('div.preloader')).toBeNull();
