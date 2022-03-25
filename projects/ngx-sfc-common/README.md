@@ -1,8 +1,6 @@
 # ngx-sfc-common
 
-This is shared library for Street Football Club(SFC) project, that contains components, directives, utils, enums and constants that will be used in related libraries: [ngx-sfc-inputs](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-inputs) and [ngx-sfc-components](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-components)
-
-**ngx-sfc-common** is built for Angular 13.2.0.
+This is shared library for Street Football Club (SFC) project, that contains components, directives, utils, enums and constants that will be used in related libraries: [ngx-sfc-inputs](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-inputs) and [ngx-sfc-components](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-components)
 
 ## Compatibility
 
@@ -14,14 +12,30 @@ ngx-sfc-common          | Angular
 
 - [Get started](#get-started)
 - [Directives](#directives)
+  - [Click out side](#click-out-side-sfcclickoutside)
+  - [Component size](#component-size-sfccomponentsize)
+  - [Mouse down](#mouse-down-sfcmousedown)
+  - [Show/Hide element](#showhide-element-sfcshowhideelement)
+  - [Template reference](#template-reference-sfctemplatereference)
+  - [Throw element on hover](#throw-element-on-hover-sfcthrowelementonhover)
 - [Components](#components)
+  - [Button](#button-sfc-button)
+  - [Checkmark](#checkmark-sfc-checkmark)
+  - [Delimeter](#delimeter-sfc-delimeter)
+  - [Dots](#dots-sfc-dots)
+  - [Hamburger](#hamburger-sfc-hamburger)
+  - [Loader](#loader-sfc-bounce-loader-sfc-circle-loader)
+  - [Modal](#modal-sfc-modal)
+  - [Toggle-switcher](#toggle-switcher-sfc-toggle-switcher)
+  - [Tooltip](#tooltip-sfc-tooltip)
 - [Services](#services)
+  - [Resize](#resize)
 - [Utils](#utils)
 
 ## Get started
 
 1. Run `npm install ngx-sfc-common` or `ng add ngx-sfc-common`.
-2. Import `NgxSfcCommonModule` into a module where you intend to use components and directives.
+2. Import `NgxSfcCommonModule` into a module where you intend to use components and directives:
 
     ```typescript
     import { NgxSfcCommonModule } from 'ngx-sfc-common';
@@ -33,36 +47,45 @@ ngx-sfc-common          | Angular
 
 ## Directives
 
-1. Click outside `[sfcClickOutside]`
+## **Click out side `[sfcClickOutside]`**
 
-This directive can be usefull when need to detect if click evnt occured on specific HTML element (or it descendants) or outside it.
+This directive can be usefull when need to detect if click event occured on specific HTML element (or it descendants) or outside it.
 
-Add directive `[sfcClickOutside]` to element that you what to check:
+Add directive `[sfcClickOutside]` to element that you whant to check:
 
-    ```html
-    <div class="target" [sfcClickOutside]="value" (action)="onClick($event)"></div>
-    ```
+```html
+<div class="target" [sfcClickOutside]="value" (action)="onClick($event)"></div>
+```
 
 Parameters:
 1. `[sfcClickOutside]="value"` - if value is true, directive will listen click events, othervise ignoring.
 2. `(action)` - function to handle click events
 
-After clicking, directive will emit `ClickOutsideEvent` event on `(action)` output function.
-`ClickOutsideEvent` has such data:
+After clicking, directive will emit `ClickOutsideEvent` event for `(action)` output function.
+
+`ClickOutsideEvent` has such structure:
+
+```typescript
+export interface ClickOutsideEvent {
+    target: EventTarget | null;
+    value: boolean;
+}
+```
 1. `target` - clicked element
-2. `value` - TRUE if clicked outside target element(which has directive on it)
+2. `value` - true if clicked outside target element (which has directive on it)
     
-2. Component size `[sfcComponentSize]`
+## **Component size `[sfcComponentSize]`**
 
-This directive allow to set defined size (Small, Medium or Large) or custom size in em units on element.
+This directive allow to set defined size (Small, Medium or Large) or custom size in `em` units on element.
 
-Add '[sfcComponentSize]' with value `ComponentSize` or add `[customSize]` for setting custom size:
-    ```html
-    <div class="target" [sfcComponentSize]="ComponentSize.Small" [customSize]="customSize">
-    ```
+Add `[sfcComponentSize]` with value `ComponentSize` or add `[customSize]` for setting custom size:
+
+```html
+ <div class="target" [sfcComponentSize]="ComponentSize.Small" [customSize]="customSize">
+```   
 
 Parameters:
-1. `sfcComponentSize` expect enum value `ComponentSize`
+1. `sfcComponentSize` expect enum `ComponentSize` value
 
 `ComponentSize` has three posible values:
 
@@ -72,92 +95,92 @@ Small         | 0.5em
 Medium        | 1em
 Large         | 2em
 
-2. `customSize` - custom size as number (em unit will be added)
+2. `customSize` - custom size as number (`em` unit will be added)
 
-3. Mouse down `(sfcMouseDown)`
+## **Mouse down `(sfcMouseDown)`**
 
 This directive allow clicking only by specific mouse button (by default allow left button click).
 
-Add `(sfcMouseDown)="click($event)"` for defined click event handler and `[button]` to define what mouse button allowed to do this click.
+Add `(sfcMouseDown)="click($event)"` for defined click event handler and `[button]` to define what mouse button allowed to do this click:
 
-    ```html
-    <div class="target" (sfcMouseDown)="click($event)" [button]="button">
-    ```
+```html
+<div class="target" (sfcMouseDown)="click($event)" [button]="button">
+```   
 
 Parameters:
 1. `(sfcMouseDown)` - if button allowed this action will be emitted
 2. `button` - define button, which will be allowed for clicking
 
-4. Show/Hide element `[sfcShowHideElement]`
+## **Show/Hide element `[sfcShowHideElement]`**
 
 This directive allow to show or hide element with delay.
 
-Add `[sfcShowHideElement]="show"` for defined show or hide element and `[delay]` for delay between show and hide states.
+Add `[sfcShowHideElement]="show"` for defined show or hide element and `[delay]` for delay between show and hide states:
 
-    ```html
-    <div class="target" [sfcShowHideElement]="show" [delay]="delay">
-    ```
+```html
+<div class="target" [sfcShowHideElement]="show" [delay]="delay">
+```    
 
 Parameters:
 1. `[sfcShowHideElement]` - if pass true value, than show element, otherwise hide
 2. `[delay]` - delay for show/hide animation (0.5s by default)
 
-5. Template reference `[sfcTemplateReference]`
+## **Template reference `[sfcTemplateReference]`**
 
-This directive allow to define templates by name and inside component query these templates as array.
+This directive allow to define templates by name and query these templates as array inside component.
 
 Add `ng-template` with directive `[sfcTemplateReference]="ModalTemplate.Header"` (`ModalTemplate.Header` it's a name for template):
 
-    ```html
-    <ng-template [sfcTemplateReference]="ModalTemplate.Header">
+```html
+<ng-template [sfcTemplateReference]="ModalTemplate.Header">
         <div>
             <div>{{HEADER_MODEL.Title}}</div>
             <i class="{{HEADER_MODEL.Icon}}"></i>
             <button (click)="FOOTER_MODEL.Click()">hide model</button>
         </div>
-    </ng-template>
-    ```
+</ng-template>
+```    
 
 Inside component query all templates by directive:
 
-    ```typescript
-    @ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
-    private templates: QueryList<TemplateReferenceDirective> | undefined;
-    ```
+```typescript
+@ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
+private templates: QueryList<TemplateReferenceDirective> | undefined;
+ ```    
 
 Get template by name `templateName`:
 
-    ```typescript
-    const templateRef = firstOrDefault(this.templates?.toArray(),
-            t => t.templateName == ModalTemplate.Header);
-    ```
+```typescript
+const templateRef = firstOrDefault(this.templates?.toArray(),
+      t => t.templateName == ModalTemplate.Header);
+```    
 
 Parameters:
 1. `[sfcTemplateReference]` - name(identificator) for template
 
-6. Throw element on hover `[sfcThrowElementOnHover]`
+## **Throw element on hover `[sfcThrowElementOnHover]`**
 
-This directive allow to throw element on `mouseenter` by Y axis and back element on `mouseleave`.
+This directive allow to throw element on `mouseenter` by Y axis and than back element on `mouseleave`.
 
 Add directive `[sfcThrowElementOnHover]` with throw power `value`:
 
-    ```html
-    <div class="target" [sfcThrowElementOnHover]="value">
-    ```
+```html
+<div class="target" [sfcThrowElementOnHover]="value">
+```    
 
 Parameters:
 1. `[sfcThrowElementOnHover]` - with which power will throw element
 
 ## Components
 
-1. Button
+## **Button `<sfc-button>`**
 
-Button component allow to define several visualization types for button, add text for button, icons before and after text and make button disabled.
+Button component allow to define several visualization types, add text, icons before and after text and make button disabled.
 
-    ```html
-    <sfc-button iconBefore="fa fa-star" text="Button" iconAfter="fa fa-car" [disabled]="false" [types]="[ButtonType.Rounded,ButtonType.Filled]">        
-    </sfc-button>
-    ```
+ ```html
+<sfc-button iconBefore="fa fa-star" text="Button" iconAfter="fa fa-car" [disabled]="false" [types]="[ButtonType.Rounded,ButtonType.Filled]">        
+</sfc-button>
+```   
 
 Parameters:
 1. `iconBefore` - icon before text
@@ -175,95 +198,93 @@ Visualization types:
 
 Types can be combinated.
 
-2. Checkmark
+## **Checkmark `<sfc-checkmark>`**
 
-Check mark with possibility to change icon value. 
-Can be used for checking rows in table rows.
+Check mark with possibility to change icon value. Can be used for checking rows in table rows.
 
-    ```html
-    <sfc-checkmark [active]="value" icon="fa fa-star"></sfc-checkmark>
-    ```
+```html
+<sfc-checkmark [active]="value" icon="fa fa-star"></sfc-checkmark>
+```    
 
 Parameters:
 1. `[active]` - check value, if checked - will have true value
 2. `icon` - icon value inside checkmark (default value - `fa fa-check`)
 
-3. Delimeter
+## **Delimeter `<sfc-delimeter>`**
 
 Can be used for separate element on UI.
 
-    ```html
-    <sfc-delimeter></sfc-delimeter>
-    ```
+```html
+<sfc-delimeter></sfc-delimeter>
+```    
 
-4. Dots
+## **Dots `<sfc-dots>`**
 
 Dots component for toggling menues or dropdowns visibility.
 
-    ```html
-    <sfc-dotted [open]="open" [direction]="Direction.Horizontal"></sfc-dotted>
-    ```
+```html
+<sfc-dots [open]="open" [direction]="Direction.Horizontal"></sfc-dots>
+```    
 
 Parameters:
 1. `[open]` - define open/close state
 2. `[direction]` - dots direction
 
 Directions:
-1. Horizontal
-2. Vertical
+1. Horizontal - `Direction.Horizontal`
+2. Vertical - `Direction.Vertical`
 
-5. Hamburger
+## **Hamburger `<sfc-hamburger>`**
 
-Hamburger element for togling menues.
+Hamburger element for toggling menues.
 
-    ```html
-    <sfc-hamburger [open]="open"></sfc-hamburger>
-    ```
+ ```html
+<sfc-hamburger [open]="open"></sfc-hamburger>
+```
+    
 Parameters:
 1. `[open]` - define open/close state
 
-6. Loader
+## **Loader `<sfc-bounce-loader>, <sfc-circle-loader>`**
 
  Loader component allow to show/hide loaders on specific elements or globally on all window object. 
 
  There two types of loaders:
- 1. Global - `id` value must be NUll
+ 1. Global - `id` value must be NULL
  2. Local - `id` value is required and must be unique
 
  Add `<sfc-bounce-loader>` loader component:
 
-    ```html
-    <button (click)="showLoader('bounceLoader')">Show</button>
-    <button (click)="hideLoader('bounceLoader')">Hide</button>
-    <sfc-bounce-loader id="bounceLoader" [start]="true"></sfc-bounce-loader>
-    ```
+ ```html
+<sfc-bounce-loader id="bounceLoader" [start]="true"></sfc-bounce-loader>
+```  
 
  Add `<button>` for showing and hidding loader (just for example):
 
-    ```html
-    <button (click)="showLoader('bounceLoader')">Show</button>
-    <button (click)="hideLoader('bounceLoader')">Hide</button>
-    ```
+```html
+<button (click)="showLoader('bounceLoader')">Show</button>
+<button (click)="hideLoader('bounceLoader')">Hide</button>
+ ```    
 
- Inside component inject `LoaderService`:
+Inject `LoaderService` inside component:
 
-    ```typescript
-    constructor(private loaderService: LoaderService) { }
-    ```
+```typescript
+constructor(private loaderService: LoaderService) { }
+```   
 
-And handle `showLoader` and `hideLoader` methods for buttons:
+Add `showLoader` and `hideLoader` methods for buttons:
 
-    ```typescript
-    public showLoader(id?: string): void {
-        this.loaderService.show(id);
-    }
+```typescript
+public showLoader(id?: string): void {
+    this.loaderService.show(id);
+}
 
-    public hideLoader(id?: string): void {
-        this.loaderService.hide(id);
-    }
-    ```
+public hideLoader(id?: string): void {
+    this.loaderService.hide(id);
+}
+```   
 
-There are several types of visual representations of loaders:
+There are several types for visual representations of loaders:
 1. Bounce - `<sfc-bounce-loader>`
 2. Circle - `<sfc-circle-loader>`
 3. Circle-fading - `<sfc-circle-loader [type]="CircleLoaderType.Fading">`
@@ -272,88 +293,90 @@ Additional parameters:
 1. `[start]` - start loading on loader init (false by default)
 2. `[background]` - add overlay on loading (true by default)
 
-7. Modal
+## **Modal `<sfc-modal>`**
 
-Modal component allow to add/remove modal element on all window object. Modal contains three main parts: `header`, `body` and `footer`. All these parts can be replaced by reference or content templates. Also `header` and `footer` parts have default implementation, if reference and content templates not provided.
+Component allow to add/remove modal on all window object. 
+Modal contains three main parts: `header`, `body` and `footer`. All these parts can be replaced by reference or content templates. 
+If reference and content templates not provided, `header` and `footer` parts have default implementation.
 
 Register button as modal handler by directive `*sfcModalOpenOnClick`. When click on this button, modal will add/removed:
 
-    ```html
-    <button #defaultModalBtn>Default modal</button>
-    <sfc-modal *sfcModalOpenOnClick="defaultModalBtn"></sfc-modal>
-    ```
+```html
+<button #defaultModalBtn>Default modal</button>
+<sfc-modal *sfcModalOpenOnClick="defaultModalBtn"></sfc-modal>
+ ```    
 
 Possible severals handlers:
 
-    ```html
-    <button #defaultOneModalBtn>Button 1</button>
-    <button #defaultSecondModalBtn>Button 1</button>
-    <sfc-modal *sfcModalOpenOnClick="[defaultOneModalBtn, defaultSecondModalBtn]">
-    </sfc-modal>
-    ```
+```html
+<button #defaultOneModalBtn>Button 1</button>
+<button #defaultSecondModalBtn>Button 1</button>
+<sfc-modal *sfcModalOpenOnClick="[defaultOneModalBtn, defaultSecondModalBtn]"></sfc-modal>
+```    
 
-Examles of setting parts:
+Examles of setting modal parts:
 
-    References:
+- References:
 
-    ```html
-    <ng-template #headerRef>
+```html
+<ng-template #headerRef>
+    <div>
+        <div>{{HEADER_MODEL.Title}}</div>
+    </div>
+</ng-template>
+
+<ng-template #footerRef>
+    <div>
+        <div>{{FOOTER_MODEL.Title}}</div>
+    </div>
+</ng-template>
+
+<sfc-modal [header]="headerRef" [footer]="footerRef"></sfc-modal>
+```    
+
+- Templates:
+
+```html
+<sfc-modal>
+    <ng-template [sfcTemplateReference]="ModalTemplate.Header">
         <div>
-            <div>{{HEADER_MODEL.Title}}</div>
-        </div>
-    </ng-template>
-
-    <ng-template #footerRef>
-        <div>
-            <div>{{FOOTER_MODEL.Title}}</div>
-        </div>
-    </ng-template>
-
-    <sfc-modal [header]="headerRef" [footer]="footerRef"></sfc-modal>
-    ```
-
-    Templates:
-
-    ```html
-    <sfc-modal>
-        <ng-template [sfcTemplateReference]="ModalTemplate.Header">
-            <div>
                 <div>{{HEADER_MODEL.Title}}</div>
-            </div>
-        </ng-template>
-        <ng-template [sfcTemplateReference]="ModalTemplate.Footer">
-            <div>
+        </div>
+    </ng-template>
+    <ng-template [sfcTemplateReference]="ModalTemplate.Footer">
+        <div>
                 <div>{{FOOTER_MODEL.Title}}</div>
-            </div>
-        </ng-template>
-    </sfc-modal>
-    ```
+        </div>
+    </ng-template>
+</sfc-modal>
+```    
 
 Modal can be added/removed by `ModalService`:
 
-    ```typescript
-    constructor(private modalService: ModalService) { }
+```typescript
+constructor(private modalService: ModalService) { }
 
-    // open
-    this.modalService.open();
+// open
+this.modalService.open();
 
-    // close
-    this.modalService.close();
-    ```
+// close
+this.modalService.close();
+```    
 
 Additional parameters:
 1. `hideOnEsc` - if true, than modal can be removed on Escape button (by default true)
 2. `hideOnClickOutside` - if true, than modal can be removed on click outside of modal (by default true)
 
-8. Toggle-switcher
+## **Toggle-switcher `<sfc-toggle-switcher>`**
 
-Component allow to add toggler with posibility to define text and icon for left and right part of component. Can be used for toggling dark and light themes on page, toggling table types (rows or cards).
+Component allow to add toggler with posibility to define text and icon for left and right part of component. 
+Can be used for toggling dark and light themes on page, toggling table types (rows or cards).
 
-    ```html
-    <sfc-toggle-switcher [active]="false" [leftModel]="{label:'test1', icon:'fa fa-car'}"
+```html
+<sfc-toggle-switcher [active]="false" [leftModel]="{label:'test1', icon:'fa fa-car'}"
         [rightModel]="{label:'test1', icon:'fa fa-star'}">
-    </sfc-toggle-switcher>
-    ```
+</sfc-toggle-switcher>
+```
 
 Parameters:
 1. `[active]` - if true, toggler will move to right side
@@ -362,21 +385,21 @@ Parameters:
 
 Model contract:
 
-    ```typescript
-    export interface IToggleSwitcherModel {
-        label: string,
-        icon?: string;
-    }
-    ```
+```typescript
+export interface IToggleSwitcherModel {
+   label: string,
+   icon?: string;
+}
+```    
 
-9. Tooltip
+## **Tooltip `<sfc-tooltip>`**
 
-Allow to add texted tooltip for element and define appearance position. Also component has two types - show tooltip on hower and show tooltip on click.
+Allow to add texted tooltip for element and define appearance position. 
+Also component has two types - show tooltip on hower and show tooltip on click.
 
-    ```html
-    <p sfc-tooltip="tooltip content" [tooltipPosition]="Position.Left"
-                [tooltipType]="TooltipType.Click" [tooltipShow]="false">
-    ```
+```html
+<p sfc-tooltip="tooltip content" [tooltipPosition]="Position.Left" [tooltipType]="TooltipType.Click" [tooltipShow]="false">
+```    
 
 Parameters:
 1. `sfc-tooltip` - texted content of tooltip
@@ -396,35 +419,42 @@ Types:
 
 ## Services
 
-1. Resize
+## **Resize**
 
-Service will emit on every window's resize and provide current state of window object.
+Service will emit on every window's resize event and provide current state of window object.
 
 Inject service:
 
-    ```typescript
-    constructor(private resizeService: ResizeService) { }
-    ```
+```typescript
+constructor(private resizeService: ResizeService) { }
+```    
 
 Subscribe on resize observable and handle emit result:
 
-    ```typescript
-    this._resizeSubscription = this.resizeService.onResize$
+```typescript
+this._resizeSubscription = this.resizeService.onResize$
       .pipe(startWith(this.window))
       .subscribe(window => this.tooltipPosition = window.innerWidth <= MediaLimits.Tablet
         ? Position.Bottom : this._position);
-    ```
+```
+    
 ## Utils
 
-- Collection utils
+- `Collection` utils
+ 
     Methods for array(collection) opearations.
-- Common utils
+- `Common` utils
+
     Methods for object checking, modification and operations.
-- DateTime utils
+- `DateTime` utils
+
     Method for DATETime objects.
-- File utils
-    Methods for IO files.
-- String utils
+- `File` utils
+
+    Methods for IO and files.
+- `String` utils
+
     Methods for strings modification and operations on them.
-- UI utils
+- `UI` utils
+
     Methods for UI operations.
