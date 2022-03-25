@@ -7,7 +7,7 @@ import { MouseDownDirective } from "./mouse-down.directive";
 @Component({
     template: `<div class="target" (sfcMouseDown)="click($event)" [button]="button">`
 })
-class TestMouseDownDirective {
+class TestMouseDownDirectiveComponent {
 
     @ViewChild(MouseDownDirective, { static: false })
     directive: MouseDownDirective = <MouseDownDirective><unknown>null;
@@ -18,17 +18,17 @@ class TestMouseDownDirective {
 
 describe('Directive: MouseDownDirective', () => {
 
-    let component: TestMouseDownDirective;
-    let fixture: ComponentFixture<TestMouseDownDirective>;
+    let component: TestMouseDownDirectiveComponent;
+    let fixture: ComponentFixture<TestMouseDownDirectiveComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [MouseDownDirective, TestMouseDownDirective]
+            declarations: [MouseDownDirective, TestMouseDownDirectiveComponent]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestMouseDownDirective);
+        fixture = TestBed.createComponent(TestMouseDownDirectiveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -7,7 +7,7 @@ import { ShowHideElementDirective } from "./show-hide-element.directive";
 @Component({
     template: `<div class="target" [sfcShowHideElement]="show" [delay]="delay">`
 })
-class TestShowHideElementDirective {
+class TestShowHideElementDirectiveComponent {
 
     @ViewChild(ShowHideElementDirective, { static: false })
     directive: ShowHideElementDirective = <ShowHideElementDirective><unknown>null;
@@ -18,17 +18,17 @@ class TestShowHideElementDirective {
 
 describe('Directive: ShowHideElementDirective', () => {
 
-    let component: TestShowHideElementDirective;
-    let fixture: ComponentFixture<TestShowHideElementDirective>;
+    let component: TestShowHideElementDirectiveComponent;
+    let fixture: ComponentFixture<TestShowHideElementDirectiveComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ShowHideElementDirective, TestShowHideElementDirective]
+            declarations: [ShowHideElementDirective, TestShowHideElementDirectiveComponent]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestShowHideElementDirective);
+        fixture = TestBed.createComponent(TestShowHideElementDirectiveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

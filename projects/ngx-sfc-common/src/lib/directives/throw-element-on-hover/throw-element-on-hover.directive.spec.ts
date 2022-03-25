@@ -6,7 +6,7 @@ import { ThrowElementOnHoverDirective } from "./throw-element-on-hover.directive
 @Component({
     template: `<div class="target" [sfcThrowElementOnHover]="value">`
 })
-class TestThrowElementOnHoverDirective {
+class TestThrowElementOnHoverDirectiveComponent {
 
     @ViewChild(ThrowElementOnHoverDirective, { static: false })
     directive: ThrowElementOnHoverDirective = <ThrowElementOnHoverDirective><unknown>null;
@@ -16,17 +16,17 @@ class TestThrowElementOnHoverDirective {
 
 describe('Directive: ComponentSizeDirective', () => {
 
-    let component: TestThrowElementOnHoverDirective;
-    let fixture: ComponentFixture<TestThrowElementOnHoverDirective>;
+    let component: TestThrowElementOnHoverDirectiveComponent;
+    let fixture: ComponentFixture<TestThrowElementOnHoverDirectiveComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ThrowElementOnHoverDirective, TestThrowElementOnHoverDirective]
+            declarations: [ThrowElementOnHoverDirective, TestThrowElementOnHoverDirectiveComponent]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestThrowElementOnHoverDirective);
+        fixture = TestBed.createComponent(TestThrowElementOnHoverDirectiveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

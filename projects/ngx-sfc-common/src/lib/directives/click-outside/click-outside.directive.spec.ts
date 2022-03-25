@@ -9,7 +9,7 @@ import { ClickOutsideDirective } from "./click-outside.directive";
                </div>
                <div class="outside"></div>`
 })
-class TestClickOutsideDirective {
+class TestClickOutsideDirectiveComponent {
     @ViewChild(ClickOutsideDirective, { static: false })
     directive: ClickOutsideDirective = <ClickOutsideDirective><unknown>null;
 
@@ -18,18 +18,18 @@ class TestClickOutsideDirective {
 
 describe('Directive: ClickOutsideDirective', () => {
 
-    let component: TestClickOutsideDirective;
-    let fixture: ComponentFixture<TestClickOutsideDirective>;
+    let component: TestClickOutsideDirectiveComponent;
+    let fixture: ComponentFixture<TestClickOutsideDirectiveComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ClickOutsideDirective, TestClickOutsideDirective],
+            declarations: [ClickOutsideDirective, TestClickOutsideDirectiveComponent],
             providers: [{ provide: DOCUMENT, useValue: document }]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestClickOutsideDirective);
+        fixture = TestBed.createComponent(TestClickOutsideDirectiveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

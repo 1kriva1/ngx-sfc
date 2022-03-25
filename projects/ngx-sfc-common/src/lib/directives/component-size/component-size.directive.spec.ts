@@ -9,7 +9,7 @@ import { ComponentSizeDirective } from "./component-size.directive";
 @Component({
     template: `<div class="target" [sfcComponentSize]="size" [customSize]="customSize">`
 })
-class TestComponentSizeDirective {
+class TestComponentSizeDirectiveComponent {
 
     @ViewChild(ComponentSizeDirective, { static: false })
     directive: ComponentSizeDirective = <ComponentSizeDirective><unknown>null;
@@ -20,17 +20,17 @@ class TestComponentSizeDirective {
 
 describe('Directive: ComponentSizeDirective', () => {
 
-    let component: TestComponentSizeDirective;
-    let fixture: ComponentFixture<TestComponentSizeDirective>;
+    let component: TestComponentSizeDirectiveComponent;
+    let fixture: ComponentFixture<TestComponentSizeDirectiveComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ComponentSizeDirective, TestComponentSizeDirective]
+            declarations: [ComponentSizeDirective, TestComponentSizeDirectiveComponent]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponentSizeDirective);
+        fixture = TestBed.createComponent(TestComponentSizeDirectiveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

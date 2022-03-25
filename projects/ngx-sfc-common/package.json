@@ -1,6 +1,28 @@
 {
   "name": "ngx-sfc-common",
   "version": "0.0.1",
+  "description": "Angular common(shared) library for SFC project",
+  "keywords": [
+    "Street Football Club",
+    "SFC",
+    "angular",
+    "components",
+    "directives",
+    "services",
+    "utils",
+    "responsive",
+    "common",
+    "shared"    
+  ],
+  "author": "Andrii Kryvoruk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1kriva1/ngx-sfc"
+  },
+  "bugs": {
+    "url": "https://github.com/1kriva1/ngx-sfc/issues"
+  },
+  "license": "MIT", 
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0"
