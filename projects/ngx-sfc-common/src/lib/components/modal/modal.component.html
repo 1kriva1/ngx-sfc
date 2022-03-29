@@ -3,50 +3,32 @@
 
         <div class="header">
 
-            <ng-container *ngIf="header;else headerTemplate">
-                <ng-container *ngTemplateOutlet="header;"></ng-container>
-            </ng-container>
+            <sfc-template-content [referenceContent]="header" [templatesContent]="templates"
+                [templateType]="ModalTemplate.Header" [defaultContent]="defaultHeader"></sfc-template-content>
 
-            <ng-template #headerTemplate>
-                <ng-container *ngTemplateOutlet="getTemplate(ModalTemplate.Header)">
-                </ng-container>
-            </ng-template>
-
-            <ng-container *ngIf="isShowDefault(ModalTemplate.Header)">
+            <ng-template #defaultHeader>
                 <sfc-default-modal-header [model]="defaultHeaderModel">
                 </sfc-default-modal-header>
-            </ng-container>
+            </ng-template>
 
         </div>
 
         <div class="body">
 
-            <ng-container *ngIf="body;else bodyTemplate">
-                <ng-container *ngTemplateOutlet="body;"></ng-container>
-            </ng-container>
-
-            <ng-template #bodyTemplate>
-                <ng-container #bodyTemplate *ngTemplateOutlet="getTemplate(ModalTemplate.Body)">
-                </ng-container>
-            </ng-template>
+            <sfc-template-content [referenceContent]="body" [templatesContent]="templates"
+                [templateType]="ModalTemplate.Body"></sfc-template-content>
 
         </div>
 
         <div class="footer">
 
-            <ng-container *ngIf="footer;else footerTemplate">
-                <ng-container *ngTemplateOutlet="footer;"></ng-container>
-            </ng-container>
+            <sfc-template-content [referenceContent]="footer" [templatesContent]="templates"
+                [templateType]="ModalTemplate.Footer" [defaultContent]="defaultFooter"></sfc-template-content>
 
-            <ng-template #footerTemplate>
-                <ng-container *ngTemplateOutlet="getTemplate(ModalTemplate.Footer)">
-                </ng-container>
-            </ng-template>
-
-            <ng-container *ngIf="isShowDefault(ModalTemplate.Footer)">
+            <ng-template #defaultFooter>
                 <sfc-default-modal-footer [model]="defaultFooterModel">
                 </sfc-default-modal-footer>
-            </ng-container>
+            </ng-template>
 
         </div>
     </div>

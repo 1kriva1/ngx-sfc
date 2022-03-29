@@ -13,8 +13,11 @@ import {
     LoadersCirclePresentationComponent,
     LoadersCircleFadingPresentationComponent,
     ModalsPresentationComponent,
-    ToggleSwitchersPresentationComponent
+    ToggleSwitchersPresentationComponent,
+    TabsLinePresentationComponent,
+    TabsIconPresentationComponent
 } from "../presentations";
+import { TabsPresentationComponent } from "../presentations/tabs/tabs-presentation.component";
 
 const indexRoute: Route = {
     path: "",
@@ -104,6 +107,28 @@ export const routes: Routes = [
     {
         path: 'toggle-switchers',
         component: ToggleSwitchersPresentationComponent
+    },
+    {
+        path: 'tabs',
+        component: TabsPresentationComponent,
+        children: [
+            {
+                path: 'line',
+                component: TabsLinePresentationComponent
+            },
+            {
+                path: 'icon',
+                component: TabsIconPresentationComponent
+            },
+            {
+                path: '',
+                component: TabsLinePresentationComponent
+            },
+            {
+                path: '**',
+                component: TabsLinePresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

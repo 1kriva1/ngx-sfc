@@ -7,7 +7,7 @@ import { isDefined } from "./common.utils";
  * @returns True if string is not null and defined(not empty string)
  */
 export function isNullOrEmptyString(value: string | undefined | null) {
-    return isDefined(value) || value === CommonConstants.EMPTY_STRING;
+    return !isDefined(value) || value === CommonConstants.EMPTY_STRING;
 }
 
 /**

@@ -26,9 +26,9 @@ import {
   HamburgerComponent,
   DotsComponent,
   ToggleSwitcherComponent,
-  CheckmarkComponent
+  CheckmarkComponent,
+  TemplateContentComponent
 } from './components';
-
 @NgModule({
   declarations: [
     // directives
@@ -56,7 +56,8 @@ import {
     DotsComponent,
     //toggle
     ToggleSwitcherComponent,
-    CheckmarkComponent
+    CheckmarkComponent,
+    TemplateContentComponent
   ],
   imports: [
     CommonModule,
@@ -88,8 +89,9 @@ import {
     DotsComponent,
     //toggle
     ToggleSwitcherComponent,
-    CheckmarkComponent
+    CheckmarkComponent,
+    TemplateContentComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })
-export class NgxSfcCommonModule {}
+export class NgxSfcCommonModule { }

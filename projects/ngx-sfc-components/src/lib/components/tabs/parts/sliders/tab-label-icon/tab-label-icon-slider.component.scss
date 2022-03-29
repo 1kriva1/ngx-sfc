@@ -1,0 +1,19 @@
+@import "../../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+.slider {
+  transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
+
+  .indicator {
+    width: 50%;
+    margin: 0 auto;
+    height: 0.25em;
+    background: $color-hover-default;
+    border-radius: 0.0625em;
+  }
+
+  @media (max-width: 430px) {
+    & {
+      display: none;
+    }
+  }
+}

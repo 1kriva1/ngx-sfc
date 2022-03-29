@@ -117,6 +117,32 @@ ng generate component components/toggle-switcher --project ngx-sfc-common --expo
 
 ng generate component components/checkmark --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
 
+ng generate component components/template-content --project ngx-sfc-common --export false --flat true --style none --skip-tests false -d
+
+// COMPONENTS
+
+ng generate component components/tabs --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/tabs/parts/tab --project ngx-sfc-components --export true --flat true --style scss --skip-tests true --inline-style true --inline-template true -d
+
+ng generate component components/tabs/parts/tab-label --project ngx-sfc-components --export true --flat true --style scss --skip-tests true --inline-style true --inline-template true -d
+
+ng generate component components/tabs/parts/tab-body --project ngx-sfc-components --export true --flat true --style scss --skip-tests true --inline-style true --inline-template true -d
+
+ng generate class components/tabs/parts/labels/tab-label-content-base --project ngx-sfc-components --skip-tests true -d
+
+ng generate class components/tabs/parts/labels/tab-label-type --project ngx-sfc-components --skip-tests true --type enum -d
+
+ng generate component components/tabs/parts/labels/tab-label-line --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/tabs/parts/labels/tab-label-line/slider/tab-label-line-slider --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/tabs/parts/labels/tab-label-icon --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/tabs/parts/labels/tab-label-icon/slider/tab-label-icon-slider --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate class components/index --project ngx-sfc-components --skip-tests true -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d

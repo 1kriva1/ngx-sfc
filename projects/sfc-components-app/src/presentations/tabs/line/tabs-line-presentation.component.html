@@ -1,0 +1,193 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Line:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_ICONS">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_DISABLED">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_SELECTED">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_EMPTY">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_TWO">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_ONE">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS" [sfcComponentSize]="ComponentSize.Small">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS" [sfcComponentSize]="ComponentSize.Large">
+                <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+                    <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+                    </sfc-tab-label-line>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+                    <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+                    </sfc-tab-label-line-slider>
+                </ng-template>
+
+                <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+                    {{data}}
+                </ng-template>
+            </sfc-tabs>
+        </div>
+
+    </div>
+</div>

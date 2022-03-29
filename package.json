@@ -7,10 +7,11 @@
     "start:inputs": "ng serve sfc-inputs-app",
     "start:components": "ng serve sfc-components-app",
     "build": "ng build",
-    "build:common": "ng build ngx-sfc-common",
+    "build:common": "ng build ngx-sfc-common && npm run build:scss",
     "build:inputs": "ng build ngx-sfc-inputs",
     "build:components": "ng build ngx-sfc-components",
     "build:all": "npm run build:common && npm run build:inputs && npm run build:components",
+    "build:scss": "scss-bundle -c scss-bundle.config.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:common": "ng test ngx-sfc-common",
@@ -43,7 +44,7 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4",
-    "ngx-sfc-common": "0.0.1"
+    "ngx-sfc-common": "0.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.6",
@@ -69,6 +70,7 @@
     "ng-packagr": "^13.0.0",
     "stylelint": "^14.6.0",
     "stylelint-config-standard-scss": "^3.0.0",
-    "typescript": "~4.5.2"
-  }
+    "typescript": "~4.5.2",
+    "scss-bundle": "3.1.2"
+  }  
 }

@@ -6,7 +6,7 @@
 }
 
 @mixin filled($color) {
-  color: $color-filled-default !important;
+  color: $color-fade-0 !important;
   border-color: $color;
   background: $color;
 }

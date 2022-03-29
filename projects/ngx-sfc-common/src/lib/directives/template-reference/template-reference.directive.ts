@@ -9,5 +9,8 @@ export class TemplateReferenceDirective {
   @Input('sfcTemplateReference')
   templateName: string = CommonConstants.EMPTY_STRING;
 
+  @Input()
+  data: any;
+
   constructor(public readonly template: TemplateRef<any>) { }
 }

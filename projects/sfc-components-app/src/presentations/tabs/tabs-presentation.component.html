@@ -1,0 +1,12 @@
+<div class="tabs-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="line" [queryParams]="{theme: theme}">Line</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button routerLinkActive="menu-active" routerLink="icon" [queryParams]="{theme: theme}">Icon</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

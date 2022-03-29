@@ -22,6 +22,16 @@ export function getValueFromCssLikeValue(value: string,
 }
 
 /**
+ * Return CCS like calc value
+ * @param value All value (100% by default)
+ * @param part Part value
+ * @returns Calc value
+ */
+export function getCalcValue(part: number, value: number = 100): string {
+    return `calc(${value}${UIConstants.CSS_PERCENTAGE} / ${part} )`;
+}
+
+/**
  * Add classes to HTML element
  * @param element HTML element
  * @param classNames Array of CSS classes

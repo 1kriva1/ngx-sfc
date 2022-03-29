@@ -1,0 +1,24 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  width: 100%;
+
+  .container {
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+
+      .tab {
+        @include theme-value(color, $color-default, $color-dark);
+
+        text-align: center;
+      }
+    }
+
+    .body-container {
+      @include theme-value(color, $color-default, $color-dark);
+
+      margin-top: 0.6em;
+    }
+  }
+}

@@ -47,6 +47,7 @@ export {
 export {
     getCssLikeValue,
     getValueFromCssLikeValue,
+    getCalcValue,
     addClasses,
     removeClasses
 } from './ui.utils'

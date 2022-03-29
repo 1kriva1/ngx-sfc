@@ -1,0 +1,65 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Icon:</h3>
+    </div>
+
+    <ng-template #labelRef let-label>
+        <sfc-tab-label-icon [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+            icon="{{label.icon}}">
+        </sfc-tab-label-icon>
+    </ng-template>
+
+    <ng-template #sliderRef let-data>
+        <sfc-tab-label-icon-slider [count]="data.count" [index]="data.index">
+        </sfc-tab-label-icon-slider>
+    </ng-template>
+
+    <ng-template #bodyRef let-data>
+        {{data}}
+    </ng-template>
+
+    <div class="component-row">
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_ICONS" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_DISABLED" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_SELECTED" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_EMPTY" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_TWO" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODEL_ONE" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"
+                [sfcComponentSize]="ComponentSize.Small"></sfc-tabs>
+        </div>
+
+        <div class="component-column full">
+            <sfc-tabs [tabs]="MODELS" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef"
+                [sfcComponentSize]="ComponentSize.Large"></sfc-tabs>
+        </div>
+    </div>
+</div>

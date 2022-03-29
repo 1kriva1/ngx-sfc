@@ -1,0 +1,29 @@
+<div class="container" *ngIf="vm$ | async as vm">
+    <div class="tabs-container">
+        <div class="tabs">
+            <div class="tab" [style.width.%]="vm.tabWidth" *ngFor="let tab of vm.tabs; index as index"
+                (click)="selectTab(tab, index)">
+
+                <sfc-template-content [referenceContent]="label" [templatesContent]="templates"
+                    [templateType]="TabsTemplate.Label" [defaultContent]="defaultLabel" [contextData]="tab">
+                </sfc-template-content>
+
+                <ng-template #defaultLabel>{{ tab.label }}</ng-template>
+            </div>
+        </div>
+
+        <sfc-template-content [referenceContent]="slider" [templatesContent]="templates"
+            [templateType]="TabsTemplate.Slider" [contextData]="vm.sliderContextData"></sfc-template-content>
+
+    </div>
+
+    <div class="body-container">
+        <ng-container *ngIf="vm.selectedTab">
+
+            <sfc-template-content [referenceContent]="body" [templatesContent]="templates"
+                [templateType]="TabsTemplate.Body" [contextData]="vm.selectedTab.data">
+            </sfc-template-content>
+
+        </ng-container>
+    </div>
+</div>
