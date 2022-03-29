@@ -16,7 +16,10 @@ import {
   LoadersCirclePresentationComponent,
   LoadersCircleFadingPresentationComponent,
   ModalsPresentationComponent,
-  ToggleSwitchersPresentationComponent
+  ToggleSwitchersPresentationComponent,
+  TabsPresentationComponent,
+  TabsIconPresentationComponent,
+  TabsLinePresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,7 +45,11 @@ import { AppComponent } from './app.component';
     // modal
     ModalsPresentationComponent,
     // toggle switchers
-    ToggleSwitchersPresentationComponent
+    ToggleSwitchersPresentationComponent,
+    // tabs
+    TabsPresentationComponent,
+    TabsLinePresentationComponent,
+    TabsIconPresentationComponent
   ],
   imports: [
     BrowserModule,

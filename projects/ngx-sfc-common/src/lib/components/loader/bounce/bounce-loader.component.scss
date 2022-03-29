@@ -1,12 +1,11 @@
-@import "../../shared/styles/mixins";
-@import "../../shared/styles/variables";
-@import "../styles/common";
+@import "../../../styles/styles";
+@import "../styles/mixins";
 
 .spinner {
   text-align: center;
 
   .bounce {
-    @include theme-value(background-color, $color-default, $color-filled-default);
+    @include theme-value(background-color, $color-default, $color-fade-0);
 
     border-radius: 100%;
     display: inline-block;

@@ -1,5 +1,4 @@
-@import "../shared/styles/variables";
-@import "../shared/styles/mixins";
+@import "../../styles/styles";
 
 :host {
   display: inline-block;
@@ -7,7 +6,7 @@
   .check {
     border-radius: 50%;
     border: 0.18em solid;
-    background: $color-filled-default;
+    background: $color-fade-0;
     border-color: $color-dark;
 
     @include square-size(1em);
@@ -24,7 +23,7 @@
       font-size: 0.8em;
       transition: opacity 0.3s ease;
       color: transparent;
-      -webkit-text-stroke: 1px $color-shadow-default;
+      -webkit-text-stroke: 1px $color-fade-3;
     }
 
     &:hover {
@@ -47,7 +46,7 @@
       i {
         opacity: 1;
         transform: scale(0);
-        color: $color-filled-default;
+        color: $color-fade-0;
         -webkit-text-stroke: 0;
         animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards;
 

@@ -1,6 +1,5 @@
-@import "../../shared/styles/variables";
-@import "../../shared/styles/mixins";
-@import "../styles/common";
+@import "../../../styles/styles";
+@import "../styles/mixins";
 
 .circles-container {
   position: relative;
@@ -21,7 +20,7 @@
       width: 15%;
       height: 15%;
 
-      @include theme-value(background-color, $color-default, $color-filled-default);
+      @include theme-value(background-color, $color-default, $color-fade-0);
 
       border-radius: 100%;
       animation: bounce-delay 1.2s infinite ease-in-out both;

@@ -7,7 +7,6 @@ import {
     QueryList, TemplateRef
 } from '@angular/core';
 import { TemplateReferenceDirective } from '../../directives';
-import { firstOrDefault, isDefined } from '../../utils';
 import { IDefaultModalFooterModel } from './footer/default/default-modal-footer.model';
 import { IDefaultModalHeaderModel } from './header/default/default-modal-header.model';
 import { ModalTemplate } from './modal-template.enum';
@@ -81,26 +80,9 @@ export class ModalComponent {
     }
 
     @ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
-    private templates: QueryList<TemplateReferenceDirective> | undefined;
+    templates: QueryList<TemplateReferenceDirective> | undefined;
 
     constructor(private modalService: ModalService) { }
-
-    getTemplate(template: ModalTemplate): TemplateRef<any> | null {
-        if (!isDefined(this.templates))
-            return null;
-
-        const templateRef = firstOrDefault(this.templates?.toArray(),
-            t => t.templateName == template);
-
-        return isDefined(templateRef) ? templateRef?.template as TemplateRef<any> : null;
-    }
-
-    isShowDefault(template: ModalTemplate): boolean {
-        return !isDefined(this.getTemplate(template))
-            && (template == ModalTemplate.Header
-                ? !isDefined(this.header)
-                : !isDefined(this.footer));
-    }
 
     close() {
         this.modalService.close();

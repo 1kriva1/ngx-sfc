@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentSizeDirective, TemplateReferenceDirective } from '../../directives';
 import { nameof } from '../../utils';
 import { ButtonComponent } from '../button/button.component';
+import { TemplateContentComponent } from '../template-content/template-content.component';
 import { DefaultModalFooterComponent } from './footer/default/default-modal-footer.component';
 import { DefaultModalHeaderComponent } from './header/default/default-modal-header.component';
 import { ModalTemplate } from './modal-template.enum';
@@ -26,17 +27,17 @@ import { ModalService } from './service/modal.service';
 
              <sfc-modal>
 
-              <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Header">
-                <h2 class="template-header">{{HEADER_MODEL.Title}}</h2>
-              </ng-template>
+                <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Header">
+                  <h2 class="template-header">{{HEADER_MODEL.Title}}</h2>
+                </ng-template>
 
-              <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Body">
-                <h2 class="template-body">{{BODY_MODEL.Title}}</h2>
-              </ng-template>
+                <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Body">
+                  <h2 class="template-body">{{BODY_MODEL.Title}}</h2>
+                </ng-template>
 
-              <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Footer">
-                <h2 class="template-footer">{{FOOTER_MODEL.Title}}</h2>
-              </ng-template>
+                <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Footer">
+                  <h2 class="template-footer">{{FOOTER_MODEL.Title}}</h2>
+                </ng-template>
 
              </sfc-modal>`
 })
@@ -80,7 +81,7 @@ describe('Component: ModalComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule],
-      declarations: [ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
+      declarations: [TemplateContentComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
         ButtonComponent, ComponentSizeDirective, TemplateReferenceDirective, TestSfcModalComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]
     }).compileComponents();

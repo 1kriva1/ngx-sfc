@@ -50,7 +50,7 @@ describe('Service: Loader', () => {
       done();
     });
 
-    fit('Should not register new loader, if it already exist', done => {
+    fit('Should not register new loader, if already exist', done => {
       const loaderId1 = 'test_loader1';
 
       service.register({ id: loaderId1, status: false })

@@ -1,5 +1,4 @@
-@import "../shared/styles/variables";
-@import "../shared/styles/mixins";
+@import "../../styles/styles";
 
 :host {
   position: relative;
@@ -28,8 +27,8 @@
     max-width: 18.75em;
     border-radius: 6px;
     background-color: $color-default;
-    box-shadow: 0 0 20.25em $color-shadow-default;
-    color: $color-filled-default;
+    box-shadow: 0 0 20.25em $color-fade-3;
+    color: $color-fade-0;
     text-align: center;
     white-space: pre-wrap;
     overflow: hidden;

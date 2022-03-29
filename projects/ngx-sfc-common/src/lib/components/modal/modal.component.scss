@@ -1,5 +1,4 @@
-@import "../shared/styles/variables";
-@import "../shared/styles/mixins";
+@import "../../styles/styles";
 
 .overlay {
   display: flex;
@@ -27,12 +26,12 @@
     position: relative;
     padding: 0.7em;
     margin: auto;
-    background-color: $color-filled-fade-default;
+    background-color: $color-fade-1;
     max-width: calc(100% - 3em);
     max-height: calc(100% - 3em);
     border-radius: 3px;
     overflow-y: auto;
-    box-shadow: 0 0.125em 0.625em $color-shadow-default;
+    box-shadow: 0 0.125em 0.625em $color-fade-4;
     transform: scale(1);
     flex-direction: column;
     animation: expand-modal 0.4s cubic-bezier(0.55, 0, 0.1, 1);

@@ -3,7 +3,7 @@
     @include filled($color-default);
 
     &:hover {
-      @include filled($color-hover-filled-default);
+      @include filled($color-fade-3);
     }
 
     &.disabled {

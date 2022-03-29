@@ -1,5 +1,4 @@
-@import "../../shared/styles/variables";
-@import "../../shared/styles/mixins";
+@import "../../../styles/styles";
 
 .preloader {
   position: relative;
@@ -13,7 +12,7 @@
   text-align: center;
 
   &.background {
-    @include theme-value(background-color, $color-filled-default, $color-filled-dark);
+    @include theme-value(background-color, $color-fade-0, $color-disabled-dark);
 
     opacity: 0.7;
   }

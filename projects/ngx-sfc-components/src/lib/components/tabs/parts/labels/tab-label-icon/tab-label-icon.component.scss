@@ -1,0 +1,72 @@
+@import "../../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  width: 100%;
+  cursor: pointer;
+
+  @include theme-value(color, $color-default, $color-dark);
+
+  font-weight: bold;
+  user-select: none;
+  padding-bottom: 1.25em;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+
+  &.selected:not(.disabled),
+  &:hover:not(.disabled) {
+    color: $color-hover-default;
+  }
+
+  &.disabled {
+    @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .container {
+    display: inline-flex;
+    align-items: center;
+    flex-flow: column wrap;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    i {
+      height: 1.2em;
+      margin-bottom: 0.2em;
+    }
+
+    span {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  :host {
+    padding-bottom: 0.6em;
+
+    .container {
+      padding: 0.8em;
+      border-radius: 0.3em;
+      text-overflow: initial;
+
+      i {
+        height: auto;
+        margin-bottom: 0;
+      }
+
+      span {
+        display: none;
+      }
+    }
+
+    &.selected {
+      .container {
+        @include theme-value(background, $color-fade-2, $color-fade-1);
+      }
+    }
+  }
+}

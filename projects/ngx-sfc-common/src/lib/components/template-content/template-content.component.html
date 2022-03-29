@@ -1,0 +1,12 @@
+<ng-container *ngIf="referenceContent;else template">
+    <ng-container *ngTemplateOutlet="referenceContent;context:{$implicit: contextData}"></ng-container>
+</ng-container>
+
+<ng-template #template>
+    <ng-container *ngTemplateOutlet="templateContent;context:{$implicit: contextData}">
+    </ng-container>
+</ng-template>
+
+<ng-container *ngIf="defaultContent && showDefault">
+    <ng-container *ngTemplateOutlet="defaultContent;context:{$implicit: contextData}"></ng-container>
+</ng-container>

@@ -1,0 +1,23 @@
+// default
+$color-default: #545e61 !default;
+$color-hover-default: #2bbbad !default;
+$color-disabled-default: #bdbdbd !default;
+
+// fades
+$color-fade-0: #fff !default;
+$color-fade-1: #f5f7fa !default;
+$color-fade-2: #e6e9ed !default;
+$color-fade-3: #aab2bd !default;
+$color-fade-4: #656d78 !default;
+$color-fade-5: #434a54 !default;
+$color-fade-6: #34323d !default;
+
+// background
+$background-gradient-default: linear-gradient(
+  to right,
+  rgb(0 0 0 / 0%) 0%,
+  rgb(0 0 0 / 30%) 17%,
+  rgb(0 0 0 / 30%) 83%,
+  rgb(0 0 0 / 0%) 100%
+);
+$color-background-default: #0009;
