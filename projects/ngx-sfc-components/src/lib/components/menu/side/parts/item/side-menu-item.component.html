@@ -1,0 +1,13 @@
+<div class="container">
+    <sfc-side-menu-item-content [item]="item" [active]="isActive(item)" [open]="open" [openParent]="openParent"
+        [hasChildren]="hasChildren(item)" (selectItem)="onParentClick(item)">
+    </sfc-side-menu-item-content>
+
+    <div class="children" *ngIf="hasChildren(item) && openParent" [@enterAnimation]>
+
+        <sfc-side-menu-item-content *ngFor="let child of item.items" [item]="child" [open]="open"
+            [active]="isActive(child)" [openParent]="true" (selectItem)="onChildClick(item, child)">
+        </sfc-side-menu-item-content>
+
+    </div>
+</div>

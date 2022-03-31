@@ -7,8 +7,13 @@ import {
   TabLabelIconComponent,
   TabLabelIconSliderComponent,
   TabLabelLineComponent,
-  TabLabelLineSliderComponent
+  TabLabelLineSliderComponent,
+  SideMenuComponent
 } from './components';
+import { SideMenuHeaderComponent } from './components/menu/side/parts/header/side-menu-header.component';
+import { SideMenuItemContentComponent } from './components/menu/side/parts/item/content/side-menu-item-content.component';
+import { SideMenuItemComponent } from './components/menu/side/parts/item/side-menu-item.component';
+import { SideMenuTitleComponent } from './components/menu/side/parts/title/side-menu-title.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,13 @@ import {
     TabLabelLineComponent,
     TabLabelIconComponent,
     TabLabelLineSliderComponent,
-    TabLabelIconSliderComponent
+    TabLabelIconSliderComponent,
+    // Side menu
+    SideMenuComponent,
+    SideMenuHeaderComponent,
+    SideMenuItemComponent,
+    SideMenuTitleComponent,
+    SideMenuItemContentComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +40,8 @@ import {
     TabLabelLineComponent,
     TabLabelIconComponent,
     TabLabelLineSliderComponent,
-    TabLabelIconSliderComponent
+    TabLabelIconSliderComponent,
+    SideMenuComponent
   ]
 })
 export class NgxSfcComponentsModule { }

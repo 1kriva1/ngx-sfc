@@ -1,0 +1,14 @@
+<div class="container">
+    <ul>
+        <sfc-side-menu-header [open]="open" (toggle)="open =!open"></sfc-side-menu-header>
+
+        <ng-container *ngFor="let item of model.items" [ngSwitch]="item.type">
+            <sfc-side-menu-item *ngSwitchCase="SideMenuItemType.Item" [item]="item" [open]="open"
+                (selectItem)="onItemSelect($event)">
+            </sfc-side-menu-item>
+
+            <sfc-side-menu-title *ngSwitchCase="SideMenuItemType.Title" [label]="item.label" [open]="open">
+            </sfc-side-menu-title>
+        </ng-container>
+    </ul>
+</div>

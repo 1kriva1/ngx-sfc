@@ -1,0 +1,26 @@
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    width: 5em;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out;
+
+    @include theme-value(background, $color-fade-1, $color-fade-7);
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &.open {
+    .container {
+      width: 11.25em;
+    }
+  }
+}
