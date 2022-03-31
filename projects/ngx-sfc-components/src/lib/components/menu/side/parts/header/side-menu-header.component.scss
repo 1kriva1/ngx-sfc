@@ -1,0 +1,31 @@
+@import "../../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25em;
+
+    span {
+      display: none;
+
+      @include theme-value(color, $color-default, $color-dark);
+
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.8em;
+      user-select: none;
+    }
+  }
+
+  &.open {
+    li {
+      justify-content: space-between;
+
+      span {
+        display: block;
+      }
+    }
+  }
+}

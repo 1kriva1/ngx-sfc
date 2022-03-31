@@ -141,6 +141,16 @@ ng generate component components/tabs/parts/labels/tab-label-icon --project ngx-
 
 ng generate component components/tabs/parts/labels/tab-label-icon/slider/tab-label-icon-slider --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
 
+ng generate component components/menu/side/side-menu --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate class components/menu/side/side-menu --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate component components/menu/side/parts/header/side-menu-header --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/menu/side/parts/item/side-menu-item --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/menu/side/parts/title/side-menu-title --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

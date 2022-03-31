@@ -1,8 +1,9 @@
 @import "../../styles/styles";
 
 :host {
+  display: inline-block;
   width: 100%;
-  height: 0.07em;
+  height: 0.06em;
 
   @include theme-value(background, $background-gradient-default, $background-gradient-dark, "");
 }

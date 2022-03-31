@@ -34,6 +34,10 @@
       &.full {
         flex-basis: 100%;
       }
+
+      :host-context(.sfc-dark-theme) & {
+        color: $color-common;
+      }
     }
   }
 }

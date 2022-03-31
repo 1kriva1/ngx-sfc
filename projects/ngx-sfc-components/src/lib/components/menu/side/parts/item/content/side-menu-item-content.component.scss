@@ -1,0 +1,134 @@
+@import "../../../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  li {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1.25em 0 1.5em;
+    cursor: pointer;
+    width: calc(100% - 2.75em);
+    justify-content: space-between;
+
+    @include theme-value(color, $color-default, $color-dark);
+
+    .expand-container {
+      @include visibility(false);
+
+      width: 0;
+
+      > i {
+        font-weight: bold;
+      }
+    }
+
+    .item-container {
+      display: inline-flex;
+      align-items: center;
+
+      .item {
+        width: 2em;
+        height: 1.9em;
+        display: flex;
+        justify-content: center;
+        border-radius: 0.7em;
+        align-items: center;
+
+        a {
+          border-radius: 0.45em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.3s ease-in-out;
+          font-size: 1.3em;
+          padding: 0.3em;
+
+          > i {
+            font-size: 1em;
+          }
+        }
+      }
+
+      .label {
+        font-weight: bold;
+        font-size: 0.9em;
+
+        @include visibility(false);
+
+        transition: color 0.3s, visibility 0.3s, opacity 0.5s ease-in-out;
+        user-select: none;
+        width: 0;
+      }
+    }
+  }
+
+  &.active,
+  &:hover {
+    li {
+      color: $color-fade-0;
+
+      .item-container {
+        .item {
+          a {
+            background-color: $color-hover-default;
+            box-shadow: 0 0.3em 1em rgb(43 187 173 / 10%);
+          }
+        }
+
+        .label {
+          color: $color-hover-default;
+        }
+      }
+
+      .expand-container {
+        color: $color-hover-default;
+      }
+    }
+  }
+
+  &.open {
+    li {
+      .item-container {
+        .item {
+          a {
+            margin-right: 1em;
+          }
+        }
+
+        .label {
+          @include visibility(true);
+
+          width: auto;
+        }
+      }
+
+      .expand-container {
+        width: auto;
+
+        @include visibility(true);
+      }
+    }
+  }
+
+  :host-context(.children) {
+    li {
+      margin: 0.2em 0;
+
+      .item-container {
+        .item {
+          a {
+            padding: 0.3em;
+            border-radius: 0.35em;
+
+            > i {
+              font-size: 0.5em;
+            }
+          }
+        }
+
+        .label {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+}

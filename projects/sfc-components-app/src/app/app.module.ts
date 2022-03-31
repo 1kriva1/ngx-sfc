@@ -19,7 +19,9 @@ import {
   ToggleSwitchersPresentationComponent,
   TabsPresentationComponent,
   TabsIconPresentationComponent,
-  TabsLinePresentationComponent
+  TabsLinePresentationComponent,
+  MenusPresentationComponent,
+  MenusSidePresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,7 +51,10 @@ import { AppComponent } from './app.component';
     // tabs
     TabsPresentationComponent,
     TabsLinePresentationComponent,
-    TabsIconPresentationComponent
+    TabsIconPresentationComponent,
+    // menus
+    MenusPresentationComponent,
+    MenusSidePresentationComponent
   ],
   imports: [
     BrowserModule,

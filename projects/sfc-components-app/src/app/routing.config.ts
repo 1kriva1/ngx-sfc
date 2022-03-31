@@ -15,7 +15,9 @@ import {
     ModalsPresentationComponent,
     ToggleSwitchersPresentationComponent,
     TabsLinePresentationComponent,
-    TabsIconPresentationComponent
+    TabsIconPresentationComponent,
+    MenusPresentationComponent,
+    MenusSidePresentationComponent
 } from "../presentations";
 import { TabsPresentationComponent } from "../presentations/tabs/tabs-presentation.component";
 
@@ -127,6 +129,24 @@ export const routes: Routes = [
             {
                 path: '**',
                 component: TabsLinePresentationComponent
+            }
+        ]
+    },
+    {
+        path: 'menus',
+        component: MenusPresentationComponent,
+        children: [
+            {
+                path: 'side',
+                component: MenusSidePresentationComponent
+            },
+            {
+                path: '',
+                component: MenusSidePresentationComponent
+            },
+            {
+                path: '**',
+                component: MenusSidePresentationComponent
             }
         ]
     },
