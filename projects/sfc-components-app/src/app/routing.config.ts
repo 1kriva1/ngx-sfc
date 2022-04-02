@@ -18,7 +18,8 @@ import {
     TabsIconPresentationComponent,
     MenusPresentationComponent,
     MenusSidePresentationComponent,
-    MenusDropdownPresentationComponent
+    MenusDropdownPresentationComponent,
+    MenusNavigationPresentationComponent
 } from "../presentations";
 import { TabsPresentationComponent } from "../presentations/tabs/tabs-presentation.component";
 
@@ -144,6 +145,10 @@ export const routes: Routes = [
             {
                 path: 'dropdown',
                 component: MenusDropdownPresentationComponent  
+            },
+            {
+                path: 'navigation',
+                component: MenusNavigationPresentationComponent  
             },
             {
                 path: '',

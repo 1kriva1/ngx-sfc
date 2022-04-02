@@ -1,6 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { CommonConstants } from 'ngx-sfc-common';
-import { IDropdownMenuModel } from './dropdown-menu.model';
+import { IDropdownMenuItemModel } from './dropdown-menu-item.model';
 
 @Component({
   selector: 'sfc-dropdown-menu-item',
@@ -10,7 +10,7 @@ import { IDropdownMenuModel } from './dropdown-menu.model';
 export class DropdownMenuItemComponent {
 
   @Input()
-  item: IDropdownMenuModel = { label: CommonConstants.EMPTY_STRING };
+  item: IDropdownMenuItemModel = { label: CommonConstants.EMPTY_STRING };
 
   @HostListener('click')
   click() {

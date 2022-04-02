@@ -22,7 +22,8 @@ import {
   TabsLinePresentationComponent,
   MenusPresentationComponent,
   MenusSidePresentationComponent,
-  MenusDropdownPresentationComponent 
+  MenusDropdownPresentationComponent,
+  MenusNavigationPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,7 +57,8 @@ import { AppComponent } from './app.component';
     // menus
     MenusPresentationComponent,
     MenusSidePresentationComponent,
-    MenusDropdownPresentationComponent 
+    MenusDropdownPresentationComponent,
+    MenusNavigationPresentationComponent
   ],
   imports: [
     BrowserModule,

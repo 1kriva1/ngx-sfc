@@ -37,7 +37,7 @@ describe('Component: DropdownMenuItemComponent', () => {
       fixture.detectChanges();
 
       expect(component.item).toEqual({ label: 'Test label', icon: 'fa fa-test' });
-    });;
+    });
 
     fit('Should call item click action', () => {
       component.item = { label: 'Test label', click: () => { } };

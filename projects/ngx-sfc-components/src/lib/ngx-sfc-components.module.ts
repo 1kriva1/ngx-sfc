@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import {
   TabsComponent,
   TabLabelIconComponent,
@@ -8,14 +8,15 @@ import {
   TabLabelLineComponent,
   TabLabelLineSliderComponent,
   SideMenuComponent,
-  DropdownMenuComponent
+  DropdownMenuComponent,
+  NavigationMenuComponent
 } from './components';
 import { SideMenuHeaderComponent } from './components/menu/side/parts/header/side-menu-header.component';
 import { SideMenuItemContentComponent } from './components/menu/side/parts/item/content/side-menu-item-content.component';
 import { SideMenuItemComponent } from './components/menu/side/parts/item/side-menu-item.component';
 import { SideMenuTitleComponent } from './components/menu/side/parts/title/side-menu-title.component';
 import { DropdownMenuItemComponent } from './components/menu/dropdown/parts/item/dropdown-menu-item.component';
-import { NgxSfcCommonModule } from 'ngx-sfc-common';
+import { NavigationMenuItemComponent } from './components/menu/navigation/parts/item/navigation-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     SideMenuTitleComponent,
     SideMenuItemContentComponent,
     DropdownMenuComponent,
-    DropdownMenuItemComponent
+    DropdownMenuItemComponent,
+    NavigationMenuComponent,
+    NavigationMenuItemComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,8 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     TabLabelIconSliderComponent,
     // Menus
     SideMenuComponent,
-    DropdownMenuComponent
+    DropdownMenuComponent,
+    NavigationMenuComponent
   ]
 })
 export class NgxSfcComponentsModule { }
