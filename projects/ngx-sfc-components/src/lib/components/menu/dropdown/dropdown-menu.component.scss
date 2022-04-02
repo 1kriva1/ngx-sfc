@@ -17,7 +17,9 @@
         flex-wrap: wrap;
         cursor: pointer;
         transition: all 0.3s ease;
+
         @include theme-value(color, $color-default, $color-dark);
+
         padding: 0.3em;
 
         span,
@@ -41,8 +43,10 @@
         flex-direction: column;
         width: max-content;
         background: $color-fade-0;
+
         @include visibility(false);
         @include theme-value(color, $color-fade-2, $color-fade-4);
+
         position: absolute;
         right: 0;
         transition: all 0.5s ease;
@@ -62,6 +66,7 @@
       li {
         .dropdown-container {
           @include visibility(true);
+
           display: flex;
         }
       }
@@ -73,7 +78,9 @@
       li {
         .container {
           border: 0.15em solid;
+
           @include theme-value(border-color, $color-default, $color-dark);
+
           border-radius: 0.3em;
 
           &:hover {
