@@ -8,4 +8,6 @@ export { TabLabelLineSliderComponent } from './tabs/parts/sliders/tab-label-line
 export { SideMenuComponent } from './menu/side/side-menu.component';
 export { ISideMenuModel, ISideMenuItemModel, SideMenuItemType } from './menu/side/side-menu.model';
 export { DropdownMenuComponent } from './menu/dropdown/dropdown-menu.component';
-export { IDropdownMenuModel } from './menu/dropdown/parts/item/dropdown-menu.model';
+export { IDropdownMenuItemModel } from './menu/dropdown/parts/item/dropdown-menu-item.model';
+export { NavigationMenuComponent } from './menu/navigation/navigation-menu.component';
+export { INavigationMenuItemModel } from './menu/navigation/parts/item/navigation-menu-item.model';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentSize, Position } from 'ngx-sfc-common';
-import { IDropdownMenuModel } from 'ngx-sfc-components';
+import { IDropdownMenuItemModel } from 'ngx-sfc-components';
 
 @Component({
     templateUrl: './menus-dropdown-presentation.component.html',
@@ -12,7 +12,7 @@ export class MenusDropdownPresentationComponent {
 
     Position = Position;
 
-    readonly MODEL: IDropdownMenuModel[] = [
+    readonly MODEL: IDropdownMenuItemModel[] = [
         {
             label: 'Photos/Videos',
             icon: 'fas fa-star'
@@ -50,11 +50,11 @@ export class MenusDropdownPresentationComponent {
         }
     ];
 
-    readonly MODEL_ONE: IDropdownMenuModel[];
+    readonly MODEL_ONE: IDropdownMenuItemModel[];
 
-    readonly MODEL_TWO: IDropdownMenuModel[];
+    readonly MODEL_TWO: IDropdownMenuItemModel[];
 
-    readonly MODEL_THREE: IDropdownMenuModel[];
+    readonly MODEL_THREE: IDropdownMenuItemModel[];
 
     constructor() {
         this.MODEL_ONE = this.MODEL.slice(0, 1);
@@ -73,7 +73,7 @@ export class MenusDropdownPresentationComponent {
         });
     }
 
-    onSelect(item: IDropdownMenuModel) {
+    onSelect(item: IDropdownMenuItemModel) {
         alert('Cliciked: ' + item.label);
     }
 }

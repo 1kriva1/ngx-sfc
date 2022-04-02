@@ -157,6 +157,12 @@ ng generate component components/menu/dropdown/parts/item/dropdown-menu-item --p
 
 ng generate class components/menu/dropdown/parts/item/dropdown-menu --project ngx-sfc-components --skip-tests true --type model -d
 
+ng generate component components/menu/navigation/navigation-menu --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/menu/navigation/parts/item/navigation-menu-item --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate class components/menu/navigation/parts/item/navigation-menu-item --project ngx-sfc-components --skip-tests true --type model -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

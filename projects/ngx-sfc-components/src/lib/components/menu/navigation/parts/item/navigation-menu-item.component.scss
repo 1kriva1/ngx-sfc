@@ -1,0 +1,44 @@
+@import "../../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @include theme-value(color, $color-default, $color-dark);
+
+  transition: color 0.2s ease-in-out;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0.3em;
+    margin: 0.625em;
+    width: 100%;
+    border-radius: 0.625em;
+    transition: background 0.2s ease-in-out;
+
+    i {
+      font-size: 1.5em;
+    }
+
+    span {
+      font-size: 1em;
+      font-weight: bold;
+      margin-top: 0.625em;
+      text-align: center;
+    }
+  }
+
+  &:hover,
+  &.active {
+    color: $color-fade-0;
+
+    .container {
+      background: $color-hover-default;
+    }
+  }
+}

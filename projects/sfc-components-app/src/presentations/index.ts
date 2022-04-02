@@ -19,3 +19,4 @@ export { TabsIconPresentationComponent } from './tabs/icon/tabs-icon-presentatio
 export { MenusPresentationComponent } from './menus/menus-presentation.component';
 export { MenusSidePresentationComponent } from './menus/side/menus-side-presentation.component';
 export { MenusDropdownPresentationComponent } from './menus/dropdown/menus-dropdown-presentation.component';
+export { MenusNavigationPresentationComponent } from './menus/navigation/menus-navigation-presentation.component';
