@@ -1,0 +1,14 @@
+<ul [sfcClickOutside]="hideOnClickOutside" (action)="onClickOutside($event)">
+    <li>
+        <div class="container" (click)="open = !open">
+            <span *ngIf="label">{{label}}</span>
+            <i *ngIf="icon" class="{{icon}}"></i>
+            <sfc-dots *ngIf="showDots" [open]="open"></sfc-dots>
+        </div>
+
+        <ul *ngIf="items.length" class="dropdown-container">
+            <sfc-dropdown-menu-item *ngFor="let item of items" [item]="item" (click)="onClick(item)">
+            </sfc-dropdown-menu-item>
+        </ul>
+    </li>
+</ul>

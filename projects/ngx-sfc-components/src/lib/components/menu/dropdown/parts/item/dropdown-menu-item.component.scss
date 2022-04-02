@@ -1,0 +1,37 @@
+@import "../../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    color: $color-default;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.4em;
+    border: 0.0063em solid transparent;
+    border-radius: 0.31em;
+    font-weight: bold;
+    font-size: 0.8em;
+    user-select: none;
+
+    &:hover,
+    &:focus-within {
+      background: $color-fade-1;
+      border-color: $color-fade-1;
+      color: $color-hover-default;
+      cursor: pointer;
+      outline: none;
+    }
+
+    i {
+      padding-right: 0.625em;
+      width: 10%;
+    }
+  }
+
+  ::ng-deep sfc-delimeter {
+    @include theme-value(background, $background-gradient-default, $background-gradient-default);
+  }
+}

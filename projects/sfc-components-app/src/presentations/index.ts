@@ -16,5 +16,6 @@ export { ToggleSwitchersPresentationComponent } from './toggle-switchers/toggle-
 export { TabsPresentationComponent } from './tabs/tabs-presentation.component';
 export { TabsLinePresentationComponent } from './tabs/line/tabs-line-presentation.component';
 export { TabsIconPresentationComponent } from './tabs/icon/tabs-icon-presentation.component';
-export {MenusPresentationComponent} from './menus/menus-presentation.component'
-export {MenusSidePresentationComponent} from './menus/side/menus-side-presentation.component'
+export { MenusPresentationComponent } from './menus/menus-presentation.component';
+export { MenusSidePresentationComponent } from './menus/side/menus-side-presentation.component';
+export { MenusDropdownPresentationComponent } from './menus/dropdown/menus-dropdown-presentation.component';

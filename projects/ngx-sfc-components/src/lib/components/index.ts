@@ -7,3 +7,5 @@ export { TabLabelIconSliderComponent } from './tabs/parts/sliders/tab-label-icon
 export { TabLabelLineSliderComponent } from './tabs/parts/sliders/tab-label-line/tab-label-line-slider.component';
 export { SideMenuComponent } from './menu/side/side-menu.component';
 export { ISideMenuModel, ISideMenuItemModel, SideMenuItemType } from './menu/side/side-menu.model';
+export { DropdownMenuComponent } from './menu/dropdown/dropdown-menu.component';
+export { IDropdownMenuModel } from './menu/dropdown/parts/item/dropdown-menu.model';
