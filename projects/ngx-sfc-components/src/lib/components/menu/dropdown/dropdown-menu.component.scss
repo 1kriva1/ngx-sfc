@@ -1,0 +1,140 @@
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: inline-flex;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+
+    li {
+      position: relative;
+
+      .container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        @include theme-value(color, $color-default, $color-dark);
+
+        padding: 0.3em;
+
+        span,
+        i {
+          font-size: 0.8em;
+          font-weight: bold;
+        }
+
+        span {
+          ~ i {
+            margin-left: 0.3em;
+          }
+        }
+
+        &:hover {
+          color: $color-hover-default;
+        }
+      }
+
+      .dropdown-container {
+        flex-direction: column;
+        width: max-content;
+        background: $color-fade-0;
+
+        @include visibility(false);
+        @include theme-value(color, $color-fade-2, $color-fade-4);
+
+        position: absolute;
+        right: 0;
+        transition: all 0.5s ease;
+        margin-top: 1em;
+        display: none;
+        padding: 0.6em;
+        border: 0.0063em solid $color-fade-1;
+        border-radius: 0.1875em;
+        box-shadow: 0 0.125em 0.625em;
+        z-index: 9999;
+      }
+    }
+  }
+
+  &.open {
+    ul {
+      li {
+        .dropdown-container {
+          @include visibility(true);
+
+          display: flex;
+        }
+      }
+    }
+  }
+
+  &.bordered {
+    ul {
+      li {
+        .container {
+          border: 0.15em solid;
+
+          @include theme-value(border-color, $color-default, $color-dark);
+
+          border-radius: 0.3em;
+
+          &:hover {
+            border-color: $color-hover-default;
+
+            ::ng-deep sfc-dots .dot {
+              background: $color-hover-default;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.top {
+    ul {
+      li {
+        .dropdown-container {
+          bottom: 0;
+          margin-bottom: 2.18em;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &.center {
+    ul {
+      li {
+        .dropdown-container {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+
+  &.left {
+    ul {
+      li {
+        .dropdown-container {
+          right: 0;
+        }
+      }
+    }
+  }
+
+  &.right {
+    ul {
+      li {
+        .dropdown-container {
+          left: 0;
+        }
+      }
+    }
+  }
+}

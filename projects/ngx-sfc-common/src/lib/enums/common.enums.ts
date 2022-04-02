@@ -36,7 +36,8 @@ export enum UIClass {
     Hidden = 'hidden',
     Animated = 'animated',
     Expanded = 'expanded',
-    Fixed = 'fixed'
+    Fixed = 'fixed',
+    Bordered = 'bordered'
 };
 
 /**
@@ -46,7 +47,8 @@ export enum Position {
     Top = 'top',
     Bottom = 'bottom',
     Left = 'left',
-    Right = 'right'
+    Right = 'right',
+    Center = 'center'
 }
 
 /**

@@ -15,7 +15,7 @@ export class SideMenuComponent {
   model: ISideMenuModel = { open: false, items: [] };
 
   @Output()
-  selectItem: EventEmitter<ISideMenuItemModel> = new EventEmitter<ISideMenuItemModel>();
+  selected: EventEmitter<ISideMenuItemModel> = new EventEmitter<ISideMenuItemModel>();
 
   @HostBinding('class.' + UIClass.Open)
   get open(): boolean {
@@ -39,6 +39,6 @@ export class SideMenuComponent {
       item.active = true;
     }
 
-    this.selectItem.emit(item);
+    this.selected.emit(item);
   }
 }

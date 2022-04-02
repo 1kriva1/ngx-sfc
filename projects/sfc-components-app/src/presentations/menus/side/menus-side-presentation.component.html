@@ -6,16 +6,16 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-side-menu [model]="MENU_MODEL" (select)="onSelect($event)"></sfc-side-menu>
+            <sfc-side-menu [model]="MENU_MODEL" (selected)="onSelect($event)"></sfc-side-menu>
             <h3>{{selectedItem}}</h3>
         </div>
 
         <div class="component-column">
-            <sfc-side-menu [model]="MENU_MODEL_1" (select)="onSelect($event)"></sfc-side-menu>
+            <sfc-side-menu [model]="MENU_MODEL_1" (selected)="onSelect($event)"></sfc-side-menu>
         </div>
 
         <div class="component-column">
-            <sfc-side-menu [model]="MENU_MODEL_2" (select)="onSelect($event)"></sfc-side-menu>
+            <sfc-side-menu [model]="MENU_MODEL_2" (selected)="onSelect($event)"></sfc-side-menu>
         </div>
 
     </div>
@@ -23,12 +23,12 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-side-menu [model]="MENU_MODEL_3" [sfcComponentSize]="ComponentSize.Small" (select)="onSelect($event)">
+            <sfc-side-menu [model]="MENU_MODEL_3" [sfcComponentSize]="ComponentSize.Small" (selected)="onSelect($event)">
             </sfc-side-menu>
         </div>
 
         <div class="component-column">
-            <sfc-side-menu [model]="MENU_MODEL_4" [sfcComponentSize]="ComponentSize.Large" (select)="onSelect($event)">
+            <sfc-side-menu [model]="MENU_MODEL_4" [sfcComponentSize]="ComponentSize.Large" (selected)="onSelect($event)">
             </sfc-side-menu>
         </div>
 

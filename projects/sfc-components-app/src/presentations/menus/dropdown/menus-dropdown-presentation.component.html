@@ -1,0 +1,106 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Dropdown:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [hideOnClick]="false"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [hideOnClickOutside]="false"></sfc-dropdown-menu>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" (selected)="onSelect($event)"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [bordered]="true"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [open]="true"></sfc-dropdown-menu>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [position]="[Position.Right, Position.Top]"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [position]="[Position.Top, Position.Center]"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [position]="[Position.Center]"></sfc-dropdown-menu>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" icon="fa fa-star"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" label="Test label"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" icon="fa fa-star" label="Test label"></sfc-dropdown-menu>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL_ONE"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL_TWO"></sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL_THREE"></sfc-dropdown-menu>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [sfcComponentSize]="ComponentSize.Small" [position]="[Position.Top]">
+            </sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [sfcComponentSize]="ComponentSize.Large" [position]="[Position.Top]">
+            </sfc-dropdown-menu>
+        </div>
+
+        <div class="component-column">
+            <sfc-dropdown-menu [items]="MODEL" [bordered]="true" [sfcComponentSize]="ComponentSize.Large"
+                [position]="[Position.Top]">
+            </sfc-dropdown-menu>
+        </div>
+
+    </div>
+
+</div>

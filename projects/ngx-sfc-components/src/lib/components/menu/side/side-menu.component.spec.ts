@@ -111,8 +111,8 @@ describe('Component: SideMenuComponent', () => {
         expect(itemEl.componentInstance.open).toEqual(component.open);
       });
 
-      fit('Should emit select event', () => {
-        spyOn(component.selectItem, 'emit');
+      fit('Should emit selected event', () => {
+        spyOn(component.selected, 'emit');
 
         component.model.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
         fixture.detectChanges();
@@ -122,7 +122,7 @@ describe('Component: SideMenuComponent', () => {
         itemContentEl.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
-        expect(component.selectItem.emit).toHaveBeenCalledOnceWith(component.model.items[0]);
+        expect(component.selected.emit).toHaveBeenCalledOnceWith(component.model.items[0]);
       });
 
       fit('Should change active state', () => {

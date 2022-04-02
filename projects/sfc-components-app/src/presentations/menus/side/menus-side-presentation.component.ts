@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentSize } from 'ngx-sfc-common';
-import { ISideMenuModel, SideMenuItemType } from 'ngx-sfc-components';
+import { ISideMenuItemModel, ISideMenuModel, SideMenuItemType } from 'ngx-sfc-components';
 
 @Component({
     templateUrl: './menus-side-presentation.component.html',
@@ -154,7 +154,7 @@ export class MenusSidePresentationComponent {
         this.MENU_MODEL.items[1].active = true;
     }
 
-    onSelect(item: any) {
+    onSelect(item: ISideMenuItemModel) {
         this.selectedItem = item.label;
     }
 }
