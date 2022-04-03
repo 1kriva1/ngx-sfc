@@ -4,14 +4,14 @@
     </div>
 
     <sfc-circle-loader [type]="CircleLoaderType.Fading"></sfc-circle-loader>
-    <button id="global-button" (click)="showLoader()">Show global loader</button>
+    <button class="app" id="global-button" (click)="showLoader()">Show global loader</button>
 
     <div class="component-row">
 
         <div class="component-column loader-container small">
 
-            <button (click)="showLoader('smallfadingcircle')">Show</button>
-            <button (click)="hideLoader('smallfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('smallfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('smallfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="smallfadingcircle" [type]="CircleLoaderType.Fading"
                     [sfcComponentSize]="ComponentSize.Small" [start]="true">
@@ -23,8 +23,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('mediumfadingcircle')">Show</button>
-            <button (click)="hideLoader('mediumfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('mediumfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('mediumfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="mediumfadingcircle" [type]="CircleLoaderType.Fading"
                     [sfcComponentSize]="ComponentSize.Medium" [start]="true">
@@ -36,8 +36,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('largefadingcircle')">Show</button>
-            <button (click)="hideLoader('largefadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('largefadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('largefadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="largefadingcircle" [type]="CircleLoaderType.Fading"
                     [sfcComponentSize]="ComponentSize.Large" [start]="true">
@@ -53,8 +53,8 @@
 
         <div class="component-column loader-container small">
 
-            <button (click)="showLoader('smallCustomfadingcircle')">Show</button>
-            <button (click)="hideLoader('smallCustomfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('smallCustomfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('smallCustomfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="smallCustomfadingcircle" [type]="CircleLoaderType.Fading" [sfcComponentSize]
                     [customSize]="0.2" [start]="true">
@@ -66,8 +66,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('largeCustomfadingcircle')">Show</button>
-            <button (click)="hideLoader('largeCustomfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('largeCustomfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('largeCustomfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="largeCustomfadingcircle" [type]="CircleLoaderType.Fading" [sfcComponentSize]
                     [customSize]="4.2" [start]="true">
@@ -83,8 +83,8 @@
 
         <div class="component-column loader-container small">
 
-            <button (click)="showLoader('notStartedfadingcircle')">Show</button>
-            <button (click)="hideLoader('notStartedfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('notStartedfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('notStartedfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="notStartedfadingcircle" [type]="CircleLoaderType.Fading" [start]="false">
                 </sfc-circle-loader>
@@ -95,8 +95,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('notBackgroundfadingcircle')">Show</button>
-            <button (click)="hideLoader('notBackgroundfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('notBackgroundfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('notBackgroundfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="notBackgroundfadingcircle" [type]="CircleLoaderType.Fading" [start]="true"
                     [background]="false">
@@ -112,8 +112,8 @@
 
         <div class="component-column loader-container medium">
 
-            <button (click)="showLoader('containerMediumfadingcircle')">Show</button>
-            <button (click)="hideLoader('containerMediumfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('containerMediumfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('containerMediumfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="containerMediumfadingcircle" [type]="CircleLoaderType.Fading" [start]="true">
                 </sfc-circle-loader>
@@ -124,8 +124,8 @@
 
         <div class="component-column loader-container large">
 
-            <button (click)="showLoader('containerLargefadingcircle')">Show</button>
-            <button (click)="hideLoader('containerLargefadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('containerLargefadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('containerLargefadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="containerLargefadingcircle" [type]="CircleLoaderType.Fading" [start]="true">
                 </sfc-circle-loader>
@@ -136,8 +136,8 @@
 
         <div class="component-column loader-container round">
 
-            <button (click)="showLoader('containerRoundfadingcircle')">Show</button>
-            <button (click)="hideLoader('containerRoundfadingcircle')">Hide</button>
+            <button class="app" (click)="showLoader('containerRoundfadingcircle')">Show</button>
+            <button class="app" (click)="hideLoader('containerRoundfadingcircle')">Hide</button>
             <div class="content">
                 <sfc-circle-loader id="containerRoundfadingcircle" [type]="CircleLoaderType.Fading" [start]="true">
                 </sfc-circle-loader>

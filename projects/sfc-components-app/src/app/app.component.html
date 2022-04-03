@@ -11,6 +11,7 @@
                 switchers</a>
             <a routerLinkActive="menu-active" routerLink="tabs" [queryParams]="{theme: theme}">Tabs</a>
             <a routerLinkActive="menu-active" routerLink="menus" [queryParams]="{theme: theme}">Menus</a>
+            <a routerLinkActive="menu-active" routerLink="stars" [queryParams]="{theme: theme}">Stars</a>
         </div>
     </div>
 
@@ -21,9 +22,9 @@
     <div class="presentation-container" [ngClass]="theme == ThemeType.Default 
         ? UIConstants.DEFAULT_THEME : UIConstants.DARK_THEME">
         <div class="theme-switcher">
-            <button [class.active]="theme == ThemeType.Default" class="common"
+            <button [class.active]="theme == ThemeType.Default" class="app common"
                 (click)="changeTheme(ThemeType.Default)">Common</button>
-            <button [class.active]="theme == ThemeType.Dark" class="dark"
+            <button [class.active]="theme == ThemeType.Dark" class="app dark"
                 (click)="changeTheme(ThemeType.Dark)">Dark</button>
         </div>
 

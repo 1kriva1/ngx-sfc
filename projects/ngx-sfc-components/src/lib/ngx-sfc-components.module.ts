@@ -9,14 +9,18 @@ import {
   TabLabelLineSliderComponent,
   SideMenuComponent,
   DropdownMenuComponent,
-  NavigationMenuComponent
+  NavigationMenuComponent,
+  StarsComponent
 } from './components';
-import { SideMenuHeaderComponent } from './components/menu/side/parts/header/side-menu-header.component';
-import { SideMenuItemContentComponent } from './components/menu/side/parts/item/content/side-menu-item-content.component';
-import { SideMenuItemComponent } from './components/menu/side/parts/item/side-menu-item.component';
-import { SideMenuTitleComponent } from './components/menu/side/parts/title/side-menu-title.component';
-import { DropdownMenuItemComponent } from './components/menu/dropdown/parts/item/dropdown-menu-item.component';
-import { NavigationMenuItemComponent } from './components/menu/navigation/parts/item/navigation-menu-item.component';
+import {
+  DropdownMenuItemComponent,
+  NavigationMenuItemComponent,
+  SideMenuHeaderComponent,
+  SideMenuItemComponent,
+  SideMenuItemContentComponent,
+  SideMenuTitleComponent
+} from './components/no-export-index';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { NavigationMenuItemComponent } from './components/menu/navigation/parts/
     DropdownMenuComponent,
     DropdownMenuItemComponent,
     NavigationMenuComponent,
-    NavigationMenuItemComponent
+    NavigationMenuItemComponent,
+    // Stars
+    StarsComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +57,9 @@ import { NavigationMenuItemComponent } from './components/menu/navigation/parts/
     // Menus
     SideMenuComponent,
     DropdownMenuComponent,
-    NavigationMenuComponent
+    NavigationMenuComponent,
+    // Stars
+    StarsComponent
   ]
 })
 export class NgxSfcComponentsModule { }

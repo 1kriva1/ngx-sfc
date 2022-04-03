@@ -13,15 +13,16 @@ import {
     LoadersCirclePresentationComponent,
     LoadersCircleFadingPresentationComponent,
     ModalsPresentationComponent,
+    TabsPresentationComponent,
     ToggleSwitchersPresentationComponent,
     TabsLinePresentationComponent,
     TabsIconPresentationComponent,
     MenusPresentationComponent,
     MenusSidePresentationComponent,
     MenusDropdownPresentationComponent,
-    MenusNavigationPresentationComponent
+    MenusNavigationPresentationComponent,
+    StarsPresentationComponent
 } from "../presentations";
-import { TabsPresentationComponent } from "../presentations/tabs/tabs-presentation.component";
 
 const indexRoute: Route = {
     path: "",
@@ -144,11 +145,11 @@ export const routes: Routes = [
             },
             {
                 path: 'dropdown',
-                component: MenusDropdownPresentationComponent  
+                component: MenusDropdownPresentationComponent
             },
             {
                 path: 'navigation',
-                component: MenusNavigationPresentationComponent  
+                component: MenusNavigationPresentationComponent
             },
             {
                 path: '',
@@ -159,6 +160,10 @@ export const routes: Routes = [
                 component: MenusSidePresentationComponent
             }
         ]
+    },
+    {
+        path: 'stars',
+        component: StarsPresentationComponent
     },
     fallbackRoute,
     indexRoute
