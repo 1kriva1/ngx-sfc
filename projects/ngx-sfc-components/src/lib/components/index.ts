@@ -11,3 +11,4 @@ export { DropdownMenuComponent } from './menu/dropdown/dropdown-menu.component';
 export { IDropdownMenuItemModel } from './menu/dropdown/parts/item/dropdown-menu-item.model';
 export { NavigationMenuComponent } from './menu/navigation/navigation-menu.component';
 export { INavigationMenuItemModel } from './menu/navigation/parts/item/navigation-menu-item.model';
+export { StarsComponent } from './stars/stars.component';

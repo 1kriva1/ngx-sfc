@@ -23,7 +23,8 @@ import {
   MenusPresentationComponent,
   MenusSidePresentationComponent,
   MenusDropdownPresentationComponent,
-  MenusNavigationPresentationComponent
+  MenusNavigationPresentationComponent,
+  StarsPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,7 +59,9 @@ import { AppComponent } from './app.component';
     MenusPresentationComponent,
     MenusSidePresentationComponent,
     MenusDropdownPresentationComponent,
-    MenusNavigationPresentationComponent
+    MenusNavigationPresentationComponent,
+    // stars
+    StarsPresentationComponent
   ],
   imports: [
     BrowserModule,

@@ -163,6 +163,10 @@ ng generate component components/menu/navigation/parts/item/navigation-menu-item
 
 ng generate class components/menu/navigation/parts/item/navigation-menu-item --project ngx-sfc-components --skip-tests true --type model -d
 
+ng generate component components/stars --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate class components/stars/star-type --project ngx-sfc-components --skipe --flat false --style scss --skip-tests fals-tests true --type enum -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

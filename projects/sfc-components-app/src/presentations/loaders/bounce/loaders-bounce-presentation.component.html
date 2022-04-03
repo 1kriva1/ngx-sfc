@@ -4,14 +4,14 @@
     </div>
 
     <sfc-bounce-loader></sfc-bounce-loader>
-    <button id="global-button" (click)="showLoader()">Show global loader</button>
+    <button class="app" id="global-button" (click)="showLoader()">Show global loader</button>
 
     <div class="component-row">
 
         <div class="component-column loader-container small">
 
-            <button (click)="showLoader('smallBounce')">Show</button>
-            <button (click)="hideLoader('smallBounce')">Hide</button>
+            <button class="app" (click)="showLoader('smallBounce')">Show</button>
+            <button class="app" (click)="hideLoader('smallBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="smallBounce" [sfcComponentSize]="ComponentSize.Small" [start]="true">
                 </sfc-bounce-loader>
@@ -22,8 +22,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('mediumBounce')">Show</button>
-            <button (click)="hideLoader('mediumBounce')">Hide</button>
+            <button class="app" (click)="showLoader('mediumBounce')">Show</button>
+            <button class="app" (click)="hideLoader('mediumBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="mediumBounce" [sfcComponentSize]="ComponentSize.Medium" [start]="true">
                 </sfc-bounce-loader>
@@ -34,8 +34,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('largeBounce')">Show</button>
-            <button (click)="hideLoader('largeBounce')">Hide</button>
+            <button class="app" (click)="showLoader('largeBounce')">Show</button>
+            <button class="app" (click)="hideLoader('largeBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="largeBounce" [sfcComponentSize]="ComponentSize.Large" [start]="true">
                 </sfc-bounce-loader>
@@ -50,8 +50,8 @@
 
         <div class="component-column loader-container small">
 
-            <button (click)="showLoader('smallCustomBounce')">Show</button>
-            <button (click)="hideLoader('smallCustomBounce')">Hide</button>
+            <button class="app" (click)="showLoader('smallCustomBounce')">Show</button>
+            <button class="app" (click)="hideLoader('smallCustomBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="smallCustomBounce" [sfcComponentSize] [customSize]="0.2" [start]="true">
                 </sfc-bounce-loader>
@@ -62,8 +62,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('largeCustomBounce')">Show</button>
-            <button (click)="hideLoader('largeCustomBounce')">Hide</button>
+            <button class="app" (click)="showLoader('largeCustomBounce')">Show</button>
+            <button class="app" (click)="hideLoader('largeCustomBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="largeCustomBounce" [sfcComponentSize] [customSize]="4.2" [start]="true">
                 </sfc-bounce-loader>
@@ -78,8 +78,8 @@
 
         <div class="component-column loader-container small">
 
-            <button (click)="showLoader('notStartedBounce')">Show</button>
-            <button (click)="hideLoader('notStartedBounce')">Hide</button>
+            <button class="app" (click)="showLoader('notStartedBounce')">Show</button>
+            <button class="app" (click)="hideLoader('notStartedBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="notStartedBounce" [start]="false">
                 </sfc-bounce-loader>
@@ -90,8 +90,8 @@
 
         <div class=" component-column loader-container small">
 
-            <button (click)="showLoader('notBackgroundBounce')">Show</button>
-            <button (click)="hideLoader('notBackgroundBounce')">Hide</button>
+            <button class="app" (click)="showLoader('notBackgroundBounce')">Show</button>
+            <button class="app" (click)="hideLoader('notBackgroundBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="notBackgroundBounce" [start]="true" [background]="false">
                 </sfc-bounce-loader>
@@ -106,8 +106,8 @@
 
         <div class="component-column loader-container medium">
 
-            <button (click)="showLoader('containerMediumBounce')">Show</button>
-            <button (click)="hideLoader('containerMediumBounce')">Hide</button>
+            <button class="app" (click)="showLoader('containerMediumBounce')">Show</button>
+            <button class="app" (click)="hideLoader('containerMediumBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="containerMediumBounce" [start]="true">
                 </sfc-bounce-loader>
@@ -118,8 +118,8 @@
 
         <div class="component-column loader-container large">
 
-            <button (click)="showLoader('containerLargeBounce')">Show</button>
-            <button (click)="hideLoader('containerLargeBounce')">Hide</button>
+            <button class="app" (click)="showLoader('containerLargeBounce')">Show</button>
+            <button class="app" (click)="hideLoader('containerLargeBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="containerLargeBounce" [start]="true">
                 </sfc-bounce-loader>
@@ -130,8 +130,8 @@
 
         <div class="component-column loader-container round">
 
-            <button (click)="showLoader('containerRoundBounce')">Show</button>
-            <button (click)="hideLoader('containerRoundBounce')">Hide</button>
+            <button class="app" (click)="showLoader('containerRoundBounce')">Show</button>
+            <button class="app" (click)="hideLoader('containerRoundBounce')">Hide</button>
             <div class="content">
                 <sfc-bounce-loader id="containerRoundBounce" [start]="true">
                 </sfc-bounce-loader>
