@@ -10,7 +10,9 @@ import {
   SideMenuComponent,
   DropdownMenuComponent,
   NavigationMenuComponent,
-  StarsComponent
+  StarsComponent,
+  AvatarComponent,
+  AvatarBadgeComponent
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -20,7 +22,6 @@ import {
   SideMenuItemContentComponent,
   SideMenuTitleComponent
 } from './components/no-export-index';
-
 
 @NgModule({
   declarations: [
@@ -41,7 +42,10 @@ import {
     NavigationMenuComponent,
     NavigationMenuItemComponent,
     // Stars
-    StarsComponent
+    StarsComponent,
+    // Avatar
+    AvatarComponent,
+    AvatarBadgeComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +63,10 @@ import {
     DropdownMenuComponent,
     NavigationMenuComponent,
     // Stars
-    StarsComponent
+    StarsComponent,
+    // Avatar
+    AvatarComponent,
+    AvatarBadgeComponent
   ]
 })
 export class NgxSfcComponentsModule { }

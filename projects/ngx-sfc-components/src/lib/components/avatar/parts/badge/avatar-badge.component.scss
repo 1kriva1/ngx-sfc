@@ -1,0 +1,14 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: flex;
+  position: absolute;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 0 0 2px $color-fade-0;
+  user-select: none;
+  border-radius: 50%;
+  color: $color-fade-0;
+}

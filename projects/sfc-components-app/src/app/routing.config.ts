@@ -21,7 +21,8 @@ import {
     MenusSidePresentationComponent,
     MenusDropdownPresentationComponent,
     MenusNavigationPresentationComponent,
-    StarsPresentationComponent
+    StarsPresentationComponent,
+    AvatarsPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -164,6 +165,10 @@ export const routes: Routes = [
     {
         path: 'stars',
         component: StarsPresentationComponent
+    },
+    {
+        path: 'avatars',
+        component: AvatarsPresentationComponent
     },
     fallbackRoute,
     indexRoute

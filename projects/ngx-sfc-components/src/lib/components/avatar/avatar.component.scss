@@ -1,0 +1,50 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    .avatar-image-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      .avatar {
+        position: relative;
+        margin-bottom: 0.5em;
+
+        .avatar-image {
+          display: flex;
+          overflow: hidden;
+          align-items: center;
+          justify-content: center;
+
+          circle {
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 0.35s, stroke-width 0.3s;
+
+            &.progress {
+              transform: rotate(-90deg);
+            }
+          }
+        }
+      }
+    }
+
+    .avatar-data-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1em;
+      font-weight: bold;
+      user-select: none;
+
+      .fullname {
+        @include theme-value(color, $color-default, $color-fade-1);
+      }
+
+      .title {
+        color: $color-fade-3;
+      }
+    }
+  }
+}
