@@ -12,3 +12,8 @@ export { IDropdownMenuItemModel } from './menu/dropdown/parts/item/dropdown-menu
 export { NavigationMenuComponent } from './menu/navigation/navigation-menu.component';
 export { INavigationMenuItemModel } from './menu/navigation/parts/item/navigation-menu-item.model';
 export { StarsComponent } from './stars/stars.component';
+export { AvatarComponent } from './avatar/avatar.component';
+export { AvatarBadgeComponent } from './avatar/parts/badge/avatar-badge.component';
+export { IAvatarDataModel } from './avatar/models/avatar-data.model';
+export { IAvatarProgressModel } from './avatar/models/avatar-progress.model';
+export { AvatarBadgePosition } from './avatar/parts/badge/avatar-badge-position.enum';

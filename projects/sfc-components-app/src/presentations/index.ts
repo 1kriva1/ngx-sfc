@@ -21,3 +21,4 @@ export { MenusSidePresentationComponent } from './menus/side/menus-side-presenta
 export { MenusDropdownPresentationComponent } from './menus/dropdown/menus-dropdown-presentation.component';
 export { MenusNavigationPresentationComponent } from './menus/navigation/menus-navigation-presentation.component';
 export { StarsPresentationComponent } from './stars/stars-presentation.component';
+export { AvatarsPresentationComponent } from './avatars/avatars-presentation.component';

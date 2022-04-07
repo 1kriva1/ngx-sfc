@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="avatar-image-container">
+        <div class="avatar" (mouseenter)="stroke = stroke * STROKE_HOVER_VALUE"
+            (mouseleave)="stroke = stroke / STROKE_HOVER_VALUE">
+
+            <div class="avatar-image">
+                <svg [attr.height]="imageModel.Height" [attr.width]="imageModel.Width">
+                    <defs>
+                        <pattern id="{{imageModel.ImageId}}" patternUnits="userSpaceOnUse"
+                            [attr.height]="imageModel.Height" [attr.width]="imageModel.Width">
+                            <image [attr.height]="imageModel.Height" [attr.width]="imageModel.Width"
+                                [attr.xlink:href]="data.image" preserveAspectRatio="xMidYMid slice"></image>
+                        </pattern>
+                    </defs>
+                    <circle class="progress" [attr.stroke]="progressModel.color" [attr.stroke-width]="stroke"
+                        fill="transparent" [attr.r]="imageModel.NormalizedRadius" [attr.cx]="radius"
+                        [attr.cy]="radius" />
+                    <circle class="progress" [attr.stroke]="progressModel.filledColor"
+                        [attr.stroke-dasharray]="imageModel.Circumference + ' ' + imageModel.Circumference"
+                        [ngStyle]="{'stroke-dashoffset':strokeDashOffset}" [attr.stroke-width]="stroke"
+                        fill="transparent" [attr.r]="imageModel.NormalizedRadius" [attr.cx]="radius"
+                        [attr.cy]="radius" />
+
+                    <circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="imageModel.ImageRadius"
+                        attr.fill="url('#{{imageModel.ImageId}}')" />
+                </svg>
+            </div>
+
+            <ng-content></ng-content>
+
+        </div>
+
+        <sfc-stars *ngIf="stars" [value]="starsValue"></sfc-stars>
+    </div>
+
+    <div class="avatar-data-container">
+        <div class="fullname" [style.fontSize.px]="radius / FULLNAME_PART_VALUE">
+            <span>{{data.firstName}} {{data.lastName}}</span>
+        </div>
+        <div class="title" [style.fontSize.px]="radius / TITLE_PART_VALUE">
+            <span>{{data.title}}</span>
+        </div>
+    </div>
+</div>

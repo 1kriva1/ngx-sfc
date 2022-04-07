@@ -52,6 +52,7 @@ class TestTemplateContentComponent implements AfterViewInit {
   }
 
   constructor(private changeDetecktor: ChangeDetectorRef) { }
+  
   ngAfterViewInit(): void {
     this.changeDetecktor.detectChanges();
   }
