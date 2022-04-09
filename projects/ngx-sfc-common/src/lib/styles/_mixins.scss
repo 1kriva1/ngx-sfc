@@ -1,6 +1,6 @@
-@mixin square-size($fontSize, $multiplier: 1) {
-  width: $fontSize * $multiplier;
-  height: $fontSize * $multiplier;
+@mixin square-size($value, $multiplier: 1) {
+  width: $value * $multiplier;
+  height: $value * $multiplier;
 }
 
 @mixin theme-value($property, $value-common, $value-dark, $selector: "&") {

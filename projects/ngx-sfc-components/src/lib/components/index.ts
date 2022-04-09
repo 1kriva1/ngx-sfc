@@ -17,3 +17,6 @@ export { AvatarBadgeComponent } from './avatar/parts/badge/avatar-badge.componen
 export { IAvatarDataModel } from './avatar/models/avatar-data.model';
 export { IAvatarProgressModel } from './avatar/models/avatar-progress.model';
 export { AvatarBadgePosition } from './avatar/parts/badge/avatar-badge-position.enum';
+export { ProgressLineComponent } from './progress/line/progress-line.component';
+export { ProgressSemiCircleComponent } from './progress/semi-circle/progress-semi-circle.component';
+export { ProgressCircleComponent } from './progress/circle/progress-circle.component';

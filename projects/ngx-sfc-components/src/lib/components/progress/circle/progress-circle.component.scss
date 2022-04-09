@@ -1,0 +1,86 @@
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  %rounded {
+    position: absolute;
+    border: 0.09em solid;
+    clip: rect(0, 0.5em, 1em, 0);
+    border-radius: 50%;
+    @include square-size(0.82em);
+  }
+
+  .container {
+    position: relative;
+    border-radius: 50%;
+    background: $color-fade-2;
+    font-size: 5em;
+    @include square-size(1em);
+
+    &::after {
+      position: absolute;
+      top: 0.082em;
+      left: 0.09em;
+      content: " ";
+      border-radius: 50%;
+      background: $color-fade-0;
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in;
+      @include square-size(0.83em);
+    }
+
+    span {
+      position: absolute;
+      z-index: 1;
+      width: 5em;
+      line-height: 5em;
+      font-size: 0.2em;
+      color: $color-default;
+      font-weight: bold;
+      text-align: center;
+      white-space: nowrap;
+      user-select: none;
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-out;
+    }
+
+    &:hover {
+      &::after {
+        top: 0.07em;
+        left: 0.07em;
+        @include square-size(0.86em);
+      }
+
+      span {
+        width: 3.33em;
+        line-height: 3.33em;
+        font-size: 0.3em;
+      }
+    }
+
+    .circle {
+      position: absolute;
+      clip: rect(0, 1em, 1em, 0.5em);
+      @include square-size(1em);
+
+      .bar {
+        @extend %rounded;
+        transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+      }
+    }
+  }
+
+  &.reversed {
+    .container {
+      .circle {
+        clip: rect(auto, auto, auto, auto);
+
+        .fill {
+          @extend %rounded;
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

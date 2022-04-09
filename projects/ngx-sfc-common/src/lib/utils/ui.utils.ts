@@ -52,3 +52,30 @@ export function removeClasses(element: HTMLElement, ...classNames: Array<string>
         classNames.forEach((className) => element.classList.remove(className));
     }
 }
+
+/**
+ * Convert RGB color to HEX
+ * @param r Red
+ * @param g Green
+ * @param b Blue
+ * @returns HEX value
+ */
+export function rgbToHex(r: number, g: number, b: number) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+/**
+ * Convert HEX to RGB value
+ * @param hex HEX value
+ * @returns RGB value
+ */
+export function hexToRgb(hex: string): string | null {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (result) {
+        var r = parseInt(result[1], 16);
+        var g = parseInt(result[2], 16);
+        var b = parseInt(result[3], 16);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+    return null;
+}

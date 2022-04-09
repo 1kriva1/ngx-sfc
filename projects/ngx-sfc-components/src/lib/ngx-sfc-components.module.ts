@@ -12,7 +12,10 @@ import {
   NavigationMenuComponent,
   StarsComponent,
   AvatarComponent,
-  AvatarBadgeComponent
+  AvatarBadgeComponent,
+  ProgressLineComponent,
+  ProgressSemiCircleComponent,
+  ProgressCircleComponent
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -45,7 +48,11 @@ import {
     StarsComponent,
     // Avatar
     AvatarComponent,
-    AvatarBadgeComponent
+    AvatarBadgeComponent,
+    // Progress
+    ProgressLineComponent,
+    ProgressSemiCircleComponent,
+    ProgressCircleComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +73,11 @@ import {
     StarsComponent,
     // Avatar
     AvatarComponent,
-    AvatarBadgeComponent
+    AvatarBadgeComponent,
+    // Progress
+    ProgressLineComponent,
+    ProgressSemiCircleComponent,
+    ProgressCircleComponent
   ]
 })
 export class NgxSfcComponentsModule { }

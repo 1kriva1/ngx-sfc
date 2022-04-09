@@ -179,6 +179,14 @@ ng generate component components/avatar/parts/badge --project ngx-sfc-components
 
 ng generate class components/avatar/avatar --project ngx-sfc-components --skip-tests true --type constants -d
 
+ng generate component components/progress/line/progress-line --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/progress/semi-circle/progress-semi-circle --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/progress/circle/progress-circle --project ngx-sfc-components --export true --flat true --style scss --skip-tests false -d
+
+ng generate class components/progress/progress-colors --project ngx-sfc-components --type enum --skip-tests true -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

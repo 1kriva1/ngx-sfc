@@ -1,0 +1,18 @@
+<div class="menus-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="line"
+                [queryParams]="{theme: theme}">Line</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="semi-circle"
+                [queryParams]="{theme: theme}">Semi-circle</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="circle"
+                [queryParams]="{theme: theme}">Circle</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

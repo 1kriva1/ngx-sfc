@@ -1,0 +1,120 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Semi-circle:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-semi-circle></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [progress]="5"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [progress]="15"></sfc-progress-semi-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [progress]="25"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [progress]="37"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [progress]="49"></sfc-progress-semi-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [limits]="false" [progress]="61"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [limits]="false" [progress]="73"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [limits]="false" [progress]="85"></sfc-progress-semi-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-progress-semi-circle [progress]="100"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle background="green" [progress]="60"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <button class="app" (click)="increase()">Increase</button>
+            <sfc-progress-semi-circle [progress]="progress"></sfc-progress-semi-circle>
+        </div>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [max]="50" [progress]="25"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [min]="90" [progress]="99"></sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [min]="20" [max]="80" [progress]="50"></sfc-progress-semi-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-progress-semi-circle [getColor]="getColor" [progress]="20">
+            </sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [getColor]="getColor" [progress]="50">
+            </sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [getColor]="getColor" [progress]="85">
+            </sfc-progress-semi-circle>
+        </div>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [sfcComponentSize]="ComponentSize.Small" [progress]="65">
+            </sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [sfcComponentSize]="ComponentSize.Large" [progress]="80">
+            </sfc-progress-semi-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-semi-circle [sfcComponentSize] [customSize]="4.2" [progress]="90">
+            </sfc-progress-semi-circle>
+        </div>
+
+    </div>
+</div>

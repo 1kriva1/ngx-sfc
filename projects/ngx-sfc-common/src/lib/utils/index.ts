@@ -49,7 +49,9 @@ export {
     getValueFromCssLikeValue,
     getCalcValue,
     addClasses,
-    removeClasses
+    removeClasses,
+    rgbToHex,
+    hexToRgb
 } from './ui.utils'
 
 export {
