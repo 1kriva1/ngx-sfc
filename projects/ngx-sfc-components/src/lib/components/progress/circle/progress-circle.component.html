@@ -1,0 +1,8 @@
+<div class="container" [style.background]="background">
+    <span>{{progress}}</span>
+    <div class="circle">
+        <div class="bar" [ngStyle]="{'transform': transformRotate, 
+            'border-color': getColor(progress)}"></div>
+        <div class="fill" [ngStyle]="{'border-color': getColor(progress)}"></div>
+    </div>
+</div>

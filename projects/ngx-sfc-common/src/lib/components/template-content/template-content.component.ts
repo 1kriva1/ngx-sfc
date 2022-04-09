@@ -5,6 +5,7 @@ import { firstOrDefault, isDefined } from '../../utils';
 @Component({
   selector: 'sfc-template-content',
   templateUrl: './template-content.component.html',
+  styles: [':host{ display: contents;}']
 })
 export class TemplateContentComponent {
 

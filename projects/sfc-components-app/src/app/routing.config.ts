@@ -22,7 +22,11 @@ import {
     MenusDropdownPresentationComponent,
     MenusNavigationPresentationComponent,
     StarsPresentationComponent,
-    AvatarsPresentationComponent
+    AvatarsPresentationComponent,
+    ProgressPresentationComponent,
+    ProgressLinePresentationComponent,
+    ProgressCirclePresentationComponent,
+    ProgressSemiCirclePresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -169,6 +173,32 @@ export const routes: Routes = [
     {
         path: 'avatars',
         component: AvatarsPresentationComponent
+    },
+    {
+        path: 'progress',
+        component: ProgressPresentationComponent,
+        children: [
+            {
+                path: 'line',
+                component: ProgressLinePresentationComponent
+            },
+            {
+                path: 'circle',
+                component: ProgressCirclePresentationComponent
+            },
+            {
+                path: 'semi-circle',
+                component: ProgressSemiCirclePresentationComponent
+            },
+            {
+                path: '',
+                component: ProgressLinePresentationComponent
+            },
+            {
+                path: '**',
+                component: ProgressLinePresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

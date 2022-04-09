@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="labels">
+        <span>{{labelStart}}</span>
+        <span *ngIf="!hideEnd">{{label}}</span>
+    </div>
+    <div class="progress-bar" [style.background]="background">
+        <div class="progress" [ngStyle]="progressStyles"></div>
+    </div>
+</div>

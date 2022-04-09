@@ -25,7 +25,11 @@ import {
   MenusDropdownPresentationComponent,
   MenusNavigationPresentationComponent,
   StarsPresentationComponent,
-  AvatarsPresentationComponent
+  AvatarsPresentationComponent,
+  ProgressLinePresentationComponent,
+  ProgressPresentationComponent,
+  ProgressCirclePresentationComponent,
+  ProgressSemiCirclePresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,7 +68,12 @@ import { AppComponent } from './app.component';
     // stars
     StarsPresentationComponent,
     // avatars
-    AvatarsPresentationComponent
+    AvatarsPresentationComponent,
+    // progress
+    ProgressPresentationComponent,
+    ProgressLinePresentationComponent,
+    ProgressCirclePresentationComponent,
+    ProgressSemiCirclePresentationComponent
   ],
   imports: [
     BrowserModule,

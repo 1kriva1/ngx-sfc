@@ -22,3 +22,7 @@ export { MenusDropdownPresentationComponent } from './menus/dropdown/menus-dropd
 export { MenusNavigationPresentationComponent } from './menus/navigation/menus-navigation-presentation.component';
 export { StarsPresentationComponent } from './stars/stars-presentation.component';
 export { AvatarsPresentationComponent } from './avatars/avatars-presentation.component';
+export { ProgressPresentationComponent } from './progress/progress-presentation.component';
+export { ProgressLinePresentationComponent } from './progress/line/progress-line-presentation.component';
+export { ProgressCirclePresentationComponent } from './progress/circle/progress-circle-presentation.component';
+export { ProgressSemiCirclePresentationComponent } from './progress/semi-circle/progress-semi-circle-presentation.component';

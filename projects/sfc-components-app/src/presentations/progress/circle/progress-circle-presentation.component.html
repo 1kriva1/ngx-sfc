@@ -1,0 +1,104 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Circle:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-circle></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="5"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="15"></sfc-progress-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="25"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="37"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="49"></sfc-progress-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="61"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="73"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [progress]="85"></sfc-progress-circle>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-progress-circle [progress]="100"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle background="green" [progress]="60"></sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <button class="app" (click)="increase()">Increase</button>
+            <sfc-progress-circle [progress]="progress"></sfc-progress-circle>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-progress-circle [getColor]="getColor" [progress]="20">
+            </sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [getColor]="getColor" [progress]="50">
+            </sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [getColor]="getColor" [progress]="85">
+            </sfc-progress-circle>
+        </div>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-progress-circle [sfcComponentSize]="ComponentSize.Small" [progress]="65">
+            </sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [sfcComponentSize]="ComponentSize.Large" [progress]="80">
+            </sfc-progress-circle>
+        </div>
+
+        <div class="component-column">
+            <sfc-progress-circle [sfcComponentSize] [customSize]="4.2" [progress]="90">
+            </sfc-progress-circle>
+        </div>
+
+    </div>
+</div>
