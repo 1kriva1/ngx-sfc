@@ -187,6 +187,10 @@ ng generate component components/progress/circle/progress-circle --project ngx-s
 
 ng generate class components/progress/progress-colors --project ngx-sfc-components --type enum --skip-tests true -d
 
+ng generate component components/tags --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/tags/parts/tag --project ngx-sfc-components --export false --flat false --style scss --skip-tests false -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

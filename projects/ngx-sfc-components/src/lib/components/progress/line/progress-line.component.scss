@@ -1,30 +1,32 @@
 @import "../../../../../../ngx-sfc-common//src//lib//styles/styles";
 
 :host {
-    width: 100%;
+  width: 100%;
 
-    .container {
-        .progress-bar {
-            border-radius: 0.5em;
-            background: $color-fade-2;
+  .container {
+    .progress-bar {
+      border-radius: 0.5em;
+      background: $color-fade-2;
 
-            .progress {
-                height: 0.4em;
-                border-radius: 0.5em;
-                background-image: linear-gradient(to bottom, rgb(255 255 255 / 30%), rgb(255 255 255 / 5%));
-                transition: 0.4s linear;
-                transition-property: width, background-color;
-            }
-        }
-
-        .labels {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.3em;
-            @include theme-value(color, $color-default, $color-dark);
-            font-weight: bold;
-            user-select: none;
-            font-size: 0.8em;
-        }
+      .progress {
+        height: 0.4em;
+        border-radius: 0.5em;
+        background-image: linear-gradient(to bottom, rgb(255 255 255 / 30%), rgb(255 255 255 / 5%));
+        transition: 0.4s linear;
+        transition-property: width, background-color;
+      }
     }
+
+    .labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.3em;
+
+      @include theme-value(color, $color-default, $color-dark);
+
+      font-weight: bold;
+      user-select: none;
+      font-size: 0.8em;
+    }
+  }
 }
