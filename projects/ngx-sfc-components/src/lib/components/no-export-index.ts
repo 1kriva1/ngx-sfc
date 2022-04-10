@@ -4,3 +4,4 @@ export { SideMenuItemComponent } from './menu/side/parts/item/side-menu-item.com
 export { SideMenuTitleComponent } from './menu/side/parts/title/side-menu-title.component';
 export { DropdownMenuItemComponent } from './menu/dropdown/parts/item/dropdown-menu-item.component';
 export { NavigationMenuItemComponent } from './menu/navigation/parts/item/navigation-menu-item.component';
+export { TagComponent } from './tags/parts/tag/tag.component';

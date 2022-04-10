@@ -29,7 +29,8 @@ import {
   ProgressLinePresentationComponent,
   ProgressPresentationComponent,
   ProgressCirclePresentationComponent,
-  ProgressSemiCirclePresentationComponent
+  ProgressSemiCirclePresentationComponent,
+  TagsPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -73,7 +74,9 @@ import { AppComponent } from './app.component';
     ProgressPresentationComponent,
     ProgressLinePresentationComponent,
     ProgressCirclePresentationComponent,
-    ProgressSemiCirclePresentationComponent
+    ProgressSemiCirclePresentationComponent,
+    // tags
+    TagsPresentationComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@
     width: 1em;
     height: 0.5em;
     font-size: 5em;
+
     @include theme-value(color, $color-default, $color-dark);
 
     .progress-bar {
@@ -15,6 +16,7 @@
 
       .bar {
         @include square-size(1em);
+
         border-radius: 50%;
         box-sizing: border-box;
         border: 0.1em solid;
