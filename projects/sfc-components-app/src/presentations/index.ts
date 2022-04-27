@@ -26,4 +26,5 @@ export { ProgressPresentationComponent } from './progress/progress-presentation.
 export { ProgressLinePresentationComponent } from './progress/line/progress-line-presentation.component';
 export { ProgressCirclePresentationComponent } from './progress/circle/progress-circle-presentation.component';
 export { ProgressSemiCirclePresentationComponent } from './progress/semi-circle/progress-semi-circle-presentation.component';
-export { TagsPresentationComponent } from './tags/tags-presentation.component'; 
+export { TagsPresentationComponent } from './tags/tags-presentation.component';
+export { SlidersPresentationComponent } from './slider/sliders-presentation.component'; 

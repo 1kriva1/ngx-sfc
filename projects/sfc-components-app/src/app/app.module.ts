@@ -30,7 +30,8 @@ import {
   ProgressPresentationComponent,
   ProgressCirclePresentationComponent,
   ProgressSemiCirclePresentationComponent,
-  TagsPresentationComponent
+  TagsPresentationComponent,
+  SlidersPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,7 +77,9 @@ import { AppComponent } from './app.component';
     ProgressCirclePresentationComponent,
     ProgressSemiCirclePresentationComponent,
     // tags
-    TagsPresentationComponent
+    TagsPresentationComponent,
+    // sliders
+    SlidersPresentationComponent
   ],
   imports: [
     BrowserModule,

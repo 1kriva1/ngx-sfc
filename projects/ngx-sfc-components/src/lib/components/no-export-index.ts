@@ -5,3 +5,6 @@ export { SideMenuTitleComponent } from './menu/side/parts/title/side-menu-title.
 export { DropdownMenuItemComponent } from './menu/dropdown/parts/item/dropdown-menu-item.component';
 export { NavigationMenuItemComponent } from './menu/navigation/parts/item/navigation-menu-item.component';
 export { TagComponent } from './tags/parts/tag/tag.component';
+export { SliderItemComponent } from './slider/parts/item/slider-item.component';
+export { SliderButtonComponent } from './slider/parts/button/slider-button.component';
+export { SliderPaginationComponent } from './slider/parts/pagination/slider-pagination.component';

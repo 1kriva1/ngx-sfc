@@ -27,7 +27,8 @@ import {
     ProgressLinePresentationComponent,
     ProgressCirclePresentationComponent,
     ProgressSemiCirclePresentationComponent,
-    TagsPresentationComponent
+    TagsPresentationComponent,
+    SlidersPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -204,6 +205,10 @@ export const routes: Routes = [
     {
         path: 'tags',
         component: TagsPresentationComponent
+    },
+    {
+        path: 'sliders',
+        component: SlidersPresentationComponent
     },
     fallbackRoute,
     indexRoute

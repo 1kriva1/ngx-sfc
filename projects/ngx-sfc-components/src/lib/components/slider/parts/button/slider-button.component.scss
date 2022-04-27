@@ -1,0 +1,42 @@
+@use "sass:math";
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  $width: 3em;
+  $height: 3.7em;
+
+  position: absolute;
+  width: $width;
+  height: $height;
+  top: 50%;
+  margin-top: math.div(-$width, 2);
+  line-height: $height;
+  text-align: center;
+  cursor: pointer;
+  background: $color-background-fade-0;
+  transition: all 0.1s ease;
+
+  &:hover {
+    background: $color-background-fade-1;
+  }
+
+  &.next {
+    right: -$width;
+    border-radius: 0.43em 0 0 0.43em;
+  }
+
+  &.previous {
+    left: -$width;
+    border-radius: 0 0.43em 0.43em 0;
+  }
+
+  &.active {
+    &.next {
+      right: 0;
+    }
+
+    &.previous {
+      left: 0;
+    }
+  }
+}

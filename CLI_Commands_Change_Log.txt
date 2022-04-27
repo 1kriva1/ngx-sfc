@@ -191,6 +191,16 @@ ng generate component components/tags --project ngx-sfc-components --export true
 
 ng generate component components/tags/parts/tag --project ngx-sfc-components --export false --flat false --style scss --skip-tests false -d
 
+ng generate component components/slider --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/slider/parts/item/slider-item --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/slider/parts/button/slider-button --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/slider/parts/pagination/slider-pagination --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate service components/slider/service/slider --project ngx-sfc-components --skip-tests false --flat true -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:
