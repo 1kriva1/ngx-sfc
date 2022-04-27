@@ -1,0 +1,4 @@
+<ul>
+    <li *ngFor="let _ of items; let itemIndex = index;" [class.active]="itemIndex === index"
+        (click)="selectItem(itemIndex)"></li>
+</ul>

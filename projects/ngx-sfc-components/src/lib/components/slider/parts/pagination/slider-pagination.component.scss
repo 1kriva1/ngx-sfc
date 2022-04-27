@@ -1,0 +1,30 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: inline-block;
+
+  ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0.3em;
+      display: inline-block;
+
+      @include square-size(0.6em);
+
+      border-radius: 50%;
+      background: $color-fade-0;
+      opacity: 0.5;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(1, 0.01, 0.32, 1);
+
+      &.active {
+        transform: scale(1.7);
+        opacity: 1;
+      }
+    }
+  }
+}

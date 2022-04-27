@@ -22,3 +22,6 @@ export { ProgressSemiCircleComponent } from './progress/semi-circle/progress-sem
 export { ProgressCircleComponent } from './progress/circle/progress-circle.component';
 export { ITagModel } from './tags/parts/tag/tag.model';
 export { TagsComponent } from './tags/tags.component';
+export { SliderComponent } from './slider/slider.component';
+export { SliderType } from './slider/slider-type.enum';
+export { ISliderItemModel } from './slider/parts/item/slider-item.model';
