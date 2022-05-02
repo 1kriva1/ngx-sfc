@@ -1,0 +1,30 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: block;
+
+  .container {
+    .timeline {
+      line-height: 1.4em;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      ::ng-deep sfc-timeline-item:first-child.period {
+        .container {
+          padding-top: 0;
+
+          .marker::before {
+            border-top: none !important;
+          }
+        }
+      }
+
+      ::ng-deep sfc-timeline-item:last-child {
+        .delimeter {
+          display: block;
+        }
+      }
+    }
+  }
+}

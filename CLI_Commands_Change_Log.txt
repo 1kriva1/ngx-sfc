@@ -201,6 +201,10 @@ ng generate component components/slider/parts/pagination/slider-pagination --pro
 
 ng generate service components/slider/service/slider --project ngx-sfc-components --skip-tests false --flat true -d
 
+ng generate component components/timeline --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/timeline/parts/item/timeline-item --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

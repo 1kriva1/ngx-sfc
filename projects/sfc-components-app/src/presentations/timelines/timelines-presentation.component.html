@@ -1,0 +1,42 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Timelines:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-timeline [items]="nothingHappened"></sfc-timeline>
+        </div>
+
+        <div class="component-column">
+            <sfc-timeline [items]="firstHalfOnly"></sfc-timeline>
+        </div>
+
+        <div class="component-column">
+            <sfc-timeline [items]="secondHalfOnly"></sfc-timeline>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-timeline [items]="items"></sfc-timeline>
+        </div>
+
+        <div class="component-column">
+            <sfc-timeline [items]="full"></sfc-timeline>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-timeline [items]="full" [sfcComponentSize]="ComponentSize.Small"></sfc-timeline>
+        </div>
+
+        <div class="component-column">
+            <sfc-timeline [items]="full" [sfcComponentSize]="ComponentSize.Large"></sfc-timeline>
+        </div>
+    </div>
+
+</div>

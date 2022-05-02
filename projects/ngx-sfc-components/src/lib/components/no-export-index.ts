@@ -8,3 +8,4 @@ export { TagComponent } from './tags/parts/tag/tag.component';
 export { SliderItemComponent } from './slider/parts/item/slider-item.component';
 export { SliderButtonComponent } from './slider/parts/button/slider-button.component';
 export { SliderPaginationComponent } from './slider/parts/pagination/slider-pagination.component';
+export { TimelineItemComponent } from './timeline/parts/item/timeline-item.component';
