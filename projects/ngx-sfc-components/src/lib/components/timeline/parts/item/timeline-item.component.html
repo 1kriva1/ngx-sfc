@@ -1,0 +1,16 @@
+<li class="container">
+    <div class="date-time">
+        <span>{{model.dateTimeLabel}}</span>
+    </div>
+    <div class="marker">
+        <div class="delimeter"></div>
+    </div>
+    <div class="content">
+        <div class="title">
+            <i *ngIf="model.icon" class="{{model.icon}}"></i>
+            <img *ngIf="showImage" [src]="model.image">
+            <span>{{model.title}}</span>
+        </div>        
+        <p>{{model.description}}</p>
+    </div>
+</li>

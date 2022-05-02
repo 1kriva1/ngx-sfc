@@ -17,7 +17,8 @@ import {
   ProgressSemiCircleComponent,
   ProgressCircleComponent,
   TagsComponent,
-  SliderComponent
+  SliderComponent,
+  TimelineComponent
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -29,7 +30,8 @@ import {
   TagComponent,
   SliderItemComponent,
   SliderButtonComponent,
-  SliderPaginationComponent
+  SliderPaginationComponent,
+  TimelineItemComponent
 } from './components/no-export-index';
 
 @NgModule({
@@ -66,7 +68,10 @@ import {
     SliderComponent,
     SliderItemComponent,
     SliderButtonComponent,
-    SliderPaginationComponent
+    SliderPaginationComponent,
+    // Timeline
+    TimelineComponent,
+    TimelineItemComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +100,9 @@ import {
     // Tags
     TagsComponent,
     // Slider
-    SliderComponent
+    SliderComponent,
+    // Timeline
+    TimelineComponent
   ]
 })
 export class NgxSfcComponentsModule { }

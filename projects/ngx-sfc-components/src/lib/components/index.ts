@@ -25,3 +25,6 @@ export { TagsComponent } from './tags/tags.component';
 export { SliderComponent } from './slider/slider.component';
 export { SliderType } from './slider/slider-type.enum';
 export { ISliderItemModel } from './slider/parts/item/slider-item.model';
+export { TimelineComponent } from './timeline/timeline.component';
+export { ITimelineItemModel } from './timeline/parts/item/timeline-item.model';
+export { TimelineItemPosition } from './timeline/parts/item/timeline-item-position.enum';
