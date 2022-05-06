@@ -21,3 +21,4 @@ export { ToggleSwitcherComponent } from './toggle-switcher/toggle-switcher.compo
 export { IToggleSwitcherModel } from './toggle-switcher/toggle-switcher.model';
 export { CheckmarkComponent } from './checkmark/checkmark.component';
 export { TemplateContentComponent } from './template-content/template-content.component';
+export { CloseComponent } from './close/close.component';

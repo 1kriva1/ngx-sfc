@@ -11,7 +11,8 @@ import {
   ThrowElementOnHoverDirective,
   TemplateReferenceDirective,
   MouseDownDirective,
-  ComponentSizeDirective
+  ComponentSizeDirective,
+  DestroyParentDirective
 } from './directives';
 import {
   ButtonComponent,
@@ -27,7 +28,8 @@ import {
   DotsComponent,
   ToggleSwitcherComponent,
   CheckmarkComponent,
-  TemplateContentComponent
+  TemplateContentComponent,
+  CloseComponent
 } from './components';
 @NgModule({
   declarations: [
@@ -38,10 +40,17 @@ import {
     TemplateReferenceDirective,
     MouseDownDirective,
     ComponentSizeDirective,
+    DestroyParentDirective,
     // components
     ButtonComponent,
     TooltipComponent,
     DelimeterComponent,
+    ToggleSwitcherComponent,
+    CheckmarkComponent,
+    TemplateContentComponent,
+    CloseComponent,
+    HamburgerComponent,
+    DotsComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -49,15 +58,7 @@ import {
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent,
-    // hamburger
-    HamburgerComponent,
-    // dots
-    DotsComponent,
-    //toggle
-    ToggleSwitcherComponent,
-    CheckmarkComponent,
-    TemplateContentComponent
+    DefaultModalFooterComponent
   ],
   imports: [
     CommonModule,
@@ -71,10 +72,17 @@ import {
     TemplateReferenceDirective,
     MouseDownDirective,
     ComponentSizeDirective,
+    DestroyParentDirective,
     // components
     ButtonComponent,
     TooltipComponent,
     DelimeterComponent,
+    CloseComponent,
+    CheckmarkComponent,
+    TemplateContentComponent,
+    ToggleSwitcherComponent,
+    DotsComponent,
+    HamburgerComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -82,15 +90,7 @@ import {
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent,
-    // hamburger
-    HamburgerComponent,
-    // dots
-    DotsComponent,
-    //toggle
-    ToggleSwitcherComponent,
-    CheckmarkComponent,
-    TemplateContentComponent
+    DefaultModalFooterComponent
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

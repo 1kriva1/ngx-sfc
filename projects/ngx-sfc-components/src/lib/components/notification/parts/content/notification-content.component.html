@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="illustration">
+        <div *ngIf="model.icon">
+            <i class="{{model.icon}}"></i>
+        </div>
+        <div *ngIf="showImage">
+            <img [src]="model.image">
+        </div>
+    </div>
+    <div class="message">
+        <h1>{{model.title}}</h1>
+        <p>{{model.subTitle}}</p>
+    </div>
+    <div *ngIf="model.showButton" class="action">
+        <sfc-button text="{{model.buttonText || type}}" [types]="[ButtonType.Rounded, ButtonType.Filled]"
+            (click)="buttonClicked.emit()"></sfc-button>
+    </div>
+</div>

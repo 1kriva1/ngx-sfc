@@ -5,7 +5,7 @@ import { UIConstants } from "../../constants";
 import { ShowHideElementDirective } from "./show-hide-element.directive";
 
 @Component({
-    template: `<div class="target" [sfcShowHideElement]="show" [delay]="delay">`
+    template: `<div class="target" [sfcShowHideElement]="show" [delay]="delay"></div>`
 })
 class TestShowHideElementDirectiveComponent {
 

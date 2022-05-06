@@ -28,3 +28,7 @@ export { ISliderItemModel } from './slider/parts/item/slider-item.model';
 export { TimelineComponent } from './timeline/timeline.component';
 export { ITimelineItemModel } from './timeline/parts/item/timeline-item.model';
 export { TimelineItemPosition } from './timeline/parts/item/timeline-item-position.enum';
+export { NotificationComponent } from './notification/notification.component';
+export { NotificationType } from './notification/enums/notification-type.enum';
+export { NotificationTemplate } from './notification/enums/notification-template.enum';
+export { INotificationContentModel } from './notification/parts/content/notification-content.model';

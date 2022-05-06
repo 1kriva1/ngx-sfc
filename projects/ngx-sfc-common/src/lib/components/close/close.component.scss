@@ -1,0 +1,10 @@
+@import "../../styles/styles";
+
+:host {
+  color: $color-default;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-hover-default;
+  }
+}

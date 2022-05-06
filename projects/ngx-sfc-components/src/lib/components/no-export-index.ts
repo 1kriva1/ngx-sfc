@@ -9,3 +9,4 @@ export { SliderItemComponent } from './slider/parts/item/slider-item.component';
 export { SliderButtonComponent } from './slider/parts/button/slider-button.component';
 export { SliderPaginationComponent } from './slider/parts/pagination/slider-pagination.component';
 export { TimelineItemComponent } from './timeline/parts/item/timeline-item.component';
+export { NotificationContentComponent } from './notification/parts/content/notification-content.component';

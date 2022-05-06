@@ -1,0 +1,88 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  display: inline-block;
+  font-size: 3em;
+
+  &.info {
+    ::ng-deep sfc-button {
+      .button.filled {
+        color: $color-info !important;
+      }
+    }
+  }
+
+  &.success {
+    ::ng-deep sfc-button {
+      .button.filled {
+        color: $color-success !important;
+      }
+    }
+  }
+
+  &.failed {
+    ::ng-deep sfc-button {
+      .button.filled {
+        color: $color-failed !important;
+      }
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .illustration {
+      color: $color-fade-1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.7em;
+
+      img {
+        object-fit: contain;
+        width: 3em;
+        height: 3em;
+      }
+    }
+
+    .message {
+      text-align: center;
+      user-select: none;
+
+      h1 {
+        font-size: 0.4em;
+        color: $color-fade-1;
+        font-weight: bold;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: 0.2em;
+        font-weight: 100;
+        color: $color-fade-5;
+        letter-spacing: 0.1em;
+      }
+    }
+
+    .action {
+      font-size: 0.25em;
+
+      ::ng-deep sfc-button {
+        transition: transform 0.3s ease-in-out;
+
+        .button.filled {
+          background: $color-fade-1;
+          border: solid 0.125em $color-fade-1;
+        }
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
