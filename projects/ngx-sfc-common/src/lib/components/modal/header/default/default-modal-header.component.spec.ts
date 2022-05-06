@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { CloseComponent } from '../../../close/close.component';
 import { ModalService } from '../../service/modal.service';
 import { DefaultModalHeaderComponent } from './default-modal-header.component';
 
@@ -12,7 +13,7 @@ describe('Component: DefaultModalHeaderComponent', () => {
     modalServiceSpy = jasmine.createSpyObj('ModalService', ['close']);
 
     await TestBed.configureTestingModule({
-      declarations: [DefaultModalHeaderComponent],
+      declarations: [CloseComponent, DefaultModalHeaderComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]
     }).compileComponents();
   });
@@ -47,12 +48,12 @@ describe('Component: DefaultModalHeaderComponent', () => {
   });
 
   describe('Close', () => {
-    fit('Should close icon has constant value', () => {
-      expect(fixture.nativeElement.querySelector('span.close > i').className).toContain('fa fa-times');
+    fit('Should create component', () => {
+      expect(fixture.nativeElement.querySelector('sfc-close')).toBeTruthy();
     });
 
     fit('Should call modal service close method', () => {
-      const closeEl: any = fixture.debugElement.query(By.css('span.close'));
+      const closeEl: any = fixture.debugElement.query(By.css('sfc-close'));
 
       closeEl.nativeElement.dispatchEvent(new MouseEvent('click'));
 

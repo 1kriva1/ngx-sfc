@@ -114,7 +114,7 @@ describe('Component: TimelineItemComponent', () => {
         expect(fixture.nativeElement.querySelector('div.content > div.title > img')).toBeTruthy();
       });
 
-      fit("Should gave defined src value", () => {
+      fit("Should have defined src value", () => {
         component.model.image = '/testImage.png';
         fixture.detectChanges();
 

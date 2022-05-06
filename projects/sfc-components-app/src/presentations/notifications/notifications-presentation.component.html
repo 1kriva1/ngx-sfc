@@ -1,0 +1,118 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Notifications:</h3>
+    </div>
+
+    <ng-template #contentRef>
+        <div>
+            <h1>Content refernce!</h1>
+        </div>
+    </ng-template>
+
+    <div class="top-right-continer">
+        <sfc-notification *ngFor="let notification of notifications; let index = index" [model]="notification"
+            [autoCloseModel]="{enabled:true, interval: 3000}">
+        </sfc-notification>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <button class="app" (click)="addNotification()">Add notification</button>
+        </div>
+    </div>
+
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-notification></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="onlyTitle"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="subTitle"></sfc-notification>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-notification [model]="btnText"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="icon"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="image"></sfc-notification>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-notification [model]="icon" [showClose]="false"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="closeNotification" (closed)="onCloseNotification()"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="btnNotification" (buttonClicked)="onButtonClick()"></sfc-notification>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-notification [model]="autoCloseModel" [autoCloseModel]="{enabled:true}"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="autoCloseModel" [autoCloseModel]="{enabled:true, interval: 1000}">
+            </sfc-notification>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-notification [model]="icon" [sfcComponentSize]="ComponentSize.Small"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="icon" [sfcComponentSize]="ComponentSize.Large"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="image" [sfcComponentSize] [customSize]="4.2"></sfc-notification>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-notification [model]="icon" [type]="NotificationType.Success"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification [model]="icon" [type]="NotificationType.Failed"></sfc-notification>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-notification [content]="contentRef"></sfc-notification>
+        </div>
+
+        <div class="component-column">
+            <sfc-notification>
+                <div *sfcTemplateReference="NotificationTemplate.Content">
+                    <h1>Content content!</h1>
+                </div>
+            </sfc-notification>
+        </div>
+    </div>
+
+</div>

@@ -29,3 +29,4 @@ export { ProgressSemiCirclePresentationComponent } from './progress/semi-circle/
 export { TagsPresentationComponent } from './tags/tags-presentation.component';
 export { SlidersPresentationComponent } from './slider/sliders-presentation.component';
 export { TimelinesPresentationComponent } from './timelines/timelines-presentation.component';
+export { NotificationsPresentationComponent } from './notifications/notifications-presentation.component';

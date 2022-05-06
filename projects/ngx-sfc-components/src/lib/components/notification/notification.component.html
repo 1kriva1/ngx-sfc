@@ -1,0 +1,14 @@
+<div class="container" [sfcDestroyParent]="destroy" [delay]="DESTROY_HOST_INTERVAL">
+    <div class="notification" [sfcShowHideElement]="show">
+        <sfc-close *ngIf="showClose" (click)="close()"></sfc-close>
+
+        <sfc-template-content [referenceContent]="content" [templatesContent]="templates"
+            [templateType]="NotificationTemplate.Content" [defaultContent]="defaultContent">
+        </sfc-template-content>
+
+        <ng-template #defaultContent>
+            <sfc-notification-content [type]="type" [model]="model" (buttonClicked)="buttonClicked.emit()">
+            </sfc-notification-content>
+        </ng-template>
+    </div>
+</div>

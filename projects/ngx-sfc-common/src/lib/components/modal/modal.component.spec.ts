@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentSizeDirective, TemplateReferenceDirective } from '../../directives';
 import { nameof } from '../../utils';
 import { ButtonComponent } from '../button/button.component';
+import { CloseComponent } from '../close/close.component';
 import { TemplateContentComponent } from '../template-content/template-content.component';
 import { DefaultModalFooterComponent } from './footer/default/default-modal-footer.component';
 import { DefaultModalHeaderComponent } from './header/default/default-modal-header.component';
@@ -81,7 +82,7 @@ describe('Component: ModalComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule],
-      declarations: [TemplateContentComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
+      declarations: [TemplateContentComponent, CloseComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
         ButtonComponent, ComponentSizeDirective, TemplateReferenceDirective, TestSfcModalComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]
     }).compileComponents();

@@ -7,4 +7,5 @@ export { ThrowElementOnHoverDirective }
 export { TemplateReferenceDirective }
     from './template-reference/template-reference.directive';
 export { MouseDownDirective } from './mouse-down/mouse-down.directive';
-export { ComponentSizeDirective } from './component-size/component-size.directive'
+export { ComponentSizeDirective } from './component-size/component-size.directive';
+export { DestroyParentDirective } from './destroy-parent/destroy-parent.directive';

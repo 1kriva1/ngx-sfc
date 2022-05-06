@@ -205,6 +205,14 @@ ng generate component components/timeline --project ngx-sfc-components --export 
 
 ng generate component components/timeline/parts/item/timeline-item --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
 
+ng generate component components/notification --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate class components/notification/notification-type --project ngx-sfc-components --type enum --skip-tests true -d
+
+ng generate component components/notification/parts/content/notification-content --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate class components/notification/parts/content/notification-content --project ngx-sfc-components --skip-tests true --type model -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

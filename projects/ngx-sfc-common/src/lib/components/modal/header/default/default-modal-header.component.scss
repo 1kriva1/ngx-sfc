@@ -25,15 +25,8 @@
       padding: 0 0.7em;
     }
 
-    .close {
-      color: $color-default;
-      cursor: pointer;
-      display: flex;
+    sfc-close {
       padding-left: 0.7em;
-    }
-
-    .close:hover {
-      color: $color-hover-default;
     }
   }
 }

@@ -32,7 +32,8 @@ import {
   ProgressSemiCirclePresentationComponent,
   TagsPresentationComponent,
   SlidersPresentationComponent,
-  TimelinesPresentationComponent
+  TimelinesPresentationComponent,
+  NotificationsPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,7 +83,9 @@ import { AppComponent } from './app.component';
     // sliders
     SlidersPresentationComponent,
     // timelines
-    TimelinesPresentationComponent
+    TimelinesPresentationComponent,
+    // notifications
+    NotificationsPresentationComponent
   ],
   imports: [
     BrowserModule,
