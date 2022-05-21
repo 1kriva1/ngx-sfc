@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgxSfcCommonModule } from 'ngx-sfc-common';
+import { Chart } from 'chart.js';
 import {
   TabsComponent,
   TabLabelIconComponent,
@@ -19,7 +19,8 @@ import {
   TagsComponent,
   SliderComponent,
   TimelineComponent,
-  NotificationComponent
+  NotificationComponent,
+  ChartComponent
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -35,6 +36,42 @@ import {
   TimelineItemComponent,
   NotificationContentComponent
 } from './components/no-export-index';
+
+import {
+  ArcElement,
+  BarController,
+  BarElement,
+  BubbleController,
+  CategoryScale,
+  DoughnutController,
+  Filler,
+  Legend,
+  LinearScale,
+  LineController,
+  LineElement,
+  PieController,
+  PointElement,
+  PolarAreaController,
+  RadarController,
+  RadialLinearScale,
+  ScatterController,
+  TimeSeriesScale,
+  Title,
+  Tooltip
+} from 'chart.js';
+import { NgxSfcCommonModule } from 'ngx-sfc-common';
+
+Chart.register(
+  Title, Tooltip, Filler, Legend,
+  LineController, LineElement, PointElement, LinearScale, CategoryScale,
+  BarController, BarElement,
+  DoughnutController, ArcElement,
+  RadarController, RadialLinearScale,
+  PieController,
+  PolarAreaController,
+  BubbleController,
+  ScatterController,
+  TimeSeriesScale);
 
 @NgModule({
   declarations: [
@@ -76,7 +113,9 @@ import {
     TimelineItemComponent,
     // Notification
     NotificationComponent,
-    NotificationContentComponent
+    NotificationContentComponent,
+    // Chart
+    ChartComponent
   ],
   imports: [
     CommonModule,
@@ -109,7 +148,9 @@ import {
     // Timeline
     TimelineComponent,
     // Notification
-    NotificationComponent
+    NotificationComponent,
+    // Chart
+    ChartComponent
   ]
 })
 export class NgxSfcComponentsModule { }

@@ -1,0 +1,77 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Line:</h3>
+    </div>
+
+    <button class="app" (click)="toggleTheme()">Toggle Theme</button>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType"></sfc-chart>
+        </div>
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [options]="getTitleOptions('Filled')" [type]="chartType"
+                [data]="filledChartData"></sfc-chart>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [data]="getData()"></sfc-chart>
+        </div>
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [data]="duoChartData"></sfc-chart>
+        </div>
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [data]="allDefaultColorsChartData"></sfc-chart>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [options]="getTitleOptions('Labels&DataSets')"
+                [labels]="labels" [datasets]="dataSets"></sfc-chart>
+        </div>
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [options]="verticalChartOptions" [data]="getData()">
+            </sfc-chart>
+        </div>
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [options]="getTitleOptions('Plugin')" [plugins]="plugins"
+                [data]="getData()">
+            </sfc-chart>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType"
+                [options]="getTitleOptions('Chart options(NOT legend, grids, ticks, tooltip and colors)')"
+                [chartOptions]="chartOptions" [data]="getData()">
+            </sfc-chart>
+        </div>
+
+        <div class="component-column">
+            <sfc-chart [theme]="theme" [type]="chartType" [chartOptions]="{defaultColors: false}"
+                [options]="getTitleOptions('Custom color (without default colors)')" [data]="customColorsChartData">
+            </sfc-chart>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-chart #test [theme]="theme" [type]="chartType" [options]="getTitleOptions('DataSets changes')"
+                [data]="changableChartData">
+            </sfc-chart>
+
+            <button class="app" (click)="changeDataSets(test)">Change DataSets</button>
+        </div>
+    </div>
+</div>

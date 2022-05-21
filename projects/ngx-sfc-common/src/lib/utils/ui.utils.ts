@@ -79,3 +79,13 @@ export function hexToRgb(hex: string): string | null {
     }
     return null;
 }
+
+/**
+ * Set opacity for RGB value
+ * @param rgb Rgb value with {opacity} placeholder
+ * @param opacity Opacity value
+ * @returns RGB value with relevant opacity
+ */
+export function replaceRgbOpacity(rgb: string, opacity: number) {
+    return rgb.replace(UIConstants.RGB_OPACITY_PLACEHOLDER, opacity.toString());
+}

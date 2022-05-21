@@ -19,6 +19,7 @@
             <a routerLinkActive="menu-active" routerLink="timelines" [queryParams]="{theme: theme}">Timelines</a>
             <a routerLinkActive="menu-active" routerLink="notifications"
                 [queryParams]="{theme: theme}">Notifications</a>
+            <a routerLinkActive="menu-active" routerLink="charts" [queryParams]="{theme: theme}">Charts</a>
         </div>
     </div>
 
@@ -26,13 +27,13 @@
 
 <main>
 
-    <div class="presentation-container" [ngClass]="theme == ThemeType.Default 
-        ? UIConstants.DEFAULT_THEME : UIConstants.DARK_THEME">
+    <div class="presentation-container" [ngClass]="theme == Theme.Default 
+        ? Theme.Default : Theme.Dark">
         <div class="theme-switcher">
-            <button [class.active]="theme == ThemeType.Default" class="app common"
-                (click)="changeTheme(ThemeType.Default)">Common</button>
-            <button [class.active]="theme == ThemeType.Dark" class="app dark"
-                (click)="changeTheme(ThemeType.Dark)">Dark</button>
+            <button [class.active]="theme == Theme.Default" class="app common"
+                (click)="changeTheme(Theme.Default)">Common</button>
+            <button [class.active]="theme == Theme.Dark" class="app dark"
+                (click)="changeTheme(Theme.Dark)">Dark</button>
         </div>
 
         <div class="components-container">

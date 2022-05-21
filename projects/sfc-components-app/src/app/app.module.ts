@@ -33,7 +33,14 @@ import {
   TagsPresentationComponent,
   SlidersPresentationComponent,
   TimelinesPresentationComponent,
-  NotificationsPresentationComponent
+  NotificationsPresentationComponent,
+  ChartsPresentationComponent,
+  ChartsLinePresentationComponent,
+  ChartsBarPresentationComponent,
+  ChartsPiePresentationComponent,
+  ChartsDoughnutPresentationComponent,
+  ChartsRadarPresentationComponent,
+  ChartsPolarPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -85,7 +92,15 @@ import { AppComponent } from './app.component';
     // timelines
     TimelinesPresentationComponent,
     // notifications
-    NotificationsPresentationComponent
+    NotificationsPresentationComponent,
+    // charts
+    ChartsPresentationComponent,
+    ChartsLinePresentationComponent,
+    ChartsBarPresentationComponent,
+    ChartsPiePresentationComponent,
+    ChartsDoughnutPresentationComponent,
+    ChartsRadarPresentationComponent,
+    ChartsPolarPresentationComponent
   ],
   imports: [
     BrowserModule,

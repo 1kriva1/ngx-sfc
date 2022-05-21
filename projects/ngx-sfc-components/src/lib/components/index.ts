@@ -32,3 +32,7 @@ export { NotificationComponent } from './notification/notification.component';
 export { NotificationType } from './notification/enums/notification-type.enum';
 export { NotificationTemplate } from './notification/enums/notification-template.enum';
 export { INotificationContentModel } from './notification/parts/content/notification-content.model';
+export { ChartComponent } from './chart/chart.component';
+export { ChartThemeService } from './chart/service/theme/chart-theme.service';
+export { ChartThemeModel } from './chart/service/theme/chart-theme.model';
+export { ChartOptionModel } from './chart/chart-option.model';

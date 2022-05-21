@@ -213,6 +213,8 @@ ng generate component components/notification/parts/content/notification-content
 
 ng generate class components/notification/parts/content/notification-content --project ngx-sfc-components --skip-tests true --type model -d
 
+ng generate component components/chart --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

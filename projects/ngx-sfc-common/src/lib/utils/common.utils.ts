@@ -68,7 +68,7 @@ export function removePropertyFromObject(obj: any, property: string): void {
  * @returns Merged object
  */
 export function mergeDeep(target: any, ...sources: any[]): any {
-    if (!isDefined(sources))
+    if (!sources.length)
         return target;
 
     const source = sources.shift();
