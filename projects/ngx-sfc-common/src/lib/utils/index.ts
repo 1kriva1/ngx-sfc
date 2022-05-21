@@ -51,7 +51,8 @@ export {
     addClasses,
     removeClasses,
     rgbToHex,
-    hexToRgb
+    hexToRgb,
+    replaceRgbOpacity
 } from './ui.utils'
 
 export {

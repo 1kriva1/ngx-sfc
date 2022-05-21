@@ -30,7 +30,14 @@ import {
     TagsPresentationComponent,
     SlidersPresentationComponent,
     TimelinesPresentationComponent,
-    NotificationsPresentationComponent
+    NotificationsPresentationComponent,
+    ChartsPresentationComponent,
+    ChartsLinePresentationComponent,
+    ChartsBarPresentationComponent,
+    ChartsDoughnutPresentationComponent,
+    ChartsPiePresentationComponent,
+    ChartsPolarPresentationComponent,
+    ChartsRadarPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -219,6 +226,44 @@ export const routes: Routes = [
     {
         path: 'notifications',
         component: NotificationsPresentationComponent
+    },
+    {
+        path: 'charts',
+        component: ChartsPresentationComponent,
+        children: [
+            {
+                path: 'line',
+                component: ChartsLinePresentationComponent
+            },
+            {
+                path: 'bar',
+                component: ChartsBarPresentationComponent
+            },
+            {
+                path: 'doughnut',
+                component: ChartsDoughnutPresentationComponent
+            },
+            {
+                path: 'pie',
+                component: ChartsPiePresentationComponent
+            },
+            {
+                path: 'radar',
+                component: ChartsRadarPresentationComponent
+            },
+            {
+                path: 'polar',
+                component: ChartsPolarPresentationComponent
+            },
+            {
+                path: '',
+                component: ChartsLinePresentationComponent
+            },
+            {
+                path: '**',
+                component: ChartsLinePresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

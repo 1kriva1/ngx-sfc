@@ -4,5 +4,6 @@ export {
     ComponentSize,
     Position,
     MediaLimits,
-    Direction
+    Direction,
+    Theme
 } from './common.enums'

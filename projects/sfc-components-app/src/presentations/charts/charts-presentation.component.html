@@ -1,0 +1,30 @@
+<div class="buttons-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="line"
+                [queryParams]="{theme: theme}">Line</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="bar"
+                [queryParams]="{theme: theme}">Bar</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="doughnut"
+                [queryParams]="{theme: theme}">Doughnut</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="pie"
+                [queryParams]="{theme: theme}">Pie</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="radar"
+                [queryParams]="{theme: theme}">Radar</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="polar"
+                [queryParams]="{theme: theme}">Polar</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

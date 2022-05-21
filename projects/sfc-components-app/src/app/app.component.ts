@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UIConstants } from 'ngx-sfc-common';
-import { ThemeType } from '../shared/enums/theme-type.enum';
+import { Theme } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-components-app-root',
@@ -9,13 +8,12 @@ import { ThemeType } from '../shared/enums/theme-type.enum';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public ThemeType = ThemeType;
-  public UIConstants = UIConstants;
-  public theme: ThemeType = ThemeType.Default;
+  public Theme = Theme;
+  public theme: Theme = Theme.Default;
 
   constructor(protected router: Router, protected activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.theme = params['theme'] ? params['theme'] : ThemeType.Default;
+      this.theme = params['theme'] ? params['theme'] : Theme.Default;
     });
   }
 
