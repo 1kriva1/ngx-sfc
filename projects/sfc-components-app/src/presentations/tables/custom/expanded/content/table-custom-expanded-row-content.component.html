@@ -1,0 +1,34 @@
+<div class="items-container">
+    <div class="item" *ngFor="let item of data">
+        <div [style.text-align]="position" class="row-columns-container">
+            <div class="row-content">
+                <div class="column-data" [ngStyle]="columnStyle">
+                    <span class="domain">{{item.planName}}</span>
+                </div>
+
+                <div class="column-data" [ngStyle]="columnStyle">
+                    <span class="storage">{{item.storage}}M</span>
+                    <span class="square"></span>
+                </div>
+
+                <div class="column-data" [ngStyle]="columnStyle">
+                    <span *ngIf="item.monthlyVisitor" class="storage">{{item.monthlyVisitor}}M</span>
+                    <span *ngIf="!item.monthlyVisitor" class="storage">-</span>
+                    <span *ngIf="item.monthlyVisitor" class="square"></span>
+                </div>
+
+                <div class="column-data" [ngStyle]="columnStyle">
+                    <div class="status">
+                        <button>{{item.domain}}</button>
+                    </div>
+                </div>
+
+                <div class="column-data" [ngStyle]="columnStyle">
+                    <div class="status">
+                        <button>{{item.status}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

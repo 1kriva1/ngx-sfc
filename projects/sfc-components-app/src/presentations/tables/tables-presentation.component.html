@@ -1,0 +1,14 @@
+<div class="menus-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="default"
+                [queryParams]="{theme: theme}">Default</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="custom"
+                [queryParams]="{theme: theme}">Custom</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

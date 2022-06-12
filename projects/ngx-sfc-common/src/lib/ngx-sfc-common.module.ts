@@ -29,7 +29,9 @@ import {
   ToggleSwitcherComponent,
   CheckmarkComponent,
   TemplateContentComponent,
-  CloseComponent
+  CloseComponent,
+  PaginationComponent,
+  SortingComponent
 } from './components';
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import {
     CloseComponent,
     HamburgerComponent,
     DotsComponent,
+    PaginationComponent,
+    SortingComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -58,7 +62,7 @@ import {
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent
+    DefaultModalFooterComponent        
   ],
   imports: [
     CommonModule,
@@ -83,6 +87,8 @@ import {
     ToggleSwitcherComponent,
     DotsComponent,
     HamburgerComponent,
+    PaginationComponent,
+    SortingComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,

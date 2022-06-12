@@ -1,0 +1,18 @@
+@import "../../styles/mixins";
+
+:host {
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+
+  .expanded {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  &.expanded {
+    .expanded {
+      max-height: 3000px;
+    }
+  }
+}

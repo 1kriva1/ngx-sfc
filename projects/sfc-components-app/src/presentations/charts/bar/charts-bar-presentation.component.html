@@ -57,11 +57,11 @@
 
     <div class="component-row">
         <div class="component-column">
-            <sfc-chart #test [theme]="theme" [type]="chartType" [options]="getTitleOptions('DataSets changes')"
+            <sfc-chart #chart [theme]="theme" [type]="chartType" [options]="getTitleOptions('DataSets changes')"
                 [data]="changableChartData">
             </sfc-chart>
 
-            <button class="app" (click)="changeDataSets(test)">Change DataSets</button>
+            <button class="app" (click)="changeDataSets(chart)">Change DataSets</button>
         </div>
     </div>
 

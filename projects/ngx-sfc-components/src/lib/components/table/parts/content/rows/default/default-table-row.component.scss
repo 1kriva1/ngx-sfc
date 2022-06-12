@@ -1,0 +1,54 @@
+@import "../../styles/mixins";
+
+:host {
+  width: 100%;
+  border-radius: 1.25em;
+  box-shadow: 0 0.625em 1em $color-box-shadow-0;
+  transition: background-color 0.3s, box-shadow 0.6s cubic-bezier(0.25, 1, 0.5, 0.1);
+
+  @include host;
+
+  .container {
+    flex-flow: row wrap;
+    padding: 0 0.31em;
+
+    @include container;
+
+    .content-container {
+      @include content-container;
+
+      .content {
+        @include content;
+
+        padding: 0.7em 0.5em;
+
+        .name {
+          display: none;
+
+          @include name;
+        }
+      }
+    }
+  }
+
+  /* MEDIA */
+
+  @media all and (max-width: 767px) {
+    .container {
+      align-items: flex-start;
+
+      .content-container {
+        .content {
+          align-items: flex-start;
+          padding: 0.625em 1.25em;
+
+          .name {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  /* END MEDIA */
+}

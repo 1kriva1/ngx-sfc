@@ -1,0 +1,35 @@
+<div class="row-container" [ngClass]="model.status">
+    <div class="row-columns-container" [style.text-align]="position">
+        <div class="row-content">
+            <div class="column-checkmark" #columnCheckmark [ngStyle]="columnStyle">
+                <sfc-checkmark [active]="isSelected" (click)="selectRow()"></sfc-checkmark>
+            </div>
+            <div class="column-data phono-container" [ngStyle]="columnStyle">
+                <div>
+                    <div class="photo" [style.backgroundImage]="'url('+ model.photo + ')'"></div>
+                </div>
+                <div>
+                    <span class="column-name">Client</span>
+                    <span>
+                        {{model.client}}
+                        <i class="fa fa-star" *ngIf="model.isVIP"></i>
+                    </span>
+                    <div class="client-number">{{model.clientNumber}}</div>
+                </div>
+            </div>
+            <div class="column-data" [ngStyle]="columnStyle">
+                <span class="column-name">Activity</span>
+                <span>{{model.activity}}</span>
+            </div>
+            <div class="column-data" [ngStyle]="columnStyle">
+                <span class="column-name">On date</span>
+                <span>{{model.onDate}}</span>
+            </div>
+            <div class="column-data" [ngStyle]="columnStyle">
+                <span class="column-name">Status</span>
+                <div class="point"></div>
+                <span>{{model.status}}</span>
+            </div>
+        </div>
+    </div>
+</div>

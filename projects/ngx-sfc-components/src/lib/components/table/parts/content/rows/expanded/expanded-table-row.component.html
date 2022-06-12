@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="content" (click)="expanded = !expanded">
+        <sfc-template-content [referenceContent]="row" [templatesContent]="templates"
+            [templateType]="ExpandedTemplate.Row" [contextData]="contextData">
+        </sfc-template-content>
+    </div>
+    <div class="expanded">
+        <sfc-template-content [referenceContent]="content" [templatesContent]="templates"
+            [templateType]="ExpandedTemplate.Content" [contextData]="contextData">
+        </sfc-template-content>
+    </div>
+</div>

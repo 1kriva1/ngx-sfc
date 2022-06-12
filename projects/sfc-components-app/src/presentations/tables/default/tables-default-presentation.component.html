@@ -1,0 +1,113 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Default:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column full">
+            <h4>Default table with columns and data</h4>
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault"></sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Table with sorting (+ row sequence, + column delimeter)</h4>
+            <sfc-table [columns]="columnsSorting" [data]="dataDefault" [sequence]="true" [delimeter]="true">
+            </sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Pagination: page=2, pageSize=2 (+ hide columns)</h4>
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [showColumns]="false"
+                [pagination]="paginationConfig">
+            </sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Selectable (+ column position start, + column icons)</h4>
+            <sfc-table [columns]="columnsSelectable" [data]="dataDefault" [position]="Position.Left" [selectable]="true"
+                [selectOnClick]="false">
+            </sfc-table>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column half">
+            <h4>Sync data (add new item, remove item and filtering data, + selected items on init)</h4>
+            <button (click)="addItemSync()" style="margin-right: 10px;">Add item</button>
+            <button (click)="removeItemSync()">Remove item</button>
+            <h6>Filter sync data:</h6>
+            <div [formGroup]="filterSyncFormGroup">
+                <input formControlName="searchSyncData" type="text" placeholder="search">
+            </div>
+            <sfc-table [columns]="columnsSorting" [data]="dataSync" [selectable]="true">
+            </sfc-table>
+        </div>
+
+        <div class="component-column half">
+            <h4>Async data (add new item, remove item and filtering data + select-on-click)</h4>
+            <button (click)="addItemAsync()" style="margin-right: 10px;">Add item</button>
+            <button (click)="removeItemAsync()">Remove item</button>
+            <h6>Filter async data:</h6>
+            <div [formGroup]="filterAsyncFormGroup">
+                <input formControlName="searchAsyncData" type="text" placeholder="search">
+            </div>
+            <sfc-table [columns]="columnsSorting" [data$]="filteredData$" [selectable]="true" [selectOnClick]="true">
+            </sfc-table>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column half">
+            <h4>Columns (add and remove column)</h4>
+            <button (click)="addColumn()" style="margin-right: 10px;">Add new column</button>
+            <button (click)="removeColumn()">Remove item</button>
+            <sfc-table [columns]="columnsModification" [data]="dataColumnModifications" [selectable]="true">
+            </sfc-table>
+        </div>
+
+        <div class="component-column half">
+            <h4>Cards (without data type toggler)</h4>
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [selectable]="true"
+                [dataType]="TableDataType.Cards" [dataToggle]="false">
+            </sfc-table>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column full">
+            <h4>Full table (sorting, pagination and selection)</h4>
+            <sfc-table [columns]="columnsSorting" [data]="dataDefault" [position]="Position.Right" [selectable]="true"
+                [delimeter]="true" [dataType]="TableDataType.Cards" [sequence]="true">
+            </sfc-table>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+        <div class="component-column full">
+            <h4>Small size</h4>
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [sfcComponentSize]="ComponentSize.Small">
+            </sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Large size</h4>
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [sfcComponentSize]="ComponentSize.Large">
+            </sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Extra large size</h4>
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [sfcComponentSize]="ComponentSize.Large"
+                [customSize]="3">
+            </sfc-table>
+        </div>
+    </div>
+</div>

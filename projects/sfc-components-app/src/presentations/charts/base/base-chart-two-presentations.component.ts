@@ -1,6 +1,5 @@
 import { Directive } from "@angular/core";
 import { ChartConfiguration } from "chart.js";
-import { ChartComponent } from "ngx-sfc-components";
 import { BaseChartPresentationComponent } from "./base-chart-presentations.component";
 
 @Directive({})
@@ -64,7 +63,7 @@ export class BaseChartTwoPresentationComponent extends BaseChartPresentationComp
         }
     }
 
-    public changeDataSets(chart: ChartComponent) {
+    public changeDataSets(chart: any) {
         this.changableChartData.datasets[0].data = [
             Math.round(Math.random() * 100),
             Math.round(Math.random() * 100),

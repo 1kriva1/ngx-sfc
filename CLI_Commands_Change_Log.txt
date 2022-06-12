@@ -119,6 +119,24 @@ ng generate component components/checkmark --project ngx-sfc-common --export tru
 
 ng generate component components/template-content --project ngx-sfc-common --export false --flat true --style none --skip-tests false -d
 
+ng generate component components/pagination --project ngx-sfc-common --export true --flat true --style scss --skip-tests false -d
+
+ng generate service components/pagination/service/pagination --project ngx-sfc-common --skip-tests false --flat true -d
+
+ng generate class components/pagination/pagination --project ngx-sfc-common --skip-tests true --type constants -d
+
+ng generate class components/pagination/service/pagination --project ngx-sfc-common --skip-tests true --type event -d
+
+ng generate component components/sorting --project ngx-sfc-common --export true --flat true --style scss --skip-tests false -d
+
+ng generate service components/sorting/service/sorting --project ngx-sfc-common --skip-tests false --flat true -d
+
+ng generate class components/sorting/service/sorting --project ngx-sfc-common --skip-tests true --type event -d
+
+ng generate class components/sorting/sorting --project ngx-sfc-common --skip-tests true --type model -d
+
+ng generate class components/sorting/sorting --project ngx-sfc-common --skip-tests true --type constants -d
+
 // COMPONENTS
 
 ng generate component components/tabs --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
@@ -214,6 +232,32 @@ ng generate component components/notification/parts/content/notification-content
 ng generate class components/notification/parts/content/notification-content --project ngx-sfc-components --skip-tests true --type model -d
 
 ng generate component components/chart --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/table --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/table/parts/columns/default/default-table-column --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate class components/table/parts/columns/default/default-table-column --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate component components/table/parts/columns/selectable/selectable-table-column --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate service components/table/service/select/table-select --project ngx-sfc-components --skip-tests false --flat true -d
+
+ng generate class components/table/service/select/table-select --project ngx-sfc-components --skip-tests true --type event -d
+
+ng generate component components/table/parts/columns/toggle/columns-toggle --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate service components/table/parts/columns/toggle/service/columns-toggle --project ngx-sfc-components --skip-tests false --flat true -d
+
+ng generate class components/table/parts/columns/toggle/toggle --project ngx-sfc-components --skip-tests true --type constants -d
+
+ng generate component components/table/parts/content/rows/default/default-table-row --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/table/parts/content/rows/expanded/expanded-table-row --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/table/parts/content/cards/default/default-table-card --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/table/parts/content/base-default-table-content --project ngx-sfc-components --export false --flat true --style none --skip-tests true -d
 
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 

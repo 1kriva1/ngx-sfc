@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+
+  .column {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    transition: color 0.3s;
+  }
+}

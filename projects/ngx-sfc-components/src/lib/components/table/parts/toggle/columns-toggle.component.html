@@ -1,0 +1,11 @@
+<div class="container" *ngIf="vm$ | async as vm">
+    <div>
+        <span class="icon" [sfcShowHideElement]="!vm.show">
+            <i class="{{vm.model.ICON}}"></i>
+        </span>
+        <span class="icon" [sfcShowHideElement]="vm.show">
+            <i class="{{vm.model.ICON}}"></i>
+        </span>
+        <span class="label">{{vm.model.LABEL}}</span>
+    </div>
+</div>

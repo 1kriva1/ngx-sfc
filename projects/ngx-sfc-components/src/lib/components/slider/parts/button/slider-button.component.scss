@@ -13,11 +13,11 @@
   line-height: $height;
   text-align: center;
   cursor: pointer;
-  background: $color-background-fade-0;
+  background: $color-background-fade-3;
   transition: all 0.1s ease;
 
   &:hover {
-    background: $color-background-fade-1;
+    background: $color-background-fade-4;
   }
 
   &.next {

@@ -1,0 +1,172 @@
+/* stylelint-disable */
+
+/* CONTAINER */
+
+.card-container {
+  box-shadow: 0 0.625em 1.25em rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+  background: #f6f6f6;
+  border-top-left-radius: 0.75em;
+  border-top-right-radius: 0.75em;
+  border-bottom-left-radius: 0.75em;
+  border-bottom-right-radius: 0.75em;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  width: 15.625em;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.Processing {
+    .card-columns-container {
+      .card-content {
+        .card {
+          .card-body {
+            .tag {
+              background-color: #9b59b8;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.InReview {
+    .card-columns-container {
+      .card-content {
+        .card {
+          .card-body {
+            .tag {
+              background-color: #5bcaae;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.NewCardIssue {
+    .card-columns-container {
+      .card-content {
+        .card {
+          .card-body {
+            .tag {
+              background-color: #51dd56;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.NotInformed {
+    .card-columns-container {
+      .card-content {
+        .card {
+          .card-body {
+            .tag {
+              background-color: #d36144;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .card-columns-container {
+    border-radius: 0.75em;
+    color: rgb(0 0 0 / 60%);
+    font-weight: bold;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+    user-select: none;
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      .card {
+        background-color: #fff;
+        border-radius: 0.625em;
+        box-shadow: 0 0.125em 1.25em rgb(0 0 0 / 20%);
+        overflow: hidden;
+        height: 23.75em;
+
+        .card-body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 1.25em;
+          font-size: 0.875em;
+
+          .tag {
+            background: #ccc;
+            border-radius: 3.125em;
+            font-size: 0.75em;
+            margin: 0;
+            color: #fff;
+            padding: 0.125em 0.625em;
+            text-transform: uppercase;
+            cursor: pointer;
+          }
+
+          .user {
+            display: flex;
+            margin-top: auto;
+            font-size: 10px;
+            line-height: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: rgb(0 0 0 / 60%);
+            align-items: center;
+
+            .photo {
+              border-radius: 50%;
+              overflow: hidden;
+              width: 40px;
+              height: 40px;
+              margin-right: 10px;
+              background-size: cover;
+              background-position: center;
+              box-shadow: 0 0 8px rgb(0 0 0 / 80%);
+            }
+
+            .client-number {
+              font-size: 12px;
+              color: #969696;
+            }
+
+            i {
+              font-size: 0.875em;
+              color: #01d0db;
+            }
+          }
+
+          p {
+            font-size: 13px;
+            margin: 0 0 0.625em;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+/* stylelint-enable */

@@ -1,0 +1,105 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Custom:</h3>
+    </div>
+
+    <!-- REFERENCES -->
+
+    <ng-template #badgeTemplateRef let-badge>
+        <table-badge [label]="badge.model.dataModel.data.label" [icon]="badge.model.dataModel.data.icon"
+            [color]="badge.model.dataModel.data.color">
+        </table-badge>
+    </ng-template>
+
+    <ng-template #expandedRowTemplateRef let-expandedRow>
+        <table-custom-expanded-row [model]="expandedRow.model.dataModel" [position]="expandedRow.position"
+            [columnWidth]="expandedRow.columnWidth" [expanded]="expandedRow.expanded" [index]="expandedRow.model.index"
+            (selected)="expandedReferenceTable.selectRow($event)">
+        </table-custom-expanded-row>
+    </ng-template>
+
+    <ng-template #expandedContentTemplateRef let-expandedContent>
+        <table-custom-expanded-row-content [data]="expandedContent.model.dataModel.data.items"
+            [position]="expandedContent.position" [columnWidth]="expandedContent.columnWidth">
+        </table-custom-expanded-row-content>
+    </ng-template>
+
+    <!-- END REFERENCES -->
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <h4>Badges</h4>
+            <sfc-table [columns]="columnsBadges" [data]="dataBadges" [showColumns]="false"
+                [dataType]="TableDataType.Cards" [cardContent]="badgeTemplateRef" [dataToggle]="false"
+                [pagination]="paginationBadgesConfig">
+            </sfc-table>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column full">
+            <h4>List of items</h4>
+            <sfc-table [columns]="columnsListItems" [data]="dataListItems" [position]="Position.Center"
+                [selectable]="true" [selectOnClick]="false" #listItemsTable>
+                <ng-template [sfcTemplateReference]="TableTemplate.Column" let-column>
+                    <table-custom-column [label]="column.name" [active]="column.sorting.active">
+                    </table-custom-column>
+                </ng-template>
+                <ng-template [sfcTemplateReference]="TableTemplate.Row" let-list>
+                    <table-custom-row [data]="list.model" [columns]="list.columns" [position]="list.position"
+                        [columnWidth]="list.columnWidth" (selected)="listItemsTable.selectRow($event)">
+                    </table-custom-row>
+                </ng-template>
+                <ng-template [sfcTemplateReference]="TableTemplate.Card" let-list>
+                    <table-custom-card [data]="list.model" [columns]="list.columns"></table-custom-card>
+                </ng-template>
+            </sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Expanded row (references)</h4>
+            <sfc-table #expandedReferenceTable [columns]="columnsExpanded" [data]="dataExpandedReference"
+                [expanded]="true" [selectable]="true">
+                <ng-template [sfcTemplateReference]="ExpandedTableRowTemplate.Row" let-row>
+                    <sfc-expanded-table-row [model]="row.model" [columns]="row.columns" [position]="row.position"
+                        [columnWidth]="row.columnWidth" [content]="expandedContentTemplateRef"
+                        [row]="expandedRowTemplateRef">
+                    </sfc-expanded-table-row>
+                </ng-template>
+            </sfc-table>
+        </div>
+
+        <div class="component-column full">
+            <h4>Expanded row (templates)</h4>
+            <sfc-table #expandedTemplateTable [columns]="columnsExpanded" [data]="dataExpandedTemplate"
+                [expanded]="true" [selectable]="true">
+                <ng-template [sfcTemplateReference]="TableTemplate.Row" let-row>
+
+                    <sfc-expanded-table-row [model]="row.model" [columns]="row.columns" [position]="row.position"
+                        [columnWidth]="row.columnWidth">
+
+                        <ng-template [sfcTemplateReference]="ExpandedTableRowTemplate.Row" let-expandedRow>
+                            <table-custom-expanded-row [model]="expandedRow.model.dataModel"
+                                [position]="expandedRow.position" [columnWidth]="expandedRow.columnWidth"
+                                [expanded]="expandedRow.expanded" [index]="expandedRow.model.index"
+                                (selected)="expandedTemplateTable.selectRow($event)">
+                            </table-custom-expanded-row>
+                        </ng-template>
+
+                        <ng-template [sfcTemplateReference]="ExpandedTableRowTemplate.Content" let-expandedContent>
+                            <table-custom-expanded-row-content [data]="expandedContent.model.dataModel.data.items"
+                                [position]="expandedContent.position" [columnWidth]="expandedContent.columnWidth">
+                            </table-custom-expanded-row-content>
+                        </ng-template>
+
+                    </sfc-expanded-table-row>
+
+                </ng-template>
+            </sfc-table>
+        </div>
+
+    </div>
+</div>

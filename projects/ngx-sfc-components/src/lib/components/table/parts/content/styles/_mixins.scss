@@ -1,0 +1,49 @@
+@import "../../../../../../../../ngx-sfc-common//src//lib/styles/styles";
+
+@mixin host() {
+  background-color: $color-fade-1;
+
+  &.even {
+    background-color: $color-fade-2;
+
+    &:hover {
+      background-color: $color-fade-8;
+    }
+  }
+
+  &:hover {
+    background-color: $color-fade-8;
+  }
+
+  &.pointer {
+    cursor: pointer;
+  }
+}
+
+@mixin container() {
+  display: flex;
+  align-items: center;
+}
+
+@mixin content-container() {
+  color: $color-default;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  user-select: none;
+}
+
+@mixin content() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin name() {
+  font-size: 0.625em;
+  line-height: 0.625em;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $color-fade-4;
+}

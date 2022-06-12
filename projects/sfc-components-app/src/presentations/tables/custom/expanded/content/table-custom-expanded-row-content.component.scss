@@ -1,0 +1,71 @@
+:host {
+  width: 100%;
+  display: inline-block;
+  background: #f5f7fa;
+  border-bottom-left-radius: 1.25em;
+  border-bottom-right-radius: 1.25em;
+
+  .row-columns-container {
+    color: rgb(0 0 0 / 60%);
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    user-select: none;
+    width: 100%;
+    padding: 0.625em 0.31em;
+
+    .row-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0.5em;
+      white-space: initial;
+      word-wrap: break-word;
+
+      .domain {
+        font-size: 13px;
+        color: #393939;
+        text-align: start;
+      }
+
+      .storage {
+        font-size: 10px;
+        font-weight: bold;
+        color: #393939;
+        margin-right: 3px;
+      }
+
+      .square {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #3b9376;
+        border-radius: 2px;
+      }
+
+      .status button {
+        color: #3b9376;
+        background: #beeddd;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-weight: bold;
+        font-size: 12px;
+      }
+    }
+  }
+
+  /* MEDIA */
+
+  @media all and (max-width: 767px) {
+    .row-columns-container {
+      .row-content {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 5px;
+      }
+    }
+  }
+
+  /* END MEDIA */
+}

@@ -36,3 +36,18 @@ export { ChartComponent } from './chart/chart.component';
 export { ChartThemeService } from './chart/service/theme/chart-theme.service';
 export { ChartThemeModel } from './chart/service/theme/chart-theme.model';
 export { ChartOptionModel } from './chart/chart-option.model';
+export { TableComponent } from './table/table.component';
+export { ITableDataModel, ITableModel } from './table/models/table.model';
+export { ITablePaginationModel } from './table/models/table-pagination.model';
+export { TableDataType } from './table/enums/table-data-type.enum';
+export { TableTemplate } from './table/enums/table-template.enum';
+export { ITableSelectEvent } from './table/service/select/table-select.event';
+export { DefaultTableColumnComponent } from './table/parts/columns/default/default-table-column.component';
+export { IDefaultTableColumnModel } from './table/parts/columns/table-column.model';
+export { SelectableTableColumnComponent } from './table/parts/columns/selectable/selectable-table-column.component';
+export { ColumnsToggleComponent } from './table/parts/toggle/columns-toggle.component';
+export { DefaultTableRowComponent } from './table/parts/content/rows/default/default-table-row.component';
+export { ExpandedTableRowComponent } from './table/parts/content/rows/expanded/expanded-table-row.component';
+export { ExpandedTableRowTemplate } from './table/parts/content/rows/expanded/expanded-table-row-template.enum';
+export { DefaultTableCardComponent } from './table/parts/content/cards/default/default-table-card.component';
+
