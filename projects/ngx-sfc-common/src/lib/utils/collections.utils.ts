@@ -162,7 +162,7 @@ export function sortByPath<T>(collection: Array<T>, path: string, direction: Sor
             while (i < partsLength) { a = a[pathParts[i]]; b = b[pathParts[i]]; i++; }
 
             return direction == SortingDirection.Ascending
-                ? a > b ? 1 : -1
+                ? a >= b ? 1 : -1
                 : a > b ? -1 : 1;
         });
 

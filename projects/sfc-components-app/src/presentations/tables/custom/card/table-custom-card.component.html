@@ -1,0 +1,32 @@
+<div class="card-container" [ngClass]="model.status">
+    <div class="card-columns-container">
+        <div class="card-content">
+            <div class="card">
+                <div class="card-header">
+                    <img src="../../../../assets/empty-football-field.jpg" alt="rover" />
+                </div>
+                <div class="card-body">
+                    <span class="tag">{{model.status}}</span>
+                    <h4>{{model.activity}}</h4>
+                    <p>
+                        {{model.onDate}}
+                        <small>2h ago</small>
+                    </p>
+                    <div class="user">
+                        <div class="photo" [style.backgroundImage]="'url('+ model.photo + ')'"></div>
+                        <div class="user-info">
+                            <div>
+                                <span>
+                                    {{model.client}}
+                                    <i class="fa fa-star" *ngIf="model.isVIP"></i>
+                                </span>
+                                <div class="client-number">{{model.clientNumber}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

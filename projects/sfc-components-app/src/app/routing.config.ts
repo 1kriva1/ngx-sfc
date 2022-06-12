@@ -37,7 +37,10 @@ import {
     ChartsDoughnutPresentationComponent,
     ChartsPiePresentationComponent,
     ChartsPolarPresentationComponent,
-    ChartsRadarPresentationComponent
+    ChartsRadarPresentationComponent,
+    TablesPresentationComponent,
+    TablesDefaultPresentationComponent,
+    TablesCustomPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -262,6 +265,28 @@ export const routes: Routes = [
             {
                 path: '**',
                 component: ChartsLinePresentationComponent
+            }
+        ]
+    },
+    {
+        path: 'tables',
+        component: TablesPresentationComponent,
+        children: [
+            {
+                path: 'default',
+                component: TablesDefaultPresentationComponent
+            },
+            {
+                path: 'custom',
+                component: TablesCustomPresentationComponent
+            },
+            {
+                path: '',
+                component: TablesDefaultPresentationComponent
+            },
+            {
+                path: '**',
+                component: TablesDefaultPresentationComponent
             }
         ]
     },

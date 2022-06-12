@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import { NgxSfcComponentsModule } from 'ngx-sfc-components';
@@ -40,7 +41,16 @@ import {
   ChartsPiePresentationComponent,
   ChartsDoughnutPresentationComponent,
   ChartsRadarPresentationComponent,
-  ChartsPolarPresentationComponent
+  ChartsPolarPresentationComponent,
+  TablesPresentationComponent,
+  TablesDefaultPresentationComponent,
+  TablesCustomPresentationComponent,
+  TableBadgeComponent,
+  TableCustomRowComponent,
+  TableCustomColumnComponent,
+  TableCustomCardComponent,
+  TableCustomExpandedRowComponent,
+  TableCustomExpandedRowContentComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -100,11 +110,23 @@ import { AppComponent } from './app.component';
     ChartsPiePresentationComponent,
     ChartsDoughnutPresentationComponent,
     ChartsRadarPresentationComponent,
-    ChartsPolarPresentationComponent
+    ChartsPolarPresentationComponent,
+    // tables
+    TablesPresentationComponent,
+    TablesDefaultPresentationComponent,
+    TablesCustomPresentationComponent,
+    TableBadgeComponent,
+    TableCustomColumnComponent,
+    TableCustomRowComponent,
+    TableCustomCardComponent,
+    TableCustomExpandedRowComponent,
+    TableCustomExpandedRowContentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxSfcCommonModule,
     NgxSfcComponentsModule
   ],

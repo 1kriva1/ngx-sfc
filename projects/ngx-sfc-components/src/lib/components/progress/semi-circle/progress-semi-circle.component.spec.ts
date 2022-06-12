@@ -41,7 +41,7 @@ describe('Component: ProgressSemiCircleComponent', () => {
       expect(component.min).toEqual(0);
     });
 
-    fit('Should progress value equal min, if it less than min', () => {
+    fit('Should progress value equal min, if less than min', () => {
       component.min = 10;
       component.progress = 5;
       component.ngOnInit();
@@ -50,7 +50,7 @@ describe('Component: ProgressSemiCircleComponent', () => {
       expect(component.progress).toEqual(component.min);
     });
 
-    fit('Should progress value equal max, if it more than max', () => {
+    fit('Should progress value equal max, if more than max', () => {
       component.max = 10;
       component.progress = 15;
       component.ngOnInit();

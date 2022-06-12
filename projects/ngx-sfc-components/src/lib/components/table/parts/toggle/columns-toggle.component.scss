@@ -1,0 +1,37 @@
+@import "../../../../../../../ngx-sfc-common//src/lib/styles/styles";
+
+:host {
+  display: flex;
+  align-items: center;
+
+  .container {
+    @include theme-value(color, $color-default, $color-dark);
+
+    font-size: 0.625em;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: end;
+    display: none;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      color: $color-hover-default;
+    }
+
+    span.icon {
+      position: absolute;
+    }
+
+    span.label {
+      padding-left: 1.3em;
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    .container {
+      display: block;
+    }
+  }
+}

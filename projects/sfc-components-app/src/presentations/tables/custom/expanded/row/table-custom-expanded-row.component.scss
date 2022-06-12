@@ -1,0 +1,114 @@
+/* stylelint-disable */
+
+:host {
+  width: 100%;
+  display: inline-block;
+
+  &:not(.expanded) {
+    .row-container {
+      border-radius: 1.25em;
+
+      &:hover {
+        background-color: #ccd1d9 !important;
+      }
+    }
+  }
+
+  &.expanded {
+    .row-container {
+      border-top-left-radius: 1.25em;
+      border-top-right-radius: 1.25em;
+    }
+  }
+
+  .row-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #e6e9ed;
+    box-shadow: 0 10px 15px rgb(0 0 0 / 2%);
+    padding: 0 0.31em;
+
+    .row-columns-container {
+      color: rgb(0 0 0 / 60%);
+      font-weight: bold;
+      user-select: none;
+
+      .row-content {
+        padding: 0.5em;
+        white-space: initial;
+        word-wrap: break-word;
+
+        .column-name {
+          display: none;
+          font-size: 10px;
+          line-height: 10px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: #969696;
+        }
+
+        .domain {
+          font-size: 1em;
+          color: #393939;
+          margin-bottom: 0.31em;
+        }
+
+        .plan-name {
+          font-size: 0.75em;
+
+          i {
+            color: #7575d3;
+            margin-right: 3px;
+          }
+
+          span {
+            color: #969696;
+          }
+        }
+
+        .progress {
+          padding: 0 0.31em;
+          display: flex;
+          flex-direction: column;
+
+          .storage {
+            font-size: 12px;
+            color: #393939;
+            padding-top: 3px;
+          }
+        }
+
+        .status button {
+          color: #3b9376;
+          background: #beeddd;
+          border: none;
+          border-radius: 0.31em;
+          padding: 0.31em 10px;
+          font-weight: bold;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  /* MEDIA */
+
+  @media all and (max-width: 767px) {
+    .row-container {
+      align-items: center;
+
+      .row-content {
+        align-items: flex-start;
+      }
+
+      .column-name {
+        display: block;
+      }
+    }
+  }
+
+  /* END MEDIA */
+}
+
+/* stylelint-enable */

@@ -1,0 +1,97 @@
+@import "../../styles/styles";
+@import "../../styles/mixins";
+
+:host {
+  width: 100%;
+  display: inline-block;
+
+  .container {
+    position: relative;
+    text-align: center;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      user-select: none;
+
+      li {
+        display: block;
+        float: left;
+        padding: 0.31em;
+
+        &:first-child {
+          border: none;
+        }
+
+        button,
+        span {
+          @include theme-value(color, $color-background-fade-5, $color-dark);
+
+          background: none;
+          border: none;
+          border-radius: 50%;
+          box-sizing: border-box;
+          display: block;
+          font-size: 1em;
+          height: 2.5em;
+          min-width: 2.5em;
+          line-height: 2.5em;
+          padding: 0;
+        }
+
+        button {
+          @include theme-value(color, $color-default, $color-dark);
+
+          outline: none;
+          position: relative;
+          transition: all 170ms linear;
+
+          &::before {
+            @include theme-value(background, $color-default, $color-fade-1);
+
+            border-radius: 50%;
+            content: "";
+            cursor: pointer;
+            height: 0;
+            left: 50%;
+            opacity: 0;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            transition: all 170ms linear;
+            top: 50%;
+            width: 0;
+          }
+
+          &:hover:not(.active) {
+            @include theme-value(color, $color-default, $color-dark);
+
+            &::before {
+              animation: hover-animation 510ms linear forwards;
+
+              @include square-size(2.5em);
+            }
+          }
+
+          &.active {
+            @include theme-value(background, $color-background-fade-3, $color-fade-1);
+
+            color: $color-default !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes hover-animation {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

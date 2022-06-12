@@ -20,7 +20,14 @@ import {
   SliderComponent,
   TimelineComponent,
   NotificationComponent,
-  ChartComponent
+  ChartComponent,
+  TableComponent,
+  DefaultTableColumnComponent,
+  SelectableTableColumnComponent,
+  ColumnsToggleComponent,
+  DefaultTableRowComponent,
+  ExpandedTableRowComponent,
+  DefaultTableCardComponent
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -115,7 +122,15 @@ Chart.register(
     NotificationComponent,
     NotificationContentComponent,
     // Chart
-    ChartComponent
+    ChartComponent,
+    // Table
+    TableComponent,
+    DefaultTableColumnComponent,
+    SelectableTableColumnComponent,
+    ColumnsToggleComponent,
+    DefaultTableRowComponent,
+    ExpandedTableRowComponent,
+    DefaultTableCardComponent
   ],
   imports: [
     CommonModule,
@@ -150,7 +165,10 @@ Chart.register(
     // Notification
     NotificationComponent,
     // Chart
-    ChartComponent
+    ChartComponent,
+    // Table
+    TableComponent,
+    ExpandedTableRowComponent
   ]
 })
 export class NgxSfcComponentsModule { }

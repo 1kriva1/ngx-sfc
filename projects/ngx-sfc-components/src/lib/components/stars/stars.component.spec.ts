@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { StarType } from './star-type.enum';
 import { StarsComponent } from './stars.component';
 
-describe('Component: StarsComponent', () => {
+describe('Component: Stars', () => {
   let component: StarsComponent;
   let fixture: ComponentFixture<StarsComponent>;
 

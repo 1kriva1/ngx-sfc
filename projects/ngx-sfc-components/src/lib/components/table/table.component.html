@@ -1,0 +1,69 @@
+<div class="container" *ngIf="vm$ | async as vm">
+    <div class="columns-container">
+        <div class="columns-actions">
+            <sfc-columns-toggle *ngIf="showColumns"></sfc-columns-toggle>
+            <sfc-toggle-switcher *ngIf="dataToggle" [active]="dataType === TableDataType.Cards"
+                [leftModel]="Constants.TOGGLE_SWITCHER_LEFT_MODEL" [rightModel]="Constants.TOGGLE_SWITCHER_RIGHT_MODEL"
+                (click)="onDataTypeToggle()">
+            </sfc-toggle-switcher>
+        </div>
+
+        <div *ngIf="vm.showColumns" class="columns">
+            <div class="column" [ngStyle]="vm.columnStyle" *ngFor="let column of vm.columns">
+                <ng-container [ngSwitch]="column.type">
+                    <sfc-selectable-table-column *ngSwitchCase="TableColumnType.Selectable"
+                        [selected]="allRowsSelected">
+                    </sfc-selectable-table-column>
+
+                    <sfc-sorting *ngSwitchDefault [model]="column.sorting" [id]="column.field">
+
+                        <sfc-template-content [referenceContent]="columnContent" [templatesContent]="templates"
+                            [templateType]="TableTemplate.Column" [defaultContent]="defaultColumn"
+                            [contextData]="column">
+                        </sfc-template-content>
+
+                        <ng-template #defaultColumn>
+                            <sfc-default-table-column [model]="column"></sfc-default-table-column>
+                        </ng-template>
+
+                    </sfc-sorting>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <sfc-delimeter *ngIf="delimeter"></sfc-delimeter>
+
+    <div class="rows-container">
+        <div class="row" *ngFor="let item of vm.data">
+
+            <ng-container [ngSwitch]="dataType">
+                <sfc-template-content *ngSwitchCase="TableDataType.Rows" [referenceContent]="rowContent"
+                    [templatesContent]="templates" [templateType]="TableTemplate.Row" [defaultContent]="defaultRow"
+                    [contextData]="{model: item, columns: vm.columns, columnWidth: vm.columnWidth, position: position}">
+                </sfc-template-content>
+
+                <ng-template #defaultRow>
+                    <sfc-default-table-row [columns]="vm.columns" [model]="item" [position]="position"
+                        [columnWidth]="vm.columnWidth" [selectOnClick]="selectOnClick" (selected)="selectRow($event)">
+                    </sfc-default-table-row>
+                </ng-template>
+
+                <sfc-template-content *ngSwitchCase="TableDataType.Cards" [referenceContent]="cardContent"
+                    [templatesContent]="templates" [templateType]="TableTemplate.Card" [defaultContent]="defaultCard"
+                    [contextData]="{model: item, columns: vm.columns}">
+                </sfc-template-content>
+
+                <ng-template #defaultCard>
+                    <sfc-default-table-card [columns]="vm.columns" [model]="item" [selectOnClick]="selectOnClick"
+                        (selected)="selectRow($event)">
+                    </sfc-default-table-card>
+                </ng-template>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="pagination-container">
+        <sfc-pagination *ngIf="pagination.enabled" [limits]="false" [full]="false" [data$]="data$"></sfc-pagination>
+    </div>
+</div>

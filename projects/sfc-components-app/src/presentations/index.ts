@@ -37,3 +37,12 @@ export { ChartsDoughnutPresentationComponent } from './charts/doughnut/charts-do
 export { ChartsPiePresentationComponent } from './charts/pie/charts-pie-presentation.component';
 export { ChartsRadarPresentationComponent } from './charts/radar/charts-radar-presentation.component';
 export { ChartsPolarPresentationComponent } from './charts/polar/charts-polar-presentation.component';
+export { TablesPresentationComponent } from './tables/tables-presentation.component';
+export { TablesDefaultPresentationComponent } from './tables/default/tables-default-presentation.component';
+export { TablesCustomPresentationComponent } from './tables/custom/tables-custom-presentation.component';
+export { TableBadgeComponent } from './tables/custom/badge/table-badge.component';
+export { TableCustomColumnComponent } from './tables/custom/column/table-custom-column.component';
+export { TableCustomRowComponent } from './tables/custom/row/table-custom-row.component';
+export { TableCustomCardComponent } from './tables/custom/card/table-custom-card.component';
+export { TableCustomExpandedRowComponent } from './tables/custom/expanded/row/table-custom-expanded-row.component';
+export { TableCustomExpandedRowContentComponent } from './tables/custom/expanded/content/table-custom-expanded-row-content.component';

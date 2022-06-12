@@ -3,6 +3,8 @@
 :host {
   display: inline-block;
 
+  @include theme-value(color, $color-default, $color-dark);
+
   .check {
     border-radius: 50%;
     border: 0.18em solid;
@@ -22,8 +24,6 @@
 
       font-size: 0.8em;
       transition: opacity 0.3s ease;
-      color: transparent;
-      -webkit-text-stroke: 1px $color-fade-3;
     }
 
     &:hover {
@@ -32,7 +32,6 @@
       i {
         @include theme-value(opacity, 0.8, 1);
 
-        -webkit-text-stroke: initial;
         color: $color-hover-default;
       }
     }

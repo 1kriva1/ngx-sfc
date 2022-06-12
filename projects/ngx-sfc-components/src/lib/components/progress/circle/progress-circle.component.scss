@@ -15,6 +15,7 @@
     border-radius: 50%;
     background: $color-fade-2;
     font-size: 5em;
+    text-align: initial;
 
     @include square-size(1em);
 

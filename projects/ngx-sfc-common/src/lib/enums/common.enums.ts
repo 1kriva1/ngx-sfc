@@ -37,7 +37,9 @@ export enum UIClass {
     Animated = 'animated',
     Expanded = 'expanded',
     Fixed = 'fixed',
-    Bordered = 'bordered'
+    Bordered = 'bordered',
+    Even = 'even',
+    Pointer = 'pointer'
 };
 
 /**

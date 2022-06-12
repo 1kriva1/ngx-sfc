@@ -9,6 +9,10 @@ export class UIConstants {
 
     static CSS_WIDTH = 'width';
     static CSS_LEFT = 'left';
+    static CSS_RIGHT = 'right';
+    static CSS_START = 'start';
+    static CSS_END = 'end';
+    static CSS_CENTER = 'center';
     static CSS_CLASS_FIXED = 'fixed';
     static CSS_CLASS_BACKGROUND = 'background';
     static CSS_CLASS_TOP = 'top';
