@@ -124,19 +124,6 @@ describe('Component: ExpandedTableRow', () => {
             });
         });
     });
-
-    describe('Content', () => {
-        fit('Should not be expanded', () => {
-            expect(fixture.debugElement.query(By.css('div.expanded')).nativeElement.clientHeight > 0).toBeFalsy();
-        });
-
-        fit('Should be expanded', () => {
-            fixture.nativeElement.querySelector('div.content').dispatchEvent(new MouseEvent('click', {}));
-            fixture.detectChanges();
-
-            expect(fixture.debugElement.query(By.css('div.expanded')).nativeElement.clientHeight > 0).toBeTruthy();
-        });
-    });
 });
 
 @Component({
@@ -217,6 +204,29 @@ describe('Component: ExpandedTableRow: Templates', () => {
         fixture = TestBed.createComponent(TestExpandedTableRowComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+    });
+
+    describe('General', () => {
+        fit('Should not be expanded', () => {
+            component.showContent = true;
+            component.expandedTableRow.columns = [{ name: '', field: '' }];
+            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 1 };
+            fixture.detectChanges();
+
+            expect(fixture.debugElement.query(By.css('div.expanded')).nativeElement.clientHeight > 0).toBeFalsy();
+        });
+
+        fit('Should be expanded', () => {
+            component.showContent = true;
+            component.expandedTableRow.columns = [{ name: '', field: '' }];
+            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 1 };
+            fixture.detectChanges();
+
+            fixture.nativeElement.querySelector('div.content').dispatchEvent(new MouseEvent('click', {}));
+            fixture.detectChanges();
+
+            expect(fixture.debugElement.query(By.css('div.expanded')).nativeElement.clientHeight > 0).toBeTruthy();
+        });
     });
 
     describe('Row', () => {
