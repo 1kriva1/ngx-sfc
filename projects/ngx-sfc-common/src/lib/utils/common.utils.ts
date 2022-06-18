@@ -93,3 +93,12 @@ export function mergeDeep(target: any, ...sources: any[]): any {
  * @returns Type's property name
  */
 export const nameof = <T>(name: keyof T) => name;
+
+/**
+   * Determines if the input is a Number or something that can be coerced to a Number
+   * @param - The input to be tested
+   * @returns - An indication if the input is a Number or can be coerced to a Number
+   */
+export function isNumeric(number: any): boolean {
+    return !isNaN(parseFloat(number));
+}

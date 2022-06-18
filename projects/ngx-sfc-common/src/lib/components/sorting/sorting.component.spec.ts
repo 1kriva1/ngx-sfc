@@ -32,7 +32,6 @@ describe('Component: SortingComponent', () => {
     });
 
     fit('Should have default model', () => {
-      debugger;
       (component.model as any) = null;
       component.ngOnInit();
 

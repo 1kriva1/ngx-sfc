@@ -50,4 +50,8 @@ export { DefaultTableRowComponent } from './table/parts/content/rows/default/def
 export { ExpandedTableRowComponent } from './table/parts/content/rows/expanded/expanded-table-row.component';
 export { ExpandedTableRowTemplate } from './table/parts/content/rows/expanded/expanded-table-row-template.enum';
 export { DefaultTableCardComponent } from './table/parts/content/cards/default/default-table-card.component';
+export { CarouselComponent } from './carousel/carousel.component';
+export { CarouselSlideDirective } from './carousel/directive/carousel-slide.directive';
+export { CarouselOptionsModel } from './carousel/models/options.model';
+export { CarouselSlideEvent } from './carousel/models/slide.model';
 

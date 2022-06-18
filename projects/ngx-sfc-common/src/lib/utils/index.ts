@@ -5,7 +5,8 @@ export {
     addPropertyToObject,
     removePropertyFromObject,
     mergeDeep,
-    nameof
+    nameof,
+    isNumeric
 } from './common.utils'
 
 export {

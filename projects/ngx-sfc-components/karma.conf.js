@@ -37,7 +37,18 @@ module.exports = function (config) {
           statements: 80,
           branches: 80,
           functions: 80,
-          lines: 80
+          lines: 80,
+          excludes: [
+            'src/lib/components/carousel/*.ts',
+            'src/lib/components/carousel/directive/*.ts',
+            'src/lib/components/carousel/models/*.ts',
+            'src/lib/components/carousel/parts/stage/*.ts',
+            'src/lib/components/carousel/service/animate/*.ts',
+            'src/lib/components/carousel/service/autoplay/*.ts',
+            'src/lib/components/carousel/service/carousel/*.ts',
+            'src/lib/components/carousel/service/lazy/*.ts',
+            'src/lib/components/carousel/service/navigation/*.ts'
+          ]
         }
       }
     },
