@@ -10,3 +10,5 @@ export { SliderButtonComponent } from './slider/parts/button/slider-button.compo
 export { SliderPaginationComponent } from './slider/parts/pagination/slider-pagination.component';
 export { TimelineItemComponent } from './timeline/parts/item/timeline-item.component';
 export { NotificationContentComponent } from './notification/parts/content/notification-content.component';
+export { CarouselStageComponent } from './carousel/parts/stage/carousel-stage.component';
+export { CarouselSlideDirective } from './carousel/directive/carousel-slide.directive';

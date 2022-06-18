@@ -40,7 +40,8 @@ import {
     ChartsRadarPresentationComponent,
     TablesPresentationComponent,
     TablesDefaultPresentationComponent,
-    TablesCustomPresentationComponent
+    TablesCustomPresentationComponent,
+    CarouselPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -289,6 +290,10 @@ export const routes: Routes = [
                 component: TablesDefaultPresentationComponent
             }
         ]
+    },
+    {
+        path: 'carousels',
+        component: CarouselPresentationComponent
     },
     fallbackRoute,
     indexRoute

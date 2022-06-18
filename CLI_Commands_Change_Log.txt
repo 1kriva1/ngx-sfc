@@ -259,6 +259,34 @@ ng generate component components/table/parts/content/cards/default/default-table
 
 ng generate component components/table/parts/content/base-default-table-content --project ngx-sfc-components --export false --flat true --style none --skip-tests true -d
 
+ng generate component components/carousel --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/carousel/parts/stage/carousel-stage --project ngx-sfc-components --export false --flat true --style scss --skip-tests false -d
+
+ng generate service components/carousel/service/carousel --project ngx-sfc-components --skip-tests false --flat false -d
+
+ng generate service components/carousel/service/carousel-navigation --project ngx-sfc-components --skip-tests false --flat false -d
+
+ng generate service components/carousel/service/animate/carousel-animate --project ngx-sfc-components --skip-tests false --flat true -d
+
+ng generate service components/carousel/service/autoplay/carousel-autoplay --project ngx-sfc-components --skip-tests false --flat true -d
+
+ng generate service components/carousel/service/lazy/carousel-lary-load --project ngx-sfc-components --skip-tests false --flat true -d
+
+ng generate directive components/carousel/directive/carousel-slide --project ngx-sfc-components --skip-tests false --flat true -d
+
+ng generate class components/carousel/models/navigation --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate class components/carousel/models/options --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate class components/carousel/models/carousel --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate class components/carousel/models/dom --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate class components/carousel/models/slide --project ngx-sfc-components --skip-tests true --type model -d
+
+ng generate class components/carousel/parts/stage/stage --project ngx-sfc-components --skip-tests true --type model -d
+
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
 Demo:

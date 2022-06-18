@@ -50,7 +50,8 @@ import {
   TableCustomColumnComponent,
   TableCustomCardComponent,
   TableCustomExpandedRowComponent,
-  TableCustomExpandedRowContentComponent
+  TableCustomExpandedRowContentComponent,
+  CarouselPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -120,7 +121,9 @@ import { AppComponent } from './app.component';
     TableCustomRowComponent,
     TableCustomCardComponent,
     TableCustomExpandedRowComponent,
-    TableCustomExpandedRowContentComponent
+    TableCustomExpandedRowContentComponent,
+    // carousels
+    CarouselPresentationComponent
   ],
   imports: [
     BrowserModule,

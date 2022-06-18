@@ -27,7 +27,8 @@ import {
   ColumnsToggleComponent,
   DefaultTableRowComponent,
   ExpandedTableRowComponent,
-  DefaultTableCardComponent
+  DefaultTableCardComponent,
+  CarouselComponent
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -41,7 +42,9 @@ import {
   SliderButtonComponent,
   SliderPaginationComponent,
   TimelineItemComponent,
-  NotificationContentComponent
+  NotificationContentComponent,
+  CarouselStageComponent,
+  CarouselSlideDirective
 } from './components/no-export-index';
 
 import {
@@ -130,7 +133,11 @@ Chart.register(
     ColumnsToggleComponent,
     DefaultTableRowComponent,
     ExpandedTableRowComponent,
-    DefaultTableCardComponent
+    DefaultTableCardComponent,
+    // Carousel
+    CarouselComponent,
+    CarouselStageComponent,
+    CarouselSlideDirective
   ],
   imports: [
     CommonModule,
@@ -168,7 +175,10 @@ Chart.register(
     ChartComponent,
     // Table
     TableComponent,
-    ExpandedTableRowComponent
+    ExpandedTableRowComponent,
+    // Carousel
+    CarouselComponent,
+    CarouselSlideDirective
   ]
 })
 export class NgxSfcComponentsModule { }

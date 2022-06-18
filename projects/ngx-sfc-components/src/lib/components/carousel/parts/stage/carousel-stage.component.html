@@ -1,0 +1,10 @@
+<div class="container" [ngStyle]="styles" (transitionend)="onTransitionEnd()">
+    <ng-container *ngFor="let slide of slidesModel; let i = index">
+        <div class="item" [ngClass]="slide.classes" [ngStyle]="getItemStyles(slide)" (animationend)="clear(slide.id)"
+            [@autoHeight]="slide.heightState">
+            <ng-template *ngIf="slide.load" [ngTemplateOutlet]="slide.tplRef"
+                [ngTemplateOutletContext]="{ $implicit: preparePublicSlide(slide), index: i }">
+            </ng-template>
+        </div>
+    </ng-container>
+</div>
