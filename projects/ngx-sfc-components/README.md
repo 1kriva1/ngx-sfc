@@ -8,6 +8,11 @@ This library contains components for Street Football Club (SFC) project.
 - [Components](#components)
   - [Avatar](#avatar-sfc-avatar)
   - [Chart](#chart-sfc-chart)
+  - [Menus](#menus)
+    - [Side](#side-sfc-side-menu)
+    - [Dropdown](#dropdown-sfc-dropdown-menu)
+    - [Navigation](#navigation-sfc-navigation-menu)
+  - [Notification](#notification-sfc-notification)
 
 ## Get started
 
@@ -22,6 +27,8 @@ This library contains components for Street Football Club (SFC) project.
     export class SomeModule { }
     ```
     
+## Components  
+  
 ## **Avatar `<sfc-avatar>`**
 
 Component display player/user rounded photo image with progress bar and information. Allowed to add player rating as stars view and add badges for additional info.
@@ -117,3 +124,106 @@ export interface ChartOptionModel {
 6. `[plugins]` - chart.js plugins
 7. `[datasets]` - chart.js datasets
 8. `[labels]` - chart.js labels
+
+## Menus
+
+Several types of menus:
+
+## **Side `<sfc-side-menu>`**
+
+Side menu that can be expanded to the right and can have sub-menus.
+
+ ```html
+<sfc-side-menu [model]="MENU_MODEL_3" (selected)="onSelect($event)"></sfc-side-menu>
+```
+
+Parameters:
+1. `[model]` - model for menu, contains info about constructed items of menu
+
+```typescript
+export interface ISideMenuModel {
+    open: boolean; // expanded or not
+    items: ISideMenuItemModel[];
+}
+
+export interface ISideMenuItemModel {
+    active: boolean; // selected or not
+    label: string;
+    icon: string;
+    type: SideMenuItemType;
+    items?: ISideMenuItemModel[]; // if not empty - has sub-menu items
+}
+
+export enum SideMenuItemType {
+    Item = 'item', 
+    Title = 'title' // not selected
+}
+``` 
+
+2. `(selected)` - emit handler for selecting menu items
+
+## **Dropdown `<sfc-dropdown-menu>`**
+
+Component allow to define context menu.
+
+ ```html
+<sfc-dropdown-menu [items]="MODEL" icon="fa fa-star" label="Test label" [hideOnClick]="false"
+                   [hideOnClickOutside]="false" [bordered]="true" [position]="Position.Right"
+                   [open]="false">
+</sfc-dropdown-menu>
+```
+
+Parameters:
+1. `[items]` - menu items
+
+```typescript
+export interface IDropdownMenuItemModel {
+    label: string;
+    icon?: string;
+    delimeter?: boolean; // add dlimeter after menu item
+    click?: (item: IDropdownMenuItemModel) => void; // click handler
+}
+``` 
+2. `[icon]` - icon for menu item
+3. `[label]` - menu item label
+4. `[hideOnClick]` - if true, on item click - menu will be hidden
+5. `[hideOnClickOutside]` - if true, when click outside menu - hide menu
+6. `[bordered]` - add border to menu dots
+7. `[position]` - define where menu wil be appear
+
+```typescript
+export enum Position {
+    Top = 'top',
+    Bottom = 'bottom',
+    Left = 'left',
+    Right = 'right',
+    Center = 'center'
+}
+``` 
+
+8. `[open]` - define if menu will be open on init
+
+## **Navigation `<sfc-navigation-menu>`**
+
+Simple responsive navigation menu.
+
+ ```html
+<sfc-navigation-menu [items]="MODEL" (selected)="onSelect($event)"></sfc-navigation-menu>
+```
+
+Parameters:
+1. `[items]` - menu items
+
+```typescript
+export interface INavigationMenuItemModel {
+    label: string;
+    active: boolean; // define selected item
+    icon?: string;
+    click?: (item: INavigationMenuItemModel) => void;
+}
+``` 
+2. `(selected)` - emit handler for selecting menu items
+
+## **Notification `<sfc-notification>`**
+
+Component created for implementing user notification with details and actions.
