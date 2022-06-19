@@ -7,6 +7,7 @@ This library contains components for Street Football Club (SFC) project.
 - [Get started](#get-started)
 - [Components](#components)
   - [Avatar](#avatar-sfc-avatar)
+  - [Chart](#chart-sfc-chart)
 
 ## Get started
 
@@ -59,7 +60,7 @@ export interface IAvatarDataModel {
 6. `[stars]` - show/hide stars as player raiting
 7. `[starsValue]` - value for stars
 
-Avatar badges has two parameters:
+Avatar's badge has two parameters:
 1. `[background]` - background color
 2. `[position]` - static position of badge
 
@@ -75,3 +76,44 @@ export enum AvatarBadgePosition {
     LeftBottom = 'left-bottom',
 }
 ``` 
+
+## **Chart `<sfc-chart>`**
+
+It's a component wrapper on chart.js library with extra logic for theming and displaying charts.
+
+ ```html
+<sfc-chart [theme]="theme" [type]="chartType" [options]="verticalChartOptions" [chartOptions]="chartOptions" [data]="getData()"
+           [datasets]="datasets" [labels]="labels" [plugins]="plugins">
+</sfc-chart>
+```  
+
+Parameters:
+1. `[type]` - chart type (line, bar, pie, doughnut, radar and polar)
+2. `[theme]` - support two themes (default and dark)
+
+```typescript
+export enum Theme {
+    Default = 'sfc-default-theme',
+    Dark = 'sfc-dark-theme'
+}
+``` 
+
+3. `[options]` - chart.js options
+4. `[chartOptions]` - options for setting frequently used chart.js options
+
+```typescript
+export interface ChartOptionModel {
+    legend?: boolean;
+    gridLines?: boolean;
+    xAxe?:boolean;
+    yAxe?:boolean;
+    tooltip?: boolean;
+    ticks?: boolean;
+    defaultColors?: boolean;
+}
+``` 
+
+5. `[data]` - chart.js data
+6. `[plugins]` - chart.js plugins
+7. `[datasets]` - chart.js datasets
+8. `[labels]` - chart.js labels
