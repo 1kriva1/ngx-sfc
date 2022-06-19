@@ -16,11 +16,15 @@ This is shared library for Street Football Club (SFC) project, that contains com
 - [Components](#components)
   - [Button](#button-sfc-button)
   - [Checkmark](#checkmark-sfc-checkmark)
+  - [Close](#close-sfc-close)
   - [Delimeter](#delimeter-sfc-delimeter)
   - [Dots](#dots-sfc-dots)
   - [Hamburger](#hamburger-sfc-hamburger)
   - [Loader](#loader-sfc-bounce-loader-sfc-circle-loader)
   - [Modal](#modal-sfc-modal)
+  - [Pagination](#pagination-sfc-pagination)
+  - [Sorting](#sorting-sfc-sorting)
+  - [Template-content](#template-content-sfc-template-content)
   - [Toggle-switcher](#toggle-switcher-sfc-toggle-switcher)
   - [Tooltip](#tooltip-sfc-tooltip)
 - [Services](#services)
@@ -96,10 +100,10 @@ Large         | 2em
 
 This directive allow to destroy parent element of directive owner.
 
-Add `[sfcDestroyParent]` with value `destroy` and optionaly can define delay by `delay` value:
+Add `[sfcDestroyParent]` with value `destroy` and optionaly can define delay by `delay` value (e.g. after 10 ms will destroy):
 
 ```html
- <div class="container" [sfcDestroyParent]="destroy" [delay]="DESTROY_HOST_INTERVAL">
+ <div class="container" [sfcDestroyParent]="destroy" [delay]="10">
 ``` 
 Parameters:
 1. `sfcDestroyParent` expect boolean value, if true - will destroy parent element
@@ -217,6 +221,14 @@ Check mark with possibility to change icon value. Can be used for checking rows 
 Parameters:
 1. `[active]` - check value, if checked - will have true value
 2. `icon` - icon value inside checkmark (default value - `fa fa-check`)
+
+## **Close `<sfc-close>`**
+
+Close icon. Used in notification and modal components.
+
+```html
+<sfc-close *ngIf="show" (click)="onClose()"></sfc-close>
+```  
 
 ## **Delimeter `<sfc-delimeter>`**
 
@@ -374,6 +386,84 @@ this.modalService.close();
 Additional parameters:
 1. `hideOnEsc` - if true, than modal can be removed on Escape button (by default true)
 2. `hideOnClickOutside` - if true, than modal can be removed on click outside of modal (by default true)
+
+## **Pagination `<sfc-pagination>`**
+
+Component allow to paginate data for example for tables.
+
+```html
+<sfc-pagination [count]="3" [limits]="false" [full]="false" [data$]="data$"></sfc-pagination>
+```
+
+Parameters:
+1. `[count]` - max limit for pagination buttons
+2. `[full]` - show or not full range of data
+3. `[limits]` - show or not first/last pagination button
+4. `[data$]` - pagination data observable
+
+## **Sorting `<sfc-sorting>`**
+
+Add posibility to emit sorting for specific data. Can add template for displaying UI, also component will add default or defined by model sorting icons. When click on component, sorting event will be emitted.
+
+```html
+<sfc-sorting [id]="column.field" [model]="column.sorting">
+  <sfc-default-table-column [model]="column"></sfc-default-table-column>
+</sfc-sorting>
+```
+
+Parameters:
+1. `[id]` - sorting ID
+2. `[model]` - sorting model
+
+Model contract:
+
+```typescript
+export interface ISortingModel {
+    enabled: boolean; // enable sorting
+    active?: boolean; // is current sorting is active
+    direction: SortingDirection; // direction - asc or desc
+    icons?: ISortingIcon[]; // custom icons for sorting
+}
+
+export interface ISortingIcon {
+    direction: SortingDirection;
+    icon: string
+}
+``` 
+
+## **Template-content `<sfc-template-content>`**
+
+Component allow to insert template as template reference or as template content. Also can be defined default content.
+
+```html
+<sfc-template-content [referenceContent]="header" [templatesContent]="templates"
+                [templateType]="ModalTemplate.Header" [defaultContent]="defaultHeader">
+</sfc-template-content>
+
+<ng-template #defaultHeader>
+    <sfc-default-modal-header [model]="defaultHeaderModel"></sfc-default-modal-header>
+</ng-template>
+```
+
+Parameters:
+1. `[referenceContent]` - reference template
+2. `[templatesContent]` - content templates
+
+```typescript
+@ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
+templates: QueryList<TemplateReferenceDirective> | undefined;
+```
+
+ 3. `[templateType]` - type for content templates
+
+```typescript
+export enum ModalTemplate {
+    Body = 'body',
+    Header = 'header',
+    Footer = 'footer'
+}
+``` 
+4. `[defaultContent]` - reference for default content
 
 ## **Toggle-switcher `<sfc-toggle-switcher>`**
 
