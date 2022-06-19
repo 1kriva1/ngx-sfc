@@ -1,24 +1,77 @@
-# NgxSfcComponents
+# ngx-sfc-components
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
+This library contains components for Street Football Club (SFC) project.
 
-## Code scaffolding
+## Table of Contents
 
-Run `ng generate component component-name --project ngx-sfc-components` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-sfc-components`.
-> Note: Don't forget to add `--project ngx-sfc-components` or else it will be added to the default project in your `angular.json` file. 
+- [Get started](#get-started)
+- [Components](#components)
+  - [Avatar](#avatar-sfc-avatar)
 
-## Build
+## Get started
 
-Run `ng build ngx-sfc-components` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Run `npm install ngx-sfc-components` or `ng add ngx-sfc-components`.
+2. Import `NgxSfcCommonModule` into a module where you intend to use components and directives:
 
-## Publishing
+    ```typescript
+    import { NgxSfcComponentsModule } from 'ngx-sfc-components';
+    @NgModule({
+      imports: [ NgxSfcComponentsModule ]
+    })
+    export class SomeModule { }
+    ```
+    
+## **Avatar `<sfc-avatar>`**
 
-After building your library with `ng build ngx-sfc-components`, go to the dist folder `cd dist/ngx-sfc-components` and run `npm publish`.
+Component display player/user rounded photo image with progress bar and information. Allowed to add player rating as stars view and add badges for additional info.
 
-## Running unit tests
+ ```html
+<sfc-avatar [radius]="160" [stroke]="1" [progress]="50" [progressModel]="progressColor" [stars]="true" [starsValue]="2.15" [data]="dataImage">
+                <sfc-avatar-badge [position]="AvatarBadgePosition.Right" [background]="'#8CC152'">
+                    <i class="fa fa-copyright"></i>
+                </sfc-avatar-badge>
+</sfc-avatar>
+```  
 
-Run `ng test ngx-sfc-components` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Parameters:
+1. `[radius]` - define avatar size (component size must be used with relevance to this value)
+2. `[stroke]` - size of avatar progress circle
+3. `[progress]` - set value for avatar's progress line
+4. `[progressModel]` - model that define color for progress line
 
-## Further help
+```typescript
+export interface IAvatarProgressModel {
+    color?: string;
+    filledColor?: string;
+}
+```  
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+5. `[data]` - provide information about player/user
+
+```typescript
+export interface IAvatarDataModel {
+    firstName?: string;
+    lastName?: string;
+    image?: string;
+    title?: string;
+}
+``` 
+6. `[stars]` - show/hide stars as player raiting
+7. `[starsValue]` - value for stars
+
+Avatar badges has two parameters:
+1. `[background]` - background color
+2. `[position]` - static position of badge
+
+```typescript
+export enum AvatarBadgePosition {
+    Top = 'top',
+    RightTop = 'right-top',
+    Right = 'right',
+    RightBottom = 'right-bottom',
+    Bottom = 'bottom',
+    LeftTop = 'left-top',
+    Left = 'left',
+    LeftBottom = 'left-bottom',
+}
+``` 
