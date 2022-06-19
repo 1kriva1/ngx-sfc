@@ -6,7 +6,7 @@
     overflow: hidden;
     transition: width 0.5s ease-in-out;
 
-    @include theme-value(background, $color-fade-1, $color-fade-7);
+    @include theme-value(background, $color-2, $color-11);
 
     ul {
       margin: 0;

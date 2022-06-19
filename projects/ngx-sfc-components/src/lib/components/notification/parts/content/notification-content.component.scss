@@ -35,7 +35,7 @@
     align-items: center;
 
     .illustration {
-      color: $color-fade-1;
+      color: $color-2;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -54,7 +54,7 @@
 
       h1 {
         font-size: 0.4em;
-        color: $color-fade-1;
+        color: $color-2;
         font-weight: bold;
         letter-spacing: 0.3em;
         text-transform: uppercase;
@@ -63,7 +63,7 @@
       p {
         font-size: 0.2em;
         font-weight: 100;
-        color: $color-fade-5;
+        color: $color-9;
         letter-spacing: 0.1em;
       }
     }
@@ -75,8 +75,8 @@
         transition: transform 0.3s ease-in-out;
 
         .button.filled {
-          background: $color-fade-1;
-          border: solid 0.125em $color-fade-1;
+          background: $color-2;
+          border: solid 0.125em $color-2;
         }
 
         &:hover {

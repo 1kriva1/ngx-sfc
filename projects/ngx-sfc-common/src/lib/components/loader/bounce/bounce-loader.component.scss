@@ -5,7 +5,7 @@
   text-align: center;
 
   .bounce {
-    @include theme-value(background-color, $color-default, $color-fade-0);
+    @include theme-value(background-color, $color-default, $color-0);
 
     border-radius: 100%;
     display: inline-block;

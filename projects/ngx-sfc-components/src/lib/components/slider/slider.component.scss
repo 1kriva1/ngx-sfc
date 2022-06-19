@@ -4,13 +4,13 @@
   .container {
     width: 37.5em;
     height: 25em;
-    color: $color-fade-0;
+    color: $color-0;
 
     .slider {
       height: inherit;
       position: relative;
       overflow: hidden;
-      background: $color-fade-5;
+      background: $color-9;
       display: flex;
       justify-content: center;
       align-items: flex-end;

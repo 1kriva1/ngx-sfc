@@ -3,7 +3,7 @@
 :host {
   width: 100%;
   border-radius: 1.25em;
-  box-shadow: 0 0.625em 1em $color-box-shadow-0;
+  box-shadow: 0 0.625em 1em $color-shadow-0;
   transition: background-color 0.3s, box-shadow 0.6s cubic-bezier(0.25, 1, 0.5, 0.1);
 
   @include host;

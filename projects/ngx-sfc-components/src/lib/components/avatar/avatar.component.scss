@@ -39,11 +39,11 @@
       user-select: none;
 
       .fullname {
-        @include theme-value(color, $color-default, $color-fade-1);
+        @include theme-value(color, $color-default, $color-2);
       }
 
       .title {
-        color: $color-fade-3;
+        color: $color-7;
       }
     }
   }

@@ -2,7 +2,7 @@
 
 :host {
   .container {
-    @include theme-value(background, $color-fade-1, $color-fade-7);
+    @include theme-value(background, $color-2, $color-11);
 
     .items {
       display: flex;

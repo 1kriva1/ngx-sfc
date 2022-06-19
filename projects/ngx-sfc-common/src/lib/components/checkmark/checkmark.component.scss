@@ -8,7 +8,7 @@
   .check {
     border-radius: 50%;
     border: 0.18em solid;
-    background: $color-fade-0;
+    background: $color-0;
     border-color: $color-dark;
 
     @include square-size(1em);
@@ -45,7 +45,7 @@
       i {
         opacity: 1;
         transform: scale(0);
-        color: $color-fade-0;
+        color: $color-0;
         -webkit-text-stroke: 0;
         animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards;
 

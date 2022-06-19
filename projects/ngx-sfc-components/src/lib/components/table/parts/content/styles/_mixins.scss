@@ -1,18 +1,18 @@
 @import "../../../../../../../../ngx-sfc-common//src//lib/styles/styles";
 
 @mixin host() {
-  background-color: $color-fade-1;
+  background-color: $color-2;
 
   &.even {
-    background-color: $color-fade-2;
+    background-color: $color-3;
 
     &:hover {
-      background-color: $color-fade-8;
+      background-color: $color-6;
     }
   }
 
   &:hover {
-    background-color: $color-fade-8;
+    background-color: $color-6;
   }
 
   &.pointer {
@@ -45,5 +45,5 @@
   line-height: 0.625em;
   font-weight: bold;
   text-transform: uppercase;
-  color: $color-fade-4;
+  color: $color-8;
 }

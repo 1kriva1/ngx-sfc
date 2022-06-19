@@ -1,12 +1,6 @@
 # ngx-sfc-common
 
-This is shared library for Street Football Club (SFC) project, that contains components, directives, utils, enums and constants that will be used in related libraries: [ngx-sfc-inputs](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-inputs) and [ngx-sfc-components](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-components)
-
-## Compatibility
-
-ngx-sfc-common          | Angular
-------------------------|--------
-0.x.x  (latest `0.0.1`) | 13.x.x
+This is shared library for Street Football Club (SFC) project, that contains components, directives, utils, enums and constants that will be used in related libraries: [ngx-sfc-inputs](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-inputs) and [ngx-sfc-components](https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-components).
 
 ## Table of Contents
 
@@ -14,6 +8,7 @@ ngx-sfc-common          | Angular
 - [Directives](#directives)
   - [Click out side](#click-out-side-sfcclickoutside)
   - [Component size](#component-size-sfccomponentsize)
+  - [Destroy parent](#destroy-parent-sfcdestroyparent)
   - [Mouse down](#mouse-down-sfcmousedown)
   - [Show/Hide element](#showhide-element-sfcshowhideelement)
   - [Template reference](#template-reference-sfctemplatereference)
@@ -96,6 +91,19 @@ Medium        | 1em
 Large         | 2em
 
 2. `customSize` - custom size as number (`em` unit will be added)
+
+## **Destroy parent `[sfcDestroyParent]`**
+
+This directive allow to destroy parent element of directive owner.
+
+Add `[sfcDestroyParent]` with value `destroy` and optionaly can define delay by `delay` value:
+
+```html
+ <div class="container" [sfcDestroyParent]="destroy" [delay]="DESTROY_HOST_INTERVAL">
+``` 
+Parameters:
+1. `sfcDestroyParent` expect boolean value, if true - will destroy parent element
+2. `delay` - define delay before destroying, by default 0.
 
 ## **Mouse down `(sfcMouseDown)`**
 
