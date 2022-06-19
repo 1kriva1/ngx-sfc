@@ -65,7 +65,7 @@
 
     &.selected {
       .container {
-        @include theme-value(background, $color-fade-2, $color-fade-1);
+        @include theme-value(background, $color-3, $color-2);
       }
     }
   }

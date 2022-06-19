@@ -20,7 +20,7 @@
       width: 15%;
       height: 15%;
 
-      @include theme-value(background-color, $color-default, $color-fade-0);
+      @include theme-value(background-color, $color-default, $color-0);
 
       border-radius: 100%;
       animation: bounce-delay 1.2s infinite ease-in-out both;

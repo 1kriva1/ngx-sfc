@@ -28,7 +28,7 @@
 
         button,
         span {
-          @include theme-value(color, $color-background-fade-5, $color-dark);
+          @include theme-value(color, $color-shadow-5, $color-dark);
 
           background: none;
           border: none;
@@ -50,7 +50,7 @@
           transition: all 170ms linear;
 
           &::before {
-            @include theme-value(background, $color-default, $color-fade-1);
+            @include theme-value(background, $color-default, $color-2);
 
             border-radius: 50%;
             content: "";
@@ -76,7 +76,7 @@
           }
 
           &.active {
-            @include theme-value(background, $color-background-fade-3, $color-fade-1);
+            @include theme-value(background, $color-shadow-1, $color-2);
 
             color: $color-default !important;
           }

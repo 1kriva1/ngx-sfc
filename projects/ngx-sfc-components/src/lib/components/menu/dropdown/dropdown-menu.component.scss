@@ -42,10 +42,10 @@
       .dropdown-container {
         flex-direction: column;
         width: max-content;
-        background: $color-fade-0;
+        background: $color-0;
 
         @include visibility(false);
-        @include theme-value(color, $color-fade-2, $color-fade-4);
+        @include theme-value(color, $color-3, $color-8);
 
         position: absolute;
         right: 0;
@@ -53,7 +53,7 @@
         margin-top: 1em;
         display: none;
         padding: 0.6em;
-        border: 0.0063em solid $color-fade-1;
+        border: 0.0063em solid $color-2;
         border-radius: 0.1875em;
         box-shadow: 0 0.125em 0.625em;
         z-index: 9999;

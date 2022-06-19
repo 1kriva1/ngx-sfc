@@ -67,7 +67,7 @@
     }
 
     .content {
-      @include theme-value(color, $color-default, $color-fade-0);
+      @include theme-value(color, $color-default, $color-0);
 
       font-size: 1em;
       font-weight: bold;
@@ -82,7 +82,7 @@
       p {
         font-size: 0.8em;
         line-height: 1em;
-        color: $color-fade-3;
+        color: $color-7;
         margin: 0;
       }
 
@@ -145,7 +145,7 @@
     .container {
       .marker {
         &::before {
-          @include theme-value(background, transparent, $color-fade-0);
+          @include theme-value(background, transparent, $color-0);
 
           border: 0.18em solid $color-hover-default;
         }

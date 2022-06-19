@@ -6,13 +6,13 @@
   .container {
     .notification {
       border-radius: 1.25em;
-      box-shadow: 5px 5px 20px $color-fade-4;
+      box-shadow: 5px 5px 20px $color-8;
       padding: 1em;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      color: $color-fade-1;
+      color: $color-2;
 
       sfc-close {
         align-self: end;
@@ -20,10 +20,10 @@
 
       ::ng-deep {
         sfc-close {
-          color: $color-fade-1;
+          color: $color-2;
 
           &:hover {
-            color: $color-fade-0;
+            color: $color-0;
           }
         }
       }

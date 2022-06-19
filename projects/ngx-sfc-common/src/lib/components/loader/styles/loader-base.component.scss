@@ -12,7 +12,7 @@
   text-align: center;
 
   &.background {
-    @include theme-value(background-color, $color-fade-0, $color-disabled-dark);
+    @include theme-value(background-color, $color-0, $color-disabled-dark);
 
     opacity: 0.7;
   }

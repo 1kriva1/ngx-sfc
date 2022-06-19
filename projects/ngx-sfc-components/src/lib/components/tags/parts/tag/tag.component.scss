@@ -14,7 +14,7 @@
       border-radius: 1em;
       font-weight: bold;
       color: $color-default;
-      background-color: $color-fade-1;
+      background-color: $color-2;
       border: 0.125em solid transparent;
       padding: 0.3em;
 
@@ -33,7 +33,7 @@
     &:hover {
       .tag {
         background-color: $color-hover-default;
-        color: $color-fade-0;
+        color: $color-0;
       }
     }
   }

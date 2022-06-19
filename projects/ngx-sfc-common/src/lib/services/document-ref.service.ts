@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ClassProvider, FactoryProvider, InjectionToken, PLATFORM_ID, Injectable } from '@angular/core';
+import { UIClass } from '../enums';
 
 /**
  * Create a new injection token for injecting the Document into a component.
@@ -46,7 +47,7 @@ export function documentFactory(
   }
   const doc = {
     hidden: false,
-    visibilityState: 'visible'
+    visibilityState: UIClass.Visible
   }
   return doc;
 }
