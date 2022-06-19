@@ -4,7 +4,8 @@
         <div class="header">
 
             <sfc-template-content [referenceContent]="header" [templatesContent]="templates"
-                [templateType]="ModalTemplate.Header" [defaultContent]="defaultHeader"></sfc-template-content>
+                [templateType]="ModalTemplate.Header" [defaultContent]="defaultHeader">
+            </sfc-template-content>
 
             <ng-template #defaultHeader>
                 <sfc-default-modal-header [model]="defaultHeaderModel">
@@ -16,14 +17,16 @@
         <div class="body">
 
             <sfc-template-content [referenceContent]="body" [templatesContent]="templates"
-                [templateType]="ModalTemplate.Body"></sfc-template-content>
+                [templateType]="ModalTemplate.Body">
+            </sfc-template-content>
 
         </div>
 
         <div class="footer">
 
             <sfc-template-content [referenceContent]="footer" [templatesContent]="templates"
-                [templateType]="ModalTemplate.Footer" [defaultContent]="defaultFooter"></sfc-template-content>
+                [templateType]="ModalTemplate.Footer" [defaultContent]="defaultFooter">
+            </sfc-template-content>
 
             <ng-template #defaultFooter>
                 <sfc-default-modal-footer [model]="defaultFooterModel">
