@@ -541,18 +541,104 @@ this._resizeSubscription = this.resizeService.onResize$
 - `Collection` utils
  
     Methods for array(collection) opearations.
+    
+```typescript
+/**
+ * Return true if collection not empty
+ * @param collection Array of items
+ * @returns True if collection not empty
+ */
+export function any<T>(collection: Array<T> | null | undefined): boolean {
+    return isDefined(collection) && (collection as Array<T>).length > 0;
+}
+```
 - `Common` utils
 
     Methods for object checking, modification and operations.
+ 
+ ```typescript
+/**
+ * Return true if value defined
+ * @param value Value to check
+ * @returns True if value is not null and defined
+ */
+export function isDefined<T>(value: T | undefined | null): boolean {
+    return <T>value !== undefined && <T>value !== null;
+}
+```
+
 - `DateTime` utils
 
     Method for DATETime objects.
+    
+```typescript
+/**
+ * Return first day of month as date from date value
+ * @param date Date value
+ * @returns First day of month as date
+ */
+export function getFirstDayOfMonth(date: Date): Date {
+    if (isDefined(date) && date instanceof Date) {
+        const year = date.getFullYear(),
+            month = date.getMonth();
+        return new Date(year, month, 1);
+    }
+
+    return date;
+}
+```
+  
 - `File` utils
 
     Methods for IO and files.
+  
+```typescript
+/**
+ * Return parsed file size as string
+ * @param bytes Bytes count
+ * @param decimals Value after dot
+ * @returns Parsed file size
+ */
+export function parseFileSize(bytes: number, decimals = 2): string {
+    if (bytes === 0)
+        return '0';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+```
+  
 - `String` utils
 
     Methods for strings modification and operations on them.
+  
+```typescript
+/**
+ * Return true if string has value(not empty string)
+ * @param value String value to check
+ * @returns True if string is not null and defined(not empty string)
+ */
+export function isNullOrEmptyString(value: string | undefined | null) {
+    return !isDefined(value) || value === CommonConstants.EMPTY_STRING;
+}
+```
+  
 - `UI` utils
 
     Methods for UI operations.
+  
+```typescript
+/**
+ * Return CSS like value
+ * @param value Value as number
+ * @returns Value as '1px'
+ */
+export function getCssLikeValue(value: number,
+    type: string = UIConstants.CSS_PIXELS): string {
+    return value + type;
+}
+```
