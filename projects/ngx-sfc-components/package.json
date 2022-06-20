@@ -1,9 +1,27 @@
 {
   "name": "ngx-sfc-components",
   "version": "0.0.1",
+  "description": "Angular components library for SFC project",
+  "keywords": [
+    "Street Football Club",
+    "SFC",
+    "angular",
+    "components",
+    "responsive"
+  ],
+  "author": "Andrii Kryvoruk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-components"
+  },
+  "bugs": {
+    "url": "https://github.com/1kriva1/ngx-sfc/issues"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0",
+    "ngx-sfc-common":"^0.0.3",
     "chart.js": "^3.6.0"
   },
   "dependencies": {

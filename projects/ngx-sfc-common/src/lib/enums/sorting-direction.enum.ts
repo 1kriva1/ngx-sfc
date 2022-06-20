@@ -1,7 +1,7 @@
 /**
  * Type of sorting
  */
- export enum SortingDirection {
+export enum SortingDirection {
     Ascending = 'ascending',
     Descending = 'descending'
 }
