@@ -383,6 +383,149 @@ Parameters:
 
 ## **Table `<sfc-table>`**
 
+Component for displaying data in the form of a table.
+Has paginate data posibility and sorting by columns. 
+Each table item can be in two states: row and card.
+Each row and card can be selected or selected all.
+Table component can be modified by replacing row/cars by custom implementation.
+Also implemented expanded row.
+Table is a responsive component.
+
+ ```html
+<sfc-table [columns]="columnsListItems" [data]="dataListItems" [position]="Position.Center"
+           [selectable]="true" [selectOnClick]="false" [delimeter]="false" 
+           [dataType]="TableDataType.Rows" [dataToggle]="true" [showColumns]="true" 
+           [pagination]="paginationModel" [sequence]="true" [expanded]="false" #listItemsTable>
+    <ng-template [sfcTemplateReference]="TableTemplate.Column" let-column>
+        <table-custom-column [label]="column.name" [active]="column.sorting.active">
+        </table-custom-column>
+    </ng-template>
+    <ng-template [sfcTemplateReference]="TableTemplate.Row" let-list>
+        <table-custom-row [data]="list.model" [columns]="list.columns" [position]="list.position"
+                        [columnWidth]="list.columnWidth" (selected)="listItemsTable.selectRow($event)">
+        </table-custom-row>
+    </ng-template>
+    <ng-template [sfcTemplateReference]="TableTemplate.Card" let-list>
+        <table-custom-card [data]="list.model" [columns]="list.columns"></table-custom-card>
+    </ng-template>
+</sfc-table>
+```
+Parameters:
+1. `[position]` - position for columns and data in row
+
+```typescript
+export enum Position {
+    Top = 'top',
+    Bottom = 'bottom',
+    Left = 'left',
+    Right = 'right',
+    Center = 'center'
+}
+```
+
+2. `[delimeter]` - show/hide delimeter after columns
+3. `[dataType]` - type of data visualization
+
+```typescript
+export enum TableDataType {
+    Rows = 'rows',
+    Cards = 'cards'
+}
+```
+
+4. `[dataToggle]` - show/hide toggle for changing dataType
+5. `[showColumns]` - show/hide columns
+6. `[pagination]` - pagination configuration
+
+```typescript
+export interface ITablePaginationModel {
+    enabled: boolean;
+    page: number; // current page
+    size: number; // how many items in one page
+}
+```
+
+7. `[sequence]` - add/remove extra column at the start for row/card sequence number
+8. `[expanded]` - define if row expanded or not
+9. `[selectable]` - define if row/card expanded or not
+10. `[selectOnClick]` - if true, than on click on whole row/card it will be selected, otherwise - will be selected only on checkmark click
+11. `[columns]` - columns for table
+
+```typescript
+export interface IDefaultTableColumnModel {
+    name: string;
+    field: string; // identificator for sorting
+    icon?: string;
+    sorting?: ISortingModel; // sorting configuration
+}
+
+export interface ISortingModel {
+    enabled: boolean;
+    active?: boolean;
+    direction: SortingDirection;
+    icons?: ISortingIcon[]; // icons for asc and desc
+}
+
+export interface ISortingIcon {
+    direction: SortingDirection;
+    icon: string
+}
+
+export enum SortingDirection {
+    Ascending = 'ascending',
+    Descending = 'descending'
+}
+```
+
+12. `[data]` - plain array data
+13. `[data$]` - table data as observable
+14. `[columnContent]` - content reference for custom column
+15. `[rowContent]` - content reference for custom row
+16. `[cardContent]` - content reference for custom card
+
+Default column:
+
+ ```html
+<sfc-default-table-column [model]="column"></sfc-default-table-column>
+```
+
+Default row:
+
+ ```html
+<sfc-default-table-row [columns]="vm.columns" [model]="item" [position]="position"
+                        [columnWidth]="vm.columnWidth" [selectOnClick]="selectOnClick" (selected)="selectRow($event)">
+</sfc-default-table-row>
+```
+
+Default card:
+
+ ```html
+<sfc-default-table-row [columns]="vm.columns" [model]="item" [position]="position"
+                        [columnWidth]="vm.columnWidth" [selectOnClick]="selectOnClick" (selected)="selectRow($event)">
+</sfc-default-table-row>
+```
+
+Expanded:
+
+ ```html
+<sfc-expanded-table-row [model]="row.model" [columns]="row.columns" [position]="row.position"
+                        [columnWidth]="row.columnWidth">
+     <ng-template [sfcTemplateReference]="ExpandedTableRowTemplate.Row" let-expandedRow>
+         <table-custom-expanded-row [model]="expandedRow.model.dataModel"
+                                [position]="expandedRow.position" [columnWidth]="expandedRow.columnWidth"
+                                [expanded]="expandedRow.expanded" [index]="expandedRow.model.index"
+                                (selected)="expandedTemplateTable.selectRow($event)">
+         </table-custom-expanded-row>
+     </ng-template>
+
+     <ng-template [sfcTemplateReference]="ExpandedTableRowTemplate.Content" let-expandedContent>
+         <table-custom-expanded-row-content [data]="expandedContent.model.dataModel.data.items"
+                                [position]="expandedContent.position" [columnWidth]="expandedContent.columnWidth">
+         </table-custom-expanded-row-content>
+     </ng-template>
+
+</sfc-expanded-table-row>
+```
 
 ## Tabs
 
