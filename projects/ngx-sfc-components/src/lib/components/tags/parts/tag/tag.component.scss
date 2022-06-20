@@ -1,4 +1,4 @@
-@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
 
 :host {
   display: inline-flex;

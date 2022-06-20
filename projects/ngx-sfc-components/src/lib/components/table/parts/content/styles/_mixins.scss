@@ -1,4 +1,4 @@
-@import "../../../../../../../../ngx-sfc-common//src//lib/styles/styles";
+@forward "node_modules/ngx-sfc-common/ngx-sfc-common.styles";
 
 @mixin host() {
   background-color: $color-2;
