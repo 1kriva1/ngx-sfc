@@ -17,6 +17,11 @@ This library contains components for Street Football Club (SFC) project.
     - [Line](#line-sfc-progress-line)
     - [Semi-circle](#semi-circle-sfc-progress-semi-circle)
     - [Circle](#circle-sfc-progress-circle)
+  - [Slider](#slider-sfc-slider)
+  - [Stars](#stars-sfc-stars)
+  - [Tabs](#tabs)
+    - [Line](#line-sfc-tabs)
+    - [Icon](#icon-sfc-tabs)
 
 ## Get started
 
@@ -330,3 +335,157 @@ Parameters:
 1. `[progress]` - progress value
 2. `background` - color for background of line (not progressed part of line)
 3. `[getColor]` - custom function for defined colors for progress value
+
+## **Slider `<sfc-slider>`**
+
+Image slider component with titles, pagination dots and buttons for slide.
+
+ ```html
+<sfc-slider [items]="items" [pagination]="false" [showCount]="true" [type]="SliderType.Automatic"></sfc-slider>
+```
+
+Parameters:
+1. `[items]` - items for slider
+
+```typescript
+export interface ISliderItemModel {
+    imageSrc: string;
+    title?: string;
+    subTitle?: string;
+}
+```
+
+2. `[pagination]` - show/hide dots pagination
+3. `[showCount]` - show/hide image count
+4. `[type]` - type of slider
+
+```typescript
+export enum SliderType {
+    Default = 'default',
+    Automatic = 'automatic'
+}
+```
+
+## **Stars `<sfc-stars>`**
+
+Responsive component for visual displaying some value or progress as stars.
+
+ ```html
+<sfc-stars [value]="1.5" [count]="3"></sfc-stars>
+```
+
+Parameters:
+1. `[value]` - current value (e.x. if count=3 and value is 1.5 - half of all stars will be filled)
+2. `[count]` - stars count
+
+
+## Tabs
+
+Two possible tabs: line and icon.
+
+## **Line `<sfc-tabs>`**
+
+Component for visual representation of line tabs
+
+ ```html
+<sfc-tabs [tabs]="MODEL_SELECTED" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef">
+    <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+        <sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+        </sfc-tab-label-line>
+    </ng-template>
+
+    <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+        <sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+        </sfc-tab-label-line-slider>
+    </ng-template>
+
+    <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+        {{data}}
+     </ng-template>
+</sfc-tabs>
+```
+
+Parameters:
+1. `[tabs]` - collection of data for tabs items
+
+```typescript
+export interface ITabModel {
+    label?: string;
+    icon?: string;
+    selected: boolean;
+    disabled: boolean;
+    data: any; // data for tab body
+}
+```
+
+2. `[label]` - content reference for label part of tab
+3. `[slider]` - content reference for slider part of tab
+4. `[body]` - content reference for body part of tab
+
+There 3 pars of tabs that can be replaced:
+
+```typescript
+export enum TabsTemplate {
+    Label = 'label',
+    Slider = 'slider',
+    Body = 'body'
+}
+```
+
+Line type of tabs use such components as parts:
+
+1. Label
+
+ ```html
+<sfc-tab-label-line [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+                        icon="{{label.icon}}">
+</sfc-tab-label-line>
+```
+
+2. Slider
+
+ ```html
+<sfc-tab-label-line-slider [count]="data.count" [index]="data.index">
+</sfc-tab-label-line-slider>
+```
+
+## **Icon `<sfc-tabs>`**
+
+Component for visual representation of icon tabs
+
+ ```html
+<sfc-tabs [tabs]="MODEL_SELECTED" [label]="labelRef" [slider]="sliderRef" [body]="bodyRef">
+    <ng-template [sfcTemplateReference]="TabsTemplate.Label" let-label>
+        <sfc-tab-label-icon [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+            icon="{{label.icon}}">
+        </sfc-tab-label-icon>
+    </ng-template>
+
+    <ng-template [sfcTemplateReference]="TabsTemplate.Slider" let-data>
+        <sfc-tab-label-icon-slider [count]="data.count" [index]="data.index">
+        </sfc-tab-label-icon-slider>
+    </ng-template>
+
+    <ng-template [sfcTemplateReference]="TabsTemplate.Body" let-data>
+        {{data}}
+     </ng-template>
+</sfc-tabs>
+```
+
+Icon type of tabs use such components as parts:
+
+1. Label
+
+ ```html
+<sfc-tab-label-icon [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
+            icon="{{label.icon}}">
+</sfc-tab-label-icon>
+```
+
+2. Slider
+
+ ```html
+<sfc-tab-label-icon-slider [count]="data.count" [index]="data.index">
+</sfc-tab-label-icon-slider>
+```
