@@ -13,6 +13,10 @@ This library contains components for Street Football Club (SFC) project.
     - [Dropdown](#dropdown-sfc-dropdown-menu)
     - [Navigation](#navigation-sfc-navigation-menu)
   - [Notification](#notification-sfc-notification)
+  - [Progresses](#progresses)
+    - [Line](#line-sfc-progress-line)
+    - [Semi-circle](#semi-circle-sfc-progress-semi-circle)
+    - [Circle](#circle-sfc-progress-circle)
 
 ## Get started
 
@@ -227,3 +231,102 @@ export interface INavigationMenuItemModel {
 ## **Notification `<sfc-notification>`**
 
 Component created for implementing user notification with details and actions.
+
+ ```html
+<sfc-notification [model]="btnNotification" [showClose]="true" [autoCloseModel]="autoCloseModel" [type]="NotificationType.Info" 
+                  [content]="contentRef" (closed)="onClose()" (buttonClicked)="onButtonClick()">
+</sfc-notification>
+```
+
+Parameters:
+1. `[model]` - notification model
+
+```typescript
+export interface INotificationContentModel {
+    title?: string;
+    subTitle?: string;
+    showButton?: boolean;
+    buttonText?: string;
+    icon?: string;
+    image?: string;
+}
+``` 
+
+2. `[showClose]` - show/hide close icon
+3. `[autoCloseModel]` - auto close notification model
+
+```typescript
+export interface INotificationAutoCloseModel {
+    enabled: boolean;
+    interval?: number; // after what time notification will be closed
+}
+``` 
+
+4. `[type]` - UI type of notification
+
+```typescript
+export enum NotificationType {
+    Info = 'info',
+    Success = 'success',
+    Failed = 'failed'
+}
+``` 
+
+5. `[content]` - hold content reference for template, if it not provided and content template also missing, than default content will be created.
+6. `(closed)` - emit handler for closing notification
+7. `(buttonClicked)` - emit handler for default notification content button click
+
+
+## Progresses
+
+Several types of progress components:
+
+## **Line `<sfc-progress-line>`**
+
+Progress bar as line view
+
+ ```html
+<sfc-progress-line labelStart="Dribbling" labelEnd="value:55" [progress]="55" background="red" [getColor]="getColor"
+                   [total]="100" [hideEnd]="true">
+</sfc-progress-line>
+```
+
+Parameters:
+1. `labelStart` - text at the start of bar line
+2. `labelEnd` - text at the end of bar line
+3. `[progress]` - progress value
+4. `background` - color for background of line (not progressed part of line)
+5. `[getColor]` - custom function for defined colors for progress value
+6. `[total]` - max value for progress bar
+7. `[hideEnd]` - show/hide progress value text or labelEnd value at the end of bar
+
+## **Semi-circle `<sfc-progress-semi-circle>`**
+
+Progress bar as semi-circle view
+
+ ```html
+ <sfc-progress-semi-circle background="green" [progress]="60" [getColor]="getColor" [limits]="true"
+                           [max]="100" [min]="0">
+ </sfc-progress-semi-circle>
+```
+
+Parameters:
+1. `[progress]` - progress value
+2. `background` - color for background of line (not progressed part of line)
+3. `[getColor]` - custom function for defined colors for progress value
+4. `[limits]` - show/hide min and max value text
+5. `[min]` - minimum value
+6. `[max]` - maximum value
+
+## **Circle `<sfc-progress-circle>`**
+
+Progress bar as circle view
+
+ ```html
+<sfc-progress-circle background="green" [progress]="60" [getColor]="getColor"></sfc-progress-circle>
+```
+
+Parameters:
+1. `[progress]` - progress value
+2. `background` - color for background of line (not progressed part of line)
+3. `[getColor]` - custom function for defined colors for progress value
