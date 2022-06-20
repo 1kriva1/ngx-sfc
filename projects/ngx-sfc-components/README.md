@@ -19,9 +19,12 @@ This library contains components for Street Football Club (SFC) project.
     - [Circle](#circle-sfc-progress-circle)
   - [Slider](#slider-sfc-slider)
   - [Stars](#stars-sfc-stars)
+  - [Table](#table-sfc-table)
   - [Tabs](#tabs)
     - [Line](#line-sfc-tabs)
     - [Icon](#icon-sfc-tabs)
+  - [Tags](#tags-sfc-tags)
+  - [Timeline](#timeline-sfc-timeline)
 
 ## Get started
 
@@ -378,6 +381,8 @@ Parameters:
 1. `[value]` - current value (e.x. if count=3 and value is 1.5 - half of all stars will be filled)
 2. `[count]` - stars count
 
+## **Table `<sfc-table>`**
+
 
 ## Tabs
 
@@ -488,4 +493,50 @@ Icon type of tabs use such components as parts:
  ```html
 <sfc-tab-label-icon-slider [count]="data.count" [index]="data.index">
 </sfc-tab-label-icon-slider>
+```
+
+## **Tags `<sfc-tags>`**
+
+Display collection of tags.
+
+ ```html
+<sfc-tags [tags]="tags"></sfc-tags>
+```
+
+Parameters:
+1. `[tags]` - collection of tags
+
+```typescript
+export interface ITagModel {
+    label: string;
+    icon?: string;
+}
+```
+
+## **Timeline `<sfc-timeline>`**
+
+Component for represent some period of time as vertical time line with dates and info.
+
+ ```html
+<sfc-timeline [items]="items"></sfc-timeline>
+```
+
+Parameters:
+1. `[items]` - timeline period items
+
+```typescript
+export interface ITimelineItemModel{
+    title: string; // period title
+    position?: TimelineItemPosition; // left or right side
+    dateTimeLabel?: string; // period time value (year, month or minutes)
+    description?: string;
+    period?: boolean; // if true, than mean it's a period title    
+    icon?: string;
+    image?: string;
+}
+
+export enum TimelineItemPosition {
+    Left = 'left',
+    Right = 'right'
+}
 ```
