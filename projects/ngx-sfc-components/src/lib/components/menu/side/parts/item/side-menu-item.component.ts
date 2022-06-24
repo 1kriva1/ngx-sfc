@@ -26,7 +26,7 @@ export class SideMenuItemComponent implements OnInit {
 
   @Input()
   item: ISideMenuItemModel = {
-    icon: CommonConstants.EMPTY_STRING,
+    icon: undefined,
     label: CommonConstants.EMPTY_STRING,
     type: SideMenuItemType.Item,
     items: [],

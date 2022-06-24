@@ -1,4 +1,5 @@
 import { Component, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { CommonConstants } from '../../constants';
 import { SortingDirection, UIClass } from '../../enums';
@@ -46,7 +47,7 @@ export class SortingComponent implements OnInit, OnDestroy {
     }
   }
 
-  get icon() {
+  get icon(): IconDefinition {
     const modelIcon = firstOrDefault(this.model.icons, i => i.direction == this.model.direction);
     return modelIcon ? modelIcon.icon : this.model.direction === SortingDirection.Ascending
       ? SortingConstants.DEFAULT_ASCENDING_ICON : SortingConstants.DEFAULT_DESCENDING_ICON;

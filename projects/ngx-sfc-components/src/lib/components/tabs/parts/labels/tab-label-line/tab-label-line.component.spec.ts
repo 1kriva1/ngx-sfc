@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonConstants, UIClass } from 'ngx-sfc-common';
 import { TabLabelLineComponent } from './tab-label-line.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: TabLabelLineComponent', () => {
     let component: TabLabelLineComponent;
@@ -8,6 +10,7 @@ describe('Component: TabLabelLineComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [FontAwesomeModule],
             declarations: [TabLabelLineComponent]
         }).compileComponents();
     });
@@ -54,21 +57,21 @@ describe('Component: TabLabelLineComponent', () => {
 
     describe('Icon', () => {
         fit('Should not exist', () => {
-            expect(fixture.nativeElement.querySelector('i')).toBeNull();
+            expect(fixture.nativeElement.querySelector('fa-icon')).toBeNull();
         });
 
         fit('Should exist', () => {
-            component.icon = 'fa fa-test';
+            component.icon = faTShirt;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('i')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
         });
 
         fit('Should have defined icon', () => {
-            component.icon = 'fa fa-test';
+            component.icon = faTShirt;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('i').className).toEqual(component.icon);
+            expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-shirt');
         });
     });
 

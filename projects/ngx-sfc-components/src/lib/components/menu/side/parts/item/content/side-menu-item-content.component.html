@@ -1,12 +1,14 @@
 <li>
     <div class="item-container">
         <div class="item">
-            <a><i class="{{item.icon}}"></i></a>
+            <a>
+                <fa-icon *ngIf="item.icon" [icon]="item.icon"></fa-icon>
+            </a>
         </div>
         <span class="label">{{item.label}}</span>
     </div>
 
     <div *ngIf="hasChildren" class="expand-container">
-        <i class="{{expandIcon}}"></i>
+        <fa-icon [icon]="expandIcon"></fa-icon>
     </div>
 </li>

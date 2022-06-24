@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UIClass } from 'ngx-sfc-common';
 import { CommonConstants } from 'ngx-sfc-common';
 import { NavigationMenuItemComponent } from './navigation-menu-item.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: NavigationMenuItemComponent', () => {
   let component: NavigationMenuItemComponent;
@@ -9,6 +11,7 @@ describe('Component: NavigationMenuItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [NavigationMenuItemComponent]
     }).compileComponents();
   });
@@ -34,10 +37,10 @@ describe('Component: NavigationMenuItemComponent', () => {
     });
 
     fit('Should be defined item value', () => {
-      component.item = { label: 'Test label', icon: 'fa fa-test', active: true };
+      component.item = { label: 'Test label', icon: faTShirt, active: true };
       fixture.detectChanges();
 
-      expect(component.item).toEqual({ label: 'Test label', icon: 'fa fa-test', active: true });
+      expect(component.item).toEqual({ label: 'Test label', icon: faTShirt, active: true });
     });
 
     fit('Should call item click action', () => {
@@ -80,14 +83,14 @@ describe('Component: NavigationMenuItemComponent', () => {
 
   describe('Icon', () => {
     fit('Should not exist', () => {
-      expect(fixture.nativeElement.querySelector('i')).toBeNull();
+      expect(fixture.nativeElement.querySelector('fa-icon')).toBeNull();
     });
 
     fit('Should exist', () => {
-      component.item.icon = 'fa fa-test';
+      component.item.icon = faTShirt;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('i.fa.fa-test')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon svg.fa-shirt')).toBeTruthy();
     });
   });
 });

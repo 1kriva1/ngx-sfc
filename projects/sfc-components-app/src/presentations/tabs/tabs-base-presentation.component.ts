@@ -1,6 +1,7 @@
 import { Directive } from "@angular/core";
 import { ComponentSize } from "ngx-sfc-common";
 import { ITabModel, TabsTemplate } from "ngx-sfc-components";
+import { faCar } from '@fortawesome/free-solid-svg-icons';
 
 @Directive()
 export class TabsBasePresentation{
@@ -13,35 +14,35 @@ export class TabsBasePresentation{
     MODELS: ITabModel[] = [
         {
             label: 'Tab line 1',
-            icon: '',
+            icon: undefined,
             disabled: false,
             selected: false,
             data: this.LONG_TEXT
         },
         {
             label: 'Tab line 2',
-            icon: '',
+            icon: undefined,
             disabled: false,
             selected: false,
             data: 'I ma second tab'
         },
         {
             label: 'Tab line 3',
-            icon: '',
+            icon: undefined,
             disabled: false,
             selected: false,
             data: this.LONG_TEXT
         },
         {
             label: 'Tab line 4',
-            icon: '',
+            icon: undefined,
             disabled: false,
             selected: false,
             data: 'I am forth content'
         },
         {
             label: 'Tab line 5',
-            icon: '',
+            icon: undefined,
             disabled: false,
             selected: false,
             data: 'I am fifth content'
@@ -63,7 +64,7 @@ export class TabsBasePresentation{
     constructor() {
         this.MODELS.forEach((val: any) => this.MODEL_ICONS.push(Object.assign({}, val)));
         this.MODEL_ICONS.forEach((item: any) => {
-            item.icon = 'fa fa-car'
+            item.icon = faCar
         });
 
         this.MODELS.forEach((val: any) => this.MODEL_DISABLED.push(Object.assign({}, val)));

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import { NgxSfcComponentsModule } from 'ngx-sfc-components';
 import {
@@ -130,6 +131,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     NgxSfcCommonModule,
     NgxSfcComponentsModule
   ],

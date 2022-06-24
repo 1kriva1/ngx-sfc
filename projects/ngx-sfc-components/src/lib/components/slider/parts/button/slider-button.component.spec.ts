@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UIClass } from 'ngx-sfc-common';
 import { SliderButtonType } from './slider-button-type.enum';
 import { SliderButtonComponent } from './slider-button.component';
@@ -9,6 +10,7 @@ describe('Component: SliderButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [SliderButtonComponent]
     }).compileComponents();
   });
@@ -26,27 +28,27 @@ describe('Component: SliderButtonComponent', () => {
 
     fit('Should create main elements', () => {
       expect(fixture.nativeElement.querySelector('div')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('i')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
     });
   });
 
   describe('Icon', () => {
     fit('Should have next icon as default', () => {
-      expect(fixture.nativeElement.querySelector('i.fa.fa-arrow-right')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon svg.fa-arrow-right')).toBeTruthy();
     });
 
     fit('Should have next icon as defined', () => {
       component.type = SliderButtonType.Next;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('i.fa.fa-arrow-right')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon svg.fa-arrow-right')).toBeTruthy();
     });
 
     fit('Should have previous icon as defined', () => {
       component.type = SliderButtonType.Previous;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('i.fa.fa-arrow-left')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon svg.fa-arrow-left')).toBeTruthy();
     });
   });
 

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { getCssLikeValue } from 'ngx-sfc-common';
 import { of } from 'rxjs';
 import { SliderButtonType } from './parts/button/slider-button-type.enum';
@@ -20,8 +21,8 @@ describe('Component: SliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SliderButtonComponent, SliderItemComponent, SliderPaginationComponent, SliderComponent],
-
+      imports: [FontAwesomeModule],
+      declarations: [SliderButtonComponent, SliderItemComponent, SliderPaginationComponent, SliderComponent]
     }).compileComponents();
 
     sliderServiceSpy = jasmine.createSpyObj('SliderService', ['move', 'select', 'init']);
@@ -245,7 +246,7 @@ describe('Component: SliderComponent', () => {
       component.type = SliderType.Automatic;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.automatic i.fas.fa-pause-circle')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div.automatic fa-icon svg.fa-circle-pause')).toBeTruthy();
     });
 
     fit('Should have play icon', () => {
@@ -253,7 +254,7 @@ describe('Component: SliderComponent', () => {
       sliderAutomaticServiceSpy.pause = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.automatic i.fas.fa-play-circle')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div.automatic fa-icon svg.fa-circle-play')).toBeTruthy();
     });
 
     fit('Should call toggle method of AutomaticSlider service', () => {

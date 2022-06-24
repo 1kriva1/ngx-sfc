@@ -23,5 +23,4 @@ export class DefaultTableRowComponent extends BaseDefaultTableContentComponent {
         return UIConstants.CSS_CENTER;
     }
   }
-
 }

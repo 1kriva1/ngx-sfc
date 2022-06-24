@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UIClass } from 'ngx-sfc-common';
 import { ISideMenuItemModel, SideMenuItemType } from '../../side-menu.model';
 import { SideMenuHeaderComponent } from '../header/side-menu-header.component';
@@ -13,7 +14,7 @@ describe('Component: SideMenuItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule],
       declarations: [SideMenuHeaderComponent, SideMenuItemContentComponent, SideMenuItemComponent]
     }).compileComponents();
   });
@@ -62,7 +63,7 @@ describe('Component: SideMenuItemComponent', () => {
     });
 
     fit('Should hasChildren to be true', () => {
-      component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+      component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
       fixture.detectChanges();
 
       const parentEl = fixture.debugElement.query(By.css('div.container > sfc-side-menu-item-content'));
@@ -90,7 +91,7 @@ describe('Component: SideMenuItemComponent', () => {
       });
 
       fit('Should have active attribute value, when has childrens', () => {
-        component.item.items?.push({ active: true, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: true, icon: undefined, label: '', type: SideMenuItemType.Item });
         fixture.detectChanges();
 
         const parentEl = fixture.debugElement.query(By.css('div.container > sfc-side-menu-item-content'));
@@ -100,7 +101,7 @@ describe('Component: SideMenuItemComponent', () => {
       });
 
       fit('Should not have active attribute value, when has childrens and any child is active', () => {
-        component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
         fixture.detectChanges();
 
         const parentEl = fixture.debugElement.query(By.css('div.container > sfc-side-menu-item-content'));
@@ -110,7 +111,7 @@ describe('Component: SideMenuItemComponent', () => {
       });
 
       fit('Should not have active attribute value, when has active childrens, but open parent', () => {
-        component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.openParent = true;
         fixture.detectChanges();
 
@@ -143,7 +144,7 @@ describe('Component: SideMenuItemComponent', () => {
       });
 
       fit('Should openParent to be false on init, when any child are active', () => {
-        component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -154,7 +155,7 @@ describe('Component: SideMenuItemComponent', () => {
       });
 
       fit('Should openParent to be true on init', () => {
-        component.item.items?.push({ active: true, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: true, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -184,7 +185,7 @@ describe('Component: SideMenuItemComponent', () => {
   describe('Children', () => {
 
     fit('Should show childrens', () => {
-      component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+      component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
       component.openParent = true;
       fixture.detectChanges();
 
@@ -201,7 +202,7 @@ describe('Component: SideMenuItemComponent', () => {
     });
 
     fit('Should not show childrens, when openParent is false', () => {
-      component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+      component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
       fixture.detectChanges();
 
       expect(fixture.debugElement
@@ -209,7 +210,7 @@ describe('Component: SideMenuItemComponent', () => {
     });
 
     fit('Should have defined attributes', () => {
-      component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+      component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
       component.openParent = true;
       fixture.detectChanges();
 
@@ -226,8 +227,8 @@ describe('Component: SideMenuItemComponent', () => {
 
     fit('Should emit select event', () => {
       spyOn(component.selectItem, 'emit');
-      component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
-      component.item.items?.push({ active: true, icon: '', label: '', type: SideMenuItemType.Item });
+      component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
+      component.item.items?.push({ active: true, icon: undefined, label: '', type: SideMenuItemType.Item });
       component.openParent = true;
       fixture.detectChanges();
 
@@ -248,7 +249,7 @@ describe('Component: SideMenuItemComponent', () => {
 
     describe('Active', () => {
       fit('Should not have active attribute value', () => {
-        component.item.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.openParent = true;
         fixture.detectChanges();
 
@@ -259,7 +260,7 @@ describe('Component: SideMenuItemComponent', () => {
       });
 
       fit('Should have active attribute value', () => {
-        component.item.items?.push({ active: true, icon: '', label: '', type: SideMenuItemType.Item });
+        component.item.items?.push({ active: true, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.openParent = true;
         fixture.detectChanges();
 

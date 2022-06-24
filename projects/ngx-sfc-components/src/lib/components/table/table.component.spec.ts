@@ -1,6 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Position, SortingComponent, TemplateReferenceDirective } from 'ngx-sfc-common';
 import { CheckmarkComponent } from 'ngx-sfc-common';
 import { MediaLimits, ShowHideElementDirective } from 'ngx-sfc-common';
@@ -26,6 +27,7 @@ describe('Component: Table', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [FontAwesomeModule],
             declarations: [ColumnsToggleComponent, ToggleSwitcherComponent, PaginationComponent, ShowHideElementDirective,
                 DelimeterComponent, SortingComponent, TemplateContentComponent, DefaultTableColumnComponent, SelectableTableColumnComponent,
                 CheckmarkComponent, DefaultTableRowComponent, DefaultTableCardComponent, TableComponent],
@@ -809,6 +811,7 @@ describe('Component: Table: Templates', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [FontAwesomeModule],
             declarations: [ColumnsToggleComponent, ToggleSwitcherComponent, PaginationComponent, ShowHideElementDirective,
                 DelimeterComponent, SortingComponent, TableComponent, TemplateContentComponent, DefaultTableColumnComponent,
                 TemplateReferenceDirective, TestTableComponent],

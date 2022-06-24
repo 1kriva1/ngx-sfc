@@ -2,7 +2,7 @@
     <li>
         <div class="container" (click)="open = !open">
             <span *ngIf="label">{{label}}</span>
-            <i *ngIf="icon" class="{{icon}}"></i>
+            <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
             <sfc-dots *ngIf="showDots" [open]="open"></sfc-dots>
         </div>
 

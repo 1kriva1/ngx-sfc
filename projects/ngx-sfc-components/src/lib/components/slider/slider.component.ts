@@ -3,7 +3,7 @@ import {
   QueryList, ViewChild, ViewChildren
 } from '@angular/core';
 import { getCssLikeValue } from 'ngx-sfc-common';
-import { EMPTY, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SliderButtonType } from './parts/button/slider-button-type.enum';
 import { SliderItemComponent } from './parts/item/slider-item.component';
 import { ISliderItemModel } from './parts/item/slider-item.model';
@@ -11,6 +11,7 @@ import { SliderAutomaticService } from './service/automatic/slider-automatic.ser
 import { SliderMoveType } from './service/slider/slider-move-type.enum';
 import { SliderService } from './service/slider/slider.service';
 import { SliderType } from './slider-type.enum';
+import { faPauseCircle, faPlayCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-slider',
@@ -20,9 +21,9 @@ import { SliderType } from './slider-type.enum';
 })
 export class SliderComponent implements AfterViewInit, AfterViewChecked {
 
-  readonly PAUSE_ICON = 'fas fa-pause-circle';
+  readonly PAUSE_ICON = faPauseCircle;
 
-  readonly PLAY_ICON = 'fas fa-play-circle';
+  readonly PLAY_ICON = faPlayCircle;
 
   SliderButtonType = SliderButtonType;
 
@@ -75,7 +76,7 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
     return this.type == SliderType.Automatic;
   }
 
-  get automaticIcon(): string {
+  get automaticIcon(): IconDefinition {
     return this.automaticService.pause ? this.PLAY_ICON : this.PAUSE_ICON;
   }
 

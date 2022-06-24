@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { CommonConstants, isNullOrEmptyString } from 'ngx-sfc-common';
+import { CommonConstants, isDefined, isNullOrEmptyString } from 'ngx-sfc-common';
 import { TimelineItemPosition } from './timeline-item-position.enum';
 import { ITimelineItemModel } from './timeline-item.model';
 
@@ -24,6 +24,6 @@ export class TimelineItemComponent {
   }
 
   get showImage(): boolean {
-    return !isNullOrEmptyString(this.model.image) && isNullOrEmptyString(this.model.icon);
+    return !isNullOrEmptyString(this.model.image) && !isDefined(this.model.icon);
   }
 }

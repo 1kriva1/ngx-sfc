@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonConstants } from '../../constants';
 import { SortingDirection, UIClass } from '../../enums';
 import { SortingComponent } from './sorting.component';
-import { SortingConstants } from './sorting.constants';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: SortingComponent', () => {
   let component: SortingComponent;
@@ -11,6 +12,7 @@ describe('Component: SortingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [SortingComponent]
     }).compileComponents();
   });
@@ -88,7 +90,7 @@ describe('Component: SortingComponent', () => {
       component.model = { enabled: true, active: false, direction: SortingDirection.Descending };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual(SortingConstants.DEFAULT_DESCENDING_ICON);
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-chevron-down');
     });
 
     fit('Should have custom icon value', () => {
@@ -97,42 +99,42 @@ describe('Component: SortingComponent', () => {
         active: false,
         direction: SortingDirection.Ascending,
         icons: [
-          { direction: SortingDirection.Ascending, icon: 'fa fa-asc-test' },
-          { direction: SortingDirection.Descending, icon: 'fa fa-desc-test' }
+          { direction: SortingDirection.Ascending, icon: faTShirt },
+          { direction: SortingDirection.Descending, icon: faTShirt }
         ]
       };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual('fa fa-asc-test');
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-shirt');
 
       component.model.direction = SortingDirection.Descending;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual('fa fa-desc-test');
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-shirt');
     });
 
     fit('Should not change icon, when sorting not active', () => {
       component.model = { enabled: true, active: false, direction: SortingDirection.Descending };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual(SortingConstants.DEFAULT_DESCENDING_ICON);
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-chevron-down');
 
       fixture.debugElement.nativeElement.dispatchEvent(new MouseEvent('click', {}));
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual(SortingConstants.DEFAULT_DESCENDING_ICON);
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-chevron-down');
     });
 
     fit('Should change icon', () => {
       component.model = { enabled: true, active: true, direction: SortingDirection.Descending };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual(SortingConstants.DEFAULT_DESCENDING_ICON);
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-chevron-down');
 
       fixture.debugElement.nativeElement.dispatchEvent(new MouseEvent('click', {}));
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icons i').className).toEqual(SortingConstants.DEFAULT_ASCENDING_ICON);
+      expect(fixture.nativeElement.querySelector('div.icons fa-icon svg').classList).toContain('fa-chevron-up');
     });
   });
 

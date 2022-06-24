@@ -19,7 +19,7 @@
     justify-content: center;
     transition: border-color 0.3s ease;
 
-    i {
+    fa-icon {
       @include theme-value(opacity, 0.5, 0.8);
 
       font-size: 0.8em;
@@ -29,7 +29,7 @@
     &:hover {
       border-color: $color-hover-default;
 
-      i {
+      fa-icon {
         @include theme-value(opacity, 0.8, 1);
 
         color: $color-hover-default;
@@ -42,7 +42,7 @@
       border-color: $color-hover-default;
       background: $color-hover-default;
 
-      i {
+      fa-icon {
         opacity: 1;
         transform: scale(0);
         color: $color-0;

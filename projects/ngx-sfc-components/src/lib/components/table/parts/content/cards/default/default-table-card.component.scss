@@ -39,4 +39,23 @@
       }
     }
   }
+
+  /* MEDIA */
+
+  @media all and (max-width: 430px) {
+    .container {
+      width: initial;
+
+      .content-container {
+        .content {
+          div {
+            width: initial;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+
+  /* END MEDIA */
 }

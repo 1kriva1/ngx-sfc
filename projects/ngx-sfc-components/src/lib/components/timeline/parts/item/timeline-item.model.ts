@@ -1,3 +1,4 @@
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { TimelineItemPosition } from "./timeline-item-position.enum";
 
 export interface ITimelineItemModel{
@@ -6,6 +7,6 @@ export interface ITimelineItemModel{
     dateTimeLabel?: string;
     description?: string;
     period?: boolean;    
-    icon?: string;
+    icon?: IconDefinition;
     image?: string;
 }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Position } from 'ngx-sfc-common';
 import { ComponentSize, SortingDirection } from 'ngx-sfc-common';
 import { ExpandedTableRowTemplate, IDefaultTableColumnModel, ITableDataModel, ITablePaginationModel, TableDataType, TableTemplate } from 'ngx-sfc-components';
+import { faSortAmountUp, faSortAmountDown, faBolt, faCar, faPen, faStar, faAnchor, faUsers, faBicycle, faRocket, faTree, faStreetView,
+faMagic, faObjectGroup, faMinusSquare, faMagnet, faMicrochip } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './tables-custom-presentation.component.html',
@@ -38,9 +40,9 @@ export class TablesCustomPresentationComponent {
     this.columnsListItems = this.getListItemsColumns();
     this.columnsListItems.forEach(column => {
       column.sorting = {
-        enabled: true, 
+        enabled: true,
         direction: SortingDirection.Ascending,
-        icons: [{ direction: SortingDirection.Ascending, icon: 'fas fa-sort-amount-up' }, { direction: SortingDirection.Descending, icon: 'fas fa-sort-amount-down' }]
+        icons: [{ direction: SortingDirection.Ascending, icon: faSortAmountUp }, { direction: SortingDirection.Descending, icon: faSortAmountDown }]
       }
     });
     this.dataListItems = this.getListItemsData();
@@ -75,7 +77,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'INITIATOR',
-          icon: 'fa fa-bolt',
+          icon: faBolt,
           color: 'yellow'
         },
         selected: false
@@ -83,7 +85,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Nuker',
-          icon: 'fa fa-car',
+          icon: faCar,
           color: 'pink'
         },
         selected: false
@@ -91,7 +93,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Disabler',
-          icon: 'fa fa-pen',
+          icon: faPen,
           color: 'orange'
         },
         selected: false
@@ -99,7 +101,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Ganker',
-          icon: 'fa fa-star',
+          icon: faStar,
           color: 'red'
         },
         selected: false
@@ -107,7 +109,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Durable',
-          icon: 'fa fa-anchor',
+          icon: faAnchor,
           color: 'purple'
         },
         selected: false
@@ -115,7 +117,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Roamer',
-          icon: 'fa fa-bicycle',
+          icon: faBicycle,
           color: 'teal'
         },
         selected: false
@@ -123,7 +125,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Pusher',
-          icon: 'fa fa-users',
+          icon: faUsers,
           color: 'blue'
         },
         selected: false
@@ -131,7 +133,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Escape',
-          icon: 'fa fa-rocket',
+          icon: faRocket,
           color: 'blue-dark'
         },
         selected: false
@@ -139,7 +141,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Jungler',
-          icon: 'fa fa-tree',
+          icon: faTree,
           color: 'green'
         },
         selected: false
@@ -147,7 +149,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Offlaner',
-          icon: 'fa fa-user fa-street-view',
+          icon: faStreetView,
           color: 'green-dark'
         },
         selected: false
@@ -155,7 +157,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'Carry',
-          icon: 'fa fa-bolt',
+          icon: faBolt,
           color: 'silver'
         },
         selected: false
@@ -163,7 +165,7 @@ export class TablesCustomPresentationComponent {
       {
         data: {
           label: 'SUPPORT',
-          icon: 'fa fa-magic',
+          icon: faMagic,
           color: 'gold'
         },
         selected: false
@@ -286,12 +288,12 @@ export class TablesCustomPresentationComponent {
       {
         name: 'Domain &  Plan Name',
         field: 'domainAndPlanName',
-        icon: ''
+        icon: undefined
       },
       {
         name: 'Storage',
         field: 'storage',
-        icon: ''
+        icon: undefined
       },
       {
         name: 'Monthly Visitor',
@@ -321,7 +323,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 5,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-object-group',
+          icon: faObjectGroup,
           items: [
             {
               planName: 'papperpillar.com',
@@ -359,7 +361,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 1,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-minus-square',
+          icon: faMinusSquare,
           items: [
             {
               planName: 'papperpillar.com',
@@ -383,7 +385,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 5,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-magnet',
+          icon: faMagnet,
           items: [
             {
               planName: 'papperpillar.com',
@@ -414,7 +416,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 5,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -445,7 +447,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 2,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -476,7 +478,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 3,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -507,7 +509,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 4,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -538,7 +540,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 6,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -569,7 +571,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 7,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -600,7 +602,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 8,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -631,7 +633,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 9,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',
@@ -662,7 +664,7 @@ export class TablesCustomPresentationComponent {
           domainsMin: 10,
           domainsMax: 10,
           status: 'Active',
-          icon: 'fa fa-microchip',
+          icon: faMicrochip,
           items: [
             {
               planName: 'papperpillar.com',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentSize, Position } from 'ngx-sfc-common';
 import { IDropdownMenuItemModel } from 'ngx-sfc-components';
+import { faStar, faChartLine, faChartPie, faDisplay, faUserFriends, faNewspaper, faCalendar, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     templateUrl: './menus-dropdown-presentation.component.html',
@@ -12,41 +13,43 @@ export class MenusDropdownPresentationComponent {
 
     Position = Position;
 
+    faStar= faStar;
+
     readonly MODEL: IDropdownMenuItemModel[] = [
         {
             label: 'Photos/Videos',
-            icon: 'fas fa-star'
+            icon: faStar
         },
         {
             label: 'Products',
-            icon: 'fab fa-line'
+            icon: faChartLine
         },
         {
             label: 'Services',
-            icon: 'fas fa-chart-pie',
+            icon: faChartPie,
             click: () => { alert('Cliciked button action: Services'); }
         },
         {
             label: 'Coupouns',
-            icon: 'fab fa-discourse'
+            icon: faDisplay
         },
         {
             label: 'User Reviews',
-            icon: 'fas fa-user-friends',
+            icon: faUserFriends,
             delimeter: false
         },
         {
             label: 'Subscription',
-            icon: 'fas fa-newspaper'
+            icon: faNewspaper
         },
         {
             label: 'Stats',
-            icon: 'fas fa-calendar',
+            icon: faCalendar,
             delimeter: false
         },
         {
             label: 'Delete Business',
-            icon: 'fas fa-trash'
+            icon: faTrash
         }
     ];
 
@@ -64,12 +67,12 @@ export class MenusDropdownPresentationComponent {
         this.MODEL_THREE = this.MODEL.slice(0, 1);
         this.MODEL_THREE.push({
             label: 'Services',
-            icon: 'fas fa-chart-pie',
+            icon: faChartPie,
             delimeter: true
         });
         this.MODEL_THREE.push({
             label: 'Coupouns',
-            icon: 'fab fa-discourse'
+            icon: faDisplay
         });
     }
 

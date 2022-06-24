@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UIClass } from '../../enums';
 import { ToggleSwitcherComponent } from './toggle-switcher.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: ToggleSwitcherComponent', () => {
   let component: ToggleSwitcherComponent;
@@ -8,6 +10,7 @@ describe('Component: ToggleSwitcherComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ToggleSwitcherComponent]
     }).compileComponents();
   });
@@ -73,17 +76,17 @@ describe('Component: ToggleSwitcherComponent', () => {
     });
 
     fit("Should not have icon", () => {
-      expect(fixture.nativeElement.querySelector('p.left > i')).toBeNull();
+      expect(fixture.nativeElement.querySelector('p.left > fa-icon svg')).toBeNull();
     });
 
     fit("Should have icon", () => {
-      component.leftModel = { label: 'test left', icon: 'fa fa-test' };
+      component.leftModel = { label: 'test left', icon: faTShirt };
       fixture.detectChanges();
 
-      const iconEl = fixture.nativeElement.querySelector('p.left > i');
+      const iconEl = fixture.nativeElement.querySelector('p.left > fa-icon svg');
 
       expect(iconEl).toBeTruthy();
-      expect(iconEl.className).toEqual('fa fa-test');
+      expect(iconEl.classList).toContain('fa-shirt');
     });
   });
 
@@ -101,17 +104,17 @@ describe('Component: ToggleSwitcherComponent', () => {
     });
 
     fit("Should not have icon", () => {
-      expect(fixture.nativeElement.querySelector('p.right > i')).toBeNull();
+      expect(fixture.nativeElement.querySelector('p.right > fa-icon svg')).toBeNull();
     });
 
     fit("Should have icon", () => {
-      component.rightModel = { label: 'test right', icon: 'fa fa-test' };
+      component.rightModel = { label: 'test right', icon: faTShirt };
       fixture.detectChanges();
 
-      const iconEl = fixture.nativeElement.querySelector('p.right > i');
+      const iconEl = fixture.nativeElement.querySelector('p.right > fa-icon svg');
 
       expect(iconEl).toBeTruthy();
-      expect(iconEl.className).toEqual('fa fa-test');
+      expect(iconEl.classList).toContain('fa-shirt');
     });
   });
 });

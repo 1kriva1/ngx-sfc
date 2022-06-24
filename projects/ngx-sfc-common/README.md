@@ -147,7 +147,7 @@ Add `ng-template` with directive `[sfcTemplateReference]="ModalTemplate.Header"`
 <ng-template [sfcTemplateReference]="ModalTemplate.Header">
         <div>
             <div>{{HEADER_MODEL.Title}}</div>
-            <i class="{{HEADER_MODEL.Icon}}"></i>
+            <fa-icon [icon]="HEADER_MODEL.Icon"></fa-icon>
             <button (click)="FOOTER_MODEL.Click()">hide model</button>
         </div>
 </ng-template>
@@ -190,7 +190,7 @@ Parameters:
 Button component allow to define several visualization types, add text, icons before and after text and make button disabled.
 
  ```html
-<sfc-button iconBefore="fa fa-star" text="Button" iconAfter="fa fa-car" [disabled]="false" [types]="[ButtonType.Rounded,ButtonType.Filled]">        
+<sfc-button [iconBefore]="faStar" text="Button" [iconAfter]="faCar" [disabled]="false" [types]="[ButtonType.Rounded,ButtonType.Filled]">        
 </sfc-button>
 ```   
 
@@ -215,7 +215,7 @@ Types can be combinated.
 Check mark with possibility to change icon value. Can be used for checking rows in table rows.
 
 ```html
-<sfc-checkmark [active]="value" icon="fa fa-star"></sfc-checkmark>
+<sfc-checkmark [active]="value" [icon]="faStar"></sfc-checkmark>
 ```    
 
 Parameters:
@@ -471,8 +471,8 @@ Component allow to add toggler with posibility to define text and icon for left 
 Can be used for toggling dark and light themes on page, toggling table types (rows or cards).
 
 ```html
-<sfc-toggle-switcher [active]="false" [leftModel]="{label:'test1', icon:'fa fa-car'}"
-        [rightModel]="{label:'test1', icon:'fa fa-star'}">
+<sfc-toggle-switcher [active]="false" [leftModel]="{label:'test1', icon:faCar}"
+        [rightModel]="{label:'test1', icon:faStar}">
 </sfc-toggle-switcher>
 ```
 

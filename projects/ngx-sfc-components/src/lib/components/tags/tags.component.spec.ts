@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagComponent } from '../no-export-index';
 import { TagsComponent } from './tags.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: TagsComponent', () => {
   let component: TagsComponent;
@@ -9,6 +11,7 @@ describe('Component: TagsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [TagComponent, TagsComponent]
     }).compileComponents();
   });
@@ -43,7 +46,7 @@ describe('Component: TagsComponent', () => {
     });
 
     fit('Should tag model reflect tags input', () => {
-      component.tags = [{ label: 'tag one', icon: 'fa fa-test' }];
+      component.tags = [{ label: 'tag one', icon: faTShirt }];
       fixture.detectChanges();
 
       expect(fixture.debugElement.query(By.css('sfc-tag')).componentInstance.model)

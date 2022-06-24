@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CloseComponent } from './close.component';
 
 describe('Component: CloseComponent', () => {
@@ -7,6 +8,7 @@ describe('Component: CloseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [CloseComponent]
     }).compileComponents();
   });
@@ -22,7 +24,7 @@ describe('Component: CloseComponent', () => {
   });
 
   fit("Should have main elements", () => {
-    expect(fixture.nativeElement.querySelector('div.container')).toBeDefined();
-    expect(fixture.nativeElement.querySelector('i.fas.fa-times')).toBeDefined();
+    expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('fa-icon svg.fa-xmark')).toBeTruthy();
   });
 });

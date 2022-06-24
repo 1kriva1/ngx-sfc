@@ -1,4 +1,5 @@
 import { SortingDirection } from "../../enums";
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 export interface ISortingModel {
     enabled: boolean;
@@ -9,5 +10,5 @@ export interface ISortingModel {
 
 export interface ISortingIcon {
     direction: SortingDirection;
-    icon: string
+    icon: IconDefinition;
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasePresentationComponent } from '../base-presentations.component';
 import { ModalService, ModalTemplate } from 'ngx-sfc-common';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './modals-presentation.component.html',
@@ -10,6 +11,7 @@ import { ModalService, ModalTemplate } from 'ngx-sfc-common';
 export class ModalsPresentationComponent extends BasePresentationComponent {
 
   ModalTemplate = ModalTemplate;
+  faStar = faStar;
 
   readonly clickFunc = (() => {
     if (confirm('Close?')) {
@@ -19,19 +21,19 @@ export class ModalsPresentationComponent extends BasePresentationComponent {
 
   readonly HEADER_MODEL: any = {
     Title: 'Header template title',
-    Icon: 'fa fa-star',
+    Icon: faStar,
     Click: this.clickFunc
   }
 
   readonly BODY_TEMPLATE_MODEL: any = {
     Title: 'Body title',
-    Icon: 'fa fa-star',
+    Icon: faStar,
     Click: this.clickFunc
   }
 
   readonly FOOTER_MODEL: any = {
     Title: 'Footer title',
-    Icon: 'fa fa-star',
+    Icon: faStar,
     Click: this.clickFunc
   }
 
@@ -39,32 +41,32 @@ export class ModalsPresentationComponent extends BasePresentationComponent {
     Items: [
       {
         Title: 'Body reference title 1',
-        Icon: 'fa fa-star',
+        Icon: faStar,
         Click: this.clickFunc
       },
       {
         Title: 'Body reference title 2',
-        Icon: 'fa fa-star',
+        Icon: faStar,
         Click: this.clickFunc
       },
       {
         Title: 'Body reference title 3',
-        Icon: 'fa fa-star',
+        Icon: faStar,
         Click: this.clickFunc
       },
       {
         Title: 'Body reference title 4',
-        Icon: 'fa fa-star',
+        Icon: faStar,
         Click: this.clickFunc
       },
       {
         Title: 'Body reference title 5',
-        Icon: 'fa fa-star',
+        Icon: faStar,
         Click: this.clickFunc
       },
       {
         Title: 'Body reference title 6',
-        Icon: 'fa fa-star',
+        Icon: faStar,
         Click: this.clickFunc
       }]
   }

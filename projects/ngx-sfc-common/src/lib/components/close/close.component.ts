@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-close',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./close.component.scss']
 })
 export class CloseComponent {
+  faTimes = faTimes;
 }

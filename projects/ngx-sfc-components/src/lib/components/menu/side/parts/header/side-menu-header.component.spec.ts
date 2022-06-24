@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HamburgerComponent, UIClass } from 'ngx-sfc-common';
 import { SideMenuHeaderComponent } from './side-menu-header.component';
 
@@ -9,6 +10,7 @@ describe('Component: SideMenuHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[FontAwesomeModule],
       declarations: [HamburgerComponent, SideMenuHeaderComponent]
     }).compileComponents();
   });

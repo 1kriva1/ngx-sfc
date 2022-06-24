@@ -3,6 +3,8 @@ import { By } from '@angular/platform-browser';
 import { CloseComponent } from '../../../close/close.component';
 import { ModalService } from '../../service/modal.service';
 import { DefaultModalHeaderComponent } from './default-modal-header.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('Component: DefaultModalHeaderComponent', () => {
   let component: DefaultModalHeaderComponent;
@@ -13,6 +15,7 @@ describe('Component: DefaultModalHeaderComponent', () => {
     modalServiceSpy = jasmine.createSpyObj('ModalService', ['close']);
 
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [CloseComponent, DefaultModalHeaderComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]
     }).compileComponents();
@@ -32,16 +35,16 @@ describe('Component: DefaultModalHeaderComponent', () => {
 
   describe('Model', () => {
     fit('Should be default model', () => {
-      expect(fixture.nativeElement.querySelector('i.icon').className).toContain('fa fa-window-restore');
+      expect(fixture.nativeElement.querySelector('fa-icon.icon svg').classList).toContain('fa-window-restore');
       expect(fixture.nativeElement.querySelector('span.label').innerText).toContain('Modal');
       expect(fixture.nativeElement.querySelector('span.close')).toBeDefined();
     });
 
     fit('Should be defined model', () => {
-      component.model = { text: 'Custom text', icon: 'fa fa-test', showCloseIcon: false };
+      component.model = { text: 'Custom text', icon: faTShirt, showCloseIcon: false };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('i.icon').className).toContain(component.model.icon);
+      expect(fixture.nativeElement.querySelector('fa-icon.icon svg').classList).toContain('fa-shirt');
       expect(fixture.nativeElement.querySelector('span.label').innerText).toContain(component.model.text);
       expect(fixture.nativeElement.querySelector('span.close')).toBeNull();
     });

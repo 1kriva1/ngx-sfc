@@ -8,6 +8,5 @@
         <sfc-side-menu-item-content *ngFor="let child of item.items" [item]="child" [open]="open"
             [active]="isActive(child)" [openParent]="true" (selectItem)="onChildClick(item, child)">
         </sfc-side-menu-item-content>
-
     </div>
 </div>

@@ -6,6 +6,7 @@ import { UIClass } from '../../enums';
 import { DelimeterComponent } from '../delimeter/delimeter.component';
 import { PaginationComponent } from './pagination.component';
 import { PaginationConstants } from './pagination.constants';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('Component: PaginationComponent', () => {
   let component: PaginationComponent;
@@ -13,6 +14,7 @@ describe('Component: PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ShowHideElementDirective, DelimeterComponent, PaginationComponent]
     }).compileComponents();
   });
@@ -79,7 +81,7 @@ describe('Component: PaginationComponent', () => {
       component.ngOnInit();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelectorAll('ul li')[0].querySelector('i.fa.fa-chevron-left')).toBeTruthy();
+      expect(fixture.nativeElement.querySelectorAll('ul li')[0].querySelector('fa-icon svg.fa-chevron-left')).toBeTruthy();
     });
 
     fit('Should return to previous page', () => {
@@ -123,7 +125,7 @@ describe('Component: PaginationComponent', () => {
       component.ngOnInit();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelectorAll('ul li')[3].querySelector('i.fa.fa-chevron-right')).toBeTruthy();
+      expect(fixture.nativeElement.querySelectorAll('ul li')[3].querySelector('fa-icon svg.fa-chevron-right')).toBeTruthy();
     });
 
     fit('Should move to next page', () => {

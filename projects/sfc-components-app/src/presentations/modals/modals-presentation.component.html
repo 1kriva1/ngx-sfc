@@ -6,7 +6,7 @@
     <ng-template #headerRef>
         <div>
             <div>{{HEADER_MODEL.Title}}</div>
-            <i class="{{HEADER_MODEL.Icon}}"></i>
+            <fa-icon [icon]="HEADER_MODEL.Icon"></fa-icon>
             <button class="app" (click)="HEADER_MODEL.Click()">hide model</button>
         </div>
     </ng-template>
@@ -16,7 +16,7 @@
             <div *ngFor="let item of BODY_REFERENCE_MODEL.Items"
                 style="display: flex;flex-direction: column;align-items: center;padding: 10px;">
                 <h1>{{item.Title}}</h1>
-                <i class="{{item.Icon}}"></i>
+                <fa-icon [icon]="item.Icon"></fa-icon>
                 <button class="app" (click)="item.Click()">click body</button>
             </div>
         </div>
@@ -25,7 +25,7 @@
     <ng-template #footerRef>
         <div>
             <div>{{FOOTER_MODEL.Title}}</div>
-            <i class="{{FOOTER_MODEL.Icon}}"></i>
+            <fa-icon [icon]="FOOTER_MODEL.Icon"></fa-icon>
             <button class="app" (click)="FOOTER_MODEL.Click()">hide model</button>
         </div>
     </ng-template>
@@ -47,7 +47,7 @@
                 <ng-template [sfcTemplateReference]="ModalTemplate.Body">
                     <div>
                         <div>{{BODY_TEMPLATE_MODEL.Title}}</div>
-                        <i class="{{BODY_TEMPLATE_MODEL.Icon}}"></i>
+                        <fa-icon [icon]="BODY_TEMPLATE_MODEL.Icon"></fa-icon>
                         <button (click)="BODY_TEMPLATE_MODEL.Click()">click body</button>
                     </div>
                 </ng-template>
@@ -79,7 +79,7 @@
         <div class="component-column">
             <button class="app" #defaultHeaderCustomModalBtn>Default header custom modal</button>
             <sfc-modal *sfcModalOpenOnClick="defaultHeaderCustomModalBtn"
-                [defaultHeaderModel]="{text: 'Test header', showCloseIcon: false, icon:'fa fa-car'}" [body]="bodyRef">
+                [defaultHeaderModel]="{text: 'Test header', showCloseIcon: false, icon:faStar}" [body]="bodyRef">
             </sfc-modal>
         </div>
 
@@ -98,7 +98,7 @@
                 <ng-template [sfcTemplateReference]="ModalTemplate.Header">
                     <div>
                         <div>{{HEADER_MODEL.Title}}</div>
-                        <i class="{{HEADER_MODEL.Icon}}"></i>
+                        <fa-icon [icon]="HEADER_MODEL.Icon"></fa-icon>
                         <button class="app" (click)="FOOTER_MODEL.Click()">hide model</button>
                     </div>
                 </ng-template>
@@ -111,7 +111,7 @@
                 <ng-template [sfcTemplateReference]="ModalTemplate.Footer">
                     <div>
                         <div>{{FOOTER_MODEL.Title}}</div>
-                        <i class="{{FOOTER_MODEL.Icon}}"></i>
+                        <fa-icon [icon]="FOOTER_MODEL.Icon"></fa-icon>
                         <button class="app" (click)="FOOTER_MODEL.Click()">hide model</button>
                     </div>
                 </ng-template>

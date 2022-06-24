@@ -33,6 +33,7 @@ import {
   PaginationComponent,
   SortingComponent
 } from './components';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     // directives
@@ -66,7 +67,8 @@ import {
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   exports: [
     // directives

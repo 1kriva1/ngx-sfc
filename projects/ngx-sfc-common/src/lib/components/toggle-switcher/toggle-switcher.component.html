@@ -2,11 +2,11 @@
     <div class="toggle"></div>
     <div class="names">
         <p class="left">
-            <i *ngIf="leftModel.icon" class="{{leftModel.icon}}"></i>
+            <fa-icon *ngIf="leftModel.icon" [icon]="leftModel.icon"></fa-icon>
             <span>{{leftModel.label}}</span>
         </p>
         <p class="right">
-            <i *ngIf="rightModel.icon" class="{{rightModel.icon}}"></i>
+            <fa-icon *ngIf="rightModel.icon" [icon]="rightModel.icon"></fa-icon>
             <span>{{rightModel.label}}</span>
         </p>
     </div>

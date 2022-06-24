@@ -48,7 +48,7 @@ Component display player/user rounded photo image with progress bar and informat
  ```html
 <sfc-avatar [radius]="160" [stroke]="1" [progress]="50" [progressModel]="progressColor" [stars]="true" [starsValue]="2.15" [data]="dataImage">
                 <sfc-avatar-badge [position]="AvatarBadgePosition.Right" [background]="'#8CC152'">
-                    <i class="fa fa-copyright"></i>
+                    <fa-icon [icon]="faCopyright"></fa-icon>
                 </sfc-avatar-badge>
 </sfc-avatar>
 ```  
@@ -179,7 +179,7 @@ export enum SideMenuItemType {
 Component allow to define context menu.
 
  ```html
-<sfc-dropdown-menu [items]="MODEL" icon="fa fa-star" label="Test label" [hideOnClick]="false"
+<sfc-dropdown-menu [items]="MODEL" [icon]="faStar" label="Test label" [hideOnClick]="false"
                    [hideOnClickOutside]="false" [bordered]="true" [position]="Position.Right"
                    [open]="false">
 </sfc-dropdown-menu>
