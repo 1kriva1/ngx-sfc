@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UIClass } from 'ngx-sfc-common';
 import { CheckmarkComponent, Position, UIConstants } from 'ngx-sfc-common';
 import { TableColumnType } from '../../../columns/table-column-type.enum';
@@ -11,6 +12,7 @@ describe('Component: DefaultTableRow', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [CheckmarkComponent, DefaultTableRowComponent]
     }).compileComponents();
   });
@@ -369,7 +371,7 @@ describe('Component: DefaultTableRow', () => {
         component.columns = [{ name: 'Sequence column', field: '', type: TableColumnType.Sequence }];
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span.name').innerText).toEqual('Sequence column');
+        expect(fixture.nativeElement.querySelector('span.name').innerText.toUpperCase()).toEqual('SEQUENCE COLUMN');
         expect(fixture.nativeElement.querySelector('span.name ~ span').innerText).toEqual('100');
       });
     });
@@ -389,7 +391,7 @@ describe('Component: DefaultTableRow', () => {
         component.columns = [{ name: 'Column name', field: 'field', type: TableColumnType.Data }];
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span.name').innerText).toEqual('Column name');
+        expect(fixture.nativeElement.querySelector('span.name').innerText.toUpperCase()).toEqual('COLUMN NAME');
         expect(fixture.nativeElement.querySelector('span.name ~ span').innerText).toEqual('test-data');
       });
     });

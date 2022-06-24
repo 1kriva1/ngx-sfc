@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonConstants, UIClass } from 'ngx-sfc-common';
 import { TabLabelIconComponent } from './tab-label-icon.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: TabLabelIconComponent', () => {
     let component: TabLabelIconComponent;
@@ -8,6 +10,7 @@ describe('Component: TabLabelIconComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [FontAwesomeModule],
             declarations: [TabLabelIconComponent]
         }).compileComponents();
     });
@@ -25,7 +28,7 @@ describe('Component: TabLabelIconComponent', () => {
 
         fit('Should create main elements', () => {
             expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('i')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('span')).toBeTruthy();
         });
 
@@ -54,16 +57,15 @@ describe('Component: TabLabelIconComponent', () => {
 
     describe('Icon', () => {
         fit('Should have default icon', () => {
-            expect(fixture.nativeElement.querySelector('i.fa.fa-circle')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('fa-icon svg.fa-circle')).toBeTruthy();
         });
 
         fit('Should have defined icon', () => {
-            component.icon = 'fa fa-test';
-            component.ngOnInit();
+            component.icon = faTShirt;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('i.fa.fa-circle')).toBeNull();
-            expect(fixture.nativeElement.querySelector('i.fa.fa-test')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('fa-icon svg.fa-circle')).toBeNull();
+            expect(fixture.nativeElement.querySelector('fa-icon svg.fa-shirt')).toBeTruthy();
         });
     });
 

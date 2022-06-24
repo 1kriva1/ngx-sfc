@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UIClass } from '../../enums';
 import { CheckmarkComponent } from './checkmark.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('Component: CheckmarkComponent', () => {
   let component: CheckmarkComponent;
@@ -8,6 +10,7 @@ describe('Component: CheckmarkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [CheckmarkComponent]
     }).compileComponents();
   });
@@ -26,7 +29,7 @@ describe('Component: CheckmarkComponent', () => {
     fit("Should have main elements", () => {
       expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('span.check')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('i')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
     });
   });
 
@@ -59,14 +62,14 @@ describe('Component: CheckmarkComponent', () => {
 
   describe('Icon', () => {
     fit("Should have default icon", () => {
-      expect(fixture.nativeElement.querySelector('i').className).toEqual('fa fa-check');
+      expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-check');
     });
 
     fit("Should have defined icon", () => {
-      component.icon = 'fa fa-test';
+      component.icon = faTShirt;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('i').className).toEqual('fa fa-test');
+      expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-shirt');
     });
   });
 });

@@ -3,6 +3,8 @@ import { By } from '@angular/platform-browser';
 import { ClickOutsideDirective, DOCUMENT, DotsComponent, MediaLimits, nameof, Position, UIClass, WINDOW } from 'ngx-sfc-common';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuItemComponent } from './parts/item/dropdown-menu-item.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('Component: DropdownMenuComponent', () => {
   let component: DropdownMenuComponent;
@@ -11,6 +13,7 @@ describe('Component: DropdownMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ClickOutsideDirective, DropdownMenuItemComponent, DotsComponent, DropdownMenuComponent],
       providers: [
         { provide: DOCUMENT, useValue: document },
@@ -93,14 +96,14 @@ describe('Component: DropdownMenuComponent', () => {
 
   describe('Icon', () => {
     fit('Should exist', () => {
-      component.icon = 'fa fa-test';
+      component.icon = faTShirt;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.container i.fa.fa-test')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div.container fa-icon svg.fa-shirt')).toBeTruthy();
     });
 
     fit('Should not exist', () => {
-      expect(fixture.nativeElement.querySelector('div.container i')).toBeNull();
+      expect(fixture.nativeElement.querySelector('div.container fa-icon')).toBeNull();
     });
   });
 
@@ -134,7 +137,7 @@ describe('Component: DropdownMenuComponent', () => {
     });
 
     fit('Should not exist, if icon provided', () => {
-      component.icon = 'fa fa-test';
+      component.icon = faTShirt;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('sfc-dots')).toBeNull();

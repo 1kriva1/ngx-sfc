@@ -1,5 +1,6 @@
 import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { UIClass } from '../../enums';
+import { faCheck, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-checkmark',
@@ -13,7 +14,7 @@ export class CheckmarkComponent {
   active: boolean = false;
 
   @Input()
-  icon?: string = 'fa fa-check';
+  icon: IconDefinition = faCheck;
 
   @HostListener('click')
   onClick = () => this.active = !this.active;

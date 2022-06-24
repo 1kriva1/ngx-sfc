@@ -4,6 +4,7 @@
 }
 
 @mixin theme-value($property, $value-common, $value-dark, $selector: "&") {
+  #{$selector},
   :host-context(.sfc-default-theme) #{$selector} {
     #{$property}: $value-common;
   }

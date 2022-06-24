@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { ButtonType, isNullOrEmptyString } from 'ngx-sfc-common';
+import { ButtonType, isDefined, isNullOrEmptyString } from 'ngx-sfc-common';
 import { NotificationType } from '../../enums/notification-type.enum';
 import { INotificationContentModel } from './notification-content.model';
 
@@ -23,6 +23,6 @@ export class NotificationContentComponent {
   buttonClicked: EventEmitter<void> = new EventEmitter<void>();
 
   get showImage(): boolean {
-    return !isNullOrEmptyString(this.model.image) && isNullOrEmptyString(this.model.icon);
+    return !isNullOrEmptyString(this.model.image) && !isDefined(this.model.icon);
   }
 }

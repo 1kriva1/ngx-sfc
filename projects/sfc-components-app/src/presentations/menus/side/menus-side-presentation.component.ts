@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { ComponentSize } from 'ngx-sfc-common';
 import { ISideMenuItemModel, ISideMenuModel, SideMenuItemType } from 'ngx-sfc-components';
+import {
+    faFootball, faMagnifyingGlass, faCirclePlus, faMountain, faBasketball, faTableTennisPaddleBall,
+    faVolleyball, faStrikethrough, faFootballBall, faPeopleCarryBox, faBaseball, faBowlingBall,
+    faHockeyPuck, faPersonBiking
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     templateUrl: './menus-side-presentation.component.html',
@@ -16,25 +21,25 @@ export class MenusSidePresentationComponent {
         items: [
             {
                 label: 'Football',
-                icon: 'fa-solid fa-futbol',
+                icon: faFootball,
                 type: SideMenuItemType.Item,
                 active: false,
                 items: [
                     {
                         label: 'Find',
-                        icon: 'fa-solid fa-magnifying-glass',
+                        icon: faMagnifyingGlass,
                         type: SideMenuItemType.Item,
                         active: false
                     },
                     {
                         label: 'Create',
-                        icon: 'fa-solid fa-circle-plus',
+                        icon: faCirclePlus,
                         type: SideMenuItemType.Item,
                         active: false,
                     },
                     {
                         label: 'View',
-                        icon: 'fa-solid fa-mountain',
+                        icon: faMountain,
                         type: SideMenuItemType.Item,
                         active: false,
                     }
@@ -42,31 +47,31 @@ export class MenusSidePresentationComponent {
             },
             {
                 label: 'Basketball',
-                icon: 'fa-solid fa-basketball',
+                icon: faBasketball,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Tennis',
-                icon: 'fa-solid fa-table-tennis-paddle-ball',
+                icon: faTableTennisPaddleBall,
                 type: SideMenuItemType.Item,
                 active: false,
                 items: [
                     {
                         label: 'Find',
-                        icon: 'fa-solid fa-magnifying-glass',
+                        icon: faMagnifyingGlass,
                         type: SideMenuItemType.Item,
                         active: false
                     },
                     {
                         label: 'Create',
-                        icon: 'fa-solid fa-circle-plus',
+                        icon: faCirclePlus,
                         type: SideMenuItemType.Item,
                         active: false,
                     },
                     {
                         label: 'View',
-                        icon: 'fa-solid fa-mountain',
+                        icon: faMountain,
                         type: SideMenuItemType.Item,
                         active: false,
                     }
@@ -74,55 +79,56 @@ export class MenusSidePresentationComponent {
             },
             {
                 label: 'Volleyball',
-                icon: 'fa fa-volleyball',
+                icon: faVolleyball,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Cricket',
-                icon: 'fa-solid fa-strikethrough',
+                icon: faStrikethrough,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Rugby',
-                icon: 'fa-solid fa-football',
+                icon: faFootballBall,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Boxing',
-                icon: 'fa-solid fa-people-carry-box',
+                icon: faPeopleCarryBox,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Categories',
                 type: SideMenuItemType.Title,
-                icon: '',
+                icon: undefined,
                 active: false
             },
             {
                 label: 'Baseball',
-                icon: 'fa-solid fa-baseball',
+                icon: faBaseball,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Bowling',
-                icon: 'fa-solid fa-bowling-ball',
+                icon: faBowlingBall,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Hockey',
-                icon: 'fa-solid fa-hockey-puck',
+                icon: faHockeyPuck,
                 type: SideMenuItemType.Item,
                 active: false
             },
             {
                 label: 'Biking',
-                icon: 'fa-solid fa-person-biking',
+                icon: faPersonBiking
+                ,
                 type: SideMenuItemType.Item,
                 active: false
             }

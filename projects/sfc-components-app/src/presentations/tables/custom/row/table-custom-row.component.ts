@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { getCalcValue, Position } from 'ngx-sfc-common';
 import { IDefaultTableColumnModel, ITableModel, ITableSelectEvent } from 'ngx-sfc-components';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'table-custom-row',
@@ -9,6 +10,8 @@ import { IDefaultTableColumnModel, ITableModel, ITableSelectEvent } from 'ngx-sf
 })
 export class TableCustomRowComponent {
 
+  faStar = faStar;
+  
   @Input()
   columns!: IDefaultTableColumnModel[];
 

@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent, ButtonType, CommonConstants } from 'ngx-sfc-common';
 import { NotificationType } from '../../enums/notification-type.enum';
 import { NotificationContentComponent } from './notification-content.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: NotificationContentComponent', () => {
   let component: NotificationContentComponent;
@@ -10,6 +12,7 @@ describe('Component: NotificationContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ButtonComponent, NotificationContentComponent]
     }).compileComponents();
   });
@@ -54,14 +57,14 @@ describe('Component: NotificationContentComponent', () => {
   describe('Illustration', () => {
     describe('Icon', () => {
       fit('Should not create icon', () => {
-        expect(fixture.nativeElement.querySelector('div.illustration > div > i')).toBeNull();
+        expect(fixture.nativeElement.querySelector('div.illustration > div > fa-icon')).toBeNull();
       });
 
       fit("Should create icon", () => {
-        component.model.icon = 'fa fa-test';
+        component.model.icon = faTShirt;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('div.illustration > div > i.fa.fa-test')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('div.illustration > div > fa-icon svg.fa-shirt')).toBeTruthy();
       });
     });
 
@@ -71,7 +74,7 @@ describe('Component: NotificationContentComponent', () => {
       });
 
       fit("Should not exist, if icon provided", () => {
-        component.model.icon = 'fa fa-test';
+        component.model.icon = faTShirt;
         component.model.image = '/testImage.png';
         fixture.detectChanges();
 

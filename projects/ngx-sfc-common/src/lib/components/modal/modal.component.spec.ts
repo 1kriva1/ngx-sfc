@@ -2,6 +2,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ComponentSizeDirective, TemplateReferenceDirective } from '../../directives';
 import { nameof } from '../../utils';
 import { ButtonComponent } from '../button/button.component';
@@ -81,7 +82,7 @@ describe('Component: ModalComponent', () => {
     modalServiceSpy = jasmine.createSpyObj('ModalService', ['close']);
 
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule],
       declarations: [TemplateContentComponent, CloseComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
         ButtonComponent, ComponentSizeDirective, TemplateReferenceDirective, TestSfcModalComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]

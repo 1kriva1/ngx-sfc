@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { isNullOrEmptyString } from 'ngx-sfc-common';
+import { Component } from '@angular/core';
+import { isDefined } from 'ngx-sfc-common';
 import { TabLabelContentBase } from '../tab-label-content-base.component';
+import { faCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-tab-label-icon',
@@ -8,12 +9,9 @@ import { TabLabelContentBase } from '../tab-label-content-base.component';
   styleUrls: ['./tab-label-icon.component.scss']
 })
 export class TabLabelIconComponent
-  extends TabLabelContentBase
-  implements OnInit {
+  extends TabLabelContentBase {
 
-  private readonly TAB_DEFAULT_ICON = 'fa fa-circle';
-
-  ngOnInit(): void {
-    this.icon = !isNullOrEmptyString(this.icon) ? this.icon : this.TAB_DEFAULT_ICON;
+  get tabIcon(): IconDefinition {
+    return isDefined(this.icon) ? this.icon as IconDefinition : faCircle;
   }
 }

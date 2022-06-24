@@ -20,28 +20,28 @@
 
     <div class="component-row">
         <div class="component-column">
-            <sfc-button iconBefore="fa fa-star" text="" [types]="[ButtonType.Rounded]"></sfc-button>
+            <sfc-button [iconBefore]="faStar" text="" [types]="[ButtonType.Rounded]"></sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button iconBefore="fa fa-star" text="Custom text" [types]="[ButtonType.Rounded]">
+            <sfc-button [iconBefore]="faStar" text="Custom text" [types]="[ButtonType.Rounded]">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button iconBefore="fa fa-star" text="Custom text" iconAfter="fa fa-car"
+            <sfc-button [iconBefore]="faStar" text="Custom text" [iconAfter]="faCar"
                 [types]="[ButtonType.Rounded]"></sfc-button>
         </div>
     </div>
 
     <div class="component-row">
         <div class="component-column">
-            <sfc-button [disabled]="true" iconAfter="fa fa-car" text="Disabled text" [types]="[ButtonType.Rounded]">
+            <sfc-button [disabled]="true" [iconAfter]="faCar" text="Disabled text" [types]="[ButtonType.Rounded]">
             </sfc-button>
         </div>
 
         <div class="component-column">
-            <sfc-button [disabled]="true" iconAfter="fa fa-car" text="" [types]="[ButtonType.Rounded]">
+            <sfc-button [disabled]="true" [iconAfter]="faCar" text="" [types]="[ButtonType.Rounded]">
             </sfc-button>
         </div>
 
@@ -79,7 +79,7 @@
 
         <div class="component-column">
             <sfc-button text="Custom size text" [sfcComponentSize]="ComponentSize.Custom" [customSize]="4"
-                iconAfter="fa fa-car" [types]="[ButtonType.Rounded]">
+                [iconAfter]="faCar" [types]="[ButtonType.Rounded]">
             </sfc-button>
         </div>
 

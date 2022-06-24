@@ -1,5 +1,5 @@
 <div class="container">
-    <i *ngIf="model?.icon" class="icon" class="{{model?.icon}}"></i>
+    <fa-icon *ngIf="model?.icon" class="icon" [icon]="icon"></fa-icon>
     <span *ngIf="model?.text" class="label">{{model?.text}}</span>
     <sfc-close *ngIf="model?.showCloseIcon" (click)="onClose()"></sfc-close>
 </div>

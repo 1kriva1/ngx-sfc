@@ -1,6 +1,7 @@
 import {
     Directive, HostBinding, Input
 } from "@angular/core";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { UIClass } from "ngx-sfc-common";
 
 @Directive()
@@ -10,7 +11,7 @@ export class TabLabelContentBase {
     label?: string;
 
     @Input()
-    icon?: string;
+    icon?: IconDefinition;
 
     @Input()
     @HostBinding('class.' + UIClass.Disabled)

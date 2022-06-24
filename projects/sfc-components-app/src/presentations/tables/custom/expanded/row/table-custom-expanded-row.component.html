@@ -10,7 +10,7 @@
                     <span>{{data.domain}}</span>
                 </div>
                 <div class="plan-name">
-                    <i [ngClass]="data.icon"></i>
+                    <fa-icon [icon]="data.icon"></fa-icon>
                     <span>{{data.planName}}</span>
                 </div>
             </div>
@@ -71,7 +71,7 @@
         <div class="row-content">
             <div class="column-data">
                 <div class="toggler">
-                    <i [ngClass]="expanded ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i>
+                    <fa-icon [icon]="icon"></fa-icon>
                 </div>
             </div>
         </div>

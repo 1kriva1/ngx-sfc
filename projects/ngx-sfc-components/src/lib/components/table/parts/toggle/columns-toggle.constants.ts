@@ -1,11 +1,13 @@
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+
 export class ColumnsToggleConstants {
     static HIDE = {
         LABEL: 'Hide',
-        ICON: 'fa fa-eye-slash'
+        ICON:faEyeSlash
     };
 
     static SHOW = {
         LABEL: 'Show',
-        ICON: 'fa fa-eye'
+        ICON: faEye
     };
 }

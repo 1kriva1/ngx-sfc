@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonConstants } from 'ngx-sfc-common';
 import { TimelineItemPosition } from './timeline-item-position.enum';
 import { TimelineItemComponent } from './timeline-item.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: TimelineItemComponent', () => {
   let component: TimelineItemComponent;
@@ -9,6 +11,7 @@ describe('Component: TimelineItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [TimelineItemComponent]
     }).compileComponents();
   });
@@ -83,14 +86,14 @@ describe('Component: TimelineItemComponent', () => {
   describe('Content', () => {
     describe('Icon', () => {
       fit("Should not exist", () => {
-        expect(fixture.nativeElement.querySelector('div.content > div.title > i')).toBeNull();
+        expect(fixture.nativeElement.querySelector('div.content > div.title > fa-icon')).toBeNull();
       });
 
       fit("Should exist", () => {
-        component.model.icon = 'fa fa-test';
+        component.model.icon = faTShirt;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('div.content > div.title > i.fa.fa-test')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('div.content > div.title > fa-icon svg.fa-shirt')).toBeTruthy();
       });
     });
 
@@ -100,7 +103,7 @@ describe('Component: TimelineItemComponent', () => {
       });
 
       fit("Should not exist, if icon provided", () => {
-        component.model.icon = 'fa fa-test';
+        component.model.icon = faTShirt;
         component.model.image = '/testImage.png';
         fixture.detectChanges();
 

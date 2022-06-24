@@ -1,7 +1,7 @@
 <div class="container">
     <div class="illustration">
         <div *ngIf="model.icon">
-            <i class="{{model.icon}}"></i>
+            <fa-icon [icon]="model.icon"></fa-icon>
         </div>
         <div *ngIf="showImage">
             <img [src]="model.image">

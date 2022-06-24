@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UIClass } from '../../enums';
 import { ButtonType } from './button-type.enum';
 import { ButtonComponent } from './button.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('Component: Button', () => {
 
@@ -12,6 +14,7 @@ describe('Component: Button', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ButtonComponent]
     }).compileComponents();
   });
@@ -73,42 +76,40 @@ describe('Component: Button', () => {
 
   describe('Icons', () => {
     fit("Should not have before icon", () => {
-      expect(fixture.nativeElement.querySelector('i.icon.before')).toBeNull();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon.before')).toBeNull();
     });
 
     fit("Should have before icon", () => {
-      component.iconBefore = 'fa fa-test';
+      component.iconBefore = faTShirt;
       fixture.detectChanges();
 
-      const iconBefore = fixture.nativeElement.querySelector('i.icon.before');
-
+      const iconBefore = fixture.nativeElement.querySelector('fa-icon.icon.before svg');
+      
       expect(iconBefore).toBeDefined();
-      expect(iconBefore.className).toContain('fa');
-      expect(iconBefore.className).toContain('fa-test');
+      expect(iconBefore.classList).toContain('fa-shirt');
     });
 
     fit("Should not have after icon", () => {
-      expect(fixture.nativeElement.querySelector('i.icon.after')).toBeNull();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon.after')).toBeNull();
     });
 
     fit("Should have after icon", () => {
-      component.iconAfter = 'fa fa-test';
+      component.iconAfter = faTShirt;
       fixture.detectChanges();
 
-      const afterBefore = fixture.nativeElement.querySelector('i.icon.after');
+      const afterBefore = fixture.nativeElement.querySelector('fa-icon.icon.after svg');
 
       expect(afterBefore).toBeDefined();
-      expect(afterBefore.className).toContain('fa');
-      expect(afterBefore.className).toContain('fa-test');
+      expect(afterBefore.classList).toContain('fa-shirt');
     });
 
     fit("Should have before and after icons", () => {
-      component.iconAfter = 'fa fa-test';
-      component.iconBefore = 'fa fa-test';
+      component.iconAfter = faTShirt;
+      component.iconBefore = faTShirt;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('i.icon.after')).toBeDefined();
-      expect(fixture.nativeElement.querySelector('i.icon.before')).toBeDefined();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon.after')).toBeDefined();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon.before')).toBeDefined();
     });
   });
 

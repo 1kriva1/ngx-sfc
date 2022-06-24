@@ -1,6 +1,7 @@
 import { Component, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent, CloseComponent, DestroyParentDirective, ShowHideElementDirective, TemplateContentComponent, TemplateReferenceDirective, UIConstants } from 'ngx-sfc-common';
 import { NotificationContentComponent } from '../no-export-index';
 import { NotificationTemplate } from './enums/notification-template.enum';
@@ -44,6 +45,7 @@ describe('Component: NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ButtonComponent, CloseComponent, ShowHideElementDirective, DestroyParentDirective, NotificationContentComponent,
         TemplateContentComponent, TemplateReferenceDirective, NotificationComponent, TestNotificationComponent]
     }).compileComponents();

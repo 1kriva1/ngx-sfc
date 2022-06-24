@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckmarkComponent, UIClass } from 'ngx-sfc-common';
 import { TableSelectService } from '../../../service/select/table-select.service';
 import { SelectableTableColumnComponent } from './selectable-table-column.component';
@@ -11,6 +12,7 @@ describe('Component: SelectableTableColumn', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [CheckmarkComponent, SelectableTableColumnComponent],
       providers: [
         { provide: TableSelectService, useValue: jasmine.createSpyObj('TableSelectService', ['selectAll']) }

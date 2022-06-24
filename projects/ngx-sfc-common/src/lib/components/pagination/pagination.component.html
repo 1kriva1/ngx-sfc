@@ -3,7 +3,7 @@
     <ul *ngIf="vm.any">
         <li [sfcShowHideElement]="vm.previousPage" (click)="onPageClick(vm.previous)">
             <button class="limit">
-                <i class="fa fa-chevron-left"></i>
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
             </button>
         </li>
         <li *ngIf="vm.firstPage" (click)="onPageClick(1)">
@@ -23,7 +23,7 @@
         </li>
         <li [sfcShowHideElement]="vm.nextPage" (click)="onPageClick(vm.next)">
             <button class="limit">
-                <i class="fa fa-chevron-right"></i>
+                <fa-icon [icon]="faChevronRight"></fa-icon>
             </button>
         </li>
     </ul>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentSize } from 'ngx-sfc-common';
 import { INavigationMenuItemModel } from 'ngx-sfc-components';
+import { faStar, faChartLine, faChartPie, faDisplay, faUserFriends, faNewspaper, faCalendar, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     templateUrl: './menus-navigation-presentation.component.html',
@@ -13,43 +14,43 @@ export class MenusNavigationPresentationComponent {
     readonly MODEL: INavigationMenuItemModel[] = [
         {
             label: 'Photos/Videos',
-            icon: 'fas fa-star',
+            icon: faStar,
             active: false
         },
         {
             label: 'Products',
-            icon: 'fab fa-line',
+            icon: faChartLine,
             active: false
         },
         {
             label: 'Services',
-            icon: 'fas fa-chart-pie',
+            icon: faChartPie,
             active: false,
             click: () => { alert('Cliciked button action: Services'); }
         },
         {
             label: 'Coupouns',
-            icon: 'fab fa-discourse',
+            icon: faDisplay,
             active: false
         },
         {
             label: 'User Reviews',
-            icon: 'fas fa-user-friends',
+            icon: faUserFriends,
             active: false
         },
         {
             label: 'Subscription',
-            icon: 'fas fa-newspaper',
+            icon: faNewspaper,
             active: false
         },
         {
             label: 'Stats',
-            icon: 'fas fa-calendar',
+            icon: faCalendar,
             active: false
         },
         {
             label: 'Delete Business',
-            icon: 'fas fa-trash',
+            icon: faTrash,
             active: false
         }
     ];

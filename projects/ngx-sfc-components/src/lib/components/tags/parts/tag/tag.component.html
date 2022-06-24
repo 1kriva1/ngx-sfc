@@ -1,7 +1,7 @@
 <div class="container">
     <a class="tag">
         <div class="content">
-            <i *ngIf="model.icon" class="{{model.icon}}"></i>
+            <fa-icon *ngIf="model.icon" [icon]="model.icon"></fa-icon>
             <span>{{model.label}}</span>
         </div>
     </a>

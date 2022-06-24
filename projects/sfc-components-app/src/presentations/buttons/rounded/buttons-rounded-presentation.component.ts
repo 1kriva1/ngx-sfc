@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonType, ComponentSize } from 'ngx-sfc-common';
+import { faStar, faCar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './buttons-rounded-presentation.component.html',
@@ -8,4 +9,6 @@ import { ButtonType, ComponentSize } from 'ngx-sfc-common';
 export class ButtonsRoundedPresentationComponent {
   public ComponentSize = ComponentSize;
   public ButtonType = ButtonType;
+  faStar = faStar;
+  faCar = faCar;
 }

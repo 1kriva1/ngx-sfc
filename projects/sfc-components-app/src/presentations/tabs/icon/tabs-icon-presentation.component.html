@@ -5,7 +5,7 @@
 
     <ng-template #labelRef let-label>
         <sfc-tab-label-icon [selected]="label.selected" [disabled]="label.disabled" label="{{label.label}}"
-            icon="{{label.icon}}">
+            [icon]="label.icon">
         </sfc-tab-label-icon>
     </ng-template>
 

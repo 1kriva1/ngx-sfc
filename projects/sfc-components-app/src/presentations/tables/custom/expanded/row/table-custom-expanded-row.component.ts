@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { getCalcValue, Position, UIClass } from 'ngx-sfc-common';
 import { ITableDataModel, ITableSelectEvent } from 'ngx-sfc-components';
 import { fromEvent, Subscription } from 'rxjs';
+import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'table-custom-expanded-row',
@@ -33,6 +35,10 @@ export class TableCustomExpandedRowComponent implements AfterViewInit, OnDestroy
   columnCheckmarkEl!: ElementRef;
 
   columnCheckmarkOnClickSubscription!: Subscription;
+
+  get icon(): IconDefinition {
+    return this.expanded ? faAngleUp : faAngleDown;
+  }
 
   ngAfterViewInit(): void {
     if (this.columnCheckmarkEl) {

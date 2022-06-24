@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, EventEmitter, HostBinding, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { ClickOutsideEvent, isNullOrEmptyString, MediaLimits, Position, ResizeService, UIClass, WINDOW } from 'ngx-sfc-common';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ClickOutsideEvent, isDefined, isNullOrEmptyString, MediaLimits, Position, ResizeService, UIClass, WINDOW } from 'ngx-sfc-common';
 import { startWith, Subscription } from 'rxjs';
 import { IDropdownMenuItemModel } from './parts/item/dropdown-menu-item.model';
 
@@ -14,7 +15,7 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
   items: IDropdownMenuItemModel[] = [];
 
   @Input()
-  icon?: string;
+  icon?: IconDefinition;
 
   @Input()
   label?: string;
@@ -46,7 +47,7 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
   private _resizeSubscription?: Subscription;
 
   get showDots(): boolean {
-    return isNullOrEmptyString(this.label) && isNullOrEmptyString(this.icon);
+    return isNullOrEmptyString(this.label) && !isDefined(this.icon);
   }
 
   constructor(private resizeService: ResizeService, @Inject(WINDOW) private window: Window) { }

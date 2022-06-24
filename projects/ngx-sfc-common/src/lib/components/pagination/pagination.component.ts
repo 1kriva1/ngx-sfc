@@ -5,6 +5,7 @@ import { IPaginationViewModel } from './models/pagination-view.model';
 import { PaginationConstants } from './pagination.constants';
 import { IPaginationEvent } from './service/pagination.event';
 import { PaginationService } from './service/pagination.service';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-pagination',
@@ -12,6 +13,9 @@ import { PaginationService } from './service/pagination.service';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit {
+
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
 
   // max limit for pagination bts
   @Input()

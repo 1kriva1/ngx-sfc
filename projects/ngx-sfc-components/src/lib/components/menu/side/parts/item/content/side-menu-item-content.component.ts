@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { CommonConstants, UIClass } from 'ngx-sfc-common';
 import { ISideMenuItemModel, SideMenuItemType } from '../../../side-menu.model';
+import { faAngleUp, faAngleDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-side-menu-item-content',
@@ -9,12 +10,12 @@ import { ISideMenuItemModel, SideMenuItemType } from '../../../side-menu.model';
 })
 export class SideMenuItemContentComponent {
 
-  private readonly ANGLE_UP_ICON = 'fa fa-angle-up';
-  private readonly ANGLE_DOWM_ICON = 'fa fa-angle-down';
+  private readonly ANGLE_UP_ICON = faAngleUp;
+  private readonly ANGLE_DOWM_ICON = faAngleDown;
 
   @Input()
   item: ISideMenuItemModel = {
-    icon: CommonConstants.EMPTY_STRING,
+    icon: undefined,
     label: CommonConstants.EMPTY_STRING,
     type: SideMenuItemType.Item,
     active: false
@@ -42,7 +43,7 @@ export class SideMenuItemContentComponent {
     this.selectItem.emit(this.item)
   }
 
-  get expandIcon() {
+  get expandIcon(): IconDefinition {
     return this.openParent ? this.ANGLE_UP_ICON : this.ANGLE_DOWM_ICON;
   }
 }

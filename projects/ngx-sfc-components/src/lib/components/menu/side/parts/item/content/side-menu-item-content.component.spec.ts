@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DelimeterComponent, UIClass } from 'ngx-sfc-common';
 import { SideMenuItemContentComponent } from './side-menu-item-content.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
 describe('Component: SideMenuItemContentComponent', () => {
     let component: SideMenuItemContentComponent;
@@ -8,6 +10,7 @@ describe('Component: SideMenuItemContentComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [FontAwesomeModule],
             declarations: [DelimeterComponent, SideMenuItemContentComponent]
         }).compileComponents();
     });
@@ -28,15 +31,14 @@ describe('Component: SideMenuItemContentComponent', () => {
             expect(fixture.nativeElement.querySelector('div.item-container')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('div.item-container div.item')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('div.item-container div.item a')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('div.item-container div.item a i')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('div.item-container span.label')).toBeTruthy();
         });
 
         fit('Should have defined icon', () => {
-            component.item.icon = 'fa fa-test';
+            component.item.icon = faTShirt;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.item-container div.item a i.fa.fa-test')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('div.item-container div.item a fa-icon svg.fa-shirt')).toBeTruthy();
         });
 
         fit('Should have defined label', () => {
@@ -97,8 +99,8 @@ describe('Component: SideMenuItemContentComponent', () => {
             component.hasChildren = true;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.expand-container i.fa.fa-angle-down')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('div.expand-container i.fa.fa-angle-up')).toBeNull();
+            expect(fixture.nativeElement.querySelector('div.expand-container fa-icon svg.fa-angle-down')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('div.expand-container fa-icon svg.fa-angle-up')).toBeNull();
         });
 
         fit('Should have opened icon', () => {
@@ -106,8 +108,8 @@ describe('Component: SideMenuItemContentComponent', () => {
             component.openParent = true;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.expand-container i.fa.fa-angle-down')).toBeNull();
-            expect(fixture.nativeElement.querySelector('div.expand-container i.fa.fa-angle-up')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('div.expand-container fa-icon svg.fa-angle-down')).toBeNull();
+            expect(fixture.nativeElement.querySelector('div.expand-container fa-icon svg.fa-angle-up')).toBeTruthy();
         });
     });
 });

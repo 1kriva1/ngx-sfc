@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShowHideElementDirective, UIClass, WINDOW } from 'ngx-sfc-common';
 import { ColumnsToggleComponent } from './columns-toggle.component';
 import { ColumnsToggleConstants } from './columns-toggle.constants';
@@ -12,6 +13,7 @@ describe('Component: ColumnsToggle', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ShowHideElementDirective, ColumnsToggleComponent],
       providers: [
         { provide: WINDOW, useFactory: (() => { return windowMock; }) }
@@ -34,7 +36,7 @@ describe('Component: ColumnsToggle', () => {
     fit('Should have main elements', () => {
       expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelectorAll('span.icon').length).toEqual(2);
-      expect(fixture.nativeElement.querySelectorAll('i').length).toEqual(2);
+      expect(fixture.nativeElement.querySelectorAll('fa-icon').length).toEqual(2);
       expect(fixture.nativeElement.querySelector('span.label')).toBeTruthy();
     });
 
@@ -49,14 +51,14 @@ describe('Component: ColumnsToggle', () => {
 
   describe('Icons', () => {
     fit('Should show icon has relevant class', () => {
-      expect(fixture.nativeElement.querySelectorAll('i')[0].className).toEqual(ColumnsToggleConstants.SHOW.ICON);
+      expect(fixture.nativeElement.querySelectorAll('fa-icon svg')[0].classList).toContain('fa-eye');
     });
 
     fit('Should hide icon has relevant class', () => {
       service.toggle();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelectorAll('i')[1].className).toEqual(ColumnsToggleConstants.HIDE.ICON);
+      expect(fixture.nativeElement.querySelectorAll('fa-icon svg')[1].classList).toContain('fa-eye-slash');
     });
 
     fit('Should show icon be visible', () => {
@@ -75,14 +77,14 @@ describe('Component: ColumnsToggle', () => {
 
   describe('Label', () => {
     fit('Should be show label', () => {
-      expect(fixture.nativeElement.querySelector('span.label').innerText).toEqual(ColumnsToggleConstants.SHOW.LABEL);
+      expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase()).toEqual(ColumnsToggleConstants.SHOW.LABEL.toUpperCase());
     });
 
     fit('Should be hide label', () => {
       service.toggle();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span.label').innerText).toEqual(ColumnsToggleConstants.HIDE.LABEL);
+      expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase()).toEqual(ColumnsToggleConstants.HIDE.LABEL.toUpperCase());
     });
   });
 });

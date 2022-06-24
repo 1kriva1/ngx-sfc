@@ -12,7 +12,7 @@
                     <span class="column-name">Client</span>
                     <span>
                         {{model.client}}
-                        <i class="fa fa-star" *ngIf="model.isVIP"></i>
+                        <fa-icon [icon]="faStar"></fa-icon>
                     </span>
                     <div class="client-number">{{model.clientNumber}}</div>
                 </div>

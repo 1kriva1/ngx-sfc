@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IDefaultModalHeaderModel } from './default-modal-header.model';
 import { isDefined } from '../../../../utils';
 import { ModalService } from '../../service/modal.service';
+import { faWindowRestore, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-default-modal-header',
@@ -11,13 +12,17 @@ import { ModalService } from '../../service/modal.service';
 export class DefaultModalHeaderComponent implements OnInit {
 
   private readonly DEFAULT_MODAL_HEADER_MODEL: IDefaultModalHeaderModel = {
-    icon: 'fa fa-window-restore',
+    icon: faWindowRestore,
     showCloseIcon: true,
     text: 'Modal'
   }
 
   @Input()
   model?: IDefaultModalHeaderModel;
+
+  get icon(): IconDefinition {
+    return this.model?.icon || faWindowRestore;
+  }
 
   constructor(private modalService: ModalService) { }
 

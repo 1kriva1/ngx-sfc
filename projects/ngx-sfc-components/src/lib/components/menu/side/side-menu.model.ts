@@ -1,3 +1,5 @@
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+
 export interface ISideMenuModel {
     open: boolean;
     items: ISideMenuItemModel[];
@@ -6,7 +8,7 @@ export interface ISideMenuModel {
 export interface ISideMenuItemModel {
     active: boolean;
     label: string;
-    icon: string;
+    icon?: IconDefinition;
     type: SideMenuItemType;
     items?: ISideMenuItemModel[];
 }

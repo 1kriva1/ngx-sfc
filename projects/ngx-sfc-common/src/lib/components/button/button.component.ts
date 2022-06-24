@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UIClass } from '../../enums';
 import { distinct } from '../../utils';
 import { ButtonType } from './button-type.enum';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-button',
@@ -16,10 +17,10 @@ export class ButtonComponent {
   text: string = this.BUTTON_DEFAULT_TEXT;
 
   @Input()
-  iconBefore?: string;
+  iconBefore?: IconDefinition;
 
   @Input()
-  iconAfter?: string;
+  iconAfter?: IconDefinition;
 
   @Input()
   disabled: boolean = false;

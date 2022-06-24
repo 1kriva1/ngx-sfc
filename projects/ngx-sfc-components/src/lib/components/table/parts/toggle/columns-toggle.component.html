@@ -1,10 +1,10 @@
 <div class="container" *ngIf="vm$ | async as vm">
     <div>
         <span class="icon" [sfcShowHideElement]="!vm.show">
-            <i class="{{vm.model.ICON}}"></i>
+            <fa-icon [icon]="vm.model.ICON"></fa-icon>
         </span>
         <span class="icon" [sfcShowHideElement]="vm.show">
-            <i class="{{vm.model.ICON}}"></i>
+            <fa-icon [icon]="vm.model.ICON"></fa-icon>
         </span>
         <span class="label">{{vm.model.LABEL}}</span>
     </div>

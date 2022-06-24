@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
+import { faArrowRight, faArrowLeft, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { UIClass } from 'ngx-sfc-common';
 import { SliderButtonType } from './slider-button-type.enum';
 
@@ -9,8 +10,8 @@ import { SliderButtonType } from './slider-button-type.enum';
 })
 export class SliderButtonComponent {
 
-  private readonly ICON_NEXT = 'fa fa-arrow-right';
-  private readonly ICON_PREVIOUS = 'fa fa-arrow-left';
+  private readonly ICON_NEXT = faArrowRight;
+  private readonly ICON_PREVIOUS = faArrowLeft;
 
   @Input()
   @HostBinding('class')
@@ -20,7 +21,7 @@ export class SliderButtonComponent {
   @HostBinding('class.' + UIClass.Active)
   active: boolean = false;
 
-  get icon(): string {
+  get icon(): IconDefinition {
     return this.type == SliderButtonType.Next
       ? this.ICON_NEXT
       : this.ICON_PREVIOUS;

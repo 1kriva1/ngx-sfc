@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DelimeterComponent, HamburgerComponent, UIClass } from 'ngx-sfc-common';
 import { SideMenuHeaderComponent } from './parts/header/side-menu-header.component';
 import { SideMenuItemContentComponent } from './parts/item/content/side-menu-item-content.component';
@@ -15,7 +16,7 @@ describe('Component: SideMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule],
       declarations: [HamburgerComponent, DelimeterComponent, SideMenuHeaderComponent, SideMenuItemContentComponent,
         SideMenuTitleComponent, SideMenuItemComponent, SideMenuComponent]
     }).compileComponents();
@@ -88,8 +89,8 @@ describe('Component: SideMenuComponent', () => {
     });
 
     fit('Should have items', () => {
-      component.model.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
-      component.model.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Title });
+      component.model.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
+      component.model.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Title });
       fixture.detectChanges();
 
       const itemEls = fixture.debugElement.queryAll(By.css('sfc-side-menu-item')),
@@ -101,7 +102,7 @@ describe('Component: SideMenuComponent', () => {
 
     describe('Item', () => {
       fit('Should have defined attributes', () => {
-        component.model.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+        component.model.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
         fixture.detectChanges();
 
         const itemEl = fixture.debugElement.query(By.css('sfc-side-menu-item'));
@@ -114,7 +115,7 @@ describe('Component: SideMenuComponent', () => {
       fit('Should emit selected event', () => {
         spyOn(component.selected, 'emit');
 
-        component.model.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
+        component.model.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
         fixture.detectChanges();
 
         const itemContentEl = fixture.debugElement.query(By.css('sfc-side-menu-item sfc-side-menu-item-content'));
@@ -126,12 +127,12 @@ describe('Component: SideMenuComponent', () => {
       });
 
       fit('Should change active state', () => {
-        component.model.items?.push({ active: false, icon: '', label: '', type: SideMenuItemType.Item });
-        component.model.items?.push({ active: true, icon: '', label: '', type: SideMenuItemType.Item });
+        component.model.items?.push({ active: false, icon: undefined, label: '', type: SideMenuItemType.Item });
+        component.model.items?.push({ active: true, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.model.items?.push({
           active: false,
-          items: [{ active: true, icon: '', label: '', type: SideMenuItemType.Item }],
-          icon: '', label: '', type: SideMenuItemType.Item
+          items: [{ active: true, icon: undefined, label: '', type: SideMenuItemType.Item }],
+          icon: undefined, label: '', type: SideMenuItemType.Item
         });
         fixture.detectChanges();
 
@@ -147,11 +148,11 @@ describe('Component: SideMenuComponent', () => {
       });
 
       fit('Should change active state for child', () => {
-        component.model.items?.push({ active: true, icon: '', label: '', type: SideMenuItemType.Item });
+        component.model.items?.push({ active: true, icon: undefined, label: '', type: SideMenuItemType.Item });
         component.model.items?.push({
           active: false,
-          items: [{ active: false, icon: '', label: '', type: SideMenuItemType.Item }],
-          icon: '', label: '', type: SideMenuItemType.Item
+          items: [{ active: false, icon: undefined, label: '', type: SideMenuItemType.Item }],
+          icon: undefined, label: '', type: SideMenuItemType.Item
         });
         fixture.detectChanges();
 
@@ -172,7 +173,7 @@ describe('Component: SideMenuComponent', () => {
 
     describe('Title', () => {
       fit('Should have defined attributes', () => {
-        component.model.items?.push({ active: false, icon: '', label: 'Test title', type: SideMenuItemType.Title });
+        component.model.items?.push({ active: false, icon: undefined, label: 'Test title', type: SideMenuItemType.Title });
         fixture.detectChanges();
 
         const itemEl = fixture.debugElement.query(By.css('sfc-side-menu-title'));

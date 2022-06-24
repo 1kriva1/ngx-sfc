@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonConstants, SortingDirection, UIClass } from 'ngx-sfc-common';
 import { DefaultTableColumnComponent } from './default-table-column.component';
+import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('Component: DefaultTableColumn', () => {
   let component: DefaultTableColumnComponent;
@@ -8,6 +10,7 @@ describe('Component: DefaultTableColumn', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [DefaultTableColumnComponent]
     }).compileComponents();
   });
@@ -45,21 +48,21 @@ describe('Component: DefaultTableColumn', () => {
 
   describe('Icon', () => {
     fit('Should not exist by default', () => {
-      expect(fixture.nativeElement.querySelector('div.icon i')).toBeNull();
+      expect(fixture.nativeElement.querySelector('div.icon fa-icon')).toBeNull();
     });
 
     fit('Should exist', () => {
-      component.model = { name: 'column_1', field: '', icon: 'fa fa-test' };
+      component.model = { name: 'column_1', field: '', icon: faTShirt };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icon i')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div.icon fa-icon')).toBeTruthy();
     });
 
     fit('Should have provided icon', () => {
-      component.model = { name: 'column_1', field: '', icon: 'fa fa-test' };
+      component.model = { name: 'column_1', field: '', icon: faTShirt };
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('div.icon i').className).toEqual('fa fa-test');
+      expect(fixture.nativeElement.querySelector('div.icon fa-icon svg').classList).toContain('fa-shirt');
     });
   });
 

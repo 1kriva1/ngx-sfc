@@ -4,6 +4,7 @@ import { CommonConstants, Position } from 'ngx-sfc-common';
 import { ComponentSize, SortingDirection } from 'ngx-sfc-common';
 import { IDefaultTableColumnModel, ITableDataModel, ITablePaginationModel, TableDataType } from 'ngx-sfc-components';
 import { BehaviorSubject, combineLatest, debounceTime, map, Observable, startWith, tap } from 'rxjs';
+import { faCar, faPen, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './tables-default-presentation.component.html',
@@ -52,7 +53,7 @@ export class TablesDefaultPresentationComponent {
       column.sorting = {
         enabled: true,
         direction: SortingDirection.Descending,
-        icons: [{ direction: SortingDirection.Ascending, icon: 'fa fa-car' }, { direction: SortingDirection.Descending, icon: 'fa fa-pen' }]
+        icons: [{ direction: SortingDirection.Ascending, icon: faCar }, { direction: SortingDirection.Descending, icon: faPen }]
       }
     });
 
@@ -60,7 +61,7 @@ export class TablesDefaultPresentationComponent {
     this.columnsSelectable = this.getColumns();
     this.columnsSelectable.forEach((column, index) => {
       if (index % 2 == 0)
-        column.icon = 'fa fa-car';
+        column.icon = faCar;
     });
 
     // sync data
@@ -111,12 +112,12 @@ export class TablesDefaultPresentationComponent {
       {
         name: 'Id',
         field: 'id',
-        icon: ''
+        icon: undefined
       },
       {
         name: 'Name',
         field: 'name',
-        icon: ''
+        icon: undefined
       },
       {
         name: 'Code',
@@ -284,11 +285,11 @@ export class TablesDefaultPresentationComponent {
     this.columnsModification.push({
       name: 'New column',
       field: 'newColumn',
-      icon: 'fa fa-star',
+      icon: faStar,
       sorting: {
         enabled: true,
         direction: SortingDirection.Descending,
-        icons: [{ icon: 'fa fa-star', direction: SortingDirection.Descending }, { icon: 'fa fa-car', direction: SortingDirection.Ascending }]
+        icons: [{ icon: faStar, direction: SortingDirection.Descending }, { icon: faCar, direction: SortingDirection.Ascending }]
       }
     });
   }
