@@ -16,7 +16,7 @@ class TestClickOutsideDirectiveComponent {
     value: boolean = false;
 }
 
-describe('Directive: ClickOutsideDirective', () => {
+describe('Directive: ClickOutside', () => {
 
     let component: TestClickOutsideDirectiveComponent;
     let fixture: ComponentFixture<TestClickOutsideDirectiveComponent>;

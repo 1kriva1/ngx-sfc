@@ -35,7 +35,7 @@ export function isAsyncData(data: any) {
  * @returns Extended object with new property
  */
 export function addPropertyToObject(obj: any, property: string, value: any = null): any {
-    if (!isDefined(property) && !obj.hasOwnProperty(property)) {
+    if (isDefined(property) && !obj.hasOwnProperty(property)) {
         let newObj: any = {};
         newObj[property] = value;
         obj = { ...obj, ...newObj };

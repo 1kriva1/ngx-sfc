@@ -1,0 +1,1 @@
+export { TextPresentationComponent } from './text/text-presentation.component';
