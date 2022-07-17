@@ -3,4 +3,5 @@ export class CommonConstants {
     static EMPTY_STRING = '';
     static MOUSE_BUTTON_LEFT = 0;
     static FULL_PERCENTAGE = 100;
+    static COMMON_TEXT_DELIMETER = '/';
 }

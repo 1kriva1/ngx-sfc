@@ -1,0 +1,10 @@
+<div class="container text">
+    <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
+    <fa-icon *ngIf="_isPassword" class="password-icon" [icon]="passwordIcon" (click)="togglePasswordVisibility()">
+    </fa-icon>
+    <input sfcInput id="{{inputId}}" [type]="type" class="text-input" [placeholder]="placeholderValue" [value]="value"
+        [disabled]="disabled" (input)="onChange($event)" (blur)="onBlur()">
+    <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
+    <span class="helper-text">{{helperTextValue}}</span>
+    <span [hidden]="!requiredLengthValue" class="character-counter">{{charsCounterValue}}</span>
+</div>

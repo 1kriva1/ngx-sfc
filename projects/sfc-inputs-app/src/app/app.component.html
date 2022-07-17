@@ -1,1 +1,30 @@
-SFC INPUTS APPLICATION
+<header>
+
+    <div class="routing-container">
+        <a routerLink="" class="logo">SFC inputs</a>
+        <div class="routing-links">
+            <a routerLinkActive="menu-active" routerLink="text" [queryParams]="{theme: theme}">Text</a>
+        </div>
+    </div>
+
+</header>
+
+<main>
+
+    <div class="presentation-container" [ngClass]="theme == Theme.Default 
+        ? Theme.Default : Theme.Dark">
+        <div class="theme-switcher">
+            <button [class.active]="theme == Theme.Default" class="app common"
+                (click)="changeTheme(Theme.Default)">Common</button>
+            <button [class.active]="theme == Theme.Dark" class="app dark"
+                (click)="changeTheme(Theme.Dark)">Dark</button>
+        </div>
+
+        <div class="components-container">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+
+</main>

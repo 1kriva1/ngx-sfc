@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "npm run lint:all && npm run test:code-coverage:common && npm run test:code-coverage:components"
+    "pre-commit": "npm run lint:all && npm run test:code-coverage:all"
   }
 }

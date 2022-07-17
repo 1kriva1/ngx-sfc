@@ -1,0 +1,1 @@
+export { TextInputComponent } from '../components/text/text-input.component';

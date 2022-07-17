@@ -1,0 +1,38 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container.text {
+    .sfc-input[type="password"] {
+      padding-right: 1.248em;
+      width: calc(100% - 1.248em);
+    }
+
+    .icon ~ .sfc-input[type="password"] {
+      width: calc(100% - 2.4em - 1.248em);
+    }
+
+    .password-icon {
+      position: absolute;
+      right: 0.6em;
+      top: 0.6em;
+      font-size: 0.8em;
+
+      @include theme-value(color, $color-default, $color-dark);
+
+      cursor: pointer;
+
+      &:hover {
+        color: $color-hover-default;
+      }
+    }
+
+    .character-counter {
+      user-select: none;
+      float: right;
+      font-size: 0.6em;
+      min-height: 0.9em;
+      position: relative;
+      top: 0.248em;
+    }
+  }
+}
