@@ -9,7 +9,7 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
-import { NgxSfcInputsModule } from 'projects/ngx-sfc-inputs/src/lib/ngx-sfc-inputs.module';
+import { NgxSfcInputsModule } from 'ngx-sfc-inputs';
 
 @NgModule({
   declarations: [
