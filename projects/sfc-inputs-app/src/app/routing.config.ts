@@ -1,5 +1,6 @@
 import { Route, Routes } from "@angular/router";
 import {
+    TextAreaPresentationComponent,
     TextPresentationComponent
 } from "../presentations";
 
@@ -19,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'text',
         component: TextPresentationComponent
+    },
+    {
+        path: 'textarea',
+        component: TextAreaPresentationComponent
     },
     fallbackRoute,
     indexRoute

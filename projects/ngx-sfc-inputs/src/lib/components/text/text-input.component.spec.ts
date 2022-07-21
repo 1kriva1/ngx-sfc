@@ -4,6 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { CommonConstants, UIClass } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
+import { InputReferenceDirective } from '../../directives';
 import { TextInputComponent } from './text-input.component';
 import { TextType } from './text-type.enum';
 
@@ -14,7 +15,7 @@ describe('Component: TextInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [TextInputComponent]
+      declarations: [InputReferenceDirective, TextInputComponent]
     }).compileComponents();
   });
 
@@ -30,7 +31,7 @@ describe('Component: TextInput', () => {
     });
 
     fit('Should have main elements', () => {
-      expect(fixture.nativeElement.querySelector('.container.text')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input.text-input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
@@ -95,7 +96,7 @@ describe('Component: TextInput', () => {
       component.type = TextType.Password;
       component.ngOnInit();
       fixture.detectChanges();
-      
+
       const passwordIconEl = fixture.debugElement.query(By.css('.password-icon'));
       passwordIconEl.triggerEventHandler('click', { target: passwordIconEl.nativeElement });
       fixture.detectChanges();
@@ -156,6 +157,37 @@ describe('Component: TextInput', () => {
       expect(fixture.nativeElement.querySelector('input.text-input').disabled).toBeTrue();
     });
 
+    fit("Should add active class for label on focus event", () => {
+      const inputEl = fixture.debugElement.query(By.css('input'));
+      inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('label').className).toEqual(UIClass.Active);
+    });
+
+    fit("Should toggle placeholder value on focus event", () => {
+      const inputEl = fixture.debugElement.query(By.css('input')),
+        placeholderAssertValue = 'test placeholder';
+      component.placeholder = placeholderAssertValue;
+      fixture.detectChanges();
+
+      expect(inputEl.nativeElement.placeholder).toEqual(placeholderAssertValue);
+
+      inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+      fixture.detectChanges();
+
+      expect(inputEl.nativeElement.placeholder).toEqual(CommonConstants.EMPTY_STRING);
+    });
+
+    fit("Should remove active class from label on blur event", () => {
+      const inputEl = fixture.debugElement.query(By.css('input'));
+      inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+      inputEl.triggerEventHandler('blur', { target: inputEl.nativeElement });
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('label').className).toEqual(CommonConstants.EMPTY_STRING);
+    });
+
     fit("Should change value", () => {
       const value = 'trigger input event',
         inputEl = fixture.debugElement.query(By.css('input'));
@@ -181,7 +213,7 @@ describe('Component: TextInput', () => {
       expect(inputEl.placeholder).toEqual(placeholderAssertValue);
     });
 
-    xit("Should be empty when input focused", () => {
+    fit("Should be empty when input focused", () => {
       const placeholderAssertValue = "test placeholder",
         inputEl = fixture.debugElement.query(By.css('input'));
       component.placeholder = placeholderAssertValue;
@@ -190,10 +222,7 @@ describe('Component: TextInput', () => {
       inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
       fixture.detectChanges();
 
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(inputEl.nativeElement.placeholder).toEqual(CommonConstants.EMPTY_STRING);
-      });
+      expect(inputEl.nativeElement.placeholder).toEqual(CommonConstants.EMPTY_STRING);
     });
   });
 
@@ -226,6 +255,14 @@ describe('Component: TextInput', () => {
 
     fit("Should be active, when value defined", () => {
       component.writeValue('test value');
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('label').className).toEqual(UIClass.Active);
+    });
+
+    fit("Should be active, when input in focus", () => {
+      const inputEl = fixture.debugElement.query(By.css('input'));
+      inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('label').className).toEqual(UIClass.Active);

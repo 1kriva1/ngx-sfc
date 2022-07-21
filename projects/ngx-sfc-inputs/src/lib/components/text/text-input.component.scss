@@ -1,7 +1,7 @@
 @import "../../../../../ngx-sfc-common/src/lib/styles/styles";
 
 :host {
-  .container.text {
+  .container {
     .sfc-input[type="password"] {
       padding-right: 1.248em;
       width: calc(100% - 1.248em);

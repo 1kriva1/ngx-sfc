@@ -289,6 +289,10 @@ ng generate class components/carousel/parts/stage/stage --project ngx-sfc-compon
 
 ng generate class components/index --project ngx-sfc-components --skip-tests true -d
 
+INPUTS:
+
+ng generate component components/textarea --project ngx-sfc-inputs --export true --flat false --style scss --skip-tests false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
