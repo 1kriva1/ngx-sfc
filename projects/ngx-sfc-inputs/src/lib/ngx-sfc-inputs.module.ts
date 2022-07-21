@@ -2,13 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
-import { TextInputComponent } from './components';
+import {
+  TextInputComponent,
+  TextAreaInputComponent
+} from './components';
 import { InputReferenceDirective } from './directives';
 
 @NgModule({
   declarations: [
     TextInputComponent,
-    InputReferenceDirective
+    InputReferenceDirective,
+    TextAreaInputComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +20,8 @@ import { InputReferenceDirective } from './directives';
     NgxSfcCommonModule
   ],
   exports: [
-    TextInputComponent
+    TextInputComponent,
+    TextAreaInputComponent
   ]
 })
 export class NgxSfcInputsModule { }

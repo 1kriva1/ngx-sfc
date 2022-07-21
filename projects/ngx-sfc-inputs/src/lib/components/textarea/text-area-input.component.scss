@@ -1,0 +1,18 @@
+:host {
+  .container {
+    .sfc-input {
+      line-height: normal;
+      overflow: hidden;
+      padding: 0.8em 0;
+      resize: none;
+      box-sizing: border-box;
+    }
+
+    .character-counter {
+      user-select: none;
+      float: right;
+      font-size: 0.75em;
+      min-height: 1.125em;
+    }
+  }
+}
