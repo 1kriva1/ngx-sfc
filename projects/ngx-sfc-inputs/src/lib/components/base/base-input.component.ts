@@ -212,8 +212,8 @@ export default abstract class BaseInputComponent<T> implements ControlValueAcces
         this.propagateBlur = fn;
     }
 
-    onChange(event: Event) {
-        this.value = (event.target as any).value;
+    onChange(value: T | null) {
+        this.value = value;
         this.propagateChange(this.value);
     }
 

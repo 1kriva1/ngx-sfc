@@ -1,5 +1,8 @@
 import { Route, Routes } from "@angular/router";
 import {
+    FileInputPresentationComponent,
+    FilePresentationComponent,
+    InlineFileInputPresentationComponent,
     TextAreaPresentationComponent,
     TextPresentationComponent
 } from "../presentations";
@@ -24,6 +27,28 @@ export const routes: Routes = [
     {
         path: 'textarea',
         component: TextAreaPresentationComponent
+    },
+    {
+        path: 'file',
+        component: FilePresentationComponent,
+        children: [
+            {
+                path: 'input',
+                component: FileInputPresentationComponent
+            },
+            {
+                path: 'inline',
+                component: InlineFileInputPresentationComponent
+            },
+            {
+                path: '',
+                component: FileInputPresentationComponent
+            },
+            {
+                path: '**',
+                component: FileInputPresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

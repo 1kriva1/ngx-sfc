@@ -1,0 +1,9 @@
+<div class="container">
+    <input #inputFile sfcInput id="{{inputId}}" type="file" [disabled]="disabled">
+    <label for="{{inputId}}" title={{title}}>
+        <fa-icon *ngIf="icon" [icon]="icon" class="icon"></fa-icon>
+        <span>{{text}}</span>
+        <sfc-close class="clear-button" *ngIf="showClearButton" (click)="clearData($event)"></sfc-close>
+    </label>
+    <span class="helper-text">{{helperTextValue}}</span>
+</div>

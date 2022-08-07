@@ -293,6 +293,16 @@ INPUTS:
 
 ng generate component components/textarea --project ngx-sfc-inputs --export true --flat false --style scss --skip-tests false -d
 
+ng generate component components/file/input/file-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/file/inline/inline-file-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate class components/file/file-input --project ngx-sfc-inputs --skip-tests true --type constants -d
+
+ng generate class components/file/base-file-input --project ngx-sfc-inputs --skip-tests true --type component -d
+
+ng generate module validators/ngx-sfc-inputs-validation --flat true --project ngx-sfc-inputs
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d

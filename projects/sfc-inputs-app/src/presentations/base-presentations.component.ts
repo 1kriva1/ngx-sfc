@@ -1,10 +1,11 @@
 import { Directive } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Theme } from 'ngx-sfc-common';
+import { ComponentSize, Theme } from 'ngx-sfc-common';
 
 @Directive()
 export abstract class BasePresentationComponent {
+    public ComponentSize = ComponentSize;    
     public theme: Theme = Theme.Default;
     public formGroup!: FormGroup;
 

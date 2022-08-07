@@ -1,0 +1,93 @@
+@import "../../../styles/mixins";
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    sfc-button {
+      float: left;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      margin: 0;
+      font-size: 0;
+      opacity: 0;
+      box-sizing: border-box;
+    }
+
+    .text-container {
+      overflow: hidden;
+      padding-left: 0.625em;
+
+      .sfc-input {
+        & + label.active {
+          transform: translateY(-0.9em) translateX(6em) scale(0.8);
+        }
+      }
+
+      .icon {
+        & ~ .sfc-input + label {
+          transform: translateY(-0.9em) translateX(0.625em) scale(0.8);
+        }
+      }
+
+      @include right-side-info;
+
+      .clear-button {
+        visibility: hidden;
+        transition: opacity 1s ease-out;
+
+        @include action-icon-right;
+      }
+    }
+  }
+
+  &:hover {
+    .container {
+      ::ng-deep sfc-button {
+        a:not(.disabled) {
+          border-color: $color-hover-default !important;
+          background: $color-hover-default;
+        }
+      }
+
+      .text-container {
+        .clear-button {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &:not(.disabled) {
+    .container {
+      input[type="file"] {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @include valid {
+    ::ng-deep sfc-button {
+      a:not(.disabled) {
+        border-color: $color-success !important;
+        background: $color-success;
+      }
+    }
+  }
+
+  @include invalid {
+    ::ng-deep sfc-button {
+      a:not(:hover):not(.disabled) {
+        border-color: $color-failed !important;
+        background: $color-failed;
+      }
+    }
+  }
+}

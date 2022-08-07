@@ -1,0 +1,111 @@
+@import "../../../styles/mixins";
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  width: 100%;
+
+  .container {
+    text-align: center;
+
+    input[type="file"] {
+      @include square-size(0);
+
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    label {
+      font-size: 1em;
+      font-weight: 700;
+      user-select: none;
+      position: relative;
+      text-align: center;
+
+      @include theme-value(color, $color-default, $color-dark);
+
+      &:hover {
+        color: $color-hover-default;
+      }
+
+      .icon {
+        position: relative;
+        bottom: 0.31em;
+        padding-right: 0.31em;
+      }
+
+      .clear-button {
+        font-size: 0.8em;
+        visibility: hidden;
+        position: absolute;
+        color: #656d78;
+        opacity: 0;
+        z-index: 999;
+        padding-left: 0.31em;
+        transition: opacity 1s ease-out;
+
+        @include theme-value(color, $color-default, $color-dark);
+
+        &:hover {
+          color: $color-failed;
+        }
+      }
+
+      span:not(:empty) {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+        max-width: 50%;
+      }
+    }
+
+    @include helper-text;
+
+    .helper-text {
+      display: block;
+    }
+  }
+
+  &.disabled {
+    .container {
+      label {
+        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+      }
+    }
+  }
+
+  &:not(.disabled) {
+    .container {
+      label {
+        cursor: pointer;
+      }
+    }
+
+    &:hover {
+      .container {
+        label {
+          .clear-button {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  @include valid {
+    label,
+    .helper-text {
+      color: $color-success;
+    }
+  }
+
+  @include invalid {
+    label,
+    .helper-text {
+      color: $color-failed;
+    }
+  }
+}
