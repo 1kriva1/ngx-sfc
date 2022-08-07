@@ -35,7 +35,7 @@ describe('Component: TextAreaInput', () => {
       expect(fixture.nativeElement.querySelector('textarea.text-input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('.character-counter')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.right-side-info')).toBeTruthy();
     });
   });
 
@@ -262,7 +262,7 @@ describe('Component: TextAreaInput', () => {
 
   describe('Characters counter', () => {
     fit("Should be not hidden", () => {
-      expect(fixture.nativeElement.querySelector('span.character-counter').hidden).toBeFalse();
+      expect(fixture.nativeElement.querySelector('span.right-side-info').hidden).toBeFalse();
     });
   });
 

@@ -54,7 +54,7 @@ describe('Component: BaseTextInputComponent', () => {
 
     describe('Required length', () => {
         fit("Should be hidden", () => {
-            expect(fixture.nativeElement.querySelector('.character-counter').hidden).toBeTrue();
+            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeTrue();
         });
 
         fit("Should be hidden with valid value", () => {
@@ -62,7 +62,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 'test' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.character-counter').hidden).toBeTrue();
+            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeTrue();
         });
 
         fit("Should be hidden with invalid value, not related to length validation", () => {
@@ -70,7 +70,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: '' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.character-counter').hidden).toBeTrue();
+            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeTrue();
         });
 
         fit("Should not be hidden with invalid value (min length validation)", () => {
@@ -78,7 +78,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 't' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.character-counter').hidden).toBeFalse();
+            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeFalse();
         });
 
         fit("Should not be hidden with invalid value (max length validation)", () => {
@@ -86,13 +86,13 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 'test test' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.character-counter').hidden).toBeFalse();
+            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeFalse();
         });
     });
 
     describe('Characters counter', () => {
         fit("Should have default value", () => {
-            expect(fixture.nativeElement.querySelector('.character-counter').innerText).toEqual(CommonConstants.EMPTY_STRING);
+            expect(fixture.nativeElement.querySelector('.right-side-info').innerText).toEqual(CommonConstants.EMPTY_STRING);
         });
 
         fit("Should be empty for valid value", () => {
@@ -100,7 +100,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 'test' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('span.character-counter').innerText).toEqual(CommonConstants.EMPTY_STRING);
+            expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual(CommonConstants.EMPTY_STRING);
         });
 
         fit("Should have value for invalid value (min length validation)", () => {
@@ -108,7 +108,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 't' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('span.character-counter').innerText).toEqual('1/2');
+            expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('1/2');
         });
 
         fit("Should have value for invalid value (max length validation)", () => {
@@ -116,7 +116,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 'test test' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('span.character-counter').innerText).toEqual('9/5');
+            expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('9/5');
         });
     });
 });

@@ -1,3 +1,5 @@
+@import "../../styles/mixins";
+
 :host {
   .container {
     .sfc-input {
@@ -8,11 +10,6 @@
       box-sizing: border-box;
     }
 
-    .character-counter {
-      user-select: none;
-      float: right;
-      font-size: 0.75em;
-      min-height: 1.125em;
-    }
+    @include right-side-info;
   }
 }

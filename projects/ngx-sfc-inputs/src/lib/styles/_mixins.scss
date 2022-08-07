@@ -1,0 +1,63 @@
+@mixin valid {
+  &.has-value.ng-dirty.ng-valid {
+    .container {
+      @content;
+    }
+  }
+}
+
+@mixin invalid {
+  &.has-value.ng-invalid,
+  &.ng-dirty.ng-invalid {
+    .container {
+      @content;
+    }
+  }
+}
+
+@mixin helper-text() {
+  .helper-text {
+    position: relative;
+    display: inline-block;
+    min-height: 0.9em;
+    min-width: 1em;
+    font-size: 0.6em;
+
+    @include theme-value(color, $color-default, $color-dark);
+
+    user-select: none;
+
+    &::after {
+      opacity: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+@mixin right-side-info() {
+  .right-side-info {
+    user-select: none;
+    float: right;
+    font-size: 0.6em;
+    min-height: 0.9em;
+    position: relative;
+    top: 0.248em;
+  }
+}
+
+@mixin action-icon-right() {
+  position: absolute;
+  right: 0.6em;
+  top: 0.6em;
+  font-size: 0.8em;
+
+  @include theme-value(color, $color-default, $color-dark);
+
+  cursor: pointer;
+
+  &:hover {
+    color: $color-hover-default;
+  }
+}

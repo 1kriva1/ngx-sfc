@@ -1,3 +1,4 @@
+@import "mixins";
 @import "../../../../ngx-sfc-common/src/lib/styles/styles";
 
 :host {
@@ -106,24 +107,7 @@
       }
     }
 
-    .helper-text {
-      position: relative;
-      display: inline-block;
-      min-height: 0.9em;
-      min-width: 1em;
-      font-size: 0.6em;
-
-      @include theme-value(color, $color-default, $color-dark);
-
-      user-select: none;
-
-      &::after {
-        opacity: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-    }
+    @include helper-text;
   }
 
   &.focus {
@@ -162,56 +146,51 @@
     }
   }
 
-  &.has-value.ng-invalid,
-  &.ng-dirty.ng-invalid {
-    .container {
-      .sfc-input {
+  @include invalid {
+    .sfc-input {
+      border-bottom: 1px solid $color-failed;
+      box-shadow: 0 1px 0 0 $color-failed;
+
+      &:focus {
         border-bottom: 1px solid $color-failed;
         box-shadow: 0 1px 0 0 $color-failed;
 
-        &:focus {
-          border-bottom: 1px solid $color-failed;
-          box-shadow: 0 1px 0 0 $color-failed;
-
-          + label {
-            color: $color-failed;
-          }
-        }
-
-        ~ .helper-text {
+        + label {
           color: $color-failed;
         }
       }
 
-      .icon {
-        color: $color-failed !important;
+      ~ .helper-text {
+        color: $color-failed;
       }
+    }
+
+    .icon {
+      color: $color-failed !important;
     }
   }
 
-  &.has-value.ng-dirty.ng-valid {
-    .container {
-      .sfc-input {
+  @include valid {
+    .sfc-input {
+      border-bottom: 1px solid $color-success;
+      box-shadow: 0 1px 0 0 $color-success;
+
+      &:focus {
         border-bottom: 1px solid $color-success;
         box-shadow: 0 1px 0 0 $color-success;
 
-        &:focus {
-          border-bottom: 1px solid $color-success;
-          box-shadow: 0 1px 0 0 $color-success;
-
-          + label {
-            color: $color-success;
-          }
-        }
-
-        ~ .helper-text {
+        + label {
           color: $color-success;
         }
       }
 
-      .icon {
-        color: $color-success !important;
+      ~ .helper-text {
+        color: $color-success;
       }
+    }
+
+    .icon {
+      color: $color-success !important;
     }
   }
 

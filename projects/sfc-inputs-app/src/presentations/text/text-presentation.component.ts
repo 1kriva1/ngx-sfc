@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { faPencil, faUser } from '@fortawesome/free-solid-svg-icons';
-import { ComponentSize } from 'ngx-sfc-common';
 import { BasePresentationComponent } from '../base-presentations.component';
 
 @Component({
@@ -10,8 +9,6 @@ import { BasePresentationComponent } from '../base-presentations.component';
 })
 export class TextPresentationComponent extends BasePresentationComponent
   implements OnInit {
-
-  ComponentSize = ComponentSize;
 
   faUser = faUser;
   faPencil = faPencil;
