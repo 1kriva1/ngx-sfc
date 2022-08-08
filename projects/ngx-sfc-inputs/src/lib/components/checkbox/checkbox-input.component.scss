@@ -1,0 +1,42 @@
+@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
+
+:host {
+  width: initial;
+
+  .container {
+    font-size: 1.45em;
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+
+      label {
+        @include theme-value(color, $color-default, $color-dark);
+
+        cursor: pointer;
+        margin-left: 0.5em;
+        user-select: none;
+      }
+    }
+
+    .icon {
+      top: 0;
+      position: relative;
+      margin-right: 0.4em;
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        label {
+          @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+        }
+      }
+    }
+  }
+}

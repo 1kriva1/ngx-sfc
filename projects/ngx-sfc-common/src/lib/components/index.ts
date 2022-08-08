@@ -20,6 +20,7 @@ export { DotsComponent } from './dots/dots.component';
 export { ToggleSwitcherComponent } from './toggle-switcher/toggle-switcher.component';
 export { IToggleSwitcherModel } from './toggle-switcher/toggle-switcher.model';
 export { CheckmarkComponent } from './checkmark/checkmark.component';
+export { CheckmarkType } from './checkmark/checkmark-type.enum';
 export { TemplateContentComponent } from './template-content/template-content.component';
 export { CloseComponent } from './close/close.component';
 export { PaginationComponent } from './pagination/pagination.component';

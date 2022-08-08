@@ -76,7 +76,6 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizelegibility;
       position: absolute;
-      width: 2.4em;
       font-size: 1.3em;
       transition: color 0.2s;
       top: 0.32em;
@@ -88,26 +87,30 @@
       &:hover {
         color: $color-hover-default;
       }
-
-      & ~ .sfc-input {
-        width: calc(100% - 2.4em);
-      }
-
-      & ~ label {
-        width: calc(100% - 2.4em - 1.2em);
-      }
-
-      & ~ label,
-      & ~ .sfc-input {
-        margin-left: 2.4em;
-      }
-
-      & ~ span.helper-text {
-        margin-left: 3.2em;
-      }
     }
 
     @include helper-text;
+  }
+
+  &.has-icon {
+    .container {
+      .sfc-input {
+        width: calc(100% - 2.4em);
+      }
+
+      label {
+        width: calc(100% - 2.4em - 1.2em);
+      }
+
+      label,
+      .sfc-input {
+        margin-left: 2.4em;
+      }
+
+      span.helper-text {
+        margin-left: 3.2em;
+      }
+    }
   }
 
   &.focus {
