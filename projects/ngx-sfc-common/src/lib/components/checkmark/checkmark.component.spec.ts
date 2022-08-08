@@ -3,6 +3,7 @@ import { UIClass } from '../../enums';
 import { CheckmarkComponent } from './checkmark.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CheckmarkType } from './checkmark-type.enum';
 
 describe('Component: CheckmarkComponent', () => {
   let component: CheckmarkComponent;
@@ -60,7 +61,76 @@ describe('Component: CheckmarkComponent', () => {
     });
   });
 
+  describe('Disabled', () => {
+    fit("Should not be disabled", () => {
+      expect(fixture.nativeElement.className)
+        .not.toContain(UIClass.Disabled);
+    });
+
+    fit("Should be disabled", () => {
+      component.disabled = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.className)
+        .toContain(UIClass.Disabled);
+    });
+  });
+
+  describe('Type', () => {
+    fit("Should have default type", () => {
+      expect(fixture.nativeElement.className).toContain(CheckmarkType.Rounded);
+      expect(fixture.nativeElement.className).not.toContain(CheckmarkType.Square);
+    });
+
+    fit("Should have defined type", () => {
+      component.type = CheckmarkType.Square
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.className).not.toContain(CheckmarkType.Rounded);
+      expect(fixture.nativeElement.className).toContain(CheckmarkType.Square);
+    });
+  });
+
   describe('Icon', () => {
+    fit("Should not exist, when showNotActive is false", () => {
+      component.showNotActive = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeNull();
+    });
+
+    fit("Should exist, when showNotActive is false, but active", () => {
+      component.showNotActive = false;
+      component.active = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
+    });
+
+    fit("Should exist, when showNotActive is true", () => {
+      component.showNotActive = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
+    });
+
+    fit("Should toggle icon, when showNotActive is false", () => {
+      component.showNotActive = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeNull();
+
+      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
+
+      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeNull();
+    });
+
     fit("Should have default icon", () => {
       expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-check');
     });

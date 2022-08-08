@@ -1,5 +1,5 @@
 <div class="container">
     <span class="check">
-        <fa-icon [icon]="icon"></fa-icon>
+        <fa-icon *ngIf="showNotActive || active" [icon]="icon"></fa-icon>
     </span>
 </div>

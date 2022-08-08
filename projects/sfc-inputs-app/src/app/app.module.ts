@@ -7,7 +7,8 @@ import {
   TextAreaPresentationComponent,
   FilePresentationComponent,
   FileInputPresentationComponent,
-  InlineFileInputPresentationComponent
+  InlineFileInputPresentationComponent,
+  CheckboxPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +22,8 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     TextAreaPresentationComponent,
     FilePresentationComponent,
     FileInputPresentationComponent,
-    InlineFileInputPresentationComponent
+    InlineFileInputPresentationComponent,
+    CheckboxPresentationComponent
   ],
   imports: [
     BrowserModule,

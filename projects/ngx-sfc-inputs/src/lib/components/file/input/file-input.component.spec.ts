@@ -9,7 +9,7 @@ import { InputReferenceDirective } from '../../../directives';
 import { FileInputConstants } from '../file-input.constants';
 import { FileInputComponent } from './file-input.component';
 
-describe('Component: FileInputComponent', () => {
+describe('Component: FileInput', () => {
   let component: FileInputComponent;
   let fixture: ComponentFixture<FileInputComponent>;
 
