@@ -14,6 +14,10 @@ export class ToggleSwitcherComponent {
   active: boolean = false;
 
   @Input()
+  @HostBinding('class.' + UIClass.Disabled)
+  disabled: boolean = false;
+
+  @Input()
   leftModel: IToggleSwitcherModel;
 
   @Input()

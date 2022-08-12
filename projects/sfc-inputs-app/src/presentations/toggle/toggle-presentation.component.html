@@ -1,0 +1,228 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Toggle:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-empty" formControlName="inputToggleNull">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-label" formControlName="inputToggleLabel" label="with label">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-placeholder" formControlName="inputTogglePlaceholder"
+                    placeholder="with placeholder">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-label-placeholder" formControlName="inputToggleLabelAndPlaceholder"
+                    label="with label and placeholder" placeholder="with label and placeholder">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-icon" formControlName="inputToggleIcon" [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-icon-label" formControlName="inputToggleIconAndLabel" [icon]="faStar"
+                    label="with label and icon">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-icon-custom-positive" formControlName="inputToggleCustomNegativeIcon"
+                    label="with label and custom positive icon" [rightModel]="{icon: faAutomobile, label:''}"
+                    helperText="with label and custom positive icon">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-icon-custom-negative" formControlName="inputToggleCustomNegativeIcon"
+                    label="with label and custom negative icon" [leftModel]="{icon: faAutomobile, label:''}"
+                    helperText="with label and custom negative icon">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-icon-custom-icons" formControlName="inputToggleCustomIcons"
+                    label="with label and custom icons" [leftModel]="{icon: faBan, label:''}"
+                    [rightModel]="{icon: faAutomobile, label:''}" helperText="with label and custom icons">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-custom-labels" formControlName="inputToggleCustomLabels"
+                    label="with label and custom labels" [leftModel]="{label:'NO'}" [rightModel]="{label:'YES'}"
+                    helperText="with label and custom labels">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-custom-labels-icon" formControlName="inputToggleCustomLabelsIcon"
+                    label="with label and custom labels and icon" [leftModel]="{label:'NO'}"
+                    [rightModel]="{label:'YES'}" helperText="with label and custom labels and icon" [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-custom-labels-icon-disabled"
+                    formControlName="inputToggleCustomLabelsDisabled"
+                    label="with label and custom labels and icon DISABLED" [leftModel]="{label:'NO'}"
+                    [rightModel]="{label:'YES'}" helperText="with label and custom labels and icon DISABLED"
+                    [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-helper" formControlName="inputToggleHelper"
+                    helperText="with helper text">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-helper-label" formControlName="inputToggleHelperAndLabel"
+                    label="with helper text and label" helperText="with helper text and label">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-helper-label-icon" formControlName="inputToggleHelperAndLabelAndIcon"
+                    label="with helper text and label and icon" helperText="with helper text and label and icon"
+                    [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-disabled" formControlName="inputToggleDisabled">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-disabled-label" formControlName="inputToggleDisabledAndLabel"
+                    label="disabled with label">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-disabled-label-icon"
+                    formControlName="inputToggleDisabledAndLabelAndIcon" label="disabled with label" [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-value" formControlName="inputToggleValue">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-value-placeholder" formControlName="inputToggleValueAndPlaceholder"
+                    placeholder="value with placeholder">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-value-icon-label" formControlName="inputToggleValueAndIconLabel"
+                    label="value with label and icon and helper" helperText="value with label and icon and helper"
+                    [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-required-true" formControlName="inputToggleRequiredTrue"
+                    label="required true with label and icon and helper"
+                    helperText="required true with label and icon and helper" [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-required-true-valid" formControlName="inputToggleRequiredTrueValid"
+                    label="required true VALID" helperText="required true VALID" [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-required-true-invalid"
+                    formControlName="inputToggleRequiredTrueInvalid" label="required true INVALID"
+                    helperText="required true INVALID" [icon]="faStar">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-required-true-custom-message-invalid"
+                    formControlName="inputToggleValueInvalidMessageRequiredTrue"
+                    label="required true (invalid with custom message)" [icon]="faStar"
+                    helperText="Helper text (invalid with custom message) required true"
+                    [validations]="{required: 'Must be checked'}">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-required-true-custom-message-valid"
+                    formControlName="inputToggleValueValidMessageRequiredTrue"
+                    label="required true (valid with custom message) validator"
+                    helperText="Helper text (valid with custom message) required true validator"
+                    [validations]="{required: 'Must be checked'}">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-required-true-custom-message-invalid-emptyhelpertext"
+                    formControlName="inputToggleValueValidMessageRequiredTrueEmptyHelperText"
+                    label="required true (valid with custom message) validator"
+                    [validations]="{required: 'Must be checked'}">
+                </sfc-toggle-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-small" formControlName="inputToggleSmall" label="Small size"
+                    helperText="Small size" [icon]="faStar" [sfcComponentSize]="ComponentSize.Small">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-large" formControlName="inputToggleLarge" label="Large size"
+                    helperText="Large size" [icon]="faStar" [sfcComponentSize]="ComponentSize.Large">
+                </sfc-toggle-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-toggle-input id="demo-toggle-custom" formControlName="inputToggleCustom" label="Custom size"
+                    helperText="Custom size" [icon]="faStar" [sfcComponentSize] [customSize]="4.2">
+                </sfc-toggle-input>
+            </div>
+
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

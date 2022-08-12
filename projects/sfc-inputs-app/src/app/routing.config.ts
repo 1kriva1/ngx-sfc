@@ -5,7 +5,8 @@ import {
     InlineFileInputPresentationComponent,
     TextAreaPresentationComponent,
     TextPresentationComponent,
-    CheckboxPresentationComponent
+    CheckboxPresentationComponent,
+    TogglePresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -54,6 +55,10 @@ export const routes: Routes = [
     {
         path: 'checkbox',
         component: CheckboxPresentationComponent
+    },
+    {
+        path: 'toggle',
+        component: TogglePresentationComponent
     },
     fallbackRoute,
     indexRoute

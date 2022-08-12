@@ -1,15 +1,18 @@
 @import "../../styles/mixins";
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
 
 :host {
   .container {
-    .sfc-input {
-      line-height: normal;
-      overflow: hidden;
-      padding: 0.8em 0;
-      resize: none;
-      box-sizing: border-box;
-    }
+    .content {
+      .sfc-input {
+        line-height: normal;
+        overflow: hidden;
+        padding: 0.8em 0;
+        resize: none;
+        box-sizing: border-box;
+      }
 
-    @include right-side-info;
+      @include right-side-info;
+    }
   }
 }

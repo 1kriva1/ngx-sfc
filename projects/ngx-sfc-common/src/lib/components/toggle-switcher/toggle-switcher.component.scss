@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import "../../styles/styles";
 
 :host {
   .container,
@@ -71,6 +71,24 @@
         .right {
           opacity: 1;
         }
+      }
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .container {
+      @include theme-value(background-color, $color-1, $color-disabled-dark);
+
+      .toggle {
+        @include theme-value(background-color, $color-3, $color-7);
+
+        box-shadow: none;
+      }
+
+      .names {
+        @include theme-value(color, $color-disabled-default, $color-4);
       }
     }
   }

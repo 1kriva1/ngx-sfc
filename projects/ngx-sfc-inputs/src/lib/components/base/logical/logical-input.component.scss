@@ -1,0 +1,39 @@
+@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
+
+:host {
+  width: initial;
+
+  .container {
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      label {
+        transform: scale(0.8);
+        cursor: pointer;
+        font-size: 0.8em;
+        position: relative;
+        transform-origin: initial;
+        user-select: none;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      .component {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    span.helper-text {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin-top: 0.3em;
+      float: none;
+    }
+  }
+}

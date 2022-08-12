@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed, waitForAsync } from "@angular/core/te
 import { FormsModule, NgForm, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { ButtonComponent, CloseComponent } from "ngx-sfc-common";
+import { ButtonComponent, CloseComponent, ComponentSizeDirective } from "ngx-sfc-common";
 import { FileInputComponent } from "../../../components";
 import { InputReferenceDirective } from "../../../directives";
 import { FileExtensionsValidatorDirective } from "./file-extensions-validator.directive";
@@ -30,7 +30,7 @@ describe('Validators-TemplateForm: File', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule, FontAwesomeModule, ReactiveFormsModule],
-            declarations: [InputReferenceDirective, ButtonComponent, CloseComponent,
+            declarations: [ComponentSizeDirective, InputReferenceDirective, ButtonComponent, CloseComponent,
                 FileExtensionsValidatorDirective, FileMaxSizeValidatorDirective, FileMinSizeValidatorDirective,
                 FileInputComponent, FileInputFormTemplateTestComponent],
         }).compileComponents().then(() => {

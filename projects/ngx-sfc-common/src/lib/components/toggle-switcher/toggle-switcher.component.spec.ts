@@ -62,6 +62,21 @@ describe('Component: ToggleSwitcherComponent', () => {
     });
   });
 
+  describe('Disabled', () => {
+    fit("Should not be disabled", () => {
+      expect(fixture.nativeElement.className)
+        .not.toContain(UIClass.Disabled);
+    });
+
+    fit("Should be disabled", () => {
+      component.disabled = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.className)
+        .toContain(UIClass.Disabled);
+    });
+  });
+
   describe('Left model', () => {
     fit("Should have default value", () => {
       expect(component.leftModel).toEqual({ label: 'Left' });

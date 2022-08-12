@@ -8,7 +8,8 @@ import {
   TextAreaInputComponent,
   FileInputComponent,
   InlineFileInputComponent,
-  CheckboxInputComponent
+  CheckboxInputComponent,
+  ToggleInputComponent
 } from './components';
 import BaseInputComponent from './components/base/base-input.component';
 import { InputReferenceDirective } from './directives';
@@ -21,7 +22,8 @@ import { InputReferenceDirective } from './directives';
     TextAreaInputComponent,
     FileInputComponent,
     InlineFileInputComponent,
-    CheckboxInputComponent
+    CheckboxInputComponent,
+    ToggleInputComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { InputReferenceDirective } from './directives';
     TextAreaInputComponent,
     FileInputComponent,
     InlineFileInputComponent,
-    CheckboxInputComponent
+    CheckboxInputComponent,
+    ToggleInputComponent
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

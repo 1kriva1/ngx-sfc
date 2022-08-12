@@ -3,15 +3,6 @@
 
 :host {
   .container {
-    .sfc-input[type="password"] {
-      padding-right: 1.248em;
-      width: calc(100% - 1.248em);
-    }
-
-    .icon ~ .sfc-input[type="password"] {
-      width: calc(100% - 2.4em - 1.248em);
-    }
-
     .password-icon {
       @include action-icon-right;
     }

@@ -5,31 +5,62 @@
   width: 100%;
 
   .container {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .sfc-input {
-      background-color: transparent;
-      border: none;
-      border-bottom: 1px solid;
+    .icon {
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizelegibility;
+      font-size: 1.3em;
+      transition: color 0.2s;
+      padding-right: 0.5em;
+      cursor: pointer;
 
-      @include theme-value(border-color, $color-default, $color-dark);
       @include theme-value(color, $color-default, $color-dark);
 
-      border-radius: 0;
-      outline: none;
-      height: 2.4em;
-      width: 100%;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.8em;
-      padding: 0;
-      box-shadow: none;
-      box-sizing: content-box;
-      transition: border 0.3s, box-shadow 0.3s;
-      transition: box-shadow 0.3s, border 0.3s;
-      transition: box-shadow 0.3s, border 0.3s, box-shadow 0.3s;
-      user-select: none;
+      &:hover {
+        color: $color-hover-default;
+      }
+    }
 
-      & + label {
+    .content {
+      width: 100%;
+      position: relative;
+
+      .sfc-input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid;
+
+        @include theme-value(border-color, $color-default, $color-dark);
+        @include theme-value(color, $color-default, $color-dark);
+
+        border-radius: 0;
+        outline: none;
+        height: 2.4em;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.8em;
+        padding: 0;
+        box-shadow: none;
+        box-sizing: content-box;
+        transition: border 0.3s, box-shadow 0.3s;
+        transition: box-shadow 0.3s, border 0.3s;
+        transition: box-shadow 0.3s, border 0.3s, box-shadow 0.3s;
+        user-select: none;
+      }
+
+      label {
         @include theme-value(color, $color-default, $color-dark);
 
         position: absolute;
@@ -44,6 +75,7 @@
         transform: translateY(0.6em);
         left: 0;
         user-select: none;
+        white-space: nowrap;
 
         &::after {
           display: block;
@@ -61,57 +93,20 @@
           cursor: pointer;
         }
       }
-    }
 
-    .icon {
-      font-weight: normal;
-      font-style: normal;
-      line-height: 1;
-      letter-spacing: normal;
-      text-transform: none;
-      display: inline-block;
-      white-space: nowrap;
-      word-wrap: normal;
-      direction: ltr;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizelegibility;
-      position: absolute;
-      font-size: 1.3em;
-      transition: color 0.2s;
-      top: 0.32em;
-
-      @include theme-value(color, $color-default, $color-dark);
-
-      cursor: pointer;
-
-      &:hover {
-        color: $color-hover-default;
-      }
-    }
-
-    @include helper-text;
-  }
-
-  &.has-icon {
-    .container {
-      .sfc-input {
-        width: calc(100% - 2.4em);
-      }
-
-      label {
-        width: calc(100% - 2.4em - 1.2em);
-      }
-
-      label,
-      .sfc-input {
-        margin-left: 2.4em;
-      }
-
-      span.helper-text {
-        margin-left: 3.2em;
-      }
+      @include helper-text;
     }
   }
+
+  /* PLACEHOLDER */
+
+  ::placeholder {
+    white-space: nowrap;
+
+    @include theme-value(color, $color-5, $color-7);
+  }
+
+  /* END PLACEHOLDER */
 
   &.focus {
     .container {
@@ -120,11 +115,13 @@
         color: $color-hover-default;
       }
 
-      .sfc-input {
-        border-bottom: 1px solid $color-hover-default;
-        box-shadow: 0 1px 0 0 $color-hover-default;
+      .content {
+        .sfc-input {
+          border-bottom: 1px solid $color-hover-default;
+          box-shadow: 0 1px 0 0 $color-hover-default;
+        }
 
-        & + label {
+        label {
           color: $color-hover-default;
         }
       }
@@ -140,30 +137,39 @@
         pointer-events: none;
       }
 
-      .sfc-input {
-        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
-        @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+      .content {
+        .sfc-input {
+          @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+          @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
 
-        border-bottom: 1px dotted;
+          border-bottom: 1px dotted;
+        }
+
+        label {
+          @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+        }
       }
+    }
+
+    ::placeholder {
+      @include theme-value(color, $color-disabled-default, $color-disabled-dark);
     }
   }
 
   @include invalid {
-    .sfc-input {
-      border-bottom: 1px solid $color-failed;
-      box-shadow: 0 1px 0 0 $color-failed;
-
-      &:focus {
+    .content {
+      .sfc-input {
         border-bottom: 1px solid $color-failed;
         box-shadow: 0 1px 0 0 $color-failed;
 
-        + label {
-          color: $color-failed;
+        &:focus {
+          border-bottom: 1px solid $color-failed;
+          box-shadow: 0 1px 0 0 $color-failed;
         }
       }
 
-      ~ .helper-text {
+      label,
+      .helper-text {
         color: $color-failed;
       }
     }
@@ -174,20 +180,19 @@
   }
 
   @include valid {
-    .sfc-input {
-      border-bottom: 1px solid $color-success;
-      box-shadow: 0 1px 0 0 $color-success;
-
-      &:focus {
+    .content {
+      .sfc-input {
         border-bottom: 1px solid $color-success;
         box-shadow: 0 1px 0 0 $color-success;
 
-        + label {
-          color: $color-success;
+        &:focus {
+          border-bottom: 1px solid $color-success;
+          box-shadow: 0 1px 0 0 $color-success;
         }
       }
 
-      ~ .helper-text {
+      label,
+      .helper-text {
         color: $color-success;
       }
     }
@@ -196,14 +201,6 @@
       color: $color-success !important;
     }
   }
-
-  /* PLACEHOLDER */
-
-  ::placeholder {
-    @include theme-value(color, $color-5, $color-7);
-  }
-
-  /* END PLACEHOLDER */
 
   /**  SCROLL BAR */
 
