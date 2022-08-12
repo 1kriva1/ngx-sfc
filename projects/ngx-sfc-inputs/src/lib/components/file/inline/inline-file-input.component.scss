@@ -17,6 +17,9 @@
     }
 
     label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: 1em;
       font-weight: 700;
       user-select: none;
@@ -30,15 +33,12 @@
       }
 
       .icon {
-        position: relative;
-        bottom: 0.31em;
         padding-right: 0.31em;
       }
 
       .clear-button {
         font-size: 0.8em;
         visibility: hidden;
-        position: absolute;
         color: #656d78;
         opacity: 0;
         z-index: 999;
@@ -65,6 +65,7 @@
 
     .helper-text {
       display: block;
+      float: none;
     }
   }
 

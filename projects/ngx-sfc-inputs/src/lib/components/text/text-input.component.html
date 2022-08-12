@@ -1,10 +1,12 @@
 <div class="container">
     <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
-    <fa-icon *ngIf="_isPassword" class="password-icon" [icon]="passwordIcon" (click)="togglePasswordVisibility()">
-    </fa-icon>
-    <input sfcInput id="{{inputId}}" [type]="type" class="text-input" [placeholder]="placeholderValue" [value]="value"
-        [disabled]="disabled" (input)="onChange($any($event.target).value)" (blur)="onBlur()">
-    <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
-    <span class="helper-text">{{helperTextValue}}</span>
-    <span [hidden]="!requiredLengthValue" class="right-side-info">{{charsCounterValue}}</span>
+    <div class="content">
+        <fa-icon *ngIf="_isPassword" class="password-icon" [icon]="passwordIcon" (click)="togglePasswordVisibility()">
+        </fa-icon>
+        <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
+        <input sfcInput id="{{inputId}}" [type]="type" class="text-input" [placeholder]="placeholderValue" [value]="value"
+            [disabled]="disabled" (input)="onChange($any($event.target).value)" (blur)="onBlur()">        
+        <span class="helper-text">{{helperTextValue}}</span>
+        <span [hidden]="!requiredLengthValue" class="right-side-info">{{charsCounterValue}}</span>
+    </div>   
 </div>

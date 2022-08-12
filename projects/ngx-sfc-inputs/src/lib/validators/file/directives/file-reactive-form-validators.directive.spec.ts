@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
-import { ButtonComponent } from "ngx-sfc-common";
+import { ButtonComponent, ComponentSizeDirective } from "ngx-sfc-common";
 import { FileInputComponent } from "../../../components";
 import { fileExtensions, fileMaxSize, fileMinSize } from "../../file/file.validators";
 
@@ -31,7 +31,7 @@ describe('Validators-ReactiveForm: File', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule],
-            declarations: [ButtonComponent, FileInputComponent, FileReactiveFormValidatorsTestComponent]
+            declarations: [ComponentSizeDirective, ButtonComponent, FileInputComponent, FileReactiveFormValidatorsTestComponent]
         }).compileComponents();
     });
 

@@ -3,3 +3,4 @@ export { TextAreaInputComponent } from '../components/textarea/text-area-input.c
 export { FileInputComponent } from '../components/file/input/file-input.component';
 export { InlineFileInputComponent } from '../components/file/inline/inline-file-input.component';
 export { CheckboxInputComponent } from './checkbox/checkbox-input.component';
+export { ToggleInputComponent } from './toggle/toggle-input.component';

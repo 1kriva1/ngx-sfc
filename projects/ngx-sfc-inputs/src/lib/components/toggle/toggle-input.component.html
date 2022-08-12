@@ -5,9 +5,10 @@
         <label for="{{inputId}}" *ngIf="labelValue">{{labelValue}}</label>
         <div class="component">
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
-            <sfc-checkmark [type]="checkmarkType" [disabled]="disabled" [showNotActive]="false"
-                [active]="value || false" (click)="onChange(!value)"></sfc-checkmark>
+            <sfc-toggle-switcher [active]="value || false" [disabled]="disabled" [leftModel]="leftModel"
+                [rightModel]="rightModel" (click)="onChange(!value)">
+            </sfc-toggle-switcher>
         </div>
-        <span class="helper-text">{{helperTextValue}}</span>
+        <span class="helper-text">{{helperTextValue}}</span>     
     </div>    
 </div>

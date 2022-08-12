@@ -15,17 +15,21 @@
   }
 }
 
+@mixin under-text() {
+  user-select: none;
+  height: 1em;
+  font-size: 0.6em;
+  margin-top: 0.248em;
+
+  @include theme-value(color, $color-default, $color-dark);
+}
+
 @mixin helper-text() {
   .helper-text {
-    position: relative;
-    display: inline-block;
-    min-height: 0.9em;
+    @include under-text;
+
     min-width: 1em;
-    font-size: 0.6em;
-
-    @include theme-value(color, $color-default, $color-dark);
-
-    user-select: none;
+    float: left;
 
     &::after {
       opacity: 1;
@@ -38,12 +42,9 @@
 
 @mixin right-side-info() {
   .right-side-info {
-    user-select: none;
+    @include under-text;
+
     float: right;
-    font-size: 0.6em;
-    min-height: 0.9em;
-    position: relative;
-    top: 0.248em;
   }
 }
 

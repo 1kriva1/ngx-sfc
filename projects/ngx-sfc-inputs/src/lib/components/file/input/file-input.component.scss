@@ -3,8 +3,13 @@
 
 :host {
   .container {
-    sfc-button {
-      float: left;
+    position: relative;
+
+    ::ng-deep sfc-button {
+      a:hover:not(.disabled) {
+        border-color: $color-hover-default !important;
+        background: $color-hover-default;
+      }
     }
 
     input[type="file"] {
@@ -18,49 +23,33 @@
       font-size: 0;
       opacity: 0;
       box-sizing: border-box;
+      z-index: 9998;
     }
 
-    .text-container {
-      overflow: hidden;
-      padding-left: 0.625em;
+    @include right-side-info;
 
-      .sfc-input {
-        & + label.active {
-          transform: translateY(-0.9em) translateX(6em) scale(0.8);
-        }
-      }
+    .clear-button {
+      @include action-icon-right;
 
-      .icon {
-        & ~ .sfc-input + label {
-          transform: translateY(-0.9em) translateX(0.625em) scale(0.8);
-        }
-      }
-
-      @include right-side-info;
-
-      .clear-button {
-        visibility: hidden;
-        transition: opacity 1s ease-out;
-
-        @include action-icon-right;
-      }
+      visibility: hidden;
+      transition: opacity 1s ease-out;
+      z-index: 9999;
     }
   }
 
   &:hover {
     .container {
-      ::ng-deep sfc-button {
-        a:not(.disabled) {
-          border-color: $color-hover-default !important;
-          background: $color-hover-default;
-        }
+      .clear-button {
+        visibility: visible;
+        opacity: 1;
       }
+    }
+  }
 
-      .text-container {
-        .clear-button {
-          visibility: visible;
-          opacity: 1;
-        }
+  &.disabled {
+    ::ng-deep sfc-button {
+      a.disabled {
+        border-color: $color-disabled-default !important;
       }
     }
   }

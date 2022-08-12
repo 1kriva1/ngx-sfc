@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { ComponentSizeDirective } from 'ngx-sfc-common';
 import { ButtonType, CloseComponent, CommonConstants } from 'ngx-sfc-common';
 import { ButtonComponent } from 'ngx-sfc-common';
 import { InputConstants } from '../../../constants/input.constants';
@@ -16,7 +17,7 @@ describe('Component: FileInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [ButtonComponent, CloseComponent, InputReferenceDirective, FileInputComponent]
+      declarations: [ComponentSizeDirective, ButtonComponent, CloseComponent, InputReferenceDirective, FileInputComponent]
     }).compileComponents();
   });
 
@@ -34,7 +35,7 @@ describe('Component: FileInput', () => {
     fit('Should have main elements', () => {
       expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input[type="file"]')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('.text-container')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input.text-input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
@@ -136,21 +137,21 @@ describe('Component: FileInput', () => {
 
   describe('Icon', () => {
     fit('Should not exist', () => {
-      expect(fixture.nativeElement.querySelector('.icon')).toBeNull();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon')).toBeNull();
     });
 
     fit('Should exist', () => {
       component.icon = faUser;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('.icon')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon')).toBeTruthy();
     });
 
     fit('Should have defined value', () => {
       component.icon = faUser;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('.icon svg.fa-user')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon.icon svg.fa-user')).toBeTruthy();
     });
   });
 

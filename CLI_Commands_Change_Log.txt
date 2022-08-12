@@ -303,6 +303,8 @@ ng generate class components/file/base-file-input --project ngx-sfc-inputs --ski
 
 ng generate module validators/ngx-sfc-inputs-validation --flat true --project ngx-sfc-inputs
 
+ng generate component components/toggle/toggle-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
