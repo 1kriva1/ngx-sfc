@@ -6,7 +6,8 @@ import {
     TextAreaPresentationComponent,
     TextPresentationComponent,
     CheckboxPresentationComponent,
-    TogglePresentationComponent
+    TogglePresentationComponent,
+    TagsPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -59,6 +60,10 @@ export const routes: Routes = [
     {
         path: 'toggle',
         component: TogglePresentationComponent
+    },
+    {
+        path: 'tags',
+        component: TagsPresentationComponent
     },
     fallbackRoute,
     indexRoute

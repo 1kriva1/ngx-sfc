@@ -1,0 +1,86 @@
+@import "../../styles/mixins";
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    .content {
+      .tags {
+        cursor: text;
+
+        @include border-bottom;
+
+        .text-input {
+          border: none !important;
+          box-shadow: none !important;
+          width: 30%;
+
+          &:focus {
+            border-bottom: none;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        .tags {
+          cursor: default;
+
+          @include disabled-border-bottom;
+        }
+      }
+    }
+  }
+
+  &.focus {
+    .container {
+      .content {
+        .tags {
+          @include focused-border-bottom;
+        }
+      }
+    }
+  }
+
+  &.has-value,
+  &.ng-dirty {
+    .container.invalid {
+      .content {
+        .tags {
+          border-bottom: 1px solid $color-failed !important;
+          box-shadow: 0 1px 0 0 $color-failed !important;
+
+          label {
+            color: $color-failed !important;
+          }
+        }
+
+        .helper-text {
+          color: $color-failed !important;
+        }
+      }
+
+      .icon {
+        color: $color-failed !important;
+      }
+    }
+  }
+
+  &.has-value.ng-dirty {
+    .container.valid {
+      .content {
+        .tags {
+          border-bottom: 1px solid $color-success;
+          box-shadow: 0 1px 0 0 $color-success;
+        }
+      }
+
+      .icon {
+        color: $color-success;
+      }
+    }
+  }
+}

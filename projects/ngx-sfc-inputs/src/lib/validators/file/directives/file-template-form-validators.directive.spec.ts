@@ -1,5 +1,5 @@
-import { Component, DebugElement, ViewChild } from "@angular/core";
-import { async, ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { Component, DebugElement } from "@angular/core";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule, NgForm, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -52,8 +52,8 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(invalidValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMaxSize')).toBeTrue();
-            expect((templateFileInputControl?.errors as ValidationErrors)['fileMaxSize']).toEqual(expectedResult);
+            expect(templateFileInputControl?.hasError('sfcFileMaxSize')).toBeTrue();
+            expect((templateFileInputControl?.errors as ValidationErrors)['sfcFileMaxSize']).toEqual(expectedResult);
             expect(templateFileInputControl?.valid).toBeFalse();
             expect(form.control.valid).toBeFalse();
         }));
@@ -65,7 +65,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(validValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMaxSize')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileMaxSize')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -78,7 +78,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(validValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMaxSize')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileMaxSize')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -89,7 +89,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(null);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMaxSize')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileMaxSize')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -105,8 +105,8 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(invalidValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMinSize')).toBeTrue();
-            expect((templateFileInputControl?.errors as ValidationErrors)['fileMinSize']).toEqual(expectedResult);
+            expect(templateFileInputControl?.hasError('sfcFileMinSize')).toBeTrue();
+            expect((templateFileInputControl?.errors as ValidationErrors)['sfcFileMinSize']).toEqual(expectedResult);
             expect(templateFileInputControl?.valid).toBeFalse();
             expect(form.control.valid).toBeFalse();
         }));
@@ -118,7 +118,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(validValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMinSize')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileMinSize')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -131,7 +131,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(validValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMinSize')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileMinSize')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -142,7 +142,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(null);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileMinSize')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileMinSize')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -159,8 +159,8 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(invalidValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileExtension')).toBeTrue();
-            expect((templateFileInputControl?.errors as ValidationErrors)['fileExtension']).toEqual(expectedResult);
+            expect(templateFileInputControl?.hasError('sfcFileExtension')).toBeTrue();
+            expect((templateFileInputControl?.errors as ValidationErrors)['sfcFileExtension']).toEqual(expectedResult);
             expect(templateFileInputControl?.valid).toBeFalse();
             expect(form.control.valid).toBeFalse();
         }));
@@ -172,7 +172,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(invalidValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileExtension')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileExtension')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -185,7 +185,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(invalidValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileExtension')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileExtension')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();
@@ -198,7 +198,7 @@ describe('Validators-TemplateForm: File', () => {
             debugEl.componentInstance.ngControl.control.setValue(invalidValue);
             fixture.detectChanges();
 
-            expect(templateFileInputControl?.hasError('fileExtension')).toBeFalse();
+            expect(templateFileInputControl?.hasError('sfcFileExtension')).toBeFalse();
             expect(templateFileInputControl?.errors).toBeNull();
             expect(templateFileInputControl?.valid).toBeTrue();
             expect(form.control.valid).toBeTrue();

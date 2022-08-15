@@ -50,7 +50,7 @@ describe('Validators-ReactiveForm: File', () => {
 
             expect(component.form.valid).toBeFalsy();
             expect(fileField.valid).toBeFalsy();
-            expect((fileField.errors as ValidationErrors)['fileMaxSize']).toEqual(expectedResult);
+            expect((fileField.errors as ValidationErrors)['sfcFileMaxSize']).toEqual(expectedResult);
         });
 
         fit('Should be valid', () => {
@@ -93,7 +93,7 @@ describe('Validators-ReactiveForm: File', () => {
 
             expect(component.form.valid).toBeFalsy();
             expect(fileField.valid).toBeFalsy();
-            expect((fileField.errors as ValidationErrors)['fileMinSize']).toEqual(expectedResult);
+            expect((fileField.errors as ValidationErrors)['sfcFileMinSize']).toEqual(expectedResult);
         });
 
         fit('Should be valid', () => {
@@ -137,7 +137,7 @@ describe('Validators-ReactiveForm: File', () => {
 
             expect(component.form.valid).toBeFalsy();
             expect(fileField.valid).toBeFalsy();
-            expect((fileField.errors as ValidationErrors)['fileExtension']).toEqual(expectedResult);
+            expect((fileField.errors as ValidationErrors)['sfcFileExtension']).toEqual(expectedResult);
         });
 
         fit('Should be valid', () => {

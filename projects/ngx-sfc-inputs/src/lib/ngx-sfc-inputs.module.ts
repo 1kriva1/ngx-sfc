@@ -9,10 +9,15 @@ import {
   FileInputComponent,
   InlineFileInputComponent,
   CheckboxInputComponent,
-  ToggleInputComponent
+  ToggleInputComponent,
+  TagsInputComponent
 } from './components';
-import BaseInputComponent from './components/base/base-input.component';
+import {
+  TagsChipComponent,
+  BaseInputComponent
+} from '../lib/components/no-export-index';
 import { InputReferenceDirective } from './directives';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +28,9 @@ import { InputReferenceDirective } from './directives';
     FileInputComponent,
     InlineFileInputComponent,
     CheckboxInputComponent,
-    ToggleInputComponent
+    ToggleInputComponent,
+    TagsInputComponent,
+    TagsChipComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +44,8 @@ import { InputReferenceDirective } from './directives';
     FileInputComponent,
     InlineFileInputComponent,
     CheckboxInputComponent,
-    ToggleInputComponent
+    ToggleInputComponent,
+    TagsInputComponent
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

@@ -62,3 +62,22 @@
     color: $color-hover-default;
   }
 }
+
+@mixin border-bottom() {
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+
+  @include theme-value(border-color, $color-default, $color-dark);
+}
+
+@mixin disabled-border-bottom() {
+  @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+
+  border-bottom: 1px dotted;
+}
+
+@mixin focused-border-bottom() {
+  border-bottom: 1px solid $color-hover-default;
+  box-shadow: 0 1px 0 0 $color-hover-default;
+}
