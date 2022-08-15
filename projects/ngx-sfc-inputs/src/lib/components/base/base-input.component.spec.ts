@@ -10,7 +10,7 @@ import { InputConstants } from "../../constants/input.constants";
 import { InputReferenceDirective } from "../../directives/reference/input-reference.directive";
 import { InputUIClass } from "../../enums/input-ui.enum";
 import { TextInputComponent } from "../text/text-input.component";
-import BaseInputComponent from "./base-input.component";
+import { BaseInputComponent } from "./base-input.component";
 
 @Component({
     template: `<form [formGroup]="formGroup">

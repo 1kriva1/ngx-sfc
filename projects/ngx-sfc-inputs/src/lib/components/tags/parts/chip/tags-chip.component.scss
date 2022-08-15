@@ -1,0 +1,48 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    color: $color-default;
+    padding: 0.5em 0.75em;
+    border-radius: 1em;
+
+    @include theme-value(background-color, $color-3, $color-2);
+
+    margin: 0.1em 0.31em 0.1em 0;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-4;
+    }
+
+    sfc-close {
+      padding-left: 0.5em;
+
+      &:hover {
+        color: $color-failed;
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      pointer-events: none;
+
+      @include theme-value(color, $color-disabled-default, $color-4);
+      @include theme-value(background-color, $color-1, $color-disabled-dark);
+
+      sfc-close {
+        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+      }
+
+      &:hover {
+        background-color: initial;
+      }
+    }
+  }
+}

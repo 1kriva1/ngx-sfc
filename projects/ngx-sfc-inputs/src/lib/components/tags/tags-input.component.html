@@ -1,0 +1,14 @@
+<div class="container" (click)="inputElementRef.nativeElement.focus()" [ngClass]="validationClass">
+    <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
+    <div class="content">
+        <div class="tags">
+            <sfc-tags-chip *ngFor="let tag of value" [disabled]="disabled" label="{{tag}}" (remove)="onRemove($event)">
+            </sfc-tags-chip>
+            <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
+            <input sfcInput id="{{inputId}}" type="text" class="text-input" [placeholder]="placeholderValue"
+                [disabled]="disabled" [value]="newTagValue" (input)="newTagValue = $any($event.target).value"
+                (blur)="onBlur()" (keyup.enter)="onEnter()">
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+</div>

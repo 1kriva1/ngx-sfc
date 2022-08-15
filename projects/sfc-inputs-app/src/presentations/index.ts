@@ -5,3 +5,4 @@ export { FileInputPresentationComponent } from './file/input/file-input-presenta
 export { InlineFileInputPresentationComponent } from './file/inline/inline-file-input-presentation.component';
 export { CheckboxPresentationComponent } from './checkbox/checkbox-presentation.component';
 export { TogglePresentationComponent } from './toggle/toggle-presentation.component';
+export { TagsPresentationComponent } from './tags/tags-presentation.component';

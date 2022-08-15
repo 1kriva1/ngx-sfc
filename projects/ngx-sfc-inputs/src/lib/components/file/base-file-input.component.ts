@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, ViewChild } from "@angular/core";
 import { CommonConstants, isNullOrEmptyString } from "ngx-sfc-common";
-import BaseInputComponent from "../base/base-input.component";
+import { BaseInputComponent } from "../base/base-input.component";
 import { FileInputConstants } from "./file-input.constants";
 
 @Directive()

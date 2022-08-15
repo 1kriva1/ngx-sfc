@@ -1,0 +1,5 @@
+<div class="container">
+    <img *ngIf="imageSrc" [src]="imageSrc">
+    <span>{{label}}</span>
+    <sfc-close (click)="remove.emit(label)"></sfc-close>
+</div>

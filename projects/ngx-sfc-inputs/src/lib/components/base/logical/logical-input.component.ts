@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import BaseInputComponent from '../base-input.component';
+import { BaseInputComponent } from '../base-input.component';
 
 @Directive()
 export abstract class BaseLogicalInputComponent extends BaseInputComponent<boolean> {

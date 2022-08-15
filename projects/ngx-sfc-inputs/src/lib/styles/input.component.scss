@@ -39,13 +39,10 @@
 
       .sfc-input {
         background-color: transparent;
-        border: none;
-        border-bottom: 1px solid;
 
-        @include theme-value(border-color, $color-default, $color-dark);
+        @include border-bottom;
         @include theme-value(color, $color-default, $color-dark);
 
-        border-radius: 0;
         outline: none;
         height: 2.4em;
         width: 100%;
@@ -117,8 +114,7 @@
 
       .content {
         .sfc-input {
-          border-bottom: 1px solid $color-hover-default;
-          box-shadow: 0 1px 0 0 $color-hover-default;
+          @include focused-border-bottom;
         }
 
         label {
@@ -140,12 +136,12 @@
       .content {
         .sfc-input {
           @include theme-value(color, $color-disabled-default, $color-disabled-dark);
-          @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
-
-          border-bottom: 1px dotted;
+          @include disabled-border-bottom;
         }
 
         label {
+          pointer-events: none;
+
           @include theme-value(color, $color-disabled-default, $color-disabled-dark);
         }
       }
@@ -175,7 +171,7 @@
     }
 
     .icon {
-      color: $color-failed !important;
+      color: $color-failed;
     }
   }
 
@@ -198,7 +194,7 @@
     }
 
     .icon {
-      color: $color-success !important;
+      color: $color-success;
     }
   }
 

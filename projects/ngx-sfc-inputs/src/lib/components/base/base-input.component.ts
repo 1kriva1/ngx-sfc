@@ -1,14 +1,15 @@
 import { ChangeDetectorRef, AfterViewInit, Input, ViewChild, HostBinding, ElementRef, Renderer2, Directive, Optional } from '@angular/core';
 import { NgControl, ControlValueAccessor, ValidationErrors } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { addPropertyToObject, CommonConstants, isDefined, isNullOrEmptyString, removePropertyFromObject, UIClass } from 'ngx-sfc-common';
+import { addPropertyToObject, any, CommonConstants, isDefined, isNullOrEmptyString, removePropertyFromObject, UIClass } from 'ngx-sfc-common';
 import { InputReferenceDirective } from '../../directives/reference/input-reference.directive';
 import { InputUIClass } from '../../enums/input-ui.enum';
 import { InputConstants } from '../../constants/input.constants';
 import { IValidationModel } from '../../models/validation.model';
+import { IInnerValidation } from '../../validators/inner-validation.model';
 
 @Directive()
-export default abstract class BaseInputComponent<T> implements ControlValueAccessor, AfterViewInit {
+export abstract class BaseInputComponent<T> implements ControlValueAccessor, AfterViewInit {
 
     // INPUTS
 
@@ -56,11 +57,11 @@ export default abstract class BaseInputComponent<T> implements ControlValueAcces
         return this._value;
     }
 
-    get labelClass(): any {
+    get labelClass(): string {
         return this.placeholder || this.isFocused || this.value ? UIClass.Active : CommonConstants.EMPTY_STRING;
     }
 
-    get placeholderValue() {
+    get placeholderValue(): string {
         return this.placeholder && !this.isFocused ? this.placeholder : CommonConstants.EMPTY_STRING;
     }
 
@@ -75,12 +76,24 @@ export default abstract class BaseInputComponent<T> implements ControlValueAcces
     /**
      * input componnent validation flag
      */
-    isValid: boolean = true;
+    get isValid() {
+        return !Object.keys(this.validationErrors).length;
+    }
+
+    get isInnerValid() {
+        return !Object.keys(this.innerErrors).length;
+    }
+
+    get validationClass() {
+        return this.isValid ? UIClass.Valid : UIClass.Invalid;
+    }
 
     /**
      * input componnent validation errors
      */
     innerErrors: ValidationErrors = {};
+
+    innerValidations: IInnerValidation[] = [];
 
     /*
     * Get first error message from custom validation error mappings (or default)
@@ -114,9 +127,6 @@ export default abstract class BaseInputComponent<T> implements ControlValueAcces
 
     // CLASSES
 
-    /*
-    * Is input on focus
-    */
     @HostBinding(`class.${UIClass.Focus}`)
     get isFocused() {
         return this.input ? this.input.isFocused : false;
@@ -166,14 +176,17 @@ export default abstract class BaseInputComponent<T> implements ControlValueAcces
         }
     }
 
+    checkeInnerValidation(parameters: any) {
+        if (any(this.innerValidations)) {
+            this.innerValidations.forEach(validation => this.toggleInnerErrors(validation.key, validation.validate(this.value, parameters)));
+        }
+    }
+
     clearInnerErrors() {
         this.innerErrors = {};
-        this.isValid = true;
     }
 
     toggleInnerErrors(validationKey: string, isValid: boolean) {
-        this.isValid = isValid;
-
         if (isValid)
             removePropertyFromObject(this.innerErrors, validationKey);
         else

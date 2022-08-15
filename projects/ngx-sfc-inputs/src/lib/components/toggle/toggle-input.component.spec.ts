@@ -35,7 +35,6 @@ describe('Component: ToggleInput', () => {
       expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('sfc-toggle-switcher')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
-
     });
   });
 

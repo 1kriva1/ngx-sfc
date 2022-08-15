@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 import { CommonConstants } from 'ngx-sfc-common';
-import BaseInputComponent from '../base-input.component';
+import { BaseInputComponent } from '../base-input.component';
 import { ValidationConstants } from '../../../constants/validation.constants';
 
 @Directive()
