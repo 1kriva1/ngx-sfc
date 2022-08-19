@@ -10,7 +10,8 @@ import {
   InlineFileInputPresentationComponent,
   CheckboxPresentationComponent,
   TogglePresentationComponent,
-  TagsPresentationComponent
+  TagsPresentationComponent,
+  NumberPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,8 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     InlineFileInputPresentationComponent,
     CheckboxPresentationComponent,
     TogglePresentationComponent,
-    TagsPresentationComponent
+    TagsPresentationComponent,
+    NumberPresentationComponent
   ],
   imports: [
     BrowserModule,

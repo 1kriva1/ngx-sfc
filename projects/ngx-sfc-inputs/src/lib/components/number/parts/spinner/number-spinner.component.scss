@@ -1,0 +1,115 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 2.5em;
+    border: 0.125em solid;
+
+    @include theme-value(border-color, $color-default, $color-dark);
+
+    transition: 0.5s;
+
+    .lever {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      cursor: pointer;
+      opacity: 0;
+      font-size: 1.2em;
+      transition: 0.5s;
+
+      @include theme-value(color, $color-default, $color-dark);
+
+      &.next {
+        margin: 0 0.5em 0 0;
+      }
+
+      &.previous {
+        margin: 0 0 0 0.5em;
+      }
+
+      &:hover {
+        color: $color-hover-default;
+      }
+    }
+
+    .label {
+      @include theme-value(color, $color-default, $color-dark);
+
+      font-size: 1.75em;
+      font-weight: bold;
+      user-select: none;
+      padding: 0 0.3em;
+    }
+  }
+
+  &.disabled {
+    .container {
+      @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+
+      .lever {
+        pointer-events: none;
+
+        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+      }
+
+      .label {
+        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+      }
+    }
+  }
+
+  &.fixed {
+    .container {
+      .lever {
+        width: auto;
+
+        &.next {
+          margin-left: 0.5em;
+        }
+
+        &.previous {
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+
+  &.fixed-actions {
+    .container {
+      .lever {
+        opacity: 1;
+
+        &.next {
+          right: 20%;
+        }
+
+        &.previous {
+          left: 20%;
+        }
+      }
+    }
+  }
+
+  &:hover:not(.disabled) {
+    .container {
+      .lever {
+        opacity: 1;
+        width: auto;
+
+        &.next {
+          margin-left: 0.5em;
+        }
+
+        &.previous {
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+}

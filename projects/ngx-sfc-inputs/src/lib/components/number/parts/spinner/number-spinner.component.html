@@ -1,0 +1,9 @@
+<div class="container">
+    <span class="lever previous" (click)="decrement()">
+        <fa-icon [sfcShowHideElement]="showPrevious" [icon]="model.prevIcon"></fa-icon>
+    </span>
+    <span class="label">{{model.value}}</span>
+    <span class="lever next" (click)="increment()">
+        <fa-icon [sfcShowHideElement]="showNext" [icon]="model.nextIcon"></fa-icon>
+    </span>
+</div>

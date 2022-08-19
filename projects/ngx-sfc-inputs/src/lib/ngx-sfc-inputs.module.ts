@@ -10,11 +10,13 @@ import {
   InlineFileInputComponent,
   CheckboxInputComponent,
   ToggleInputComponent,
-  TagsInputComponent
+  TagsInputComponent,
+  NumberInputComponent
 } from './components';
 import {
   TagsChipComponent,
-  BaseInputComponent
+  BaseInputComponent,
+  NumberSpinnerComponent
 } from '../lib/components/no-export-index';
 import { InputReferenceDirective } from './directives';
 
@@ -30,7 +32,9 @@ import { InputReferenceDirective } from './directives';
     CheckboxInputComponent,
     ToggleInputComponent,
     TagsInputComponent,
-    TagsChipComponent
+    TagsChipComponent,
+    NumberInputComponent,
+    NumberSpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +49,8 @@ import { InputReferenceDirective } from './directives';
     InlineFileInputComponent,
     CheckboxInputComponent,
     ToggleInputComponent,
-    TagsInputComponent
+    TagsInputComponent,
+    NumberInputComponent
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },
