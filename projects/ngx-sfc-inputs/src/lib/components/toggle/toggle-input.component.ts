@@ -6,7 +6,7 @@ import { BaseLogicalInputComponent } from '../base/logical/logical-input.compone
 @Component({
   selector: 'sfc-toggle-input',
   templateUrl: './toggle-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', '../base/logical/logical-input.component.scss']
+  styleUrls: ['../../styles/input.component.scss', '../../styles/vertical-input.component.scss']
 })
 export class ToggleInputComponent extends BaseLogicalInputComponent {
 

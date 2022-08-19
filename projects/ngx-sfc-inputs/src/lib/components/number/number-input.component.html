@@ -1,0 +1,11 @@
+<div class="container">
+    <input sfcInput id="{{inputId}}" type="number" [disabled]="disabled" [value]="value" style="display: none;" />
+    <div class="content">
+        <label for="{{inputId}}" *ngIf="label">{{label}}</label>
+        <div class="component">
+            <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+            <sfc-number-spinner [model]="spinnerModel" (update)="update($event)"></sfc-number-spinner>
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+</div>

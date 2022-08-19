@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, AfterViewInit, Input, ViewChild, HostBinding, ElementRef, Renderer2, Directive, Optional } from '@angular/core';
+import { ChangeDetectorRef, AfterViewInit, Input, ViewChild, HostBinding, ElementRef, Renderer2, Directive, Optional, HostListener } from '@angular/core';
 import { NgControl, ControlValueAccessor, ValidationErrors } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { addPropertyToObject, any, CommonConstants, isDefined, isNullOrEmptyString, removePropertyFromObject, UIClass } from 'ngx-sfc-common';
@@ -143,6 +143,14 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     }
 
     // END CLASSES
+
+    public isHovered: boolean = false;
+    
+    @HostListener('mouseenter')
+    onMouseEnter() { this.isHovered = true; }
+
+    @HostListener('mouseleave')
+    onMouseLeave() { this.isHovered = false; }
 
     @ViewChild(InputReferenceDirective, { static: false })
     input!: InputReferenceDirective;

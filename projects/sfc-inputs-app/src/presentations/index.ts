@@ -6,3 +6,4 @@ export { InlineFileInputPresentationComponent } from './file/inline/inline-file-
 export { CheckboxPresentationComponent } from './checkbox/checkbox-presentation.component';
 export { TogglePresentationComponent } from './toggle/toggle-presentation.component';
 export { TagsPresentationComponent } from './tags/tags-presentation.component';
+export { NumberPresentationComponent } from './number/number-presentation.component';
