@@ -1,0 +1,63 @@
+@import "../../styles/mixins";
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    input[type="number"] {
+      display: none;
+    }
+
+    .content {
+      .component {
+        .stars {
+          display: flex;
+          flex-flow: row wrap;
+
+          sfc-star {
+            padding: 0 0.2em;
+          }
+        }
+      }
+
+      span.helper-text {
+        height: auto !important;
+      }
+
+      .right-side-info {
+        @include right-side-info;
+
+        display: flex;
+        align-items: center;
+        margin-top: 0.5em;
+
+        .reset {
+          cursor: pointer;
+          white-space: nowrap;
+          font-weight: bold;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+          overflow: hidden;
+          font-size: 0.8em;
+          padding-left: 1em;
+
+          &:hover {
+            color: $color-failed;
+          }
+        }
+      }
+    }
+  }
+
+  &.vertical {
+    .container {
+      .content {
+        .component {
+          .stars {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+}

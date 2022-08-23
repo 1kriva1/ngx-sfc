@@ -260,12 +260,6 @@ describe('Component: TextAreaInput', () => {
     });
   });
 
-  describe('Characters counter', () => {
-    fit("Should be not hidden", () => {
-      expect(fixture.nativeElement.querySelector('span.right-side-info').hidden).toBeFalse();
-    });
-  });
-
   function inputWithKeyUp(value: string, key: string) {
     const textAreaEl = fixture.debugElement.query(By.css('textarea'));
     textAreaEl.nativeElement.value = value;

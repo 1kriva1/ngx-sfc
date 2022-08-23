@@ -2,6 +2,7 @@ import { Component, DebugElement, OnInit, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
+import { ShowHideElementDirective, UIClass } from "ngx-sfc-common";
 import { CommonConstants } from "ngx-sfc-common";
 import { InputReferenceDirective } from "../../../directives/reference/input-reference.directive";
 import { TextInputComponent } from "../../text/text-input.component";
@@ -35,7 +36,7 @@ describe('Component: BaseTextInputComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FormsModule],
-            declarations: [InputReferenceDirective, TextInputComponent, TestBaseTextInputComponent]
+            declarations: [ShowHideElementDirective, InputReferenceDirective, TextInputComponent, TestBaseTextInputComponent]
         }).compileComponents();
     });
 
@@ -54,7 +55,7 @@ describe('Component: BaseTextInputComponent', () => {
 
     describe('Required length', () => {
         fit("Should be hidden", () => {
-            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeTrue();
+            expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);
         });
 
         fit("Should be hidden with valid value", () => {
@@ -62,7 +63,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 'test' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeTrue();
+            expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);
         });
 
         fit("Should be hidden with invalid value, not related to length validation", () => {
@@ -70,7 +71,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: '' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeTrue();
+            expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);
         });
 
         fit("Should not be hidden with invalid value (min length validation)", () => {
@@ -78,7 +79,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 't' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeFalse();
+            expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Visible);
         });
 
         fit("Should not be hidden with invalid value (max length validation)", () => {
@@ -86,7 +87,7 @@ describe('Component: BaseTextInputComponent', () => {
             inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 'test test' } });
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.right-side-info').hidden).toBeFalse();
+            expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Visible);
         });
     });
 

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { By } from "@angular/platform-browser";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { UIClass } from "ngx-sfc-common";
+import { ShowHideElementDirective, UIClass } from "ngx-sfc-common";
 import { CommonConstants } from "ngx-sfc-common";
 import { InputConstants } from "../../constants/input.constants";
 import { InputReferenceDirective } from "../../directives/reference/input-reference.directive";
@@ -47,7 +47,7 @@ describe('Component: BaseInputComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FormsModule, FontAwesomeModule],
-            declarations: [InputReferenceDirective, TextInputComponent, TestBaseInputComponent]
+            declarations: [ShowHideElementDirective, InputReferenceDirective, TextInputComponent, TestBaseInputComponent]
         }).compileComponents();
     });
 

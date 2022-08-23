@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { fileExtensions } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../../base-presentations.component';
 
@@ -10,8 +9,6 @@ import { BasePresentationComponent } from '../../base-presentations.component';
 })
 export class InlineFileInputPresentationComponent extends BasePresentationComponent implements OnInit {
   
-  faUser = faUser;
-
   ngOnInit(): void {
     const file = new File([''], "name.jpg");
     Object.defineProperty(

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { equalOrInclude, maxLength, minLength } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../base-presentations.component';
 
@@ -9,8 +8,6 @@ import { BasePresentationComponent } from '../base-presentations.component';
 })
 export class TagsPresentationComponent extends BasePresentationComponent
   implements OnInit {
-
-  faUser = faUser;
 
   ngOnInit(): void {
     const data = ["tag 1", "asda sd atag 1", "tag 3", "as", "asddddaaaaaasqqqqqqqqqqqq"]

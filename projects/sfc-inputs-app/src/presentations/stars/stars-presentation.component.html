@@ -1,0 +1,210 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Stars:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-empty" formControlName="inputStarRatingNull" [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-label" formControlName="inputStarRatingLabel" label="test label"
+                    [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-icon" formControlName="inputStarRatingIcon" [icon]="faUser"
+                    [items]="data">
+                </sfc-stars-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-helper" formControlName="inputStarRatingHelper"
+                    helperText="helper test" [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-helper-label" formControlName="inputStarRatingHelperLabel"
+                    helperText="helper test" label="test label" [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-helper-label-icon"
+                    formControlName="inputStarRatingHelperLabelIcon" helperText="helper testqwwwwwwwwwwwwwwwwwwwwwwwww" label="test labelasdasdasd"
+                    [icon]="faUser" [items]="data">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-counter" formControlName="inputStarRatingCounter"
+                    helperText="helper test counter" label="test label counter" [icon]="faUser" [items]="data"
+                    [counter]="true">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-reset" formControlName="inputStarRatingResetButton"
+                    helperText="helper test reset button" label="test label reset button" [icon]="faUser" [items]="data"
+                    [reset]="true">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-counter-reset" formControlName="inputStarRatingCounterResetButton"
+                    helperText="helper test reset button and counter" label="test label reset button and counter"
+                    [icon]="faUser" [items]="data" [counter]="true" [reset]="true">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-counter-value" formControlName="inputStarRatingCounterValue"
+                    helperText="helper test first selected" label="test label first selected" [icon]="faUser"
+                    [items]="data" [counter]="true">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-reset-value" formControlName="inputStarRatingResetButtonValue"
+                    helperText="helper test value=4" label="test label value=4" [icon]="faUser" [items]="data"
+                    [reset]="true">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-counter-reset-value"
+                    formControlName="inputStarRatingCounterResetButtonValue" helperText="helper test last selected"
+                    label="test label last selected" [icon]="faUser" [items]="data" [counter]="true" [reset]="true">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-disabled" formControlName="inputStarRatingDisabled"
+                    helper-text="helper test disabled" label="test label disabled" [icon]="faUser" [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-disabled-value" formControlName="inputStarRatingDisabledValue"
+                    helperText="helper test disabled value=4" label="test label disabled value=4" [icon]="faUser"
+                    [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-disabled-value-actions"
+                    formControlName="inputStarRatingDisabledValueActions" helperText="helper test disabled value=5"
+                    label="test label disabled value=5" [icon]="faUser" [items]="data" [counter]="true" [reset]="true">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-validation" formControlName="inputStarRatingValidation"
+                    helperText="helper test valid only 4" label="test label valid only 4" [icon]="faUser"
+                    [items]="data">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-validation-actions"
+                    formControlName="inputStarRatingValidationActions" helperText="valid only greater than 1"
+                    label="valid only greater than 1" [icon]="faUser" [items]="data" [counter]="true" [reset]="true">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-validation-value" formControlName="inputStarRatingValidationValue"
+                    helper-text="valid only less than 3" label="valid only less than 3" [icon]="faUser" [items]="data"
+                    [counter]="true" [reset]="true">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-validation-message"
+                    formControlName="inputStarRatingValidationMessage" helperText="helper test valid only 4"
+                    label="test label valid only 4" [icon]="faUser" [items]="data"
+                    [validations]="{sfcEqualOrInclude: 'Value must be equal 4.'}">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-validation-actions-message"
+                    formControlName="inputStarRatingValidationActionsMessage" helperText="valid only greater than 1"
+                    label="valid only greater than 1" [icon]="faUser" [items]="data" [counter]="true" [reset]="true"
+                    [validations]="{min: 'Value must be greater than 1.'}">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-validation-value-message"
+                    formControlName="inputStarRatingValidationValueMessage" helperText="valid only less than 4"
+                    label="valid only less than 4" [icon]="faUser" [items]="data" [counter]="true" [reset]="true"
+                    [validations]="{max: 'Value must be less than 4.'}">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-10-star" formControlName="inputStarRating10Star"
+                    helperText="helper test" label="label test" [icon]="faUser" [items]="data10" [counter]="true"
+                    [reset]="true">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-2-star" formControlName="inputStarRating2Star"
+                    helperText="helper test" label="test label" [icon]="faUser" [items]="data2" [counter]="true"
+                    [reset]="true">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-small" formControlName="inputStarRatingSmall"
+                    helperText="Small helper" label="Small label" [icon]="faUser" [items]="data" [counter]="true"
+                    [reset]="true" [sfcComponentSize]="ComponentSize.Small">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-large" formControlName="inputStarRatingLarge"
+                    helperText="Large helper" label="Large label" [icon]="faUser" [items]="data" [counter]="true"
+                    [reset]="true" [sfcComponentSize]="ComponentSize.Large">
+                </sfc-stars-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-stars-input id="demo-star-rating-custom" formControlName="inputStarRatingCustom"
+                    helperText="Custom helper" label="Custom label" [icon]="faUser" [items]="data" [counter]="true"
+                    [reset]="true" [sfcComponentSize] [customSize]="4.2">
+                </sfc-stars-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

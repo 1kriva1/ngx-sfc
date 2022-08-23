@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { faMinusCircle, faPlusCircle, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { equalOrInclude } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../base-presentations.component';
 
@@ -11,7 +11,6 @@ import { BasePresentationComponent } from '../base-presentations.component';
 export class NumberPresentationComponent extends BasePresentationComponent
   implements OnInit {
 
-  faUser = faUser;
   faPlusCircle = faPlusCircle;
   faMinusCircle = faMinusCircle;
 

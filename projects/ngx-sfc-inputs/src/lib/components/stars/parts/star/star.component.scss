@@ -1,0 +1,60 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      @include theme-value(color, $color-default, $color-dark);
+
+      font-size: 1.75em;
+      transition: all 0.2s;
+      cursor: pointer;
+      float: right;
+    }
+  }
+
+  &.common {
+    .container {
+      label {
+        color: $color-yellow-0;
+      }
+    }
+  }
+
+  &.max {
+    .container {
+      label {
+        color: $color-yellow-2;
+      }
+    }
+  }
+
+  &.min {
+    .container {
+      label {
+        color: $color-orange-0;
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      label {
+        cursor: initial;
+
+        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+      }
+    }
+  }
+
+  &:not(.disabled) {
+    .container {
+      label:hover {
+        transform: rotate(-15deg) scale(1.3);
+      }
+    }
+  }
+}

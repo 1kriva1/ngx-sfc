@@ -41,11 +41,9 @@
 }
 
 @mixin right-side-info() {
-  .right-side-info {
-    @include under-text;
+  @include under-text;
 
-    float: right;
-  }
+  float: right;
 }
 
 @mixin action-icon-right() {
