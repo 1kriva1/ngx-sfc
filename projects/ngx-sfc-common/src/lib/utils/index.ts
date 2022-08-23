@@ -67,6 +67,7 @@ export {
     all,
     where,
     skip,
+    sort,
     sortBy,
     sortByPath,
     distinct,

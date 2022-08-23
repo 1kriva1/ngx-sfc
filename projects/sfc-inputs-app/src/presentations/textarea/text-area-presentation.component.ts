@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { BasePresentationComponent } from '../base-presentations.component';
 
 @Component({
@@ -9,8 +8,6 @@ import { BasePresentationComponent } from '../base-presentations.component';
 })
 export class TextAreaPresentationComponent extends BasePresentationComponent
   implements OnInit {
-
-  faUser = faUser;
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group(

@@ -115,6 +115,16 @@ export function skip<T>(collection: Array<T>, page: number, size: number): Array
     return collection;
 }
 
+export function sort<T>(collection: Array<T>, direction: SortingDirection = SortingDirection.Ascending): Array<T> {
+    if (any(collection)) {
+        return direction == SortingDirection.Ascending
+            ? collection.sort((a: any, b: any) => a - b)
+            : collection.sort((a: any, b: any) => b - a);
+    }
+
+    return collection;
+}
+
 /**
  * Return sorted collection of objects by property
  * @param collection Array of items

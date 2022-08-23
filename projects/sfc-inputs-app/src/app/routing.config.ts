@@ -8,7 +8,8 @@ import {
     CheckboxPresentationComponent,
     TogglePresentationComponent,
     TagsPresentationComponent,
-    NumberPresentationComponent
+    NumberPresentationComponent,
+    StarsPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -69,6 +70,10 @@ export const routes: Routes = [
     {
         path: 'number',
         component: NumberPresentationComponent
+    },
+    {
+        path: 'stars',
+        component: StarsPresentationComponent
     },
     fallbackRoute,
     indexRoute

@@ -7,3 +7,4 @@ export { CheckboxPresentationComponent } from './checkbox/checkbox-presentation.
 export { TogglePresentationComponent } from './toggle/toggle-presentation.component';
 export { TagsPresentationComponent } from './tags/tags-presentation.component';
 export { NumberPresentationComponent } from './number/number-presentation.component';
+export { StarsPresentationComponent } from './stars/stars-presentation.component';

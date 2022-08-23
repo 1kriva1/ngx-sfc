@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { TextInputComponent } from './text-input.component';
@@ -15,7 +15,7 @@ describe('Component: TextInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [InputReferenceDirective, TextInputComponent]
+      declarations: [ShowHideElementDirective, InputReferenceDirective, TextInputComponent]
     }).compileComponents();
   });
 
@@ -285,7 +285,7 @@ describe('Component: TextInput', () => {
 
   describe('Characters counter', () => {
     fit("Should be hidden", () => {
-      expect(fixture.nativeElement.querySelector('span.right-side-info').hidden).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('span.right-side-info').style.visibility).toEqual(UIClass.Hidden);
     });
   });
 });

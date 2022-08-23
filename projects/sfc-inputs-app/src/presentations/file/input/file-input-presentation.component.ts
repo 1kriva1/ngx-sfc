@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { fileExtensions, fileMaxSize } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../../base-presentations.component';
 
@@ -9,8 +8,6 @@ import { BasePresentationComponent } from '../../base-presentations.component';
   styleUrls: ['../../../shared/styles/shared.component.scss']
 })
 export class FileInputPresentationComponent extends BasePresentationComponent implements OnInit {
-
-  faUser = faUser;
 
   ngOnInit(): void {
     const file = new File([''], "name.jpg");

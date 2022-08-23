@@ -12,7 +12,9 @@
         box-sizing: border-box;
       }
 
-      @include right-side-info;
+      .right-side-info {
+        @include right-side-info;
+      }
     }
   }
 }
