@@ -1,0 +1,73 @@
+<div class="container" *ngIf="model$ | async as vm" (mousedown)="$event.preventDefault()">
+    <div class="content">
+        <div class="view">
+            <div class="header">
+                <span>{{vm.day ||'Time'}}</span>
+                <sfc-close (sfcMouseDown)="onClose($event)"></sfc-close>
+            </div>
+            <div class="date" *ngIf="(year && !time) || date">
+                <div *ngIf="date">
+                    <div class="handler before">
+                        <a [hidden]="!showMonthBefore" (sfcMouseDown)="onMonthBefore()">
+                            <fa-icon [icon]="faChevronLeft"></fa-icon>
+                        </a>
+                    </div>
+                    <div class="month">{{vm.month}}</div>
+                    <div class="handler after">
+                        <a [hidden]="!showMonthAfter" (sfcMouseDown)="onMonthAfter()">
+                            <fa-icon [icon]="faChevronRight"></fa-icon>
+                        </a>
+                    </div>
+                </div>
+                <div *ngIf="date" class="day">{{vm.dayNumber}}</div>
+                <div>
+                    <div class="handler before">
+                        <a [hidden]="!showYearBefore" (sfcMouseDown)="onYearBefore()">
+                            <fa-icon [icon]="faChevronLeft"></fa-icon>
+                        </a>
+                    </div>
+                    <div class="year" [ngStyle]="{'pointer-events': year ? 'initial':'none'}"
+                        (sfcMouseDown)="showYearsList()">
+                        <span>{{vm.year}}</span>
+                    </div>
+                    <div class="handler after">
+                        <a [hidden]="!showYearAfter" (sfcMouseDown)="onYearAfter()">
+                            <fa-icon [icon]="faChevronRight"></fa-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="time" *ngIf="!date && time">{{vm.time}}</div>
+            <div class="picker">
+                <ng-container [ngSwitch]="viewService.view">
+                    <sfc-datetime-calendar *ngSwitchCase="DateTimeView.Calendar" [minDate]="minDate" [maxDate]="maxDate"
+                        [disabledDays]="disabledDays" [weekStart]="weekStart" [locale]="locale"
+                        [switchOnClick]="switchOnClick" [currentDate]="vm.value">
+                    </sfc-datetime-calendar>
+
+                    <sfc-datetime-clock
+                        *ngSwitchCase="[DateTimeView.Hours, DateTimeView.Minutes] | sfcSwitchMultiCase:viewService.view"
+                        [shortTime]="shortTime" [minDate]="minDate" [maxDate]="maxDate" [locale]="locale"
+                        [switchOnClick]="switchOnClick" [hour]="vm.hour" [minute]="vm.minute"
+                        [time]="date && time ? vm.time : CommonConstants.EMPTY_STRING">
+                    </sfc-datetime-clock>
+
+                    <sfc-datetime-year *ngSwitchCase="DateTimeView.Years" [year]="vm.yearNumber" [minDate]="minDate"
+                        [maxDate]="maxDate">
+                    </sfc-datetime-year>
+                </ng-container>
+            </div>
+        </div>
+        <div class="actions">
+            <sfc-button *ngIf="nowButton" text="Now" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onNow()">
+            </sfc-button>
+            <sfc-button *ngIf="clearButton" text="Clear" [types]="[ButtonType.Rounded]"
+                (sfcMouseDown)="onClear($event)">
+            </sfc-button>
+            <sfc-button text="Cancel" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onCancel($event)">
+            </sfc-button>
+            <sfc-button [disabled]="isDisabled" text="Ok" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onOk($event)">
+            </sfc-button>
+        </div>
+    </div>
+</div>

@@ -39,7 +39,7 @@ describe('Component: Button', () => {
 
   describe('Disabled', () => {
     fit("Should not be disabled", () => {
-      expect(fixture.nativeElement.querySelector('a.button').className)
+      expect(fixture.nativeElement.className)
         .not.toContain(UIClass.Disabled);
     });
 
@@ -47,7 +47,7 @@ describe('Component: Button', () => {
       component.disabled = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('a.button').className)
+      expect(fixture.nativeElement.className)
         .toContain(UIClass.Disabled);
     });
   });
@@ -84,7 +84,7 @@ describe('Component: Button', () => {
       fixture.detectChanges();
 
       const iconBefore = fixture.nativeElement.querySelector('fa-icon.icon.before svg');
-      
+
       expect(iconBefore).toBeDefined();
       expect(iconBefore.classList).toContain('fa-shirt');
     });

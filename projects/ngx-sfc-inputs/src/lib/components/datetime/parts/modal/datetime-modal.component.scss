@@ -1,0 +1,144 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+$color-header: #26a69a;
+
+:host {
+  .container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+
+    .content {
+      background: $color-0;
+      box-shadow: 0 0.125em 0.31em 0 $color-shadow-0, 0 0.125em 0.625em 0 $color-shadow-1;
+
+      .view {
+        .header {
+          background: $color-header;
+          color: $color-0;
+          text-align: center;
+          padding: 0.4em 0.7em 0.4em 0.4em;
+          height: 1.3em;
+          cursor: default;
+          display: grid;
+          align-items: center;
+
+          span,
+          sfc-close {
+            grid-column-start: 1;
+            grid-row-start: 1;
+            justify-self: center;
+          }
+
+          sfc-close {
+            color: $color-0;
+            justify-self: right;
+          }
+        }
+
+        .date {
+          background: $color-hover-default;
+          text-align: center;
+          color: $color-0;
+          padding: 0.625em 0.3em;
+          cursor: default;
+
+          div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+          }
+
+          .handler {
+            width: 10%;
+
+            a {
+              transition: color 0.2s ease-in;
+              cursor: pointer;
+
+              &:hover {
+                color: $color-header;
+              }
+            }
+          }
+
+          .month {
+            text-transform: uppercase;
+          }
+
+          .day {
+            font-size: 3em;
+          }
+
+          .year {
+            span {
+              cursor: pointer;
+            }
+
+            &.disabled {
+              pointer-events: none;
+
+              &:hover {
+                cursor: inherit;
+              }
+            }
+          }
+
+          .month,
+          .year {
+            font-size: 1.5em;
+          }
+        }
+
+        .time {
+          background: $color-hover-default;
+          text-align: center;
+          color: $color-0;
+          padding: 0.625em 0;
+          font-size: 3em;
+          line-height: 0.9;
+        }
+
+        .picker {
+          padding: 0.5em 1em;
+          text-align: center;
+        }
+      }
+
+      .actions {
+        padding-bottom: 1em;
+        text-align: right;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        ::ng-deep sfc-button {
+          padding: 0.31em;
+
+          .button.rounded {
+            color: $color-default !important;
+            border-color: $color-default !important;
+
+            &:hover {
+              border-color: $color-hover-default !important;
+              color: $color-hover-default !important;
+            }
+          }
+
+          &.disabled {
+            .button {
+              @include theme-value(color, $color-disabled-default !important, $color-disabled-default !important);
+              @include theme-value(
+                border-color,
+                $color-disabled-default !important,
+                $color-disabled-default !important
+                      );
+            }
+          }
+        }
+      }
+    }
+  }
+}

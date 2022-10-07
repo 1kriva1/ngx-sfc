@@ -8,14 +8,30 @@ import { getCssLikeValue } from '../../utils';
 })
 export class ComponentSizeDirective {
 
+  private _size: ComponentSize | null | undefined;
   @Input('sfcComponentSize')
   set size(value: ComponentSize | null | undefined) {
-    this.style.fontSize = this.getSizeValue(value);
+    this._size = value;
+    this.style.fontSize = getCssLikeValue(this.getSizeProportion(), UIConstants.CSS_EM);
+  }
+  get size(): ComponentSize | null | undefined {
+    return this._size;
   }
 
+  private _customSize: number | null = null;
   @Input()
-  set customSize(value: number) {
-    this.style.fontSize = getCssLikeValue(value, UIConstants.CSS_EM);
+  set customSize(value: number | null) {
+    this._customSize = value;
+
+    if (this._customSize)
+      this.style.fontSize = getCssLikeValue(this._customSize, UIConstants.CSS_EM);
+  }
+  get customSize(): number | null {
+    return this._customSize;
+  }
+
+  public get proportion(): number {
+    return this.customSize || this.getSizeProportion();
   }
 
   private get style(): any {
@@ -23,19 +39,19 @@ export class ComponentSizeDirective {
   }
 
   constructor(private el: ElementRef) {
-    this.style.fontSize = this.getSizeValue(this.size);
+    this.style.fontSize = getCssLikeValue(this.getSizeProportion(), UIConstants.CSS_EM);
   }
 
-  private getSizeValue(value: ComponentSize | null| undefined): string {
-    switch (value) {
+  private getSizeProportion(): number {
+    switch (this.size) {
       case ComponentSize.Small:
-        return getCssLikeValue(0.5, UIConstants.CSS_EM);
+        return 0.5;
       case ComponentSize.Medium:
-        return getCssLikeValue(1, UIConstants.CSS_EM);
+        return 1;
       case ComponentSize.Large:
-        return getCssLikeValue(2, UIConstants.CSS_EM);
+        return 2;
       default:
-        return getCssLikeValue(1, UIConstants.CSS_EM);
+        return 1;
     }
   }
 }

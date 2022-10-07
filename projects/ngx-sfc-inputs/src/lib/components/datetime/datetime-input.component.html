@@ -1,0 +1,14 @@
+<div class="container">
+    <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
+    <div class="content">
+        <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
+        <input sfcInput id="{{inputId}}" [disabled]="disabled" type="text" class="text-input"
+            [placeholder]="placeholderValue" [value]="displayDate">
+        <span class="helper-text">{{helperTextValue}}</span>
+        <sfc-datetime-modal [sfcShowHideElement]="isFocused" [delay]="0" [date]="date" [time]="time" [year]="year"
+            [shortTime]="shortTime" [locale]="locale" [minDate]="minDate" [maxDate]="maxDate"
+            [disabledDays]="disabledDays" [weekStart]="weekStart" [switchOnClick]="switchOnClick"
+            [clearButton]="clearButton" [nowButton]="nowButton" (update)="update($event)">
+        </sfc-datetime-modal>
+    </div>
+</div>

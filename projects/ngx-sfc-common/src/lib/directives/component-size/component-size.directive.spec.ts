@@ -18,7 +18,7 @@ class TestComponentSizeDirectiveComponent {
     customSize?: number;
 }
 
-describe('Directive: ComponentSizeDirective', () => {
+describe('Directive: ComponentSize', () => {
 
     let component: TestComponentSizeDirectiveComponent;
     let fixture: ComponentFixture<TestComponentSizeDirectiveComponent>;
@@ -40,6 +40,7 @@ describe('Directive: ComponentSizeDirective', () => {
     });
 
     fit('Should have default value', () => {
+        expect(component.directive.proportion).toEqual(1);
         expect(fixture.debugElement.query(By.css('div.target'))
             .styles['fontSize']).toEqual(getCssLikeValue(1, UIConstants.CSS_EM));
     });
@@ -48,6 +49,7 @@ describe('Directive: ComponentSizeDirective', () => {
         component.size = ComponentSize.Small;
         fixture.detectChanges();
 
+        expect(component.directive.proportion).toEqual(0.5);
         expect(fixture.debugElement.query(By.css('div.target'))
             .styles['fontSize']).toEqual(getCssLikeValue(0.5, UIConstants.CSS_EM));
     });
@@ -56,6 +58,7 @@ describe('Directive: ComponentSizeDirective', () => {
         component.size = ComponentSize.Medium;
         fixture.detectChanges();
 
+        expect(component.directive.proportion).toEqual(1);
         expect(fixture.debugElement.query(By.css('div.target'))
             .styles['fontSize']).toEqual(getCssLikeValue(1, UIConstants.CSS_EM));
     });
@@ -64,6 +67,7 @@ describe('Directive: ComponentSizeDirective', () => {
         component.size = ComponentSize.Large;
         fixture.detectChanges();
 
+        expect(component.directive.proportion).toEqual(2);
         expect(fixture.debugElement.query(By.css('div.target'))
             .styles['fontSize']).toEqual(getCssLikeValue(2, UIConstants.CSS_EM));
     });
@@ -72,6 +76,7 @@ describe('Directive: ComponentSizeDirective', () => {
         component.customSize = 4.2;
         fixture.detectChanges();
 
+        expect(component.directive.proportion).toEqual(4.2);
         expect(fixture.debugElement.query(By.css('div.target'))
             .styles['fontSize']).toEqual(getCssLikeValue(4.2, UIConstants.CSS_EM));
     });

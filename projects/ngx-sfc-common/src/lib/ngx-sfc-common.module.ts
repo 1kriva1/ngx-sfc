@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   DOCUMENT_PROVIDERS,
   WINDOW_PROVIDERS
@@ -12,8 +13,12 @@ import {
   TemplateReferenceDirective,
   MouseDownDirective,
   ComponentSizeDirective,
-  DestroyParentDirective
+  DestroyParentDirective,
+  DomChangesDirective,
+  ScrollTrackerDirective,
+  ScrollIntoViewDirective
 } from './directives';
+import { SwitchMultiCasePipe } from './pipes';
 import {
   ButtonComponent,
   TooltipComponent,
@@ -33,7 +38,7 @@ import {
   PaginationComponent,
   SortingComponent
 } from './components';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     // directives
@@ -44,6 +49,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MouseDownDirective,
     ComponentSizeDirective,
     DestroyParentDirective,
+    DomChangesDirective,
+    ScrollTrackerDirective,
+    ScrollIntoViewDirective,
     // components
     ButtonComponent,
     TooltipComponent,
@@ -63,7 +71,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent        
+    DefaultModalFooterComponent,
+    // pipes
+    SwitchMultiCasePipe
   ],
   imports: [
     CommonModule,
@@ -79,6 +89,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MouseDownDirective,
     ComponentSizeDirective,
     DestroyParentDirective,
+    DomChangesDirective,
+    ScrollTrackerDirective,
+    ScrollIntoViewDirective,
     // components
     ButtonComponent,
     TooltipComponent,
@@ -98,7 +111,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ModalComponent,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
-    DefaultModalFooterComponent
+    DefaultModalFooterComponent,
+    // pipes
+    SwitchMultiCasePipe
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

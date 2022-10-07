@@ -1,0 +1,12 @@
+:host {
+  &:not(.disabled) {
+    .container {
+      .content {
+        .sfc-input,
+        label {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

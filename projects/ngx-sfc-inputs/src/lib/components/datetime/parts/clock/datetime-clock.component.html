@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="meridien">
+        <div *ngIf="shortTime" class="handler left">
+            <sfc-button text="AM" [class.active]="!isPM" [sfcComponentSize]="ComponentSize.Small"
+                [types]="[ButtonType.Circled]" (sfcMouseDown)="onAM()">
+            </sfc-button>
+        </div>
+        <div class="time">{{time}}</div>
+        <div *ngIf="shortTime" class="handler right">
+            <sfc-button text="PM" [class.active]="isPM" [sfcComponentSize]="ComponentSize.Small"
+                [types]="[ButtonType.Circled]" (sfcMouseDown)="onPM()">
+            </sfc-button>
+        </div>
+    </div>
+    <svg [attr.viewBox]="clock.viewBox">
+        <g [attr.transform]="clock.translate">
+            <circle class="circle" r="12em"></circle>
+            <line class="minute-hand" x1="0" y1="0" x2="0" y2="-9.375em"
+                [class.active]="viewService.view !== DateTimeView.Hours" [ngStyle]="minutesHandStyle">
+            </line>
+            <line class="hour-hand" x1="0" y1="0" x2="0" y2="-5.625em"
+                [class.active]="viewService.view === DateTimeView.Hours" [ngStyle]="hoursHandStyle">
+            </line>
+            <circle class="point" r="0.93em"></circle>
+            <ng-container [ngSwitch]="viewService.view">
+                <ng-container *ngSwitchCase="DateTimeView.Hours">
+                    <ng-container *ngFor="let hour of clock.hours">
+                        <circle class="hour-circle" r="1.25em" [attr.cx]="hour.circle.cx" [attr.cy]="hour.circle.cy"
+                            [ngClass]="hourClasses(hour.value)" (sfcMouseDown)="onSelectHour(hour.value)">
+                        </circle>
+                        <text class="hour-text" [attr.x]="hour.text.x" [attr.y]="hour.text.y"
+                            [ngClass]="hourClasses(hour.value)" (sfcMouseDown)="onSelectHour(hour.value)">
+                            {{hour.value}}
+                        </text>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="DateTimeView.Minutes">
+                    <ng-container *ngFor="let minute of clock.minutes">
+                        <circle class="minute-circle" [attr.r]="minute.circle.r + 'em'" [attr.cx]="minute.circle.cx"
+                            [attr.cy]="minute.circle.cy" [class.point]="!minute.text"
+                            [ngClass]="minuteClasses(minute.value)">
+                        </circle>
+                        <circle *ngIf="!minute.text" class="minute-circle" r="0.75em" [attr.cx]="minute.circle.cx"
+                            [attr.cy]="minute.circle.cy" [class.disabled]="isDisabledMinute(minute.value)"
+                            (sfcMouseDown)="onSelectMinute(minute.value, $event)">
+                        </circle>
+                        <text *ngIf="minute.text" class="minute-text" [attr.x]="minute.text.x" [attr.y]="minute.text.y"
+                            [ngClass]="minuteClasses(minute.value)"
+                            (sfcMouseDown)="onSelectMinute(minute.value, $event)">
+                            {{minute.value}}
+                        </text>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </g>
+    </svg>
+</div>

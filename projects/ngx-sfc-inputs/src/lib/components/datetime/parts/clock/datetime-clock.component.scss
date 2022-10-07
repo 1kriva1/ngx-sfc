@@ -1,0 +1,118 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    overflow: auto;
+    margin: 0 auto;
+
+    .meridien {
+      .handler {
+        width: 20%;
+        display: inline-block;
+
+        &.left {
+          float: left;
+        }
+
+        &.right {
+          float: right;
+        }
+      }
+
+      .time:not(:empty) {
+        cursor: default;
+        width: 60%;
+        display: inline-block;
+      }
+    }
+
+    svg {
+      @include square-size(16em);
+
+      .circle {
+        fill: $color-1;
+        stroke: $color-8;
+        stroke-width: 0.1em;
+      }
+
+      .hour-hand,
+      .minute-hand {
+        stroke: $color-8;
+
+        &.active {
+          stroke: $color-hover-default;
+        }
+      }
+
+      .hour-hand {
+        stroke-width: 0.5em;
+      }
+
+      .minute-hand {
+        stroke-width: 0.1em;
+      }
+
+      .point {
+        fill: $color-8;
+      }
+
+      .hour-circle,
+      .minute-circle {
+        fill: transparent;
+        cursor: pointer;
+
+        &.selected {
+          fill: $color-hover-default !important;
+        }
+
+        &.disabled {
+          color: $color-disabled-default;
+          pointer-events: none;
+        }
+      }
+
+      .minute-circle {
+        &.point {
+          fill: $color-8;
+
+          &.disabled {
+            fill: $color-disabled-default;
+          }
+        }
+      }
+
+      .hour-text {
+        font-size: 1.43em;
+      }
+
+      .minute-text {
+        font-size: 1.125em;
+      }
+
+      .hour-text,
+      .minute-text {
+        fill: $color-default;
+        cursor: pointer;
+        text-anchor: middle;
+        font-weight: bold;
+
+        &.selected {
+          fill: $color-0;
+        }
+
+        &.disabled {
+          fill: $color-disabled-default;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  ::ng-deep sfc-button.active {
+    .button.circled {
+      color: $color-0 !important;
+      border-color: $color-hover-default !important;
+      background: $color-hover-default !important;
+    }
+  }
+}

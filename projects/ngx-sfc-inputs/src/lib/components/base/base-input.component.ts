@@ -7,6 +7,7 @@ import { InputUIClass } from '../../enums/input-ui.enum';
 import { InputConstants } from '../../constants/input.constants';
 import { IValidationModel } from '../../models/validation.model';
 import { IInnerValidation } from '../../validators/inner-validation.model';
+import { Observable, Subject } from 'rxjs';
 
 @Directive()
 export abstract class BaseInputComponent<T> implements ControlValueAccessor, AfterViewInit {
@@ -145,7 +146,7 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     // END CLASSES
 
     public isHovered: boolean = false;
-    
+
     @HostListener('mouseenter')
     onMouseEnter() { this.isHovered = true; }
 
@@ -160,6 +161,9 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
 
     @ViewChild('iconRef', { static: false, read: ElementRef })
     iconElementRef!: ElementRef;
+
+    private valueSubject: Subject<T> = new Subject<T>();
+    public value$: Observable<T> = this.valueSubject.asObservable();
 
     constructor(@Optional() protected ngControl: NgControl,
         protected changeDetector: ChangeDetectorRef,
@@ -207,6 +211,7 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     * Write form value to the DOM element (model => view)
     */
     writeValue(value: T): void {
+        this.valueSubject.next(value);
         this.value = value;
     }
 

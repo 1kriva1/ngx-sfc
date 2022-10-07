@@ -137,6 +137,8 @@ ng generate class components/sorting/sorting --project ngx-sfc-common --skip-tes
 
 ng generate class components/sorting/sorting --project ngx-sfc-common --skip-tests true --type constants -d
 
+ng generate pipe pipes/switch-multi-case --flat false --export true --project ngx-sfc-common -d
+
 // COMPONENTS
 
 ng generate component components/tabs --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
@@ -312,6 +314,14 @@ ng generate component components/tags/parts/chip/tags-chip --project ngx-sfc-inp
 ng generate component components/number/number-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
 
 ng generate component components/number/parts/spinner/number-spinner --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/datetime/datetime-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/datetime/parts/calendar/datetime-calendar --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/datetime/parts/clock/datetime-clock --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/datetime/parts/year/datetime-year --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
 
 Demo:
 

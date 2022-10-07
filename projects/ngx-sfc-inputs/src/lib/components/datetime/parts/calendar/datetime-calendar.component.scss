@@ -1,0 +1,63 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+
+    .title {
+      padding-bottom: 1.25em;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: $color-default;
+      cursor: default;
+    }
+
+    table {
+      min-height: 15em;
+      border-collapse: collapse;
+
+      tr {
+        td {
+          font-weight: 700;
+          font-size: 0.8em;
+
+          a {
+            color: $color-default;
+            padding: 0.7em;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &.disabled {
+              color: $color-disabled-default;
+              padding: 0.4em 0.5em 0.5em 0.6em;
+              pointer-events: none;
+            }
+
+            &.selected {
+              background: $color-hover-default;
+              color: $color-0;
+            }
+
+            &:not(.selected):hover {
+              background: $color-3;
+            }
+          }
+        }
+      }
+
+      thead {
+        tr {
+          border-bottom: 0.06em solid $color-4;
+          cursor: default;
+
+          th {
+            color: $color-7;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,7 +12,12 @@ import {
   TogglePresentationComponent,
   TagsPresentationComponent,
   NumberPresentationComponent,
-  StarsPresentationComponent
+  StarsPresentationComponent,
+  DateTimePresentationComponent,
+  DateInputPresentationComponent,
+  TimeInputPresentationComponent,
+  DateTimeInputPresentationComponent,
+  YearsInputPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +36,12 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     TogglePresentationComponent,
     TagsPresentationComponent,
     NumberPresentationComponent,
-    StarsPresentationComponent
+    StarsPresentationComponent,
+    DateTimePresentationComponent,
+    DateInputPresentationComponent,
+    TimeInputPresentationComponent,
+    DateTimeInputPresentationComponent,
+    YearsInputPresentationComponent
   ],
   imports: [
     BrowserModule,
