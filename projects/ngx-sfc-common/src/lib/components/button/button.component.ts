@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { UIClass } from '../../enums';
 import { distinct } from '../../utils';
 import { ButtonType } from './button-type.enum';
@@ -23,17 +23,15 @@ export class ButtonComponent {
   iconAfter?: IconDefinition;
 
   @Input()
+  @HostBinding(`class.${UIClass.Disabled}`)
   disabled: boolean = false;
 
   @Input()
   types: Array<ButtonType> = [ButtonType.Bordered];
 
   get classes() {
-    const classes: any = {}
-
-    if (this.disabled)
-      classes[UIClass.Disabled] = true;
-
+    const classes: any = {};
+    
     distinct(this.types).forEach(type => classes[type] = true);
 
     return classes;

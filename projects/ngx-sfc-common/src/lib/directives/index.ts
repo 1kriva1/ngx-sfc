@@ -9,3 +9,6 @@ export { TemplateReferenceDirective }
 export { MouseDownDirective } from './mouse-down/mouse-down.directive';
 export { ComponentSizeDirective } from './component-size/component-size.directive';
 export { DestroyParentDirective } from './destroy-parent/destroy-parent.directive';
+export { DomChangesDirective } from './dom-changes/dom-changes.directive';
+export { ScrollTrackerDirective } from './scroll-tracker/scroll-tracker.directive';
+export { ScrollIntoViewDirective } from './scroll-into-view/scroll-into-view.directive';

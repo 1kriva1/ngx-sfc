@@ -32,6 +32,15 @@ export function getCalcValue(part: number, value: number = 100): string {
 }
 
 /**
+ * Return CCS like rotate value
+ * @param value value as degrees
+ * @returns Rotate value
+ */
+export function getRotateValue(value: number): string {
+    return `rotate(${value}deg)`;
+}
+
+/**
  * Add classes to HTML element
  * @param element HTML element
  * @param classNames Array of CSS classes

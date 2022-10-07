@@ -307,4 +307,17 @@ describe('Component: BaseInputComponent', () => {
             expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.Disabled}`)).toBeTruthy();
         });
     });
+
+    describe('Value', () => {
+        fit('Should emit on writeValue', done => {
+            const assertValue = 'test value';
+
+            component.base.value$.subscribe(value => {
+                expect(value).toEqual(assertValue);
+                done();
+            });
+
+            component.base.writeValue(assertValue);
+        });
+    });
 });

@@ -1,0 +1,166 @@
+<div class="component-container">
+    <div class="title">
+        <h3>DateTime:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-empty" formControlName="inputDateTimeNull">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-label" formControlName="inputDateTimeLabel" label="test label">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-icon" formControlName="inputDateTimeIcon" [icon]="faUser">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-helper" formControlName="inputDateTimeHelper"
+                    helperText="test helper text">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-disabled" formControlName="inputDateTimeDisabled"
+                    helperText="test helper text" [icon]="faUser" label="test label">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-value" formControlName="inputDateTimeValue" [icon]="faUser"
+                    label="test label">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-validation" formControlName="inputDateTimeValidation"
+                    [icon]="faUser" helperText="valid only 1/12/2020 03:15">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-valid" formControlName="inputDateTimeValid" label="valid value"
+                    helperText="valid only 1/12/2020 03:15">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-invalid" formControlName="inputDateTimeInValid" [icon]="faUser"
+                    label="invalid value" helperText="valid only 1/12/2020 03:15">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-week-start" formControlName="inputDateTimeWeekStart"
+                    [icon]="faUser" label="sunday start" helperText="week start from sunday" [weekStart]="0">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-all-buttons" formControlName="inputDateTimeAllButtons"
+                    [icon]="faUser" label="all buttons" helperText="+ clear and now button" [clearButton]="true"
+                    [nowButton]="true">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-switch-on-click" formControlName="inputDateTimeSwithcOnClick"
+                    [icon]="faUser" label="+ switch" helperText="switch on click" [clearButton]="true"
+                    [nowButton]="true" [switchOnClick]="true">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-min-date" formControlName="inputDateTimeMin" [icon]="faUser"
+                    label="min now" helperText="allow only more than now" [minDate]="minDate">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-max-date" formControlName="inputDateTimeMax" [icon]="faUser"
+                    label="max now" helperText="allow only less than now" [maxDate]="maxDate">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-disabled-day" formControlName="inputDateTimeDisabledDay"
+                    [icon]="faUser" label="now is disabled" helperText="disabled now"
+                    [disabledDays]="disabledDates">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-format" formControlName="inputDateTimeFormat" [icon]="faUser"
+                    label="Jun 15, 2015, 19:03:01" helperText="format: Jun 15, 2015, 19:03:01"
+                    format="MMM d, y, HH:mm:ss">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-date-time-short-format" formControlName="inputDateTimeShortFormat"
+                    [icon]="faUser" label="Jun 15, 2015, 9:03:01 AM" helperText="format: Jun 15, 2015, 9:03:01 AM"
+                    [shortTime]="true" format="MMM d, y, h:mm:ss a">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-datetime-small" formControlName="inputDateTimeSmall" [icon]="faUser"
+                    label="Small label" helperText="Small helper" [icon]="faUser" [clearButton]="true"
+                    [nowButton]="true" [sfcComponentSize]="ComponentSize.Small">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-datetime-large" formControlName="inputDateTimeLarge" [icon]="faUser"
+                    label="Large label" helperText="Large helper" [icon]="faUser" [clearButton]="true"
+                    [nowButton]="true" [sfcComponentSize]="ComponentSize.Large">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-datetime-custom" formControlName="inputDateTimeCustom" [icon]="faUser"
+                    label="Custom label" helperText="Custom helper" [icon]="faUser" [clearButton]="true"
+                    [nowButton]="true" [sfcComponentSize] [customSize]="4.2">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+
+</div>

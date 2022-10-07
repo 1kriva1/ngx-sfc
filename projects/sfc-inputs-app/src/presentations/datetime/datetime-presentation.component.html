@@ -1,0 +1,22 @@
+<div class="buttons-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="date"
+                [queryParams]="{theme: theme}">Date</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="time"
+                [queryParams]="{theme: theme}">Time</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="datetime"
+                [queryParams]="{theme: theme}">DateTime</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="years"
+                [queryParams]="{theme: theme}">Years</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

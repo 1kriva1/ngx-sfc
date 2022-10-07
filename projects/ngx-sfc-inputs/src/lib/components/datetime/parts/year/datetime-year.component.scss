@@ -1,0 +1,53 @@
+@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    .handler {
+      &:last-child {
+        margin-top: 0.31em;
+      }
+
+      ::ng-deep sfc-button {
+        width: 100%;
+
+        .button.rounded {
+          width: 100%;
+          font-size: 1.1em;
+          color: $color-default;
+          border-color: transparent !important;
+          border-width: 0.125em;
+
+          &:hover {
+            border-color: $color-hover-default;
+          }
+        }
+      }
+    }
+
+    .years {
+      overflow-y: scroll;
+      max-height: 10em;
+
+      .year {
+        color: $color-default;
+        padding: 0.125em 0;
+        font-size: 1.2em;
+        cursor: pointer;
+
+        &:hover {
+          color: $color-hover-default;
+        }
+
+        &.selected {
+          color: $color-hover-default;
+          font-weight: bold;
+        }
+
+        &.disabled {
+          color: $color-disabled-default;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,12 @@ import {
     TogglePresentationComponent,
     TagsPresentationComponent,
     NumberPresentationComponent,
-    StarsPresentationComponent
+    StarsPresentationComponent,
+    DateTimePresentationComponent,
+    DateInputPresentationComponent,
+    TimeInputPresentationComponent,
+    DateTimeInputPresentationComponent,
+    YearsInputPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -74,6 +79,36 @@ export const routes: Routes = [
     {
         path: 'stars',
         component: StarsPresentationComponent
+    },
+    {
+        path: 'datetime',
+        component: DateTimePresentationComponent,
+        children: [
+            {
+                path: 'date',
+                component: DateInputPresentationComponent
+            },
+            {
+                path: 'time',
+                component: TimeInputPresentationComponent
+            },
+            {
+                path: 'datetime',
+                component: DateTimeInputPresentationComponent
+            },
+            {
+                path: 'years',
+                component: YearsInputPresentationComponent
+            },
+            {
+                path: '',
+                component: DateInputPresentationComponent
+            },
+            {
+                path: '**',
+                component: DateInputPresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

@@ -8,3 +8,8 @@ export { TogglePresentationComponent } from './toggle/toggle-presentation.compon
 export { TagsPresentationComponent } from './tags/tags-presentation.component';
 export { NumberPresentationComponent } from './number/number-presentation.component';
 export { StarsPresentationComponent } from './stars/stars-presentation.component';
+export { DateTimePresentationComponent } from './datetime/datetime-presentation.component';
+export { DateInputPresentationComponent } from './datetime/date/date-input-presentation.component';
+export { TimeInputPresentationComponent } from './datetime/time/time-input-presentation.component';
+export { DateTimeInputPresentationComponent } from './datetime/datetime/datetime-input-presentation.component';
+export { YearsInputPresentationComponent } from './datetime/years/years-input-presentation.component';

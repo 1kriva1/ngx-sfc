@@ -1,0 +1,35 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Years:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-year" formControlName="inputYear" [icon]="faUser" label="only year"
+                    [date]="false" [time]="false" helperText="only year show">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-real-time" formControlName="inputRealTime" [icon]="faUser"
+                    label="real time" helperText="real time">
+                </sfc-datetime-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-datetime-input id="demo-real-min" formControlName="inputRealMin" [icon]="faUser" label="real min"
+                    helperText="real min" [minDate]="minDate">
+                </sfc-datetime-input>
+            </div>
+
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+
+</div>

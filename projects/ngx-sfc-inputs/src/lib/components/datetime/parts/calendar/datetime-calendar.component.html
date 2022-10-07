@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="title">{{calendarMonth}}</div>
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let dayIndex of model.weekDays">
+                    {{DateTimeConstants.DAYS_OF_WEEK_3[dayIndex]}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let week of model.weeks">
+                <td *ngFor="let date of week">
+                    <a *ngIf="date" [ngClass]="getDateState(date)" (sfcMouseDown)="onSelectDate($event, date)">
+                        {{getDateNumber(date)}}
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -7,3 +7,4 @@ export { ToggleInputComponent } from './toggle/toggle-input.component';
 export { TagsInputComponent } from './tags/tags-input.component';
 export { NumberInputComponent } from './number/number-input.component';
 export { StarsInputComponent } from './stars/stars-input.component';
+export { DateTimeInputComponent } from './datetime/datetime-input.component';

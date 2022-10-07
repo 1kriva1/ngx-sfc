@@ -12,16 +12,20 @@ import {
   ToggleInputComponent,
   TagsInputComponent,
   NumberInputComponent,
-  StarsInputComponent
+  StarsInputComponent,
+  DateTimeInputComponent
 } from './components';
 import {
   TagsChipComponent,
   BaseInputComponent,
   NumberSpinnerComponent,
-  StarComponent
+  StarComponent,
+  DateTimeCalendarComponent,
+  DateTimeClockComponent,
+  DateTimeYearComponent,
+  DateTimeModalComponent
 } from '../lib/components/no-export-index';
 import { InputReferenceDirective } from './directives';
-
 
 @NgModule({
   declarations: [
@@ -38,7 +42,12 @@ import { InputReferenceDirective } from './directives';
     NumberInputComponent,
     NumberSpinnerComponent,
     StarsInputComponent,
-    StarComponent
+    StarComponent,
+    DateTimeInputComponent,
+    DateTimeCalendarComponent,
+    DateTimeClockComponent,
+    DateTimeYearComponent,
+    DateTimeModalComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +64,8 @@ import { InputReferenceDirective } from './directives';
     ToggleInputComponent,
     TagsInputComponent,
     NumberInputComponent,
-    StarsInputComponent
+    StarsInputComponent,
+    DateTimeInputComponent
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

@@ -102,3 +102,11 @@ export const nameof = <T>(name: keyof T) => name;
 export function isNumeric(number: any): boolean {
     return !isNaN(parseFloat(number));
 }
+
+/**
+ * Return true if current browser is Chrome
+ * @returns If current browser is Chrome
+ */
+export function isChromeBrowser(): boolean {
+    return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+}

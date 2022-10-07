@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="handler">
+        <sfc-button [text]="CommonConstants.EMPTY_STRING" [types]="[ButtonType.Rounded]"
+            [sfcComponentSize]="ComponentSize.Small" [iconBefore]="faChevronUp"
+            (sfcMouseDown)="updateList(Sequence.Previous)">
+        </sfc-button>
+    </div>
+
+    <div #yearsEl class="years" [sfcScrollIntoView]="scrollTarget" (sfcScrollTracker)="onScroll($event)"
+        [positions]="[Position.Bottom, Position.Top]">
+        <div class="year" *ngFor="let _year of years" [class.selected]="year === _year"
+            [class.disabled]="isDisabled(_year)" (sfcMouseDown)="onSelectYear(_year)">
+            {{_year}}
+        </div>
+    </div>
+
+    <div class="handler">
+        <sfc-button [text]="CommonConstants.EMPTY_STRING" [types]="[ButtonType.Rounded]"
+            [sfcComponentSize]="ComponentSize.Small" [iconBefore]="faChevronDown"
+            (sfcMouseDown)="updateList(Sequence.Next)">
+        </sfc-button>
+    </div>
+</div>

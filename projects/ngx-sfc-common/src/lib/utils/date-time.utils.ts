@@ -7,15 +7,10 @@ import { isDefined } from "./common.utils";
  * @param minute Minute value
  * @returns Date with minute value
  */
- export function setMinutes(date: Date, minute: number): Date {
-    date.setMinutes(minute);
-    return new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        date.getHours(),
-        date.getMinutes()
-    );
+export function setMinutes(date: Date, minute: number): Date {
+    const result = new Date(date);
+    result.setMinutes(minute);
+    return result;
 }
 
 /**
@@ -25,14 +20,9 @@ import { isDefined } from "./common.utils";
  * @returns Date with hour value
  */
 export function setHours(date: Date, hour: number): Date {
-    date.setHours(hour);
-    return new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        date.getHours(),
-        date.getMinutes()
-    );
+    const result = new Date(date);
+    result.setHours(hour);
+    return result;
 }
 
 /**
@@ -54,14 +44,56 @@ export function setDay(date: Date, dayNumber: number): Date {
  * @returns Date with year value
  */
 export function setYear(date: Date, year: number): Date {
-    date.setFullYear(year);
-    return new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        date.getHours(),
-        date.getMinutes()
-    );
+    const result = new Date(date);
+    result.setFullYear(year);
+    return result;
+}
+
+/**
+ * Set seconds for date
+ * @param date Date value
+ * @param value Seconds value
+ * @returns Date with minute value
+ */
+export function setSeconds(date: Date, value: number): Date {
+    const result = new Date(date);
+    result.setSeconds(value);
+    return result;
+}
+
+/**
+ * Set milliseconds for date
+ * @param date Date value
+ * @param value Milliseconds value
+ * @returns Date with minute value
+ */
+export function setMilliseconds(date: Date, value: number): Date {
+    const result = new Date(date);
+    result.setMilliseconds(value);
+    return result;
+}
+
+/**
+ * Set 0 for seconds and milliseconds of date
+ * @param date Date value
+ * @returns Date with minute value
+ */
+export function setDefaultSecondsAndMiliseconds(date: Date): Date {
+    const result = new Date(date);
+    result.setSeconds(0);
+    result.setMilliseconds(0);
+    return result;
+}
+
+/**
+ * Get next date
+ * @param date Date value
+ * @returns Next date
+ */
+export function getNextDate(date: Date): Date {
+    const nextDate = new Date(date);
+    nextDate.setDate(date.getDate() + 1)
+    return nextDate;
 }
 
 /**
@@ -203,10 +235,12 @@ export function getWeeksNumberInMonth(date: Date): number {
  * @returns True if first and second date are equal
  */
 export function isEqualDates(date1: Date, date2: Date): boolean {
-    date1.setHours(0, 0, 0, 0);
-    date2.setHours(0, 0, 0, 0);
+    const date1Value = new Date(date1),
+        date2Value = new Date(date2);
+    date1Value.setHours(0, 0, 0, 0);
+    date2Value.setHours(0, 0, 0, 0);
 
-    return date1.getTime() === date2.getTime();
+    return date1Value.getTime() === date2Value.getTime();
 }
 
 /**

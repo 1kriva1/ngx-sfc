@@ -6,7 +6,8 @@ export {
     removePropertyFromObject,
     mergeDeep,
     nameof,
-    isNumeric
+    isNumeric,
+    isChromeBrowser
 } from './common.utils'
 
 export {
@@ -20,6 +21,10 @@ export {
     setHours,
     setDay,
     setYear,
+    setSeconds,
+    setMilliseconds,
+    setDefaultSecondsAndMiliseconds,
+    getNextDate,
     getNextMonth,
     getPreviousMonth,
     getNextYear,
@@ -49,6 +54,7 @@ export {
     getCssLikeValue,
     getValueFromCssLikeValue,
     getCalcValue,
+    getRotateValue,
     addClasses,
     removeClasses,
     rgbToHex,

@@ -72,7 +72,7 @@
         transform: translateY(0.6em);
         left: 0;
         user-select: none;
-        white-space: nowrap;
+        white-space: break-spaces;
 
         &::after {
           display: block;
@@ -200,24 +200,25 @@
 
   /**  SCROLL BAR */
 
-  ::-webkit-scrollbar {
+  ::ng-deep ::-webkit-scrollbar {
     @include square-size(0.375em);
   }
 
-  ::-webkit-scrollbar-track {
+  ::ng-deep ::-webkit-scrollbar-track {
+    border-radius: 0.625em;
     background: rgb(0 0 0 / 10%);
   }
 
-  ::-webkit-scrollbar-thumb {
+  ::ng-deep ::-webkit-scrollbar-thumb {
     border-radius: 0.625em;
     background: rgb(0 0 0 / 20%);
   }
 
-  ::-webkit-scrollbar-thumb:hover {
+  ::ng-deep ::-webkit-scrollbar-thumb:hover {
     background: rgb(0 0 0 / 40%);
   }
 
-  ::-webkit-scrollbar-thumb:active {
+  ::ng-deep ::-webkit-scrollbar-thumb:active {
     background: rgb(0 0 0 / 60%);
   }
 
