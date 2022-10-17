@@ -5,6 +5,7 @@ export enum UIClass {
     Active = 'active',
     Valid = 'valid',
     Invalid = 'invalid',
+    InnerInvalid = 'inner-invalid',
     Enabled = 'enabled',
     Disabled = 'disabled',
     Selected = 'selected',

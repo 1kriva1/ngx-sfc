@@ -44,7 +44,7 @@ export class FileInputPresentationComponent extends BasePresentationComponent im
         }],
         inputFileSmall: [null],
         inputFileLarge: [null],
-        inputFileCustomSize: [file],
+        inputFileCustomSize: [file]
       }
     );
   }

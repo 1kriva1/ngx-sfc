@@ -323,6 +323,12 @@ ng generate component components/datetime/parts/clock/datetime-clock --project n
 
 ng generate component components/datetime/parts/year/datetime-year --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
 
+ng generate component components/image/image-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/image/parts/editor/image-editor --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
+
+ng generate service components/image/service/image --project ngx-sfc-inputs --skip-tests false --flat false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d

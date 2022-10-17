@@ -45,9 +45,8 @@ export function readAsDataURL(file: File, onLoad: (result: string | ArrayBuffer 
         const reader = new FileReader();
         reader.onload = () => onLoad(reader.result);
         reader.readAsDataURL(file);
-    }
-
-    throw new Error('File utils | Read as data URL function --> File is empty.');
+    } else
+        throw new Error('File utils | Read as data URL function --> File is empty.');
 }
 
 /**
@@ -56,5 +55,5 @@ export function readAsDataURL(file: File, onLoad: (result: string | ArrayBuffer 
  * @returns True if file is image
  */
 export function isImage(file: File): boolean {
-    return (/\.(gif|jpe?g|jpg|tiff|png|webp|bmp)$/i).test(file.name);
+    return isDefined(file) && (/\.(gif|jpe?g|jpg|tiff|png|webp|bmp)$/i).test(file.name);
 }

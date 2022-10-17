@@ -1,0 +1,25 @@
+<div class="container">
+    <input sfcInput id="{{inputId}}" type="file" hidden="true" [disabled]="disabled"
+        (change)="onEmitFile($any($event.target).files)">
+    <div class="content">
+        <div class="component">
+            <div class="image" [ngStyle]="{'background-image': 'url('+url+')'}"></div>
+            <div class="label">
+                <label for="{{inputId}}">
+                    <fa-icon [icon]="icon"></fa-icon>
+                    <span *ngIf="label">{{label}}</span>
+                </label>
+                <sfc-close *ngIf="showClearButton" (click)="onClear()"></sfc-close>
+            </div>
+            <div class="overlay"></div>
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+
+    <sfc-modal *sfcModalOpen [defaultHeaderModel]="headerModalModel" [defaultFooterModel]="footerModalModel"
+        [hideOnClickOutside]="false">
+        <ng-template [sfcTemplateReference]="ModalTemplate.Body">
+            <sfc-image-editor [type]="type"></sfc-image-editor>
+        </ng-template>
+    </sfc-modal>
+</div>

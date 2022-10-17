@@ -30,7 +30,6 @@
     max-width: calc(100% - 3em);
     max-height: calc(100% - 3em);
     border-radius: 3px;
-    overflow-y: auto;
     box-shadow: 0 0.125em 0.625em $color-8;
     transform: scale(1);
     flex-direction: column;
@@ -46,14 +45,19 @@
 
     > div {
       width: 100%;
-      flex: 0 0 auto;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       color: $color-default;
       flex-direction: row;
       display: flex;
+      flex: 0 0 auto;
       justify-content: center;
+
+      &.body {
+        overflow-y: auto;
+        flex: 0;
+      }
     }
   }
 }

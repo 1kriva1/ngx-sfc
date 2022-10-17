@@ -81,8 +81,9 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
         return !Object.keys(this.validationErrors).length;
     }
 
-    get isInnerValid() {
-        return !Object.keys(this.innerErrors).length;
+    @HostBinding(`class.${UIClass.InnerInvalid}`)
+    get isInnerInvalid() {
+        return Object.keys(this.innerErrors).length > 0;
     }
 
     get validationClass() {

@@ -45,9 +45,10 @@
     }
   }
 
-  &.has-value,
-  &.ng-dirty {
-    .container.invalid {
+  &.has-value.ng-invalid,
+  &.ng-dirty.ng-invalid,
+  &.has-value.inner-invalid {
+    .container {
       .content {
         .tags {
           border-bottom: 1px solid $color-failed !important;
@@ -69,8 +70,8 @@
     }
   }
 
-  &.has-value.ng-dirty {
-    .container.valid {
+  &.has-value.ng-dirty.ng-valid {
+    .container {
       .content {
         .tags {
           border-bottom: 1px solid $color-success;
