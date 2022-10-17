@@ -14,7 +14,8 @@ import {
     DateInputPresentationComponent,
     TimeInputPresentationComponent,
     DateTimeInputPresentationComponent,
-    YearsInputPresentationComponent
+    YearsInputPresentationComponent,
+    ImagePresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -109,6 +110,10 @@ export const routes: Routes = [
                 component: DateInputPresentationComponent
             }
         ]
+    },
+    {
+        path: 'image',
+        component: ImagePresentationComponent
     },
     fallbackRoute,
     indexRoute

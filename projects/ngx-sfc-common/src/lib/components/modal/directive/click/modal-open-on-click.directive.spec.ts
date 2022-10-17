@@ -1,8 +1,8 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
-import { ModalService } from '../service/modal.service';
+import { ModalService } from '../../service/modal.service';
 import { ModalOpenOnClickDirective } from './modal-open-on-click.directive';
 
 @Component({
@@ -19,7 +19,7 @@ class TestModalOpenOnClickComponent {
   directive: ModalOpenOnClickDirective = null as unknown as ModalOpenOnClickDirective;
 }
 
-describe('Directive: ModalOpenOnClickDirective', () => {
+describe('Directive: ModalOpenOnClick', () => {
 
   let component: TestModalOpenOnClickComponent;
   let fixture: ComponentFixture<TestModalOpenOnClickComponent>;

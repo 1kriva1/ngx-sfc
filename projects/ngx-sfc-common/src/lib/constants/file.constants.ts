@@ -1,0 +1,1 @@
+export type ImageFormat = 'gif' | 'jpeg' | 'jpg' | 'tiff' | 'png' | 'webp' | 'bmp';

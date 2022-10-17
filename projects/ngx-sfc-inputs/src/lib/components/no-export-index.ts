@@ -6,3 +6,4 @@ export { DateTimeCalendarComponent } from "./datetime/parts/calendar/datetime-ca
 export { DateTimeClockComponent } from "./datetime/parts/clock/datetime-clock.component";
 export { DateTimeYearComponent } from "./datetime/parts/year/datetime-year.component";
 export { DateTimeModalComponent } from "./datetime/parts/modal/datetime-modal.component";
+export { ImageEditorComponent } from "./image/parts/editor/image-editor.component";

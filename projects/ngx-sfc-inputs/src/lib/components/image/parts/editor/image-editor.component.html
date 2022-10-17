@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="editor" [ngClass]="type">
+        <img #image crossorigin [src]="url" (load)="onImageLoad(image)">
+    </div>
+    <div class="actions">
+        <fa-icon [icon]="faCrop" (click)="crop()" [class.active]="isCrop"></fa-icon>
+        <fa-icon [icon]="faArrowsAlt" (click)="move()" [class.active]="!isCrop"></fa-icon>
+        <fa-icon [icon]="faSearchPlus" (click)="zoomIn()"></fa-icon>
+        <fa-icon [icon]="faSearchMinus" (click)="zoomOut()"></fa-icon>
+        <fa-icon [icon]="faArrowsV" (click)="flipV()"></fa-icon>
+        <fa-icon [icon]="faArrowsH" (click)="flipH()"></fa-icon>
+        <fa-icon [icon]="faRotateLeft" (click)="rotateLeft()"></fa-icon>
+        <fa-icon [icon]="faRotateRight" (click)="rotateRight()"></fa-icon>
+        <fa-icon [icon]="faRefresh" (click)="reset()"></fa-icon>
+    </div>
+</div>

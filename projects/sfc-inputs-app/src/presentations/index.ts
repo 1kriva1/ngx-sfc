@@ -13,3 +13,4 @@ export { DateInputPresentationComponent } from './datetime/date/date-input-prese
 export { TimeInputPresentationComponent } from './datetime/time/time-input-presentation.component';
 export { DateTimeInputPresentationComponent } from './datetime/datetime/datetime-input-presentation.component';
 export { YearsInputPresentationComponent } from './datetime/years/years-input-presentation.component';
+export { ImagePresentationComponent } from './image/image-presentation.component';

@@ -17,12 +17,14 @@ import {
   DateInputPresentationComponent,
   TimeInputPresentationComponent,
   DateTimeInputPresentationComponent,
-  YearsInputPresentationComponent
+  YearsInputPresentationComponent,
+  ImagePresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,11 +43,13 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     DateInputPresentationComponent,
     TimeInputPresentationComponent,
     DateTimeInputPresentationComponent,
-    YearsInputPresentationComponent
+    YearsInputPresentationComponent,
+    ImagePresentationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     FontAwesomeModule,

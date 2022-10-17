@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { isDefined } from '../../../utils';
-import { ModalService } from '../service/modal.service';
+import { ModalService } from '../../service/modal.service';
+import { isDefined } from '../../../../utils/index';
 
 @Directive({
   selector: '[sfcModalOpenOnClick]'
@@ -41,9 +41,7 @@ export class ModalOpenOnClickDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._closeSubscription = this.modalService.close$
-      .subscribe(() => {
-        this.viewContainer.clear();
-      });
+      .subscribe(() => this.viewContainer.clear());
   }
 
   ngOnDestroy(): void {

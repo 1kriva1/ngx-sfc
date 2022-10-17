@@ -52,7 +52,7 @@ export class TagsInputComponent extends BaseInputComponent<string[]> implements 
     const newValue = trim(this.newTagValue as string);
     this.checkeInnerValidation(newValue);
 
-    if (this.isInnerValid)
+    if (!this.isInnerInvalid)
       this.addNewTag();
   }
 

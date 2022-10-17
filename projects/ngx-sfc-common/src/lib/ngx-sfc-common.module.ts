@@ -27,6 +27,7 @@ import {
   CircleLoaderComponent,
   ModalComponent,
   ModalOpenOnClickDirective,
+  ModalOpenDirective,
   DefaultModalHeaderComponent,
   DefaultModalFooterComponent,
   HamburgerComponent,
@@ -69,6 +70,7 @@ import {
     CircleLoaderComponent,
     // modal
     ModalComponent,
+    ModalOpenDirective,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
@@ -109,6 +111,7 @@ import {
     CircleLoaderComponent,
     // modal
     ModalComponent,
+    ModalOpenDirective,
     ModalOpenOnClickDirective,
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,

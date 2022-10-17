@@ -18,7 +18,7 @@ export class ModalService {
     this.subjectClose.next();
   }
 
-  open(options: any) {
+  open(options?: any) {
     this.subjectOpen.next(options);
   }
 }

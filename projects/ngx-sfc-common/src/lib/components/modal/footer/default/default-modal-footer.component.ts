@@ -33,7 +33,7 @@ export class DefaultModalFooterComponent implements OnInit {
     }
   }
 
-  onButtonClick(isCancelButton: boolean = false) {
+  onButtonClick(isCancelButton: boolean = false): void {
     if (isCancelButton) {
       if (this.model?.onCancel) {
         return this.model?.onCancel();

@@ -281,11 +281,11 @@ describe('Component: FileInput', () => {
       expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual(CommonConstants.EMPTY_STRING);
     });
   });
-});
 
-function getHugeFile(name: string, size: number): File {
-  const file = new File([''], name);
-  Object.defineProperty(
-    file, 'size', { value: size, writable: false });
-  return file;
-}
+  function getHugeFile(name: string, size: number): File {
+    const file = new File([''], name);
+    Object.defineProperty(
+      file, 'size', { value: size, writable: false });
+    return file;
+  }
+});

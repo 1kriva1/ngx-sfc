@@ -306,6 +306,17 @@ describe('Component: BaseInputComponent', () => {
 
             expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.Disabled}`)).toBeTruthy();
         });
+
+        fit("Should not have inner invalid class", () => {
+            expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.InnerInvalid}`)).toBeNull();
+        });
+
+        fit("Should have inner invalid class", () => {
+            component.base.toggleInnerErrors('innerError', false);
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.InnerInvalid}`)).toBeTruthy();
+        });
     });
 
     describe('Value', () => {

@@ -1,0 +1,138 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  width: initial;
+
+  .container {
+    .content {
+      text-align: center;
+
+      .component {
+        border: 0.25em solid $color-default;
+        color: $color-default;
+        position: relative;
+        overflow: hidden;
+
+        .image {
+          @include square-size(12.5em);
+
+          background-size: cover;
+          background-position: 50%;
+        }
+
+        @mixin image-label-size {
+          height: 25%;
+          width: 100%;
+        }
+
+        .label {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+
+          @include image-label-size;
+
+          z-index: 1;
+          opacity: 0;
+          transition: opacity 0.5s;
+          font-size: 1em;
+
+          label {
+            color: $color-0 !important;
+            position: initial;
+            overflow: hidden;
+            font-weight: bold;
+            user-select: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            transform: none;
+            cursor: pointer;
+            width: 50%;
+            text-align: center;
+
+            fa-icon {
+              transition: color, 0.3s ease;
+
+              &:hover {
+                color: $color-hover-default;
+              }
+            }
+
+            span {
+              margin-left: 0.31em;
+            }
+          }
+
+          sfc-close {
+            color: $color-red-0;
+          }
+        }
+
+        .overlay {
+          background-color: $color-8;
+
+          @include image-label-size;
+
+          position: absolute;
+          bottom: 0;
+          opacity: 0;
+          transition: opacity 0.5s;
+          z-index: 0;
+        }
+
+        &:hover {
+          border-color: $color-8;
+
+          .label {
+            opacity: 1;
+          }
+
+          .overlay {
+            opacity: 0.3;
+          }
+        }
+      }
+
+      .helper-text {
+        float: initial;
+      }
+    }
+  }
+
+  &.circle {
+    .container {
+      .content {
+        .component {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        .component {
+          border-width: 0.1em;
+          border-style: dashed;
+
+          @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+
+          &:hover {
+            @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+
+            .label,
+            .overlay {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
