@@ -1,0 +1,154 @@
+@import "../../../styles/mixins";
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    .range-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .limits {
+        @include theme-value(color, $color-default, $color-dark);
+
+        white-space: nowrap;
+        font-weight: 700;
+        user-select: none;
+
+        &.before {
+          margin-right: 1em;
+        }
+
+        &.after {
+          margin-left: 1em;
+        }
+      }
+
+      .component {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        label {
+          transform: translateY(-1.25em) scale(0.8);
+        }
+
+        .range {
+          width: 100%;
+
+          .tooltip {
+            bottom: 0.1em;
+          }
+
+          input[type="range"] {
+            border: none !important;
+            box-shadow: none !important;
+            appearance: none;
+
+            @include theme-value(background-color, $color-default, $color-dark);
+
+            height: 0.3125em;
+            border-radius: 0.3125em;
+            margin: 0.8em 0;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+
+            &::-webkit-slider-thumb {
+              appearance: none;
+              background-color: $color-default;
+
+              @include square-size(2em);
+
+              border-radius: 50%;
+              border: 0.125em solid $color-0;
+              cursor: pointer;
+              transition: 0.3s ease-in-out;
+
+              &:active {
+                background-color: $color-hover-default;
+                transform: scale(1.2);
+              }
+
+              &:hover {
+                background-color: $color-hover-default;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        .range-container {
+          .limits {
+            @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+          }
+
+          .component {
+            .range {
+              input[type="range"] {
+                cursor: initial;
+
+                @include theme-value(background-color, $color-disabled-default, $color-disabled-dark);
+
+                &::-webkit-slider-thumb {
+                  @include theme-value(
+                    background-color,
+                                        $color-disabled-default,
+                                        $color-disabled-dark
+                                    );
+                  @include theme-value(border-color, $color-2, $color-7);
+
+                  cursor: initial;
+
+                  &:active {
+                    transform: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include valid {
+    .content {
+      .range-container {
+        .component {
+          .range {
+            input[type="range"] {
+              background-color: $color-success;
+
+              &::-webkit-slider-thumb {
+                background-color: $color-success;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include invalid {
+    .content {
+      .range-container {
+        .component {
+          .range {
+            input[type="range"] {
+              background-color: $color-failed;
+
+              &::-webkit-slider-thumb {
+                background-color: $color-failed;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

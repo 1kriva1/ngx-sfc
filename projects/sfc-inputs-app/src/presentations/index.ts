@@ -14,3 +14,6 @@ export { TimeInputPresentationComponent } from './datetime/time/time-input-prese
 export { DateTimeInputPresentationComponent } from './datetime/datetime/datetime-input-presentation.component';
 export { YearsInputPresentationComponent } from './datetime/years/years-input-presentation.component';
 export { ImagePresentationComponent } from './image/image-presentation.component';
+export { RangePresentationComponent } from './range/range-presentation.component';
+export { HorizontalRangeInputPresentationComponent } from './range/horizontal/horizontal-range-input-presentation.component';
+export { VerticalRangeInputPresentationComponent } from './range/vertical/vertical-range-input-presentation.component';

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, AfterViewInit, Input, ViewChild, HostBinding, ElementRef, Renderer2, Directive, Optional, HostListener } from '@angular/core';
 import { NgControl, ControlValueAccessor, ValidationErrors } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { addPropertyToObject, any, CommonConstants, isDefined, isNullOrEmptyString, removePropertyFromObject, UIClass } from 'ngx-sfc-common';
+import { addPropertyToObject, any, CommonConstants, ComponentSizeDirective, isDefined, isNullOrEmptyString, removePropertyFromObject, UIClass } from 'ngx-sfc-common';
 import { InputReferenceDirective } from '../../directives/reference/input-reference.directive';
 import { InputUIClass } from '../../enums/input-ui.enum';
 import { InputConstants } from '../../constants/input.constants';
@@ -70,8 +70,12 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     * Return helper text if input has NOT error, 
     * otherwise return first error message
     */
-    get helperTextValue() {
+    get helperTextValue(): string {
         return this.input?.isInvalid || !this.isValid ? this.errorMessage : this.helperText;
+    }
+
+    get sizeProportion(): number {
+        return this.componentSize?.proportion || 1;
     }
 
     /**
@@ -166,7 +170,9 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     private valueSubject: Subject<T> = new Subject<T>();
     public value$: Observable<T> = this.valueSubject.asObservable();
 
-    constructor(@Optional() protected ngControl: NgControl,
+    constructor(
+        @Optional() protected ngControl: NgControl,
+        @Optional() protected componentSize: ComponentSizeDirective,
         protected changeDetector: ChangeDetectorRef,
         protected renderer: Renderer2,
         protected elementRef: ElementRef) {

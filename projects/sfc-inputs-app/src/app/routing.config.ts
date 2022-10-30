@@ -15,7 +15,10 @@ import {
     TimeInputPresentationComponent,
     DateTimeInputPresentationComponent,
     YearsInputPresentationComponent,
-    ImagePresentationComponent
+    ImagePresentationComponent,
+    RangePresentationComponent,
+    HorizontalRangeInputPresentationComponent,
+    VerticalRangeInputPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -114,6 +117,28 @@ export const routes: Routes = [
     {
         path: 'image',
         component: ImagePresentationComponent
+    },
+    {
+        path: 'range',
+        component:RangePresentationComponent,
+        children: [
+            {
+                path: 'horizontal',
+                component: HorizontalRangeInputPresentationComponent
+            },
+            {
+                path: 'vertical',
+                component: VerticalRangeInputPresentationComponent
+            } ,
+            {
+                path: '',
+                component: HorizontalRangeInputPresentationComponent
+            },
+            {
+                path: '**',
+                component: HorizontalRangeInputPresentationComponent
+            }           
+        ]
     },
     fallbackRoute,
     indexRoute

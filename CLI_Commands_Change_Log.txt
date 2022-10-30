@@ -329,6 +329,8 @@ ng generate component components/image/parts/editor/image-editor --project ngx-s
 
 ng generate service components/image/service/image --project ngx-sfc-inputs --skip-tests false --flat false -d
 
+ng generate component components/range/range-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
