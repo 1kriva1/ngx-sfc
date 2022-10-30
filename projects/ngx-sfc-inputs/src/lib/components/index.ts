@@ -10,3 +10,5 @@ export { StarsInputComponent } from './stars/stars-input.component';
 export { DateTimeInputComponent } from './datetime/datetime-input.component';
 export { ImageInputComponent } from './image/image-input.component';
 export { ImageInputType } from './image/image-input-type.enum';
+export { RangeInputComponent } from './range/range-input.component';
+export { RangeInputVerticalComponent } from "./range/vertical/range-input-vertical.component";

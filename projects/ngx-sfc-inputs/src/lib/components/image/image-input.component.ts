@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, NgZone, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ModalTemplate, readAsDataURL, IDefaultModalFooterModel, isImage, isNullOrEmptyString, IDefaultModalHeaderModel, ModalService, CommonConstants } from 'ngx-sfc-common';
+import { ModalTemplate, readAsDataURL, IDefaultModalFooterModel, isImage, isNullOrEmptyString, IDefaultModalHeaderModel, ModalService, CommonConstants, ComponentSizeDirective } from 'ngx-sfc-common';
 import { Subscription } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { BaseInputComponent } from '../base/base-input.component';
@@ -67,14 +67,16 @@ export class ImageInputComponent
 
   private _exportSubscription!: Subscription;
 
-  constructor(@Optional() ngControl: NgControl,
+  constructor(
+    @Optional() ngControl: NgControl,
+    @Optional() componentSize: ComponentSizeDirective,
     changeDetector: ChangeDetectorRef,
     renderer: Renderer2,
     elementRef: ElementRef,
     private modalService: ModalService,
     private imageService: ImageService,
     private ngZone: NgZone) {
-    super(ngControl, changeDetector, renderer, elementRef);
+    super(ngControl, componentSize, changeDetector, renderer, elementRef);
   }
 
   ngOnInit(): void {

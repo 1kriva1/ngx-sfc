@@ -1,0 +1,14 @@
+<div class="buttons-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="horizontal"
+                [queryParams]="{theme: theme}">Horizontal</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="vertical"
+                [queryParams]="{theme: theme}">Vertical</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

@@ -1,7 +1,7 @@
 import { formatDate, WeekDay } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { CommonConstants, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
+import { CommonConstants, ComponentSizeDirective, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
 import { isNullOrEmptyString } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base/base-input.component';
 import { DateTimeInputConstants } from './constants/datetime.constants';
@@ -84,13 +84,15 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
     return this.value ? formatDate(this.value, this.format, this.locale) : CommonConstants.EMPTY_STRING;
   }
 
-  constructor(@Optional() ngControl: NgControl,
+  constructor(
+    @Optional() ngControl: NgControl,
+    @Optional() componentSize: ComponentSizeDirective,
     changeDetector: ChangeDetectorRef,
     renderer: Renderer2,
     elementRef: ElementRef,
     public viewService: DateTimeViewService,
     public valueService: DateTimeValueService) {
-    super(ngControl, changeDetector, renderer, elementRef);
+    super(ngControl, componentSize, changeDetector, renderer, elementRef);
   }
 
   ngOnInit(): void {

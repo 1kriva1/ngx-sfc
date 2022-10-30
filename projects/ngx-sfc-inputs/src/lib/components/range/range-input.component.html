@@ -1,0 +1,27 @@
+<div class="container">
+    <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+    <div class="content">
+        <div class="range-container">
+            <span *ngIf="showBeforeLabel" class="limits before">
+                <span *ngIf="!startIcon">{{min}}</span>
+                <fa-icon *ngIf="startIcon" [icon]="startIcon"></fa-icon>
+            </span>
+            <div class="component">
+                <label for="{{inputId}}" *ngIf="label" class="active">{{label}}</label>
+                <div class="range">
+                    <span *ngIf="tooltip" class="tooltip" [ngStyle]="{'left': tooltipModel.left}"
+                        [sfc-tooltip]="tooltipModel.value" [tooltipShow]="tooltipModel.show"
+                        [tooltipPosition]="tooltipPosition"></span>
+                    <input sfcInput id="{{inputId}}" type="range" min="{{min}}" max="{{max}}" step="{{step}}"
+                        [value]="value" [disabled]="disabled" (input)="onChange($any($event.target).value)"
+                        (mousedown)="onHover(true)" (mouseup)="onHover(false)">
+                </div>
+            </div>
+            <span *ngIf="showAfterLabel" class="limits after">
+                <span *ngIf="!endIcon">{{showValue ? value : max}}</span>
+                <fa-icon *ngIf="endIcon" [icon]="endIcon"></fa-icon>
+            </span>
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+</div>

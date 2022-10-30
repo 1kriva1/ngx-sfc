@@ -14,7 +14,9 @@ import {
   NumberInputComponent,
   StarsInputComponent,
   DateTimeInputComponent,
-  ImageInputComponent
+  ImageInputComponent,
+  RangeInputComponent,
+  RangeInputVerticalComponent
 } from './components';
 import {
   TagsChipComponent,
@@ -51,7 +53,10 @@ import { InputReferenceDirective } from './directives';
     DateTimeYearComponent,
     DateTimeModalComponent,
     ImageInputComponent,
-    ImageEditorComponent
+    ImageEditorComponent,
+    // range
+    RangeInputComponent,
+    RangeInputVerticalComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +75,10 @@ import { InputReferenceDirective } from './directives';
     NumberInputComponent,
     StarsInputComponent,
     DateTimeInputComponent,
-    ImageInputComponent
+    ImageInputComponent,
+    // range
+    RangeInputComponent,
+    RangeInputVerticalComponent
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

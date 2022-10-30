@@ -18,7 +18,10 @@ import {
   TimeInputPresentationComponent,
   DateTimeInputPresentationComponent,
   YearsInputPresentationComponent,
-  ImagePresentationComponent
+  ImagePresentationComponent,
+  RangePresentationComponent,
+  HorizontalRangeInputPresentationComponent,
+  VerticalRangeInputPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +47,10 @@ import { HttpClientModule } from '@angular/common/http';
     TimeInputPresentationComponent,
     DateTimeInputPresentationComponent,
     YearsInputPresentationComponent,
-    ImagePresentationComponent
+    ImagePresentationComponent,
+    RangePresentationComponent,
+    HorizontalRangeInputPresentationComponent,
+    VerticalRangeInputPresentationComponent
   ],
   imports: [
     BrowserModule,

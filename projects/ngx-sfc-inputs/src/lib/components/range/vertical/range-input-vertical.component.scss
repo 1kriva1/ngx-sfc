@@ -1,0 +1,43 @@
+@import "../../../styles/mixins";
+@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    .content {
+      .range-container {
+        flex-direction: column;
+
+        .limits {
+          margin: 0;
+        }
+
+        .component {
+          display: block;
+          max-width: 1.43em;
+
+          .range {
+            writing-mode: tb-rl;
+            white-space: nowrap;
+            overflow: visible;
+            transform: rotate(-90deg) translateX(-100%);
+            transform-origin: top left;
+            width: initial;
+
+            .tooltip {
+              position: absolute;
+              bottom: -0.1em;
+
+              &::before {
+                padding: 0.7em 0.4em;
+              }
+            }
+
+            input[type="range"] {
+              width: 15em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
