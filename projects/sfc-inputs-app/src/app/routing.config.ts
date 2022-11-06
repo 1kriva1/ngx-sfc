@@ -17,8 +17,11 @@ import {
     YearsInputPresentationComponent,
     ImagePresentationComponent,
     RangePresentationComponent,
-    HorizontalRangeInputPresentationComponent,
-    VerticalRangeInputPresentationComponent
+    HorizontalRangePresentationComponent,
+    VerticalRangePresentationComponent,
+    RadioPresentationComponent,
+    HorizontalRadioPresentationComponent,
+    VerticalRadioPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -120,24 +123,46 @@ export const routes: Routes = [
     },
     {
         path: 'range',
-        component:RangePresentationComponent,
+        component: RangePresentationComponent,
         children: [
             {
                 path: 'horizontal',
-                component: HorizontalRangeInputPresentationComponent
+                component: HorizontalRangePresentationComponent
             },
             {
                 path: 'vertical',
-                component: VerticalRangeInputPresentationComponent
-            } ,
+                component: VerticalRangePresentationComponent
+            },
             {
                 path: '',
-                component: HorizontalRangeInputPresentationComponent
+                component: HorizontalRangePresentationComponent
             },
             {
                 path: '**',
-                component: HorizontalRangeInputPresentationComponent
-            }           
+                component: HorizontalRangePresentationComponent
+            }
+        ]
+    },
+    {
+        path: 'radio',
+        component: RadioPresentationComponent,
+        children: [
+            {
+                path: 'horizontal',
+                component: HorizontalRadioPresentationComponent
+            },
+            {
+                path: 'vertical',
+                component: VerticalRadioPresentationComponent
+            },
+            {
+                path: '',
+                component: VerticalRadioPresentationComponent
+            },
+            {
+                path: '**',
+                component: VerticalRadioPresentationComponent
+            }
         ]
     },
     fallbackRoute,

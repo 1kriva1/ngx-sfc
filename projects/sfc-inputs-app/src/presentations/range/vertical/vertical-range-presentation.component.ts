@@ -6,10 +6,10 @@ import { equalOrInclude } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../../base-presentations.component';
 
 @Component({
-  templateUrl: './vertical-range-input-presentation.component.html',
+  templateUrl: './vertical-range-presentation.component.html',
   styleUrls: ['../../../shared/styles/shared.component.scss']
 })
-export class VerticalRangeInputPresentationComponent extends BasePresentationComponent implements OnInit {
+export class VerticalRangePresentationComponent extends BasePresentationComponent implements OnInit {
 
   Direction = Direction;
 

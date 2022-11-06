@@ -15,5 +15,8 @@ export { DateTimeInputPresentationComponent } from './datetime/datetime/datetime
 export { YearsInputPresentationComponent } from './datetime/years/years-input-presentation.component';
 export { ImagePresentationComponent } from './image/image-presentation.component';
 export { RangePresentationComponent } from './range/range-presentation.component';
-export { HorizontalRangeInputPresentationComponent } from './range/horizontal/horizontal-range-input-presentation.component';
-export { VerticalRangeInputPresentationComponent } from './range/vertical/vertical-range-input-presentation.component';
+export { HorizontalRangePresentationComponent } from './range/horizontal/horizontal-range-presentation.component';
+export { VerticalRangePresentationComponent } from './range/vertical/vertical-range-presentation.component';
+export { RadioPresentationComponent } from './radio/radio-presentation.component';
+export { VerticalRadioPresentationComponent } from './radio/vertical/radio-vertical-presentation.component';
+export { HorizontalRadioPresentationComponent } from './radio/horizontal/radio-horizontal-presentation.component';

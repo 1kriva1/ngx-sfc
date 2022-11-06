@@ -12,3 +12,5 @@ export { ImageInputComponent } from './image/image-input.component';
 export { ImageInputType } from './image/image-input-type.enum';
 export { RangeInputComponent } from './range/range-input.component';
 export { RangeInputVerticalComponent } from "./range/vertical/range-input-vertical.component";
+export { RadioInputComponent } from "./radio/radio-input.component";
+export { IRadioItemModel } from "./radio/radio-item.model";

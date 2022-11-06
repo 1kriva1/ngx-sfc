@@ -5,10 +5,10 @@ import { equalOrInclude } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../../base-presentations.component';
 
 @Component({
-    templateUrl: './horizontal-range-input-presentation.component.html',
+    templateUrl: './horizontal-range-presentation.component.html',
     styleUrls: ['../../../shared/styles/shared.component.scss']
 })
-export class HorizontalRangeInputPresentationComponent extends BasePresentationComponent implements OnInit {
+export class HorizontalRangePresentationComponent extends BasePresentationComponent implements OnInit {
 
     faPlus = faPlus;
     faMinus = faMinus;
