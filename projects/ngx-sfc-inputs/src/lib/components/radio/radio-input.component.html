@@ -1,0 +1,20 @@
+<div class="container">
+    <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+    <div class="content">
+        <label *ngIf="label" class="active">{{label}}</label>
+        <div class="radios">
+            <div class="radio-container" *ngFor="let item of items">
+                <input sfcInput type="radio" id="{{inputId}}-{{item.value}}" [checked]="isChecked(item)"
+                    [disabled]="disabled || item.disabled" [value]="item.value" (input)="onChange(item.value)">
+                <label for="{{inputId}}-{{item.value}}">
+                    <div [ngClass]="item.icon ? RadioItemType.Icon : RadioItemType.Circle">
+                        <div *ngIf="!item.icon" class="radio"></div>
+                        <fa-icon *ngIf="item.icon" [icon]="item.icon"></fa-icon>
+                    </div>
+                    <span>{{item.label}}</span>
+                </label>
+            </div>
+        </div>        
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+</div>

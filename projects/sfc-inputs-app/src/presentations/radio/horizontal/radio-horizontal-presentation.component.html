@@ -1,0 +1,261 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Horizontal:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal" formControlName="inputRadioHorizontal"
+                    [items]="items" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon" formControlName="inputRadioHorizontalIcon"
+                    [items]="items" [direction]="Direction.Horizontal" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-helper"
+                    formControlName="inputRadioHorizontalIconHelper" [items]="items" [direction]="Direction.Horizontal"
+                    [icon]="faUser" helperText="helper text as it">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-disabled"
+                    formControlName="inputRadioHorizontalDisabled" [items]="items" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-disabled"
+                    formControlName="inputRadioHorizontalIconDisabled" [items]="items"
+                    [direction]="Direction.Horizontal" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-helper-disabled"
+                    formControlName="inputRadioHorizontalIconHelperDisabled" [items]="items"
+                    [direction]="Direction.Horizontal" [icon]="faUser" helperText="helper text as it Disabled">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-empty-icons"
+                    formControlName="inputRadioHorizontalNullIcons" [items]="itemsIcons"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-icons"
+                    formControlName="inputRadioHorizontalWithIconIcons" [items]="itemsIcons" [icon]="faUser"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-helper-icons"
+                    formControlName="inputRadioHorizontalIconHelperIcons" [items]="itemsIcons" [icon]="faUser"
+                    helperText="helper text as it" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-empty-mix"
+                    formControlName="inputRadioHorizontalNullMix" [items]="itemsMix" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-horizontal-buttons-icon-mix"
+                    formControlName="inputRadioHorizontalWithIconMix" [items]="itemsMix" [icon]="faUser"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-horizontal-buttons-icon-helper-mix"
+                    formControlName="inputRadioHorizontalWithIconHelperMix" [items]="itemsMix" [icon]="faUser"
+                    helperText="helper text as it" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-empty-mix-disabled"
+                    formControlName="inputRadioHorizontalNullMixDisabled" [items]="itemsMix"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-mix-disabled"
+                    formControlName="inputRadioHorizontalWithIconMixDisabled" [items]="itemsMix" [icon]="faUser"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-helper-mix-disabled"
+                    formControlName="inputRadioHorizontalWithIconHelperMixDisabled" [items]="itemsMix" [icon]="faUser"
+                    helperText="helper text as it" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-item-disabled"
+                    formControlName="inputRadioHorizontalItemDisabled" [items]="itemsDisabled"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-icon-item-disabled" formControlName="inputRadioHorizontalIconItemDisabled"
+                    [items]="itemsDisabled" [icon]="faUser" helperText="helper text as it item DISABLED" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-item-value-disabled"
+                    formControlName="inputRadioHorizontalItemValueDisabled" [items]="itemsDisabled"
+                    helperText="helper text as it item DISABLED" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-mix-buttons-horizontal-item-disabled" formControlName="inputRadioHorizontalItemDisabled"
+                    [items]="itemsMixDisabled" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-mix-item-disabled"
+                    formControlName="inputRadioHorizontalMixItemDisabled" [items]="itemsMixDisabled" [icon]="faUser"
+                    helperText="helper text as it item DISABLED" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-mix-item-value-disabled"
+                    formControlName="inputRadioHorizontalMixItemValueDisabled" [items]="itemsMixDisabled"
+                    helperText="helper text as it item DISABLED" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-horizontal-buttons-item-default"
+                    formControlName="inputRadioHorizontalItemDefault" [items]="itemsDefault"
+                    helperText="one item is DEFAULT" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-horizontal-buttons-item-default-value"
+                    formControlName="inputRadioHorizontalItemDefaultValue" [items]="itemsDefault"
+                    helperText="one item is DEFAULT (3) and defined value(2)" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-horizontal-buttons-item-default-value-icon"
+                    formControlName="inputRadioHorizontalItemDefaultValueIcon" [items]="itemsDefault"
+                    helperText="one item is DEFAULT (3) and defined value(3)" [icon]="faUser"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-validation-horizontal"
+                    formControlName="inputRadioHorizontalValidation" [items]="items" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-validation-horizontal"
+                    formControlName="inputRadioHorizontalValueValidValidation" [items]="items" [icon]="faUser"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-validation-horizontal"
+                    formControlName="inputRadioHorizontalValueInvalidValidation" [items]="items" [icon]="faUser"
+                    helperText="helper text as it" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-validation-custom-msg-horizontal"
+                    formControlName="inputRadioHorizontalValidationCustomMessage" [items]="items"
+                    [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-validation-custom-msg-horizontal"
+                    formControlName="inputRadioHorizontalValueValidValidationCustomMessage" [items]="items"
+                    [icon]="faUser" [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}"
+                    [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-validation-custom-msg-horizontal"
+                    formControlName="inputRadioHorizontalValueInvalidValidationCustomMessage" [items]="items"
+                    [icon]="faUser" helperText="helper text as it"
+                    [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-small" formControlName="inputRadioHorizontalSmall"
+                    [items]="items" [icon]="faUser" helperText="helper text Small radio" label="Small radio"
+                    [sfcComponentSize]="ComponentSize.Small" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-large" formControlName="inputRadioHorizontalLarge"
+                    [items]="items" [icon]="faUser" helperText="helper text Large radio" label="Large radio"
+                    [sfcComponentSize]="ComponentSize.Large" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-horizontal-cusom" formControlName="inputRadioHorizontalCustom"
+                    [items]="items" [icon]="faUser" helperText="helper text Custom" label="Custom radio"
+                    [sfcComponentSize] [customSize]="4.2" [direction]="Direction.Horizontal">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

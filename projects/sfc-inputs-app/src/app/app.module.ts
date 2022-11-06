@@ -20,8 +20,11 @@ import {
   YearsInputPresentationComponent,
   ImagePresentationComponent,
   RangePresentationComponent,
-  HorizontalRangeInputPresentationComponent,
-  VerticalRangeInputPresentationComponent
+  HorizontalRangePresentationComponent,
+  VerticalRangePresentationComponent,
+  RadioPresentationComponent,
+  HorizontalRadioPresentationComponent,
+  VerticalRadioPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,8 +52,11 @@ import { HttpClientModule } from '@angular/common/http';
     YearsInputPresentationComponent,
     ImagePresentationComponent,
     RangePresentationComponent,
-    HorizontalRangeInputPresentationComponent,
-    VerticalRangeInputPresentationComponent
+    HorizontalRangePresentationComponent,
+    VerticalRangePresentationComponent,
+    RadioPresentationComponent,
+    HorizontalRadioPresentationComponent,
+  VerticalRadioPresentationComponent
   ],
   imports: [
     BrowserModule,

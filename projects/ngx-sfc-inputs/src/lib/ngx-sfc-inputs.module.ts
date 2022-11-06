@@ -16,7 +16,8 @@ import {
   DateTimeInputComponent,
   ImageInputComponent,
   RangeInputComponent,
-  RangeInputVerticalComponent
+  RangeInputVerticalComponent,
+  RadioInputComponent
 } from './components';
 import {
   TagsChipComponent,
@@ -54,6 +55,7 @@ import { InputReferenceDirective } from './directives';
     DateTimeModalComponent,
     ImageInputComponent,
     ImageEditorComponent,
+    RadioInputComponent,
     // range
     RangeInputComponent,
     RangeInputVerticalComponent
@@ -76,6 +78,7 @@ import { InputReferenceDirective } from './directives';
     StarsInputComponent,
     DateTimeInputComponent,
     ImageInputComponent,
+    RadioInputComponent,
     // range
     RangeInputComponent,
     RangeInputVerticalComponent

@@ -1,0 +1,245 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Vertical:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-empty" formControlName="inputRadioNull" [items]="items">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon" formControlName="inputRadioWithIcon" [items]="items"
+                    [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper" formControlName="inputRadioWithIconHelper"
+                    [items]="items" [icon]="faUser" helperText="helper text as it">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-empty-disabled" formControlName="inputRadioNullDisabled"
+                    [items]="items">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-disabled" formControlName="inputRadioWithIconDisabled"
+                    [items]="items" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-disabled"
+                    formControlName="inputRadioWithIconHelperDisabled" [items]="items" [icon]="faUser"
+                    helperText="helper text as it DISABLED">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-empty-icons" formControlName="inputRadioNullIcons"
+                    [items]="itemsIcons">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-icons" formControlName="inputRadioWithIconIcons"
+                    [items]="itemsIcons" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-icons"
+                    formControlName="inputRadioWithIconHelperIcons" [items]="itemsIcons" [icon]="faUser"
+                    helperText="helper text as it">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-empty-mix" formControlName="inputRadioNullMix"
+                    [items]="itemsMix">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-mix" formControlName="inputRadioWithIconMix"
+                    [items]="itemsMix" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-mix" formControlName="inputRadioWithIconHelperMix"
+                    [items]="itemsMix" [icon]="faUser" helperText="helper text as it">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-empty-mix-disabled" formControlName="inputRadioNullMixDisabled"
+                    [items]="itemsMix">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-mix-disabled"
+                    formControlName="inputRadioWithIconMixDisabled" [items]="itemsMix" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-mix-disabled"
+                    formControlName="inputRadioWithIconHelperMixDisabled" [items]="itemsMix" [icon]="faUser"
+                    helperText="helper text as it">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-item-disabled" formControlName="inputRadioItemDisabled"
+                    [items]="itemsDisabled">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-item-disabled" formControlName="inputRadioIconItemDisabled"
+                    [items]="itemsDisabled" [icon]="faUser" helperText="helper text as it item DISABLED">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-item-value-disabled"
+                    formControlName="inputRadioItemValueDisabled" [items]="itemsDisabled"
+                    helperText="helper text as it item DISABLED">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-mix-buttons-item-disabled" formControlName="inputRadioItemDisabled"
+                    [items]="itemsMixDisabled">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-mix-buttons-icon-item-disabled"
+                    formControlName="inputRadioIconItemDisabled" [items]="itemsMixDisabled" [icon]="faUser"
+                    helperText="helper text as it item DISABLED">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-mix-buttons-item-value-disabled"
+                    formControlName="inputRadioItemValueDisabled" [items]="itemsMixDisabled"
+                    helperText="helper text as it item DISABLED">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-item-default" formControlName="inputRadioItemDefault"
+                    [items]="itemsDefault" helperText="one item is DEFAULT">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-item-default-value" formControlName="inputRadioItemDefaultValue"
+                    [items]="itemsDefault" helperText="one item is DEFAULT (3) and defined value(2)">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-item-default-value-icon"
+                    formControlName="inputRadioItemDefaultValueIcon" [items]="itemsDefault"
+                    helperText="one item is DEFAULT (3) and defined value(3)" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-validation" formControlName="inputRadioValidation"
+                    [items]="items">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-validation"
+                    formControlName="inputRadioValueValidValidation" [items]="items" [icon]="faUser">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-validation"
+                    formControlName="inputRadioValueInvalidValidation" [items]="items" [icon]="faUser"
+                    helperText="helper text as it">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-validation-custom-msg"
+                    formControlName="inputRadioValidationCustomMessage" [items]="items"
+                    [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-validation-custom-msg"
+                    formControlName="inputRadioValueValidValidationCustomMessage" [items]="items" [icon]="faUser"
+                    [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-icon-helper-validation-custom-msg"
+                    formControlName="inputRadioValueInvalidValidationCustomMessage" [items]="items" [icon]="faUser"
+                    helperText="helper text as it" [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-small" formControlName="inputRadioSmall" [items]="items"
+                    [icon]="faUser" helperText="helper text Small radio" label="Small radio"
+                    [sfcComponentSize]="ComponentSize.Small">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-large" formControlName="inputRadioLarge" [items]="items"
+                    [icon]="faUser" helperText="helper text Large radio" label="Large radio"
+                    [sfcComponentSize]="ComponentSize.Large">
+                </sfc-radio-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-radio-input id="demo-radio-buttons-cusom" formControlName="inputRadioCustom" [items]="items"
+                    [icon]="faUser" helperText="helper text Custom" label="Custom radio" [sfcComponentSize]
+                    [customSize]="4.2">
+                </sfc-radio-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

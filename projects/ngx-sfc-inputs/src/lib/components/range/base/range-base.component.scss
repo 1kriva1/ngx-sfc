@@ -97,9 +97,9 @@
                 &::-webkit-slider-thumb {
                   @include theme-value(
                     background-color,
-                                        $color-disabled-default,
-                                        $color-disabled-dark
-                                    );
+                    $color-disabled-default,
+                    $color-disabled-dark
+                  );
                   @include theme-value(border-color, $color-2, $color-7);
 
                   cursor: initial;
