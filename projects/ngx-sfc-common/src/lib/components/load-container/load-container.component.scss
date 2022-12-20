@@ -1,0 +1,59 @@
+@import "../../styles/styles";
+
+:host {
+  width: 100%;
+  height: inherit;
+  position: relative;
+
+  .container {
+    height: inherit;
+    background: $color-0;
+
+    .content {
+      cursor: initial;
+      overflow-y: auto;
+      height: inherit;
+
+      sfc-load-more-button {
+        ::ng-deep sfc-delimeter {
+          background: $background-gradient-default;
+        }
+      }
+
+      .empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-default;
+        cursor: default;
+        height: 100%;
+        font-size: 0.8em;
+        user-select: none;
+        padding:  0.7em;
+      }
+    }
+  }
+
+  &.dropdown {
+    .container {
+      .content {
+        display: none;
+        opacity: 0;
+        max-height: 12.5em;
+        box-shadow: 0 0.125em 0.125em 0 rgb(0 0 0 / 14%), 0 0.18em 0.06em -0.125em rgb(0 0 0 / 12%),
+          0 0.06em 0.31em 0 rgb(0 0 0 / 20%);
+      }
+    }
+
+    &.open {
+      .container {
+        .content {
+          display: block;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @include scroll;
+}

@@ -198,29 +198,5 @@
     }
   }
 
-  /**  SCROLL BAR */
-
-  ::ng-deep ::-webkit-scrollbar {
-    @include square-size(0.375em);
-  }
-
-  ::ng-deep ::-webkit-scrollbar-track {
-    border-radius: 0.625em;
-    background: rgb(0 0 0 / 10%);
-  }
-
-  ::ng-deep ::-webkit-scrollbar-thumb {
-    border-radius: 0.625em;
-    background: rgb(0 0 0 / 20%);
-  }
-
-  ::ng-deep ::-webkit-scrollbar-thumb:hover {
-    background: rgb(0 0 0 / 40%);
-  }
-
-  ::ng-deep ::-webkit-scrollbar-thumb:active {
-    background: rgb(0 0 0 / 60%);
-  }
-
-  /** END  SCROLL BAR */
+  @include scroll;
 }

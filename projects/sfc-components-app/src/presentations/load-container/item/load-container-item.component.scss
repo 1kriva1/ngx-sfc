@@ -1,0 +1,28 @@
+:host {
+  width: 100%;
+  padding: 0 0.31em;
+
+  .container {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    border-radius: 1.25em;
+    background-color: #f5f7fa;
+
+    .content-container {
+      font-weight: bold;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      user-select: none;
+      width: 100%;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0.7em 0.5em;
+      }
+    }
+  }
+}

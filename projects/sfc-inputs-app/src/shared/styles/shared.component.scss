@@ -38,9 +38,17 @@
         flex-basis: 45%;
       }
 
+      &.column-direction {
+        flex-direction: column;
+      }
+
       :host-context(.sfc-dark-theme) & {
         color: $color-common;
       }
     }
+  }
+
+  :host-context(.sfc-dark-theme) & {
+    color: $color-common;
   }
 }

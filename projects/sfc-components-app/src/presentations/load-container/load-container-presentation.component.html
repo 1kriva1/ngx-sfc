@@ -1,0 +1,83 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Load Containers:</h3>
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <button class="app" (click)="load()">Reset</button>
+            <sfc-load-container id="load-container-reset" [type]="LoadContainerType.Table" [model]="modelReset"
+                (handleSuccess)="handleSuccess($event)">
+                <load-container-item *ngFor="let item of items" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-size" [type]="LoadContainerType.Table" [size]="2" [model]="model"
+                (handleSuccess)="itemsSize = itemsSize.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsSize" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-label" [type]="LoadContainerType.Table" loadMoreLabel="Give me more!"
+                [model]="model" (handleSuccess)="itemsLabel = itemsLabel.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsLabel" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <button class="app" (click)="open()">Open</button>
+            <sfc-load-container id="load-container-dropdown" [model]="modelDropdown" [open]="isOpen"
+                (handleSuccess)="itemsDropdown = itemsDropdown.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsDropdown" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-empty" [type]="LoadContainerType.Table" [model]="modelEmpty"
+                notFoundLabel="NOT FOUND!!!" (handleSuccess)="itemsEmpty = itemsEmpty.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsEmpty" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column scroll">
+            <sfc-load-container id="load-container-scroll" [type]="LoadContainerType.Table" [model]="model"
+                [showLoadMoreButton]="false" (handleSuccess)="itemsScroll = itemsScroll.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsScroll" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-small" [type]="LoadContainerType.Table" [model]="model"
+                (handleSuccess)="itemsSmall = itemsSmall.concat($event.items)" [sfcComponentSize]="ComponentSize.Small">
+                <load-container-item *ngFor="let item of itemsSmall" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-large" [type]="LoadContainerType.Table" [model]="model"
+                (handleSuccess)="itemsLarge = itemsLarge.concat($event.items)" [sfcComponentSize]="ComponentSize.Large">
+                <load-container-item *ngFor="let item of itemsLarge" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-custom" [type]="LoadContainerType.Table" [model]="model"
+                (handleSuccess)="itemsCustom = itemsCustom.concat($event.items)" [sfcComponentSize] [customSize]="3.2">
+                <load-container-item *ngFor="let item of itemsCustom" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+    </div>
+
+</div>

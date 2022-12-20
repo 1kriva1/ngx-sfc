@@ -41,8 +41,7 @@ describe('Component: TooltipComponent', () => {
         ResizeService,
         { provide: WINDOW, useFactory: (() => { return windowMock; }) }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

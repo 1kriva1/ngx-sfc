@@ -37,7 +37,9 @@ import {
   TemplateContentComponent,
   CloseComponent,
   PaginationComponent,
-  SortingComponent
+  SortingComponent,
+  LoadContainerComponent,
+  LoadMoreButtonComponent
 } from './components';
 
 @NgModule({
@@ -65,6 +67,8 @@ import {
     DotsComponent,
     PaginationComponent,
     SortingComponent,
+    LoadMoreButtonComponent,
+    LoadContainerComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -106,6 +110,8 @@ import {
     HamburgerComponent,
     PaginationComponent,
     SortingComponent,
+    LoadMoreButtonComponent,
+    LoadContainerComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,

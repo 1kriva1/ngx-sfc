@@ -330,5 +330,18 @@ describe('Component: BaseInputComponent', () => {
 
             component.base.writeValue(assertValue);
         });
+
+        fit('Should have no input value', () => {
+            expect(component.base.inputValue).toEqual(CommonConstants.EMPTY_STRING);
+        });
+
+        fit('Should have input value', () => {
+            const assertValue = 'test value',
+                inputEl = el.query(By.css('input'));
+            inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: assertValue } });
+            fixture.detectChanges();
+
+            expect(component.base.inputValue).toEqual(assertValue);
+        });
     });
 });

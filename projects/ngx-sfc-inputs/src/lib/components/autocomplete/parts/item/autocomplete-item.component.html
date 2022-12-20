@@ -1,0 +1,4 @@
+<div (sfcMouseDown)="selected.emit(item)">    
+    <span *ngIf="item">{{item.value}}</span>
+    <img *ngIf="item?.image" [src]="item.image">
+</div>

@@ -328,6 +328,24 @@ describe('Service: DateTimeView', () => {
 
         service.update({ type: DateTimeViewActionType.Ok });
       });
+
+      fit('Should emit model on Ok for not defined current view', done => {
+        subscribeToExpect((model, index) => {
+          if (index > 1) {
+            expect(model).toEqual({
+              currentView: null as unknown as any,
+              previousView: null,
+              state: DateTimeState.Update,
+              event: undefined
+            });
+            done();
+          }
+        });
+
+        service.update({ type: DateTimeViewActionType.Year });
+
+        service.update({ type: DateTimeViewActionType.Ok });
+      });
     });
 
     describe('Cancel', () => {
@@ -415,6 +433,24 @@ describe('Service: DateTimeView', () => {
         });
 
         service.update({ type: DateTimeViewActionType.Years });
+
+        service.update({ type: DateTimeViewActionType.Cancel });
+      });
+
+      fit('Should emit model on Cancel for not defined current view', done => {
+        subscribeToExpect((model, index) => {
+          if (index > 1) {
+            expect(model).toEqual({
+              currentView: null as unknown as any,
+              previousView: null,
+              state: DateTimeState.Hide,
+              event: undefined
+            });
+            done();
+          }
+        });
+
+        service.update({ type: DateTimeViewActionType.Year });
 
         service.update({ type: DateTimeViewActionType.Cancel });
       });

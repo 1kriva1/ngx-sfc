@@ -7,3 +7,4 @@ export { DateTimeClockComponent } from "./datetime/parts/clock/datetime-clock.co
 export { DateTimeYearComponent } from "./datetime/parts/year/datetime-year.component";
 export { DateTimeModalComponent } from "./datetime/parts/modal/datetime-modal.component";
 export { ImageEditorComponent } from "./image/parts/editor/image-editor.component";
+export { AutoCompleteItemComponent } from "./autocomplete/parts/item/autocomplete-item.component";

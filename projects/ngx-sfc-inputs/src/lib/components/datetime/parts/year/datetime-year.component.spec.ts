@@ -212,9 +212,9 @@ describe('Component: DateTimeYear', () => {
       component.year = 1992;
       fixture.detectChanges();
 
-      selectYear(fixture.debugElement.queryAll(By.css('div.year'))[4], 1993);
+      const event = selectYear(fixture.debugElement.queryAll(By.css('div.year'))[4], 1993);
 
-      expect(viewServiceSpy.update).toHaveBeenCalledOnceWith({ type: DateTimeViewActionType.Year });
+      expect(viewServiceSpy.update).toHaveBeenCalledOnceWith({ type: DateTimeViewActionType.Year, event: event });
     });
 
     describe('Scroll', () => {
@@ -263,11 +263,16 @@ describe('Component: DateTimeYear', () => {
         component.year = 1992;
         fixture.detectChanges();
 
+        const yearsElBefore = fixture.debugElement.query(By.css('div.years')).nativeElement;
+
+        expect(yearsElBefore.scrollTop).toEqual(0);
+
         scrollYearList();
 
-        const yearsEl = fixture.debugElement.query(By.css('div.years')).nativeElement;
+        const yearsElAfter = fixture.debugElement.query(By.css('div.years')).nativeElement;
 
-        expect(yearsEl.scrollTop).toEqual(208);
+        expect(yearsElAfter.scrollTop).not.toEqual(0);
+        expect(yearsElAfter.scrollTop).toBeGreaterThan(0);
       });
 
       fit('Should on top scroll update years list', () => {
@@ -285,16 +290,18 @@ describe('Component: DateTimeYear', () => {
         component.year = 1992;
         fixture.detectChanges();
 
-        scrollYearList(false);
-
         const yearsEl = fixture.debugElement.query(By.css('div.years')).nativeElement;
 
-        expect(Math.round(yearsEl.scrollTop)).toEqual(27);
+        expect(Math.round(yearsEl.scrollTop) > 0).toBeFalse();
+
+        scrollYearList(false);
+
+        expect(Math.round(yearsEl.scrollTop) > 0).toBeTrue();
       });
     });
   });
 
-  function selectYear(yearEl: DebugElement, value: number | null = null) {
+  function selectYear(yearEl: DebugElement, value: number | null = null): any {
     const event = { target: yearEl.nativeElement, button: 0 };
     yearEl.triggerEventHandler('mousedown', event);
     fixture.detectChanges();
@@ -303,6 +310,8 @@ describe('Component: DateTimeYear', () => {
       component.year = value;
       fixture.detectChanges();
     }
+
+    return event;
   }
 
   function scrollYearList(bottom = true) {

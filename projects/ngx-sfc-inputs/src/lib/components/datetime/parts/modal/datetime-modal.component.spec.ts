@@ -587,7 +587,7 @@ describe('Component: DateTimeModal', () => {
           event: any = { target: clearBtn.nativeElement, button: 0 };
         clearBtn.triggerEventHandler('mousedown', event);
 
-        expect(valueServiceSpy.update).toHaveBeenCalledOnceWith({ type: DateTimeValueActionType.Init, value: new Date() });
+        expect(valueServiceSpy.update).toHaveBeenCalledTimes(1);
         expect(viewServiceSpy.update).toHaveBeenCalledOnceWith({ type: DateTimeViewActionType.Hide, event: event });
         expect(component.update.emit).toHaveBeenCalledOnceWith(null);
       });
