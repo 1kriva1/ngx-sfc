@@ -58,20 +58,20 @@
   }
 
   &.focus {
+    .container {
+      .content {
+        sfc-load-container.empty {
+          top: 2.1em;
+        }
+      }
+    }
+
     &.any {
       .container {
         .content {
           sfc-load-container {
             top: 2.1em;
           }
-        }
-      }
-    }
-
-    .container {
-      .content {
-        sfc-load-container.empty {
-          top: 2.1em;
         }
       }
     }
