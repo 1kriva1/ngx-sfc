@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { forwardRef, NgModule } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import {
   TextInputComponent,
   TextAreaInputComponent,
@@ -17,7 +16,8 @@ import {
   ImageInputComponent,
   RangeInputComponent,
   RangeInputVerticalComponent,
-  RadioInputComponent
+  RadioInputComponent,
+  AutoCompleteInputComponent
 } from './components';
 import {
   TagsChipComponent,
@@ -28,9 +28,11 @@ import {
   DateTimeClockComponent,
   DateTimeYearComponent,
   DateTimeModalComponent,
-  ImageEditorComponent
+  ImageEditorComponent,
+  AutoCompleteItemComponent
 } from '../lib/components/no-export-index';
 import { InputReferenceDirective } from './directives';
+import { NgxSfcCommonModule } from 'ngx-sfc-common';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,10 @@ import { InputReferenceDirective } from './directives';
     RadioInputComponent,
     // range
     RangeInputComponent,
-    RangeInputVerticalComponent
+    RangeInputVerticalComponent,
+    // autocomplete
+    AutoCompleteInputComponent,
+    AutoCompleteItemComponent
   ],
   imports: [
     CommonModule,
@@ -79,9 +84,10 @@ import { InputReferenceDirective } from './directives';
     DateTimeInputComponent,
     ImageInputComponent,
     RadioInputComponent,
+    AutoCompleteInputComponent,
     // range
     RangeInputComponent,
-    RangeInputVerticalComponent
+    RangeInputVerticalComponent    
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

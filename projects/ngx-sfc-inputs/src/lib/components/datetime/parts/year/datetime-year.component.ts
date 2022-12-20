@@ -71,9 +71,9 @@ export class DateTimeYearComponent implements AfterViewInit {
     this.years = yearsList;
   }
 
-  onSelectYear(year: number): void {
+  onSelectYear(event: MouseEvent, year: number): void {
     this.valueService.update({ type: DateTimeValueActionType.Year, parameter: year });
-    this.viewService.update({ type: DateTimeViewActionType.Year });
+    this.viewService.update({ type: DateTimeViewActionType.Year, event: event });
   }
 
   onScroll(position: Position) {

@@ -1,0 +1,16 @@
+<div class="container">
+    <fa-icon #iconRef *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+    <div class="content">
+        <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
+        <input sfcInput id="{{inputId}}" type="text" class="text-input" [placeholder]="placeholderValue"
+            [value]="displayValue" [disabled]="disabled" [readonly]="loading">
+        <span class="helper-text">{{helperTextValue}}</span>
+        <sfc-load-container [id]="inputId" [open]="isFocused"
+            [showLoadMoreButton]="showLoadMoreButton" [showEmpty]="showEmpty" [loadMore]="loadMore" [model]="loadModel"
+            (handleSuccess)="handleSuccess($event)" (handleError)="handleError()"
+            (handleLoading)="handleLoading($event)">
+            <sfc-autocomplete-item *ngFor="let item of items" [item]="item" (selected)="onChange($event)">
+            </sfc-autocomplete-item>
+        </sfc-load-container>
+    </div>
+</div>

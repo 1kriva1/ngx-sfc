@@ -1,0 +1,35 @@
+@import "../../styles/styles";
+
+:host {
+  cursor: default;
+
+  .container {
+    text-align: center;
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      cursor: pointer;
+      color: $color-default;
+      transition: color 0.5s;
+      padding: 0.5em 0 1em;
+
+      fa-icon {
+        font-size: 0.7em;
+        margin-right: 0.31em;
+      }
+
+      span {
+        font-size: 0.6em;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      &:hover {
+        color: $color-hover-default;
+      }
+    }
+  }
+}

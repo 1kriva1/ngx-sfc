@@ -43,7 +43,7 @@ export class DateTimeViewService {
                             this.onMinute();
                             break;
                         case DateTimeViewActionType.Year:
-                            this.model.currentView = this.model.previousView as DateTimeView;
+                            this.onYear();
                             break;
                         case DateTimeViewActionType.Years:
                             this.onYears();
@@ -88,6 +88,10 @@ export class DateTimeViewService {
         }
     }
 
+    private onYear(): void {
+        this.model.currentView = this.model.previousView as DateTimeView;
+    }
+
     private onDate(): void {
         if (this.initModel.time)
             this.model.currentView = DateTimeView.Hours;
@@ -113,7 +117,8 @@ export class DateTimeViewService {
             this.onMinute();
         } else if (this.model.currentView === DateTimeView.Years) {
             this.model.currentView = this.model.previousView as DateTimeView;
-        }
+        } else
+            this.model.state = DateTimeState.Update;
     }
 
     private onCancel(): void {
@@ -128,6 +133,7 @@ export class DateTimeViewService {
             this.model.currentView = DateTimeView.Hours;
         } else if (this.model.currentView === DateTimeView.Years) {
             this.model.currentView = this.model.previousView as DateTimeView;
-        }
+        } else
+            this.model.state = DateTimeState.Hide;
     }
 }

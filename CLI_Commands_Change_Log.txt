@@ -139,6 +139,10 @@ ng generate class components/sorting/sorting --project ngx-sfc-common --skip-tes
 
 ng generate pipe pipes/switch-multi-case --flat false --export true --project ngx-sfc-common -d
 
+ng generate component components/load-dropdown --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
+
+ng generate component components/load-more-button --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
+
 // COMPONENTS
 
 ng generate component components/tabs --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
@@ -330,6 +334,10 @@ ng generate component components/image/parts/editor/image-editor --project ngx-s
 ng generate service components/image/service/image --project ngx-sfc-inputs --skip-tests false --flat false -d
 
 ng generate component components/range/range-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/autocomplete/autocomplete-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/autocomplete/parts/option/autocomplete-option --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
 
 Demo:
 

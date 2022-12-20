@@ -20,3 +20,4 @@ export { VerticalRangePresentationComponent } from './range/vertical/vertical-ra
 export { RadioPresentationComponent } from './radio/radio-presentation.component';
 export { VerticalRadioPresentationComponent } from './radio/vertical/radio-vertical-presentation.component';
 export { HorizontalRadioPresentationComponent } from './radio/horizontal/radio-horizontal-presentation.component';
+export { AutoCompletePresentationComponent } from './autocomplete/autocomplete-presentation.component';

@@ -47,3 +47,5 @@ export { TableCustomCardComponent } from './tables/custom/card/table-custom-card
 export { TableCustomExpandedRowComponent } from './tables/custom/expanded/row/table-custom-expanded-row.component';
 export { TableCustomExpandedRowContentComponent } from './tables/custom/expanded/content/table-custom-expanded-row-content.component';
 export { CarouselPresentationComponent } from './carousel/carousel-presentation.component';
+export { LoadContainerPresentationComponent } from './load-container/load-container-presentation.component';
+export { LoadContainerItemComponent } from './load-container/item/load-container-item.component';

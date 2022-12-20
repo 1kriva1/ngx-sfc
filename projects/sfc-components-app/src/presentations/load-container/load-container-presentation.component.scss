@@ -1,0 +1,19 @@
+:host {
+  .component-container {
+    .component-row {
+      .component-column {
+        align-items: center;
+        flex-direction: column;
+
+        sfc-load-container {
+          margin-top: 1em;
+        }
+
+        &.scroll {
+          display: block;
+          height: 10em;
+        }
+      }
+    }
+  }
+}

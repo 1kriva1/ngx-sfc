@@ -14,3 +14,6 @@ export { RangeInputComponent } from './range/range-input.component';
 export { RangeInputVerticalComponent } from "./range/vertical/range-input-vertical.component";
 export { RadioInputComponent } from "./radio/radio-input.component";
 export { IRadioItemModel } from "./radio/radio-item.model";
+export { AutoCompleteInputComponent } from "./autocomplete/autocomplete-input.component";
+export { IAutoCompleteItemModel } from "./autocomplete/models/autocomplete-item.model";
+export { IAutoCompleteValue } from "./autocomplete/models/autocomplete-value.model";

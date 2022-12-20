@@ -58,6 +58,10 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
         return this._value;
     }
 
+    get inputValue(): string {
+        return this.inputElementRef?.nativeElement.value;
+    }
+
     get labelClass(): string {
         return this.placeholder || this.isFocused || this.value ? UIClass.Active : CommonConstants.EMPTY_STRING;
     }

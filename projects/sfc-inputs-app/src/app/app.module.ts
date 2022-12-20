@@ -24,12 +24,13 @@ import {
   VerticalRangePresentationComponent,
   RadioPresentationComponent,
   HorizontalRadioPresentationComponent,
-  VerticalRadioPresentationComponent
+  VerticalRadioPresentationComponent,
+  AutoCompletePresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
-import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+import {  NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -56,7 +57,8 @@ import { HttpClientModule } from '@angular/common/http';
     VerticalRangePresentationComponent,
     RadioPresentationComponent,
     HorizontalRadioPresentationComponent,
-  VerticalRadioPresentationComponent
+    VerticalRadioPresentationComponent,
+    AutoCompletePresentationComponent
   ],
   imports: [
     BrowserModule,

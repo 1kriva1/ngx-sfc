@@ -41,7 +41,8 @@ import {
     TablesPresentationComponent,
     TablesDefaultPresentationComponent,
     TablesCustomPresentationComponent,
-    CarouselPresentationComponent
+    CarouselPresentationComponent,
+    LoadContainerPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -294,6 +295,10 @@ export const routes: Routes = [
     {
         path: 'carousels',
         component: CarouselPresentationComponent
+    },
+    {
+        path: 'load-container',
+        component: LoadContainerPresentationComponent
     },
     fallbackRoute,
     indexRoute

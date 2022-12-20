@@ -1,0 +1,79 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/styles";
+
+:host {
+  .container {
+    .content {
+      .text-input {
+        position: relative;
+        z-index: 2;
+      }
+
+      sfc-load-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 2em;
+        z-index: 1;
+        cursor: text;
+
+        &.open {
+          z-index: 9999;
+        }
+      }
+    }
+  }
+
+  @mixin loader-background {
+    ::ng-deep sfc-bounce-loader {
+      .preloader {
+        @include theme-value(background, $color-0, transparent);
+      }
+    }
+  }
+
+  &.loading {
+    &:not(.any) {
+      sfc-load-container:not(.empty) {
+        @include loader-background;
+      }
+    }
+
+    .container {
+      .content {
+        .text-input {
+          cursor: initial;
+        }
+
+        sfc-load-container {
+          cursor: initial;
+          z-index: 9999;
+
+          &:not(.open) {
+            @include loader-background;
+          }
+        }
+      }
+    }
+  }
+
+  &.focus {
+    .container {
+      .content {
+        sfc-load-container.empty {
+          top: 2.1em;
+        }
+      }
+    }
+
+    &.any {
+      .container {
+        .content {
+          sfc-load-container {
+            top: 2.1em;
+          }
+        }
+      }
+    }
+  }
+}

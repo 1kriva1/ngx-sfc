@@ -52,7 +52,9 @@ import {
   TableCustomCardComponent,
   TableCustomExpandedRowComponent,
   TableCustomExpandedRowContentComponent,
-  CarouselPresentationComponent
+  CarouselPresentationComponent,
+  LoadContainerPresentationComponent,
+  LoadContainerItemComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -124,7 +126,10 @@ import { AppComponent } from './app.component';
     TableCustomExpandedRowComponent,
     TableCustomExpandedRowContentComponent,
     // carousels
-    CarouselPresentationComponent
+    CarouselPresentationComponent,
+    // load container
+    LoadContainerPresentationComponent,
+    LoadContainerItemComponent
   ],
   imports: [
     BrowserModule,

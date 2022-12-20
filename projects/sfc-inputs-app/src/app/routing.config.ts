@@ -21,7 +21,8 @@ import {
     VerticalRangePresentationComponent,
     RadioPresentationComponent,
     HorizontalRadioPresentationComponent,
-    VerticalRadioPresentationComponent
+    VerticalRadioPresentationComponent,
+    AutoCompletePresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -164,6 +165,10 @@ export const routes: Routes = [
                 component: VerticalRadioPresentationComponent
             }
         ]
+    },
+    {
+        path: 'autocomplete',
+        component: AutoCompletePresentationComponent
     },
     fallbackRoute,
     indexRoute

@@ -1,0 +1,11 @@
+<div class="container">
+    <sfc-bounce-loader [id]="id" [sfcComponentSize]="ComponentSize.Small"></sfc-bounce-loader>
+    <div #content class="content" (sfcScrollTracker)="onScroll()" [positions]="scrollPosition">
+        <ng-content></ng-content>
+        <div (sfcMouseDown)="$event.preventDefault()">
+            <sfc-load-more-button [hidden]="hideLoadMoreButton" (more)="more($event)" [label]="loadMoreLabel">
+            </sfc-load-more-button>
+            <div *ngIf="isEmpty" class="empty">{{notFoundLabel}}</div>
+        </div>
+    </div>
+</div>

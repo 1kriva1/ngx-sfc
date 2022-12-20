@@ -9,7 +9,7 @@
     <div #yearsEl class="years" [sfcScrollIntoView]="scrollTarget" (sfcScrollTracker)="onScroll($event)"
         [positions]="[Position.Bottom, Position.Top]">
         <div class="year" *ngFor="let _year of years" [class.selected]="year === _year"
-            [class.disabled]="isDisabled(_year)" (sfcMouseDown)="onSelectYear(_year)">
+            [class.disabled]="isDisabled(_year)" (sfcMouseDown)="onSelectYear($event, _year)">
             {{_year}}
         </div>
     </div>

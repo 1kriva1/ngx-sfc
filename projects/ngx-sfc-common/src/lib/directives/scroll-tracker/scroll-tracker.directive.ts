@@ -24,7 +24,7 @@ export class ScrollTrackerDirective {
     const tracker: any = event.target,
       limit = tracker.scrollHeight - tracker.clientHeight;
 
-    if (Math.round(tracker.scrollTop) === limit)
+    if (tracker.scrollTop >= limit)
       return Position.Bottom;
     else if (tracker.scrollTop <= 0)
       return Position.Top;
