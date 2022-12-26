@@ -22,11 +22,12 @@ export class ScrollTrackerDirective {
 
   private getPosition(event: Event): Position | null {
     const tracker: any = event.target,
-      limit = tracker.scrollHeight - tracker.clientHeight;
+      limit = tracker.scrollHeight - tracker.clientHeight,
+      scrollTopFixed = tracker.scrollTop.toFixed();
 
-    if (tracker.scrollTop >= limit)
+    if (scrollTopFixed >= limit)
       return Position.Bottom;
-    else if (tracker.scrollTop <= 0)
+    else if (scrollTopFixed <= 0)
       return Position.Top;
 
     return null;

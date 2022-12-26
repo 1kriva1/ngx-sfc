@@ -9,7 +9,7 @@
             [showLoadMoreButton]="showLoadMoreButton" [showEmpty]="showEmpty" [loadMore]="loadMore" [model]="loadModel"
             (handleSuccess)="handleSuccess($event)" (handleError)="handleError()"
             (handleLoading)="handleLoading($event)">
-            <sfc-autocomplete-item *ngFor="let item of items" [item]="item" (selected)="onChange($event)">
+            <sfc-autocomplete-item *ngFor="let item of items" [item]="item" (selected)="onSelect($event)">
             </sfc-autocomplete-item>
         </sfc-load-container>
     </div>

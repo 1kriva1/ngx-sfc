@@ -45,20 +45,6 @@ describe('Component: CheckmarkComponent', () => {
 
       expect(fixture.nativeElement.className).toContain(UIClass.Active);
     });
-
-    fit("Should have active class, when toggle component", () => {
-      expect(fixture.nativeElement.className).not.toContain(UIClass.Active);
-
-      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.className).toContain(UIClass.Active);
-
-      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.className).not.toContain(UIClass.Active);
-    });
   });
 
   describe('Disabled', () => {
@@ -112,23 +98,6 @@ describe('Component: CheckmarkComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
-    });
-
-    fit("Should toggle icon, when showNotActive is false", () => {
-      component.showNotActive = false;
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeNull();
-
-      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
-
-      fixture.debugElement.triggerEventHandler('click', { target: fixture.nativeElement });
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeNull();
     });
 
     fit("Should have default icon", () => {

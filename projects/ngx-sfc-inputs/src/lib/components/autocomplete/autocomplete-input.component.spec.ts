@@ -2,7 +2,7 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, DelimeterComponent, ILoadMoreModel, ILoadMoreParameters, MouseDownDirective, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, DelimeterComponent, ILoadMoreModel, ILoadMoreParameters, MouseDownDirective, ScrollIntoViewDirective, UIClass } from 'ngx-sfc-common';
 import { ComponentSizeDirective, ScrollTrackerDirective } from 'ngx-sfc-common';
 import { BounceLoaderComponent, LoadMoreButtonComponent } from 'ngx-sfc-common';
 import { LoadContainerComponent } from 'ngx-sfc-common';
@@ -10,7 +10,7 @@ import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { AutoCompleteInputComponent } from './autocomplete-input.component';
 import { AutoCompleteInputConstants } from './autocomplete-input.constants';
-import { IAutoCompleteItemModel } from './models/autocomplete-item.model';
+import { IAutoCompleteItemModel } from './parts/item/autocomplete-item.model';
 import { AutoCompleteItemComponent } from './parts/item/autocomplete-item.component';
 import { BehaviorSubject } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -23,7 +23,7 @@ describe('Component: AutoCompleteInput', () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
             declarations: [InputReferenceDirective, MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective,
-                LoadContainerComponent, ScrollTrackerDirective, DelimeterComponent, AutoCompleteItemComponent, AutoCompleteInputComponent]
+                LoadContainerComponent, ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent, AutoCompleteItemComponent, AutoCompleteInputComponent]
         }).compileComponents();
     });
 
@@ -213,7 +213,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(fixture.nativeElement.querySelector('input[type=text]').value).toEqual(CommonConstants.EMPTY_STRING);
         });
 
-        fit("Should have defined value for date and time", () => {
+        fit("Should have defined value", () => {
             component.writeValue({ key: 0, value: 'Test' });
             fixture.detectChanges();
 
@@ -338,7 +338,6 @@ describe('Component: AutoCompleteInput', () => {
 
             expect(fixture.nativeElement.querySelector('input[type="text"]')).toEqual(document.activeElement);
         }));
-
     });
 
     describe('Placeholder', () => {

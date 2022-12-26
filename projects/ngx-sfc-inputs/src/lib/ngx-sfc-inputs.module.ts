@@ -17,7 +17,8 @@ import {
   RangeInputComponent,
   RangeInputVerticalComponent,
   RadioInputComponent,
-  AutoCompleteInputComponent
+  AutoCompleteInputComponent,
+  SelectInputComponent
 } from './components';
 import {
   TagsChipComponent,
@@ -29,7 +30,8 @@ import {
   DateTimeYearComponent,
   DateTimeModalComponent,
   ImageEditorComponent,
-  AutoCompleteItemComponent
+  AutoCompleteItemComponent,
+  SelectItemComponent
 } from '../lib/components/no-export-index';
 import { InputReferenceDirective } from './directives';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
@@ -40,30 +42,39 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     TextInputComponent,
     InputReferenceDirective,
     TextAreaInputComponent,
+    // file
     FileInputComponent,
     InlineFileInputComponent,
     CheckboxInputComponent,
     ToggleInputComponent,
+    RadioInputComponent,
+    //tags
     TagsInputComponent,
     TagsChipComponent,
+    // number
     NumberInputComponent,
     NumberSpinnerComponent,
+    // stars
     StarsInputComponent,
     StarComponent,
+    // datetime
     DateTimeInputComponent,
     DateTimeCalendarComponent,
     DateTimeClockComponent,
     DateTimeYearComponent,
     DateTimeModalComponent,
+    // image
     ImageInputComponent,
-    ImageEditorComponent,
-    RadioInputComponent,
+    ImageEditorComponent,    
     // range
     RangeInputComponent,
     RangeInputVerticalComponent,
     // autocomplete
     AutoCompleteInputComponent,
-    AutoCompleteItemComponent
+    AutoCompleteItemComponent,
+    // select
+    SelectInputComponent,
+    SelectItemComponent
   ],
   imports: [
     CommonModule,
@@ -85,9 +96,10 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     ImageInputComponent,
     RadioInputComponent,
     AutoCompleteInputComponent,
+    SelectInputComponent,
     // range
     RangeInputComponent,
-    RangeInputVerticalComponent    
+    RangeInputVerticalComponent        
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

@@ -13,10 +13,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
         min-height: 2em;
-        z-index: 1;
-        cursor: text;
 
         &.open {
           z-index: 9999;
@@ -34,28 +31,22 @@
     }
   }
 
-  &.loading {
-    &:not(.any) {
-      sfc-load-container:not(.empty) {
-        @include loader-background;
+  &:not(.disabled) {
+    .container {
+      .content {
+        .text-input {
+          cursor: pointer;
+        }
       }
     }
   }
 
-  &.focus {
+  &.initialization {
     .container {
       .content {
-        sfc-load-container.empty {
-          top: 2.1em;
-        }
-      }
-    }
-
-    &.any {
-      .container {
-        .content {
-          sfc-load-container {
-            top: 2.1em;
+        sfc-load-container {
+          &.loading {
+            @include loader-background;
           }
         }
       }

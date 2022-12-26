@@ -15,5 +15,11 @@ export { RangeInputVerticalComponent } from "./range/vertical/range-input-vertic
 export { RadioInputComponent } from "./radio/radio-input.component";
 export { IRadioItemModel } from "./radio/radio-item.model";
 export { AutoCompleteInputComponent } from "./autocomplete/autocomplete-input.component";
-export { IAutoCompleteItemModel } from "./autocomplete/models/autocomplete-item.model";
-export { IAutoCompleteValue } from "./autocomplete/models/autocomplete-value.model";
+export { IAutoCompleteItemModel } from "./autocomplete/parts/item/autocomplete-item.model";
+export { IAutoCompleteValue } from "./autocomplete/autocomplete-input-value.model";
+export { SelectInputComponent } from "./select/select-input.component";
+export { ISelectValue } from "./select/models/select-value.model";
+export { ISelectGroupValue } from "./select/models/select-group-value.model";
+export { ISelectItemModel } from "./select/parts/item/models/select-item.model";
+export { ISelectGroupItemModel } from "./select/parts/item/models/select-group-item.model";
+export { SelectItemModel } from "./select/parts/item/select-item.component";

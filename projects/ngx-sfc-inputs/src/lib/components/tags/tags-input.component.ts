@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { removeItem, trim, UIClass } from 'ngx-sfc-common';
+import { removeItemBy, trim, UIClass } from 'ngx-sfc-common';
 import { CommonConstants } from 'ngx-sfc-common';
 import { any, isNullOrEmptyString } from 'ngx-sfc-common';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -57,7 +57,7 @@ export class TagsInputComponent extends BaseInputComponent<string[]> implements 
   }
 
   onRemove(removeValue: string): void {
-    removeItem(this.value as string[], (item: string) => item === removeValue);
+    removeItemBy(this.value as string[], (item: string) => item === removeValue);
     this.onChange(this.value);
   }
 

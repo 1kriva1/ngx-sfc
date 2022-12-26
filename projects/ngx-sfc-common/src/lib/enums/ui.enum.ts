@@ -21,5 +21,7 @@ export enum UIClass {
     Fixed = 'fixed',
     Bordered = 'bordered',
     Even = 'even',
-    Pointer = 'pointer'
+    Pointer = 'pointer',
+    Default = 'default',
+    Initialization = 'initialization'
 };

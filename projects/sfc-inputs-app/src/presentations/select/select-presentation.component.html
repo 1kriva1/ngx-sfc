@@ -1,0 +1,18 @@
+<div class="buttons-container">
+    <div class="component-routing">        
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="common"
+                [queryParams]="{theme: theme}">Common</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="multiple"
+                [queryParams]="{theme: theme}">Multiple</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="group"
+                [queryParams]="{theme: theme}">Group</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

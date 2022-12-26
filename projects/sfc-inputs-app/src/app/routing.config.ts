@@ -22,7 +22,11 @@ import {
     RadioPresentationComponent,
     HorizontalRadioPresentationComponent,
     VerticalRadioPresentationComponent,
-    AutoCompletePresentationComponent
+    AutoCompletePresentationComponent,
+    SelectPresentationComponent,
+    CommonSelectPresentationComponent,
+    MultipleSelectPresentationComponent,
+    GroupSelectPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -169,6 +173,32 @@ export const routes: Routes = [
     {
         path: 'autocomplete',
         component: AutoCompletePresentationComponent
+    },
+    {
+        path: 'select',
+        component: SelectPresentationComponent,
+        children: [
+            {
+                path: 'common',
+                component: CommonSelectPresentationComponent
+            },
+            {
+                path: 'multiple',
+                component: MultipleSelectPresentationComponent
+            },
+            {
+                path: 'group',
+                component: GroupSelectPresentationComponent
+            },
+            {
+                path: '',
+                component: CommonSelectPresentationComponent
+            },
+            {
+                path: '**',
+                component: CommonSelectPresentationComponent
+            }
+        ]
     },
     fallbackRoute,
     indexRoute

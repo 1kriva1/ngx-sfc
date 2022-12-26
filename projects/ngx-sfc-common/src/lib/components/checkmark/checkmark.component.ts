@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { UIClass } from '../../enums';
 import { faCheck, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { CheckmarkType } from './checkmark-type.enum';
@@ -27,7 +27,4 @@ export class CheckmarkComponent {
 
   @Input()
   showNotActive: boolean = true;
-
-  @HostListener('click')
-  onClick = () => this.active = !this.active;
 }
