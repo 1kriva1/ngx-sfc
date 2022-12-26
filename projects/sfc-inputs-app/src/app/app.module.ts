@@ -25,12 +25,16 @@ import {
   RadioPresentationComponent,
   HorizontalRadioPresentationComponent,
   VerticalRadioPresentationComponent,
-  AutoCompletePresentationComponent
+  AutoCompletePresentationComponent,
+  SelectPresentationComponent,
+  CommonSelectPresentationComponent,
+  MultipleSelectPresentationComponent,
+  GroupSelectPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
-import {  NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -58,7 +62,11 @@ import { HttpClientModule } from '@angular/common/http';
     RadioPresentationComponent,
     HorizontalRadioPresentationComponent,
     VerticalRadioPresentationComponent,
-    AutoCompletePresentationComponent
+    AutoCompletePresentationComponent,
+    SelectPresentationComponent,
+    CommonSelectPresentationComponent,
+    MultipleSelectPresentationComponent,
+    GroupSelectPresentationComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EMPTY, map, of, Subject } from 'rxjs';
 import { CommonConstants } from '../../constants';
-import { ComponentSizeDirective, MouseDownDirective, ScrollTrackerDirective } from '../../directives';
+import { ComponentSizeDirective, MouseDownDirective, ScrollIntoViewDirective, ScrollTrackerDirective } from '../../directives';
 import { ComponentSize, Position, UIClass } from '../../enums';
 import { DelimeterComponent } from '../delimeter/delimeter.component';
 import { LoadMoreButtonComponent } from '../load-more-button/load-more-button.component';
@@ -39,7 +39,7 @@ describe('Component: LoadContainer', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [DelimeterComponent, MouseDownDirective, LoadMoreButtonComponent,
+            declarations: [DelimeterComponent, MouseDownDirective, LoadMoreButtonComponent, ScrollIntoViewDirective,
                 BounceLoaderComponent, ComponentSizeDirective, ScrollTrackerDirective, LoadContainerComponent, TestLoadContainerComponent]
         }).compileComponents();
     });
@@ -118,8 +118,8 @@ describe('Component: LoadContainer', () => {
             ).and.callThrough();
 
             expect(unsubscribeSpy).not.toHaveBeenCalled()
-            
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };            
+
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
 
             expect(unsubscribeSpy).toHaveBeenCalledTimes(1);
         });
@@ -309,6 +309,23 @@ describe('Component: LoadContainer', () => {
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('div.content').scrollTop === 0).toBeTrue();
+        });
+
+        fit('Should scroll target not exist', () => {
+            expect(component.loadContainer.scrollTarget).toBeUndefined();
+        });
+
+        fit('Should scroll to target', () => {
+            component.loadContainer.open = true;
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('div.content').scrollTop === 0).toBeTrue();
+
+            component.loadContainer.scrollTarget = fixture.nativeElement.querySelectorAll('.load-item')[4];
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('div.content').scrollTop > 0).toBeTrue();
         });
     });
 

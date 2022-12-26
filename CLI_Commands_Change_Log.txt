@@ -339,6 +339,10 @@ ng generate component components/autocomplete/autocomplete-input --project ngx-s
 
 ng generate component components/autocomplete/parts/option/autocomplete-option --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
 
+ng generate component components/select/select-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
+
+ng generate component components/select/parts/option/select-option --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d

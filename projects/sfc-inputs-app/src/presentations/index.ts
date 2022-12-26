@@ -21,3 +21,7 @@ export { RadioPresentationComponent } from './radio/radio-presentation.component
 export { VerticalRadioPresentationComponent } from './radio/vertical/radio-vertical-presentation.component';
 export { HorizontalRadioPresentationComponent } from './radio/horizontal/radio-horizontal-presentation.component';
 export { AutoCompletePresentationComponent } from './autocomplete/autocomplete-presentation.component';
+export { SelectPresentationComponent } from './select/select-presentation.component';
+export { CommonSelectPresentationComponent } from './select/common/select-common-presentation.component';
+export { MultipleSelectPresentationComponent } from './select/multiple/select-multiple-presentation.component';
+export { GroupSelectPresentationComponent } from './select/group/select-group-presentation.component';

@@ -82,6 +82,7 @@ export {
     remove,
     addItem,
     removeItem,
-    updateItem,
+    removeItemBy,
+    updateItemBy,
     getCollectionOrEmpty
 } from './collections.utils'

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IAutoCompleteItemModel } from '../../models/autocomplete-item.model';
+import { IAutoCompleteItemModel } from './autocomplete-item.model';
 
 @Component({
   selector: 'sfc-autocomplete-item',

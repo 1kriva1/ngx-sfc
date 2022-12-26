@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, filter, map, Observable } from 'rxjs';
-import { addItem, any, firstOrDefault, hasObjectItem, isDefined, nameof, removeItem, updateItem } from '../../../utils';
+import { addItem, any, firstOrDefault, hasObjectItem, isDefined, nameof, removeItemBy, updateItemBy } from '../../../utils';
 import { LoaderConstants } from '../loader.constants';
 import { ILoaderEvent } from '../loader.event';
 
@@ -60,7 +60,7 @@ export class LoaderService {
   public remove(id: string = LoaderConstants.GLOBAL_LOADER_ID): void {
     const loaders = this.loaderSubject.getValue();
 
-    if (removeItem(loaders, loader => loader.id == id)) {
+    if (removeItemBy(loaders, loader => loader.id == id)) {
       this.loaderSubject.next(loaders);
     }
   }
@@ -81,7 +81,7 @@ export class LoaderService {
     if (isDefined(loader) && loader?.status == status)
       return this.selectLoaderById(id);
 
-    const updatedLoaders = updateItem(loaders, (loader) => loader.id == id, ILoaderEvent);
+    const updatedLoaders = updateItemBy(loaders, (loader) => loader.id == id, ILoaderEvent);
 
     if (isDefined(updatedLoaders)) {
       this.loaderSubject.next(updatedLoaders as ILoaderEvent[]);

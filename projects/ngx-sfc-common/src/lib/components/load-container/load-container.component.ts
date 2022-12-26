@@ -69,6 +69,9 @@ export class LoadContainerComponent implements OnDestroy {
     }
   }
 
+  @Input()
+  scrollTarget!: HTMLElement;
+
   @Output()
   handleError: EventEmitter<any> = new EventEmitter<any>();
 

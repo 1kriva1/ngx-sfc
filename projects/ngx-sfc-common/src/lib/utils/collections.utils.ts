@@ -256,12 +256,27 @@ export function addItem<T>(collection: Array<T>, item: T,
 }
 
 /**
+ * Delete item from collection
+ * @param collection Array of items
+ * @param item Item to delete
+ * @returns True if successfully removed
+ */
+export function removeItem<T>(collection: Array<T>, item: T): boolean {
+    if (isDefined(item) && hasItem(collection, item)) {
+        collection.splice(collection.indexOf(item), 1);
+        return true;
+    }
+
+    return false;
+}
+
+/**
  * Delete item from collection by predicate
  * @param collection Array of items
  * @param predicate Function to define remove logic
  * @returns True if successfully removed
  */
-export function removeItem<T>(collection: Array<T>, predicate: (item: T) => boolean): boolean {
+export function removeItemBy<T>(collection: Array<T>, predicate: (item: T) => boolean): boolean {
     const foundItem: T | null | undefined = firstOrDefault(collection, predicate);
     if (isDefined(foundItem)) {
         collection.splice(collection.indexOf(foundItem as T), 1);
@@ -271,7 +286,13 @@ export function removeItem<T>(collection: Array<T>, predicate: (item: T) => bool
     return false;
 }
 
-export function updateItem<T>(collection: Array<T>, predicate: (item: T) => boolean, newItem: T)
+/**
+ * Update item in collection by predicate
+ * @param collection Array of items
+ * @param predicate Function to define item for deleting
+ * @returns True if successfully removed
+ */
+export function updateItemBy<T>(collection: Array<T>, predicate: (item: T) => boolean, newItem: T)
     : Array<T> | null {
     const itemIndex = collection.findIndex(predicate);
 

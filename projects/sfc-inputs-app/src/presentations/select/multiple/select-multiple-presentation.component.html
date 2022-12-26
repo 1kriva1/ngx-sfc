@@ -1,0 +1,214 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Multiple:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+
+        <h3>Static:</h3>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-empty" formControlName="inputSelectMultipleEmpty"
+                    label="Muliple select Multiple empty" placeholder="Muliple select Multiple empty"
+                    helperText="helper text Multiple empty" [multiple]="true" [showDefaultItem]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple" formControlName="inputSelectMultiple" [data]="data"
+                    label="Muliple select Multiple" placeholder="Muliple select Multiple" [icon]="faUser"
+                    helperText="helper text Multiple" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-without-default"
+                    formControlName="inputSelectultipleWithoutDefault" [data]="data" [loadOnInit]="false"
+                    label="Muliple select without default" placeholder="Muliple select without default"
+                    [multiple]="true" [showDefaultItem]="false">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-with-value" formControlName="inputSelectMultipleWithValue"
+                    [data]="data" label="Muliple select with value (1 and 3)" placeholder="Muliple select with value"
+                    [icon]="faUser" helperText="helper text Multiple with value (1 and 3)" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-disabled" formControlName="inputSelectultipleDisabled"
+                    [data]="data" label="Muliple select disabled" placeholder="Muliple select disabled"
+                    [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-not-found" formControlName="inputSelectMultipleNotFound"
+                    [data]="data" label="Muliple select not found (33 not found)"
+                    placeholder="Muliple select not found (33 not found)" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-validation" formControlName="inputSelectMultipleValidation"
+                    [data]="data" label="Muliple select valiation (leo or anita)" placeholder="Muliple select valiation"
+                    [icon]="faUser" helperText="Muliple select validation (leo or anita)"
+                    [validations]="{sfcEqualOrInclude: 'Include invalid  (leo or anita)'}" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-validation-value"
+                    formControlName="inputSelectMultipleValidationWithValue" [data]="data"
+                    label="Muliple select valiation value Valid (leo or anita)"
+                    placeholder="Muliple select valiation Valid value" [icon]="faUser"
+                    helperText="Muliple select validation value (leo or anita)"
+                    [validations]="{required: 'This field required', sfcEqualOrInclude: 'Include invalid (leo or anita)'}"
+                    [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-validation-value-invalid"
+                    formControlName="inputSelectMultipleValidationWithValueInv" [data]="data"
+                    label="Muliple select valiation value invalid (leo or anita)"
+                    placeholder="Muliple select valiation value invalid (leo or anita)" [icon]="faUser"
+                    helperText="Muliple select validation value invalid"
+                    [validations]="{required: 'This field required', equalOrInclude: 'Include invalid (leo or anita)'}"
+                    [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-small" formControlName="inputSelectMultipleSmall"
+                    [data]="data" label="Small" placeholder="Small" [icon]="faUser" helperText="Small"
+                    [sfcComponentSize]="ComponentSize.Small" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-large" formControlName="inputSelectMultipleLarge"
+                    [data]="data" label="Large" placeholder="Large" [icon]="faUser" helperText="Large"
+                    [sfcComponentSize]="ComponentSize.Large" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-custom" formControlName="inputSelectMultipleCustom"
+                    [data]="data" label="Custom" placeholder="Custom" [icon]="faUser" helperText="Custom"
+                    [sfcComponentSize] [customSize]="3.2" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-scroll" formControlName="inputSelectMultipleScroll"
+                    [data]="dataModification" [loadOnInit]="false" helperText="Scroll" [icon]="faUser" label="Scroll"
+                    placeholder="Scroll" [showLoadMoreButton]="false" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column column-direction">
+                <div>
+                    <h4>Sync data (add new item, remove item)</h4>
+                    <button (click)="addItemSync()" style="margin-right: 10px;">Add item</button>
+                    <button (click)="removeItemSync()">Remove item</button>
+                </div>
+                <sfc-select-input id="demo-select-multiple-modification"
+                    formControlName="inputSelectMultipleModification" [data]="dataModification" [multiple]="true">
+                </sfc-select-input>
+            </div>
+        </div>
+
+        <h3>Observable:</h3>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-obs-helper-icon"
+                    formControlName="inputSelectMultipleObservableHelperIcon" [data$]="data$" [loadOnInit]="false"
+                    helperText="test helper" [icon]="faUser" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-obs-validation-msg"
+                    formControlName="inputSelectMultipleObservableValidationMessage" [data$]="data$"
+                    [showLoadMoreButton]="false" label="validation label test" placeholder="validation placeholder test"
+                    [icon]="faUser" helperText="validation test helper"
+                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column column-direction">
+                <div>
+                    <h4>Async data (add new item, remove item)</h4>
+                    <button (click)="addItemAsync()" style="margin-right: 10px;">Add item</button>
+                    <button (click)="removeItemAsync()">Remove item</button>
+                </div>
+                <sfc-select-input id="demo-select-multiple-obs-modification"
+                    formControlName="inputSelectMultipleObservableModification" [data$]="dataModification$"
+                    [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <h3>Loader:</h3>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-loader-helper-icon"
+                    formControlName="inputSelectMultipleLoaderHelperIcon" [loader]="loader" helperText="test helper"
+                    [icon]="faUser" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-multiple-loader-validation-msg"
+                    formControlName="inputSelectMultipleLoaderValidationMessage" [loader]="loader"
+                    label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
+                    helperText="validation test helper"
+                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}" [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column column-direction">
+                <div>
+                    <h4>Loader data (add new item, remove item)</h4>
+                    <button (click)="addItemLoader()" style="margin-right: 10px;">Add item</button>
+                    <button (click)="removeItemLoader()">Remove item</button>
+                </div>
+                <sfc-select-input id="demo-select-multiple-loader-modification"
+                    formControlName="inputSelectMultipleLoaderModification" [loader]="loaderModification"
+                    [multiple]="true">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

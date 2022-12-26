@@ -8,3 +8,4 @@ export { DateTimeYearComponent } from "./datetime/parts/year/datetime-year.compo
 export { DateTimeModalComponent } from "./datetime/parts/modal/datetime-modal.component";
 export { ImageEditorComponent } from "./image/parts/editor/image-editor.component";
 export { AutoCompleteItemComponent } from "./autocomplete/parts/item/autocomplete-item.component";
+export { SelectItemComponent } from "./select/parts/item/select-item.component";
