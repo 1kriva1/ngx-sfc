@@ -1,6 +1,25 @@
 {
   "name": "ngx-sfc-inputs",
   "version": "0.0.1",
+  "description": "Angular inputs library for SFC project",
+  "keywords": [
+    "Street Football Club",
+    "SFC",
+    "angular",
+    "inputs",
+    "form",
+    "forms",
+    "responsive"
+  ],
+  "author": "Andrii Kryvoruk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1kriva1/ngx-sfc/tree/master/projects/ngx-sfc-inputs"
+  },
+  "bugs": {
+    "url": "https://github.com/1kriva1/ngx-sfc/issues"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0",
@@ -9,7 +28,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
-    "ngx-sfc-common": "^0.0.4"
+    "ngx-sfc-common": "^0.0.5"
   },
   "dependencies": {
     "tslib": "^2.3.0"

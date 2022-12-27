@@ -1,5 +1,5 @@
 @use "node_modules/cropperjs/dist/cropper.min.css";
-@import "../../../../../../../ngx-sfc-common/src/lib/styles/styles";
+@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
 
 .container {
   padding: 0.1em 0.2em;

@@ -1,5 +1,5 @@
+@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
 @import "../../../styles/mixins";
-@import "../../../../../../ngx-sfc-common/src/lib/styles/styles";
 
 :host {
   .container {
