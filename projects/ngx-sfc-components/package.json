@@ -1,6 +1,6 @@
 {
   "name": "ngx-sfc-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Angular components library for SFC project",
   "keywords": [
     "Street Football Club",
@@ -19,13 +19,13 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^14.2.12",
-    "@angular/core": "^14.2.12",
+    "@angular/common": "^15.0.4",
+    "@angular/core": "^15.0.4",
     "chart.js": "^3.6.0",
     "@fortawesome/angular-fontawesome": "0.10.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "ngx-sfc-common": "^0.0.5"
+    "ngx-sfc-common": "^0.0.6"
   },
   "dependencies": {
     "tslib": "^2.3.0"

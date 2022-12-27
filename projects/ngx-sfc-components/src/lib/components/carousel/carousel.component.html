@@ -3,15 +3,15 @@
         <sfc-carousel-stage [stageModel]="stageModel" [slidesModel]="slidesModel"></sfc-carousel-stage>
     </div>
     <ng-container *ngIf="slides.toArray().length">
-        <div class="navigation" [class.disabled]="navigationModel?.disabled">
-            <div class="action previous" [class.disabled]="navigationModel?.previous?.disabled" (click)="previous()">
-                {{navigationModel?.previous?.label}}
+        <div class="navigation" [class.disabled]="navigationModel.disabled">
+            <div class="action previous" [class.disabled]="navigationModel.previous.disabled" (click)="previous()">
+                {{navigationModel.previous.label}}
             </div>
-            <div class="action next" [class.disabled]="navigationModel?.next?.disabled" (click)="next()">
-                {{navigationModel?.next?.label}}
+            <div class="action next" [class.disabled]="navigationModel.next.disabled" (click)="next()">
+                {{navigationModel.next.label}}
             </div>
         </div>
-        <div class="dots" [class.disabled]="navigationDotsModel?.disabled">
+        <div class="dots" [class.disabled]="navigationDotsModel.disabled">
             <div *ngFor="let dot of navigationDotsModel?.dots" class="dot" [class.active]="dot.active"
                 (click)="moveByDot(dot.id)">
                 <span></span>
