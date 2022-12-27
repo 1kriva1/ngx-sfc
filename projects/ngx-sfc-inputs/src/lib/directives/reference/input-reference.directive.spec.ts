@@ -1,6 +1,6 @@
 import { Component, DebugElement, OnInit, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { CommonConstants } from "ngx-sfc-common";
 import { InputConstants } from "../../constants/input.constants";
@@ -12,9 +12,9 @@ import { InputReferenceDirective } from "./input-reference.directive";
              </form>`
 })
 class TestInputReferenceComponent implements OnInit {
-  public formGroup!: FormGroup;
+  public formGroup!: UntypedFormGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: UntypedFormBuilder) { }
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       input: ['', {

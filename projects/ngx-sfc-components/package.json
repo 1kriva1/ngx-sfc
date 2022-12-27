@@ -19,8 +19,8 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^13.2.0",
-    "@angular/core": "^13.2.0",
+    "@angular/common": "^14.2.12",
+    "@angular/core": "^14.2.12",
     "chart.js": "^3.6.0",
     "@fortawesome/angular-fontawesome": "0.10.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",

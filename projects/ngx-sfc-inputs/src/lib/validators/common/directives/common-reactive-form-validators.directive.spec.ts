@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
 import { equalOrInclude, maxLength, minLength } from "../common.validators";
 import { TagsInputComponent } from "../../../components/tags/tags-input.component";
 
@@ -12,9 +12,9 @@ import { TagsInputComponent } from "../../../components/tags/tags-input.componen
         `
 })
 export class CommonReactiveFormValidatorsTestComponent implements OnInit {
-    form!: FormGroup;
+    form!: UntypedFormGroup;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: UntypedFormBuilder) { }
 
     ngOnInit() {
         this.form = this.fb.group({

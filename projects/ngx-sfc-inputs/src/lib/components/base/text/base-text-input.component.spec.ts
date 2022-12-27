@@ -1,6 +1,6 @@
 import { Component, DebugElement, OnInit, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { ShowHideElementDirective, UIClass } from "ngx-sfc-common";
 import { CommonConstants } from "ngx-sfc-common";
@@ -13,9 +13,9 @@ import { TextInputComponent } from "../../text/text-input.component";
                </form>`
 })
 class TestBaseTextInputComponent implements OnInit {
-    public formGroup!: FormGroup;
+    public formGroup!: UntypedFormGroup;
 
-    constructor(public formBuilder: FormBuilder) { }
+    constructor(public formBuilder: UntypedFormBuilder) { }
     ngOnInit(): void {
         this.formGroup = this.formBuilder.group({
             input: ['', {
