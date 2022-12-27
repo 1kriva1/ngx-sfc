@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
 import { ButtonComponent, ComponentSizeDirective } from "ngx-sfc-common";
 import { FileInputComponent } from "../../../components";
 import { fileExtensions, fileMaxSize, fileMinSize } from "../../file/file.validators";
@@ -13,9 +13,9 @@ import { fileExtensions, fileMaxSize, fileMinSize } from "../../file/file.valida
         `
 })
 export class FileReactiveFormValidatorsTestComponent implements OnInit {
-    form!: FormGroup;
+    form!: UntypedFormGroup;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: UntypedFormBuilder) { }
 
     ngOnInit() {
         this.form = this.fb.group({

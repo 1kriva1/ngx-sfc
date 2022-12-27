@@ -1,6 +1,6 @@
 import { Component, DebugElement, OnInit, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -18,11 +18,11 @@ import { BaseInputComponent } from "./base-input.component";
                </form>`
 })
 class TestBaseInputComponent implements OnInit {
-    public formGroup!: FormGroup;
+    public formGroup!: UntypedFormGroup;
 
     faUser = faUser;
 
-    constructor(public formBuilder: FormBuilder) { }
+    constructor(public formBuilder: UntypedFormBuilder) { }
     ngOnInit(): void {
         this.formGroup = this.formBuilder.group({
             input: [{ value: '', disabled: false }, {

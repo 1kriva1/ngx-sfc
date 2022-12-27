@@ -55,7 +55,10 @@
             "styles": [
               "projects/sfc-inputs-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "cropperjs"
+            ]
           },
           "configurations": {
             "production": {
@@ -373,6 +376,5 @@
         }
       }
     }
-  },
-  "defaultProject": "sfc-inputs-app"
+  }
 }

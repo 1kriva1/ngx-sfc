@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CommonConstants, Position } from 'ngx-sfc-common';
 import { ComponentSize, SortingDirection } from 'ngx-sfc-common';
 import { IDefaultTableColumnModel, ITableDataModel, ITablePaginationModel, TableDataType } from 'ngx-sfc-components';
@@ -34,12 +34,12 @@ export class TablesDefaultPresentationComponent {
   paginationConfig: ITablePaginationModel = { enabled: true, page: 2, size: 2 };
 
   // forms
-  filterSyncFormGroup: FormGroup = new FormGroup({
-    searchSyncData: new FormControl()
+  filterSyncFormGroup: UntypedFormGroup = new UntypedFormGroup({
+    searchSyncData: new UntypedFormControl()
   });
 
-  filterAsyncFormGroup: FormGroup = new FormGroup({
-    searchAsyncData: new FormControl()
+  filterAsyncFormGroup: UntypedFormGroup = new UntypedFormGroup({
+    searchAsyncData: new UntypedFormControl()
   });
 
   ngOnInit(): void {

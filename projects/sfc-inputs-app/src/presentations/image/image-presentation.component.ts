@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fileMaxSize, ImageInputType } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../base-presentations.component';
@@ -17,7 +17,7 @@ export class ImagePresentationComponent extends BasePresentationComponent
 
   public defaultImage = '../assets/argentina_messi.png';
 
-  constructor(router: Router, activatedRoute: ActivatedRoute, formBuilder: FormBuilder, public httpClient: HttpClient) {
+  constructor(router: Router, activatedRoute: ActivatedRoute, formBuilder: UntypedFormBuilder, public httpClient: HttpClient) {
     super(router, activatedRoute, formBuilder);
   }
 
