@@ -69,8 +69,8 @@ import {
   Title,
   Tooltip
 } from 'chart.js';
-import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxSfcCommonModule } from 'ngx-sfc-common';
 
 Chart.register(
   Title, Tooltip, Filler, Legend,
