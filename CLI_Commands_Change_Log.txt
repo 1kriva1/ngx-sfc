@@ -350,3 +350,15 @@ ng new sfc -p sfc --routing true --skip-install --style scss
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
+
+NPM Publish:
+
+npm run build:common
+cd dist/ngx-sfc-common
+npm publish
+
+cd ../../
+
+npm run build:components
+cd dist/ngx-sfc-components
+npm publish

@@ -157,7 +157,12 @@
           "options": {
             "main": "projects/ngx-sfc-inputs/src/test.ts",
             "tsConfig": "projects/ngx-sfc-inputs/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-sfc-inputs/karma.conf.js"
+            "karmaConfig": "projects/ngx-sfc-inputs/karma.conf.js",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"         
+              ]
+            }
           }
         },
         "lint": {
@@ -322,7 +327,12 @@
           "options": {
             "main": "projects/ngx-sfc-components/src/test.ts",
             "tsConfig": "projects/ngx-sfc-components/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-sfc-components/karma.conf.js"
+            "karmaConfig": "projects/ngx-sfc-components/karma.conf.js",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"         
+              ]
+            }
           }
         },
         "lint": {

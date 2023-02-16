@@ -45,7 +45,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
-    "ngx-sfc-common": "^0.0.6",
+    "ngx-sfc-common": "^0.0.7",
     "ngx-sfc-components": "^0.0.3",
     "ngx-sfc-inputs": "^0.0.2",
     "rxjs": "~7.5.0",
