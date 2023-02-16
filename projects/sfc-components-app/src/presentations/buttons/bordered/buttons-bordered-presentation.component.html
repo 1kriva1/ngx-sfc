@@ -23,7 +23,7 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-button [iconBefore]="faStar" text=""></sfc-button>
+            <sfc-button [iconBefore]="faStar"></sfc-button>
         </div>
 
         <div class="component-column">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="component-column">
-            <sfc-button [disabled]="true" [iconAfter]="faCar" text="">
+            <sfc-button [disabled]="true" [iconAfter]="faCar">
             </sfc-button>
         </div>
 
@@ -79,14 +79,13 @@
     <div class="component-row">
 
         <div class="component-column">
-            <sfc-button text="Custom size text" [sfcComponentSize]="ComponentSize.Custom"
-                [customSize]="0.2">
+            <sfc-button text="Custom size text" [sfcComponentSize]="ComponentSize.Custom" [customSize]="0.2">
             </sfc-button>
         </div>
 
         <div class="component-column">
             <sfc-button text="Custom size text" [sfcComponentSize]="ComponentSize.Custom" [customSize]="4"
-            [iconAfter]="faCar">
+                [iconAfter]="faCar">
             </sfc-button>
         </div>
 

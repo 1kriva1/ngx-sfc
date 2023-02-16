@@ -1,8 +1,10 @@
-.button {
-  &.rounded {
-    @include border;
+:host {
+  .button {
+    &.rounded {
+      @include border;
 
-    border-radius: 20px;
-    padding: 0.4em 1.2em;
+      border-radius: 20px;
+      padding: 0.4em 1.2em;
+    }
   }
 }

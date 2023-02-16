@@ -1,12 +1,16 @@
-.button {
-  &.filled {
-    @include filled($color-default);
+:host {
+  .button {
+    &.filled {
+      @include filled($color-default);
 
-    &:hover {
-      @include filled($color-7);
+      &:hover {
+        @include filled($color-7);
+      }
     }
+  }
 
-    &.disabled {
+  &.disabled {
+    .button {
       @include filled($color-disabled-default);
     }
   }

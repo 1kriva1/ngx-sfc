@@ -1,5 +1,7 @@
-.button {
-  &.bordered {
-    @include border;
+:host{
+  .button {
+    &.bordered {
+      @include border;
+    }
   }
 }
