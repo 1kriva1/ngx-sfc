@@ -263,7 +263,7 @@ describe('Component: Table', () => {
             component.columns = [{ name: '', field: '' }, { name: '', field: '' }];
             fixture.detectChanges();
 
-            windowMock.innerWidth = MediaLimits.Phone;
+            windowMock.innerWidth = MediaLimits.MobileLarge;
             fixture.detectChanges();
 
             window.dispatchEvent(new Event('resize'));

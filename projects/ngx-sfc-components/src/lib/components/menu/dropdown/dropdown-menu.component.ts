@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, EventEmitter, HostBinding, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ClickOutsideEvent, isDefined, isNullOrEmptyString, MediaLimits, Position, ResizeService, UIClass, WINDOW } from 'ngx-sfc-common';
-import { startWith, Subscription } from 'rxjs';
+import { filter, startWith, Subscription } from 'rxjs';
 import { IDropdownMenuItemModel } from './parts/item/dropdown-menu-item.model';
 
 @Component({
@@ -38,6 +38,9 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
   @HostBinding('class.' + UIClass.Open)
   open: boolean = false;
 
+  @Input()
+  autoResize: boolean = true;
+
   @Output()
   selected: EventEmitter<IDropdownMenuItemModel> = new EventEmitter<IDropdownMenuItemModel>();
 
@@ -58,10 +61,13 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
 
   ngAfterContentInit(): void {
     this._resizeSubscription = this.resizeService.onResize$
-      .pipe(startWith(this.window))
+      .pipe(
+        startWith(this.window),
+        filter(_ => this.autoResize)
+      )
       .subscribe(window => {
         this.position = window.innerWidth <= MediaLimits.Tablet
-          ? [Position.Left, Position.Top] : this._position
+          ? [Position.Bottom, Position.Center] : this._position
       });
   }
 
@@ -72,6 +78,9 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
   onClick(item: IDropdownMenuItemModel) {
     if (this.hideOnClick)
       this.open = false;
+
+    this.items.forEach(item => item.active = false);
+    item.active = true;
 
     this.selected.emit(item);
   }

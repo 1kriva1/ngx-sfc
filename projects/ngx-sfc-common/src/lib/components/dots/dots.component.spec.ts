@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Direction, UIClass } from '../../enums';
 import { DotsComponent } from './dots.component';
 
-describe('Component: DotsComponent', () => {
+describe('Component: Dots', () => {
   let component: DotsComponent;
   let fixture: ComponentFixture<DotsComponent>;
 

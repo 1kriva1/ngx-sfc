@@ -18,7 +18,8 @@ export { DefaultModalFooterComponent } from './modal/footer/default/default-moda
 export { IDefaultModalFooterModel } from './modal/footer/default/default-modal-footer.model';
 export { IDefaultModalHeaderModel } from './modal/header/default/default-modal-header.model';
 export { ModalTemplate } from './modal/modal-template.enum';
-export { HamburgerComponent } from './hamburger/hamburger.component';
+export { HamburgerComponent } from './hamburger/default/hamburger.component';
+export { HamburgerMenuComponent } from './hamburger/menu/hamburger-menu.component';
 export { DotsComponent } from './dots/dots.component';
 export { ToggleSwitcherComponent } from './toggle-switcher/toggle-switcher.component';
 export { IToggleSwitcherModel } from './toggle-switcher/toggle-switcher.model';
@@ -39,3 +40,4 @@ export { LoadContainerType } from './load-container/load-container.enum';
 export { LoaderFunction, FilterFunction, ILoadContainerModel } from './load-container/models/load-container.model';
 export { ILoadMoreParameters } from './load-container/models/load-more-parameters.model';
 export { ILoadMoreModel } from './load-container/models/load-more.model';
+export { IconComponent } from './icon/icon.component';

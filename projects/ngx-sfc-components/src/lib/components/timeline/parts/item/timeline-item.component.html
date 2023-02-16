@@ -7,8 +7,7 @@
     </div>
     <div class="content">
         <div class="title">
-            <fa-icon *ngIf="model.icon" [icon]="model.icon"></fa-icon>
-            <img *ngIf="showImage" [src]="model.image">
+            <sfc-icon [icon]="model.icon" [imageSrc]="model.image"></sfc-icon>
             <span>{{model.title}}</span>
         </div>        
         <p>{{model.description}}</p>

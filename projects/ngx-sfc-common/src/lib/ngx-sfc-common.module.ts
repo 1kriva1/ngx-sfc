@@ -31,6 +31,7 @@ import {
   DefaultModalHeaderComponent,
   DefaultModalFooterComponent,
   HamburgerComponent,
+  HamburgerMenuComponent,
   DotsComponent,
   ToggleSwitcherComponent,
   CheckmarkComponent,
@@ -39,7 +40,8 @@ import {
   PaginationComponent,
   SortingComponent,
   LoadContainerComponent,
-  LoadMoreButtonComponent
+  LoadMoreButtonComponent,
+  IconComponent
 } from './components';
 
 @NgModule({
@@ -64,11 +66,13 @@ import {
     TemplateContentComponent,
     CloseComponent,
     HamburgerComponent,
+    HamburgerMenuComponent,
     DotsComponent,
     PaginationComponent,
     SortingComponent,
     LoadMoreButtonComponent,
     LoadContainerComponent,
+    IconComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -79,7 +83,7 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // pipes
-    SwitchMultiCasePipe
+    SwitchMultiCasePipe    
   ],
   imports: [
     CommonModule,
@@ -108,10 +112,12 @@ import {
     ToggleSwitcherComponent,
     DotsComponent,
     HamburgerComponent,
+    HamburgerMenuComponent,
     PaginationComponent,
     SortingComponent,
     LoadMoreButtonComponent,
     LoadContainerComponent,
+    IconComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -122,7 +128,7 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // pipes
-    SwitchMultiCasePipe
+    SwitchMultiCasePipe    
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

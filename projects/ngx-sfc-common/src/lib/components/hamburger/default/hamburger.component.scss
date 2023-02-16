@@ -1,4 +1,4 @@
-@import "../../styles/styles";
+@import "../../../styles/index";
 
 .container {
   @include square-size(1em);
@@ -29,7 +29,7 @@
       transform-origin: right;
 
       :host(.open) & {
-        transform: rotate(-90deg) translateX(0.1875em);
+        transform: rotate(-90deg) translateX(0.1375em);
       }
     }
 

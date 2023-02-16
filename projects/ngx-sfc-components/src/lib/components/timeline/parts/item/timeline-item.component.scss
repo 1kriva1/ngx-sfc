@@ -1,4 +1,4 @@
-@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
+@use "node_modules/ngx-sfc-common/styles/index" as *;
 
 :host {
   display: block;
@@ -28,7 +28,7 @@
 
       &::before {
         box-sizing: border-box;
-        background: $color-hover-default;
+        background: $color-green-4;
         border: 0.18em solid transparent;
         border-radius: 100%;
         content: "";
@@ -86,13 +86,8 @@
         margin: 0;
       }
 
-      fa-icon,
-      img {
+      sfc-icon {
         margin-right: 0.31em;
-      }
-
-      img {
-        width: 1em;
       }
     }
   }
@@ -133,9 +128,14 @@
         padding: 2.5em 0 4.375em;
         justify-content: start;
 
-        span {
-          margin: 0;
-          font-size: 1.875em;
+        .title {
+          width: 100%;
+
+          span {
+            margin: 0;
+            font-size: 1.875em;
+            text-align: center;
+          }
         }
       }
     }
@@ -147,7 +147,7 @@
         &::before {
           @include theme-value(background, transparent, $color-0);
 
-          border: 0.18em solid $color-hover-default;
+          border: 0.18em solid $color-green-4;
         }
       }
     }
@@ -156,7 +156,7 @@
 
 /* MEDIA */
 
-@media (min-width: 992px) {
+@media (min-width: 435px) {
   :host {
     .container {
       padding: 0;

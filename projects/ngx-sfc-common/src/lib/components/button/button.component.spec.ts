@@ -32,8 +32,8 @@ describe('Component: Button', () => {
     });
 
     fit("Should have main elements", () => {
-      expect(fixture.nativeElement.querySelector('a.button')).toBeDefined();
-      expect(fixture.nativeElement.querySelector('a.button span')).toBeDefined();
+      expect(fixture.nativeElement.querySelector('a.button')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('a.button span')).toBeTruthy();
     });
   });
 
@@ -85,7 +85,7 @@ describe('Component: Button', () => {
 
       const iconBefore = fixture.nativeElement.querySelector('fa-icon.icon.before svg');
 
-      expect(iconBefore).toBeDefined();
+      expect(iconBefore).toBeTruthy();
       expect(iconBefore.classList).toContain('fa-shirt');
     });
 

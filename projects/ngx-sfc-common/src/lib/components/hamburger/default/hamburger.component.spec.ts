@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UIClass } from '../../enums';
+import { UIClass } from '../../../enums';
 import { HamburgerComponent } from './hamburger.component';
 
-describe('Component: HamburgerComponent', () => {
+describe('Component: Hamburger', () => {
   let component: HamburgerComponent;
   let fixture: ComponentFixture<HamburgerComponent>;
 

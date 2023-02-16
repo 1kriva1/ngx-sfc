@@ -1,5 +1,5 @@
-import { Component, HostListener, Input } from '@angular/core';
-import { CommonConstants } from 'ngx-sfc-common';
+import { Component, HostBinding, HostListener, Input } from '@angular/core';
+import { CommonConstants, UIClass } from 'ngx-sfc-common';
 import { IDropdownMenuItemModel } from './dropdown-menu-item.model';
 
 @Component({
@@ -11,6 +11,9 @@ export class DropdownMenuItemComponent {
 
   @Input()
   item: IDropdownMenuItemModel = { label: CommonConstants.EMPTY_STRING };
+
+  @HostBinding(`class.${UIClass.Active}`)
+  private get _active(): boolean { return this.item.active || false; }
 
   @HostListener('click')
   click() {

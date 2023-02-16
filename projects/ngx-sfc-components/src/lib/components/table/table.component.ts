@@ -267,7 +267,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, 
   }
 
   private getColumnWidth(windowWidth: number, columnsLength: number): number {
-    if (windowWidth <= MediaLimits.Phone)
+    if (windowWidth <= MediaLimits.MobileLarge)
       return 1;
 
     if (windowWidth <= MediaLimits.Tablet)

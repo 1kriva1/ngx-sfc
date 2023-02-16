@@ -9,3 +9,10 @@ $background-gradient-default: linear-gradient(
   rgb(0 0 0 / 30%) 83%,
   rgb(0 0 0 / 0%) 100%
 );
+$background-gradient-vertical-default: linear-gradient(
+  to bottom,
+  rgb(0 0 0 / 0%) 0%,
+  rgb(0 0 0 / 30%) 17%,
+  rgb(0 0 0 / 30%) 83%,
+  rgb(0 0 0 / 0%) 100%
+);

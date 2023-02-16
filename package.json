@@ -3,17 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "start:inputs": "ng serve sfc-inputs-app",
     "start:components": "ng serve sfc-components-app",
-    "build": "ng build",
-    "build:common": "ng build ngx-sfc-common && npm run build:scss",
+    "build:common": "ng build ngx-sfc-common",
+    "build:common:watch": "ng build ngx-sfc-common --watch",
     "build:inputs": "ng build ngx-sfc-inputs",
+    "build:inputs:watch": "ng build ngx-sfc-inputs --watch",
     "build:components": "ng build ngx-sfc-components",
+    "build:components:watch": "ng build ngx-sfc-components --watch",
     "build:all": "npm run build:common && npm run build:inputs && npm run build:components",
-    "build:scss": "scss-bundle -c scss-bundle.config.json",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "test:common": "ng test ngx-sfc-common",
     "test:inputs": "ng test ngx-sfc-inputs",
     "test:components": "ng test ngx-sfc-components",
@@ -79,6 +77,7 @@
     "scss-bundle": "3.1.2",
     "stylelint": "^14.6.0",
     "stylelint-config-standard-scss": "^3.0.0",
-    "typescript": "~4.8.4"
+    "typescript": "~4.8.4",
+    "concurrently": "^7.6.0"
   }
 }

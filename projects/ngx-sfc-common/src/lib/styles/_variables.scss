@@ -1,3 +1,7 @@
 @import "./themes/default";
 @import "./themes/dark";
+@import "./themes/yellow";
 @import "./colors";
+
+$transition-duration-default: 0.5s;
+$transition-timing-function-default: ease;
