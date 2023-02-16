@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonConstants, DelimeterComponent } from 'ngx-sfc-common';
+import { CommonConstants, DelimeterComponent, IconComponent, UIClass } from 'ngx-sfc-common';
 import { DropdownMenuItemComponent } from './dropdown-menu-item.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,7 +11,7 @@ describe('Component: DropdownMenuItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [DelimeterComponent, DropdownMenuItemComponent]
+      declarations: [DelimeterComponent, IconComponent, DropdownMenuItemComponent]
     }).compileComponents();
   });
 
@@ -52,6 +52,17 @@ describe('Component: DropdownMenuItemComponent', () => {
 
       expect(component.item.click).toHaveBeenCalledOnceWith(component.item);
     });
+
+    fit("Should not have active class", () => {
+      expect(fixture.nativeElement.className).not.toEqual(UIClass.Active);
+    });
+
+    fit("Should have active class", () => {
+      component.item.active = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.className).toEqual(UIClass.Active);
+    });
   });
 
   describe('Label', () => {
@@ -77,6 +88,19 @@ describe('Component: DropdownMenuItemComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('fa-icon svg.fa-shirt')).toBeTruthy();
+    });
+  });
+
+  describe('Image', () => {
+    fit('Should not exist', () => {
+      expect(fixture.nativeElement.querySelector('img')).toBeNull();
+    });
+
+    fit('Should exist', () => {
+      component.item.image = '/assets/test.png';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('img').src).toContain(component.item.image);
     });
   });
 

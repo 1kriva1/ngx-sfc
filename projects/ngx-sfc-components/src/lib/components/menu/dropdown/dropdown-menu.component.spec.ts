@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ClickOutsideDirective, DOCUMENT, DotsComponent, MediaLimits, nameof, Position, UIClass, WINDOW } from 'ngx-sfc-common';
+import { ClickOutsideDirective, DOCUMENT, DotsComponent, IconComponent, MediaLimits, nameof, Position, UIClass, WINDOW } from 'ngx-sfc-common';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuItemComponent } from './parts/item/dropdown-menu-item.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ describe('Component: DropdownMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [ClickOutsideDirective, DropdownMenuItemComponent, DotsComponent, DropdownMenuComponent],
+      declarations: [ClickOutsideDirective, IconComponent, DropdownMenuItemComponent, DotsComponent, DropdownMenuComponent],
       providers: [
         { provide: DOCUMENT, useValue: document },
         { provide: WINDOW, useFactory: (() => { return windowMock; }) }
@@ -195,7 +195,22 @@ describe('Component: DropdownMenuComponent', () => {
       component.ngAfterContentInit();
       fixture.detectChanges();
 
-      expect(component.position).toEqual([Position.Left, Position.Top]);
+      expect(component.position).toEqual([Position.Bottom, Position.Center]);
+    });
+
+    fit("Should have initial value, when window size is less or equal Tablet limit", () => {
+      component.position = [Position.Left];
+      component.autoResize = false;
+      fixture.detectChanges();
+
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      windowMock.innerWidth = MediaLimits.Tablet;
+      component.ngAfterContentInit();
+      fixture.detectChanges();
+
+      expect(component.position).toEqual([Position.Left]);
     });
 
     fit("Should have initial value after size become more than Tablet limit", () => {
@@ -205,7 +220,7 @@ describe('Component: DropdownMenuComponent', () => {
       component.ngOnInit();
       fixture.detectChanges();
 
-      windowMock.innerWidth = MediaLimits.Phone;
+      windowMock.innerWidth = MediaLimits.MobileLarge;
       component.ngAfterContentInit();
       fixture.detectChanges();
 
@@ -309,6 +324,20 @@ describe('Component: DropdownMenuComponent', () => {
       fixture.nativeElement.querySelector('sfc-dropdown-menu-item').dispatchEvent(new MouseEvent('click'));
 
       expect(component.open).toBeFalse();
+    });
+
+    fit('Should active selected item', () => {
+      component.items.push({ label: 'Test label1' }, { label: 'Test label2', active: true });
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-dropdown-menu-item')[0].className).not.toContain(UIClass.Active);
+      expect(fixture.nativeElement.querySelectorAll('sfc-dropdown-menu-item')[1].className).toContain(UIClass.Active);
+
+      fixture.nativeElement.querySelectorAll('sfc-dropdown-menu-item')[0].dispatchEvent(new MouseEvent('click'));
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-dropdown-menu-item')[0].className).toContain(UIClass.Active);
+      expect(fixture.nativeElement.querySelectorAll('sfc-dropdown-menu-item')[1].className).not.toContain(UIClass.Active);
     });
 
     fit('Should not set open state to false', () => {

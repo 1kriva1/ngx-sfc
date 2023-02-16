@@ -2,7 +2,10 @@
  * CSS Media limits
  */
 export enum MediaLimits {
-    Laptop = 1200,
-    Tablet = 767,
-    Phone = 430
+    LaptopLarge = 1440,
+    Laptop = 1024,
+    Tablet = 768,
+    MobileLarge = 425,
+    Mobile = 375,
+    MobileSmall = 320
 }

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommonConstants } from 'ngx-sfc-common';
+import { CommonConstants, IconComponent } from 'ngx-sfc-common';
 import { TimelineItemPosition } from './timeline-item-position.enum';
 import { TimelineItemComponent } from './timeline-item.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ describe('Component: TimelineItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [TimelineItemComponent]
+      declarations: [IconComponent, TimelineItemComponent]
     }).compileComponents();
   });
 
@@ -86,20 +86,20 @@ describe('Component: TimelineItemComponent', () => {
   describe('Content', () => {
     describe('Icon', () => {
       fit("Should not exist", () => {
-        expect(fixture.nativeElement.querySelector('div.content > div.title > fa-icon')).toBeNull();
+        expect(fixture.nativeElement.querySelector('div.content > div.title fa-icon')).toBeNull();
       });
 
       fit("Should exist", () => {
         component.model.icon = faTShirt;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('div.content > div.title > fa-icon svg.fa-shirt')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('div.content > div.title fa-icon svg.fa-shirt')).toBeTruthy();
       });
     });
 
     describe('Image', () => {
       fit("Should not exist, if source not provided", () => {
-        expect(fixture.nativeElement.querySelector('div.content > div.title > img')).toBeNull();
+        expect(fixture.nativeElement.querySelector('div.content > div.title img')).toBeNull();
       });
 
       fit("Should not exist, if icon provided", () => {
@@ -107,21 +107,21 @@ describe('Component: TimelineItemComponent', () => {
         component.model.image = '/testImage.png';
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('div.content > div.title > img')).toBeNull();
+        expect(fixture.nativeElement.querySelector('div.content > div.title img')).toBeNull();
       });
 
       fit("Should exist", () => {
         component.model.image = '/testImage.png';
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('div.content > div.title > img')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('div.content > div.title img')).toBeTruthy();
       });
 
       fit("Should have defined src value", () => {
         component.model.image = '/testImage.png';
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('div.content > div.title > img').src).toContain(component.model.image);
+        expect(fixture.nativeElement.querySelector('div.content > div.title img').src).toContain(component.model.image);
       });
     });
 

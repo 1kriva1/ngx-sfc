@@ -1,0 +1,66 @@
+@import "../../../styles/index";
+
+:host {
+  .container {
+    display: inline-block;
+    cursor: pointer;
+
+    span {
+      position: relative;
+
+      @include theme-value(background, $color-default, $color-0);
+
+      display: block;
+      height: 0.125em;
+      margin-bottom: 0.1875em;
+      transition: all ease-in-out 0.4s;
+
+      &.text {
+        @include theme-value(color, $color-default, $color-0);
+
+        font-size: 0.4375em;
+        letter-spacing: 0.4px;
+        transition: opacity 1s ease-in-out;
+        background: none !important;
+        opacity: 1;
+        text-transform: uppercase;
+      }
+    }
+
+    &:hover {
+      span {
+        background: $color-hover-default;
+
+        &.text {
+          color: $color-hover-default;
+        }
+      }
+    }
+  }
+
+  &.open {
+    .container {
+      span {
+        &:nth-child(1) {
+          transform: rotate(-45deg);
+          top: 0.625em;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: 0;
+          opacity: 0;
+        }
+
+        &:nth-child(4) {
+          transform: rotate(45deg);
+          top: -0.3125em;
+        }
+
+        &.text {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

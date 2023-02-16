@@ -1,8 +1,9 @@
-@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
+@use "node_modules/ngx-sfc-common/styles/index" as *;
 
 :host {
   display: flex;
   flex-direction: column;
+  padding: 0.1em 0;
 
   li {
     color: $color-default;
@@ -20,12 +21,12 @@
     &:focus-within {
       background: $color-2;
       border-color: $color-2;
-      color: $color-hover-default;
+      color: $color-green-4;
       cursor: pointer;
       outline: none;
     }
 
-    fa-icon {
+    sfc-icon {
       padding-right: 0.625em;
       width: 10%;
     }
@@ -33,5 +34,13 @@
 
   ::ng-deep sfc-delimeter {
     @include theme-value(background, $background-gradient-default, $background-gradient-default);
+  }
+
+  &.active {
+    li {
+      background: $color-3;
+      border-color: $color-3;
+      color: $color-green-4;
+    }
   }
 }

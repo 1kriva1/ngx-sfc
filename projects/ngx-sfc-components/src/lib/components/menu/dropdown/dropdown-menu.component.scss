@@ -1,4 +1,4 @@
-@use "node_modules/ngx-sfc-common/ngx-sfc-common.styles" as *;
+@use "node_modules/ngx-sfc-common/styles/index" as *;
 
 :host {
   display: inline-flex;
@@ -14,9 +14,9 @@
       .container {
         display: flex;
         justify-content: center;
-        flex-wrap: wrap;
+        align-items: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all $transition-duration-default $transition-timing-function-default;
 
         @include theme-value(color, $color-default, $color-dark);
 

@@ -1,8 +1,8 @@
 @mixin border() {
   border: solid 2px;
 
-  @include theme-value(color, $color-default, $color-dark, "&:not(:hover):not(.disabled)");
-  @include theme-value(border-color, $color-default, $color-dark, "&:not(:hover):not(.disabled)");
+  @include theme-value(color, $color-default, $color-dark);
+  @include theme-value(border-color, $color-default, $color-dark);
 }
 
 @mixin filled($color) {

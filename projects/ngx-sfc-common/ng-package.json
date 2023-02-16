@@ -3,5 +3,6 @@
   "dest": "../../dist/ngx-sfc-common",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [{ "input": "src/lib/styles", "glob": "**/*.scss", "output": "styles" }]
 }

@@ -159,7 +159,7 @@ describe('Component: TooltipComponent', () => {
       component.tooltipComponent?.ngOnInit();
       fixture.detectChanges();
 
-      windowMock.innerWidth = MediaLimits.Phone;
+      windowMock.innerWidth = MediaLimits.MobileLarge;
       component.tooltipComponent?.ngAfterContentInit();
       fixture.detectChanges();
 

@@ -1,5 +1,0 @@
-.button {
-  &.texted {
-    @include theme-value(color, $color-default, $color-dark, "&:not(:hover):not(.disabled)");
-  }
-}

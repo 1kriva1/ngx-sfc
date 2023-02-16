@@ -4,6 +4,7 @@ export class UIConstants {
     static CSS_DEGREES = 'deg';
     static CSS_EM = 'em';
 
+    static CSS_INITIAL = 'initial';
     static CSS_VISIBILITY_VISIBLE = 'visible';
     static CSS_VISIBILITY_HIDDEN = 'hidden';
 

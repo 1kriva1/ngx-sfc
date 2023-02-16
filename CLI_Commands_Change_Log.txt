@@ -343,6 +343,10 @@ ng generate component components/select/select-input --project ngx-sfc-inputs --
 
 ng generate component components/select/parts/option/select-option --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
 
+APPLICATION:
+
+ng new sfc -p sfc --routing true --skip-install --style scss
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
