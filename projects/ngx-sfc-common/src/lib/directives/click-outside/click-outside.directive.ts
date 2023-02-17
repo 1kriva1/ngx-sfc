@@ -1,6 +1,7 @@
 import {
+  AfterViewInit,
   Directive, ElementRef, EventEmitter,
-  Inject, Input, OnDestroy, OnInit, Output
+  Inject, Input, OnDestroy, Output
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { DOCUMENT } from '../../services';
@@ -9,7 +10,7 @@ import { ClickOutsideEvent } from './click-outside.event';
 @Directive({
   selector: '[sfcClickOutside]'
 })
-export class ClickOutsideDirective implements OnInit, OnDestroy {
+export class ClickOutsideDirective implements AfterViewInit, OnDestroy {
 
   /**
    * Toggler for checking ouside click event
@@ -31,11 +32,9 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this._clickSubscription = fromEvent(this.document, 'click')
-      .subscribe(event => {
-        this.onClick(event);
-      });
+      .subscribe(event => this.onClick(event));
   }
 
   ngOnDestroy() {

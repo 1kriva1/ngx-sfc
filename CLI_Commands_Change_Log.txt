@@ -362,3 +362,9 @@ cd ../../
 npm run build:components
 cd dist/ngx-sfc-components
 npm publish
+
+cd ../../
+
+npm run build:inputs
+cd dist/ngx-sfc-inputs
+npm publish

@@ -5,6 +5,7 @@ import { ButtonType } from './button-type.enum';
 import { ButtonComponent } from './button.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommonConstants } from '../../constants';
 
 describe('Component: Button', () => {
 
@@ -116,6 +117,20 @@ describe('Component: Button', () => {
   describe('Text', () => {
     fit("Should have default text", () => {
       expect(fixture.nativeElement.querySelector('span.text').innerText).toEqual('Button');
+    });
+
+    fit("Should not have default text, if before icon defined", () => {
+      component.iconBefore = faTShirt;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.text').innerText).toEqual(CommonConstants.EMPTY_STRING);
+    });
+
+    fit("Should not have default text, if after icon defined", () => {
+      component.iconAfter = faTShirt;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.text').innerText).toEqual(CommonConstants.EMPTY_STRING);
     });
 
     fit("Should have defined text", () => {

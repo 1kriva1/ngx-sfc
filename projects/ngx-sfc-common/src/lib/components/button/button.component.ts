@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { UIClass } from '../../enums';
-import { distinct } from '../../utils';
+import { distinct, isDefined, isNullOrEmptyString } from '../../utils';
 import { ButtonType } from './button-type.enum';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,7 +14,7 @@ export class ButtonComponent {
   private readonly BUTTON_DEFAULT_TEXT: string = 'Button';
 
   @Input()
-  text: string = this.BUTTON_DEFAULT_TEXT;
+  text!: string;
 
   @Input()
   iconBefore?: IconDefinition;
@@ -29,9 +29,15 @@ export class ButtonComponent {
   @Input()
   types: Array<ButtonType> = [ButtonType.Bordered];
 
+  get label(): string {
+    return isNullOrEmptyString(this.text) && !isDefined(this.iconBefore) && !isDefined(this.iconAfter)
+      ? this.BUTTON_DEFAULT_TEXT
+      : this.text;
+  }
+
   get classes() {
     const classes: any = {};
-    
+
     distinct(this.types).forEach(type => classes[type] = true);
 
     return classes;
