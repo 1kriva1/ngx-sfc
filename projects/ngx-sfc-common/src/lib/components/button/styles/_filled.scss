@@ -2,16 +2,20 @@
   .button {
     &.filled {
       @include filled($color-default);
-
-      &:hover {
-        @include filled($color-7);
-      }
     }
   }
 
   &.disabled {
     .button {
       @include filled($color-disabled-default);
+    }
+  }
+
+  &:hover {
+    .button {
+      &.filled {
+        @include filled($color-hover-default);
+      }
     }
   }
 }

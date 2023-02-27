@@ -1,25 +1,24 @@
-<div class="container">
-    <div *ngIf="vm$ | async as vm" #slider class="slider">
-        <ul [ngStyle]="vm.styles">
-            <sfc-slider-item *ngFor="let item of items" [model]="item"></sfc-slider-item>
-        </ul>
+<div class="container" *ngIf="vm$ | async as vm">
+    <div #itemsContainer class="items">
+        <sfc-slider-item *ngFor="let item of items; let itemIndex = index;" [model]="item"
+            [sfcShowHideElement]="itemIndex === vm.index"></sfc-slider-item>
+    </div>
 
-        <div class="buttons">
-            <sfc-slider-button [active]="active" [type]="SliderButtonType.Next" (click)="move(SliderMoveType.Next)">
-            </sfc-slider-button>
-            <sfc-slider-button [active]="active" [type]="SliderButtonType.Previous" (click)="move(SliderMoveType.Previous)">
-            </sfc-slider-button>
-        </div>
+    <div *ngIf="handlers" class="buttons">
+        <sfc-slider-button [active]="active" [type]="SliderButtonType.Next" (click)="move(SliderMoveType.Next)">
+        </sfc-slider-button>
+        <sfc-slider-button [active]="active" [type]="SliderButtonType.Previous" (click)="move(SliderMoveType.Previous)">
+        </sfc-slider-button>
+    </div>
 
-        <div class="counter" *ngIf="showCount">{{vm.label}}</div>
+    <div class="counter" *ngIf="showCount">{{vm.label}}</div>
 
-        <div class="actions">
-            <sfc-slider-pagination *ngIf="pagination" [count]="vm.count" [index]="vm.index" (selected)="select($event)">
-            </sfc-slider-pagination>
+    <div class="actions">
+        <sfc-slider-pagination *ngIf="pagination" [count]="vm.count" [index]="vm.index" (selected)="select($event)">
+        </sfc-slider-pagination>
 
-            <div *ngIf="isAutomatic" class="automatic" (click)="toggleAutomatic()">
-                <fa-icon [icon]="automaticIcon"></fa-icon>
-            </div>
+        <div *ngIf="isAutomatic && showAutomaticToggle" class="automatic" (click)="toggleAutomatic()">
+            <fa-icon [icon]="automaticIcon"></fa-icon>
         </div>
     </div>
 </div>

@@ -1,19 +1,123 @@
 @import "../../styles/index";
 
-:host {
-  display: inline-block;
-  width: 100%;
-  height: 1px;
-  margin: 0.3em 0;
+@mixin delimeter-color($direction, $slice) {
+  @include theme-value(
+    border-image,
+    linear-gradient(
+      to $direction,
+      rgb(0 0 0 / 0%) 0%,
+        rgb(0 0 0 / 30%) 47%,
+        rgb(0 0 0 / 30%) 53%,
+        rgb(0 0 0 / 30%) 100%
+      )
+      $slice,
+    linear-gradient(
+        to $direction,
+        rgb(255 255 255 / 0%) 0%,
+        rgb(255 255 255 / 40%) 47%,
+        rgb(255 255 255 / 40%) 53%,
+        rgb(255 255 255 / 40%) 100%
+      )
+      $slice
+  );
+}
 
-  @include theme-value(background, $background-gradient-default, $background-gradient-dark);
+:host {
+  padding: 0.3em 0;
+
+  span {
+    @include theme-value(color, $color-default, $color-dark);
+
+    font-size: 0.8em;
+  }
 
   &.vertical {
+    display: inline-table;
+    text-align: center;
     height: 100%;
-    min-height: 1em;
-    width: 1px;
-    margin: 0 0.3em;
+    min-height: 4em;
+    padding: 0 0.3em;
 
-    @include theme-value(background, $background-gradient-vertical-default, $background-gradient-vertical-dark);
+    span {
+      position: relative;
+      display: table-cell;
+      vertical-align: middle;
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        left: 50%;
+        border-left: 1px solid;
+      }
+
+      &::before {
+        bottom: 50%;
+        top: 0;
+        margin-bottom: 0.8em;
+
+        @include delimeter-color(bottom, 1 100%);
+      }
+
+      &::after {
+        top: 50%;
+        bottom: 0;
+        margin-top: 0.8em;
+
+        @include delimeter-color(top, 1 100%);
+      }
+    }
+
+    &.empty {
+      min-height: 2em;
+
+      span {
+        &::before {
+          margin-bottom: 0;
+        }
+
+        &::after {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &.horizontal {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+
+    &::before {
+      @include delimeter-color(right, 100% 1);
+    }
+
+    &::after {
+      @include delimeter-color(left, 100% 1);
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid;
+    }
+
+    &.empty {
+      span {
+        display: none;
+      }
+    }
+
+    &:not(.empty) {
+      &::before {
+        margin-right: 0.5em;
+      }
+
+      &::after {
+        margin-left: 0.5em;
+      }
+    }
   }
 }

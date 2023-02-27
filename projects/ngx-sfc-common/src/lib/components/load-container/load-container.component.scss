@@ -7,18 +7,11 @@
 
   .container {
     height: inherit;
-    background: $color-0;
 
     .content {
       cursor: initial;
       overflow-y: auto;
       height: inherit;
-
-      sfc-load-more-button {
-        ::ng-deep sfc-delimeter {
-          background: $background-gradient-default;
-        }
-      }
 
       .empty {
         display: flex;

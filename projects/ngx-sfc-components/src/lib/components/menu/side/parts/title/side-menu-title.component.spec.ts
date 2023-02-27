@@ -25,21 +25,21 @@ describe('Component: SideMenuTitleComponent', () => {
 
     fit('Should create main elements', () => {
       expect(fixture.nativeElement.querySelector('li')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('span')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('li span')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('sfc-delimeter')).toBeTruthy();
     });
   });
 
   describe('Label', () => {
     fit('Should have default text', () => {
-      expect(fixture.nativeElement.querySelector('span').innerText).toEqual(CommonConstants.EMPTY_STRING);
+      expect(fixture.nativeElement.querySelector('li span').innerText).toEqual(CommonConstants.EMPTY_STRING);
     });
 
     fit('Should have defined text', () => {
       component.label = 'Test label';
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span').innerText).toEqual(component.label.toUpperCase());
+      expect(fixture.nativeElement.querySelector('li span').innerText).toEqual(component.label.toUpperCase());
     });
   });
 

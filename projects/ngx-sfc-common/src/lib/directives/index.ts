@@ -12,3 +12,7 @@ export { DestroyParentDirective } from './destroy-parent/destroy-parent.directiv
 export { DomChangesDirective } from './dom-changes/dom-changes.directive';
 export { ScrollTrackerDirective } from './scroll-tracker/scroll-tracker.directive';
 export { ScrollIntoViewDirective } from './scroll-into-view/scroll-into-view.directive';
+export { ImageLoadDirective } from './image-size/image-load.directive';
+export { ImageSize } from './image-size/services/image-size.model';
+export { ImageLoadEvent } from './image-size/services/image-load.event';
+export { ImageLoadService } from './image-size/services/image-load.service';

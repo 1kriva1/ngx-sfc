@@ -49,14 +49,14 @@ describe('Component: LoadMoreButton', () => {
 
   describe('Label', () => {
     fit("Should have default value", () => {
-      expect(fixture.nativeElement.querySelector('span').innerText).toEqual('SHOW MORE');
+      expect(fixture.nativeElement.querySelector('.button span').innerText).toEqual('SHOW MORE');
     });
 
     fit("Should have defined value", () => {
       component.label = 'Test label';
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span').innerText).toEqual('TEST LABEL');
+      expect(fixture.nativeElement.querySelector('.button span').innerText).toEqual('TEST LABEL');
     });
   });
 

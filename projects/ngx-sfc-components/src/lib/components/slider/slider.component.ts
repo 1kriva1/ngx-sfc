@@ -1,8 +1,7 @@
 import {
-  AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input,
+  AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, HostListener, Input,
   QueryList, ViewChild, ViewChildren
 } from '@angular/core';
-import { getCssLikeValue } from 'ngx-sfc-common';
 import { map, Observable } from 'rxjs';
 import { SliderButtonType } from './parts/button/slider-button-type.enum';
 import { SliderItemComponent } from './parts/item/slider-item.component';
@@ -12,6 +11,7 @@ import { SliderMoveType } from './service/slider/slider-move-type.enum';
 import { SliderService } from './service/slider/slider.service';
 import { SliderType } from './slider-type.enum';
 import { faPauseCircle, faPlayCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ResizeService, ImageLoadService } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-slider',
@@ -21,9 +21,11 @@ import { faPauseCircle, faPlayCircle, IconDefinition } from '@fortawesome/free-s
 })
 export class SliderComponent implements AfterViewInit, AfterViewChecked {
 
-  readonly PAUSE_ICON = faPauseCircle;
+  private readonly SIZE_FACTOR = 0.00225;
 
-  readonly PLAY_ICON = faPlayCircle;
+  private readonly PAUSE_ICON = faPauseCircle;
+
+  private readonly PLAY_ICON = faPlayCircle;
 
   SliderButtonType = SliderButtonType;
 
@@ -41,8 +43,11 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
   @Input()
   pagination: boolean = true;
 
-  @ViewChild('slider', { static: false })
-  private slider!: ElementRef;
+  @Input()
+  handlers: boolean = true;
+
+  @Input()
+  showAutomaticToggle: boolean = true;
 
   @ViewChildren(SliderItemComponent)
   private sliderItems!: QueryList<SliderItemComponent>;
@@ -72,6 +77,15 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
       this.automaticService.start();
   }
 
+  @ViewChild('itemsContainer')
+  private itemsEl!: ElementRef;
+
+  @HostBinding('style.font-size.em')
+  private _sizeFactor: number = 1;
+
+  @HostBinding('style.max-width.px')
+  private _maxWidth!: number;
+
   get isAutomatic() {
     return this.type == SliderType.Automatic;
   }
@@ -82,6 +96,8 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
 
   constructor(public sliderService: SliderService,
     private automaticService: SliderAutomaticService,
+    private resizeService: ResizeService,
+    public imageLoadService: ImageLoadService,
     private changeDetector: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
@@ -92,7 +108,6 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
       map(model => {
         return {
           index: model.index,
-          styles: this.getStyles(model.index, model.count),
           label: `${model.count > 0 ? model.index + 1 : 0} / ${model.count}`,
           count: model.count
         }
@@ -101,22 +116,19 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
 
     if (this.isAutomatic)
       this.automaticService.start();
+
+    this.imageLoadService.load$.subscribe((sizeEvent: any) => {
+      this._sizeFactor = this.getSizeFactor(sizeEvent.offset.height);
+      this._maxWidth = sizeEvent.natural.width;
+    });
+
+    this.resizeService.onResize$.subscribe(() => this._sizeFactor = this.getSizeFactor(this.itemsEl.nativeElement.offsetHeight));
+
+    this.changeDetector.detectChanges();
   }
 
   ngAfterViewChecked() {
     this.changeDetector.detectChanges();
-  }
-
-  getStyles(index: number, count: number) {
-    if (this.slider) {
-      const width = this.slider.nativeElement.offsetWidth;
-      return {
-        width: getCssLikeValue(width * count),
-        left: getCssLikeValue(-width * index)
-      };
-    }
-
-    return null;
   }
 
   move(type: SliderMoveType): void {
@@ -129,5 +141,9 @@ export class SliderComponent implements AfterViewInit, AfterViewChecked {
 
   toggleAutomatic(): void {
     this.automaticService.toggle();
+  }
+
+  private getSizeFactor(value: number) {
+    return value * this.SIZE_FACTOR;
   }
 }
