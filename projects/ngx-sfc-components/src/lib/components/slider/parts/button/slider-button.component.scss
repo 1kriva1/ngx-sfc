@@ -2,32 +2,27 @@
 @use "ngx-sfc-common/styles/index" as *;
 
 :host {
-  $width: 3em;
-  $height: 3.7em;
-
   position: absolute;
-  width: $width;
-  height: $height;
-  top: 50%;
-  margin-top: math.div(-$width, 2);
-  line-height: $height;
+  width: 3em;
+  top: 45%;
+  line-height: 3.7em;
   text-align: center;
   cursor: pointer;
   background: $color-shadow-1;
   transition: all 0.1s ease;
+  z-index: 9999;
+  border-radius: 0.43em;
 
   &:hover {
     background: $color-shadow-4;
   }
 
   &.next {
-    right: -$width;
-    border-radius: 0.43em 0 0 0.43em;
+    right: 0;
   }
 
   &.previous {
-    left: -$width;
-    border-radius: 0 0.43em 0.43em 0;
+    left: 0;
   }
 
   &.active {

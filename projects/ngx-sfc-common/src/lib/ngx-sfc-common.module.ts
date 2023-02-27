@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   DOCUMENT_PROVIDERS,
@@ -16,7 +15,8 @@ import {
   DestroyParentDirective,
   DomChangesDirective,
   ScrollTrackerDirective,
-  ScrollIntoViewDirective
+  ScrollIntoViewDirective,
+  ImageLoadDirective
 } from './directives';
 import { SwitchMultiCasePipe } from './pipes';
 import {
@@ -57,6 +57,7 @@ import {
     DomChangesDirective,
     ScrollTrackerDirective,
     ScrollIntoViewDirective,
+    ImageLoadDirective,
     // components
     ButtonComponent,
     TooltipComponent,
@@ -83,11 +84,10 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // pipes
-    SwitchMultiCasePipe    
+    SwitchMultiCasePipe        
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FontAwesomeModule
   ],
   exports: [
@@ -102,6 +102,7 @@ import {
     DomChangesDirective,
     ScrollTrackerDirective,
     ScrollIntoViewDirective,
+    ImageLoadDirective,
     // components
     ButtonComponent,
     TooltipComponent,
@@ -128,7 +129,7 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // pipes
-    SwitchMultiCasePipe    
+    SwitchMultiCasePipe        
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

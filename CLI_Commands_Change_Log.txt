@@ -70,6 +70,10 @@ ng generate directive directives/component-size --project ngx-sfc-common --skip-
 
 ng generate class directives/index --project ngx-sfc-common --skip-tests true -d
 
+ng generate directive directives/image-size --project ngx-sfc-common --skip-tests false --export true --flat false --dry-run
+
+ng generate service directives/image-size/services --project ngx-sfc-common --skip-tests false --flat false --dry-run
+
 Components:
 
 ng generate component components/button --project ngx-sfc-common --export true --flat false --style scss -d
@@ -347,6 +351,12 @@ APPLICATION:
 
 ng new sfc -p sfc --routing true --skip-install --style scss
 
+ng generate module share --dry-run
+
+ng generate component share/components/logo --export true --flat false --style scss --skip-tests false --dry-run
+
+ng generate component features/identity/pages/registration/registration.page --export true --flat true --style scss --skip-tests false --dry-run
+
 Demo:
 
 ng generate component components/button-app --project sfc-components-app --flat false --style none --skip-tests true -d
@@ -368,3 +378,26 @@ cd ../../
 npm run build:inputs
 cd dist/ngx-sfc-inputs
 npm publish
+
+NPM Link (C:\Users\andriik\AppData\Roaming\npm\node_modules):
+----------------------------------------------------------
+source:
+npm run build:common
+cd dist/ngx-sfc-common
+npm link
+cd ../../
+
+consumer:
+npm link ngx-sfc-common
+----------------------------------------------------------
+source:
+npm run build:components
+cd dist/ngx-sfc-components
+npm link
+cd ../../
+
+consumer:
+npm link ngx-sfc-components
+
+npm link ngx-sfc-common ngx-sfc-components
+----------------------------------------------------------

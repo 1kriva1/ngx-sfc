@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { getCssLikeValue } from 'ngx-sfc-common';
+import { CommonConstants, ImageLoadService, ShowHideElementDirective } from 'ngx-sfc-common';
 import { of } from 'rxjs';
 import { SliderButtonType } from './parts/button/slider-button-type.enum';
 import { SliderButtonComponent } from './parts/button/slider-button.component';
@@ -18,22 +18,28 @@ describe('Component: SliderComponent', () => {
   let fixture: ComponentFixture<SliderComponent>;
   let sliderServiceSpy: jasmine.SpyObj<SliderService>;
   let sliderAutomaticServiceSpy: jasmine.SpyObj<SliderAutomaticService>;
+  let imageLoadServiceSpy: jasmine.SpyObj<ImageLoadService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [SliderButtonComponent, SliderItemComponent, SliderPaginationComponent, SliderComponent]
+      declarations: [ShowHideElementDirective, SliderButtonComponent, SliderItemComponent, SliderPaginationComponent, SliderComponent]
     }).compileComponents();
 
     sliderServiceSpy = jasmine.createSpyObj('SliderService', ['move', 'select', 'init']);
     sliderServiceSpy.model$ = of({ index: 0, count: 0 });
+
     sliderAutomaticServiceSpy = jasmine.createSpyObj('SliderAutomaticService', ['start', 'toggle', 'stop']);
+
+    imageLoadServiceSpy = jasmine.createSpyObj('ImageLoadService', ['load']);
+    imageLoadServiceSpy.load$ = of();
 
     TestBed.overrideComponent(SliderComponent, {
       set: {
         providers: [
           { provide: SliderService, useValue: sliderServiceSpy },
-          { provide: SliderAutomaticService, useValue: sliderAutomaticServiceSpy }
+          { provide: SliderAutomaticService, useValue: sliderAutomaticServiceSpy },
+          { provide: ImageLoadService, useValue: imageLoadServiceSpy }
         ]
       }
     })
@@ -52,36 +58,8 @@ describe('Component: SliderComponent', () => {
 
     fit('Should create main elements', () => {
       expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('div.slider')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('ul')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('div.buttons')).toBeTruthy();
-      expect(fixture.nativeElement.querySelectorAll('div.buttons sfc-slider-button').length).toEqual(2);
+      expect(fixture.nativeElement.querySelector('div.items')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('div.actions')).toBeTruthy();
-    });
-
-    fit('Should have default styles for items container', () => {
-      component.ngAfterViewInit();
-      fixture.detectChanges();
-
-      const itemsContainerEl = fixture.debugElement.query(By.css('ul'));
-
-      expect(itemsContainerEl.styles['width']).toEqual(getCssLikeValue(0));
-
-      expect(itemsContainerEl.styles['left']).toEqual(getCssLikeValue(0));
-    });
-
-    fit('Should have styles related to items count and index', () => {
-      sliderServiceSpy.model$ = of({ index: 1, count: 2 });
-      fixture.detectChanges();
-
-      component.ngAfterViewInit();
-      fixture.detectChanges();
-
-      const itemsContainerEl = fixture.debugElement.query(By.css('ul'));
-
-      expect(itemsContainerEl.styles['width']).toEqual(getCssLikeValue(1200));
-
-      expect(itemsContainerEl.styles['left']).toEqual(getCssLikeValue(-600));
     });
 
     fit('Should call init method of Slider service', () => {
@@ -90,6 +68,41 @@ describe('Component: SliderComponent', () => {
 
     fit('Should not call start method of AutomaticSlider service', () => {
       expect(sliderAutomaticServiceSpy.start).not.toHaveBeenCalled();
+    });
+
+    fit('Should have default font-size style', () => {
+      expect(fixture.nativeElement.style.fontSize).toEqual('1em');
+    });
+
+    fit('Should have font-size style  from responsive images', () => {
+      imageLoadServiceSpy.load$ = of({ natural: { height: 1, width: 1 }, offset: { height: 10, width: 1 } });
+      component.ngAfterViewInit();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.style.fontSize).toEqual('0.0225em');
+    });
+
+    fit('Should change font-size style on resize event', () => {
+      window.dispatchEvent(new Event('resize'));
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.style.fontSize).toEqual('0em');
+    });
+
+    fit('Should have default max-width style', () => {
+      imageLoadServiceSpy.load$ = of({ natural: { height: 1, width: 100 }, offset: { height: 1, width: 1 } });
+      component.ngAfterViewInit();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.style.maxWidth).toEqual('100px');
+    });
+
+    fit('Should have max-width style from responsive images', () => {
+      imageLoadServiceSpy.load({ natural: { height: 1, width: 1 }, offset: { height: 1, width: 1 } });
+      component.ngAfterViewInit();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.style.maxWidth).toEqual(CommonConstants.EMPTY_STRING);
     });
   });
 
@@ -118,6 +131,19 @@ describe('Component: SliderComponent', () => {
   });
 
   describe('Buttons', () => {
+    fit('Should exist by default', () => {
+      expect(fixture.nativeElement.querySelector('div.buttons')).toBeTruthy();
+      expect(fixture.nativeElement.querySelectorAll('div.buttons sfc-slider-button').length).toEqual(2);
+    });
+
+    fit('Should not exist ', () => {
+      component.handlers = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('div.buttons')).toBeNull();
+      expect(fixture.nativeElement.querySelectorAll('div.buttons sfc-slider-button').length).toEqual(0);
+    });
+
     fit('Should have defined input values by default', () => {
       const buttonELts = fixture.debugElement.queryAll(By.css('sfc-slider-button'));
 
@@ -242,6 +268,14 @@ describe('Component: SliderComponent', () => {
       expect(fixture.nativeElement.querySelector('div.automatic')).toBeTruthy();
     });
 
+    fit('Should not exist automatic handler', () => {
+      component.showAutomaticToggle = false;
+      component.type = SliderType.Automatic;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('div.automatic')).toBeNull();
+    });
+
     fit('Should have pause icon', () => {
       component.type = SliderType.Automatic;
       fixture.detectChanges();
@@ -276,7 +310,7 @@ describe('Component: SliderComponent', () => {
       fixture.detectChanges();
 
       expect(sliderAutomaticServiceSpy.stop).toHaveBeenCalledTimes(1);
-    });    
+    });
 
     fit('Should call start method of AutomaticSlider service', () => {
       component.type = SliderType.Automatic;

@@ -1,50 +1,40 @@
 @use "ngx-sfc-common/styles/index" as *;
 
 :host {
+  display: inline-block;
+  width: 100%;
+
   .container {
-    width: 37.5em;
-    height: 25em;
+    position: relative;
     color: $color-0;
 
-    .slider {
-      height: inherit;
-      position: relative;
-      overflow: hidden;
-      background: $color-9;
+    .counter {
+      top: 10%;
+      right: 6%;
+      position: absolute;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .actions {
+      cursor: pointer;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: flex-end;
+      position: absolute;
+      top: 85%;
+      align-items: center;
+      width: 100%;
 
-      > ul {
-        position: absolute;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        height: inherit;
-        transition: all 0.3s cubic-bezier(1, 0.01, 0.32, 1);
+      .automatic {
+        margin-top: 0.3em;
       }
+    }
 
-      .counter {
-        top: 10%;
-        right: 6%;
-        position: absolute;
-        font-weight: bold;
-        user-select: none;
-      }
-
-      .actions {
-        margin-bottom: 1em;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: relative;
-        align-items: center;
-
-        .automatic {
-          margin-top: 0.3em;
-        }
-      }
+    .buttons,
+    .counter,
+    .actions {
+      z-index: 2;
     }
   }
 }

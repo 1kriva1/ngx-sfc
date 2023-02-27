@@ -1,7 +1,9 @@
-<li>
-    <div>
+<div class="container">
+    <div class="title">
         <h2>{{model.title}}</h2>
         <span>{{model.subTitle}}</span>
     </div>
-    <img [src]="model.imageSrc">
-</li>
+    <div class="image">
+        <img #image [src]="model.imageSrc" sfcImageLoad>
+    </div>   
+</div>

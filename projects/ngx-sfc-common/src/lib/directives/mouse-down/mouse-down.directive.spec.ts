@@ -16,7 +16,7 @@ class TestMouseDownDirectiveComponent {
     click = (event: MouseEvent) => { };
 }
 
-describe('Directive: MouseDownDirective', () => {
+describe('Directive: MouseDown', () => {
 
     let component: TestMouseDownDirectiveComponent;
     let fixture: ComponentFixture<TestMouseDownDirectiveComponent>;

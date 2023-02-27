@@ -12,7 +12,7 @@
       justify-content: center;
       flex-wrap: wrap;
       cursor: pointer;
-      color: $color-default;
+      @include theme-value(color, $color-default, $color-dark);
       transition: color 0.5s;
       padding: 0.5em 0 1em;
 
