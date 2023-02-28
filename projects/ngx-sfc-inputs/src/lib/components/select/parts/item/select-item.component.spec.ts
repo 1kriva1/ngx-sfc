@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CheckmarkComponent, DelimeterComponent, MouseDownDirective, UIClass } from 'ngx-sfc-common';
+import { CheckmarkComponent, DelimeterComponent, MouseDownDirective, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
 import { SelectItemComponent } from './select-item.component';
 import { SelectItemConstants } from './select-item.constants';
 
@@ -12,7 +12,7 @@ describe('Component: SelectItem', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [MouseDownDirective, DelimeterComponent, CheckmarkComponent, SelectItemComponent]
+      declarations: [ShowHideElementDirective, MouseDownDirective, DelimeterComponent, CheckmarkComponent, SelectItemComponent]
     }).compileComponents();
   });
 

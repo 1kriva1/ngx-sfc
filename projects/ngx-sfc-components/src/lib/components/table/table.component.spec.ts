@@ -28,7 +28,7 @@ describe('Component: Table', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [ColumnsToggleComponent, ToggleSwitcherComponent, PaginationComponent, ShowHideElementDirective,
+            declarations: [ShowHideElementDirective, ColumnsToggleComponent, ToggleSwitcherComponent, PaginationComponent, ShowHideElementDirective,
                 DelimeterComponent, SortingComponent, TemplateContentComponent, DefaultTableColumnComponent, SelectableTableColumnComponent,
                 CheckmarkComponent, DefaultTableRowComponent, DefaultTableCardComponent, TableComponent],
             providers: [

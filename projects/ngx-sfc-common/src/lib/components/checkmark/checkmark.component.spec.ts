@@ -4,6 +4,8 @@ import { CheckmarkComponent } from './checkmark.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckmarkType } from './checkmark-type.enum';
+import { ShowHideElementDirective } from '../../directives';
+import { UIConstants } from '../../constants';
 
 describe('Component: CheckmarkComponent', () => {
   let component: CheckmarkComponent;
@@ -12,7 +14,7 @@ describe('Component: CheckmarkComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [CheckmarkComponent]
+      declarations: [ShowHideElementDirective, CheckmarkComponent]
     }).compileComponents();
   });
 
@@ -78,26 +80,26 @@ describe('Component: CheckmarkComponent', () => {
   });
 
   describe('Icon', () => {
-    fit("Should not exist, when showNotActive is false", () => {
+    fit("Should be hidden, when showNotActive is false", () => {
       component.showNotActive = false;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeNull();
+      expect(fixture.nativeElement.querySelector('fa-icon').style.visibility).toEqual(UIConstants.CSS_VISIBILITY_HIDDEN);
     });
 
-    fit("Should exist, when showNotActive is false, but active", () => {
+    fit("Should visible, when showNotActive is false, but active", () => {
       component.showNotActive = false;
       component.active = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon').style.visibility).toEqual(UIConstants.CSS_VISIBILITY_VISIBLE);
     });
 
-    fit("Should exist, when showNotActive is true", () => {
+    fit("Should visible, when showNotActive is true", () => {
       component.showNotActive = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('fa-icon svg')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('fa-icon').style.visibility).toEqual(UIConstants.CSS_VISIBILITY_VISIBLE);
     });
 
     fit("Should have default icon", () => {

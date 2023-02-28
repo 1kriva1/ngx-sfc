@@ -1,4 +1,5 @@
 export enum CheckmarkType {
     Square = 'square',
-    Rounded = 'rounded'
+    Rounded = 'rounded',
+    Circle = 'circle'
 }

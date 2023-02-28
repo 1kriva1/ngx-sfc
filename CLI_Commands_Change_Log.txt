@@ -379,6 +379,8 @@ npm run build:inputs
 cd dist/ngx-sfc-inputs
 npm publish
 
+cd ../../
+
 NPM Link (C:\Users\andriik\AppData\Roaming\npm\node_modules):
 ----------------------------------------------------------
 source:
@@ -400,4 +402,15 @@ consumer:
 npm link ngx-sfc-components
 
 npm link ngx-sfc-common ngx-sfc-components
+----------------------------------------------------------
+source:
+npm run build:inputs
+cd dist/ngx-sfc-inputs
+npm link
+cd ../../
+
+consumer:
+npm link ngx-sfc-inputs
+
+npm link ngx-sfc-common ngx-sfc-components ngx-sfc-inputs
 ----------------------------------------------------------
