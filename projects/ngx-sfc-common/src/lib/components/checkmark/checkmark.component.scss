@@ -7,7 +7,8 @@
 
   .check {
     border: 0.125em solid;
-    background:transparent;
+    background: transparent;
+
     @include theme-value(border-color, $color-default, $color-dark);
     @include square-size(1em);
 
