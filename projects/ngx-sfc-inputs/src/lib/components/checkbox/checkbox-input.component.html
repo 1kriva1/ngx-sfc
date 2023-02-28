@@ -1,13 +1,14 @@
 <div class="container">
     <input sfcInput id="{{inputId}}" type="checkbox" [disabled]="disabled" [checked]="value" [value]="value"
         (input)="onChange($any($event.target).checked)" style="display: none;" />
-    <div class="content">
-        <label for="{{inputId}}" *ngIf="labelValue">{{labelValue}}</label>
+    <div class="content" [class.side-label]="sideLabel">
+        <label tabindex="0" for="{{inputId}}" *ngIf="label">{{label}}</label>
         <div class="component">
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
             <sfc-checkmark [type]="checkmarkType" [disabled]="disabled" [showNotActive]="false"
                 [active]="value || false" (click)="onChange(!value)"></sfc-checkmark>
+            <label tabindex="0" *ngIf="sideLabel" for="{{inputId}}">{{sideLabel}}</label>
         </div>
-        <span class="helper-text">{{helperTextValue}}</span>
-    </div>    
+        <span [sfcShowHideElement]="!!helperTextValue" class="helper-text">{{helperTextValue}}</span>
+    </div>
 </div>

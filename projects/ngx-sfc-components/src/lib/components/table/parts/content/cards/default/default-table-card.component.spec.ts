@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CheckmarkComponent, UIClass } from 'ngx-sfc-common';
+import { CheckmarkComponent, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
 import { TableColumnType } from '../../../columns/table-column-type.enum';
 import { DefaultTableCardComponent } from './default-table-card.component';
 
@@ -12,7 +12,7 @@ describe('Component: DefaultTableCard', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [CheckmarkComponent, DefaultTableCardComponent]
+      declarations: [ShowHideElementDirective, CheckmarkComponent, DefaultTableCardComponent]
     }).compileComponents();
   });
 

@@ -6,9 +6,8 @@
   @include theme-value(color, $color-default, $color-dark);
 
   .check {
-    border: 0.18em solid;
-
-    @include theme-value(background, $color-0, transparent);
+    border: 0.125em solid;
+    background:transparent;
     @include theme-value(border-color, $color-default, $color-dark);
     @include square-size(1em);
 
@@ -63,9 +62,15 @@
     }
   }
 
-  &.rounded {
+  &.circle {
     .check {
       border-radius: 50%;
+    }
+  }
+
+  &.rounded {
+    .check {
+      border-radius: 15%;
     }
   }
 

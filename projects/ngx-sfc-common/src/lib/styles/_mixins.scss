@@ -23,6 +23,25 @@
   }
 }
 
+@mixin center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@mixin center-wrap() {
+  @include center;
+
+  flex-wrap: wrap;
+}
+
+@mixin not-first-not-last {
+  &:not(:first-child, :last-child) {
+    @content;
+  }
+}
+
 @mixin scroll {
   ::ng-deep ::-webkit-scrollbar {
     @include square-size(0.375em);

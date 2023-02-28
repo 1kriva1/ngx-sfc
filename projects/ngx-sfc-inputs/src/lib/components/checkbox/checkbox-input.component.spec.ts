@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CheckmarkComponent, CheckmarkType, CommonConstants } from 'ngx-sfc-common';
+import { CheckmarkComponent, CheckmarkType, CommonConstants, ShowHideElementDirective } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { CheckboxInputComponent } from './checkbox-input.component';
@@ -14,7 +14,7 @@ describe('Component: CheckboxInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [CheckmarkComponent, InputReferenceDirective, CheckboxInputComponent]
+      declarations: [ShowHideElementDirective, CheckmarkComponent, InputReferenceDirective, CheckboxInputComponent]
     }).compileComponents();
   });
 
@@ -159,34 +159,76 @@ describe('Component: CheckboxInput', () => {
   });
 
   describe('Label', () => {
-    fit("Should not exist", () => {
-      expect(fixture.nativeElement.querySelector('label')).toBeNull();
+    describe('Common', () => {
+      fit("Should not exist", () => {
+        expect(fixture.nativeElement.querySelector('label')).toBeNull();
+      });
+
+      fit("Should have defined value", () => {
+        const labelAssertValue = 'test label';
+        component.label = labelAssertValue;
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
+      });
+
+      fit("Should have tabindex", () => {
+        const labelAssertValue = 'test label';
+        component.label = labelAssertValue;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('label')).attributes['tabindex']).toEqual('0');
+      });
+
+      fit("Should be linked to input element", () => {
+        component.label = 'test label';
+        fixture.detectChanges();
+
+        const inputEl = fixture.nativeElement.querySelector('input[type=checkbox]');
+        expect(inputEl.labels).toBeDefined();
+        expect(inputEl.labels.length).toEqual(1);
+        expect(inputEl.labels[0].htmlFor).toEqual(inputEl.id);
+      });
     });
 
-    fit("Should have defined value", () => {
-      const labelAssertValue = 'test label';
-      component.label = labelAssertValue;
-      fixture.detectChanges();
+    describe('Side', () => {
+      fit("Should not exist", () => {
+        expect(fixture.nativeElement.querySelector('label')).toBeNull();
+      });
 
-      expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
-    });
+      fit("Should have defined value", () => {
+        const labelAssertValue = 'test label';
+        component.sideLabel = labelAssertValue;
+        fixture.detectChanges();
 
-    fit("Should have defined placeholder value", () => {
-      const labelAssertValue = 'test placeholder';
-      component.placeholder = labelAssertValue;
-      fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
+      });
 
-      expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
-    });
+      fit("Should have tabindex", () => {
+        const labelAssertValue = 'test label';
+        component.sideLabel = labelAssertValue;
+        fixture.detectChanges();
 
-    fit("Should be linked to input element", () => {
-      component.label = 'test label';
-      fixture.detectChanges();
+        expect(fixture.debugElement.query(By.css('label')).attributes['tabindex']).toEqual('0');
+      });
 
-      const inputEl = fixture.nativeElement.querySelector('input[type=checkbox]');
-      expect(inputEl.labels).toBeDefined();
-      expect(inputEl.labels.length).toEqual(1);
-      expect(inputEl.labels[0].htmlFor).toEqual(inputEl.id);
+      fit("Should have side-label class", () => {
+        const labelAssertValue = 'test label';
+        component.sideLabel = labelAssertValue;
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.content').className).toContain('side-label');
+      });
+
+      fit("Should be linked to input element", () => {
+        component.sideLabel = 'test label';
+        fixture.detectChanges();
+
+        const inputEl = fixture.nativeElement.querySelector('input[type=checkbox]');
+        expect(inputEl.labels).toBeDefined();
+        expect(inputEl.labels.length).toEqual(1);
+        expect(inputEl.labels[0].htmlFor).toEqual(inputEl.id);
+      });
     });
   });
 

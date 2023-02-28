@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CheckmarkComponent } from 'ngx-sfc-common';
+import { CheckmarkComponent, ShowHideElementDirective } from 'ngx-sfc-common';
 import {
   MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective, LoadContainerComponent,
   ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent, ILoadMoreModel, ILoadMoreParameters, CommonConstants, UIClass
@@ -25,7 +25,7 @@ describe('Component: SelectInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [InputReferenceDirective, MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective,
+      declarations: [ShowHideElementDirective, InputReferenceDirective, MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective,
         LoadContainerComponent, ScrollTrackerDirective, ScrollIntoViewDirective, CheckmarkComponent, DelimeterComponent, SelectItemComponent,
         SelectInputComponent]
     }).compileComponents();
@@ -551,7 +551,7 @@ describe('Component: SelectInput', () => {
       fit('Should show group without group items', () => {
         component.showDefaultItem = false;
         component.items = [];
-        debugger;
+
         initData(true, [{ value: 'Group test', group: true, groupKey: 2 }, { key: 1, groupKey: 1, value: 'Test1' }, { key: 1, groupKey: 1, value: 'Test2' }]);
 
         expect(fixture.debugElement.queryAll(By.css('sfc-select-item')).length).toEqual(1);
