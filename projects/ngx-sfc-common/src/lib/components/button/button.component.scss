@@ -26,8 +26,7 @@
 
     @include theme-value(color, $color-default, $color-dark);
 
-    transition:
-      color $transition-duration-default $transition-timing-function-default,
+    transition: color $transition-duration-default $transition-timing-function-default,
       border-color $transition-duration-default $transition-timing-function-default,
       background $transition-duration-default $transition-timing-function-default;
 
@@ -38,6 +37,8 @@
     .text {
       padding: 3px;
       white-space: initial;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
       &:empty {
         display: none;
