@@ -1,6 +1,6 @@
 {
   "name": "ngx-sfc-inputs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Angular inputs library for SFC project",
   "keywords": [
     "Street Football Club",
@@ -28,7 +28,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
-    "ngx-sfc-common": "^0.0.12"
+    "ngx-sfc-common": "^0.0.14"
   },
   "dependencies": {
     "tslib": "^2.3.0"

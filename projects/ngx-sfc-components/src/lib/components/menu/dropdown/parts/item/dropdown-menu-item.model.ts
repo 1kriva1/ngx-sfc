@@ -6,5 +6,6 @@ export interface IDropdownMenuItemModel {
     image?: string;
     delimeter?: boolean;
     active?: boolean;
+    value?: any;
     click?: (item: IDropdownMenuItemModel) => void;
 }
