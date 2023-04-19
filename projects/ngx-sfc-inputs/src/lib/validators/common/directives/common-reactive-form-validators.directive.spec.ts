@@ -1,13 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
-import { equalOrInclude, maxLength, minLength } from "../common.validators";
+import { equalOrInclude, match, maxLength, minLength } from "../common.validators";
 import { TagsInputComponent } from "../../../components/tags/tags-input.component";
 
 @Component({
     template: `
         <form [formGroup]="form">
-            <sfc-tags-input id="demo-input-field" formControlName="fileField"></sfc-tags-input>
+            <sfc-tags-input id="demo-input-field" formControlName="formField"></sfc-tags-input>
+            <sfc-tags-input id="demo-input-compare-field" formControlName="compareField"></sfc-tags-input>
         </form>
         `
 })
@@ -18,7 +19,8 @@ export class CommonReactiveFormValidatorsTestComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.fb.group({
-            fileField: [null, [equalOrInclude(['a', 'b', 'c']), maxLength(3), minLength(1)]]
+            formField: [null, [equalOrInclude(['a', 'b', 'c']), maxLength(3), minLength(1), match('compareField')]],
+            compareField: [null]
         });
     }
 }
@@ -26,7 +28,7 @@ export class CommonReactiveFormValidatorsTestComponent implements OnInit {
 describe('Validators-ReactiveForm: Common', () => {
     let component: CommonReactiveFormValidatorsTestComponent;
     let fixture: ComponentFixture<CommonReactiveFormValidatorsTestComponent>;
-    let fileField: AbstractControl;
+    let formField: AbstractControl, compareField: AbstractControl;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -39,24 +41,21 @@ describe('Validators-ReactiveForm: Common', () => {
         fixture = TestBed.createComponent(CommonReactiveFormValidatorsTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        fileField = component.form.controls['fileField'];
+        formField = component.form.controls['formField'];
+        compareField = component.form.controls['compareField'];
     });
 
     describe('EqualOrInclude', () => {
         fit('Should be invalid', () => {
-            fileField.setValue('d');
+            formField.setValue('d');
 
-            expect(component.form.valid).toBeFalsy();
-            expect(fileField.valid).toBeFalsy();
-            expect((fileField.errors as ValidationErrors)['sfcEqualOrInclude']).toBeTrue();
+            expect((formField.errors as ValidationErrors)['sfcEqualOrInclude']).toBeTrue();
         });
 
         fit('Should be valid', () => {
-            fileField.setValue('a');
+            formField.setValue('a');
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect((formField.errors as ValidationErrors)['sfcEqualOrInclude']).toBeUndefined();
         });
     });
 
@@ -65,35 +64,27 @@ describe('Validators-ReactiveForm: Common', () => {
             const value = ['a', 'b', 'c', 'd'],
                 expectedResult = { requiredLength: 3, actualLength: 4, value: value };
 
-            fileField.setValue(value);
+            formField.setValue(value);
 
-            expect(component.form.valid).toBeFalsy();
-            expect(fileField.valid).toBeFalsy();
-            expect((fileField.errors as ValidationErrors)['sfcMaxLength']).toEqual(expectedResult);
+            expect((formField.errors as ValidationErrors)['sfcMaxLength']).toEqual(expectedResult);
         });
 
         fit('Should be valid', () => {
-            fileField.setValue(['a', 'b', 'c']);
+            formField.setValue(['a', 'b', 'c']);
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect((formField.errors as ValidationErrors)['sfcMaxLength']).toBeUndefined();
         });
 
         fit('Should be valid, when value is not array', () => {
-            fileField.setValue('a');
+            formField.setValue('a');
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect((formField.errors as ValidationErrors)['sfcMaxLength']).toBeUndefined();
         });
 
         fit('Should be valid, when value is null', () => {
-            fileField.setValue(null);
+            formField.setValue(null);
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect(formField.errors).toBeNull();
         });
     });
 
@@ -102,35 +93,45 @@ describe('Validators-ReactiveForm: Common', () => {
             const value: any[] = [],
                 expectedResult = { requiredLength: 1, actualLength: 0, value: value };
 
-            fileField.setValue(value);
+            formField.setValue(value);
 
-            expect(component.form.valid).toBeFalsy();
-            expect(fileField.valid).toBeFalsy();
-            expect((fileField.errors as ValidationErrors)['sfcMinLength']).toEqual(expectedResult);
+            expect((formField.errors as ValidationErrors)['sfcMinLength']).toEqual(expectedResult);
         });
 
         fit('Should be valid', () => {
-            fileField.setValue(['a']);
+            formField.setValue(['a']);
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect((formField.errors as ValidationErrors)['sfcMinLength']).toBeUndefined();
         });
 
         fit('Should be valid, when value is not array', () => {
-            fileField.setValue('a');
+            formField.setValue('a');
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect((formField.errors as ValidationErrors)['sfcMinLength']).toBeUndefined();
         });
 
         fit('Should be valid, when value is null', () => {
-            fileField.setValue(null);
+            formField.setValue(null);
 
-            expect(component.form.valid).toBeTruthy();
-            expect(fileField.valid).toBeTruthy();
-            expect(fileField.errors).toBeNull();
+            expect(formField.errors).toBeNull();
+        });
+    });
+
+    describe('Match', () => {
+        fit('Should be invalid', () => {
+            formField.setValue('123');
+            compareField.setValue('12');
+
+            expect(component.form.valid).toBeFalsy();
+            expect(formField.valid).toBeFalsy();
+            expect((formField.errors as ValidationErrors)['sfcMatch']).toBeTrue();
+        });
+
+        fit('Should be valid', () => {
+            compareField.setValue('123');
+            formField.setValue('123');
+
+            expect((formField.errors as ValidationErrors)['sfcMatch']).toBeUndefined();
         });
     });
 });

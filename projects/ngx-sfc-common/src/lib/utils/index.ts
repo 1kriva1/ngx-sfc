@@ -7,7 +7,8 @@ export {
     mergeDeep,
     nameof,
     isNumeric,
-    isChromeBrowser
+    isChromeBrowser,
+    isEmail
 } from './common.utils'
 
 export {

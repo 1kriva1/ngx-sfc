@@ -1,4 +1,4 @@
-import { ValidatorFn } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { isDefined } from "ngx-sfc-common";
 import { validation } from "../_validators";
 
@@ -76,7 +76,26 @@ export function minLength(minLength: number): ValidatorFn {
     return validation(validatorFn);
 }
 
-function equalOrIncludeArrayOfValues(element: any, includes: Array<any>) {
+export function match(matchTo: string, reverse?: boolean): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        if (control.parent && reverse) {
+            const matchControl = (control.parent?.controls as any)[matchTo] as AbstractControl;
+
+            if (matchControl)
+                matchControl.updateValueAndValidity();
+
+            return null;
+        }
+
+        return !!control.parent &&
+            !!control.parent.value &&
+            control.value === (control.parent?.controls as any)[matchTo]?.value
+            ? null
+            : { sfcMatch: true };
+    }
+}
+
+function equalOrIncludeArrayOfValues(element: any, includes: Array<any>): ValidationErrors | null {
     if (element instanceof Object) {
         let found: boolean = false;
         for (let index = 0; index < includes.length; index++) {

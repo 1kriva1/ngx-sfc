@@ -3,12 +3,20 @@
 
 :host {
   .container {
-    .password-icon {
-      @include action-icon-right;
-    }
+    .content {
+      .password-icon {
+        @include action-icon-right;
 
-    .right-side-info {
-      @include right-side-info;
+        z-index: 9999;
+      }
+
+      .input {
+        position: relative;
+      }
+
+      .right-side-info {
+        @include right-side-info;
+      }
     }
   }
 }

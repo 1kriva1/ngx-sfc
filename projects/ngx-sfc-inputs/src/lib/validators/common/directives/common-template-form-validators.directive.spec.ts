@@ -8,17 +8,22 @@ import { MaxLengthValidatorDirective } from "./max-length-validator.directive";
 import { MinLengthValidatorDirective } from "./min-length-validator.directive";
 import { TagsInputComponent } from "../../../components/tags/tags-input.component";
 import { TagsChipComponent } from "../../../components/tags/parts/chip/tags-chip.component";
-import { CloseComponent } from "ngx-sfc-common";
+import { CloseComponent, ShowHideElementDirective } from "ngx-sfc-common";
+import { TextInputComponent } from "../../../components/text/text-input.component";
+import { MatchValidatorDirective } from "./match-validator.directive";
 
 @Component({
     template: `
       <form>
-        <sfc-tags-input id="input" name="input" ngModel [sfcEqualOrInclude]="['a', 'b', 'c']" [sfcMaxLength]="3" [sfcMinLength]="1">
+        <sfc-tags-input id="input" name="input" [(ngModel)]="tags" [sfcEqualOrInclude]="['a', 'b', 'c']" [sfcMaxLength]="3" [sfcMinLength]="1">
         </sfc-tags-input>
+        <sfc-text-input id="compareValue" name="compareValue" ngModel></sfc-text-input>
+        <sfc-text-input id="primaryValue" name="primaryValue" ngModel [sfcMatch]="'compareValue'"></sfc-text-input>
       </form>
     `
 })
 class TagsInputFormTemplateTestComponent {
+    public tags: [] = [];
 }
 
 describe('Validators-TemplateForm: Common', () => {
@@ -30,14 +35,14 @@ describe('Validators-TemplateForm: Common', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule, FontAwesomeModule, ReactiveFormsModule],
-            declarations: [EqualOrIncludeValidatorDirective, MaxLengthValidatorDirective, MinLengthValidatorDirective,
-                TagsInputComponent, TagsChipComponent, CloseComponent, TagsInputFormTemplateTestComponent],
+            declarations: [EqualOrIncludeValidatorDirective, MaxLengthValidatorDirective, MinLengthValidatorDirective, MatchValidatorDirective,
+                TagsInputComponent, TagsChipComponent, CloseComponent, ShowHideElementDirective, TextInputComponent, TagsInputFormTemplateTestComponent],
         }).compileComponents().then(() => {
             fixture = TestBed.createComponent(TagsInputFormTemplateTestComponent);
             el = fixture.debugElement;
             fixture.detectChanges();
 
-            debugEl = el.query(By.css('input[type="text"]'));
+            debugEl = el.query(By.css('sfc-tags-input input[type="text"]'));
             form = el.children[0].injector.get(NgForm);
         });
     }));
@@ -52,7 +57,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcEqualOrInclude')).toBeTrue();
             expect((templateInputControl?.errors as ValidationErrors)['sfcEqualOrInclude']).toBeTrue();
             expect(templateInputControl?.valid).toBeFalse();
-            expect(form.control.valid).toBeFalse();
         }));
 
         fit('Should be valid', (() => {
@@ -64,7 +68,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcEqualOrInclude')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         }));
     });
 
@@ -80,7 +83,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMaxLength')).toBeTrue();
             expect((templateInputControl?.errors as ValidationErrors)['sfcMaxLength']).toEqual(expectedResult);
             expect(templateInputControl?.valid).toBeFalse();
-            expect(form.control.valid).toBeFalse();
         }));
 
         fit('Should be valid', (() => {
@@ -92,7 +94,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMaxLength')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         }));
 
         fit('Should be valid, when value is not array', () => {
@@ -104,7 +105,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMaxLength')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         });
 
         fit('Should be valid, when value is null', () => {
@@ -116,7 +116,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMaxLength')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         });
     });
 
@@ -132,7 +131,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMinLength')).toBeTrue();
             expect((templateInputControl?.errors as ValidationErrors)['sfcMinLength']).toEqual(expectedResult);
             expect(templateInputControl?.valid).toBeFalse();
-            expect(form.control.valid).toBeFalse();
         }));
 
         fit('Should be valid', (() => {
@@ -144,7 +142,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMinLength')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         }));
 
         fit('Should be valid, when value is not array', () => {
@@ -156,7 +153,6 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMinLength')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         });
 
         fit('Should be valid, when value is null', () => {
@@ -168,7 +164,36 @@ describe('Validators-TemplateForm: Common', () => {
             expect(templateInputControl?.hasError('sfcMinLength')).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
-            expect(form.control.valid).toBeTrue();
         });
+    });
+
+    describe('Match', () => {
+        fit('Should be invalid', (() => {
+            const templateInputControl = form.control.get('primaryValue'),
+                compareInputEl = el.query(By.css('input[type="text"][id="sfc-compareValue"]')),
+                primaryInputEl = el.query(By.css('input[type="text"][id="sfc-primaryValue"]'));
+
+            compareInputEl.componentInstance.ngControl.control.setValue('12');
+            primaryInputEl.componentInstance.ngControl.control.setValue('123');
+            fixture.detectChanges();
+
+            expect(templateInputControl?.hasError('sfcMatch')).toBeTrue();
+            expect((templateInputControl?.errors as ValidationErrors)['sfcMatch']).toBeTrue();
+            expect(templateInputControl?.valid).toBeFalse();
+        }));
+
+        fit('Should be valid', (() => {
+            const templateInputControl = form.control.get('primaryValue'),
+                compareInputEl = el.query(By.css('input[type="text"][id="sfc-compareValue"]')),
+                primaryInputEl = el.query(By.css('input[type="text"][id="sfc-primaryValue"]'));
+
+            compareInputEl.componentInstance.ngControl.control.setValue('123');
+            primaryInputEl.componentInstance.ngControl.control.setValue('123');
+            fixture.detectChanges();
+
+            expect(templateInputControl?.hasError('sfcEqualOrInclude')).toBeFalse();
+            expect(templateInputControl?.errors).toBeNull();
+            expect(templateInputControl?.valid).toBeTrue();
+        }));
     });
 });

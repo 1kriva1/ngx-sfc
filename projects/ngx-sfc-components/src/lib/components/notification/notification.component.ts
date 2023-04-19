@@ -26,7 +26,13 @@ export class NotificationComponent implements OnInit {
 
   @Input()
   @HostBinding('class')
-  type: NotificationType = NotificationType.Info;
+  get type(): NotificationType {
+    return this.model.type ?? this._type;
+  };
+  set type(value: NotificationType) {
+    this._type = value;
+  }
+  private _type: NotificationType = NotificationType.Info;
 
   @Input()
   model: INotificationContentModel = { showButton: true };
@@ -35,7 +41,7 @@ export class NotificationComponent implements OnInit {
   content?: TemplateRef<any>;
 
   @Output()
-  closed: EventEmitter<void> = new EventEmitter<void>();
+  closed: EventEmitter<INotificationContentModel> = new EventEmitter<INotificationContentModel>();
 
   @Output()
   buttonClicked: EventEmitter<void> = new EventEmitter<void>();
@@ -65,6 +71,6 @@ export class NotificationComponent implements OnInit {
   close() {
     this.show = false;
     this.destroy = true;
-    this.closed.emit();
+    this.closed.emit(this.model);
   }
 }

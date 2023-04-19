@@ -8,6 +8,7 @@ import { NotificationTemplate } from './enums/notification-template.enum';
 import { NotificationType } from './enums/notification-type.enum';
 import { INotificationAutoCloseModel } from './notification-auto-close.model';
 import { NotificationComponent } from './notification.component';
+import { INotificationContentModel } from './parts/content/notification-content.model';
 
 @Component({
   template: `<ng-template #contentRef>
@@ -72,6 +73,10 @@ describe('Component: NotificationComponent', () => {
       expect(component.notification?.model).toEqual({ showButton: true });
     });
 
+    fit('Should have default id value in model', () => {
+      expect(component.notification?.model.id).toBeUndefined();
+    });
+
     fit('Should have defined automodel', () => {
       expect(component.notification?.autoCloseModel).toEqual({ enabled: false, interval: 5000 });
     });
@@ -87,6 +92,15 @@ describe('Component: NotificationComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('sfc-notification').className).toContain(NotificationType.Success);
+    });
+
+    fit("Should have value from model", () => {
+      const notificationComponent: NotificationComponent = (component.notification as NotificationComponent);
+      notificationComponent.type = NotificationType.Success;
+      notificationComponent.model = {type: NotificationType.Failed}
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('sfc-notification').className).toContain(NotificationType.Failed);
     });
   });
 
@@ -195,13 +209,13 @@ describe('Component: NotificationComponent', () => {
     });
 
     fit('Should emit closed event', () => {
-      spyOn(component.notification?.closed as EventEmitter<void>, 'emit');
+      spyOn(component.notification?.closed as EventEmitter<INotificationContentModel>, 'emit');
       component.showClose = true;
       fixture.detectChanges();
 
       fixture.debugElement.query(By.css('sfc-close')).nativeElement.dispatchEvent(new MouseEvent('click'));
 
-      expect(component.notification?.closed.emit).toHaveBeenCalledTimes(1);
+      expect(component.notification?.closed.emit).toHaveBeenCalledOnceWith(component.notification?.model);
     });
   });
 

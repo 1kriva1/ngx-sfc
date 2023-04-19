@@ -4,9 +4,12 @@
         <fa-icon *ngIf="_isPassword" class="password-icon" [icon]="passwordIcon" (click)="togglePasswordVisibility()">
         </fa-icon>
         <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
-        <input sfcInput id="{{inputId}}" [type]="type" class="text-input" [placeholder]="placeholderValue"
-            [value]="value" [disabled]="disabled" (input)="onChange($any($event.target).value)" (blur)="onBlur()">
+        <div class="input">
+            <input sfcInput id="{{inputId}}" [type]="type" class="text-input" [placeholder]="placeholderValue"
+                [value]="value" [disabled]="disabled" (input)="onChange($any($event.target).value)" (blur)="onBlur()">
+            <ng-content></ng-content>
+        </div>
         <span class="helper-text">{{helperTextValue}}</span>
         <span [sfcShowHideElement]="requiredLengthValue !== null" class="right-side-info">{{charsCounterValue}}</span>
     </div>
-</div>
+</div> 
