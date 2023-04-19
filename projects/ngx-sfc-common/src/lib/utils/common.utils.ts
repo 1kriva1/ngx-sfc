@@ -110,3 +110,13 @@ export function isNumeric(number: any): boolean {
 export function isChromeBrowser(): boolean {
     return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 }
+
+/**
+ * Return true if value is valid email address
+ * @returns True if it's valid email address
+ */
+export function isEmail(value: string): boolean {
+    return isDefined(value.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ));
+}

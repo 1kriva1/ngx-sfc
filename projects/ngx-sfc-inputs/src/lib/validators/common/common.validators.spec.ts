@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
-import { UntypedFormControl } from "@angular/forms";
-import { equalOrInclude, maxLength, minLength } from "./common.validators";
+import { FormBuilder, FormControl, FormGroup, UntypedFormControl } from "@angular/forms";
+import { equalOrInclude, match, maxLength, minLength } from "./common.validators";
 
 describe('Validations', () => {
 
@@ -194,6 +194,50 @@ describe('Validations', () => {
                 const value = 1,
                     validationResult = minLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
+            });
+        });
+
+        describe('Match', () => {
+            fit('Should be invalid', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        password: new FormControl(null),
+                        confirmPassword: new FormControl(null, [match('password', false)]),
+                    });
+
+                formGroup.setValue({ password: '123', confirmPassword: '12' });
+
+                expect(formGroup.get('confirmPassword')?.errors).toEqual({ sfcMatch: true });
+            });
+
+            fit('Should be invalid when parent group not exist', () => {
+                const validationResult = match('password')(new UntypedFormControl('123'))
+
+                expect(validationResult).toEqual({ sfcMatch: true });
+            });
+
+            fit('Should be valid when reversed', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        password: new FormControl(null),
+                        confirmPassword: new FormControl(null, [match('password', true)]),
+                    });
+
+                formGroup.setValue({ password: '123', confirmPassword: '12' });
+
+                expect(formGroup.get('confirmPassword')?.errors).toBeNull();
+            });
+
+            fit('Should be valid when values match', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        password: new FormControl(null),
+                        confirmPassword: new FormControl(null, [match('password', false)]),
+                    });
+
+                formGroup.setValue({ password: '123', confirmPassword: '123' });
+
+                expect(formGroup.get('confirmPassword')?.errors).toBeNull();
             });
         });
     });

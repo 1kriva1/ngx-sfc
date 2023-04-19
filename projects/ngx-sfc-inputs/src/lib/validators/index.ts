@@ -4,6 +4,7 @@ export { FileMinSizeValidatorDirective } from './file/directives/file-min-size-v
 export { EqualOrIncludeValidatorDirective } from './common/directives/equal-or-include-validator.directive';
 export { MaxLengthValidatorDirective } from './common/directives/max-length-validator.directive';
 export { MinLengthValidatorDirective } from './common/directives/min-length-validator.directive';
+export { MatchValidatorDirective } from './common/directives/match-validator.directive';
 export {
     fileExtensions,
     fileMaxSize,
@@ -12,5 +13,6 @@ export {
 export {
     equalOrInclude,
     maxLength,
-    minLength
+    minLength,
+    match
 } from './common/common.validators';

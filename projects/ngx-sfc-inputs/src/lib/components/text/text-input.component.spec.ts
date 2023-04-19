@@ -32,6 +32,7 @@ describe('Component: TextInput', () => {
 
     fit('Should have main elements', () => {
       expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input.text-input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
