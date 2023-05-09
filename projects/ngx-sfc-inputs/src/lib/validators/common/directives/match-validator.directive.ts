@@ -12,7 +12,7 @@ export class MatchValidatorDirective {
     @Input('sfcMatch')
     matchTo!: string;
 
-    @Input('sfcReverse')
+    @Input()
     reverse: boolean = false;
 
     validate(control: AbstractControl): ValidationErrors | null {

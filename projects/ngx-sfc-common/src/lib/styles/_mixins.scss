@@ -41,26 +41,26 @@
   }
 }
 
-@mixin scroll {
-  ::ng-deep ::-webkit-scrollbar {
+@mixin scroll($selector: "::ng-deep") {
+  #{$selector} ::-webkit-scrollbar {
     @include square-size(0.375em);
   }
 
-  ::ng-deep ::-webkit-scrollbar-track {
+  #{$selector} ::-webkit-scrollbar-track {
     border-radius: 0.625em;
     background: rgb(0 0 0 / 10%);
   }
 
-  ::ng-deep ::-webkit-scrollbar-thumb {
+  #{$selector} ::-webkit-scrollbar-thumb {
     border-radius: 0.625em;
     background: rgb(0 0 0 / 20%);
   }
 
-  ::ng-deep ::-webkit-scrollbar-thumb:hover {
+  #{$selector} ::-webkit-scrollbar-thumb:hover {
     background: rgb(0 0 0 / 40%);
   }
 
-  ::ng-deep ::-webkit-scrollbar-thumb:active {
+  #{$selector} ::-webkit-scrollbar-thumb:active {
     background: rgb(0 0 0 / 60%);
   }
 }

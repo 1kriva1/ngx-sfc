@@ -52,7 +52,7 @@ export class ClickOutsideDirective implements AfterViewInit, OnDestroy {
     }
   }
 
-  private isDescendant(parent: HTMLElement, child: HTMLElement) {
+  private isDescendant(parent: HTMLElement, child: HTMLElement): boolean {
     let node: HTMLElement = child;
     while (node !== null) {
       if (node === parent) {

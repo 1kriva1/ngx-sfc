@@ -16,6 +16,10 @@
     font-weight: bold;
     font-size: 0.8em;
     user-select: none;
+    transition:
+      color $transition-duration-default $transition-timing-function-default,
+      border-color $transition-duration-default $transition-timing-function-default,
+      background $transition-duration-default $transition-timing-function-default;
 
     &:hover,
     &:focus-within {

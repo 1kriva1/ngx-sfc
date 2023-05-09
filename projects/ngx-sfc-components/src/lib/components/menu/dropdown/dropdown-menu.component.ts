@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentInit, Component, EventEmitter, HostBinding, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ClickOutsideEvent, isDefined, isNullOrEmptyString, MediaLimits, Position, ResizeService, UIClass, WINDOW } from 'ngx-sfc-common';
@@ -7,7 +8,23 @@ import { IDropdownMenuItemModel } from './parts/item/dropdown-menu-item.model';
 @Component({
   selector: 'sfc-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',
-  styleUrls: ['./dropdown-menu.component.scss']
+  styleUrls: ['./dropdown-menu.component.scss'],
+  animations: [
+    trigger(
+      'openClose', 
+      [
+        state('true', style({
+          opacity: 1
+        })),
+        state('false', style({
+          opacity: 0,
+        })),
+        transition('true <=> false', [
+          animate('0.5s')
+        ])
+      ]
+    )
+  ]
 })
 export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentInit {
 
@@ -16,6 +33,9 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
 
   @Input()
   icon?: IconDefinition;
+
+  @Input()
+  defaultDots: boolean = true;
 
   @Input()
   label?: string;
@@ -50,7 +70,7 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
   private _resizeSubscription?: Subscription;
 
   get showDots(): boolean {
-    return isNullOrEmptyString(this.label) && !isDefined(this.icon);
+    return this.defaultDots && isNullOrEmptyString(this.label) && !isDefined(this.icon);
   }
 
   constructor(private resizeService: ResizeService, @Inject(WINDOW) private window: Window) { }
