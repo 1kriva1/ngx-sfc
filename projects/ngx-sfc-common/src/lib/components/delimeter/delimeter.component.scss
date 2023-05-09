@@ -8,9 +8,9 @@
       rgb(0 0 0 / 0%) 0%,
       rgb(0 0 0 / 30%) 47%,
       rgb(0 0 0 / 30%) 53%,
-        rgb(0 0 0 / 30%) 100%
-      )
-      $slice,
+      rgb(0 0 0 / 30%) 100%
+    )
+    $slice,
     linear-gradient(
         to $direction,
         rgb(255 255 255 / 0%) 0%,
@@ -49,6 +49,7 @@
         content: "";
         left: 50%;
         border-left: 1px solid;
+        transition: border-image $transition-duration-default $transition-timing-function-default;
       }
 
       &::before {

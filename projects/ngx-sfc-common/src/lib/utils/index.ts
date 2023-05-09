@@ -8,7 +8,8 @@ export {
     nameof,
     isNumeric,
     isChromeBrowser,
-    isEmail
+    isEmail,
+    parseBoolean
 } from './common.utils'
 
 export {

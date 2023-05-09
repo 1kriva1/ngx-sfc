@@ -4,9 +4,10 @@
             <span *ngIf="label">{{label}}</span>
             <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
             <sfc-dots *ngIf="showDots" [open]="open"></sfc-dots>
+            <ng-content></ng-content>
         </div>
 
-        <ul *ngIf="items.length" class="dropdown-container">
+        <ul *ngIf="items.length" [@openClose]="open" class="dropdown-container">
             <sfc-dropdown-menu-item *ngFor="let item of items" [item]="item" (click)="onClick(item)">
             </sfc-dropdown-menu-item>
         </ul>

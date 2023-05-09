@@ -8,6 +8,7 @@
   .check {
     border: 0.125em solid;
     background: transparent;
+    transition: border-color $transition-duration-default $transition-timing-function-default;
 
     @include theme-value(border-color, $color-default, $color-dark);
     @include square-size(1em);
@@ -16,7 +17,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color 0.3s ease;
 
     fa-icon {
       @include theme-value(opacity, 0.5, 0.8);

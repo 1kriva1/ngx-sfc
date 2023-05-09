@@ -44,12 +44,11 @@
         width: max-content;
         background: $color-0;
 
-        @include visibility(false);
         @include theme-value(color, $color-3, $color-8);
 
         position: absolute;
         right: 0;
-        transition: all 0.5s ease;
+        transition: opacity $transition-duration-default $transition-timing-function-default;
         margin-top: 1em;
         display: none;
         padding: 0.6em;
@@ -65,8 +64,6 @@
     ul {
       li {
         .dropdown-container {
-          @include visibility(true);
-
           display: flex;
         }
       }

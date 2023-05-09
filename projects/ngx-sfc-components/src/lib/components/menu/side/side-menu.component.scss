@@ -3,10 +3,11 @@
 :host {
   .container {
     width: 5em;
+    height: inherit;
     overflow: hidden;
-    transition: width 0.5s ease-in-out;
-
-    @include theme-value(background, $color-2, $color-11);
+    transition:
+      background $transition-duration-default $transition-timing-function-default,
+      width $transition-duration-default ease-in-out;
 
     ul {
       margin: 0;

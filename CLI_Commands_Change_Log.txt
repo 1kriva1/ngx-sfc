@@ -355,11 +355,19 @@ ng generate module share --dry-run
 
 ng generate component share/components/logo --export true --flat false --style scss --skip-tests false --dry-run
 
+ng generate component share/components/theme-toggler --export true --flat false --style scss --skip-tests false --dry-run
+
+ng generate component share/components/language-toggler --export true --flat false --style scss --skip-tests false --dry-run
+
 ng generate component features/identity/pages/registration/registration.page --export true --flat true --style scss --skip-tests false --dry-run
 
 ng generate service features/identity/services/existence --flat false --skip-tests false --dry-run
 
 ng generate service features/identity/services/identity --flat false --skip-tests false --dry-run
+
+ng generate component core/components/header/authenticated/authenticated-header --export true --flat true --style scss --skip-tests false --dry-run
+
+ng generate component core/components/header/base/header --export true --flat true --style scss --skip-tests false --dry-run
 
 Demo:
 

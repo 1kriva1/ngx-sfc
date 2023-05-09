@@ -5,6 +5,7 @@ import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuItemComponent } from './parts/item/dropdown-menu-item.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Component: DropdownMenuComponent', () => {
   let component: DropdownMenuComponent;
@@ -13,7 +14,7 @@ describe('Component: DropdownMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FontAwesomeModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule],
       declarations: [ClickOutsideDirective, IconComponent, DropdownMenuItemComponent, DotsComponent, DropdownMenuComponent],
       providers: [
         { provide: DOCUMENT, useValue: document },
@@ -138,6 +139,13 @@ describe('Component: DropdownMenuComponent', () => {
 
     fit('Should not exist, if icon provided', () => {
       component.icon = faTShirt;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('sfc-dots')).toBeNull();
+    });
+
+    fit('Should not exist, if defaultDots is false', () => {
+      component.defaultDots = false;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('sfc-dots')).toBeNull();

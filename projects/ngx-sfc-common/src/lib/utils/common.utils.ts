@@ -120,3 +120,11 @@ export function isEmail(value: string): boolean {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     ));
 }
+
+/**
+ * Return true if string is "true"
+ * @returns parsed string as boolean
+ */
+export function parseBoolean(value: string): boolean {
+    return /^true$/i.test(value);
+}
