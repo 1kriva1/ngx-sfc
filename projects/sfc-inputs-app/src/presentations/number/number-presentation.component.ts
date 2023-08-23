@@ -67,7 +67,8 @@ export class NumberPresentationComponent extends BasePresentationComponent
         }],
         inputNumberSmall: [4],
         inputNumberLarge: [4],
-        inputNumberCustom: [4]
+        inputNumberCustom: [4],
+        inputNumberEdit: [null]
       }
     );
   }

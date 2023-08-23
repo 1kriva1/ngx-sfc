@@ -66,7 +66,7 @@
                 <sfc-file-input id="demo-file-validdef" formControlName="inputFileValidationDefined"
                     label="Validation defined label" placeholder="Validation defined placeholder"
                     helperText="Demo Validation defined"
-                    [validations]="{required: 'File is required', sfcFileMaxSize: 'Max length is not valid'}">
+                    [validations]="{required: 'File is required', 'sfc-file-max-size': 'Max length is not valid'}">
                 </sfc-file-input>
             </div>
 
@@ -74,7 +74,7 @@
                 <sfc-file-input id="demo-file-validdef" formControlName="inputFileWithValueInvalid"
                     label="With invalid value label" placeholder="With invalid value placeholder"
                     helperText="Demo With invalid value"
-                    [validations]="{required: 'File is required', sfcFileMaxSize: 'Max length is not valid'}">
+                    [validations]="{required: 'File is required', 'sfc-file-max-size': 'Max length is not valid'}">
                 </sfc-file-input>
             </div>
         </div>

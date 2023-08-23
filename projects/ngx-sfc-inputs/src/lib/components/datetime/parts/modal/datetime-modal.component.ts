@@ -1,12 +1,12 @@
 import { WeekDay } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   any,
   ButtonType, CommonConstants, getFirstDayOfMonth, getFirstDayOfYear,
   getLastDayOfMonth, getLastDayOfYear,
   hasItemBy,
-  isDateGreat, isDateGreatOrEqual, isDateTimeGreat, isDateTimeGreatOrEqual, isEqualDates
+  isDateGreat, isDateGreatOrEqual, isDateTimeGreat, isDateTimeGreatOrEqual, isEqualDates, ModalService, UIClass
 } from 'ngx-sfc-common';
 import { combineLatest, map, Observable } from 'rxjs';
 import { DateTimeInputConstants } from '../../constants/datetime.constants';
@@ -16,13 +16,14 @@ import { DateTimeViewActionType } from '../../service/view/enums/datetime-view.e
 import { IDateTimeViewModel } from '../../service/view/models/datetime-view.model';
 import { DateTimeViewService } from '../../service/view/datetime-view.service';
 import { DateTimeView } from '../../datetime-input-view.enum';
-import { IDateTimeModalModel } from './datetime-modal.model';
+import { IDateTimeModalButtonsModel, IDateTimeModalModel } from './datetime-modal.model';
 import { DateTimeState } from '../../service/view/enums/datetime-state.enum';
+import { IDateTimeValueModel } from '../../service/value/models/datetime-value.model';
 
 @Component({
   selector: 'sfc-datetime-modal',
   templateUrl: './datetime-modal.component.html',
-  styleUrls: ['./datetime-modal.component.scss'],
+  styleUrls: ['./datetime-modal.component.scss', './datetime-modal-bordered.component.scss'],
 
 })
 export class DateTimeModalComponent implements OnInit {
@@ -70,12 +71,34 @@ export class DateTimeModalComponent implements OnInit {
   @Input()
   nowButton = false;
 
+  @Input()
+  @HostBinding(`class.${DateTimeInputConstants.FULL_SIZE_CLASS}`)
+  fullSize = false;
+
+  @Input()
+  buttonsModel: IDateTimeModalButtonsModel = {
+    okLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.OK,
+    cancelLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.CANCEL,
+    clearLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.CLEAR,
+    nowLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.NOW
+  };
+
+  @Input()
+  timeLabel!: string;
+
+  @Input()
+  @HostBinding(`class.${UIClass.Bordered}`)
+  bordered: boolean = false;
+
   @Output()
   update = new EventEmitter<Date | null>();
 
   model$!: Observable<IDateTimeModalModel>;
 
-  constructor(public valueService: DateTimeValueService, public viewService: DateTimeViewService) { }
+  constructor(
+    public valueService: DateTimeValueService,
+    public viewService: DateTimeViewService,
+    private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.model$ = combineLatest([
@@ -162,7 +185,7 @@ export class DateTimeModalComponent implements OnInit {
   // YEARS
 
   showYearsList(): void {
-    if(this.year)
+    if (this.year)
       this.viewService.update({ type: DateTimeViewActionType.Years });
   }
 
@@ -208,7 +231,10 @@ export class DateTimeModalComponent implements OnInit {
     this.update.emit(null);
   }
 
-  onClose(event: MouseEvent | undefined): void {
+  onClose(event: MouseEvent | undefined, immediate: boolean = false): void {
+    if (this.fullSize && immediate)
+      this.modalService.toggle();
+
     event?.stopPropagation();
   }
 
@@ -217,7 +243,8 @@ export class DateTimeModalComponent implements OnInit {
   private finalize(viewModel: IDateTimeViewModel) {
     if (viewModel.state == DateTimeState.Hide
       || viewModel.state == DateTimeState.Update) {
-      this.onClose(viewModel.event);
+      this.onClose(viewModel.event,
+        viewModel.state == DateTimeState.Hide);
     }
 
     if (viewModel.state == DateTimeState.Update)

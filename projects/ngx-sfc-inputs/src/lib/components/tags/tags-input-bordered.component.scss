@@ -1,0 +1,104 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "../../styles";
+
+:host {
+  &.bordered {
+    .container {
+      .content {
+        .tags {
+          border: 2px solid;
+          border-radius: 1em;
+          padding: 0.2em 0.3em;
+          margin: 0.2em 0;
+
+          @include theme-value(border-color, $color-bordered-default, $color-dark);
+        }
+
+        .sfc-input {
+          margin: 0;
+        }
+
+        label {
+          transform: translateY(1.2em);
+        }
+      }
+    }
+
+    &.disabled {
+      .container {
+        .content {
+          .tags {
+            @include theme-value(border-color, $color-disabled-bordered-default, $color-disabled-dark);
+          }
+        }
+      }
+    }
+
+    &.focus {
+      .container {
+        .content {
+          .tags {
+            box-shadow: 0 0 5pt 0.5pt $box-shadow-bordered-color;
+            outline-width: 0;
+          }
+        }
+      }
+    }
+
+    &:not(.has-value) {
+      .container {
+        .content {
+          .tags {
+            padding: 0 0.3em;
+          }
+        }
+      }
+    }
+
+    &.has-value.ng-invalid,
+    &.ng-dirty.ng-invalid,
+    &.has-value.inner-invalid {
+      .container {
+        .content {
+          .tags {
+            border-color: $color-bordered-failed !important;
+            border-bottom: 2px solid $color-bordered-failed !important;
+            box-shadow: none !important;
+          }
+        }
+      }
+
+      &.focus {
+        .container {
+          .content {
+            .tags {
+              box-shadow: 0 0 5pt 0.5pt $color-bordered-failed !important;
+            }
+          }
+        }
+      }
+    }
+
+    &.has-value.ng-dirty.ng-valid {
+      .container {
+        .content {
+          .tags {
+            border-color: $color-bordered-success;
+            border-bottom: 2px solid $color-bordered-success;
+            box-shadow: none;
+          }
+        }
+      }
+
+      &.focus {
+        .container {
+          .content {
+            .tags {
+              box-shadow: 0 0 5pt 0.5pt $color-bordered-success;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonComponent, ButtonType, ScrollIntoViewDirective, ScrollTrackerDirective } from 'ngx-sfc-common';
-import { CloseComponent, MouseDownDirective, SwitchMultiCasePipe } from 'ngx-sfc-common';
+import {
+  ButtonComponent, ButtonType, ScrollIntoViewDirective, ScrollTrackerDirective,
+  CloseComponent, MouseDownDirective, SwitchMultiCasePipe, ComponentSizeDirective,
+  UIClass, CommonConstants
+} from 'ngx-sfc-common';
 import { DateTimeValueService } from '../../service/value/datetime-value.service';
 import { DateTimeViewService } from '../../service/view/datetime-view.service';
 import { DateTimeCalendarComponent } from '../calendar/datetime-calendar.component';
@@ -12,13 +15,11 @@ import { DateTimeView } from '../../datetime-input-view.enum';
 import { DateTimeState } from '../../service/view/enums/datetime-state.enum';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { By } from '@angular/platform-browser';
-import { UIClass } from 'ngx-sfc-common';
-import { CommonConstants } from 'ngx-sfc-common';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
 import { DateTimeViewActionType } from '../../service/view/enums/datetime-view.enum';
 import { WeekDay } from '@angular/common';
-import { ComponentSizeDirective } from 'ngx-sfc-common';
 import { DebugElement } from '@angular/core';
+import { DateTimeInputConstants } from '../../constants/datetime.constants';
 
 describe('Component: DateTimeModal', () => {
   let component: DateTimeModalComponent;
@@ -81,7 +82,19 @@ describe('Component: DateTimeModal', () => {
 
       init('', DateTimeState.Hide, event);
 
-      expect(component.onClose).toHaveBeenCalledOnceWith(event);
+      expect(component.onClose).toHaveBeenCalledOnceWith(event, true);
+    });
+
+    fit('Should hide and toggle modal service', () => {
+      spyOn((component as any).modalService, "toggle").and.callThrough();
+
+      component.fullSize = true;
+
+      const event: any = { test: true };
+
+      init('', DateTimeState.Hide, event);
+
+      expect((component as any).modalService.toggle).toHaveBeenCalledTimes(1);
     });
 
     fit('Should update and hide', () => {
@@ -91,8 +104,30 @@ describe('Component: DateTimeModal', () => {
 
       init('', DateTimeState.Update, event);
 
-      expect(component.onClose).toHaveBeenCalledOnceWith(event);
+      expect(component.onClose).toHaveBeenCalledOnceWith(event, false);
       expect(component.update.emit).toHaveBeenCalledOnceWith(valueServiceSpy.value);
+    });
+
+    fit("Should not have full size class", () => {
+      expect(fixture.nativeElement.classList.contains(DateTimeInputConstants.FULL_SIZE_CLASS)).toBeFalse();
+    });
+
+    fit('Should have full size class', () => {
+      component.fullSize = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.classList.contains(DateTimeInputConstants.FULL_SIZE_CLASS)).toBeTrue();
+    });
+
+    fit("Should not have bordered class", () => {
+      expect(fixture.nativeElement.classList.contains(UIClass.Bordered)).toBeFalse();
+    });
+
+    fit('Should have bordered class', () => {
+      component.bordered = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.classList.contains(UIClass.Bordered)).toBeTrue();
     });
   });
 
@@ -104,9 +139,12 @@ describe('Component: DateTimeModal', () => {
     });
 
     fit('Should display constant if value is empty', () => {
+      component.timeLabel = 'Test';
+      fixture.detectChanges();
+
       init('');
 
-      expect(fixture.nativeElement.querySelector('div.header span').innerText).toEqual('Time');
+      expect(fixture.nativeElement.querySelector('div.header span').innerText).toEqual(component.timeLabel);
     });
 
     fit('Should call close', () => {
@@ -603,7 +641,7 @@ describe('Component: DateTimeModal', () => {
       fit('Should have constant values', () => {
         init();
 
-        const cancelBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0];
+        const cancelBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[1];
 
         expect(cancelBtn.componentInstance.types).toEqual([ButtonType.Rounded]);
         expect(cancelBtn.componentInstance.text).toEqual('Cancel');
@@ -612,7 +650,7 @@ describe('Component: DateTimeModal', () => {
       fit('Should update view', () => {
         init();
 
-        const cancelBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0],
+        const cancelBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[1],
           event: any = { target: cancelBtn.nativeElement, button: 0 };
         cancelBtn.triggerEventHandler('mousedown', event);
 
@@ -630,7 +668,7 @@ describe('Component: DateTimeModal', () => {
       fit('Should have constant values', () => {
         init();
 
-        const okBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[1];
+        const okBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0];
 
         expect(okBtn.componentInstance.types).toEqual([ButtonType.Rounded]);
         expect(okBtn.componentInstance.text).toEqual('Ok');
@@ -639,7 +677,7 @@ describe('Component: DateTimeModal', () => {
       fit('Should update view', () => {
         init();
 
-        const okBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[1],
+        const okBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0],
           event: any = { target: okBtn.nativeElement, button: 0 };
         okBtn.triggerEventHandler('mousedown', event);
 
@@ -651,7 +689,7 @@ describe('Component: DateTimeModal', () => {
         valueServiceSpy.value = new Date(2021, 0, 2);
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
 
       fit('Should be disabled by minDate', () => {
@@ -660,7 +698,7 @@ describe('Component: DateTimeModal', () => {
         valueServiceSpy.value = new Date(2021, 0, 1);
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
 
       fit('Should be disabled by maxDate', () => {
@@ -670,7 +708,7 @@ describe('Component: DateTimeModal', () => {
         fixture.detectChanges();
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
 
       fit('Should be disabled by min, max dates and disabledDays', () => {
@@ -682,7 +720,7 @@ describe('Component: DateTimeModal', () => {
         fixture.detectChanges();
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
 
       fit('Should be disabled by minDate with time', () => {
@@ -690,7 +728,7 @@ describe('Component: DateTimeModal', () => {
         valueServiceSpy.value = new Date(2021, 0, 2, 13, 9);
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
 
       fit('Should be disabled by maxDate with time', () => {
@@ -699,7 +737,7 @@ describe('Component: DateTimeModal', () => {
         fixture.detectChanges();
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
 
       fit('Should be disabled by min, max dates and disabledDays with time', () => {
@@ -710,7 +748,7 @@ describe('Component: DateTimeModal', () => {
         fixture.detectChanges();
         init();
 
-        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[1].classes[UIClass.Disabled]).toBeTrue();
+        expect(fixture.debugElement.queryAll(By.css('sfc-button'))[0].classes[UIClass.Disabled]).toBeTrue();
       });
     });
   });

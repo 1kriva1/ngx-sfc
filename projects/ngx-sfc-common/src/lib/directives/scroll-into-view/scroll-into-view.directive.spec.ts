@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ScrollIntoViewDirective } from "./scroll-into-view.directive";
 
 @Component({
-    template: `<div [sfcScrollIntoView]="targetEl">
+    template: `<div [sfcScrollIntoView]="targetEl" [local]="local">
                     <span #target></span>
                </div>`
 })
@@ -17,11 +17,12 @@ class TestScrollIntoViewDirectiveComponent {
 
     targetEl!: HTMLElement;
 
+    local: boolean = false;
+
     setTarget(el: HTMLElement) { this.targetEl = el; }
 }
 
 describe('Directive: ScrollIntoView', () => {
-
     let component: TestScrollIntoViewDirectiveComponent;
     let fixture: ComponentFixture<TestScrollIntoViewDirectiveComponent>;
 
@@ -73,6 +74,20 @@ describe('Directive: ScrollIntoView', () => {
         fixture.detectChanges();
 
         expect(component.target.nativeElement.scrollIntoViewIfNeeded).toHaveBeenCalled();
+        expect(component.target.nativeElement.scrollIntoView).not.toHaveBeenCalled();
+    });
+
+    fit('Should not call scrollIntoView or scrollIntoViewIfNeeded if local', () => {
+        spyOn(component.target.nativeElement, 'scrollIntoView');
+        spyOn(component.target.nativeElement, 'scrollIntoViewIfNeeded');
+
+        component.local = true;
+        fixture.detectChanges();
+        
+        component.setTarget(component.target.nativeElement);
+        fixture.detectChanges();
+
+        expect(component.target.nativeElement.scrollIntoViewIfNeeded).not.toHaveBeenCalled();
         expect(component.target.nativeElement.scrollIntoView).not.toHaveBeenCalled();
     });
 });

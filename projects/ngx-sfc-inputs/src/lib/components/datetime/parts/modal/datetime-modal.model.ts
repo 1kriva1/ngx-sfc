@@ -9,3 +9,10 @@ export interface IDateTimeModalModel {
     yearNumber: number;
     time: string;
 }
+
+export interface IDateTimeModalButtonsModel {
+    okLabel?: string;
+    cancelLabel?: string;
+    nowLabel?: string;
+    clearLabel?: string;
+}

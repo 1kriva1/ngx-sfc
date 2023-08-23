@@ -191,14 +191,14 @@
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-validation-failed-cust-msg"
                     formControlName="inputTagsValidationCustomMsgFailed"
-                    [validations]="{sfcEqualOrInclude: 'Include valid only (qwe or rty)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include valid only (qwe or rty)'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-label-validation-failed-cust-msg"
                     formControlName="inputTagsLabelValidationCustomMsgFailed" label="label valid (qwe, rty)"
-                    [validations]="{sfcEqualOrInclude: 'Include valid only (qwe or rty)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include valid only (qwe or rty)'}">
                 </sfc-tags-input>
             </div>
 
@@ -206,7 +206,7 @@
                 <sfc-tags-input id="demo-tags-label-icon-helper-validation-failed-cust-msg"
                     formControlName="inputTagsLabelIconHelperValidationCustomMsgFailed" label="label valid (qwe, rty)"
                     [icon]="faUser" helperText="helper valid (qwe, rty)"
-                    [validations]="{sfcEqualOrInclude: 'Include valid only (qwe or rty)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include valid only (qwe or rty)'}">
                 </sfc-tags-input>
             </div>
         </div>
@@ -235,21 +235,21 @@
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-max-length" formControlName="inputTagsMaxLength"
                     label="label max length 3" [icon]="faUser" helperText="label max length 3"
-                    [validations]="{sfcMaxLength: 'No more than 3 tags'}">
+                    [validations]="{'sfc-max-array-length': 'No more than 3 tags'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-min-length" formControlName="inputTagsMinLength"
                     label="label min length 1" [icon]="faUser" helperText="label min length 1"
-                    [validations]="{sfcMinLength: 'must be at least 1 tag'}">
+                    [validations]="{'sfc-min-array-length': 'must be at least 1 tag'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-max-min-length" formControlName="inputTagsMaxMinLength"
                     label="label max 3 and min 1 length" [icon]="faUser" helperText="max 3 and min 1 length"
-                    [validations]="{sfcMaxLength: 'No more than 3 tags', sfcMinLength: 'must be at least 1 tag'}">
+                    [validations]="{'sfc-max-array-length': 'No more than 3 tags', 'sfc-min-array-length': 'must be at least 1 tag'}">
                 </sfc-tags-input>
             </div>
         </div>
@@ -258,21 +258,21 @@
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-max-length-invalid" formControlName="inputTagsMaxLengthInvalid"
                     label="label max length 3" [icon]="faUser" helperText="label max length 3"
-                    [validations]="{sfcMaxLength: 'No more than 3 tags'}">
+                    [validations]="{'sfc-max-array-length': 'No more than 3 tags'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-min-length-invalid" formControlName="inputTagsMinLengthInvalid"
                     label="label min length 1" [icon]="faUser" helperText="label min length 1"
-                    [validations]="{sfcMinLength: 'must be at least 1 tag'}">
+                    [validations]="{'sfc-min-array-length': 'must be at least 1 tag'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-max-min-length-invalid" formControlName="inputTagsMaxMinLengthInvalid"
                     label="label max 3 and min 1 length" [icon]="faUser" helperText="max 3 and min 1 length"
-                    [validations]="{sfcMaxLength: 'No more than 3 tags', sfcMinLength: 'must be at least 1 tag'}">
+                    [validations]="{'sfc-max-array-length': 'No more than 3 tags', 'sfc-min-array-length': 'must be at least 1 tag'}">
                 </sfc-tags-input>
             </div>
         </div>
@@ -281,21 +281,21 @@
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-max-length-valid" formControlName="inputTagsMaxLengthValid"
                     label="label max length 3" [icon]="faUser" helperText="label max length 3"
-                    [validations]="{sfcMaxLength: 'No more than 3 tags'}">
+                    [validations]="{'sfc-max-array-length': 'No more than 3 tags'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-min-length-valid" formControlName="inputTagsMinLengthValid"
                     label="label min length 1" [icon]="faUser" helperText="label min length 1"
-                    [validations]="{sfcMinLength: 'must be at least 1 tag'}">
+                    [validations]="{'sfc-min-array-length': 'must be at least 1 tag'}">
                 </sfc-tags-input>
             </div>
 
             <div class="component-column">
                 <sfc-tags-input id="demo-tags-max-min-length-valid" formControlName="inputTagsMaxMinLengthValid"
                     label="label max 3 and min 1 length" [icon]="faUser" helperText="max 3 and min 1 length"
-                    [validations]="{sfcMaxLength: 'No more than 3 tags', sfcMinLength: 'must be at least 1 tag'}">
+                    [validations]="{'sfc-max-array-length': 'No more than 3 tags', 'sfc-min-array-length': 'must be at least 1 tag'}">
                 </sfc-tags-input>
             </div>
         </div>

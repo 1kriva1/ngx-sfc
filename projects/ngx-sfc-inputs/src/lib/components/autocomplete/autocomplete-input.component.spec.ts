@@ -42,6 +42,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('.input')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('input[type=text]')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('sfc-load-container')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
@@ -688,14 +689,22 @@ describe('Component: AutoCompleteInput', () => {
 
             expect(fixture.nativeElement.querySelectorAll('sfc-autocomplete-item').length).toEqual(1);
 
-            dataSubject?.next({ next: true, items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }] });
+            dataSubject?.next({
+                next: true,
+                items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }],
+                reset: false
+            });
             fixture.detectChanges();
 
             emitSearching('tes');
 
             expect(fixture.nativeElement.querySelectorAll('sfc-autocomplete-item').length).toEqual(2);
 
-            dataSubject?.next({ next: true, items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }, { key: 2, value: 'test 2' }] });
+            dataSubject?.next({
+                next: true,
+                items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }, { key: 2, value: 'test 2' }],
+                reset: false
+            });
             fixture.detectChanges();
 
             emitSearching();
@@ -775,7 +784,9 @@ describe('Component: AutoCompleteInput', () => {
         }));
     });
 
-    function initLoader(model: ILoadMoreModel<IAutoCompleteItemModel> = { next: true, items: [{ key: 0, value: 'test 0' }] })
+    function initLoader(model: ILoadMoreModel<IAutoCompleteItemModel> = {
+        next: true, items: [{ key: 0, value: 'test 0' }], reset: false
+    })
         : BehaviorSubject<ILoadMoreModel<IAutoCompleteItemModel>> {
         const dataSubject = new BehaviorSubject<ILoadMoreModel<IAutoCompleteItemModel>>(model);
         component.loader = (_: ILoadMoreParameters) => {

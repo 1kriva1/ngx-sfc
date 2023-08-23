@@ -209,14 +209,14 @@
             <div class="component-column">
                 <sfc-radio-input id="demo-radio-buttons-validation-custom-msg-horizontal"
                     formControlName="inputRadioHorizontalValidationCustomMessage" [items]="items"
-                    [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}" [direction]="Direction.Horizontal">
+                    [validations]="{'sfc-equal-or-include': 'Value must be two(2).'}" [direction]="Direction.Horizontal">
                 </sfc-radio-input>
             </div>
 
             <div class="component-column">
                 <sfc-radio-input id="demo-radio-buttons-icon-validation-custom-msg-horizontal"
                     formControlName="inputRadioHorizontalValueValidValidationCustomMessage" [items]="items"
-                    [icon]="faUser" [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}"
+                    [icon]="faUser" [validations]="{'sfc-equal-or-include': 'Value must be two(2).'}"
                     [direction]="Direction.Horizontal">
                 </sfc-radio-input>
             </div>
@@ -225,7 +225,7 @@
                 <sfc-radio-input id="demo-radio-buttons-icon-helper-validation-custom-msg-horizontal"
                     formControlName="inputRadioHorizontalValueInvalidValidationCustomMessage" [items]="items"
                     [icon]="faUser" helperText="helper text as it"
-                    [validations]="{sfcEqualOrInclude: 'Value must be two(2).'}" [direction]="Direction.Horizontal">
+                    [validations]="{'sfc-equal-or-include': 'Value must be two(2).'}" [direction]="Direction.Horizontal">
                 </sfc-radio-input>
             </div>
         </div>

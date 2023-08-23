@@ -7,7 +7,8 @@
         <div class="component-row">
 
             <div class="component-column">
-                <sfc-number-input id="demo-text-input-full-empty" formControlName="inputNumberNull"></sfc-number-input>
+                <sfc-number-input id="demo-text-input-full-empty" formControlName="inputNumberNull">
+                </sfc-number-input>
             </div>
 
             <div class="component-column">
@@ -176,7 +177,7 @@
                 <sfc-number-input id="demo-number-validation-message" formControlName="inputNumberValidationMessage"
                     label="test label valid when value is 1" [icon]="faUser"
                     helperText="helper test  valid when value is 1"
-                    [validations]="{sfcEqualOrInclude: 'Value must be equal 1.'}">
+                    [validations]="{'sfc-equal-or-include': 'Value must be equal 1.'}">
                 </sfc-number-input>
             </div>
 
@@ -212,6 +213,13 @@
             <div class="component-column">
                 <sfc-number-input id="demo-number-custom" formControlName="inputNumberCustom" label="Label custom"
                     [icon]="faUser" helperText="Helper custom" [sfcComponentSize] [customSize]="4.2">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-text-input-edit" formControlName="inputNumberEdit" [edit]="true">
                 </sfc-number-input>
             </div>
         </div>

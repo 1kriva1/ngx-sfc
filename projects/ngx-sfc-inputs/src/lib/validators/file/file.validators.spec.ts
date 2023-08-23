@@ -15,7 +15,7 @@ describe('Validations', () => {
             fit('Should be invalid', () => {
                 const mockFile = getHugeFile('testFile.jpg', 1024),
                     validationResult = fileMaxSize(10)(new UntypedFormControl(mockFile)),
-                    expectedResult = { sfcFileMaxSize: { requiredSize: 10, actualSize: 1024, file: mockFile } };
+                    expectedResult = { 'sfc-file-max-size': { requiredSize: 10, actualSize: 1024, file: mockFile } };
                 expect(validationResult).toEqual(expectedResult);
             });
 
@@ -45,7 +45,7 @@ describe('Validations', () => {
             fit('Should be invalid', () => {
                 const mockFile = getHugeFile('testFile.jpg', 10),
                     validationResult = fileMinSize(1024)(new UntypedFormControl(mockFile)),
-                    expectedResult = { sfcFileMinSize: { requiredSize: 1024, actualSize: 10, file: mockFile } };
+                    expectedResult = { 'sfc-file-min-size': { requiredSize: 1024, actualSize: 10, file: mockFile } };
                 expect(validationResult).toEqual(expectedResult);
             });
 
@@ -76,7 +76,7 @@ describe('Validations', () => {
                 const mockFile = getHugeFile('testFile.jpg', 10),
                     allowedExtensions = ["png", "jpeg"],
                     validationResult = fileExtensions(allowedExtensions)(new UntypedFormControl(mockFile)),
-                    expectedResult = { sfcFileExtension: { allowedExtensions: allowedExtensions, actualExtension: 'jpg', file: mockFile } };
+                    expectedResult = { 'sfc-file-extension': { allowedExtensions: allowedExtensions, actualExtension: 'jpg', file: mockFile } };
                 expect(validationResult).toEqual(expectedResult);
             });
 

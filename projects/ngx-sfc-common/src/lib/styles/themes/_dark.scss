@@ -7,11 +7,11 @@ $background-gradient-dark: linear-gradient(
   rgb(255 255 255 / 40%) 17%,
   rgb(255 255 255 / 40%) 83%,
   rgb(255 255 255 / 0%) 100%
-);
+) !default;
 $background-gradient-vertical-dark: linear-gradient(
   to bottom,
   rgb(255 255 255 / 0%) 0%,
   rgb(255 255 255 / 40%) 17%,
   rgb(255 255 255 / 40%) 83%,
   rgb(255 255 255 / 0%) 100%
-);
+) !default;

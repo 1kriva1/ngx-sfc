@@ -20,6 +20,7 @@ export { AvatarBadgePosition } from './avatar/parts/badge/avatar-badge-position.
 export { ProgressLineComponent } from './progress/line/progress-line.component';
 export { ProgressSemiCircleComponent } from './progress/semi-circle/progress-semi-circle.component';
 export { ProgressCircleComponent } from './progress/circle/progress-circle.component';
+export { getProgressColorDefaultFunc, getProgressColorDynamicallyFunc } from './progress/progress.utils';
 export { ITagModel } from './tags/parts/tag/tag.model';
 export { TagsComponent } from './tags/tags.component';
 export { SliderComponent } from './slider/slider.component';

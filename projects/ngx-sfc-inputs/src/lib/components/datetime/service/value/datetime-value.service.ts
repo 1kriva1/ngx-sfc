@@ -18,6 +18,7 @@ export class DateTimeValueService {
     time: true,
     shortTime: false,
     value: new Date(),
+    currentValue: null,
     format: CommonConstants.EMPTY_STRING,
     locale: DateTimeInputConstants.DEFAULT_LOCALE,
     disabledDays: []
@@ -33,6 +34,13 @@ export class DateTimeValueService {
     return this._value;
   }
 
+  public set currentValue(date: Date | null) {
+    this.model.currentValue = date;
+  }
+  public get currentValue(): Date | null {
+    return this.model.currentValue;
+  }
+
   public value$!: Observable<IDateTimeValueModel>;
 
   init(model: IDateTimeValueInitModel) {
@@ -42,7 +50,7 @@ export class DateTimeValueService {
         startWith({ type: DateTimeValueActionType.Init, value: this.model.value }),
         map((event: IDateTimeValueEvent) => {
           this.value = this.calculate(event);
-
+          
           return {
             value: this.value,
             day: this.day,

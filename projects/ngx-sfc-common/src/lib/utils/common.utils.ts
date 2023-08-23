@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { isEqualDateTimes } from './date-time.utils';
 
 /**
  * Return true if value defined
@@ -15,7 +16,9 @@ export function isDefined<T>(value: T | undefined | null): boolean {
  * @returns True if value is object
  */
 export function isObject(value: any): boolean {
-    return (isDefined(value) && typeof value === 'object' && !Array.isArray(value));
+    return (isDefined(value) && typeof value === 'object'
+        && !Array.isArray(value)
+        && !(value instanceof Date || value instanceof File));
 }
 
 /**
@@ -128,3 +131,84 @@ export function isEmail(value: string): boolean {
 export function parseBoolean(value: string): boolean {
     return /^true$/i.test(value);
 }
+
+/**
+ * Return true if values equal
+ * @param obj1 First value to compare
+ * @param obj2 Second value to compare
+ * @returns True if equal
+ */
+ export function isEqual(obj1: any, obj2: any) {
+
+    /**
+     * More accurately check the type of a JavaScript object
+     * @param  {Object} obj The object
+     * @return {String}     The object type
+     */
+    function getType(obj: any) {
+      return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+    }
+  
+    function areArraysEqual() {
+  
+      // Check length
+      if (obj1.length !== obj2.length) return false;
+  
+      // Check each item in the array
+      for (let i = 0; i < obj1.length; i++) {
+        if (!isEqual(obj1[i], obj2[i])) return false;
+      }
+  
+      // If no errors, return true
+      return true;
+  
+    }
+  
+    function areObjectsEqual() {
+  
+      if (Object.keys(obj1).length !== Object.keys(obj2).length) return false;
+  
+      // Check each item in the object
+      for (let key in obj1) {
+        if (Object.prototype.hasOwnProperty.call(obj1, key)) {
+          if (!isEqual(obj1[key], obj2[key])) {
+            
+            return false;
+          }
+        }
+      }
+  
+      // If no errors, return true
+      return true;
+  
+    }
+  
+    function areFunctionsEqual() {
+      return obj1.toString() === obj2.toString();
+    }
+  
+    function arePrimativesEqual() {
+      return obj1 === obj2;
+    }
+  
+    function areDatesEqual() {
+      return isEqualDateTimes(obj1, obj2);
+    }
+  
+    // Get the object type
+    let type = getType(obj1);
+  
+    // If the two items are not the same type, return false
+    if (type !== getType(obj2)) return false;
+  
+    // Compare based on type
+    if (type === 'array') return areArraysEqual();
+  
+    if (type === 'date') return areDatesEqual();
+  
+    if (type === 'object') return areObjectsEqual();
+  
+    if (type === 'function') return areFunctionsEqual();
+  
+    return arePrimativesEqual();
+  }

@@ -45,6 +45,16 @@
     }
   }
 
+  &.has-value:not(.bordered) {
+    .container {
+      .content {
+        .tags {
+          padding: 0.3em 0;
+        }
+      }
+    }
+  }
+
   &.has-value.ng-invalid,
   &.ng-dirty.ng-invalid,
   &.has-value.inner-invalid {

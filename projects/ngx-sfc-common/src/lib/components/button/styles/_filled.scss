@@ -7,7 +7,9 @@
 
   &.disabled {
     .button {
-      @include filled($color-disabled-default);
+      &.filled {
+        @include filled($color-disabled-default);
+      }
     }
   }
 

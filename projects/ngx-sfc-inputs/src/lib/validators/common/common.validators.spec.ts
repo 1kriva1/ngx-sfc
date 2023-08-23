@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { FormBuilder, FormControl, FormGroup, UntypedFormControl } from "@angular/forms";
-import { equalOrInclude, match, maxLength, minLength } from "./common.validators";
+import { equalOrInclude, match, maxArrayLength, minArrayLength } from "./common.validators";
 
 describe('Validations', () => {
 
@@ -17,7 +17,7 @@ describe('Validations', () => {
                     const testValue = 1,
                         includes = 3,
                         validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                        expectedResult = { sfcEqualOrInclude: true };
+                        expectedResult = { 'sfc-equal-or-include': true };
                     expect(validationResult).toEqual(expectedResult);
                 });
 
@@ -34,7 +34,7 @@ describe('Validations', () => {
                     const testValue = { key: 1, groupKey: 1 },
                         includes = { key: 1, groupKey: 2 },
                         validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                        expectedResult = { sfcEqualOrInclude: true };
+                        expectedResult = { 'sfc-equal-or-include': true };
                     expect(validationResult).toEqual(expectedResult);
                 });
 
@@ -52,7 +52,7 @@ describe('Validations', () => {
                         const testValue = 2,
                             includes = [3, 1],
                             validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                            expectedResult = { sfcEqualOrInclude: true };
+                            expectedResult = { 'sfc-equal-or-include': true };
                         expect(validationResult).toEqual(expectedResult);
                     });
 
@@ -67,7 +67,7 @@ describe('Validations', () => {
                         const testValue = [1, 2],
                             includes = [2, 3],
                             validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                            expectedResult = { sfcEqualOrInclude: true };
+                            expectedResult = { 'sfc-equal-or-include': true };
                         expect(validationResult).toEqual(expectedResult);
                     });
 
@@ -82,7 +82,7 @@ describe('Validations', () => {
                         const testValue = [1, 2],
                             includes = 3,
                             validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                            expectedResult = { sfcEqualOrInclude: true };
+                            expectedResult = { 'sfc-equal-or-include': true };
                         expect(validationResult).toEqual(expectedResult);
                     });
 
@@ -99,7 +99,7 @@ describe('Validations', () => {
                         const testValue = { key: 2, groupKey: 1 },
                             includes = [{ key: 1, groupKey: 2 }, { key: 1, groupKey: 1 }],
                             validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                            expectedResult = { sfcEqualOrInclude: true };
+                            expectedResult = { 'sfc-equal-or-include': true };
                         expect(validationResult).toEqual(expectedResult);
                     });
 
@@ -114,7 +114,7 @@ describe('Validations', () => {
                         const testValue = [{ key: 1, groupKey: 1 }, { key: 1, groupKey: 2 }],
                             includes = [{ key: 2, groupKey: 1 }, { key: 2, groupKey: 2 }],
                             validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                            expectedResult = { sfcEqualOrInclude: true };
+                            expectedResult = { 'sfc-equal-or-include': true };
                         expect(validationResult).toEqual(expectedResult);
                     });
 
@@ -129,7 +129,7 @@ describe('Validations', () => {
                         const testValue = [{ key: 1, groupKey: 1 }, { key: 1, groupKey: 2 }],
                             includes = { key: 2, groupKey: 1 },
                             validationResult = equalOrInclude(includes)(new UntypedFormControl(testValue)),
-                            expectedResult = { sfcEqualOrInclude: true };
+                            expectedResult = { 'sfc-equal-or-include': true };
                         expect(validationResult).toEqual(expectedResult);
                     });
 
@@ -146,26 +146,26 @@ describe('Validations', () => {
         describe('MaxLength', () => {
             fit('Should be invalid', () => {
                 const value = ['test1', 'test2', 'test3'],
-                    validationResult = maxLength(2)(new UntypedFormControl(value)),
-                    expectedResult = { sfcMaxLength: { requiredLength: 2, actualLength: 3, value: value } };
+                    validationResult = maxArrayLength(2)(new UntypedFormControl(value)),
+                    expectedResult = { 'sfc-max-array-length': { requiredLength: 2, actualLength: 3, value: value } };
                 expect(validationResult).toEqual(expectedResult);
             });
 
             fit('Should be valid', () => {
                 const value = ['test1', 'test2'],
-                    validationResult = maxLength(2)(new UntypedFormControl(value));
+                    validationResult = maxArrayLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
             });
 
             fit('Should be valid, when value is null', () => {
                 const value = null,
-                    validationResult = maxLength(2)(new UntypedFormControl(value));
+                    validationResult = maxArrayLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
             });
 
             fit('Should be valid, when value is not array', () => {
                 const value = 'test',
-                    validationResult = maxLength(2)(new UntypedFormControl(value));
+                    validationResult = maxArrayLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
             });
         });
@@ -173,26 +173,26 @@ describe('Validations', () => {
         describe('MinLength', () => {
             fit('Should be invalid', () => {
                 const value = ['test1', 'test2', 'test3'],
-                    validationResult = minLength(4)(new UntypedFormControl(value)),
-                    expectedResult = { sfcMinLength: { requiredLength: 4, actualLength: 3, value: value } };
+                    validationResult = minArrayLength(4)(new UntypedFormControl(value)),
+                    expectedResult = { 'sfc-min-array-length': { requiredLength: 4, actualLength: 3, value: value } };
                 expect(validationResult).toEqual(expectedResult);
             });
 
             fit('Should be valid', () => {
                 const value = ['test1', 'test2'],
-                    validationResult = minLength(2)(new UntypedFormControl(value));
+                    validationResult = minArrayLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
             });
 
             fit('Should be valid, when value is null', () => {
                 const value = null,
-                    validationResult = minLength(2)(new UntypedFormControl(value));
+                    validationResult = minArrayLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
             });
 
             fit('Should be valid, when value is not array', () => {
                 const value = 1,
-                    validationResult = minLength(2)(new UntypedFormControl(value));
+                    validationResult = minArrayLength(2)(new UntypedFormControl(value));
                 expect(validationResult).toBeNull();
             });
         });
@@ -207,13 +207,13 @@ describe('Validations', () => {
 
                 formGroup.setValue({ password: '123', confirmPassword: '12' });
 
-                expect(formGroup.get('confirmPassword')?.errors).toEqual({ sfcMatch: true });
+                expect(formGroup.get('confirmPassword')?.errors).toEqual({ 'sfc-match': true });
             });
 
             fit('Should be invalid when parent group not exist', () => {
                 const validationResult = match('password')(new UntypedFormControl('123'))
 
-                expect(validationResult).toEqual({ sfcMatch: true });
+                expect(validationResult).toEqual({ 'sfc-match': true });
             });
 
             fit('Should be valid when reversed', () => {

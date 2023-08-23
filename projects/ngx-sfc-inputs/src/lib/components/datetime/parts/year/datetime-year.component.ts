@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { Position } from 'ngx-sfc-common';
-import { CommonConstants, ComponentSize } from 'ngx-sfc-common';
+import { ComponentSize } from 'ngx-sfc-common';
 import { ButtonType, Sequence } from 'ngx-sfc-common';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
 import { DateTimeValueService } from '../../service/value/datetime-value.service';
@@ -16,7 +16,6 @@ import { DateTimeYearConstants } from './datetime-year.constants';
 })
 export class DateTimeYearComponent implements AfterViewInit {
 
-  CommonConstants = CommonConstants;
   Position = Position;
   ButtonType = ButtonType;
   Sequence = Sequence;
@@ -48,10 +47,13 @@ export class DateTimeYearComponent implements AfterViewInit {
 
   years: number[] = [];
 
-  constructor(public valueService: DateTimeValueService, public viewService: DateTimeViewService, private changeDetector: ChangeDetectorRef) { }
+  constructor(
+    public valueService: DateTimeValueService,
+    public viewService: DateTimeViewService,
+    private changeDetector: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
-    this.scrollTarget = this.yearsEl.nativeElement.children[DateTimeYearConstants.YEARS_RANGE];
+    this.scrollTarget = this.yearsEl.nativeElement;
     this.changeDetector.detectChanges();
   }
 
@@ -61,14 +63,22 @@ export class DateTimeYearComponent implements AfterViewInit {
       || false;
   }
 
-  updateList(type: Sequence): void {
-    const yearsList: number[] = [];
+  updateList(type: Sequence, single: boolean = false): void {
+    const range = single ? 1 : DateTimeYearConstants.YEARS_RANGE;
 
-    this.years.forEach((year: number) => {
-      yearsList.push(type === Sequence.Next ? year + 1 : year - 1);
-    });
+    for (let index = 0; index < range; index++) {
+      if (type === Sequence.Next)
+        this.years.push(this.years[this.years.length - 1] + 1);
+      else
+        this.years.unshift(this.years[0] - 1);
+    }
 
-    this.years = yearsList;
+    if (single) {
+      if (type === Sequence.Next)
+        this.yearsEl.nativeElement.scrollTop = this.yearsEl.nativeElement.scrollHeight;
+      else
+        this.yearsEl.nativeElement.scrollTop = 1;
+    }
   }
 
   onSelectYear(event: MouseEvent, year: number): void {
@@ -85,8 +95,6 @@ export class DateTimeYearComponent implements AfterViewInit {
 
     if (position === Position.Top)
       this.yearsEl.nativeElement.scrollTop += 1;
-    else
-      this.yearsEl.nativeElement.scrollTop -= 1;
   }
 
   private initList(year: number) {

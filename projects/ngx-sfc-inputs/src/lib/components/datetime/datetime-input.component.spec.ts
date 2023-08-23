@@ -1,11 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import {
+    ModalOpenDirective, ModalComponent, TemplateContentComponent,
+    CommonConstants, ShowHideElementDirective, UIClass
+} from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { DateTimeModalComponent } from '../no-export-index';
+import { DateTimeInputConstants } from './constants/datetime.constants';
 import { DateTimeInputComponent } from './datetime-input.component';
 import { DateTimeValueActionType } from './service/value/datetime-value.enum';
 import { DateTimeValueService } from './service/value/datetime-value.service';
@@ -20,8 +25,11 @@ describe('Component: DateTimeInput', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [FontAwesomeModule],
-            declarations: [ShowHideElementDirective, InputReferenceDirective, DateTimeModalComponent, DateTimeInputComponent]
+            imports: [FontAwesomeModule, NoopAnimationsModule],
+            declarations: [
+                ShowHideElementDirective, ModalOpenDirective, ModalComponent, TemplateContentComponent,
+                InputReferenceDirective, DateTimeModalComponent, DateTimeInputComponent
+            ]
         }).compileComponents();
 
         valueServiceSpy = jasmine.createSpyObj('DateTimeValueService', ['update', 'init']);
@@ -51,6 +59,7 @@ describe('Component: DateTimeInput', () => {
 
         fit('Should have main elements', () => {
             expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('.input')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('input[type=text]')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
@@ -78,7 +87,8 @@ describe('Component: DateTimeInput', () => {
                 locale: component.locale,
                 shortTime: component.shortTime,
                 disabledDays: component.disabledDays,
-                value: assertValue
+                value: assertValue,
+                currentValue: assertValue
             });
         });
 
@@ -102,6 +112,14 @@ describe('Component: DateTimeInput', () => {
             expect(valueServiceSpy.update).toHaveBeenCalledOnceWith({ type: DateTimeValueActionType.Init, value: assertValue });
         });
 
+        fit('Should change current value of value service on change input value', () => {
+            const assertValue = new Date(2033, 8, 29, 13, 16);
+            component.update(assertValue);
+            fixture.detectChanges();
+
+            expect(valueServiceSpy.currentValue).toEqual(assertValue);
+        });
+
         fit("Should call unsubscribe on value change subscription", () => {
             const unsubscribeSpy = spyOn(
                 (component as any)._valueChangeSubscription,
@@ -119,6 +137,36 @@ describe('Component: DateTimeInput', () => {
 
             expect(component.minDate.getSeconds()).toEqual(0);
             expect(component.minDate.getMilliseconds()).toEqual(0);
+        });
+
+        fit("Should not be readonly", () => {
+            expect(fixture.nativeElement.querySelector('input[type=text]').readOnly).toBeFalse();
+        });
+
+        fit("Should be readonly", () => {
+            const inputEl = fixture.debugElement.query(By.css('input'));
+            inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('input[type=text]').readOnly).toBeTrue();
+        });
+
+        fit('Should not exist template content', () => {
+            component.fullSize = true;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('sfc-template-content')).toBeNull();
+        });
+
+        fit('Should exist template content', () => {
+            expect(fixture.nativeElement.querySelector('sfc-template-content')).toBeTruthy();
+        });
+
+        fit('Should have default buttons texts', () => {
+            expect(component.modalButtonsModel.cancelLabel).toEqual(DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.CANCEL);
+            expect(component.modalButtonsModel.clearLabel).toEqual(DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.CLEAR);
+            expect(component.modalButtonsModel.nowLabel).toEqual(DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.NOW);
+            expect(component.modalButtonsModel.okLabel).toEqual(DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.OK);
         });
     });
 
@@ -346,6 +394,127 @@ describe('Component: DateTimeInput', () => {
             expect(calendarEl.componentInstance.locale).toEqual(component.locale);
             expect(calendarEl.componentInstance.switchOnClick).toBeFalse();
             expect(calendarEl.attributes['ng-reflect-delay']).toEqual('0');
+            expect(calendarEl.componentInstance.fullSize).toEqual(component.fullSize);
+            expect(calendarEl.componentInstance.buttonsModel).toEqual(component.modalButtonsModel);
+            expect(calendarEl.componentInstance.timeLabel).toEqual(component.label);
+            expect(calendarEl.componentInstance.bordered).toEqual(component.bordered);
+        });
+    });
+
+    describe('Full size', () => {
+        fit('Should not toggle modal service on change input value', () => {
+            spyOn((component as any).modalService, "toggle").and.callThrough();
+
+            component.update(null);
+            fixture.detectChanges();
+
+            expect((component as any).modalService.toggle).not.toHaveBeenCalled();
+        });
+
+        fit('Should toggle modal service on change input value', () => {
+            spyOn((component as any).modalService, "toggle").and.callThrough();
+
+            component.fullSize = true;
+            fixture.detectChanges();
+
+            component.update(null);
+            fixture.detectChanges();
+
+            expect((component as any).modalService.toggle).toHaveBeenCalledTimes(1);
+        });
+
+        describe('Focus', () => {
+            fit("Should init value service on focus", () => {
+                const inputEl = fixture.debugElement.query(By.css('input')),
+                    assertValue = new Date(2033, 8, 29, 13, 16);
+
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                component.fullSize = true;
+                component.writeValue(assertValue);
+                component.ngOnInit();
+
+                expect(valueServiceSpy.init).toHaveBeenCalledTimes(2);
+                expect(valueServiceSpy.init).toHaveBeenCalledWith({
+                    date: component.date,
+                    time: component.time,
+                    format: component.format,
+                    locale: component.locale,
+                    shortTime: component.shortTime,
+                    disabledDays: component.disabledDays,
+                    value: assertValue,
+                    currentValue: assertValue
+                });
+            });
+
+            fit("Should toggle modal service on focus", () => {
+                spyOn((component as any).modalService, "toggle").and.callThrough();
+
+                component.fullSize = true;
+                fixture.detectChanges();
+
+                const inputEl = fixture.debugElement.query(By.css('input'));
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect((component as any).modalService.toggle).toHaveBeenCalledTimes(1);
+            });
+
+            fit("Should not toggle modal service on focus, if fit already openned", () => {
+                spyOn((component as any).modalService, "toggle").and.callThrough();
+
+                component.fullSize = true;
+                fixture.detectChanges();
+
+                const inputEl = fixture.debugElement.query(By.css('input'));
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+
+                expect((component as any).modalService.toggle).toHaveBeenCalledTimes(1);
+
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+
+                expect((component as any).modalService.toggle).toHaveBeenCalledTimes(1);
+            });
+
+            fit("Should not toggle modal service and init value service on focus if not full size input", () => {
+                spyOn((component as any).modalService, "toggle").and.callThrough();
+
+                const inputEl = fixture.debugElement.query(By.css('input'));
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect((component as any).modalService.toggle).not.toHaveBeenCalled();
+                expect(valueServiceSpy.init).toHaveBeenCalledTimes(1);
+            });
+        });
+
+        describe('Modal', () => {
+            fit('Should show modal when full size', () => {
+                component.fullSize = true;
+                fixture.detectChanges();
+
+                const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('sfc-datetime-modal').style.visibility).toEqual(UIClass.Visible);
+            });
+
+            fit('Should have all related attributes', () => {
+                component.fullSize = true;
+                fixture.detectChanges();
+
+                const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                const modalEl = fixture.debugElement.query(By.css('sfc-modal'));
+
+                expect(modalEl.componentInstance.hideOnClickOutside).toEqual(component.hideOnClickOutside);
+                expect(modalEl.componentInstance.showHeader).toBeFalse();
+                expect(modalEl.componentInstance.showFooter).toBeFalse();
+            });
         });
     });
 });

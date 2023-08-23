@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { IModalEvent } from './modal.event';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
-  private subjectClose = new Subject<void>();
+  private subject = new BehaviorSubject<IModalEvent>({ open: false });
 
-  private subjectOpen = new Subject<any>();
+  public modal$: Observable<any> = this.subject.asObservable();
 
-  close$: Observable<void> = this.subjectClose.asObservable();
-
-  open$: Observable<any> = this.subjectOpen.asObservable();
-
-  close() {
-    this.subjectClose.next();
+  public get isOpen(): boolean {
+    return this.subject.value.open;
   }
 
-  open(options?: any) {
-    this.subjectOpen.next(options);
+  public args: any;
+
+  public toggle(): void {
+    this.subject.next({ open: !this.isOpen });
+  }
+
+  public close(): void {
+    this.subject.next({ open: false });
+  }
+
+  public open(args?: any): void {
+    this.args = args;
+    this.subject.next({ open: true, args: args });
   }
 }

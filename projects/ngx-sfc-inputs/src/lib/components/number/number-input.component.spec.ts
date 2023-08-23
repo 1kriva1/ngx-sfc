@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, ShowHideElementDirective } from 'ngx-sfc-common';
+import { CommonConstants, ShowHideElementDirective, UIConstants } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
+import { InputNumberDirective, InputReferenceDirective } from '../../directives';
 import { NumberInputComponent } from './number-input.component';
 import { NumberSpinnerComponent } from './parts/spinner/number-spinner.component';
 
@@ -14,7 +15,8 @@ describe('Component: NumberInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [ShowHideElementDirective, NumberSpinnerComponent, NumberInputComponent]
+      declarations: [ShowHideElementDirective, InputReferenceDirective, InputNumberDirective,
+        NumberSpinnerComponent, NumberInputComponent]
     }).compileComponents();
   });
 
@@ -31,11 +33,77 @@ describe('Component: NumberInput', () => {
 
     fit('Should have main elements', () => {
       expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('input[type=number]')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.component')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('sfc-number-spinner')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
+    });
+
+    fit('Should focus input on container click', () => {
+      spyOn(component.inputElementRef.nativeElement, 'focus');
+
+      fixture.debugElement.query(By.css('div.container'))
+        .nativeElement.dispatchEvent(new MouseEvent('click'));
+      fixture.detectChanges();
+
+      expect(component.inputElementRef.nativeElement.focus).toHaveBeenCalled();
+    });
+
+    fit('Should not be bordered', () => {
+      expect(component.bordered).toBeFalse();
+    });
+
+    fit("Should hide lever next", () => {
+      const prevLeverEl = fixture.debugElement.query(By.css('sfc-number-spinner .lever.next fa-icon'));
+
+      expect(prevLeverEl.styles['visibility']).toEqual(UIConstants.CSS_VISIBILITY_VISIBLE);
+      expect(prevLeverEl.styles['opacity']).toEqual('1');
+
+      component.disableNext = true;
+      fixture.detectChanges();
+
+      expect(prevLeverEl.styles['visibility']).toEqual(UIConstants.CSS_VISIBILITY_HIDDEN);
+      expect(prevLeverEl.styles['opacity']).toEqual('0');
+    });
+
+    fit("Should hide lever previous", () => {
+      const prevLeverEl = fixture.debugElement.query(By.css('sfc-number-spinner .lever.previous fa-icon'));
+
+      expect(prevLeverEl.styles['visibility']).toEqual(UIConstants.CSS_VISIBILITY_VISIBLE);
+      expect(prevLeverEl.styles['opacity']).toEqual('1');
+
+      component.disablePrevious = true;
+      fixture.detectChanges();
+
+      expect(prevLeverEl.styles['visibility']).toEqual(UIConstants.CSS_VISIBILITY_HIDDEN);
+      expect(prevLeverEl.styles['opacity']).toEqual('0');
+    });
+
+    fit("Should have default value", () => {
+      expect(component.spinnerModel.value).toEqual(0);
+    });
+
+    fit("Should have default value as min", () => {
+      component.min = 10;
+
+      expect(component.spinnerModel.value).toEqual(10);
+    });
+
+    fit("Should have default value as value", () => {
+      component.value = 4;
+
+      expect(component.spinnerModel.value).toEqual(4);
+    });
+
+    fit("Should call unsubscribe on resize observable, when component destroyed", () => {
+      const unsubscribeSpy = spyOn(
+        (component as any)._subscription,
+        'unsubscribe'
+      ).and.callThrough();
+
+      component?.ngOnDestroy();
+
+      expect(unsubscribeSpy).toHaveBeenCalled();
     });
   });
 
@@ -139,14 +207,18 @@ describe('Component: NumberInput', () => {
         nextIcon: faUser,
         prevIcon: faUser,
         step: 3,
-        value: 0,
+        value: 2,
         max: 100,
-        min: 2
+        min: 2,
+        edit: false,
+        disableNext: false,
+        disablePrevious: false
       });
     });
 
     fit("Should change value", () => {
-      fixture.nativeElement.querySelector('sfc-number-spinner .lever.next').dispatchEvent(new MouseEvent('click', {}));
+      fixture.nativeElement.querySelector('sfc-number-spinner .lever.next')
+        .dispatchEvent(new MouseEvent('click', {}));
       fixture.detectChanges();
 
       expect(component.value).toEqual(1);
@@ -186,6 +258,191 @@ describe('Component: NumberInput', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(helperTextAssertValue);
+    });
+  });
+
+  describe('Edit', () => {
+    fit('Should number input not exist', () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('input[type=number]')).toBeNull();
+    });
+
+    fit('Should text input exist', () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('input[type=text]')).toBeTruthy();
+    });
+
+    fit('Should text input has sfcnumberinput directive', () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const attributes = fixture.debugElement.query(By.css('input[type=text]')).attributes;
+
+      expect(attributes['sfcNumberInput']).toBeDefined();
+    });
+
+    fit("Should have default id value", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('input[type=text]')).nativeElement.id).toEqual(`${InputConstants.ID_PREFIX}undefined`);
+    });
+
+    fit("Should have defined id value", () => {
+      component.edit = true;
+      component.id = 'test-id';
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('input[type=text]')).nativeElement.id).toEqual(`${InputConstants.ID_PREFIX}test-id`);
+    });
+
+    fit("Should have default value", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('input[type=text]').value).toEqual('0');
+    });
+
+    fit("Should have defined value", () => {
+      component.edit = true;
+      component.writeValue(4);
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('input[type=text]').value).toEqual('4');
+    });
+
+    fit("Should not be disabled", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('input[type=text]').disabled).toBeFalse();
+    });
+
+    fit("Should be disabled", () => {
+      component.edit = true;
+      component.disabled = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('input[type=text]').disabled).toBeTrue();
+    });
+
+    fit("Should update width on key up event", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]')),
+        initialWidth = inputEl.nativeElement.style.width;
+
+      inputEl.nativeElement.value = '123123';
+      inputEl.triggerEventHandler('keyup', { target: inputEl.nativeElement });
+      fixture.detectChanges();
+
+      const newWidth = inputEl.nativeElement.style.width;
+
+      expect(initialWidth != newWidth).toBeTrue();
+      expect(newWidth).toEqual(`6${UIConstants.CSS_CH}`);
+    });
+
+    fit("Should update width on blur event", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]')),
+        initialWidth = inputEl.nativeElement.style.width;
+
+      inputEl.nativeElement.value = '13';
+      inputEl.triggerEventHandler('blur', { target: inputEl.nativeElement });
+      fixture.detectChanges();
+
+      const newWidth = inputEl.nativeElement.style.width;
+
+      expect(initialWidth != newWidth).toBeTrue();
+      expect(newWidth).toEqual(`2${UIConstants.CSS_CH}`);
+    });
+
+    fit("Should update width on value change", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]')),
+        initialWidth = inputEl.nativeElement.style.width;
+
+      component.writeValue(4);
+      fixture.detectChanges();
+
+      const newWidth = inputEl.nativeElement.style.width;
+
+      expect(initialWidth != newWidth).toBeTrue();
+      expect(newWidth).toEqual(`1${UIConstants.CSS_CH}`);
+    });
+
+    fit("Should update width on lever action", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]')),
+        initialWidth = inputEl.nativeElement.style.width;
+
+      fixture.nativeElement.querySelector('sfc-number-spinner .lever.next')
+        .dispatchEvent(new MouseEvent('click', {}));
+      fixture.detectChanges();
+
+      const newWidth = inputEl.nativeElement.style.width;
+
+      expect(initialWidth != newWidth).toBeTrue();
+      expect(newWidth).toEqual(`1${UIConstants.CSS_CH}`);
+    });
+
+    fit("Should set value on input event", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+      inputEl.nativeElement.value = '123';
+      inputEl.nativeElement.dispatchEvent(new Event('input'));
+
+      expect(component.value).toEqual(123);
+    });
+
+    fit("Should set previous value if new value is invalid on input event", () => {
+      component.edit = true;
+      component.min = 4;
+      component.writeValue(4);
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+      inputEl.nativeElement.value = '3';
+      inputEl.nativeElement.dispatchEvent(new Event('input'));
+
+      expect(component.value).toEqual(4);
+    });
+
+    fit("Should set value on paste event", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+      inputEl.nativeElement.value = '123';
+      inputEl.nativeElement.dispatchEvent(new Event('paste'));
+
+      expect(component.value).toEqual(123);
+    });
+
+    fit("Should set previous value if new value is invalid on paste event", () => {
+      component.edit = true;
+      component.min = 4;
+      component.writeValue(4);
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+      inputEl.nativeElement.value = '3';
+      inputEl.nativeElement.dispatchEvent(new Event('paste'));
+
+      expect(component.value).toEqual(4);
     });
   });
 });

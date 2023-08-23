@@ -1,0 +1,9 @@
+@import "../../../../styles/mixins";
+
+:host {
+  &.bordered:not(.full-size) {
+    .container {
+      @include modal-bordered(0.625em);
+    }
+  }
+}

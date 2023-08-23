@@ -5,5 +5,6 @@ export interface IDateTimeValueInitModel {
     format: string;
     locale: string;
     value: Date;
+    currentValue: Date | null;
     disabledDays: Date[];
 }

@@ -306,7 +306,7 @@
             <div class="component-column">
                 <sfc-range-input-vertical id="demo-range-icon-validation"
                     formControlName="inputRangeIconValidationMessage" [icon]="faUser" [showLimits]="true"
-                    label="test label equal 12" [validations]="{sfcEqualOrInclude: 'Value must be equal 12.'}">
+                    label="test label equal 12" [validations]="{'sfc-equal-or-include': 'Value must be equal 12.'}">
                 </sfc-range-input-vertical>
             </div>
         </div>
@@ -316,14 +316,14 @@
                 <sfc-range-input-vertical id="demo-range-helper-validation"
                     formControlName="inputRangeHelperValidationMessage" helperText="helper test equal 100"
                     [startIcon]="faMinus" [endIcon]="faPlus"
-                    [validations]="{sfcEqualOrInclude: 'Value must be equal 100.'}">
+                    [validations]="{'sfc-equal-or-include': 'Value must be equal 100.'}">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
                 <sfc-range-input-vertical id="demo-range-label-icon-validation"
                     formControlName="inputRangeLabelIconValidationMessage" label="test label and icon equal 1"
-                    [icon]="faUser" [validations]="{sfcEqualOrInclude: 'Value must be equal 1.'}">
+                    [icon]="faUser" [validations]="{'sfc-equal-or-include': 'Value must be equal 1.'}">
                 </sfc-range-input-vertical>
             </div>
 

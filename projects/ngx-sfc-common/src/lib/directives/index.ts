@@ -2,6 +2,7 @@
 export { ClickOutsideDirective } from './click-outside/click-outside.directive';
 export { ClickOutsideEvent } from './click-outside/click-outside.event';
 export { ShowHideElementDirective } from './show-hide-element/show-hide-element.directive';
+export { IfDirective } from './if/if.directive';
 export { ThrowElementOnHoverDirective }
     from './throw-element-on-hover/throw-element-on-hover.directive';
 export { TemplateReferenceDirective }

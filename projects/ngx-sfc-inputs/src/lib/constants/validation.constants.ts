@@ -8,6 +8,12 @@ export class ValidationConstants {
     static EMPTY_VALIDATOR_KEY = 'sfc-empty';
     static FORMAT_VALIDATOR_KEY = 'sfc-format';
     static DATA_VALIDATOR_KEY = 'sfc-data';
+    static EQUAL_OR_INCLUDE_VALIDATOR_KEY = 'sfc-equal-or-include';
+    static MAX_ARRAY_LENGTH_VALIDATOR_KEY = 'sfc-max-array-length';
+    static MIN_ARRAY_LENGTH_VALIDATOR_KEY = 'sfc-min-array-length';
+    static MATCH_VALIDATOR_KEY = 'sfc-match';
+    static COMPARE_THAN_VALIDATOR_KEY = 'sfc-compare-than';
+
 
     // validations
     static DUPLICATE_VALIDATION: ValidationErrors = { 'sfc-duplicate': 'Duplicate value' };

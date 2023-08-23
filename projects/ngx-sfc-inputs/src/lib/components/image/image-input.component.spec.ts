@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommonConstants, DefaultModalFooterComponent, ModalService, TemplateReferenceDirective } from 'ngx-sfc-common';
-import { ModalComponent, ModalOpenDirective } from 'ngx-sfc-common';
-import { CloseComponent } from 'ngx-sfc-common';
+import {
+  CommonConstants, DefaultModalFooterComponent, DelimeterComponent, ModalService, TemplateReferenceDirective,
+  ModalComponent, ModalOpenDirective, CloseComponent, TemplateContentComponent, DefaultModalHeaderComponent,
+  ComponentSizeDirective, ButtonComponent
+} from 'ngx-sfc-common';
 import { InputReferenceDirective } from '../../directives';
 import { ImageEditorComponent } from './parts/editor/image-editor.component';
 import { ImageInputComponent } from './image-input.component';
 import { ImageService } from './service/image.service';
 import { By } from '@angular/platform-browser';
 import { InputConstants } from '../../constants/input.constants';
-import { TemplateContentComponent } from 'ngx-sfc-common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DefaultModalHeaderComponent } from 'ngx-sfc-common';
-import { ButtonComponent } from 'ngx-sfc-common';
-import { ComponentSizeDirective } from 'ngx-sfc-common';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { ImageInputConstants } from './image-input.constants';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -27,8 +25,9 @@ describe('Component: ImageInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule, BrowserAnimationsModule],
-      declarations: [InputReferenceDirective, CloseComponent, ModalComponent, ModalOpenDirective, TemplateContentComponent,
-        DefaultModalHeaderComponent, DefaultModalFooterComponent, ButtonComponent, ComponentSizeDirective, TemplateReferenceDirective, ImageEditorComponent, ImageInputComponent],
+      declarations: [InputReferenceDirective, CloseComponent, DelimeterComponent, ModalComponent, ModalOpenDirective, TemplateContentComponent,
+        DefaultModalHeaderComponent, DefaultModalFooterComponent, ButtonComponent, ComponentSizeDirective,
+        TemplateReferenceDirective, ImageEditorComponent, ImageInputComponent],
       providers: [ModalService, ImageService]
     }).compileComponents();
   });
@@ -55,6 +54,10 @@ describe('Component: ImageInput', () => {
       expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.overlay')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
+    });
+
+    fit('Should not be bordered', () => {
+      expect(component.bordered).toBeFalse();
     });
 
     fit("Should have defined value", () => {
@@ -88,7 +91,9 @@ describe('Component: ImageInput', () => {
 
     fit("Should have constant modal footer model", () => {
       expect(component.footerModalModel.cancelButton).toBeTrue();
+      expect(component.footerModalModel.cancelButtonText).toEqual(component.cancelLabel);
       expect(component.footerModalModel.applyButton).toBeTrue();
+      expect(component.footerModalModel.applyButtonText).toEqual(component.okLabel);
       expect(component.footerModalModel.onApply).toBeDefined();
     });
 
@@ -130,8 +135,8 @@ describe('Component: ImageInput', () => {
       expect(Object.keys(component.innerErrors).length).toEqual(0);
     });
 
-    fit("Should close modal after export image", () => {
-      const modalServiceSpy = spyOn((component as any).modalService, 'close'),
+    fit("Should toggle modal after export image", () => {
+      const modalServiceSpy = spyOn((component as any).modalService, 'toggle'),
         exportEvent: IImageExportEvent = { file: new File([], 'test.png'), base64: 'base_64' };
 
       (component as any).imageService.export(exportEvent);
@@ -201,16 +206,16 @@ describe('Component: ImageInput', () => {
       expect((component as any).imageService.imageFile).toBeUndefined();
     });
 
-    fit("Should call open modal", () => {
-      const modalServiceSpy = spyOn((component as any).modalService, 'open');
+    fit("Should call toggle modal", () => {
+      const modalServiceSpy = spyOn((component as any).modalService, 'toggle');
 
       emitImage();
 
       expect(modalServiceSpy).toHaveBeenCalledTimes(1);
     });
 
-    fit("Should not call open modal", () => {
-      const modalServiceSpy = spyOn((component as any).modalService, 'open');
+    fit("Should not call toggle modal", () => {
+      const modalServiceSpy = spyOn((component as any).modalService, 'toggle');
 
       emitImage(getHugeFile('test.text', 1000));
 
@@ -381,7 +386,7 @@ describe('Component: ImageInput', () => {
 
       expect(modalEl.componentInstance.defaultHeaderModel).toEqual(component.headerModalModel);
       expect(modalEl.componentInstance.defaultFooterModel).toEqual(component.footerModalModel);
-      expect(modalEl.componentInstance.hideOnClickOutside).toBeFalse();
+      expect(modalEl.componentInstance.hideOnClickOutside).toEqual(component.hideOnClickOutside);
     });
 
     fit('Should image editor has all related attributes', () => {
@@ -396,7 +401,7 @@ describe('Component: ImageInput', () => {
       const imageServiceSpy = spyOn((component as any).imageService, 'crop');
 
       emitImage();
-      
+
       const okBtn = fixture.debugElement.query(By.css('sfc-default-modal-footer sfc-button'));
       okBtn.triggerEventHandler('click', { target: okBtn.nativeElement });
       fixture.detectChanges();

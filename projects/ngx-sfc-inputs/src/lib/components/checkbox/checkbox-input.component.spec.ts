@@ -121,7 +121,6 @@ describe('Component: CheckboxInput', () => {
 
       expect(checkMark.type).toEqual(CheckmarkType.Square);
       expect(checkMark.disabled).toBeFalse();
-      expect(checkMark.showNotActive).toBeFalse();
       expect(checkMark.active).toBeFalse();
     });
 

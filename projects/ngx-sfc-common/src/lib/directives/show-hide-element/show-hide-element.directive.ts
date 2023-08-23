@@ -6,7 +6,7 @@ import { UIConstants } from '../../constants';
 })
 export class ShowHideElementDirective {
 
-  private readonly SHOW_HIDE_TRANSITION_DELAY_DEFAULT: number = 0.5;  
+  private readonly SHOW_HIDE_TRANSITION_DELAY_DEFAULT: number = 0.5;
 
   @Input('sfcShowHideElement')
   set showHideElement(show: boolean) {

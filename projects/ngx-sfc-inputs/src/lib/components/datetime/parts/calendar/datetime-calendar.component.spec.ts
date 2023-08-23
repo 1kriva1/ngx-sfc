@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DateTimeConstants, MouseDownDirective } from 'ngx-sfc-common';
+import { DateTimeConstants, MouseDownDirective, UIClass } from 'ngx-sfc-common';
 import { DateTimeValueService } from '../../service/value/datetime-value.service';
 import { DateTimeViewService } from '../../service/view/datetime-view.service';
 import { DateTimeCalendarComponent } from './datetime-calendar.component';
@@ -7,7 +7,6 @@ import { By } from '@angular/platform-browser';
 import { WeekDay } from '@angular/common';
 import { DebugElement } from '@angular/core';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
-import { UIClass } from 'ngx-sfc-common';
 import { DateTimeViewActionType } from '../../service/view/enums/datetime-view.enum';
 
 describe('Component: DateTimeCalendar', () => {
@@ -80,7 +79,8 @@ describe('Component: DateTimeCalendar', () => {
     fit('Should have days in order', () => {
       fixture.debugElement.queryAll(By.css('th')).forEach((dayEl, index) => {
         const indexValue = index + 1 >= DateTimeConstants.DAYS_OF_WEEK_3.length ? 0 : index + component.weekStart;
-        expect(dayEl.nativeElement.innerText).toEqual(DateTimeConstants.DAYS_OF_WEEK_3[indexValue]);
+        expect(dayEl.nativeElement.innerText.toLocaleLowerCase())
+          .toEqual(DateTimeConstants.DAYS_OF_WEEK_3[indexValue].toLocaleLowerCase());
       });
     });
 
@@ -90,7 +90,8 @@ describe('Component: DateTimeCalendar', () => {
       fixture.detectChanges();
 
       fixture.debugElement.queryAll(By.css('th')).forEach((dayEl, index) => {
-        expect(dayEl.nativeElement.innerText).toEqual(DateTimeConstants.DAYS_OF_WEEK_3[index]);
+        expect(dayEl.nativeElement.innerText.toLocaleLowerCase())
+          .toEqual(DateTimeConstants.DAYS_OF_WEEK_3[index].toLocaleLowerCase());
       });
     });
   });
@@ -215,7 +216,7 @@ describe('Component: DateTimeCalendar', () => {
     describe('Select event', () => {
       fit('Should not change selected day by default', () => {
         const selectedDate = new Date(2021, 0, 1);
-        valueServiceSpy.value = component.currentDate = selectedDate;
+        valueServiceSpy.currentValue = component.currentDate = selectedDate;
         fixture.detectChanges();
 
         selectDate(getDayEl(4));
@@ -225,7 +226,7 @@ describe('Component: DateTimeCalendar', () => {
 
       fit('Should change selected day', () => {
         const selectedDate = new Date(2021, 0, 1);
-        valueServiceSpy.value = component.currentDate = selectedDate;
+        valueServiceSpy.currentValue = component.currentDate = selectedDate;
         fixture.detectChanges();
 
         selectDate(getDayEl(5), new Date(2021, 0, 2));
@@ -235,7 +236,7 @@ describe('Component: DateTimeCalendar', () => {
 
       fit('Should not change selected day that already selected', () => {
         const selectedDate = new Date(2021, 0, 1);
-        valueServiceSpy.value = component.currentDate = selectedDate;
+        valueServiceSpy.currentValue = component.currentDate = selectedDate;
         fixture.detectChanges();
 
         selectDate(getDayEl(5), new Date(2021, 0, 2));
@@ -246,7 +247,7 @@ describe('Component: DateTimeCalendar', () => {
 
       fit('Should not update view', () => {
         const selectedDate = new Date(2021, 0, 1);
-        valueServiceSpy.value = component.currentDate = selectedDate;
+        valueServiceSpy.currentValue = component.currentDate = selectedDate;
         fixture.detectChanges();
 
         selectDate(getDayEl(5), new Date(2021, 0, 2));
@@ -256,7 +257,7 @@ describe('Component: DateTimeCalendar', () => {
 
       fit('Should update view', () => {
         const selectedDate = new Date(2021, 0, 1);
-        valueServiceSpy.value = component.currentDate = selectedDate;
+        valueServiceSpy.currentValue = component.currentDate = selectedDate;
         component.switchOnClick = true;
         fixture.detectChanges();
 
@@ -273,7 +274,7 @@ describe('Component: DateTimeCalendar', () => {
     fixture.detectChanges();
 
     if (value) {
-      valueServiceSpy.value = component.currentDate = value;
+      valueServiceSpy.value = valueServiceSpy.currentValue = component.currentDate = value;
       fixture.detectChanges();
     }
 

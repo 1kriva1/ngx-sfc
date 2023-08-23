@@ -11,7 +11,8 @@ import { TagsInputConstants } from './tags-input.constants';
 @Component({
   selector: 'sfc-tags-input',
   templateUrl: './tags-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', './tags-input.component.scss']
+  styleUrls: ['../../styles/input.component.scss', './tags-input.component.scss',
+    './tags-input-bordered.component.scss']
 })
 export class TagsInputComponent extends BaseInputComponent<string[]> implements OnInit {
 
@@ -21,7 +22,11 @@ export class TagsInputComponent extends BaseInputComponent<string[]> implements 
   newTagValue: string | null = null;
 
   ngOnInit(): void {
-    this.validations = { ...this.validations, ...ValidationConstants.DUPLICATE_VALIDATION, ...ValidationConstants.EMPTY_VALIDATION };
+    this.validations = {
+      ...ValidationConstants.DUPLICATE_VALIDATION,
+      ...ValidationConstants.EMPTY_VALIDATION,
+      ...this.validations
+    };
     this.value = this.value || [];
   }
 
@@ -70,5 +75,30 @@ export class TagsInputComponent extends BaseInputComponent<string[]> implements 
 
     // clear new tag input
     this.newTagValue = null;
+  }
+
+  get requiredLengthValue(): number | null {
+    let requiredLength = null;
+
+    if (this.validationErrors) {
+      const minLengthError = this.validationErrors[ValidationConstants.MIN_ARRAY_LENGTH_VALIDATOR_KEY],
+        maxLengthError = this.validationErrors[ValidationConstants.MAX_ARRAY_LENGTH_VALIDATOR_KEY];
+
+      if (minLengthError) {
+        requiredLength = minLengthError.requiredLength;
+      }
+
+      if (maxLengthError) {
+        requiredLength = maxLengthError.requiredLength;
+      }
+    }
+
+    return requiredLength;
+  }
+
+  get charsCounterValue(): string {
+    return this.requiredLengthValue
+      ? `${this.value?.length}${CommonConstants.COMMON_TEXT_DELIMETER}${this.requiredLengthValue}`
+      : CommonConstants.EMPTY_STRING;
   }
 }

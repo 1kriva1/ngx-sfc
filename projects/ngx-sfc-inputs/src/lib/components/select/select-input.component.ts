@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostBinding, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import {
   any, CommonConstants, firstOrDefault, hasItemBy, hasObjectItem, ILoadMoreModel,
-  isDefined, nameof, remove, removeItemBy, where
+  ILoadMorePredicateParameters,
+  isDefined, nameof, remove, removeItemBy, sortBy, SortingDirection, where
 } from 'ngx-sfc-common';
 import { Subject } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -15,13 +16,16 @@ import { ISelectGroupItemModel } from './parts/item/models/select-group-item.mod
 import { ISelectGroupValue } from './models/select-group-value.model';
 import { SelectItemModel } from './parts/item/select-item.component';
 
+export type ISelectValueType = ISelectValue | ISelectValue[] | ISelectGroupValue | null;
+
 @Component({
   selector: 'sfc-select-input',
   templateUrl: './select-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', './select-input.component.scss']
+  styleUrls: ['../../styles/input.component.scss', './select-input.component.scss',
+    './select-input-bordered.component.scss']
 })
 export class SelectInputComponent
-  extends BaseDataInputComponent<SelectItemModel, ISelectValue | ISelectValue[] | ISelectGroupValue>
+  extends BaseDataInputComponent<SelectItemModel, ISelectValueType>
   implements OnInit {
 
   @Input()
@@ -35,6 +39,9 @@ export class SelectInputComponent
 
   @Input()
   multiple: boolean = false;
+
+  @Input()
+  size!: number;
 
   @ViewChildren(SelectItemComponent, { read: ElementRef })
   private itemsRef!: QueryList<ElementRef>;
@@ -58,7 +65,7 @@ export class SelectInputComponent
     return this.placeholder ? this.placeholder : CommonConstants.EMPTY_STRING;
   }
 
-  private initSubject!: Subject<void>;
+  private initSubject!: Subject<ILoadMorePredicateParameters>;
   private _initialized: boolean = false;
   @HostBinding(`class.${UIClass.Initialization}`)
   private get needInitialization(): boolean {
@@ -85,19 +92,20 @@ export class SelectInputComponent
     super.ngOnInit();
 
     this.loadModel = {
+      size: this.size,
       data$: this.data$,
       loader: this.loader
     };
 
     if (!this.loadOnInit) {
-      this.initSubject = new Subject<void>();
+      this.initSubject = new Subject<ILoadMorePredicateParameters>();
       this.loadModel.predicate$ = this.initSubject.asObservable();
     }
   }
 
   public onFocus(): void {
     if (this.needInitialization)
-      this.initSubject.next();
+      this.initSubject.next({ value: null });
 
     if (this.hasValue)
       this.selectedItem = this.itemsRef.find(itemRef => itemRef.nativeElement.className.includes(UIClass.Active))?.nativeElement;
@@ -119,7 +127,10 @@ export class SelectInputComponent
     if (this.needInitialization)
       this._initialized = true;
 
-    this.items = this.items.concat(result.items);
+    if (result.reset)
+      this.items = result.items;
+    else
+      this.items = this.items.concat(result.items);
 
     if (this.hasGroup)
       this.items = this.prepareGroupItems(this.items as ISelectGroupItemModel[]);
@@ -160,7 +171,7 @@ export class SelectInputComponent
       newValue.push({ key: item.key, value: item.value });
     }
 
-    this.onChange(newValue);
+    this.onChange(sortBy(newValue, nameof<ISelectItemModel>('key'), SortingDirection.Ascending));
   }
 
   private onGroupChange(item: ISelectGroupItemModel): void {

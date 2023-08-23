@@ -5,4 +5,5 @@ export class InputConstants {
 
     static ENTER_KEY = "Enter";
     static BACKSPACE_KEY = "Backspace";
+    static DELETE_KEY = "Delete";
 }

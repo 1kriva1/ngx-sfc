@@ -1,29 +1,39 @@
-@import "../../../../styles/variables";
+@import "../../../../styles";
+
+$left-right-limit: 1.5em;
 
 :host {
   display: inline-flex;
   width: 100%;
 
   .container {
-    display: flex;
-    align-items: flex-start;
     width: 100%;
-    justify-content: space-between;
+    padding-bottom: 0.5em;
 
-    .icon {
-      font-size: 1em;
-      padding-right: 0.7em;
+    .content {
+      @include center;
+
+      padding: 0.5em 0;
+
+      .icon {
+        position: absolute;
+        left: $left-right-limit;
+        font-size: 1.3em;
+      }
+
+      .label {
+        font-size: 1.2em;
+        font-weight: bold;
+        user-select: none;
+        padding: 0 0.7em;
+      }
+
+      sfc-close {
+        position: absolute;
+        right: $left-right-limit;
+      }
     }
 
-    .label {
-      font-size: 1.2em;
-      font-weight: bold;
-      user-select: none;
-      padding: 0 0.7em;
-    }
-
-    sfc-close {
-      padding-left: 0.7em;
-    }
+    @include delimeter-same-as-default;
   }
 }

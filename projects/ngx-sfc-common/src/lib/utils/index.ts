@@ -9,7 +9,8 @@ export {
     isNumeric,
     isChromeBrowser,
     isEmail,
-    parseBoolean
+    parseBoolean,
+    isEqual
 } from './common.utils'
 
 export {
@@ -27,6 +28,7 @@ export {
     setMilliseconds,
     setDefaultSecondsAndMiliseconds,
     getNextDate,
+    getPreviousDate,
     getNextMonth,
     getPreviousMonth,
     getNextYear,
@@ -39,10 +41,13 @@ export {
     getLastDayOfMonthByYearAndMonth,
     getWeeksNumberInMonth,
     isEqualDates,
+    isEqualDateTimes,
     isDateGreat,
     isDateGreatOrEqual,
     isDateTimeGreat,
-    isDateTimeGreatOrEqual
+    isDateTimeGreatOrEqual,
+    convertUTCDateToLocalDate,
+    convertTimestampToDate
 } from './date-time.utils'
 
 export {
@@ -86,5 +91,6 @@ export {
     removeItem,
     removeItemBy,
     updateItemBy,
-    getCollectionOrEmpty
+    getCollectionOrEmpty,
+    count
 } from './collections.utils'

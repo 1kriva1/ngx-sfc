@@ -24,7 +24,4 @@ export class CheckmarkComponent {
   @Input()
   @HostBinding('class')
   type: CheckmarkType = CheckmarkType.Rounded;
-
-  @Input()
-  showNotActive: boolean = true;
 }

@@ -34,8 +34,12 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxSfcCommonModule } from 'ngx-sfc-common';
-import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+// import { NgxSfcCommonModule } from 'ngx-sfc-common';
+// import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSfcInputsValidationModule } from 'projects/ngx-sfc-inputs/src/lib/validators/ngx-sfc-inputs-validation.module';
+import { NgxSfcInputsModule } from 'projects/ngx-sfc-inputs/src/lib/ngx-sfc-inputs.module';
+import { NgxSfcCommonModule } from 'projects/ngx-sfc-common/src/lib/ngx-sfc-common.module';
 
 @NgModule({
   declarations: [
@@ -75,6 +79,7 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     ReactiveFormsModule,
     AppRoutingModule,
     FontAwesomeModule,
+    BrowserAnimationsModule,
     NgxSfcCommonModule,
     NgxSfcInputsValidationModule,
     NgxSfcInputsModule

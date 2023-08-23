@@ -16,6 +16,8 @@ export class InlineFileInputComponent extends BaseFileInputComponent implements 
   @Input()
   showFileName = true;
 
+  override bordered: boolean = false;
+
   ngOnInit() {
     if (this.defaultIcon || !this.showFileName && !this.icon)
       this.icon = FileInputConstants.DEFAULT_ICON;

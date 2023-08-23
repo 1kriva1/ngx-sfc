@@ -84,7 +84,7 @@ export class GroupSelectPresentationComponent extends BasePresentationComponent
       value: 'group one',
       group: true,
       groupKey: 1
-    },   
+    },
     {
       key: 1,
       value: 'abc 1',
@@ -361,9 +361,10 @@ export class GroupSelectPresentationComponent extends BasePresentationComponent
           const data: ILoadMoreModel<any> = items
             ? {
               items: skip(items, parameters.page, 3),
-              next: parameters.page < Math.ceil(items.length / 3)
+              next: parameters.page < Math.ceil(items.length / 3),
+              reset: false
             }
-            : { items: [], next: false };
+            : { items: [], next: false, reset: false };
 
           return data;
         })

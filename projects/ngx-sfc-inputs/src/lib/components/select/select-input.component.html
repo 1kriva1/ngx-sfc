@@ -2,14 +2,16 @@
     <fa-icon #iconRef *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
     <div class="content">
         <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
-        <input sfcInput id="{{inputId}}" type="text" class="text-input" [placeholder]="placeholderValue"
-            [value]="displayValue" [disabled]="disabled" readonly="true" (focus)="onFocus()">
+        <div class="input">
+            <input sfcInput id="{{inputId}}" type="text" class="text-input" [placeholder]="placeholderValue"
+                [value]="displayValue" [disabled]="disabled" readonly="true" (focus)="onFocus()">
+        </div>
         <span class="helper-text">{{helperTextValue}}</span>
-        <sfc-load-container [id]="inputId" [open]="isFocused" [showLoadMoreButton]="showLoadMoreButton" [showEmpty]="false"
-            [model]="loadModel" [scrollTarget]="selectedItem" (handleSuccess)="handleSuccess($event)"
-            (handleError)="handleError()">
-            <sfc-select-item *ngFor="let item of items" [active]="isSelected(item)" [multiple]="multiple" [hasGroup]="hasGroup"
-                [item]="item" (selected)="onSelect($event)">
+        <sfc-load-container [id]="inputId" [open]="isFocused" [showLoadMoreButton]="showLoadMoreButton"
+            [showEmpty]="false" [model]="loadModel" [scrollTarget]="selectedItem"
+            (handleSuccess)="handleSuccess($event)" (handleError)="handleError()">
+            <sfc-select-item *ngFor="let item of items" [active]="isSelected(item)" [multiple]="multiple"
+                [hasGroup]="hasGroup" [item]="item" (selected)="onSelect($event)">
             </sfc-select-item>
         </sfc-load-container>
     </div>

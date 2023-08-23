@@ -18,7 +18,7 @@ export class DefaultModalHeaderComponent implements OnInit {
   }
 
   @Input()
-  model?: IDefaultModalHeaderModel;
+  model!: IDefaultModalHeaderModel;
 
   get icon(): IconDefinition {
     return this.model?.icon || faWindowRestore;
@@ -31,7 +31,7 @@ export class DefaultModalHeaderComponent implements OnInit {
       this.model = this.DEFAULT_MODAL_HEADER_MODEL;
   }
 
-  onClose() {
+  public onClose(): void {
     this.modalService.close();
   }
 }

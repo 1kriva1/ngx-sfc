@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonConstants, hexToRgb } from 'ngx-sfc-common';
 import { ProgressColor } from '../progress-color.enum';
+import { getProgressColorDynamicallyFunc } from '../progress.utils';
 import { ProgressSemiCircleComponent } from './progress-semi-circle.component';
 
 describe('Component: ProgressSemiCircleComponent', () => {
@@ -192,6 +193,28 @@ describe('Component: ProgressSemiCircleComponent', () => {
 
         expect(fixture.debugElement.query(By.css('div.bar')).styles['borderBottomColor']).toEqual('green');
         expect(fixture.debugElement.query(By.css('div.bar')).styles['borderRightColor']).toEqual('green');
+      });
+
+      fit("Should reflect colors from defined dynamic getColor function", () => {
+        component.getColor = getProgressColorDynamicallyFunc;
+        component.max = 9
+        component.progress = 4;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['borderBottomColor']).toEqual(hexToRgb(ProgressColor.MEDIUM));
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['borderRightColor']).toEqual(hexToRgb(ProgressColor.MEDIUM));
+
+        component.progress = 5;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['borderBottomColor']).toEqual(hexToRgb(ProgressColor.MAX_MEDIUM));
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['borderRightColor']).toEqual(hexToRgb(ProgressColor.MAX_MEDIUM));
+
+        component.progress = 8;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['borderBottomColor']).toEqual(hexToRgb(ProgressColor.MAX_HIGH));
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['borderRightColor']).toEqual(hexToRgb(ProgressColor.MAX_HIGH));
       });
     });
   });

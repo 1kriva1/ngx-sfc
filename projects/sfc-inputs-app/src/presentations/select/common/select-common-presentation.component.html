@@ -128,7 +128,7 @@
                 <sfc-select-input id="demo-select-validation-msg" formControlName="inputSelectValidationMessage"
                     [data]="data" label="validation label test" placeholder="validation placeholder test"
                     [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 
@@ -136,7 +136,7 @@
                 <sfc-select-input id="demo-select-validation-failed-msg"
                     formControlName="inputSelectValidationFailedMessage" [data]="data" label="validation label test"
                     placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 
@@ -144,7 +144,7 @@
                 <sfc-select-input id="demo-select-validation-success-msg"
                     formControlName="inputSelectValidationSuccessMessage" [data]="data" label="validation label test"
                     placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 
@@ -209,7 +209,7 @@
                     formControlName="inputSelectObservableValidationMessage" [data$]="data$"
                     [showLoadMoreButton]="false" label="validation label test" placeholder="validation placeholder test"
                     [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 
@@ -240,7 +240,7 @@
                 <sfc-select-input id="demo-select-loader-validation-msg"
                     formControlName="inputSelectLoaderValidationMessage" [loader]="loader" label="validation label test"
                     placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 

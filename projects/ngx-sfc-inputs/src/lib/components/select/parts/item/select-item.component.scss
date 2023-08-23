@@ -1,5 +1,8 @@
 @use "ngx-sfc-common/styles/index" as *;
 
+$item-size: 1.8em;
+$item-content-size: calc($item-size / 2);
+
 :host {
   cursor: pointer;
 
@@ -9,11 +12,11 @@
     flex-flow: row wrap;
     text-align: center;
     background-color: $color-0;
-    min-height: 2em;
+    min-height: $item-size;
     padding: 0.5em 1em;
 
     img {
-      height: 2em;
+      height: $item-size;
       object-fit: cover;
       object-position: bottom;
       margin-left: auto;
@@ -21,16 +24,17 @@
 
     span {
       display: block;
-      font-size: 1em;
+      font-size: $item-content-size;
       color: $color-default;
     }
 
     sfc-checkmark {
+      font-size: $item-content-size;
       padding-right: 1em;
     }
 
     &:hover {
-      background-color: $color-1;
+      background-color: $color-2;
     }
   }
 
@@ -44,7 +48,7 @@
 
   &.active {
     div {
-      background-color: $color-2;
+      // background-color: $color-1;
     }
   }
 

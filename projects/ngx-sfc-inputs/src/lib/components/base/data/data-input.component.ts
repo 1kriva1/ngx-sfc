@@ -41,7 +41,7 @@ export abstract class BaseDataInputComponent<T, V>
     }
 
     ngOnInit(): void {
-        this.validations = { ...this.validations, ...ValidationConstants.DATA_VALIDATION };
+        this.validations = { ...ValidationConstants.DATA_VALIDATION, ...this.validations };
 
         // if data is static, make it observable
         if (!isDefined(this.data$)) {

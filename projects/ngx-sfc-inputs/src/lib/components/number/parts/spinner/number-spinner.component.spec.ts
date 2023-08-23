@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { ShowHideElementDirective, UIClass, UIConstants } from 'ngx-sfc-common';
 import { NumberSpinnerComponent } from './number-spinner.component';
 
 describe('Component: NumberSpinner', () => {
@@ -130,6 +130,29 @@ describe('Component: NumberSpinner', () => {
 
         expect(component.showPrevious).toBeFalse();
       });
+
+      fit('Should not show icon if disabled', () => {
+        component.model.disablePrevious = true;
+
+        expect(component.showPrevious).toBeFalse();
+      });
+
+      fit('Should have active styles', () => {
+        const leverPreviousEl = fixture.debugElement.query(By.css('.lever.previous'));
+
+        expect(leverPreviousEl.styles['cursor']).toEqual(UIClass.Pointer);
+        expect(leverPreviousEl.styles['pointerEvents']).toEqual(UIConstants.CSS_INITIAL);
+      });
+
+      fit('Should have disabled styles', () => {
+        component.model.disablePrevious = true;
+        fixture.detectChanges();
+
+        const leverPreviousEl = fixture.debugElement.query(By.css('.lever.previous'));
+
+        expect(leverPreviousEl.styles['cursor']).toEqual(UIClass.Default);
+        expect(leverPreviousEl.styles['pointerEvents']).toEqual(UIConstants.CSS_NONE);
+      });
     });
 
     describe('Next', () => {
@@ -186,10 +209,44 @@ describe('Component: NumberSpinner', () => {
 
         expect(component.showNext).toBeFalse();
       });
+
+      fit('Should not show icon if disabled', () => {
+        component.model.disableNext = true;
+
+        expect(component.showNext).toBeFalse();
+      });
+
+      fit('Should have active styles', () => {
+        const leverNextEl = fixture.debugElement.query(By.css('.lever.next'));
+
+        expect(leverNextEl.styles['cursor']).toEqual(UIClass.Pointer);
+        expect(leverNextEl.styles['pointerEvents']).toEqual(UIConstants.CSS_INITIAL);
+      });
+
+      fit('Should have disabled styles', () => {
+        component.model.disableNext = true;
+        fixture.detectChanges();
+
+        const leverNextEl = fixture.debugElement.query(By.css('.lever.next'));
+
+        expect(leverNextEl.styles['cursor']).toEqual(UIClass.Default);
+        expect(leverNextEl.styles['pointerEvents']).toEqual(UIConstants.CSS_NONE);
+      });
     });
   });
 
   describe('Label', () => {
+    fit('Should exist', () => {
+      expect(fixture.nativeElement.querySelector('.label span')).toBeDefined();
+    });
+
+    fit('Should not exist', () => {
+      component.model.edit = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.label span')).toBeNull();
+    });
+
     fit('Should have default value', () => {
       expect(fixture.nativeElement.querySelector('.label').innerText).toEqual('0');
     });

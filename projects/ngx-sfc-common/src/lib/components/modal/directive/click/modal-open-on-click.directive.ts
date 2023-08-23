@@ -1,7 +1,8 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { ModalService } from '../../service/modal.service';
 import { isDefined } from '../../../../utils/index';
+import { IModalEvent } from '../../service/modal.event';
 
 @Directive({
   selector: '[sfcModalOpenOnClick]'
@@ -23,10 +24,10 @@ export class ModalOpenOnClickDirective implements OnInit, OnDestroy {
     });
   }
 
-  private clickHandler = ((event: MouseEvent): void => {
+  private clickHandler = ((): void => {
     this.viewContainer.clear();
     this.viewContainer.createEmbeddedView(this.templateRef);
-    this.modalService.open(event.currentTarget);
+    this.modalService.toggle();
   }).bind(this);
 
   private elements: HTMLElement[] = [];
@@ -40,7 +41,8 @@ export class ModalOpenOnClickDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._closeSubscription = this.modalService.close$
+    this._closeSubscription = this.modalService.modal$
+      .pipe(filter((event: IModalEvent) => !event.open))
       .subscribe(() => this.viewContainer.clear());
   }
 

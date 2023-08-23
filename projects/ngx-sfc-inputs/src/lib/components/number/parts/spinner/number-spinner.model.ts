@@ -10,4 +10,7 @@ export interface INumberSpinnerModel {
     min?: number | null;
     step: number;
     disabled: boolean;
+    disableNext: boolean;
+    disablePrevious: boolean;
+    edit?: boolean;
 }

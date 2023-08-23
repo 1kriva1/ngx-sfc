@@ -1,7 +1,7 @@
 <div class="overlay" [@hideOverlay] (click)="hideOnClickOutside && close()">
     <div class="content" [@hideContent] (click)="$event.stopPropagation()">
 
-        <div class="header">
+        <div *ngIf="showHeader" class="header">
 
             <sfc-template-content [referenceContent]="header" [templatesContent]="templates"
                 [templateType]="ModalTemplate.Header" [defaultContent]="defaultHeader">
@@ -21,7 +21,7 @@
 
         </div>
 
-        <div class="footer">
+        <div *ngIf="showFooter" class="footer">
 
             <sfc-template-content [referenceContent]="footer" [templatesContent]="templates"
                 [templateType]="ModalTemplate.Footer" [defaultContent]="defaultFooter">

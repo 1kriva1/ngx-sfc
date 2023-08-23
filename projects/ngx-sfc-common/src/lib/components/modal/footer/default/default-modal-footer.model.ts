@@ -1,6 +1,8 @@
 export interface IDefaultModalFooterModel {
     cancelButton?: boolean;
+    cancelButtonText?: string;
+    onCancel?: (args:any) => void;
     applyButton?: boolean;
-    onCancel?: () => void;
-    onApply?: () => void;
+    applyButtonText?: string;
+    onApply?: (args:any) => void;
 }

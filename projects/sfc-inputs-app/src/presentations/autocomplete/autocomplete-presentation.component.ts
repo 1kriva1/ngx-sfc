@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { hasItemBy, ILoadMoreModel, ILoadMoreParameters, LoaderFunction, skip, where } from 'ngx-sfc-common';
+import { hasItemBy, ILoadMoreModel, ILoadMoreParameters, LoadChangesSource, LoaderFunction, skip, where } from 'ngx-sfc-common';
 import { equalOrInclude, IAutoCompleteItemModel } from 'ngx-sfc-inputs';
 import { BehaviorSubject, map, Observable, of, delay } from 'rxjs';
 import { BasePresentationComponent } from '../base-presentations.component';
@@ -273,21 +273,30 @@ export class AutoCompletePresentationComponent extends BasePresentationComponent
   // END LOADER DATA ACTIONS
 
   private getLoaderFynction(data$: Observable<IAutoCompleteItemModel[]>) {
-    return ((parameters: ILoadMoreParameters): Observable<ILoadMoreModel<any>> => {
+    return ((parameters: ILoadMoreParameters, source: LoadChangesSource): Observable<ILoadMoreModel<any>> => {
       return data$.pipe(
         delay(1000),
         map(items => {
+          const reset = source == LoadChangesSource.Data;
+
+          if (reset) {
+            parameters = { params: parameters.params, page: 1 };
+          }
+
           const filtered = where(items, (item: IAutoCompleteItemModel) => {
             const itemParts = item.value.trim().split(' ');
-            return item.value.includes(parameters.params) || hasItemBy(itemParts, part => part.includes(parameters.params));
+            return item.value.includes(parameters.params.value) || hasItemBy(itemParts, part => part.includes(parameters.params.value));
           });
 
           const data: ILoadMoreModel<any> = filtered
             ? {
               items: skip(filtered, parameters.page, 3),
-              next: parameters.page < Math.ceil(filtered.length / 3)
+              next: parameters.page < Math.ceil(filtered.length / 3),
+              reset: reset
             }
-            : { items: [], next: false };
+            : { items: [], next: false, reset: reset };
+
+          source = LoadChangesSource.Data;
 
           return data;
         })

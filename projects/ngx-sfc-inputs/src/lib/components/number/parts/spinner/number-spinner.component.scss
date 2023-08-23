@@ -9,7 +9,7 @@
     border-radius: 2.5em;
     border: 0.125em solid;
 
-    @include theme-value(border-color, $color-default, $color-dark);
+    @include theme-value(border-color, $color-8, $color-dark);
 
     transition: 0.5s;
 
@@ -22,8 +22,9 @@
       opacity: 0;
       font-size: 1.2em;
       transition: 0.5s;
+      user-select: none;
 
-      @include theme-value(color, $color-default, $color-dark);
+      @include theme-value(color, $color-8, $color-dark);
 
       &.next {
         margin: 0 0.5em 0 0;
@@ -39,8 +40,9 @@
     }
 
     .label {
-      @include theme-value(color, $color-default, $color-dark);
+      @include theme-value(color, $color-8, $color-dark);
 
+      font-family: Arial, Helvetica, sans-serif; // $font-family-default
       font-size: 1.75em;
       font-weight: bold;
       user-select: none;

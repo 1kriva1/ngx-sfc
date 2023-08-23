@@ -1,9 +1,8 @@
-@import "../../styles/index";
+@import "../../styles";
 
 .overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include center;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -24,12 +23,12 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0.7em;
+    padding: 0.9em 1.5em;
     margin: auto;
     background-color: $color-2;
     max-width: calc(100% - 3em);
     max-height: calc(100% - 3em);
-    border-radius: 3px;
+    border-radius: $modal-border-radius;
     box-shadow: 0 0.125em 0.625em $color-8;
     transform: scale(1);
     flex-direction: column;

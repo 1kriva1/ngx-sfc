@@ -46,6 +46,7 @@ describe('Service: DateTimeValueService', () => {
         value: new Date(),
         format: CommonConstants.EMPTY_STRING,
         locale: DateTimeInputConstants.DEFAULT_LOCALE,
+        currentValue: new Date(),
         disabledDays: []
       };
       service.init(initModel);
@@ -68,6 +69,7 @@ describe('Service: DateTimeValueService', () => {
           time: true,
           shortTime: false,
           value: new Date(),
+          currentValue: new Date(),
           format: CommonConstants.EMPTY_STRING,
           locale: DateTimeInputConstants.DEFAULT_LOCALE,
           disabledDays: [new Date()]
@@ -85,6 +87,7 @@ describe('Service: DateTimeValueService', () => {
           time: true,
           shortTime: false,
           value: new Date(),
+          currentValue: new Date(),
           format: CommonConstants.EMPTY_STRING,
           locale: DateTimeInputConstants.DEFAULT_LOCALE,
           disabledDays: [getNextDate(new Date())]
@@ -105,6 +108,20 @@ describe('Service: DateTimeValueService', () => {
       }, assertValue);
     });
 
+    fit('Should set current value', () => {
+      const assertValue = new Date(2022, 9, 22);
+      service.currentValue = assertValue;
+
+      expect((service as any).model.currentValue).toEqual(assertValue)
+    });
+
+    fit('Should get current value', () => {
+      const assertValue = new Date(2022, 9, 22);
+      (service as any).model.currentValue = assertValue;
+
+      expect(service.currentValue).toEqual(assertValue)
+    });
+
     fit('Should have defined day without date', done => {
       const assertValue = new Date(2022, 9, 22),
         initModel: IDateTimeValueInitModel = {
@@ -112,6 +129,7 @@ describe('Service: DateTimeValueService', () => {
           time: true,
           shortTime: false,
           value: new Date(),
+          currentValue: new Date(),
           format: CommonConstants.EMPTY_STRING,
           locale: DateTimeInputConstants.DEFAULT_LOCALE,
           disabledDays: []
@@ -129,6 +147,7 @@ describe('Service: DateTimeValueService', () => {
           time: false,
           shortTime: false,
           value: new Date(),
+          currentValue: new Date(),
           format: DateTimeFormatsConstants.DEFAULT_DATE_TIME_FORMAT,
           locale: DateTimeInputConstants.DEFAULT_LOCALE,
           disabledDays: []
@@ -186,6 +205,7 @@ describe('Service: DateTimeValueService', () => {
           time: true,
           shortTime: true,
           value: new Date(),
+          currentValue: new Date(),
           format: DateTimeFormatsConstants.DEFAULT_DATE_TIME_FORMAT,
           locale: DateTimeInputConstants.DEFAULT_LOCALE,
           disabledDays: []
@@ -266,6 +286,7 @@ describe('Service: DateTimeValueService', () => {
         time: false,
         shortTime: false,
         value: new Date(),
+        currentValue: new Date(),
         format: CommonConstants.EMPTY_STRING,
         locale: DateTimeInputConstants.DEFAULT_LOCALE,
         disabledDays: []
@@ -372,6 +393,7 @@ describe('Service: DateTimeValueService', () => {
       time: true,
       shortTime: false,
       value: new Date(),
+      currentValue: new Date(),
       format: CommonConstants.EMPTY_STRING,
       locale: DateTimeInputConstants.DEFAULT_LOCALE,
       disabledDays: []

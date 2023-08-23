@@ -14,7 +14,7 @@ describe('Component: DefaultModalFooterComponent', () => {
   let modalServiceSpy: jasmine.SpyObj<ModalService>;
 
   beforeEach(async () => {
-    modalServiceSpy = jasmine.createSpyObj('ModalService', ['close']);
+    modalServiceSpy = jasmine.createSpyObj('ModalService', ['toggle']);
 
     await TestBed.configureTestingModule({
       declarations: [DefaultModalFooterComponent, ButtonComponent, ComponentSizeDirective],
@@ -36,6 +36,33 @@ describe('Component: DefaultModalFooterComponent', () => {
 
   describe('Apply button', () => {
     fit('Should exist by default', () => {
+      expect(fixture.nativeElement.querySelectorAll('sfc-button')[0])
+        .toBeDefined();
+    });
+
+    fit('Should exist by default with defined model, without explicit value', () => {
+      component.model = {};
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-button')[0])
+        .toBeDefined();
+    });
+
+    fit('Should have defined text', () => {
+      const assertButtonText = 'Defined apply';
+      component.model.applyButtonText = assertButtonText;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-button span.text')[0].innerText)
+        .toEqual(assertButtonText);
+    });
+
+    fit('Should have default text', () => {
+      component.model.applyButtonText = undefined;
+      component.ngOnInit();
+      fixture.detectChanges();
+
       expect(fixture.nativeElement.querySelectorAll('sfc-button span.text')[0].innerText)
         .toEqual('Ok');
     });
@@ -60,10 +87,11 @@ describe('Component: DefaultModalFooterComponent', () => {
 
       applyBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-      expect(modalServiceSpy.close).toHaveBeenCalledTimes(1);
+      expect(modalServiceSpy.toggle).toHaveBeenCalledTimes(1);
     });
 
     fit('Should call model method', () => {
+      modalServiceSpy.args = { data: 'test' };
       (component?.model as IDefaultModalFooterModel).onApply = () => { };
       fixture.detectChanges();
 
@@ -73,13 +101,41 @@ describe('Component: DefaultModalFooterComponent', () => {
 
       applyBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-      expect(modalServiceSpy.close).not.toHaveBeenCalledTimes(1);
+      expect(modalServiceSpy.toggle).not.toHaveBeenCalledTimes(1);
       expect(component?.model?.onApply).toHaveBeenCalledTimes(1);
+      expect(component?.model?.onApply).toHaveBeenCalledOnceWith(modalServiceSpy.args);
     });
   });
 
   describe('Cancel button', () => {
     fit('Should exist by default', () => {
+      expect(fixture.nativeElement.querySelectorAll('sfc-button')[1])
+        .toBeDefined();
+    });
+
+    fit('Should exist by default with defined model, without explicit value', () => {
+      component.model = {};
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-button')[1])
+        .toBeDefined();
+    });
+
+    fit('Should have defined text', () => {
+      const assertButtonText = 'Defined cancel';
+      component.model.cancelButtonText = assertButtonText;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-button span.text')[1].innerText)
+        .toEqual(assertButtonText);
+    });
+
+    fit('Should have default text', () => {
+      component.model.cancelButtonText = undefined;
+      component.ngOnInit();
+      fixture.detectChanges();
+
       expect(fixture.nativeElement.querySelectorAll('sfc-button span.text')[1].innerText)
         .toEqual('Cancel');
     });
@@ -104,7 +160,7 @@ describe('Component: DefaultModalFooterComponent', () => {
 
       cancelBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-      expect(modalServiceSpy.close).toHaveBeenCalledTimes(1);
+      expect(modalServiceSpy.toggle).toHaveBeenCalledTimes(1);
     });
 
     fit('Should call model method', () => {
@@ -117,8 +173,9 @@ describe('Component: DefaultModalFooterComponent', () => {
 
       cancelBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-      expect(modalServiceSpy.close).not.toHaveBeenCalledTimes(1);
+      expect(modalServiceSpy.toggle).not.toHaveBeenCalledTimes(1);
       expect(component?.model?.onCancel).toHaveBeenCalledTimes(1);
+      expect(component?.model?.onCancel).toHaveBeenCalledOnceWith(modalServiceSpy.args);
     });
   });
 });

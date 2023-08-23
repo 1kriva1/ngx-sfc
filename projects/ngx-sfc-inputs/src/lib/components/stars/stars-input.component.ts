@@ -34,7 +34,9 @@ export class StarsInputComponent extends BaseInputComponent<number> implements O
   direction: Direction = Direction.Horizontal;
 
   @Input()
-  items: number[] = [];
+  items: number[] = [1, 2, 3, 4, 5];
+
+  override bordered: boolean = false;
 
   ngOnInit(): void {
     if (any(this.items))

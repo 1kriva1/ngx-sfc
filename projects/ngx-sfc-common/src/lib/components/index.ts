@@ -39,5 +39,7 @@ export { LoadMoreButtonComponent } from './load-more-button/load-more-button.com
 export { LoadContainerType } from './load-container/load-container.enum';
 export { LoaderFunction, FilterFunction, ILoadContainerModel } from './load-container/models/load-container.model';
 export { ILoadMoreParameters } from './load-container/models/load-more-parameters.model';
+export { ILoadMorePredicateParameters } from './load-container/models/load-more-predicate-parameters.model';
 export { ILoadMoreModel } from './load-container/models/load-more.model';
+export { LoadChangesSource } from './load-container/load-container.enum';
 export { IconComponent } from './icon/icon.component';

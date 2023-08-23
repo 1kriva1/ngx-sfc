@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { IModalEvent } from './modal.event';
 import { ModalService } from './modal.service';
 
 describe('Service: Modal', () => {
@@ -13,31 +14,62 @@ describe('Service: Modal', () => {
         expect(service).toBeTruthy();
     });
 
-    fit('Should be defined open observable', () => {
-        expect(service.open$).toBeTruthy();
+    fit('Should be defined modal observable', () => {
+        expect(service.modal$).toBeTruthy();
     });
 
     fit('Should emit on open', done => {
-        const assertEvent = { data: 'test' };
+        const assertArgs = { data: 'test' };
+        let assertEvent: IModalEvent = { open: false };
 
-        service.open$.subscribe((event: any) => {
+        service.modal$.subscribe((event: IModalEvent) => {
             expect(event).toEqual(assertEvent);
-            done();
         });
 
-        service.open(assertEvent);
-    });
+        assertEvent = { open: true, args: assertArgs };
 
-    fit('Should be defined close observable', () => {
-        expect(service.close$).toBeTruthy();
+        service.open(assertArgs);
+
+        done();
     });
 
     fit('Should emit on close', done => {
-        service.close$.subscribe(() => {
-            expect(true).toBeTrue();
-            done();
+        service.modal$.subscribe((event: IModalEvent) => {
+            expect(event).toEqual({ open: false });
         });
 
         service.close();
+
+        done();
+    });
+
+    fit('Should emit on toggle', done => {
+        let firstToggle = false;
+
+        service.modal$.subscribe((event: IModalEvent) => {
+            expect(event).toEqual({ open: firstToggle });
+        });
+
+        firstToggle = true;
+
+        service.toggle();
+
+        firstToggle = false;
+
+        service.toggle();
+
+        done();
+    });
+
+    fit('Should isOpen has default value', () => {
+        expect(service.isOpen).toBeFalse();
+    });
+
+    fit('Should isOpen change value', () => {
+        expect(service.isOpen).toBeFalse();
+
+        service.toggle();
+
+        expect(service.isOpen).toBeTrue();
     });
 });

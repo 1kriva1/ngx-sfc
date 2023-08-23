@@ -5,5 +5,17 @@
       position: relative;
       cursor: initial;
     }
+
+    .range-container {
+      .limits {
+        &.after {
+          width: 10%;
+        }
+      }
+
+      .component {
+        width: 90%;
+      }
+    }
   }
 }

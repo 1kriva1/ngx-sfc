@@ -1,6 +1,8 @@
 @use "ngx-sfc-common/styles/index" as *;
 
 :host {
+  display: inline-block;
+
   .container {
     display: inline-flex;
     justify-content: center;
@@ -15,6 +17,11 @@
     margin: 0.1em 0.31em 0.1em 0;
     user-select: none;
     cursor: pointer;
+
+    span {
+      word-wrap: break-word;
+      max-width: 10em;
+    }
 
     &:hover {
       background-color: $color-4;

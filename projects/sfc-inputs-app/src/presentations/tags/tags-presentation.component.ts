@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { equalOrInclude, maxLength, minLength } from 'ngx-sfc-inputs';
+import { equalOrInclude, maxArrayLength, minArrayLength } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../base-presentations.component';
 
 @Component({
@@ -103,31 +103,31 @@ export class TagsPresentationComponent extends BasePresentationComponent
           disabled: false
         }, [equalOrInclude(['qwe', 'rty'])]],
         inputTagsMaxLength: [null, {
-          validators: [maxLength(3)]
+          validators: [maxArrayLength(3)]
         }],
         inputTagsMinLength: [null, {
-          validators: [minLength(1)]
+          validators: [minArrayLength(1)]
         }],
         inputTagsMaxMinLength: [null, {
-          validators: [maxLength(3), minLength(1)]
+          validators: [maxArrayLength(3), minArrayLength(1)]
         }],
         inputTagsMaxLengthInvalid: [['qwe', 'asd', 'asdas', '4'], {
-          validators: [maxLength(3)]
+          validators: [maxArrayLength(3)]
         }],
         inputTagsMinLengthInvalid: [[], {
-          validators: [minLength(1)]
+          validators: [minArrayLength(1)]
         }],
         inputTagsMaxMinLengthInvalid: [[], {
-          validators: [maxLength(3), minLength(1)]
+          validators: [maxArrayLength(3), minArrayLength(1)]
         }],
         inputTagsMaxLengthValid: [['qwe', 'asd', 'asdas'], {
-          validators: [maxLength(3)]
+          validators: [maxArrayLength(3)]
         }],
         inputTagsMinLengthValid: [['test 1'], {
-          validators: [minLength(1)]
+          validators: [minArrayLength(1)]
         }],
         inputTagsMaxMinLengthValid: [['test 1', 'test 2'], {
-          validators: [maxLength(3), minLength(1)]
+          validators: [maxArrayLength(3), minArrayLength(1)]
         }],
         inputTagsSmall: [['test 1', 'test 2']],
         inputTagsLarge: [['test 1', 'test 2']],

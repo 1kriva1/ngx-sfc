@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { CloseComponent } from '../../../close/close.component';
 import { ModalService } from '../../service/modal.service';
 import { DefaultModalHeaderComponent } from './default-modal-header.component';
+import { DelimeterComponent } from '../../../delimeter/delimeter.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -16,7 +17,7 @@ describe('Component: DefaultModalHeaderComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [CloseComponent, DefaultModalHeaderComponent],
+      declarations: [CloseComponent, DelimeterComponent, DefaultModalHeaderComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]
     }).compileComponents();
   });
@@ -30,6 +31,12 @@ describe('Component: DefaultModalHeaderComponent', () => {
   describe('General', () => {
     fit('Should create component', () => {
       expect(component).toBeTruthy();
+    });
+
+    fit("Should have main elements", () => {
+      expect(fixture.nativeElement.querySelector('div.container')).toBeDefined();
+      expect(fixture.nativeElement.querySelector('div.content')).toBeDefined();
+      expect(fixture.nativeElement.querySelector('sfc-delimeter')).toBeDefined();
     });
   });
 
@@ -47,6 +54,15 @@ describe('Component: DefaultModalHeaderComponent', () => {
       expect(fixture.nativeElement.querySelector('fa-icon.icon svg').classList).toContain('fa-shirt');
       expect(fixture.nativeElement.querySelector('span.label').innerText).toContain(component.model.text);
       expect(fixture.nativeElement.querySelector('span.close')).toBeNull();
+    });
+  });
+
+  describe('Icon', () => {
+    fit('Should have default value', () => {
+      component.model = { text: 'Custom text', icon: null, showCloseIcon: false };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('fa-icon.icon svg').classList).toContain('fa-window-restore');
     });
   });
 

@@ -2,8 +2,8 @@
     <div class="content">
         <div class="view">
             <div class="header">
-                <span>{{vm.day ||'Time'}}</span>
-                <sfc-close (sfcMouseDown)="onClose($event)"></sfc-close>
+                <span>{{vm.day || timeLabel}}</span>
+                <sfc-close (sfcMouseDown)="onClose($event, true)"></sfc-close>
             </div>
             <div class="date" *ngIf="(year && !time) || date">
                 <div *ngIf="date">
@@ -59,14 +59,15 @@
             </div>
         </div>
         <div class="actions">
-            <sfc-button *ngIf="nowButton" text="Now" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onNow()">
+            <sfc-button *ngIf="nowButton" [text]="buttonsModel.nowLabel" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onNow()">
             </sfc-button>
-            <sfc-button *ngIf="clearButton" text="Clear" [types]="[ButtonType.Rounded]"
+            <sfc-button *ngIf="clearButton" [text]="buttonsModel.clearLabel" [types]="[ButtonType.Rounded]"
                 (sfcMouseDown)="onClear($event)">
             </sfc-button>
-            <sfc-button text="Cancel" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onCancel($event)">
+            <sfc-button [disabled]="isDisabled" [text]="buttonsModel.okLabel" [types]="[ButtonType.Rounded]"
+                (sfcMouseDown)="onOk($event)">
             </sfc-button>
-            <sfc-button [disabled]="isDisabled" text="Ok" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onOk($event)">
+            <sfc-button [text]="buttonsModel.cancelLabel" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onCancel($event)">
             </sfc-button>
         </div>
     </div>
