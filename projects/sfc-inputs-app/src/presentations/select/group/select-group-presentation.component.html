@@ -58,7 +58,7 @@
                     label="OptGroup select validation with value Invalid"
                     placeholder="OptGroup select validation  with value Invalid"
                     helperText="helper OptGroup select validation  with value Invalid"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (only 1.1 and 1.2)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (only 1.1 and 1.2)'}">
                 </sfc-select-input>
             </div>
 
@@ -126,7 +126,7 @@
                     formControlName="inputSelectGroupObservableValidationMessage" [data$]="data$"
                     [showLoadMoreButton]="false" label="validation label test" placeholder="validation placeholder test"
                     [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be 1.1)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be 1.1)'}">
                 </sfc-select-input>
             </div>
 
@@ -159,7 +159,7 @@
                     formControlName="inputSelectGroupLoaderValidationMessage" [loader]="loader"
                     label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
                     helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 

@@ -42,6 +42,10 @@ describe('Component: StarsInput', () => {
       expect(fixture.nativeElement.querySelector('.right-side-info')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
     });
+
+    fit('Should not be bordered', () => {
+      expect(component.bordered).toBeFalse();
+    });
   });
 
   describe('Input', () => {
@@ -139,11 +143,11 @@ describe('Component: StarsInput', () => {
   });
 
   describe('Stars', () => {
-    fit('Should not exist', () => {
-      expect(fixture.nativeElement.querySelector('sfc-star')).toBeNull();
+    fit('Should have default', () => {
+      expect(fixture.nativeElement.querySelectorAll('sfc-star').length).toEqual(5);
     });
 
-    fit('Should exist', () => {
+    fit('Should have defined', () => {
       component.items = [1, 2, 3];
       fixture.detectChanges();
 
@@ -289,7 +293,7 @@ describe('Component: StarsInput', () => {
         fixture.detectChanges();
 
         const counterSpan = fixture.nativeElement.querySelector('div.counter span:last-child');
-        expect(counterSpan.innerText).toEqual('/0');
+        expect(counterSpan.innerText).toEqual('/5');
       });
 
       fit("Should text reflect stars count", () => {

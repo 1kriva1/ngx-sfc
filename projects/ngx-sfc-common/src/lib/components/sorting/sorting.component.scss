@@ -2,8 +2,8 @@
 
 :host {
   cursor: default;
-  text-overflow: ellipsis;
-  overflow: hidden;
+
+  @include text-ellipsis;
 
   &.enabled {
     cursor: pointer;

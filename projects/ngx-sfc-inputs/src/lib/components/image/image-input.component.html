@@ -17,7 +17,7 @@
     </div>
 
     <sfc-modal *sfcModalOpen [defaultHeaderModel]="headerModalModel" [defaultFooterModel]="footerModalModel"
-        [hideOnClickOutside]="false">
+        [hideOnClickOutside]="hideOnClickOutside">
         <ng-template [sfcTemplateReference]="ModalTemplate.Body">
             <sfc-image-editor [type]="type"></sfc-image-editor>
         </ng-template>

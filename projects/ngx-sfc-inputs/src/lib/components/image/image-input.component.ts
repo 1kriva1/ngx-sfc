@@ -29,8 +29,19 @@ export class ImageInputComponent
   clearButton: boolean = true;
 
   @Input()
+  hideOnClickOutside: boolean = false;
+
+  @Input()
   @HostBinding('class')
   type: ImageInputType = ImageInputType.Circle;
+
+  @Input()
+  okLabel!: string;
+
+  @Input()
+  cancelLabel!: string;
+
+  override bordered: boolean = false;
 
   override set value(value: File | null) {
     this._value = value;
@@ -80,7 +91,7 @@ export class ImageInputComponent
   }
 
   ngOnInit(): void {
-    this.validations = { ...this.validations, ...ValidationConstants.FORMAT_VALIDATION };
+    this.validations = { ...ValidationConstants.FORMAT_VALIDATION, ...this.validations };
     this._exportSubscription = this.imageService.export$.subscribe(event => this.onExport(event));
 
     this.headerModalModel = {
@@ -88,7 +99,11 @@ export class ImageInputComponent
     };
 
     this.footerModalModel = {
-      cancelButton: true, applyButton: true, onApply: () => this.imageService.crop()
+      cancelButton: true,
+      cancelButtonText: this.cancelLabel,
+      applyButton: true,
+      onApply: () => this.imageService.crop(),
+      applyButtonText: this.okLabel
     }
   }
 
@@ -96,27 +111,29 @@ export class ImageInputComponent
     this._exportSubscription.unsubscribe();
   }
 
-  onEmitFile(event: FileList) {
+  onEmitFile(event: FileList): void {
     const file = event.item(0) as File;
+    
     if (this.validateFormat(file)) {
       this.imageService.imageFile = file;
-      this.modalService.open();
+      this.modalService.toggle();
     }
+
     this.inputElementRef.nativeElement.value = CommonConstants.EMPTY_STRING;
   }
 
-  onExport(event: IImageExportEvent) {
+  onExport(event: IImageExportEvent): void {
     this.ngZone.run(() => this.onChange(event.file));
-    this.modalService.close();
+    this.modalService.toggle();
   }
 
-  onClear() {
+  onClear(): void {
     this.toggleInnerErrors(ValidationConstants.FORMAT_VALIDATOR_KEY, true);
     this.url = null;
     this.onChange(null);
   }
 
-  private validateFormat(file: File) {
+  private validateFormat(file: File): boolean {
     const result = isImage(file);
     this.toggleInnerErrors(ValidationConstants.FORMAT_VALIDATOR_KEY, result);
     return result;

@@ -1,0 +1,11 @@
+:host {
+  &.bordered {
+    .container {
+      .content {
+        .clear-button {
+          top: 0.9em;
+        }
+      }
+    }
+  }
+}

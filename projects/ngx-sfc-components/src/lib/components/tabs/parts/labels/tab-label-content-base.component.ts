@@ -1,8 +1,8 @@
 import {
     Directive, HostBinding, Input
 } from "@angular/core";
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { UIClass } from "ngx-sfc-common";
+import { faCircle, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { isDefined, UIClass } from "ngx-sfc-common";
 
 @Directive()
 export class TabLabelContentBase {
@@ -20,4 +20,8 @@ export class TabLabelContentBase {
     @Input()
     @HostBinding('class.' + UIClass.Selected)
     selected = false;
+
+    get tabIcon(): IconDefinition {
+        return isDefined(this.icon) ? this.icon as IconDefinition : faCircle;
+    }
 }

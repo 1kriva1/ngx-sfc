@@ -64,7 +64,7 @@
                 <sfc-select-input id="demo-select-multiple-validation" formControlName="inputSelectMultipleValidation"
                     [data]="data" label="Muliple select valiation (leo or anita)" placeholder="Muliple select valiation"
                     [icon]="faUser" helperText="Muliple select validation (leo or anita)"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid  (leo or anita)'}" [multiple]="true">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid  (leo or anita)'}" [multiple]="true">
                 </sfc-select-input>
             </div>
 
@@ -74,7 +74,7 @@
                     label="Muliple select valiation value Valid (leo or anita)"
                     placeholder="Muliple select valiation Valid value" [icon]="faUser"
                     helperText="Muliple select validation value (leo or anita)"
-                    [validations]="{required: 'This field required', sfcEqualOrInclude: 'Include invalid (leo or anita)'}"
+                    [validations]="{required: 'This field required', 'sfc-equal-or-include': 'Include invalid (leo or anita)'}"
                     [multiple]="true">
                 </sfc-select-input>
             </div>
@@ -154,7 +154,7 @@
                     formControlName="inputSelectMultipleObservableValidationMessage" [data$]="data$"
                     [showLoadMoreButton]="false" label="validation label test" placeholder="validation placeholder test"
                     [icon]="faUser" helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}" [multiple]="true">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}" [multiple]="true">
                 </sfc-select-input>
             </div>
 
@@ -188,7 +188,7 @@
                     formControlName="inputSelectMultipleLoaderValidationMessage" [loader]="loader"
                     label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
                     helperText="validation test helper"
-                    [validations]="{sfcEqualOrInclude: 'Include invalid (must be anita 3)'}" [multiple]="true">
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}" [multiple]="true">
                 </sfc-select-input>
             </div>
 

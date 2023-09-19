@@ -1,11 +1,13 @@
 <div class="container">
     <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
     <div class="content">
-        <textarea #textAreaRef sfcInput id="{{inputId}}" class="text-input" [placeholder]="placeholderValue"
-            [value]="value" [disabled]="disabled" (input)="onChange($any($event.target).value)" (blur)="onBlur()"
-            (keyup)="onKeyUp($event)"></textarea>
+        <div class="input">
+            <textarea #textAreaRef sfcInput id="{{inputId}}" class="text-input" [placeholder]="placeholderValue"
+                [value]="value" [disabled]="disabled" (input)="onChange($any($event.target).value)"
+                (blur)="onBlur()"></textarea>
+        </div>
         <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
         <span class="helper-text">{{helperTextValue}}</span>
-        <span class="right-side-info">{{charCounterValue}}</span>
+        <span class="right-side-info">{{charsCounterValue}}</span>
     </div>
 </div>

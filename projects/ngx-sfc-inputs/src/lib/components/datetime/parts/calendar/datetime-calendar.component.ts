@@ -1,5 +1,5 @@
-import { formatDate, WeekDay } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { formatDate, FormStyle, getLocaleDayNames, TranslationWidth, WeekDay } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   any, DateTimeConstants, getFirstDayOfMonthByYearAndMonth, getLastDayOfMonthByYearAndMonth, getWeeksNumberInMonth,
   hasItemBy, isDateGreat, isDateGreatOrEqual, isEqualDates
@@ -18,7 +18,7 @@ import { IDateTimeCalendarModel } from './datetime-calendar.model';
   templateUrl: './datetime-calendar.component.html',
   styleUrls: ['./datetime-calendar.component.scss']
 })
-export class DateTimeCalendarComponent {
+export class DateTimeCalendarComponent implements OnInit {
 
   DateTimeConstants = DateTimeConstants;
 
@@ -51,7 +51,13 @@ export class DateTimeCalendarComponent {
     return formatDate(this.valueService.value, DateTimeFormatsConstants.CALENDAR_MONTH_FORMAT, this.locale);
   };
 
+  public dayNames!: readonly string[];
+
   constructor(public valueService: DateTimeValueService, public viewService: DateTimeViewService) { }
+
+  ngOnInit(): void {
+    this.dayNames = getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Abbreviated);
+  }
 
   getDateNumber(date: Date): string {
     return formatDate(date, DateTimeFormatsConstants.PREFIX_DAY_NUMBER_FORMAT, this.locale);
@@ -61,12 +67,12 @@ export class DateTimeCalendarComponent {
     const isDisabled = this.isDisabled(date);
     return {
       disabled: isDisabled,
-      selected: !isDisabled && this.isCurrentDate(date)
+      selected: !isDisabled && isEqualDates(date, this.valueService.value)
     };
   }
 
   onSelectDate(event: MouseEvent, date: Date): void {
-    if (!this.isCurrentDate(date)) {
+    if (!isEqualDates(date, this.valueService.currentValue as Date)) {
       this.valueService.update({ type: DateTimeValueActionType.Date, value: date });
 
       if (this.switchOnClick)
@@ -78,10 +84,6 @@ export class DateTimeCalendarComponent {
     return (this.minDate && !isDateGreatOrEqual(date, this.minDate))
       || (this.maxDate && isDateGreat(date, this.maxDate))
       || (hasItemBy(this.disabledDays, (disabledDate: Date) => isEqualDates(disabledDate, date)));
-  }
-
-  private isCurrentDate(date: Date): boolean {
-    return date.getDate() === this.valueService.value.getDate();
   }
 
   private initCalendar(date: Date): void {

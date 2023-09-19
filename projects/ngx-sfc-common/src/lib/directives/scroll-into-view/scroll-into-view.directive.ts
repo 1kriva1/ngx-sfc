@@ -7,15 +7,25 @@ import { isChromeBrowser, isDefined } from '../../utils';
 export class ScrollIntoViewDirective {
 
   @Input()
-  set sfcScrollIntoView(value: HTMLElement) {
-    if (!isDefined(value))
+  set sfcScrollIntoView(target: HTMLElement) {
+    if (!isDefined(target))
       return;
 
-    if (isChromeBrowser())
-      (value as any).scrollIntoViewIfNeeded();
-    else
-      value.scrollIntoView(this.options);
+    if (this.local)
+      target.scrollTop = target.offsetHeight / 2;
+    else {
+      if (isChromeBrowser())
+        (target as any).scrollIntoViewIfNeeded();
+      else
+        target.scrollIntoView(this.options);
+    }
   }
+
+  /**
+   * Scroll into middle of local container(not whole page)
+   */
+  @Input()
+  local: boolean = false;
 
   @Input()
   options: ScrollIntoViewOptions = { behavior: 'smooth', block: 'center', inline: 'start' };

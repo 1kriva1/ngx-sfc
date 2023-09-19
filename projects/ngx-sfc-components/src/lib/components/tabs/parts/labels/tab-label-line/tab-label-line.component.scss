@@ -23,6 +23,7 @@
 
   .container {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,14 +37,34 @@
       flex-wrap: wrap;
       text-align: center;
       padding: 1.25em 0;
+      overflow: hidden;
 
-      fa-icon {
-        margin-right: 0.18em;
+      span {
+        text-overflow: ellipsis;
+        overflow: hidden; // @include text-ellipsis;
+      }
 
-        @media (max-width: 430px) {
-          & {
-            display: none;
-          }
+      sfc-icon {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    padding-bottom: 0.6em;
+
+    .container {
+      .content {
+        padding: 0.8em;
+        border-radius: 0.3em;
+        text-overflow: initial;
+
+        sfc-icon {
+          display: block;
+        }
+
+        span {
+          display: none;
         }
       }
     }

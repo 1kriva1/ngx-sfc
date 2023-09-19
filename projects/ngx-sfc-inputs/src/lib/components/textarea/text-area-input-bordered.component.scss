@@ -1,0 +1,22 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  &.bordered {
+    // @include scroll-round-bordered;
+
+    ::-webkit-scrollbar {
+      width: 1em;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border: 0.35em solid transparent;
+      background-clip: padding-box;
+
+      @include theme-value(background-color, rgb(0 0 0 / 20%), $color-0);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
+}

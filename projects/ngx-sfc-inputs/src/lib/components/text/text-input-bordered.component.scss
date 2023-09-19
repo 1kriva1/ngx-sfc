@@ -1,0 +1,11 @@
+:host {
+  &.bordered {
+    .container {
+      .content {
+        .password-icon {
+          top: 0.9em;
+        }
+      }
+    }
+  }
+}

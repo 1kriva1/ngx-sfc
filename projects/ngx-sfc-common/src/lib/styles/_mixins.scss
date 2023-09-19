@@ -3,7 +3,11 @@
   height: $value * $multiplier;
 }
 
-@mixin theme-value($property, $value-common, $value-dark, $selector: "&") {
+@mixin theme-value($property, $value-common, $value-dark: null, $selector: "&") {
+  @if not $value-dark {
+    $value-dark: $value-common;
+  }
+
   #{$selector},
   :host-context(.sfc-default-theme) #{$selector} {
     #{$property}: $value-common;
@@ -11,6 +15,8 @@
   :host-context(.sfc-dark-theme) #{$selector} {
     #{$property}: $value-dark;
   }
+
+  transition: #{$property} $transition-duration-default $transition-timing-function-default;
 }
 
 @mixin visibility($show) {
@@ -41,26 +47,7 @@
   }
 }
 
-@mixin scroll($selector: "::ng-deep") {
-  #{$selector} ::-webkit-scrollbar {
-    @include square-size(0.375em);
-  }
-
-  #{$selector} ::-webkit-scrollbar-track {
-    border-radius: 0.625em;
-    background: rgb(0 0 0 / 10%);
-  }
-
-  #{$selector} ::-webkit-scrollbar-thumb {
-    border-radius: 0.625em;
-    background: rgb(0 0 0 / 20%);
-  }
-
-  #{$selector} ::-webkit-scrollbar-thumb:hover {
-    background: rgb(0 0 0 / 40%);
-  }
-
-  #{$selector} ::-webkit-scrollbar-thumb:active {
-    background: rgb(0 0 0 / 60%);
-  }
+@mixin text-ellipsis() {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

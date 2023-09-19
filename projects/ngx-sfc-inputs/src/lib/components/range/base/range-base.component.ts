@@ -32,9 +32,12 @@ export abstract class RangeBaseComponent extends BaseInputComponent<number> {
   @Input()
   endIcon: IconDefinition | null = null;
 
+  override bordered: boolean = false;
+
   override get value(): number {
     return this._value ? this._value : this.min;
   }
+  
   override set value(value: number) {
     this._value = value;
   }

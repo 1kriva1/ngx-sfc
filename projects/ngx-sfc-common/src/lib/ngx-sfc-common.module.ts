@@ -8,6 +8,7 @@ import {
 import {
   ClickOutsideDirective,
   ShowHideElementDirective,
+  IfDirective,
   ThrowElementOnHoverDirective,
   TemplateReferenceDirective,
   MouseDownDirective,
@@ -49,6 +50,7 @@ import {
     // directives
     ClickOutsideDirective,
     ShowHideElementDirective,
+    IfDirective,
     ThrowElementOnHoverDirective,
     TemplateReferenceDirective,
     MouseDownDirective,
@@ -94,6 +96,7 @@ import {
     // directives
     ClickOutsideDirective,
     ShowHideElementDirective,
+    IfDirective,
     ThrowElementOnHoverDirective,
     TemplateReferenceDirective,
     MouseDownDirective,

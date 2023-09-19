@@ -33,7 +33,7 @@ import {
   AutoCompleteItemComponent,
   SelectItemComponent
 } from '../lib/components/no-export-index';
-import { InputReferenceDirective } from './directives';
+import { InputReferenceDirective, InputNumberDirective } from './directives';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
 
 @NgModule({
@@ -54,6 +54,7 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     // number
     NumberInputComponent,
     NumberSpinnerComponent,
+    InputNumberDirective,
     // stars
     StarsInputComponent,
     StarComponent,
@@ -65,7 +66,7 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     DateTimeModalComponent,
     // image
     ImageInputComponent,
-    ImageEditorComponent,    
+    ImageEditorComponent,
     // range
     RangeInputComponent,
     RangeInputVerticalComponent,
@@ -99,7 +100,7 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     SelectInputComponent,
     // range
     RangeInputComponent,
-    RangeInputVerticalComponent        
+    RangeInputVerticalComponent
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

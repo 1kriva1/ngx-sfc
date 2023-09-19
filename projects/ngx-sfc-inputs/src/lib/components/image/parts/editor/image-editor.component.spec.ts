@@ -32,7 +32,7 @@ describe('Component: ImageEditor', () => {
     });
 
     fit('Should create main elements', () => {
-      expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div.container.sfc-image-editor')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('div.editor')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('img')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('div.actions')).toBeTruthy();

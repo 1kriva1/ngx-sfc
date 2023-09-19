@@ -359,6 +359,10 @@ ng generate component share/components/theme-toggler --export true --flat false 
 
 ng generate component share/components/language-toggler --export true --flat false --style scss --skip-tests false --dry-run
 
+ng generate component share/components/icon-tooltip --export true --flat false --style scss --skip-tests false --dry-run
+
+ng generate component share/components/title --export true --flat false --style scss --skip-tests false --dry-run
+
 ng generate component features/identity/pages/registration/registration.page --export true --flat true --style scss --skip-tests false --dry-run
 
 ng generate service features/identity/services/existence --flat false --skip-tests false --dry-run

@@ -4,8 +4,7 @@ import { BaseInputComponent } from '../base-input.component';
 import { ValidationConstants } from '../../../constants/validation.constants';
 
 @Directive()
-export abstract class BaseTextInputComponent extends BaseInputComponent<string> {
-
+export abstract class BaseTextInputComponent<T extends string | string[]> extends BaseInputComponent<T> {
     get requiredLengthValue(): number | null {
         let requiredLength = null;
 

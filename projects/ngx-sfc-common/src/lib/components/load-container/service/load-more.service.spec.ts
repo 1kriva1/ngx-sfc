@@ -14,7 +14,7 @@ describe('Service: LoadMore', () => {
     });
 
     fit('Should have constant value for start page', () => {
-        expect(service.START_PAGE).toEqual(1);
+        expect(LoadMoreService.START_PAGE).toEqual(1);
     });
 
     fit('Should be defined more observable', () => {
@@ -31,7 +31,7 @@ describe('Service: LoadMore', () => {
     });
 
     fit('Should increase page on more', done => {
-        let page = service.START_PAGE;
+        let page = LoadMoreService.START_PAGE;
 
         service.more$.subscribe((event: any) => {
             expect(event).toEqual(page + 1);            
@@ -51,7 +51,7 @@ describe('Service: LoadMore', () => {
     });
 
     fit('Should reset page', done => {
-        let page = service.START_PAGE;
+        let page = LoadMoreService.START_PAGE;
 
         service.more$.subscribe((event: any) => {
             expect(event).toEqual(page + 1);
@@ -63,7 +63,7 @@ describe('Service: LoadMore', () => {
 
         service.reset();
 
-        page = service.START_PAGE;
+        page = LoadMoreService.START_PAGE;
 
         service.more();
 

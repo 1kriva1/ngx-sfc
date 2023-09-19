@@ -1,7 +1,7 @@
 @use "ngx-sfc-common/styles/index" as *;
 
 :host {
-  width: initial;
+  width: 100%;
 
   .container {
     .content {
@@ -14,8 +14,9 @@
         overflow: hidden;
 
         .image {
-          @include square-size(12.5em);
-
+          width: inherit;
+          height: 0;
+          padding-bottom: 100%;
           background-size: cover;
           background-position: 50%;
         }
@@ -47,9 +48,6 @@
             overflow: hidden;
             font-weight: bold;
             user-select: none;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
             transform: none;
             cursor: pointer;
             width: 50%;
@@ -100,6 +98,7 @@
 
       .helper-text {
         float: initial;
+        position: relative;
       }
     }
   }

@@ -29,7 +29,10 @@
     @include under-text;
 
     min-width: 1em;
+
+    // min-height: 1em;
     float: left;
+    position: absolute;
 
     &::after {
       opacity: 1;
@@ -44,6 +47,8 @@
   @include under-text;
 
   float: right;
+  position: absolute;
+  right: 0;
 }
 
 @mixin action-icon-right() {
@@ -84,6 +89,56 @@
   ::ng-deep sfc-bounce-loader {
     .preloader {
       @include theme-value(background, $color-0, transparent);
+    }
+  }
+}
+
+@mixin load-container-bordered {
+  sfc-load-container {
+    min-height: 2.3em;
+
+    ::ng-deep .container {
+      .content {
+        border-radius: 1em;
+
+        // @include scroll-round-bordered;
+
+        &::-webkit-scrollbar {
+          width: 1em;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border: 0.35em solid rgb(0 0 0 / 0%);
+          background-clip: padding-box;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+      }
+    }
+
+    &.loading {
+      ::ng-deep .container {
+        sfc-bounce-loader {
+          .preloader {
+            border-radius: 1.6em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin modal-bordered($radius) {
+  .content {
+    border-radius: $radius;
+
+    .view {
+      .header {
+        border-top-right-radius: $radius;
+        border-top-left-radius: $radius;
+      }
     }
   }
 }

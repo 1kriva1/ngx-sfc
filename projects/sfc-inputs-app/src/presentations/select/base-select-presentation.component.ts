@@ -1,5 +1,5 @@
 import { Directive, OnInit } from '@angular/core';
-import { ILoadMoreModel, ILoadMoreParameters, LoaderFunction, skip } from 'ngx-sfc-common';
+import { ILoadMoreModel, ILoadMoreParameters, LoadChangesSource, LoaderFunction, skip } from 'ngx-sfc-common';
 import { SelectItemModel } from 'ngx-sfc-inputs';
 import { of, BehaviorSubject, Observable, delay, map } from 'rxjs';
 import { BasePresentationComponent } from '../base-presentations.component';
@@ -119,8 +119,8 @@ export abstract class BaseSelectPresentationComponent extends BasePresentationCo
   private loaderDataModification$: Observable<SelectItemModel[]> = this.dataLoaderSubject.asObservable();
 
   ngOnInit(): void {
-    this.loader = this.getLoaderFynction(this.loaderData$);
-    this.loaderModification = this.getLoaderFynction(this.loaderDataModification$);
+    this.loader = this.getLoaderFunction(this.loaderData$);
+    this.loaderModification = this.getLoaderFunction(this.loaderDataModification$);
   }
 
   // SYNC DATA ACTIONS
@@ -172,17 +172,26 @@ export abstract class BaseSelectPresentationComponent extends BasePresentationCo
 
   // END LOADER DATA ACTIONS
 
-  private getLoaderFynction(data$: Observable<SelectItemModel[]>) {
-    return ((parameters: ILoadMoreParameters): Observable<ILoadMoreModel<any>> => {
+  private getLoaderFunction(data$: Observable<SelectItemModel[]>) {
+    return ((parameters: ILoadMoreParameters, source: LoadChangesSource): Observable<ILoadMoreModel<any>> => {
       return data$.pipe(
         delay(1000),
         map(items => {
+          const reset = source == LoadChangesSource.Data;
+
+          if (reset) {
+            parameters = { params: parameters.params, page: 1 };
+          }
+
           const data: ILoadMoreModel<any> = items
             ? {
               items: skip(items, parameters.page, 3),
-              next: parameters.page < Math.ceil(items.length / 3)
+              next: parameters.page < Math.ceil(items.length / 3),
+              reset: reset
             }
-            : { items: [], next: false };
+            : { items: [], next: false, reset: reset };
+
+          source = LoadChangesSource.Data;
 
           return data;
         })

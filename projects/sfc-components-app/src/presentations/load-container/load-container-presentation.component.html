@@ -14,7 +14,7 @@
         </div>
 
         <div class="component-column">
-            <sfc-load-container id="load-container-size" [type]="LoadContainerType.Table" [size]="2" [model]="model"
+            <sfc-load-container id="load-container-size" [type]="LoadContainerType.Table" [model]="modelSize"
                 (handleSuccess)="itemsSize = itemsSize.concat($event.items)">
                 <load-container-item *ngFor="let item of itemsSize" [value]="item"></load-container-item>
             </sfc-load-container>

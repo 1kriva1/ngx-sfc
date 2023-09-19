@@ -54,6 +54,10 @@ describe('Component: RadioInput', () => {
 
       expect(fixture.nativeElement.className).toContain(Direction.Horizontal);
     });
+
+    fit('Should not be bordered', () => {
+      expect(component.bordered).toBeFalse();
+    });
   });
 
   describe('Icon', () => {

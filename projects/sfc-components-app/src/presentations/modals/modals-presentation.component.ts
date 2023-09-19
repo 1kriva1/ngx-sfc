@@ -15,7 +15,7 @@ export class ModalsPresentationComponent extends BasePresentationComponent {
 
   readonly clickFunc = (() => {
     if (confirm('Close?')) {
-      this.modalService.close();
+      this.modalService.toggle();
     }
   }).bind(this);
 

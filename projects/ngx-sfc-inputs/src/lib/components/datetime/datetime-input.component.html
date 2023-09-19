@@ -2,13 +2,27 @@
     <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
     <div class="content">
         <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
-        <input sfcInput id="{{inputId}}" [disabled]="disabled" type="text" class="text-input"
-            [placeholder]="placeholderValue" [value]="displayDate">
+        <div class="input">
+            <input sfcInput id="{{inputId}}" [disabled]="disabled" type="text" class="text-input"
+                [placeholder]="placeholderValue" [value]="displayDate" [readOnly]="isFocused" (focus)="onFocus()">
+        </div>
         <span class="helper-text">{{helperTextValue}}</span>
-        <sfc-datetime-modal [sfcShowHideElement]="isFocused" [delay]="0" [date]="date" [time]="time" [year]="year"
-            [shortTime]="shortTime" [locale]="locale" [minDate]="minDate" [maxDate]="maxDate"
-            [disabledDays]="disabledDays" [weekStart]="weekStart" [switchOnClick]="switchOnClick"
-            [clearButton]="clearButton" [nowButton]="nowButton" (update)="update($event)">
-        </sfc-datetime-modal>
+
+        <ng-template #modal>
+            <sfc-datetime-modal [sfcShowHideElement]="fullSize || isFocused" [delay]="0" [date]="date" [time]="time"
+                [year]="year" [shortTime]="shortTime" [locale]="locale" [minDate]="minDate" [maxDate]="maxDate"
+                [disabledDays]="disabledDays" [weekStart]="weekStart" [fullSize]="fullSize"
+                [switchOnClick]="switchOnClick" [clearButton]="clearButton" [nowButton]="nowButton"
+                [buttonsModel]="modalButtonsModel" [timeLabel]="label" [bordered]="bordered" (update)="update($event)">
+            </sfc-datetime-modal>
+        </ng-template>
+
+        <sfc-template-content *ngIf="!fullSize" [referenceContent]="modal"></sfc-template-content>
+
+        <ng-container *ngIf="fullSize">
+            <sfc-modal *sfcModalOpen [hideOnClickOutside]="hideOnClickOutside" [showHeader]="false" [showFooter]="false"
+                [body]="modal">
+            </sfc-modal>
+        </ng-container>
     </div>
 </div>

@@ -24,6 +24,9 @@ export class ProgressLineComponent
   labelEnd?: string;
 
   @Input()
+  labelSuffix: string | null = null;
+
+  @Input()
   hideEnd: boolean = false;
 
   ngOnInit(): void {
@@ -32,14 +35,17 @@ export class ProgressLineComponent
   }
 
   get label(): string {
-    return isNullOrEmptyString(this.labelEnd) ? `${this.progress}` : this.labelEnd as string;
+    const valueLabel = isNullOrEmptyString(this.labelEnd)
+      ? `${this.progress}` : this.labelEnd as string;
+
+    return isNullOrEmptyString(this.labelSuffix) ? valueLabel : `${valueLabel}${this.labelSuffix}`
   }
 
   get progressStyles() {
     return {
       width: getCssLikeValue((this.progress / this.total) * CommonConstants.FULL_PERCENTAGE,
         UIConstants.CSS_PERCENTAGE),
-      backgroundColor: this.getColor(this.progress)
+      backgroundColor: this.getColor(this.progress, this.total)
     }
   }
 }

@@ -5,9 +5,8 @@
 
   .container {
     .content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include center;
+
       flex-direction: column;
 
       label {
@@ -22,18 +21,16 @@
       }
 
       .component {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include center;
       }
-    }
 
-    span.helper-text {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      margin-top: 0.3em;
-      float: none;
+      span.helper-text {
+        @include center;
+
+        margin-top: 0.3em;
+        float: none;
+        position: relative;
+      }
     }
   }
 }

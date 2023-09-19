@@ -7,6 +7,7 @@ import { ComponentSizeDirective, TemplateReferenceDirective } from '../../direct
 import { nameof } from '../../utils';
 import { ButtonComponent } from '../button/button.component';
 import { CloseComponent } from '../close/close.component';
+import { DelimeterComponent } from '../delimeter/delimeter.component';
 import { TemplateContentComponent } from '../template-content/template-content.component';
 import { DefaultModalFooterComponent } from './footer/default/default-modal-footer.component';
 import { DefaultModalHeaderComponent } from './header/default/default-modal-header.component';
@@ -27,7 +28,7 @@ import { ModalService } from './service/modal.service';
                   <h1 class="reference-footer">{{FOOTER_MODEL.Title}}</h1>
               </ng-template>
 
-             <sfc-modal>
+             <sfc-modal [showHeader]="showHeader" [showFooter]="showFooter">
 
                 <ng-template *ngIf="showContent" [sfcTemplateReference]="ModalTemplate.Header">
                   <h2 class="template-header">{{HEADER_MODEL.Title}}</h2>
@@ -61,6 +62,10 @@ class TestSfcModalComponent {
 
   showContent: boolean = false;
 
+  showHeader: boolean = true;
+
+  showFooter: boolean = true;
+
   readonly HEADER_MODEL = {
     Title: 'Header title'
   }
@@ -83,7 +88,7 @@ describe('Component: ModalComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, FontAwesomeModule],
-      declarations: [TemplateContentComponent, CloseComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
+      declarations: [TemplateContentComponent, CloseComponent, DelimeterComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
         ButtonComponent, ComponentSizeDirective, TemplateReferenceDirective, TestSfcModalComponent],
       providers: [{ provide: ModalService, useValue: modalServiceSpy }]
     }).compileComponents();
@@ -189,6 +194,21 @@ describe('Component: ModalComponent', () => {
       expect(fixture.nativeElement.querySelector('h1.reference-header')).toBeNull();
       expect(fixture.nativeElement.querySelector('h2.template-header')).toBeNull();
     });
+
+    fit("Should have default content", () => {
+      expect(fixture.nativeElement.querySelector('sfc-default-modal-header')).not.toBeNull();
+      expect(fixture.nativeElement.querySelector('h1.reference-header')).toBeNull();
+      expect(fixture.nativeElement.querySelector('h2.template-header')).toBeNull();
+    });
+
+    fit("Should hide", () => {
+      component.showHeader = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('sfc-default-modal-header')).toBeNull();
+      expect(fixture.nativeElement.querySelector('h1.reference-header')).toBeNull();
+      expect(fixture.nativeElement.querySelector('h2.template-header')).toBeNull();
+    });
   });
 
   describe('Body', () => {
@@ -232,6 +252,15 @@ describe('Component: ModalComponent', () => {
 
     fit("Should have default content", () => {
       expect(fixture.nativeElement.querySelector('sfc-default-modal-footer')).not.toBeNull();
+      expect(fixture.nativeElement.querySelector('h1.reference-footer')).toBeNull();
+      expect(fixture.nativeElement.querySelector('h2.template-footer')).toBeNull();
+    });
+
+    fit("Should hide", () => {
+      component.showFooter = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('sfc-default-modal-footer')).toBeNull();
       expect(fixture.nativeElement.querySelector('h1.reference-footer')).toBeNull();
       expect(fixture.nativeElement.querySelector('h2.template-footer')).toBeNull();
     });

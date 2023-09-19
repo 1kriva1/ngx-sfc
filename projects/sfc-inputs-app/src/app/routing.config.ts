@@ -26,7 +26,21 @@ import {
     SelectPresentationComponent,
     CommonSelectPresentationComponent,
     MultipleSelectPresentationComponent,
-    GroupSelectPresentationComponent
+    GroupSelectPresentationComponent,
+    CommonTextPresentationComponent,
+    BorderedTextPresentationComponent,
+    CommonTextAreaPresentationComponent,
+    BorderedTextAreaPresentationComponent,
+    CommonFileInputPresentationComponent,
+    BorderedFileInputPresentationComponent,
+    CommonTagsPresentationComponent,
+    BorderedTagsPresentationComponent,
+    CommonNumberPresentationComponent,
+    EditNumberPresentationComponent,
+    BorderedDateTimeInputPresentationComponent,
+    CommonAutoCompletePresentationComponent,
+    BorderedAutoCompletePresentationComponent,
+    BorderedCommonSelectPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -44,11 +58,47 @@ const fallbackRoute: Route = {
 export const routes: Routes = [
     {
         path: 'text',
-        component: TextPresentationComponent
+        component: TextPresentationComponent,
+        children: [
+            {
+                path: 'common',
+                component: CommonTextPresentationComponent
+            },
+            {
+                path: 'bordered',
+                component: BorderedTextPresentationComponent
+            },
+            {
+                path: '',
+                component: CommonTextPresentationComponent
+            },
+            {
+                path: '**',
+                component: CommonTextPresentationComponent
+            }
+        ]
     },
     {
         path: 'textarea',
-        component: TextAreaPresentationComponent
+        component: TextAreaPresentationComponent,
+        children: [
+            {
+                path: 'common',
+                component: CommonTextAreaPresentationComponent
+            },
+            {
+                path: 'bordered',
+                component: BorderedTextAreaPresentationComponent
+            },
+            {
+                path: '',
+                component: CommonTextAreaPresentationComponent
+            },
+            {
+                path: '**',
+                component: CommonTextAreaPresentationComponent
+            }
+        ]
     },
     {
         path: 'file',
@@ -56,7 +106,25 @@ export const routes: Routes = [
         children: [
             {
                 path: 'input',
-                component: FileInputPresentationComponent
+                component: FileInputPresentationComponent,
+                children: [
+                    {
+                        path: 'common',
+                        component: CommonFileInputPresentationComponent
+                    },
+                    {
+                        path: 'bordered',
+                        component: BorderedFileInputPresentationComponent
+                    },
+                    {
+                        path: '',
+                        component: CommonFileInputPresentationComponent
+                    },
+                    {
+                        path: '**',
+                        component: CommonFileInputPresentationComponent
+                    }
+                ]
             },
             {
                 path: 'inline',
@@ -82,11 +150,47 @@ export const routes: Routes = [
     },
     {
         path: 'tags',
-        component: TagsPresentationComponent
+        component: TagsPresentationComponent,
+        children: [
+            {
+                path: 'common',
+                component: CommonTagsPresentationComponent
+            },
+            {
+                path: 'bordered',
+                component: BorderedTagsPresentationComponent
+            },
+            {
+                path: '',
+                component: CommonTagsPresentationComponent
+            },
+            {
+                path: '**',
+                component: CommonTagsPresentationComponent
+            }
+        ]
     },
     {
         path: 'number',
-        component: NumberPresentationComponent
+        component: NumberPresentationComponent,
+        children: [
+            {
+                path: 'common',
+                component: CommonNumberPresentationComponent
+            },
+            {
+                path: 'edit',
+                component: EditNumberPresentationComponent
+            },
+            {
+                path: '',
+                component: CommonNumberPresentationComponent
+            },
+            {
+                path: '**',
+                component: CommonNumberPresentationComponent
+            }
+        ]
     },
     {
         path: 'stars',
@@ -111,6 +215,10 @@ export const routes: Routes = [
             {
                 path: 'years',
                 component: YearsInputPresentationComponent
+            },
+            {
+                path: 'bordered',
+                component: BorderedDateTimeInputPresentationComponent
             },
             {
                 path: '',
@@ -172,7 +280,25 @@ export const routes: Routes = [
     },
     {
         path: 'autocomplete',
-        component: AutoCompletePresentationComponent
+        component: AutoCompletePresentationComponent,
+        children: [
+            {
+                path: 'common',
+                component: CommonAutoCompletePresentationComponent
+            },
+            {
+                path: 'bordered',
+                component: BorderedAutoCompletePresentationComponent
+            },
+            {
+                path: '',
+                component: CommonSelectPresentationComponent
+            },
+            {
+                path: '**',
+                component: CommonSelectPresentationComponent
+            }
+        ]
     },
     {
         path: 'select',
@@ -181,6 +307,10 @@ export const routes: Routes = [
             {
                 path: 'common',
                 component: CommonSelectPresentationComponent
+            },
+            {
+                path: 'bordered',
+                component: BorderedCommonSelectPresentationComponent
             },
             {
                 path: 'multiple',

@@ -6,9 +6,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class LoadMoreService {
 
-    public readonly START_PAGE: number = 1;
+    public static readonly START_PAGE: number = 1;
 
-    private _page = this.START_PAGE;
+    private _page = LoadMoreService.START_PAGE;
 
     private moreSubject: Subject<number> = new Subject<number>();
 
@@ -20,6 +20,6 @@ export class LoadMoreService {
     }
 
     reset(): void {
-        this._page = this.START_PAGE;
+        this._page = LoadMoreService.START_PAGE;
     }
 }

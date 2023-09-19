@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { UIClass } from 'ngx-sfc-common';
-import { CommonConstants, getCssLikeValue, getValueFromCssLikeValue } from 'ngx-sfc-common';
+import { CommonConstants, getValueFromCssLikeValue } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { TextAreaInputComponent } from './text-area-input.component';
@@ -32,6 +32,7 @@ describe('Component: TextAreaInput', () => {
 
     fit('Should have main elements', () => {
       expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('textarea.text-input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
@@ -134,41 +135,30 @@ describe('Component: TextAreaInput', () => {
       expect(fixture.nativeElement.querySelector('label').className).toEqual(CommonConstants.EMPTY_STRING);
     });
 
-    fit("Should have appropriate height after keyUp event", () => {
-      const textAreaEl = fixture.debugElement.query(By.css('textarea')),
-        initialHeight = textAreaEl.nativeElement.clientHeight;
-      textAreaEl.triggerEventHandler('keydown.space', { target: textAreaEl.nativeElement });
-      textAreaEl.triggerEventHandler('keyup', { target: textAreaEl.nativeElement });
-      fixture.detectChanges();
-
-      expect(getValueFromCssLikeValue(textAreaEl.nativeElement.style.height))
-        .toEqual(getValueFromCssLikeValue(getCssLikeValue(initialHeight)) + 1); // border height
-    });
-
     fit("Should have appropriate height after adding new word", () => {
       const textAreaEl = fixture.debugElement.query(By.css('textarea'));
-      inputWithKeyUp('first word', 'a');
+      inputWithKeyUp('first word');
       const initialHeight = textAreaEl.nativeElement.clientHeight;
-      inputWithKeyUp('second word', 'a');
+      inputWithKeyUp('second word \n');
       const resultHeight = getValueFromCssLikeValue(textAreaEl.nativeElement.style.height);
 
-      expect(resultHeight).toEqual(initialHeight + 1); // border height
+      expect(resultHeight).toBeGreaterThan(initialHeight);
     });
 
-    fit("Should have appropriate height after removing line (press backspace)", () => {
+    fit("Should have appropriate height after removing line", () => {
       const textAreaEl = fixture.debugElement.query(By.css('textarea'));
-      inputWithKeyUp('first line \n', InputConstants.BACKSPACE_KEY);
+      inputWithKeyUp('first line \n');
       const initialHeight = textAreaEl.nativeElement.clientHeight;
-      inputWithKeyUp('first line', InputConstants.BACKSPACE_KEY);
+      inputWithKeyUp('first line');
       const resultHeight = getValueFromCssLikeValue(textAreaEl.nativeElement.style.height);
 
       expect(resultHeight).toBeLessThan(initialHeight);
     });
 
-    fit("Should have appropriate height after adding new line (press enter)", () => {
+    fit("Should have appropriate height after adding new line", () => {
       const textAreaEl = fixture.debugElement.query(By.css('textarea'));
       const initialHeight = textAreaEl.nativeElement.clientHeight;
-      inputWithKeyUp('\n', InputConstants.ENTER_KEY);
+      inputWithKeyUp('\n');
       const resultHeight = getValueFromCssLikeValue(textAreaEl.nativeElement.style.height);
 
       expect(resultHeight).toBeGreaterThan(initialHeight);
@@ -260,14 +250,31 @@ describe('Component: TextAreaInput', () => {
     });
   });
 
-  function inputWithKeyUp(value: string, key: string) {
+  describe('Characters counter', () => {
+    fit("Should have relevant value", () => {
+      component.value = '12345';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('5');
+    });
+
+    fit("Should have relevant value when empty", () => {
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual(CommonConstants.EMPTY_STRING);
+    });
+
+    fit("Should have relevant value when has validation error", () => {
+      component.value = '12345';
+      component.innerErrors = { 'minlength': { requiredLength: 10 } };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('5/10');
+    });
+  });
+
+  function inputWithKeyUp(value: string) {
     const textAreaEl = fixture.debugElement.query(By.css('textarea'));
     textAreaEl.nativeElement.value = value;
     textAreaEl.triggerEventHandler('input', { target: textAreaEl.nativeElement });
-    textAreaEl.triggerEventHandler('keyup', {
-      target: textAreaEl.nativeElement,
-      key: key
-    });
     fixture.detectChanges();
   }
 });

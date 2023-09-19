@@ -3,8 +3,32 @@
     &.rounded {
       @include border;
 
-      border-radius: 20px;
+      &.filled {
+        @include theme-value(border-color, $color-default);
+      }
+
+      border-radius: 1.25em;
       padding: 0.4em 1.2em;
+    }
+  }
+
+  &.disabled {
+    .button {
+      &.rounded {
+        &.filled {
+          border-color: $color-disabled-default;
+        }
+      }
+    }
+  }
+
+  &:not(.disabled):hover {
+    .button {
+      &.rounded {
+        &.filled {
+          border-color: $color-hover-default;
+        }
+      }
     }
   }
 }

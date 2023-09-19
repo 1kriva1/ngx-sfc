@@ -57,3 +57,31 @@ export function readAsDataURL(file: File, onLoad: (result: string | ArrayBuffer 
 export function isImage(file: File): boolean {
     return isDefined(file) && (/\.(gif|jpe?g|jpg|tiff|png|webp|bmp)$/i).test(file.name);
 }
+
+/**
+ * Convert file to base64 string
+ * @param file File value
+ * @returns Base64 string
+ */
+export function convertToBase64String(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+    });
+}
+
+/**
+ * Convert base64 string to file
+ * @param base64 Base64 string
+ * @param name File name
+ * @returns File value
+ */
+export async function convertFromBase64String(base64: string, name: string): Promise<File> {
+    const res: Response = await fetch(base64),
+        blob: Blob = await res.blob(),
+        extension = base64.substring("data:image/".length, base64.indexOf(";base64"));
+
+    return new File([blob], `${name}.${extension}`, { type: `image/${extension}` });
+}

@@ -1,27 +1,5 @@
 @import "../../styles/index";
 
-@mixin delimeter-color($direction, $slice) {
-  @include theme-value(
-    border-image,
-    linear-gradient(
-      to $direction,
-      rgb(0 0 0 / 0%) 0%,
-      rgb(0 0 0 / 30%) 47%,
-      rgb(0 0 0 / 30%) 53%,
-      rgb(0 0 0 / 30%) 100%
-    )
-    $slice,
-    linear-gradient(
-        to $direction,
-        rgb(255 255 255 / 0%) 0%,
-        rgb(255 255 255 / 40%) 47%,
-        rgb(255 255 255 / 40%) 53%,
-        rgb(255 255 255 / 40%) 100%
-      )
-      $slice
-  );
-}
-
 :host {
   padding: 0.3em 0;
 
@@ -57,7 +35,7 @@
         top: 0;
         margin-bottom: 0.8em;
 
-        @include delimeter-color(bottom, 1 100%);
+        @include delimeter-color(bottom, 1 100%, $delimeter-common-color, $delimeter-dark-color);
       }
 
       &::after {
@@ -65,7 +43,7 @@
         bottom: 0;
         margin-top: 0.8em;
 
-        @include delimeter-color(top, 1 100%);
+        @include delimeter-color(top, 1 100%, $delimeter-common-color, $delimeter-dark-color);
       }
     }
 
@@ -91,11 +69,11 @@
     user-select: none;
 
     &::before {
-      @include delimeter-color(right, 100% 1);
+      @include delimeter-color(right, 100% 1, $delimeter-common-color, $delimeter-dark-color);
     }
 
     &::after {
-      @include delimeter-color(left, 100% 1);
+      @include delimeter-color(left, 100% 1, $delimeter-common-color, $delimeter-dark-color);
     }
 
     &::before,

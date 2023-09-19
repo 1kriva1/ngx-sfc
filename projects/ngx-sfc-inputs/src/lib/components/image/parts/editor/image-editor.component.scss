@@ -1,8 +1,8 @@
 @use "cropperjs/dist/cropper.min.css";
 @use "ngx-sfc-common/styles/index" as *;
 
-.container {
-  padding: 0.1em 0.2em;
+.sfc-image-editor.container {
+  padding: 0.1em 0;
 
   .editor {
     &.circle {
@@ -20,7 +20,7 @@
 
   .actions {
     color: $color-8;
-    padding: 0.5em 0 1em;
+    padding: 1em 0;
     display: flex;
     justify-content: center;
 

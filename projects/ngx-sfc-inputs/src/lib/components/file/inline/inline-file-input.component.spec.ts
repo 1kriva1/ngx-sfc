@@ -37,6 +37,10 @@ describe('Component: InlineFileInput', () => {
       expect(fixture.nativeElement.querySelector('label span')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
     });
+
+    fit('Should not be bordered', () => {
+      expect(component.bordered).toBeFalse();
+    });
   });
 
   describe('Input', () => {

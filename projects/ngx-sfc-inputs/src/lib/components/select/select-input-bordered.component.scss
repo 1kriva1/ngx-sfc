@@ -1,0 +1,17 @@
+@import "../../styles/mixins";
+
+:host {
+  &.bordered {
+    .container {
+      .content {
+        @include load-container-bordered;
+
+        .input {
+          .sfc-input {
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+  }
+}

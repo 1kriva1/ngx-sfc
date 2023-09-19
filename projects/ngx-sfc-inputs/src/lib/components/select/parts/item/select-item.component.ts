@@ -20,6 +20,7 @@ export class SelectItemComponent {
   active: boolean = false;
 
   @Input()
+  @HostBinding(`class.${SelectItemConstants.MULTIPLE_CLASS}`)
   multiple: boolean = false;
 
   @Input()

@@ -32,7 +32,7 @@ export class ProgressSemiCircleComponent
   }
 
   get barStyles() {
-    const color = this.getColor(this.progress),
+    const color = this.getColor(this.progress, this.max),
       differenceLimits = this.max - this.min,
       rotateValue = 45 + (180 - ((this.max - this.progress) * 180 / differenceLimits));
 

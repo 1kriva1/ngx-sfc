@@ -20,7 +20,7 @@
 
     ::ng-deep sfc-button .button {
       &.rounded {
-        width: 5em;
+        min-width: 5em;
       }
 
       &:not(:hover) {

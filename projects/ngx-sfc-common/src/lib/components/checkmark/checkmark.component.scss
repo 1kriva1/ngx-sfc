@@ -8,7 +8,9 @@
   .check {
     border: 0.125em solid;
     background: transparent;
-    transition: border-color $transition-duration-default $transition-timing-function-default;
+    transition:
+      border-color $transition-duration-default $transition-timing-function-default,
+      background $transition-duration-default $transition-timing-function-default;
 
     @include theme-value(border-color, $color-default, $color-dark);
     @include square-size(1em);

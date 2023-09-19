@@ -1,14 +1,16 @@
-<div class="container">    
+<div class="container">
     <sfc-button *ngIf="!icon" class="icon" [sfcComponentSize] [customSize]="0.6"
         [types]="[ButtonType.Rounded, ButtonType.Filled]" text="File" [disabled]="disabled">
     </sfc-button>
     <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
     <input #inputFile id="{{inputId}}" type="file" title={{title}} [disabled]="disabled"
         (change)="emitFiles($any($event.target).files)">
-    <div class="content">        
+    <div class="content">
         <label for="{{inputId}}" class="active">{{label}}</label>
-        <input sfcInput class="text-input" value={{fileName}} type="text" [disabled]="disabled"
-            [placeholder]="placeholderValue">
+        <div class="input">
+            <input sfcInput class="text-input" value={{fileName}} type="text" [disabled]="disabled"
+                [placeholder]="placeholderValue">
+        </div>
         <span class="helper-text">{{helperTextValue}}</span>
         <span class="right-side-info">{{fileSize}}</span>
         <sfc-close class="clear-button" *ngIf="showClearButton" (click)="clearData($event)"></sfc-close>

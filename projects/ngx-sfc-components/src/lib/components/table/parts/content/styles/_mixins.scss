@@ -29,7 +29,7 @@
   color: $color-default;
   font-weight: bold;
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow: hidden; // @include text-ellipsis;
   user-select: none;
 }
 

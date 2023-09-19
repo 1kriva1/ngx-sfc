@@ -2,6 +2,6 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 export interface IDefaultModalHeaderModel {
     text?: string;
-    icon?: IconDefinition;
+    icon?: IconDefinition | null;
     showCloseIcon?: boolean;
 }

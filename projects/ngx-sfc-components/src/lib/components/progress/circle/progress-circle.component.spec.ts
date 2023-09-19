@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonConstants, hexToRgb } from 'ngx-sfc-common';
 import { ProgressColor } from '../progress-color.enum';
+import { getProgressColorDynamicallyFunc } from '../progress.utils';
 import { ProgressCircleComponent } from './progress-circle.component';
 
 describe('Component: ProgressCircleComponent', () => {
@@ -54,6 +55,14 @@ describe('Component: ProgressCircleComponent', () => {
 
       expect(fixture.debugElement.nativeElement.className).toContain('reversed');
     });
+
+    fit("Should have reversed class with defined total value", () => {
+      component.progress = 6;
+      component.total = 10;
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.nativeElement.className).toContain('reversed');
+    });
   });
 
   describe('Progress', () => {
@@ -73,6 +82,14 @@ describe('Component: ProgressCircleComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.debugElement.query(By.css('div.bar')).styles['transform']).toEqual(component.transformRotate);
+    });
+
+    fit('Should reflect transform rotate value with defined total value', () => {
+      component.progress = 14;
+      component.total = 28;
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('div.bar')).styles['transform']).toEqual('rotate(180deg)');
     });
 
     describe('Colors', () => {
@@ -168,6 +185,28 @@ describe('Component: ProgressCircleComponent', () => {
 
         expect(fixture.debugElement.query(By.css('div.bar')).styles['border-color']).toEqual('green');
         expect(fixture.debugElement.query(By.css('div.fill')).styles['border-color']).toEqual('green');
+      });
+
+      fit("Should reflect colors from defined dynamic getColor function", () => {
+        component.getColor = getProgressColorDynamicallyFunc;
+        component.total = 9
+        component.progress = 0;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['border-color']).toEqual(hexToRgb(ProgressColor.MIN_LOW));
+        expect(fixture.debugElement.query(By.css('div.fill')).styles['border-color']).toEqual(hexToRgb(ProgressColor.MIN_LOW));
+
+        component.progress = 2;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['border-color']).toEqual(hexToRgb(ProgressColor.MAX_LOW));
+        expect(fixture.debugElement.query(By.css('div.fill')).styles['border-color']).toEqual(hexToRgb(ProgressColor.MAX_LOW));
+
+        component.progress = 7;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.bar')).styles['border-color']).toEqual(hexToRgb(ProgressColor.HIGH));
+        expect(fixture.debugElement.query(By.css('div.fill')).styles['border-color']).toEqual(hexToRgb(ProgressColor.HIGH));
       });
     });
   });

@@ -5,7 +5,8 @@ import { BaseFileInputComponent } from '../base-file-input.component';
 @Component({
   selector: 'sfc-file-input',
   templateUrl: './file-input.component.html',
-  styleUrls: ['../../../styles/input.component.scss', './file-input.component.scss']
+  styleUrls: ['../../../styles/input.component.scss', './file-input.component.scss',
+    './file-input-bordered.component.scss']
 })
 export class FileInputComponent extends BaseFileInputComponent {
 

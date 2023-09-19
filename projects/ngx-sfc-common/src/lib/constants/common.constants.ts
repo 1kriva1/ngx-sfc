@@ -4,4 +4,5 @@ export class CommonConstants {
     static MOUSE_BUTTON_LEFT = 0;
     static FULL_PERCENTAGE = 100;
     static COMMON_TEXT_DELIMETER = '/';
+    static PERCENTAGE_SYMBOL = '%';
 }

@@ -4,12 +4,18 @@
 :host {
   .container {
     .content {
-      .sfc-input {
-        line-height: normal;
-        overflow: hidden;
-        padding: 0.8em 0;
-        resize: none;
-        box-sizing: border-box;
+      .input {
+        .sfc-input {
+          padding-top: 0.7em;
+          resize: none;
+          cursor: auto;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+      }
+
+      .helper-text {
+        width: 90%;
       }
 
       .right-side-info {

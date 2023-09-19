@@ -4,9 +4,10 @@ import {
   FileMaxSizeValidatorDirective,
   FileMinSizeValidatorDirective,
   EqualOrIncludeValidatorDirective,
-  MaxLengthValidatorDirective,
-  MinLengthValidatorDirective,
-  MatchValidatorDirective
+  MaxArrayLengthValidatorDirective,
+  MinArrayLengthValidatorDirective,
+  MatchValidatorDirective,
+  CompareThanValidatorDirective
 } from '.';
 
 @NgModule({
@@ -15,18 +16,20 @@ import {
     FileMaxSizeValidatorDirective,
     FileMinSizeValidatorDirective,
     EqualOrIncludeValidatorDirective,
-    MaxLengthValidatorDirective,
-    MinLengthValidatorDirective,
-    MatchValidatorDirective
+    MaxArrayLengthValidatorDirective,
+    MinArrayLengthValidatorDirective,
+    MatchValidatorDirective,
+    CompareThanValidatorDirective
   ],
   exports: [
     FileExtensionsValidatorDirective,
     FileMaxSizeValidatorDirective,
     FileMinSizeValidatorDirective,
     EqualOrIncludeValidatorDirective,
-    MaxLengthValidatorDirective,
-    MinLengthValidatorDirective,
-    MatchValidatorDirective
+    MaxArrayLengthValidatorDirective,
+    MinArrayLengthValidatorDirective,
+    MatchValidatorDirective,
+    CompareThanValidatorDirective
   ]
 })
 export class NgxSfcInputsValidationModule { }

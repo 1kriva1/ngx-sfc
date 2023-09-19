@@ -8,7 +8,8 @@ import { combineLatest } from 'rxjs';
 
 @Component({
   templateUrl: './image-presentation.component.html',
-  styleUrls: ['../../shared/styles/shared.component.scss']
+  styleUrls: ['../../shared/styles/shared.component.scss'],
+  styles: ['sfc-image-input { max-width:20em;}']
 })
 export class ImagePresentationComponent extends BasePresentationComponent
   implements OnInit {

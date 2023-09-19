@@ -1,6 +1,7 @@
 <div class="container">
   <div class="content">
-    <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+    <sfc-icon [icon]="tabLineIcon" [imageSrc]="image"></sfc-icon>
     <span>{{label}}</span>
+    <ng-content></ng-content>
   </div>
 </div>

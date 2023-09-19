@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CheckmarkComponent, ShowHideElementDirective } from 'ngx-sfc-common';
 import {
+  CheckmarkComponent, ShowHideElementDirective,
   MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective, LoadContainerComponent,
   ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent, ILoadMoreModel, ILoadMoreParameters, CommonConstants, UIClass
 } from 'ngx-sfc-common';
@@ -46,6 +46,7 @@ describe('Component: SelectInput', () => {
       expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input[type=text]')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('sfc-load-container')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
@@ -123,8 +124,7 @@ describe('Component: SelectInput', () => {
     });
 
     fit('Should has initialization class', () => {
-      component.loadOnInit = false;
-      fixture.detectChanges();
+      resetLoadOnInit();
 
       expect(fixture.nativeElement.className).toContain(UIClass.Initialization);
     });
@@ -320,7 +320,8 @@ describe('Component: SelectInput', () => {
     });
 
     fit('Should init load data on focus', () => {
-      component.loadOnInit = false;
+      resetLoadOnInit()
+
       initData(true, [{
         key: 0,
         value: 'test 0'
@@ -428,7 +429,7 @@ describe('Component: SelectInput', () => {
     });
 
     fit('Should has not initialization class after load complete', () => {
-      component.loadOnInit = false;
+      resetLoadOnInit();
 
       initData(true);
 
@@ -443,6 +444,8 @@ describe('Component: SelectInput', () => {
 
     describe('Items', () => {
       fit('Should not exist', () => {
+        fixture.detectChanges();
+
         component.showDefaultItem = false;
         component.items = [];
         fixture.detectChanges();
@@ -558,12 +561,14 @@ describe('Component: SelectInput', () => {
       });
 
       fit('Should concat items on load more', () => {
-        const data = [{ key: 0, value: 'test 0' },
-        { key: 1, value: 'test 1' },
-        { key: 2, value: 'test 3' },
-        { key: 3, value: 'test 3' },
-        { key: 4, value: 'test 4' },
-        { key: 5, value: 'test 5' }],
+        const data = [
+          { key: 0, value: 'test 0' },
+          { key: 1, value: 'test 1' },
+          { key: 2, value: 'test 3' },
+          { key: 3, value: 'test 3' },
+          { key: 4, value: 'test 4' },
+          { key: 5, value: 'test 5' }
+        ],
           loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button'));
         initData(true, data);
 
@@ -573,6 +578,25 @@ describe('Component: SelectInput', () => {
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(7);
+      });
+
+      fit('Should load items depend on size parameter', () => {
+        component.size = 2;
+        component.showDefaultItem = false;
+        component.ngOnInit();
+
+        const data = [
+          { key: 0, value: 'test 0' },
+          { key: 1, value: 'test 1' },
+          { key: 2, value: 'test 3' },
+          { key: 3, value: 'test 3' },
+          { key: 4, value: 'test 4' },
+          { key: 5, value: 'test 5' }
+        ];
+
+        initData(true, data);
+
+        expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(2);
       });
 
       fit('Should prepare group item', () => {
@@ -686,7 +710,7 @@ describe('Component: SelectInput', () => {
           item1El.triggerEventHandler('mousedown', new MouseEvent('mousedown'));
           fixture.detectChanges();
 
-          expect(component.value).toEqual([{ key: 1, value: 'Test 1' }, { key: 0, value: 'Test 0' }]);
+          expect(component.value).toEqual([{ key: 0, value: 'Test 0' }, { key: 1, value: 'Test 1' }]);
         });
 
         fit('Should remove selected value', () => {
@@ -739,7 +763,7 @@ describe('Component: SelectInput', () => {
           item1El.triggerEventHandler('mousedown', new MouseEvent('mousedown'));
           fixture.detectChanges();
 
-          expect(component.value).toEqual([{ key: 1, value: 'Test 1' }, { key: 0, value: 'Test 0' }]);
+          expect(component.value).toEqual([{ key: 0, value: 'Test 0' }, { key: 1, value: 'Test 1' }]);
 
           defaultItemEl.triggerEventHandler('mousedown', new MouseEvent('mousedown'));
           fixture.detectChanges();
@@ -800,6 +824,16 @@ describe('Component: SelectInput', () => {
 
       expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(2);
     });
+
+    fit('Should reset items on new data', () => {
+      initLoader({ next: true, items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }], reset: false });
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(3);
+
+      initLoader({ next: true, items: [{ key: 0, value: 'test 0' }], reset: true });
+
+      expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(2);
+    });
   });
 
   describe('Inner validation', () => {
@@ -849,7 +883,7 @@ describe('Component: SelectInput', () => {
     return dataSubject;
   }
 
-  function initLoader(model: ILoadMoreModel<SelectItemModel> = { next: true, items: [{ key: 0, value: 'test 0' }] })
+  function initLoader(model: ILoadMoreModel<SelectItemModel> = { next: true, items: [{ key: 0, value: 'test 0' }], reset: false })
     : BehaviorSubject<ILoadMoreModel<SelectItemModel>> {
     const dataSubject = new BehaviorSubject<ILoadMoreModel<SelectItemModel>>(model);
     component.loader = (_: ILoadMoreParameters) => dataSubject.asObservable();
@@ -858,5 +892,14 @@ describe('Component: SelectInput', () => {
     fixture.detectChanges();
 
     return dataSubject;
+  }
+
+  function resetLoadOnInit() {
+    fixture.detectChanges();
+
+    component.loadOnInit = false;
+    (component as any)._initialized = false;
+    component.ngOnInit();
+    fixture.detectChanges();
   }
 });

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import {
   any, CommonConstants, hasItemBy, ILoadMoreModel,
-  ILoadMoreParameters, isDefined, isNullOrEmptyString, UIClass, where
+  ILoadMoreParameters, ILoadMorePredicateParameters, isDefined, isNullOrEmptyString, UIClass, where
 } from 'ngx-sfc-common';
 import { fromEvent, map, debounceTime, tap, filter, Observable, distinctUntilChanged } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -13,7 +13,8 @@ import { BaseDataInputComponent } from '../base/data/data-input.component';
 @Component({
   selector: 'sfc-autocomplete-input',
   templateUrl: './autocomplete-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', './autocomplete-input.component.scss']
+  styleUrls: ['../../styles/input.component.scss', './autocomplete-input.component.scss',
+    './autocomplete-input-bordered.component.scss']
 })
 export class AutoCompleteInputComponent
   extends BaseDataInputComponent<IAutoCompleteItemModel, IAutoCompleteValue>
@@ -49,7 +50,7 @@ export class AutoCompleteInputComponent
   private searchValue: string | undefined;
 
   override ngAfterViewInit(): void {
-    const predicate$: Observable<string> = fromEvent<InputEvent>(this.inputElementRef.nativeElement, 'input').pipe(
+    const predicate$: Observable<ILoadMorePredicateParameters> = fromEvent<InputEvent>(this.inputElementRef.nativeElement, 'input').pipe(
       // get value
       map(event => (event.target as any).value),
 
@@ -74,7 +75,9 @@ export class AutoCompleteInputComponent
       }),
 
       // if character length greater then 1
-      filter(value => value.length >= this.chars)
+      filter(value => value.length >= this.chars),
+
+      map(value => { return { value } })
     );
 
     this.loadModel = {
@@ -97,7 +100,7 @@ export class AutoCompleteInputComponent
   public handleSuccess(result: ILoadMoreModel<IAutoCompleteItemModel>): void {
     this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, true);
 
-    if (this.newValue)
+    if (this.newValue || result.reset)
       this.items = result.items;
     else
       this.items = this.items.concat(result.items);
@@ -118,10 +121,10 @@ export class AutoCompleteInputComponent
   }
 
   private filter(items: IAutoCompleteItemModel[], parameters: ILoadMoreParameters): IAutoCompleteItemModel[] {
-    const valueParts: string[] = parameters.params.trim().split(' '),
+    const valueParts: string[] = parameters.params.value.trim().split(' '),
       filtered = where(items, (item: IAutoCompleteItemModel) => {
         const itemParts = item.value.trim().split(' ');
-        return item.value.includes(parameters.params)
+        return item.value.includes(parameters.params.value)
           || hasItemBy(valueParts, value => hasItemBy(itemParts, part => part.includes(value)));
       });
 

@@ -1,7 +1,7 @@
 import { formatDate, WeekDay } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { CommonConstants, ComponentSizeDirective, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
+import { CommonConstants, ComponentSizeDirective, ModalService, ModalTemplate, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
 import { isNullOrEmptyString } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base/base-input.component';
 import { DateTimeInputConstants } from './constants/datetime.constants';
@@ -12,14 +12,17 @@ import { DateTimeViewService } from './service/view/datetime-view.service';
 import { IDateTimeValueInitModel } from './service/value/models/datetime-value-init.model';
 import { Subscription } from 'rxjs';
 import { DateTimeValueActionType } from './service/value/datetime-value.enum';
+import { IDateTimeModalButtonsModel } from './parts/modal/datetime-modal.model';
 
 @Component({
   selector: 'sfc-datetime-input',
   templateUrl: './datetime-input.component.html',
   styleUrls: ['../../styles/input.component.scss', './datetime-input.component.scss'],
-  providers: [DateTimeViewService, DateTimeValueService]
+  providers: [DateTimeViewService, DateTimeValueService, ModalService]
 })
 export class DateTimeInputComponent extends BaseInputComponent<Date> implements OnInit, OnDestroy {
+
+  ModalTemplate = ModalTemplate;
 
   @Input()
   date: boolean = true;
@@ -78,6 +81,23 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
   @Input()
   switchOnClick: boolean = false;
 
+  /**
+   * Open in modal (on center of whole page)
+   */
+  @Input()
+  fullSize: boolean = false;
+
+  @Input()
+  hideOnClickOutside: boolean = false;
+
+  @Input()
+  modalButtonsModel: IDateTimeModalButtonsModel = {
+    okLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.OK,
+    cancelLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.CANCEL,
+    clearLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.CLEAR,
+    nowLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.NOW
+  };
+
   private _valueChangeSubscription!: Subscription;
 
   get displayDate() {
@@ -90,6 +110,7 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
     changeDetector: ChangeDetectorRef,
     renderer: Renderer2,
     elementRef: ElementRef,
+    private modalService: ModalService,
     public viewService: DateTimeViewService,
     public valueService: DateTimeValueService) {
     super(ngControl, componentSize, changeDetector, renderer, elementRef);
@@ -98,16 +119,7 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
   ngOnInit(): void {
     this.viewService.init({ date: this.date, time: this.time });
 
-    const valueModel: IDateTimeValueInitModel = {
-      date: this.date,
-      time: this.time,
-      format: this.format,
-      locale: this.locale,
-      shortTime: this.shortTime,
-      disabledDays: this.disabledDays,
-      value: this.hasValue ? this.value as Date : new Date()
-    };
-    this.valueService.init(valueModel);
+    this.initValue();
 
     this._valueChangeSubscription = this.value$.subscribe((value: Date) =>
       this.valueService.update({ type: DateTimeValueActionType.Init, value: value }));
@@ -117,9 +129,38 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
     this._valueChangeSubscription.unsubscribe();
   }
 
-  update(value: Date | null) {
+  update(value: Date | null): void {
     this.onChange(value);
+    this.valueService.currentValue = value;
     this.viewService.update({ type: DateTimeViewActionType.RefreshState });
+
+    // when we set value - close modal
+    if (this.fullSize)
+      this.modalService.toggle();
+  }
+
+  onFocus(): void {
+    if (this.fullSize) {
+      this.initValue();
+
+      if (!this.modalService.isOpen)
+        this.modalService.toggle();
+    }
+  }
+
+  private initValue(): void {
+    const valueModel: IDateTimeValueInitModel = {
+      date: this.date,
+      time: this.time,
+      format: this.format,
+      locale: this.locale,
+      shortTime: this.shortTime,
+      disabledDays: this.disabledDays,
+      value: this.hasValue ? this.value as Date : new Date(),
+      currentValue: this.value
+    };
+
+    this.valueService.init(valueModel);
   }
 
   private get defaultFormat(): string {

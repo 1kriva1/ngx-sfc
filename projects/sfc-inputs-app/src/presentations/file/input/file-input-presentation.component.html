@@ -1,107 +1,14 @@
-<div class="component-container">
-    <div class="title">
-        <h3>Input:</h3>
+<div class="buttons-container">
+    <div class="component-routing">
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="common"
+                [queryParams]="{theme: theme}">Common</button>
+        </div>
+        <div class="routing-link" routerLinkActive="menu-active">
+            <button class="app" routerLinkActive="menu-active" routerLink="bordered"
+                [queryParams]="{theme: theme}">Bordered</button>
+        </div>
     </div>
 
-    <form [formGroup]="formGroup" autocomplete="off">
-        <div class="component-row">
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file" formControlName="inputFileNull"></sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-label" formControlName="inputFileLabel" label="With label">
-                </sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-placeholder" formControlName="inputFilePlaceholder"
-                    placeholder="With placeholder">
-                </sfc-file-input>
-            </div>
-
-        </div>
-
-        <div class="component-row">
-            <div class="component-column">
-                <sfc-file-input id="demo-file-labplace" formControlName="inputFileLabPlace" label="With label"
-                    placeholder="With placeholder"></sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-dis" formControlName="inputFileDisabled" label="Disabled label"
-                    placeholder="Disabled placeholder"></sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-icon" formControlName="inputFileIcon" label="Icon label"
-                    placeholder="Icon placeholder" [icon]="faUser">
-                </sfc-file-input>
-            </div>
-        </div>
-
-        <div class="component-row">
-            <div class="component-column">
-                <sfc-file-input id="demo-file-helper" formControlName="inputFileHelper" label="Helper label"
-                    placeholder="Helper placeholder" helperText="Demo helper"></sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-validundef" formControlName="inputFileValidationUndefined"
-                    label="Validation undefined label" placeholder="Validation undefined placeholder"
-                    helper-text="Demo Validation undefined">
-                </sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-validdef" formControlName="inputFileWithValue" label="With value label"
-                    placeholder="With value placeholder" helperText="Demo With value">
-                </sfc-file-input>
-            </div>
-        </div>
-
-        <div class="component-row">
-            <div class="component-column">
-                <sfc-file-input id="demo-file-validdef" formControlName="inputFileValidationDefined"
-                    label="Validation defined label" placeholder="Validation defined placeholder"
-                    helperText="Demo Validation defined"
-                    [validations]="{required: 'File is required', sfcFileMaxSize: 'Max length is not valid'}">
-                </sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-validdef" formControlName="inputFileWithValueInvalid"
-                    label="With invalid value label" placeholder="With invalid value placeholder"
-                    helperText="Demo With invalid value"
-                    [validations]="{required: 'File is required', sfcFileMaxSize: 'Max length is not valid'}">
-                </sfc-file-input>
-            </div>
-        </div>
-
-        <div class="component-row">
-            <div class="component-column">
-                <sfc-file-input id="demo-file-small" [sfcComponentSize]="ComponentSize.Small"
-                    formControlName="inputFileSmall" label="Small label" placeholder="Small placeholder"
-                    helperText="Small helper"></sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-large" [icon]="faUser" [sfcComponentSize]="ComponentSize.Large"
-                    formControlName="inputFileLarge" label="Large label" placeholder="Large placeholder"
-                    helperText="Large helper"></sfc-file-input>
-            </div>
-
-            <div class="component-column">
-                <sfc-file-input id="demo-file-custom" [sfcComponentSize] [customSize]="4.2"
-                    formControlName="inputFileCustomSize" label="Custom label" placeholder="Custom placeholder"
-                    helperText="Custom helper"></sfc-file-input>
-            </div>
-        </div>
-
-        <div>
-            <pre><code>{{ formGroup.value | json }}</code></pre>
-            <h1>Valid: {{formGroup.valid}}</h1>
-        </div>
-    </form>
+    <router-outlet></router-outlet>
 </div>

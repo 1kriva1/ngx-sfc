@@ -1,10 +1,15 @@
-<div class="container">
-    <input sfcInput id="{{inputId}}" type="number" [disabled]="disabled" [value]="value" style="display: none;" />
+<div class="container" (click)="inputElementRef.nativeElement.focus()">
+    <input *ngIf="!edit" sfcInput id="{{inputId}}" type="number" [disabled]="disabled" [value]="value"
+        style="display: none;" />
     <div class="content">
         <label for="{{inputId}}" *ngIf="label">{{label}}</label>
         <div class="component">
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
-            <sfc-number-spinner [model]="spinnerModel" (update)="update($event)"></sfc-number-spinner>
+            <sfc-number-spinner [model]="spinnerModel" (update)="update($event)">
+                <input *ngIf="edit" sfcInput sfcNumberInput id="{{inputId}}" type="text" [disabled]="disabled"
+                    [value]="spinnerModel.value" [sign]="sign" (input)="onChangeValue($event)" (paste)="onChangeValue($event)"
+                    (keyup)="updateWidth()" (blur)="updateWidth()" />
+            </sfc-number-spinner>
         </div>
         <span class="helper-text">{{helperTextValue}}</span>
     </div>

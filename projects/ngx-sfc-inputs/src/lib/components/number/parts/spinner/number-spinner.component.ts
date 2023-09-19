@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { isDefined, UIClass } from 'ngx-sfc-common';
+import { isDefined, Sequence, UIClass, UIConstants } from 'ngx-sfc-common';
 import { INumberSpinnerModel } from './number-spinner.model';
 
 @Component({
@@ -10,6 +10,8 @@ import { INumberSpinnerModel } from './number-spinner.model';
 })
 export class NumberSpinnerComponent {
 
+  Sequence = Sequence;
+
   @Input()
   model: INumberSpinnerModel = {
     value: 0,
@@ -18,8 +20,11 @@ export class NumberSpinnerComponent {
     nextIcon: faAngleRight,
     prevIcon: faAngleLeft,
     step: 1,
-    disabled: false
-  }
+    edit: false,
+    disabled: false,
+    disableNext: false,
+    disablePrevious: false
+  };
 
   @HostBinding(`class.${UIClass.Fixed}`)
   get isFixedWidth(): boolean {
@@ -40,11 +45,13 @@ export class NumberSpinnerComponent {
   update = new EventEmitter<number>();
 
   get showNext(): boolean {
-    return !isDefined(this.model.max) || this.nextValue <= (this.model.max || 0);
+    return !this.model.disableNext &&
+      (!isDefined(this.model.max) || this.nextValue <= (this.model.max || 0));
   }
 
   get showPrevious(): boolean {
-    return !isDefined(this.model.min) || this.previousValue >= (this.model.min || 0);
+    return !this.model.disablePrevious &&
+      (!isDefined(this.model.min) || this.previousValue >= (this.model.min || 0));
   }
 
   private get nextValue(): number {
@@ -61,5 +68,14 @@ export class NumberSpinnerComponent {
 
   decrement(): void {
     this.update.emit(this.previousValue);
+  }
+
+  getStyles(sequence: Sequence): any {
+    const allow: boolean = (sequence == Sequence.Next ? this.showNext : this.showPrevious);
+
+    return {
+      cursor: allow ? UIClass.Pointer : UIClass.Default,
+      pointerEvents: allow ? UIConstants.CSS_INITIAL : UIConstants.CSS_NONE
+    };
   }
 }

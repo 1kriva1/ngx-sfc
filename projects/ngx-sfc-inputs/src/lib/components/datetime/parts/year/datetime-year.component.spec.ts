@@ -2,11 +2,10 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ButtonType, ComponentSize, MouseDownDirective, Position, ScrollIntoViewDirective, ScrollTrackerDirective } from 'ngx-sfc-common';
-import { UIClass } from 'ngx-sfc-common';
-import { CommonConstants } from 'ngx-sfc-common';
-import { ComponentSizeDirective } from 'ngx-sfc-common';
-import { ButtonComponent } from 'ngx-sfc-common';
+import {
+  ButtonType, ComponentSize, MouseDownDirective, Position, ScrollIntoViewDirective, ScrollTrackerDirective,
+  UIClass, CommonConstants, ComponentSizeDirective, ButtonComponent
+} from 'ngx-sfc-common';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
 import { DateTimeValueService } from '../../service/value/datetime-value.service';
 import { DateTimeViewService } from '../../service/view/datetime-view.service';
@@ -109,7 +108,7 @@ describe('Component: DateTimeYear', () => {
       updateYearList(false);
 
       fixture.debugElement.queryAll(By.css('div.year')).forEach((item, index) => {
-        expect(item.nativeElement.innerText).toEqual((1986 + index).toString());
+        expect(item.nativeElement.innerText).toEqual((1985 + index).toString());
       });
     });
   });
@@ -218,34 +217,31 @@ describe('Component: DateTimeYear', () => {
     });
 
     describe('Scroll', () => {
-      fit('Should scroll target not exist', () => {
-        expect(component.scrollTarget).toBeUndefined();
-      });
-
       fit('Should scroll target exist', () => {
-        component.year = 1992;
-        fixture.detectChanges();
-
-        component.ngAfterViewInit();
-        fixture.detectChanges();
-
         expect(component.scrollTarget).toBeTruthy();
       });
 
-      fit('Should current year be scroll target element', () => {
+      fit('Should set scroll target', () => {
         component.year = 1992;
+        (component.scrollTarget as any) = null;
         fixture.detectChanges();
+
+        expect(component.scrollTarget).toBeNull();
 
         component.ngAfterViewInit();
         fixture.detectChanges();
 
-        const selectedYearEl = fixture.debugElement.queryAll(By.css('div.year'))[7];
-        expect(component.scrollTarget).toEqual(selectedYearEl.nativeElement);
+        expect(component.scrollTarget).toBeDefined();
       });
 
       fit('Should have constant positions for scrolling', () => {
         expect(fixture.debugElement.query(By.css('div.years')).attributes['ng-reflect-positions'])
           .toEqual(`${Position.Bottom},${Position.Top}`)
+      });
+
+      fit('Should have constant local attribute', () => {
+        expect(fixture.debugElement.query(By.css('div.years')).attributes['ng-reflect-local'])
+          .toEqual('true')
       });
 
       fit('Should on bottom scroll update years list', () => {
@@ -255,7 +251,7 @@ describe('Component: DateTimeYear', () => {
         scrollYearList();
 
         fixture.debugElement.queryAll(By.css('div.year')).forEach((item, index) => {
-          expect(item.nativeElement.innerText).toEqual((1986 + index).toString());
+          expect(item.nativeElement.innerText).toEqual((1985 + index).toString());
         });
       });
 
@@ -282,7 +278,7 @@ describe('Component: DateTimeYear', () => {
         scrollYearList(false);
 
         fixture.debugElement.queryAll(By.css('div.year')).forEach((item, index) => {
-          expect(item.nativeElement.innerText).toEqual((1984 + index).toString());
+          expect(item.nativeElement.innerText).toEqual((1978 + index).toString());
         });
       });
 

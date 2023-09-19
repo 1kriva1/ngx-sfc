@@ -80,28 +80,6 @@ describe('Component: CheckmarkComponent', () => {
   });
 
   describe('Icon', () => {
-    fit("Should be hidden, when showNotActive is false", () => {
-      component.showNotActive = false;
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon').style.visibility).toEqual(UIConstants.CSS_VISIBILITY_HIDDEN);
-    });
-
-    fit("Should visible, when showNotActive is false, but active", () => {
-      component.showNotActive = false;
-      component.active = true;
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon').style.visibility).toEqual(UIConstants.CSS_VISIBILITY_VISIBLE);
-    });
-
-    fit("Should visible, when showNotActive is true", () => {
-      component.showNotActive = true;
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon').style.visibility).toEqual(UIConstants.CSS_VISIBILITY_VISIBLE);
-    });
-
     fit("Should have default icon", () => {
       expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-check');
     });

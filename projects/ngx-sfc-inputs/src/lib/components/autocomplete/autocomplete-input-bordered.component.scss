@@ -1,0 +1,34 @@
+@import "../../styles/mixins";
+
+$bordered-load-container-top: 2.3em;
+
+:host {
+  &.bordered {
+    .container {
+      .content {
+        @include load-container-bordered;
+      }
+    }
+
+    &.focus {
+      .container {
+        .content {
+          sfc-load-container.empty {
+            top: $bordered-load-container-top;
+            min-height: 2em;
+          }
+        }
+      }
+
+      &.any {
+        .container {
+          .content {
+            sfc-load-container {
+              top: $bordered-load-container-top;
+            }
+          }
+        }
+      }
+    }
+  }
+}

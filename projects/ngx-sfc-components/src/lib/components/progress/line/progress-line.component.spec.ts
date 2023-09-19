@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonConstants, hexToRgb } from 'ngx-sfc-common';
 import { ProgressColor } from '../progress-color.enum';
+import { getProgressColorDynamicallyFunc } from '../progress.utils';
 import { ProgressLineComponent } from './progress-line.component';
 
 describe('Component: ProgressLineComponent', () => {
@@ -79,6 +80,15 @@ describe('Component: ProgressLineComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('span').length).toEqual(1);
+    });
+
+    fit("Should end label have suffics", () => {
+      component.progress = 100;
+      component.labelSuffix = 'test'
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('span')[1].innerText)
+        .toEqual(`${component.progress}${component.labelSuffix}`);
     });
   });
 
@@ -218,6 +228,28 @@ describe('Component: ProgressLineComponent', () => {
         fixture.detectChanges();
 
         expect(fixture.debugElement.query(By.css('div.progress')).styles['background-color']).toEqual('green');
+      });
+
+      fit("Should reflect colors from defined dynamic getColor function", () => {
+        component.getColor = getProgressColorDynamicallyFunc;
+        component.total = 9
+        component.progress = 1;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.progress')).styles['background-color'])
+          .toEqual(hexToRgb(ProgressColor.LOW));
+
+        component.progress = 3;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.progress')).styles['background-color'])
+          .toEqual(hexToRgb(ProgressColor.MIN_MEDIUM));
+
+        component.progress = 6;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('div.progress')).styles['background-color'])
+          .toEqual(hexToRgb(ProgressColor.MIN_HIGH));
       });
     });
   });

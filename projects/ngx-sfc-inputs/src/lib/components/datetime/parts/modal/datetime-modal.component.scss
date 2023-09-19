@@ -1,6 +1,5 @@
 @use "ngx-sfc-common/styles/index" as *;
-
-$color-header: #26a69a;
+@import "../../../../styles/mixins";
 
 :host {
   .container {
@@ -15,7 +14,7 @@ $color-header: #26a69a;
 
       .view {
         .header {
-          background: $color-header;
+          background: $color-yellow-1;
           color: $color-0;
           text-align: center;
           padding: 0.4em 0.7em 0.4em 0.4em;
@@ -59,7 +58,7 @@ $color-header: #26a69a;
               cursor: pointer;
 
               &:hover {
-                color: $color-header;
+                color: $color-yellow-1;
               }
             }
           }
@@ -99,6 +98,7 @@ $color-header: #26a69a;
           padding: 0.625em 0;
           font-size: 3em;
           line-height: 0.9;
+          cursor: default;
         }
 
         .picker {
@@ -139,6 +139,17 @@ $color-header: #26a69a;
           }
         }
       }
+    }
+  }
+
+  &.full-size {
+    min-width: 20em;
+    overflow: auto;
+
+    .container {
+      position: relative;
+
+      @include modal-bordered(0.18em); // $modal-border-radius;
     }
   }
 }

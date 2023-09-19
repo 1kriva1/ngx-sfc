@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, AfterViewInit, Input, ViewChild, HostBinding, ElementRef, Renderer2, Directive, Optional, HostListener } from '@angular/core';
+import { ChangeDetectorRef, AfterViewInit, Input, ViewChild, HostBinding, ElementRef, Renderer2, Directive, Optional, HostListener, Output, EventEmitter } from '@angular/core';
 import { NgControl, ControlValueAccessor, ValidationErrors } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { addPropertyToObject, any, CommonConstants, ComponentSizeDirective, isDefined, isNullOrEmptyString, removePropertyFromObject, UIClass } from 'ngx-sfc-common';
@@ -42,6 +42,12 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     @Input()
     validations: IValidationModel = {};
 
+    @Input()
+    @HostBinding(`class.${UIClass.Bordered}`)
+    bordered: boolean = false;
+
+    @Output()
+    changeValue: EventEmitter<T | null> = new EventEmitter<T | null>();
     // END INPUTS
 
     // PROPERTIES
@@ -172,6 +178,7 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     iconElementRef!: ElementRef;
 
     private valueSubject: Subject<T> = new Subject<T>();
+
     public value$: Observable<T> = this.valueSubject.asObservable();
 
     constructor(
@@ -252,6 +259,7 @@ export abstract class BaseInputComponent<T> implements ControlValueAccessor, Aft
     onChange(value: T | null) {
         this.value = value;
         this.propagateChange(this.value);
+        this.changeValue.emit(this.value);
     }
 
     onBlur() {

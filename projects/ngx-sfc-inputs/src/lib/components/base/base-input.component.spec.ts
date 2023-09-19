@@ -317,6 +317,17 @@ describe('Component: BaseInputComponent', () => {
 
             expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.InnerInvalid}`)).toBeTruthy();
         });
+
+        fit("Should not have bordered class", () => {
+            expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.Bordered}`)).toBeNull();
+        });
+
+        fit('Should have bordered class', () => {
+            component.base.bordered = true;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector(`sfc-text-input.${UIClass.Bordered}`)).toBeTruthy();
+        });
     });
 
     describe('Value', () => {
@@ -329,6 +340,17 @@ describe('Component: BaseInputComponent', () => {
             });
 
             component.base.writeValue(assertValue);
+        });
+
+        fit('Should emit on change value', () => {
+            spyOn(component.textComponent.changeValue, 'emit');
+
+            const assertValue = 'test value',
+                inputEl = el.query(By.css('input'));
+            inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: assertValue } });
+            fixture.detectChanges();
+
+            expect(component.textComponent.changeValue.emit).toHaveBeenCalledOnceWith(assertValue);
         });
 
         fit('Should have no input value', () => {

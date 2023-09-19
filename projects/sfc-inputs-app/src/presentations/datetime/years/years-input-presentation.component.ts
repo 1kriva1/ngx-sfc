@@ -16,7 +16,8 @@ export class YearsInputPresentationComponent extends BasePresentationComponent i
       {
         inputYear: [null],
         inputRealTime: [new Date()],
-        inputRealMin: [null]
+        inputRealMin: [null],
+        inputModal: [null],
       });
 
     this.repeatEvery(() => {

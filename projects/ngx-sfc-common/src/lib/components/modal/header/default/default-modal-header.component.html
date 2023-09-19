@@ -1,5 +1,9 @@
 <div class="container">
-    <fa-icon *ngIf="model?.icon" class="icon" [icon]="icon"></fa-icon>
-    <span *ngIf="model?.text" class="label">{{model?.text}}</span>
-    <sfc-close *ngIf="model?.showCloseIcon" (click)="onClose()"></sfc-close>
+    <div class="content">
+        <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+        <span *ngIf="model.text" class="label">{{model.text}}</span>
+        <sfc-close *ngIf="model.showCloseIcon" (click)="onClose()"></sfc-close>
+    </div>
+
+    <sfc-delimeter></sfc-delimeter>
 </div>

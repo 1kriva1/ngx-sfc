@@ -1,0 +1,27 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  .container {
+    .content {
+      .component {
+        sfc-number-spinner {
+          .sfc-input {
+            @include theme-value(color, $color-8, $color-dark);
+
+            position: relative;
+            border-bottom: none !important;
+            font-size: 1em;
+            min-width: 20px;
+            font-weight: bold;
+            user-select: none;
+            height: auto;
+            width: 1ch;
+            max-width: 4em;
+            box-shadow: none !important;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

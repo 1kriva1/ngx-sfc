@@ -1,17 +1,16 @@
-import { hasItem, isNullOrEmptyString } from "ngx-sfc-common";
-import { ValidationConstants } from "../../constants/validation.constants";
-import { IInnerValidation } from "../../validators/inner-validation.model";
+import { ValidationErrors } from "@angular/forms";
+import { isDefined } from "ngx-sfc-common";
 
 export class TagsInputConstants {
-    static DEFAULT_NEW_TAG_PLACEHOLDER = '+ Tag';
-    static INNER_VALIDATIONS: IInnerValidation[] = [
-        {
-          key: ValidationConstants.DUPLICATE_VALIDATOR_KEY,
-          validate: (value: any | null, newValue: string) => !hasItem(value as string[], newValue)
-        },
-        {
-          key: ValidationConstants.EMPTY_VALIDATOR_KEY,
-          validate: (value: any | null, newValue: string) => !isNullOrEmptyString(newValue)
-        }
-      ]
+  static DEFAULT_NEW_TAG_PLACEHOLDER = '+ Tag';
+  static LENGTH_VALIDATOR_KEY = 'sfc-tags-length';
+  static LENGTH_VALIDATION(maxLength: number | null, minLength: number | null): ValidationErrors {
+    return {
+      'sfc-tags-length': isDefined(maxLength) && isDefined(minLength)
+        ? `Allowed tag value length is between ${minLength} and ${maxLength} chars`
+        : isDefined(maxLength) 
+          ? `Max tag value length is ${maxLength} chars`
+          : `Min tag value length is ${minLength} chars`
+    };
+  }
 }

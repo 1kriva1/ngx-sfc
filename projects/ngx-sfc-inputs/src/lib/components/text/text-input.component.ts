@@ -6,18 +6,19 @@ import { TextType } from './text-type.enum';
 @Component({
   selector: 'sfc-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', './text-input.component.scss']
+  styleUrls: ['../../styles/input.component.scss', './text-input.component.scss',
+    './text-input-bordered.component.scss']
 })
-export class TextInputComponent extends BaseTextInputComponent implements OnInit {
+export class TextInputComponent extends BaseTextInputComponent<string> implements OnInit {
 
   @Input()
   type: string = TextType.Text;
 
   _isPassword = false;
-  
+
   ngOnInit(): void {
     this._isPassword = this.isPassword;
-  }  
+  }
 
   get isPassword(): boolean {
     return this.type === TextType.Password;

@@ -1,5 +1,21 @@
 @import "../../styles/index";
 
+@mixin load-container-sfc-load-more-button() {
+  sfc-load-more-button {
+    ::ng-deep .container {
+      @include delimeter-same-as-default;
+
+      .button {
+        @include theme-value(color, $color-default);
+
+        &:hover {
+          color: $color-hover-default;
+        }
+      }
+    }
+  }
+}
+
 :host {
   width: 100%;
   height: inherit;
@@ -9,14 +25,18 @@
     height: inherit;
 
     .content {
+      @include theme-value(background, $color-0);
+
       cursor: initial;
       overflow-y: auto;
+      overflow-x: hidden;
       height: inherit;
 
+      @include load-container-sfc-load-more-button;
+
       .empty {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include center;
+
         color: $color-default;
         cursor: default;
         height: 100%;

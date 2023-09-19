@@ -12,7 +12,7 @@
     .content-container {
       font-weight: bold;
       text-overflow: ellipsis;
-      overflow: hidden;
+      overflow: hidden; // @include text-ellipsis;
       user-select: none;
       width: 100%;
 

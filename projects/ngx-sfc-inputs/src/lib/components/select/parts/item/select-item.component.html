@@ -1,6 +1,6 @@
 <div (sfcMouseDown)="onSelect(item, $event)">
     <sfc-delimeter *ngIf="group"></sfc-delimeter>
-    <sfc-checkmark *ngIf="multiple && !default" [active]="active"></sfc-checkmark>    
+    <sfc-checkmark class="sfc-default-theme" *ngIf="multiple && !default" [active]="active"></sfc-checkmark>    
     <span *ngIf="item">{{item.value}}</span>
     <img *ngIf="item?.image" [src]="item.image">
 </div>

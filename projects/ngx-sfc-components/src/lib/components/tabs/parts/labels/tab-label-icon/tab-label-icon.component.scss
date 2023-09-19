@@ -31,7 +31,7 @@
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; // @include text-ellipsis;
 
     fa-icon {
       height: 1.2em;
@@ -42,10 +42,8 @@
       font-size: 0.8em;
     }
   }
-}
 
-@media (max-width: 430px) {
-  :host {
+  @media (max-width: 425px) {
     padding-bottom: 0.6em;
 
     .container {

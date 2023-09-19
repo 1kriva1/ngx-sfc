@@ -5,7 +5,7 @@ import { validation } from "../_validators";
 export function fileMaxSize(maxSize: number): ValidatorFn {
     const validatorFn = (file: File) => {
         if (file instanceof File && file.size > maxSize) {
-            return { sfcFileMaxSize: { requiredSize: maxSize, actualSize: file.size, file } };
+            return { 'sfc-file-max-size': { requiredSize: maxSize, actualSize: file.size, file } };
         }
 
         return null;
@@ -16,7 +16,7 @@ export function fileMaxSize(maxSize: number): ValidatorFn {
 export function fileMinSize(minSize: number): ValidatorFn {
     const validatorFn = (file: File) => {
         if (file instanceof File && file.size < minSize) {
-            return { sfcFileMinSize: { requiredSize: minSize, actualSize: file.size, file } };
+            return { 'sfc-file-min-size': { requiredSize: minSize, actualSize: file.size, file } };
         }
 
         return null;
@@ -33,7 +33,7 @@ export function fileExtensions(allowedExtensions: Array<string>): ValidatorFn {
         if (file instanceof File) {
             const ext = getFileExtension(file);
             if (allowedExtensions.indexOf(ext) === -1) {
-                return { sfcFileExtension: { allowedExtensions: allowedExtensions, actualExtension: ext, file } };
+                return { 'sfc-file-extension': { allowedExtensions: allowedExtensions, actualExtension: ext, file } };
             }
         }
 

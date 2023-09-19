@@ -38,17 +38,6 @@ describe('Directive: ModalOpen', () => {
             expect(component.directive).toBeDefined();
         });
 
-        fit("Should call unsubscribe on close subscription, when directive destroyed", () => {
-            const unsubscribeSpy = spyOn(
-                (component.directive as any)._closeSubscription,
-                'unsubscribe'
-            ).and.callThrough();
-
-            component.directive?.ngOnDestroy();
-
-            expect(unsubscribeSpy).toHaveBeenCalled();
-        });
-
         fit("Should call unsubscribe on open subscription, when directive destroyed", () => {
             const unsubscribeSpy = spyOn(
                 (component.directive as any)._openSubscription,

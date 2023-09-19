@@ -1,0 +1,1 @@
+export { IClassModel } from './class.model';

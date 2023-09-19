@@ -1,10 +1,41 @@
+@mixin datetime-input-sfc-modal() {
+  sfc-modal {
+    ::ng-deep .overlay {
+      .content {
+        padding: 0;
+      }
+    }
+  }
+}
+
 :host {
-  &:not(.disabled) {
+  .container {
+    .content {
+      label {
+        cursor: pointer;
+      }
+
+      .input {
+        .sfc-input {
+          cursor: pointer;
+        }
+      }
+
+      @include datetime-input-sfc-modal;
+    }
+  }
+
+  &.disabled {
     .container {
       .content {
-        .sfc-input,
+        .input {
+          .sfc-input {
+            cursor: initial;
+          }
+        }
+
         label {
-          cursor: pointer;
+          cursor: initial;
         }
       }
     }

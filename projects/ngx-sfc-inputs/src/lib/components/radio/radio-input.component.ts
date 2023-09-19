@@ -20,6 +20,8 @@ export class RadioInputComponent extends BaseInputComponent<number> {
   @Input()
   items: IRadioItemModel[] = [];
 
+  override bordered: boolean = false;
+
   public isChecked(item: IRadioItemModel): boolean {
     return this.hasValue ? this.value === item.value : item.default || false;
   }

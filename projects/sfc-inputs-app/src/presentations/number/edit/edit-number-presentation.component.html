@@ -1,0 +1,232 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Edit:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-number-input id="demo-text-input-full-empty" formControlName="inputNumberNull" [edit]="true">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-label" formControlName="inputNumberLabel" [edit]="true"
+                    label="test label">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-icon" formControlName="inputNumberIcon" [edit]="true" [icon]="faUser">
+                </sfc-number-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-helper" formControlName="inputNumberHelper" [edit]="true"
+                    helperText="helper test">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-label-helper" formControlName="inputNumberLabelHelper" [edit]="true"
+                    label="test label" helperText="helper test">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-label-icon-helper" formControlName="inputNumberLabelIconHelper"
+                    [edit]="true" label="test label" [icon]="faUser">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-custom-next" formControlName="inputNumberCustomNext" [edit]="true"
+                    label="test label" [icon]="faUser" helperText="helper test" [nextIcon]="faPlusCircle">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-custom-prev" formControlName="inputNumberCustomPrev" [edit]="true"
+                    label="test label" [icon]="faUser" helperText="helper test" [prevIcon]="faMinusCircle">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-custom-next-prev" formControlName="inputNumberCustomNextPrev"
+                    [edit]="true" label="test label" [icon]="faUser" helperText="helper test" [nextIcon]="faPlusCircle"
+                    [prevIcon]="faMinusCircle">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-max" formControlName="inputNumberMax" [edit]="true"
+                    label="test label max 3 limit" [icon]="faUser" helperText="helper test max 3 limit" [max]="3">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-min" formControlName="inputNumberMin" [edit]="true"
+                    label="test label min 0 limit" [icon]="faUser" helperText="helper test min 0 limit" [min]="0">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-max-min" formControlName="inputNumberMaxMin" [edit]="true"
+                    label="test label from 0 to 3 limit" [icon]="faUser" helperText="helper test from 0 to 3" [min]="0"
+                    [max]="3">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-max-step" formControlName="inputNumberMaxStep" [edit]="true"
+                    label="test label max 3 limit step 2" [icon]="faUser" helperText="helper test max 3 limit step 2"
+                    [max]="3" [step]="2">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-min-step" formControlName="inputNumberMinStep" [edit]="true"
+                    label="test label min 0 limit step 2" [icon]="faUser" helperText="helper test min 0 limit step 2"
+                    [min]="0" [step]="2">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-max-min-step" formControlName="inputNumberMaxMinStep" [edit]="true"
+                    label="test label from 0 to 3 limit step 2" [icon]="faUser"
+                    helperText="helper test from 0 to 3 step 2" [min]="0" [max]="3" [step]="2">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-fixed" formControlName="inputNumberFixed" [edit]="true"
+                    label="test label fixed" [icon]="faUser" helperText="helper test fixed" [fixedWidth]="true">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-fixed-actions" formControlName="inputNumberFixedActions" [edit]="true"
+                    label="test label fixed actions" [icon]="faUser" helperText="helper test fixed actions"
+                    [fixedActions]="true">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-fixed-all" formControlName="inputNumberFixedAll" [edit]="true"
+                    label="test label fixed all" [icon]="faUser" helper-text="helper test fixed all" [fixedWidth]="true"
+                    [fixedActions]="true">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-disabled" formControlName="inputNumberDisabled" [edit]="true"
+                    label="test label disabled" [icon]="faUser" helperText="helper test disabled">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-fixed-disabled" formControlName="inputNumberFixedDisabled"
+                    [edit]="true" label="test label disabled fixed" [icon]="faUser"
+                    helperText="helper test disabled fixed" [fixedWidth]="true">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-fixed-all-disabled" formControlName="inputNumberFixedAllDisabled"
+                    [edit]="true" label="test label disabled fixed all" [icon]="faUser"
+                    helperText="helper test disabled fixed all" [fixedWidth]="true" [fixedActions]="true">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-validation" formControlName="inputNumberValidation" [edit]="true"
+                    label="test label valid when value is 1" [icon]="faUser"
+                    helperText="helper test  valid when value is 1">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-validation-label" formControlName="inputNumberValidationLabel"
+                    [edit]="true" label="test label valid when value less than 3">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-validation-icon" formControlName="inputNumberValidationIcon"
+                    [edit]="true" [icon]="faUser" label="test label valid when value more than 3">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-validation-message" formControlName="inputNumberValidationMessage"
+                    [edit]="true" label="test label valid when value is 1" [icon]="faUser"
+                    helperText="helper test  valid when value is 1"
+                    [validations]="{'sfc-equal-or-include': 'Value must be equal 1.'}">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-validation-label-message"
+                    formControlName="inputNumberValidationLabelMessage" [edit]="true"
+                    label="test label valid when value less than 3" [validations]="{max: 'Value must be less than 3.'}">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-validation-icon-message"
+                    formControlName="inputNumberValidationIconMessage" [edit]="true" [icon]="faUser"
+                    label="test label valid when value more than 3"
+                    [validations]="{min: 'Value must be greater than 3.'}">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-number-input id="demo-number-small" formControlName="inputNumberSmall" [edit]="true"
+                    label="Label small" [icon]="faUser" helperText="Helper small"
+                    [sfcComponentSize]="ComponentSize.Small">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-large" formControlName="inputNumberLarge" [edit]="true"
+                    label="Label large" [icon]="faUser" helperText="Helper large"
+                    [sfcComponentSize]="ComponentSize.Large">
+                </sfc-number-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-number-input id="demo-number-custom" formControlName="inputNumberCustom" [edit]="true"
+                    label="Label custom" [icon]="faUser" helperText="Helper custom" [sfcComponentSize]
+                    [customSize]="4.2">
+                </sfc-number-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+
+
+</div>

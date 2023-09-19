@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommonConstants, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, IconComponent, UIClass } from 'ngx-sfc-common';
 import { TabLabelLineComponent } from './tab-label-line.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,7 @@ describe('Component: TabLabelLineComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [TabLabelLineComponent]
+            declarations: [IconComponent, TabLabelLineComponent]
         }).compileComponents();
     });
 
@@ -56,22 +56,34 @@ describe('Component: TabLabelLineComponent', () => {
     });
 
     describe('Icon', () => {
-        fit('Should not exist', () => {
-            expect(fixture.nativeElement.querySelector('fa-icon')).toBeNull();
+        fit('Should have wrap', () => {
+            expect(fixture.nativeElement.querySelector('sfc-icon')).toBeTruthy();
         });
 
-        fit('Should exist', () => {
-            component.icon = faTShirt;
-            fixture.detectChanges();
-
+        fit('Should have default value', () => {
             expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
         });
 
-        fit('Should have defined icon', () => {
+        fit('Should have defined value', () => {
             component.icon = faTShirt;
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-shirt');
+        });
+
+        fit('Should have image instead of icon', () => {
+            component.image = 'test.png';
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('fa-icon')).toBeNull();
+            expect(fixture.nativeElement.querySelector('img')).toBeTruthy();
+        });
+
+        fit('Should have defined image value', () => {
+            component.image = 'test.png';
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('img').src).toContain(component.image);
         });
     });
 

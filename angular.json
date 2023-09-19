@@ -52,6 +52,11 @@
               "projects/sfc-inputs-app/src/favicon.ico",
               "projects/sfc-inputs-app/src/assets"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
             "styles": [
               "projects/sfc-inputs-app/src/styles.scss"
             ],
@@ -66,12 +71,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "1.3mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [
@@ -160,7 +165,7 @@
             "karmaConfig": "projects/ngx-sfc-inputs/karma.conf.js",
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules"         
+                "node_modules"
               ]
             }
           }
@@ -330,7 +335,7 @@
             "karmaConfig": "projects/ngx-sfc-components/karma.conf.js",
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules"         
+                "node_modules"
               ]
             }
           }

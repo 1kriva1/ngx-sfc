@@ -5,3 +5,8 @@
 
 $transition-duration-default: 0.5s;
 $transition-timing-function-default: ease;
+$modal-border-radius: 3px;
+$delimeter-common-color: rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 30%) 47%, rgb(0 0 0 / 30%) 53%, rgb(0 0 0 / 30%) 100%;
+$delimeter-dark-color: rgb(255 255 255 / 0%) 0%, rgb(255 255 255 / 40%) 47%, rgb(255 255 255 / 40%) 53%,
+  rgb(255 255 255 / 40%) 100%;
+$font-family-default: arial, helvetica, sans-serif;

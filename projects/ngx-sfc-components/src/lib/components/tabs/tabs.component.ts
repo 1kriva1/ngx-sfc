@@ -76,7 +76,7 @@ export class TabsComponent implements OnInit {
 
   private getSelectedIndex(tabs: ITabModel[]): number {
     let selectedIndex = tabs.indexOf(firstOrDefault(tabs,
-      tab => tab.selected && !tab.disabled) as ITabModel);
+      tab => tab.selected! && !tab.disabled) as ITabModel);
 
     if (selectedIndex == CommonConstants.NOT_FOUND_INDEX) {
       selectedIndex = tabs.indexOf(firstOrDefault(tabs, tab => !tab.disabled) as ITabModel);

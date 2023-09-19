@@ -84,7 +84,7 @@
             <div class="component-column">
                 <sfc-inline-file-input id="demo-file-inline-validation-def" formControlName="inlineFileValDef"
                     label="ValDef inline" placeholder="ValDef inline" helperText="helper text ValDef"
-                    [validations]="{required: 'First name is required', sfcFileExtension: 'Invalid extension'}">
+                    [validations]="{required: 'First name is required', 'sfc-file-extension': 'Invalid extension'}">
                 </sfc-inline-file-input>
             </div>
         </div>
@@ -100,7 +100,7 @@
                 <sfc-inline-file-input id="demo-file-inline-validation-has-value-invalid"
                     formControlName="inlineFileHasValueInvalid" label="Has value inline invalid"
                     placeholder="Has value inline invalid" helperText="helper text Has value invalid"
-                    [validations]="{required: 'First name is required', sfcFileExtension: 'Invalid extension'}">
+                    [validations]="{required: 'First name is required', 'sfc-file-extension': 'Invalid extension'}">
                 </sfc-inline-file-input>
             </div>
         </div>

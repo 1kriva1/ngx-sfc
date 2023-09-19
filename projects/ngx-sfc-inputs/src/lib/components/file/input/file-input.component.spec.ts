@@ -3,8 +3,7 @@ import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ComponentSizeDirective } from 'ngx-sfc-common';
-import { ButtonType, CloseComponent, CommonConstants } from 'ngx-sfc-common';
-import { ButtonComponent } from 'ngx-sfc-common';
+import { ButtonType, CloseComponent, CommonConstants, ButtonComponent } from 'ngx-sfc-common';
 import { InputConstants } from '../../../constants/input.constants';
 import { InputReferenceDirective } from '../../../directives';
 import { FileInputConstants } from '../file-input.constants';
@@ -36,6 +35,7 @@ describe('Component: FileInput', () => {
       expect(fixture.nativeElement.querySelector('.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input[type="file"]')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input.text-input')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();

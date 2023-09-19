@@ -89,6 +89,16 @@ export function all<T>(collection: Array<T>, predicate: (item: T) => boolean): b
 }
 
 /**
+ * Return count by predicate
+ * @param collection Array of objects
+ * @param predicate Function to define check logic
+ * @returns Items count
+ */
+ export function count<T>(collection: Array<T>, predicate: (item: T) => boolean): number {
+    return collection.filter(predicate).length;
+}
+
+/**
  * Return items from collection by predicate function
  * @param collection Array of items
  * @param predicate Function to define search logic

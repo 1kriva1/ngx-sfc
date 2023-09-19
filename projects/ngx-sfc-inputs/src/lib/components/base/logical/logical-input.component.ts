@@ -7,6 +7,8 @@ export abstract class BaseLogicalInputComponent extends BaseInputComponent<boole
     @Input()
     sideLabel!: string;
 
+    override bordered: boolean = false;
+
     get labelValue(): string {
         return this.label || this.sideLabel || this.placeholder;
     }

@@ -1,0 +1,21 @@
+@mixin delimeter-color($direction, $slice, $value-common, $value-dark) {
+  @include theme-value(
+    border-image,
+    linear-gradient(to $direction, $value-common) $slice,
+    linear-gradient(to $direction, $value-dark) $slice
+  );
+}
+
+@mixin delimeter-same-as-default() {
+  ::ng-deep sfc-delimeter {
+    &.horizontal {
+      &::before {
+        @include delimeter-color(right, 100% 1, $delimeter-common-color, $delimeter-common-color);
+      }
+
+      &::after {
+        @include delimeter-color(left, 100% 1, $delimeter-common-color, $delimeter-common-color);
+      }
+    }
+  }
+}

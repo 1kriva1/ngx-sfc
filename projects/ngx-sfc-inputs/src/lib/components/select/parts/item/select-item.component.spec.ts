@@ -98,6 +98,17 @@ describe('Component: SelectItem', () => {
       expect(fixture.nativeElement.className).toContain(SelectItemConstants.GROUP_CLASS);
     });
 
+    fit("Should not have multiple class by default", () => {
+      expect(fixture.nativeElement.className).not.toContain(SelectItemConstants.MULTIPLE_CLASS);
+    });
+
+    fit("Should have multiple class", () => {
+      component.multiple = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.className).toContain(SelectItemConstants.MULTIPLE_CLASS);
+    });
+
     fit("Should not have default class, when key is not null", () => {
       component.item = { key: 1, value: 'Test value' };
       fixture.detectChanges();
@@ -135,7 +146,7 @@ describe('Component: SelectItem', () => {
 
   describe('Checkmark', () => {
     fit('Should not exist checkmark, when not multiple', () => {
-      expect(fixture.nativeElement.querySelector('sfc-checkmark')).toBeNull();
+      expect(fixture.nativeElement.querySelector('sfc-checkmark.sfc-default-theme')).toBeNull();
     });
 
     fit('Should not exist checkmark, when default', () => {
@@ -143,7 +154,7 @@ describe('Component: SelectItem', () => {
       component.multiple = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('sfc-checkmark')).toBeNull();
+      expect(fixture.nativeElement.querySelector('sfc-checkmark.sfc-default-theme')).toBeNull();
     });
 
     fit('Should exist checkmark', () => {
@@ -151,7 +162,7 @@ describe('Component: SelectItem', () => {
       component.multiple = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('sfc-checkmark')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('sfc-checkmark.sfc-default-theme')).toBeTruthy();
     });
 
     fit('Should checkmark be not active', () => {
@@ -160,7 +171,7 @@ describe('Component: SelectItem', () => {
       fixture.detectChanges();
 
 
-      expect(fixture.debugElement.query(By.css('sfc-checkmark')).componentInstance.active).toBeFalse();
+      expect(fixture.debugElement.query(By.css('sfc-checkmark.sfc-default-theme')).componentInstance.active).toBeFalse();
     });
 
     fit('Should checkmark be active', () => {
@@ -169,7 +180,7 @@ describe('Component: SelectItem', () => {
       component.active = true;
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('sfc-checkmark')).componentInstance.active).toBeTrue();
+      expect(fixture.debugElement.query(By.css('sfc-checkmark.sfc-default-theme')).componentInstance.active).toBeTrue();
     });
   });
 

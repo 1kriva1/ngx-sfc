@@ -3,14 +3,11 @@
     display: inline-flex;
 
     .content {
-      &.side-label {
-        align-items: flex-start;
-      }
-
       .component {
         label {
           transform: scale(1);
           margin: 0 1em;
+          white-space: break-spaces;
         }
       }
     }

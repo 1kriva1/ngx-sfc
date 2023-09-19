@@ -60,10 +60,10 @@ export class ModalComponent {
     // Defaults
 
     @Input()
-    defaultHeaderModel?: IDefaultModalHeaderModel;
+    defaultHeaderModel!: IDefaultModalHeaderModel;
 
     @Input()
-    defaultFooterModel?: IDefaultModalFooterModel;
+    defaultFooterModel!: IDefaultModalFooterModel;
 
     // End Defaults
 
@@ -72,6 +72,14 @@ export class ModalComponent {
 
     @Input()
     hideOnClickOutside: boolean = true;
+
+    // hide modal header (even default)
+    @Input()
+    showHeader: boolean = true;
+
+    // hide modal footer (even default)
+    @Input()
+    showFooter: boolean = true;
 
     @HostListener('document:keydown.escape')
     onEscapeKeyDownHandler() {
@@ -84,7 +92,7 @@ export class ModalComponent {
 
     constructor(private modalService: ModalService) { }
 
-    close() {
+    public close(): void {
         this.modalService.close();
     }
 }

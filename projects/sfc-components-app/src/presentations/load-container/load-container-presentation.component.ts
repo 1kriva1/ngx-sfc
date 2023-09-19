@@ -28,6 +28,11 @@ export class LoadContainerPresentationComponent
     data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
   };
 
+  modelSize: ILoadContainerModel = {
+    size: 2,
+    data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+  };
+
   modelDropdown: ILoadContainerModel = {
     predicate$: this.loadDropdownData$,
     data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
