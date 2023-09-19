@@ -9,7 +9,7 @@ import { TextType } from './text-type.enum';
   styleUrls: ['../../styles/input.component.scss', './text-input.component.scss',
     './text-input-bordered.component.scss']
 })
-export class TextInputComponent extends BaseTextInputComponent implements OnInit {
+export class TextInputComponent extends BaseTextInputComponent<string> implements OnInit {
 
   @Input()
   type: string = TextType.Text;

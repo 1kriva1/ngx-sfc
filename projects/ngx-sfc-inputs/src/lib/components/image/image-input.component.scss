@@ -1,11 +1,10 @@
 @use "ngx-sfc-common/styles/index" as *;
 
 :host {
-  width: initial;
+  width: 100%;
 
   .container {
     .content {
-      width: initial;
       text-align: center;
 
       .component {
@@ -15,8 +14,9 @@
         overflow: hidden;
 
         .image {
-          @include square-size(12.5em);
-
+          width: inherit;
+          height: 0;
+          padding-bottom: 100%;
           background-size: cover;
           background-position: 50%;
         }

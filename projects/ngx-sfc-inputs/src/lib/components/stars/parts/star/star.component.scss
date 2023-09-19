@@ -10,7 +10,7 @@
       @include theme-value(color, $color-default, $color-dark);
 
       font-size: 1.75em;
-      transition: all 0.2s;
+      transition: all $transition-duration-default $transition-timing-function-default;
       cursor: pointer;
       float: right;
     }

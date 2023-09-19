@@ -55,8 +55,8 @@
       }
 
       span:not(:empty) {
-        text-overflow: ellipsis;
         white-space: nowrap;
+        text-overflow: ellipsis; // @include text-ellipsis;
         overflow: hidden;
         display: inline-block;
       }

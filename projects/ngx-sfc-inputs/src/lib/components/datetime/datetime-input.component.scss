@@ -11,6 +11,10 @@
 :host {
   .container {
     .content {
+      label {
+        cursor: pointer;
+      }
+
       .input {
         .sfc-input {
           cursor: pointer;

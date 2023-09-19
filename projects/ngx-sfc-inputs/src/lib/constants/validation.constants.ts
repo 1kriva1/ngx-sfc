@@ -13,11 +13,10 @@ export class ValidationConstants {
     static MIN_ARRAY_LENGTH_VALIDATOR_KEY = 'sfc-min-array-length';
     static MATCH_VALIDATOR_KEY = 'sfc-match';
     static COMPARE_THAN_VALIDATOR_KEY = 'sfc-compare-than';
-
-
+    
     // validations
     static DUPLICATE_VALIDATION: ValidationErrors = { 'sfc-duplicate': 'Duplicate value' };
     static EMPTY_VALIDATION: ValidationErrors = { 'sfc-empty': 'Empty value' };
     static FORMAT_VALIDATION: ValidationErrors = { 'sfc-format': 'Invalid file format' };
-    static DATA_VALIDATION: ValidationErrors = { 'sfc-data': 'Data error occurred' };
+    static DATA_VALIDATION: ValidationErrors = { 'sfc-data': 'Data error occurred' };    
 }

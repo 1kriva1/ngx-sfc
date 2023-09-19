@@ -250,6 +250,27 @@ describe('Component: TextAreaInput', () => {
     });
   });
 
+  describe('Characters counter', () => {
+    fit("Should have relevant value", () => {
+      component.value = '12345';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('5');
+    });
+
+    fit("Should have relevant value when empty", () => {
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual(CommonConstants.EMPTY_STRING);
+    });
+
+    fit("Should have relevant value when has validation error", () => {
+      component.value = '12345';
+      component.innerErrors = { 'minlength': { requiredLength: 10 } };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('5/10');
+    });
+  });
+
   function inputWithKeyUp(value: string) {
     const textAreaEl = fixture.debugElement.query(By.css('textarea'));
     textAreaEl.nativeElement.value = value;

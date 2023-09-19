@@ -113,10 +113,12 @@ export class ImageInputComponent
 
   onEmitFile(event: FileList): void {
     const file = event.item(0) as File;
+    
     if (this.validateFormat(file)) {
       this.imageService.imageFile = file;
       this.modalService.toggle();
     }
+
     this.inputElementRef.nativeElement.value = CommonConstants.EMPTY_STRING;
   }
 

@@ -13,7 +13,7 @@
 
     h3 {
       text-overflow: ellipsis;
-      overflow: hidden;
+      overflow: hidden; // @include text-ellipsis;
     }
   }
 

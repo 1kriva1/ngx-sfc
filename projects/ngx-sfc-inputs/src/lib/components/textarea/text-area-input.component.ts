@@ -9,7 +9,7 @@ import { BaseTextInputComponent } from '../base/text/base-text-input.component';
     './text-area-input-bordered.component.scss']
 })
 export class TextAreaInputComponent
-  extends BaseTextInputComponent
+  extends BaseTextInputComponent<string>
   implements AfterViewChecked {
 
   @ViewChild("textAreaRef", { static: false })
@@ -19,7 +19,7 @@ export class TextAreaInputComponent
     this.alignHeight();
   }
 
-  get charCounterValue(): string {
+  override get charsCounterValue(): string {
     //Think about this:  this.value.replace(/\r?\n/g, "");
     return super.charsCounterValue
       ? super.charsCounterValue

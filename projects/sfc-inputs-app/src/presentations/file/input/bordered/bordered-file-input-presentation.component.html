@@ -1,0 +1,107 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Bordered input:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file" formControlName="inputFileNull" [bordered]="true"></sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-label" formControlName="inputFileLabel" [bordered]="true" label="With label">
+                </sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-placeholder" formControlName="inputFilePlaceholder" [bordered]="true"
+                    placeholder="With placeholder">
+                </sfc-file-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-file-input id="demo-file-labplace" formControlName="inputFileLabPlace" [bordered]="true" label="With label"
+                    placeholder="With placeholder"></sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-dis" formControlName="inputFileDisabled" [bordered]="true" label="Disabled label"
+                    placeholder="Disabled placeholder"></sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-icon" formControlName="inputFileIcon" [bordered]="true" label="Icon label"
+                    placeholder="Icon placeholder" [icon]="faUser">
+                </sfc-file-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-file-input id="demo-file-helper" formControlName="inputFileHelper" [bordered]="true" label="Helper label"
+                    placeholder="Helper placeholder" helperText="Demo helper"></sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-validundef" formControlName="inputFileValidationUndefined" [bordered]="true"
+                    label="Validation undefined label" placeholder="Validation undefined placeholder"
+                    helper-text="Demo Validation undefined">
+                </sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-validdef" formControlName="inputFileWithValue" [bordered]="true" label="With value label"
+                    placeholder="With value placeholder" helperText="Demo With value">
+                </sfc-file-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-file-input id="demo-file-validdef" formControlName="inputFileValidationDefined" [bordered]="true"
+                    label="Validation defined label" placeholder="Validation defined placeholder"
+                    helperText="Demo Validation defined"
+                    [validations]="{required: 'File is required', 'sfc-file-max-size': 'Max length is not valid'}">
+                </sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-validdef" formControlName="inputFileWithValueInvalid" [bordered]="true"
+                    label="With invalid value label" placeholder="With invalid value placeholder"
+                    helperText="Demo With invalid value"
+                    [validations]="{required: 'File is required', 'sfc-file-max-size': 'Max length is not valid'}">
+                </sfc-file-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-file-input id="demo-file-small" [sfcComponentSize]="ComponentSize.Small"
+                    formControlName="inputFileSmall" [bordered]="true" label="Small label" placeholder="Small placeholder"
+                    helperText="Small helper"></sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-large" [icon]="faUser" [sfcComponentSize]="ComponentSize.Large"
+                    formControlName="inputFileLarge" [bordered]="true" label="Large label" placeholder="Large placeholder"
+                    helperText="Large helper"></sfc-file-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-file-input id="demo-file-custom" [sfcComponentSize] [customSize]="4.2"
+                    formControlName="inputFileCustomSize" [bordered]="true" label="Custom label" placeholder="Custom placeholder"
+                    helperText="Custom helper"></sfc-file-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

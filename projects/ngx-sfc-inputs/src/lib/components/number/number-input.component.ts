@@ -17,13 +17,16 @@ export class NumberInputComponent
   implements OnInit, OnDestroy {
 
   @Input()
-  max!: number;
+  max: number = Number.MAX_SAFE_INTEGER;
 
   @Input()
-  min!: number;
+  min: number = Number.MIN_SAFE_INTEGER;
 
   @Input()
   step: number = 1;
+
+  @Input()
+  sign: boolean = true;
 
   @Input()
   fixedWidth: boolean = false;
@@ -66,7 +69,9 @@ export class NumberInputComponent
   }
 
   private get defaultValue(): number {
-    return this.value || this.min || 0;
+    return this.value ||
+      (this.min == Number.MIN_SAFE_INTEGER ? 0 : this.min) ||
+      0;
   }
 
   private _subscription!: Subscription;
@@ -98,8 +103,8 @@ export class NumberInputComponent
 
   updateWidth(value?: number): void {
     this.inputElementRef.nativeElement.style.width =
-        getCssLikeValue(`${value || this.inputValue}`.length,
-          UIConstants.CSS_CH);
+      getCssLikeValue(`${value || this.inputValue}`.length,
+        UIConstants.CSS_CH);
   }
 
   private validateValue(newValue: number): boolean {

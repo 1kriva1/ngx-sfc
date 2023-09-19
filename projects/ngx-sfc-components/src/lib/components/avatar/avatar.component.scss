@@ -45,6 +45,11 @@
       .title {
         color: $color-7;
       }
+
+      .fullname,
+      .title {
+        transition: color $transition-duration-default $transition-timing-function-default;
+      }
     }
   }
 }

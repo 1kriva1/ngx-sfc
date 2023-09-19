@@ -19,7 +19,7 @@
         }
 
         label {
-          transform: translateY(1.2em);
+          transform: translateY(1em);
         }
       }
     }
@@ -29,6 +29,7 @@
         .content {
           .tags {
             @include theme-value(border-color, $color-disabled-bordered-default, $color-disabled-dark);
+            border-style: dotted;
           }
         }
       }
@@ -55,9 +56,9 @@
       }
     }
 
+    &.inner-invalid,
     &.has-value.ng-invalid,
-    &.ng-dirty.ng-invalid,
-    &.has-value.inner-invalid {
+    &.ng-dirty.ng-invalid {
       .container {
         .content {
           .tags {

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CloseComponent, CommonConstants, UIClass } from 'ngx-sfc-common';
+import { CloseComponent, CommonConstants, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { InputReferenceDirective } from '../../directives';
@@ -18,7 +18,8 @@ describe('Component: TagsInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [CloseComponent, InputReferenceDirective, TagsChipComponent, TagsInputComponent]
+      declarations: [CloseComponent, ShowHideElementDirective, InputReferenceDirective,
+        TagsChipComponent, TagsInputComponent]
     }).compileComponents();
   });
 
@@ -40,6 +41,7 @@ describe('Component: TagsInput', () => {
       expect(fixture.nativeElement.querySelector('input[type=text]')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.right-side-info')).toBeTruthy();
     });
 
     fit("Should focus text input on click event", () => {
@@ -381,6 +383,64 @@ describe('Component: TagsInput', () => {
         expect(inputEl.nativeElement.value).toEqual(assertValue);
       });
 
+      fit("Should raise validation error, when try to add value that exceed max length", () => {
+        component.maxTagLength = 4;
+        fixture.detectChanges();
+
+        const assertValue = 'test1',
+          inputEl = fixture.debugElement.query(By.css('input'));
+
+        inputEl.triggerEventHandler('input', { target: { value: assertValue } });
+        fixture.detectChanges();
+
+        inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
+        fixture.detectChanges();
+
+        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
+        expect(chips.length).toEqual(0);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText)
+          .toEqual(TagsInputConstants.LENGTH_VALIDATION(component.maxTagLength, component.minTagLength)[TagsInputConstants.LENGTH_VALIDATOR_KEY]);
+      });
+
+      fit("Should raise validation error, when try to add value that not fit limits", () => {
+        component.maxTagLength = 4;
+        component.minTagLength = 1;
+        fixture.detectChanges();
+
+        const assertValue = 'test1',
+          inputEl = fixture.debugElement.query(By.css('input'));
+
+        inputEl.triggerEventHandler('input', { target: { value: assertValue } });
+        fixture.detectChanges();
+
+        inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
+        fixture.detectChanges();
+
+        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
+        expect(chips.length).toEqual(0);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText)
+          .toEqual(TagsInputConstants.LENGTH_VALIDATION(component.maxTagLength, component.minTagLength)[TagsInputConstants.LENGTH_VALIDATOR_KEY]);
+      });
+
+      fit("Should raise validation error, when try to add value that less than min length", () => {
+        component.minTagLength = 4;
+        fixture.detectChanges();
+
+        const assertValue = 'tes',
+          inputEl = fixture.debugElement.query(By.css('input'));
+
+        inputEl.triggerEventHandler('input', { target: { value: assertValue } });
+        fixture.detectChanges();
+
+        inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
+        fixture.detectChanges();
+
+        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
+        expect(chips.length).toEqual(0);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText)
+          .toEqual(TagsInputConstants.LENGTH_VALIDATION(component.maxTagLength, component.minTagLength)[TagsInputConstants.LENGTH_VALIDATOR_KEY]);
+      });
+
       fit("Should bew valid, when try to add empty and than valid value", () => {
         const assertValue = 'test3',
           inputEl = fixture.debugElement.query(By.css('input'));
@@ -408,7 +468,6 @@ describe('Component: TagsInput', () => {
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual('');
         expect(inputEl.nativeElement.value).toEqual('');
       });
-
     });
   });
 
@@ -470,6 +529,26 @@ describe('Component: TagsInput', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(helperTextAssertValue);
+    });
+  });
+
+  describe('Characters counter', () => {
+    fit("Should be hidden", () => {
+      expect(fixture.nativeElement.querySelector('span.right-side-info').style.visibility).toEqual(UIClass.Hidden);
+    });
+
+    fit("Should be visible", () => {
+      component.innerErrors = { 'sfc-min-array-length': { requiredLength: 10 } };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').style.visibility).toEqual(UIClass.Visible);
+    });
+
+    fit("Should have relevant text", () => {
+      component.innerErrors = { 'sfc-max-array-length': { requiredLength: 10 } };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('0/10');
     });
   });
 

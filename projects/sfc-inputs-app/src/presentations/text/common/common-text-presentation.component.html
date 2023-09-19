@@ -1,0 +1,114 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Common:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-full-empty" formControlName="fullEmpty"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-only-placeholder" formControlName="onlyPlaceholder"
+                    placeholder="Placeholder"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-last" formControlName="lastName" label="Last Name"></sfc-text-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-first" formControlName="firstName" label="First Name"
+                    placeholder="Placeholder"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-not-valid" label="Not validatable"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-disabled" label="Disabled" [icon]="faUser"
+                    placeholder="I am disabled" formControlName="disabledInput"></sfc-text-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-password" [icon]="faUser" type=password label="Password"
+                    placeholder="Password" formControlName="password"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-helper" label="Helper" helperText="Helper text is it"
+                    placeholder="placeholder" formControlName="helper">
+                </sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-defined" label="Defined" helperText="Defined"
+                    formControlName="defined">
+                </sfc-text-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-icon" label="Icon" helperText="Icon helper" formControlName="icon"
+                    [icon]="faUser"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-validation-defined" label="Defined validation"
+                    helperText="Defined validation" formControlName="definedValidation"
+                    [validations]="{required: 'First name is required', minlength: 'Min length is not valid', maxlength: 'Max length is not valid'}">
+                </sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-validation-undefined" label="Undefined validation"
+                    helperText="Undefined validation" formControlName="undefinedValidation" [icon]="faPencil">
+                </sfc-text-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-small" label="Small" helperText="Small helper"
+                    placeholder="placeholder" formControlName="small" [icon]="faUser"
+                    [sfcComponentSize]="ComponentSize.Small"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-large" label="Large" helperText="Large helper"
+                    placeholder="placeholder" formControlName="large" [icon]="faUser"
+                    [sfcComponentSize]="ComponentSize.Large"></sfc-text-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-input id="demo-text-input-custom-size" label="Custom size" helperText="Custom size helper"
+                    placeholder="placeholder" formControlName="customSize" [icon]="faUser" [sfcComponentSize]
+                    [customSize]="4.2"></sfc-text-input>
+            </div>
+
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+
+
+</div>

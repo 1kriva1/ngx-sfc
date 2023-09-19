@@ -9,7 +9,7 @@
     color: rgb(0 0 0 / 60%);
     font-weight: bold;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: hidden; // @include text-ellipsis;
     user-select: none;
     width: 100%;
     padding: 0.625em 0.31em;

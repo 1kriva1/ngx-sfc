@@ -103,7 +103,7 @@ describe('Directive: InputNumber', () => {
                 inputEl.triggerEventHandler('input', event);
                 fixture.detectChanges();
 
-                expect(inputEl.nativeElement.value).toEqual('');
+                expect(inputEl.nativeElement.value).toEqual('0');
                 expect(event.preventDefault).toHaveBeenCalled();
             });
         });
@@ -141,7 +141,7 @@ describe('Directive: InputNumber', () => {
                 inputEl.triggerEventHandler('input', event);
                 fixture.detectChanges();
 
-                expect(inputEl.nativeElement.value).toEqual('');
+                expect(inputEl.nativeElement.value).toEqual('0');
                 expect(event.preventDefault).toHaveBeenCalled();
             });
         });
@@ -179,7 +179,7 @@ describe('Directive: InputNumber', () => {
                 inputEl.triggerEventHandler('input', event);
                 fixture.detectChanges();
 
-                expect(inputEl.nativeElement.value).toEqual('');
+                expect(inputEl.nativeElement.value).toEqual('0');
                 expect(event.preventDefault).toHaveBeenCalled();
             });
 
@@ -255,7 +255,7 @@ describe('Directive: InputNumber', () => {
                 inputEl.triggerEventHandler('input', event);
                 fixture.detectChanges();
 
-                expect(inputEl.nativeElement.value).toEqual('');
+                expect(inputEl.nativeElement.value).toEqual('0');
                 expect(event.preventDefault).toHaveBeenCalled();
             });
         });
@@ -292,7 +292,7 @@ describe('Directive: InputNumber', () => {
             inputEl.triggerEventHandler('paste', event);
             fixture.detectChanges();
 
-            expect(inputEl.nativeElement.value).toEqual('');
+            expect(inputEl.nativeElement.value).toEqual('0');
             expect(event.preventDefault).toHaveBeenCalled();
         });
     });

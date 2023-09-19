@@ -16,7 +16,10 @@ export class CompareThanValidatorDirective {
     @Input()
     compare!: Compare;
 
+    @Input()
+    reverse: boolean = false;
+
     validate(control: AbstractControl): ValidationErrors | null {
-        return compareThan(this.comparePropertyName, this.compare)(control);
+        return compareThan(this.comparePropertyName, this.compare, this.reverse)(control);
     }
 }

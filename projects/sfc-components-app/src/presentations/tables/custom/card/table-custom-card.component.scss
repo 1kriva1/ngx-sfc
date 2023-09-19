@@ -84,7 +84,7 @@
     font-weight: bold;
     text-align: center;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: hidden; // @include text-ellipsis;
     text-align: left;
     user-select: none;
 

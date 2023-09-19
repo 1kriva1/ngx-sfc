@@ -7,9 +7,9 @@
       border-radius: 50%;
 
       .text {
-        text-overflow: ellipsis;
         white-space: nowrap;
-        overflow: hidden;
+
+        @include text-ellipsis;
       }
     }
   }

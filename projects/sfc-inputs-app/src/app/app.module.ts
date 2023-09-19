@@ -29,36 +29,58 @@ import {
   SelectPresentationComponent,
   CommonSelectPresentationComponent,
   MultipleSelectPresentationComponent,
-  GroupSelectPresentationComponent
+  GroupSelectPresentationComponent,
+  CommonTextPresentationComponent,
+  BorderedTextPresentationComponent,
+  CommonTextAreaPresentationComponent,
+  BorderedTextAreaPresentationComponent,
+  CommonFileInputPresentationComponent,
+  BorderedFileInputPresentationComponent,
+  CommonTagsPresentationComponent,
+  BorderedTagsPresentationComponent,
+  CommonNumberPresentationComponent,
+  EditNumberPresentationComponent,
+  BorderedDateTimeInputPresentationComponent,
+  CommonAutoCompletePresentationComponent,
+  BorderedAutoCompletePresentationComponent,
+  BorderedCommonSelectPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgxSfcCommonModule } from 'ngx-sfc-common';
-// import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+import { NgxSfcCommonModule } from 'ngx-sfc-common';
+import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxSfcInputsValidationModule } from 'projects/ngx-sfc-inputs/src/lib/validators/ngx-sfc-inputs-validation.module';
-import { NgxSfcInputsModule } from 'projects/ngx-sfc-inputs/src/lib/ngx-sfc-inputs.module';
-import { NgxSfcCommonModule } from 'projects/ngx-sfc-common/src/lib/ngx-sfc-common.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     TextPresentationComponent,
+    CommonTextPresentationComponent,
+    BorderedTextPresentationComponent,
     TextAreaPresentationComponent,
+    CommonTextAreaPresentationComponent,
+    BorderedTextAreaPresentationComponent,
     FilePresentationComponent,
     FileInputPresentationComponent,
+    CommonFileInputPresentationComponent,
+    BorderedFileInputPresentationComponent,
     InlineFileInputPresentationComponent,
     CheckboxPresentationComponent,
     TogglePresentationComponent,
     TagsPresentationComponent,
+    CommonTagsPresentationComponent,
+    BorderedTagsPresentationComponent,
     NumberPresentationComponent,
+    CommonNumberPresentationComponent,
+    EditNumberPresentationComponent,
     StarsPresentationComponent,
     DateTimePresentationComponent,
     DateInputPresentationComponent,
     TimeInputPresentationComponent,
     DateTimeInputPresentationComponent,
     YearsInputPresentationComponent,
+    BorderedDateTimeInputPresentationComponent,
     ImagePresentationComponent,
     RangePresentationComponent,
     HorizontalRangePresentationComponent,
@@ -67,10 +89,13 @@ import { NgxSfcCommonModule } from 'projects/ngx-sfc-common/src/lib/ngx-sfc-comm
     HorizontalRadioPresentationComponent,
     VerticalRadioPresentationComponent,
     AutoCompletePresentationComponent,
+    CommonAutoCompletePresentationComponent,
+    BorderedAutoCompletePresentationComponent,
     SelectPresentationComponent,
     CommonSelectPresentationComponent,
     MultipleSelectPresentationComponent,
-    GroupSelectPresentationComponent
+    GroupSelectPresentationComponent,
+    BorderedCommonSelectPresentationComponent
   ],
   imports: [
     BrowserModule,

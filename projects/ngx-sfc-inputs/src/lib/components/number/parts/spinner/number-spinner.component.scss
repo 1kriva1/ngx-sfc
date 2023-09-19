@@ -53,6 +53,7 @@
   &.disabled {
     .container {
       @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+      border-style: dotted;
 
       .lever {
         pointer-events: none;

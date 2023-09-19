@@ -7,7 +7,7 @@
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
             <sfc-number-spinner [model]="spinnerModel" (update)="update($event)">
                 <input *ngIf="edit" sfcInput sfcNumberInput id="{{inputId}}" type="text" [disabled]="disabled"
-                    [value]="spinnerModel.value" (input)="onChangeValue($event)" (paste)="onChangeValue($event)"
+                    [value]="spinnerModel.value" [sign]="sign" (input)="onChangeValue($event)" (paste)="onChangeValue($event)"
                     (keyup)="updateWidth()" (blur)="updateWidth()" />
             </sfc-number-spinner>
         </div>

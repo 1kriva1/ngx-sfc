@@ -288,5 +288,20 @@ describe('Component: TextInput', () => {
     fit("Should be hidden", () => {
       expect(fixture.nativeElement.querySelector('span.right-side-info').style.visibility).toEqual(UIClass.Hidden);
     });
+
+    fit("Should be visible", () => {
+      component.innerErrors = { 'minlength': { requiredLength: 10 } };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').style.visibility).toEqual(UIClass.Visible);
+    });
+
+    fit("Should have relevant text", () => {
+      component.value = CommonConstants.EMPTY_STRING;
+      component.innerErrors = { 'maxlength': { requiredLength: 10 } };
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('span.right-side-info').innerText).toEqual('0/10');
+    });
   });
 });

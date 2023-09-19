@@ -29,7 +29,7 @@
     transition:
       color $transition-duration-default $transition-timing-function-default,
       border-color $transition-duration-default $transition-timing-function-default,
-      background $transition-duration-default $transition-timing-function-default;
+      background $transition-duration-default $transition-timing-function-default !important;
 
     .icon {
       padding: 3px;
@@ -38,8 +38,8 @@
     .text {
       padding: 3px;
       white-space: initial;
-      text-overflow: ellipsis;
-      overflow: hidden;
+
+      @include text-ellipsis;
 
       &:empty {
         display: none;

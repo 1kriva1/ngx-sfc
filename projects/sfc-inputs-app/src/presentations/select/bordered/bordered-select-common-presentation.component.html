@@ -1,0 +1,272 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Bordered:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+
+        <h3>Static:</h3>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-empty" formControlName="inputSelectFullEmpty" [bordered]="true">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-with-data" formControlName="inputSelectWithData" [bordered]="true"
+                    [data]="data">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-with-label" formControlName="inputSelectWithLabel" [bordered]="true"
+                    [data]="data" label="Single select label">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-with-placeholder" formControlName="inputSelectWithPlace"
+                    [bordered]="true" [data]="data" placeholder="Single select placeholder">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-with-custom-default" formControlName="inputSelectCustomDefault"
+                    [bordered]="true" [data]="data" label="Single select custom default"
+                    placeholder="Single select custom default" defaultItemLabel="I am custom default">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-with-labelandplace" formControlName="inputSelectWithLabelPlace"
+                    [bordered]="true" [data]="data" label="Should load on open" placeholder="Should load on open"
+                    [loadOnInit]="false">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-without-default" formControlName="inputSelectWithoutDefault"
+                    [bordered]="true" [data]="data" label="Single select without default"
+                    placeholder="Single select without default" [showDefaultItem]="false">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-disabled" formControlName="inputSelectDisabled" [bordered]="true"
+                    [data]="data" label="Single select disabled" placeholder="Single select disabled">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-icon" formControlName="inputSelectIcon" [bordered]="true"
+                    [data]="data" label="Single select icon" placeholder="Single select icon" [icon]="faUser">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-helper" formControlName="inputSelectHelper" [bordered]="true"
+                    [data]="data" label="Single select helper text" placeholder="Single select helper text"
+                    [icon]="faUser" helperText="helper text test">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-with-value" formControlName="inputSelectWithValue" [bordered]="true"
+                    [data]="data" label="Single select with value 3" placeholder="Single select with value 3"
+                    [icon]="faUser" helperText="helper text with value 3">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-single" formControlName="inputSelectSingle" [bordered]="true"
+                    [data]="data" label="Single select single value 10" placeholder="Single select single value 10">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-validation" formControlName="inputSelectValidation" [bordered]="true"
+                    [data]="data" label="validation label test" placeholder="validation placeholder test"
+                    [icon]="faUser" helperText="validation test helper">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-validation-success" formControlName="inputSelectValidationSuccess"
+                    [bordered]="true" [data]="data" label="validation label test"
+                    placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-validation-failed" formControlName="inputSelectValidationFailed"
+                    [bordered]="true" [data]="data" label="validation label test"
+                    placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-validation-msg" formControlName="inputSelectValidationMessage"
+                    [bordered]="true" [data]="data" label="validation label test"
+                    placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper"
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-validation-failed-msg"
+                    formControlName="inputSelectValidationFailedMessage" [bordered]="true" [data]="data"
+                    label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
+                    helperText="validation test helper"
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-validation-success-msg"
+                    formControlName="inputSelectValidationSuccessMessage" [bordered]="true" [data]="data"
+                    label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
+                    helperText="validation test helper"
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-small" formControlName="inputSelectSmall" [bordered]="true"
+                    [data]="data" label="Small" placeholder="Small" [icon]="faUser" helperText="Small"
+                    [sfcComponentSize]="ComponentSize.Small">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-large" formControlName="inputSelectLarge" [bordered]="true"
+                    [data]="data" label="Large" placeholder="Large" [icon]="faUser" helperText="Large"
+                    [sfcComponentSize]="ComponentSize.Large">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-custom" formControlName="inputSelectCustom" [bordered]="true"
+                    [data]="data" label="Custom" placeholder="Custom" [icon]="faUser" helperText="Custom"
+                    [sfcComponentSize] [customSize]="3.2">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-scroll" formControlName="inputSelectScroll" [bordered]="true"
+                    [data]="dataModification" [loadOnInit]="false" helperText="Scroll" [icon]="faUser" label="Scroll"
+                    placeholder="Scroll" [showLoadMoreButton]="false">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column column-direction">
+                <div>
+                    <h4>Sync data (add new item, remove item)</h4>
+                    <button (click)="addItemSync()" style="margin-right: 10px;">Add item</button>
+                    <button (click)="removeItemSync()">Remove item</button>
+                </div>
+                <sfc-select-input id="demo-select-modification" formControlName="inputSelectModification"
+                    [bordered]="true" [data]="dataModification">
+                </sfc-select-input>
+            </div>
+        </div>
+
+        <h3>Observable:</h3>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-obs-helper-icon" formControlName="inputSelectObservableHelperIcon"
+                    [bordered]="true" [data$]="data$" [loadOnInit]="false" helperText="test helper" [icon]="faUser">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-obs-validation-msg"
+                    formControlName="inputSelectObservableValidationMessage" [bordered]="true" [data$]="data$"
+                    [showLoadMoreButton]="false" label="validation label test" placeholder="validation placeholder test"
+                    [icon]="faUser" helperText="validation test helper"
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column column-direction">
+                <div>
+                    <h4>Async data (add new item, remove item)</h4>
+                    <button (click)="addItemAsync()" style="margin-right: 10px;">Add item</button>
+                    <button (click)="removeItemAsync()">Remove item</button>
+                </div>
+                <sfc-select-input id="demo-select-obs-modification" formControlName="inputSelectObservableModification"
+                    [bordered]="true" [data$]="dataModification$">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <h3>Loader:</h3>
+
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-loader-helper-icon" formControlName="inputSelectLoaderHelperIcon"
+                    [bordered]="true" [loader]="loader" helperText="test helper" [icon]="faUser">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-select-input id="demo-select-loader-validation-msg"
+                    formControlName="inputSelectLoaderValidationMessage" [bordered]="true" [loader]="loader"
+                    label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
+                    helperText="validation test helper"
+                    [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
+                </sfc-select-input>
+            </div>
+
+            <div class="component-column column-direction">
+                <div>
+                    <h4>Loader data (add new item, remove item)</h4>
+                    <button (click)="addItemLoader()" style="margin-right: 10px;">Add item</button>
+                    <button (click)="removeItemLoader()">Remove item</button>
+                </div>
+                <sfc-select-input id="demo-select-loader-modification" formControlName="inputSelectLoaderModification"
+                    [bordered]="true" [loader]="loaderModification">
+                </sfc-select-input>
+            </div>
+
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

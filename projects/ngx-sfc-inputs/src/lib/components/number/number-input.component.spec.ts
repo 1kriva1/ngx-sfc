@@ -89,10 +89,28 @@ describe('Component: NumberInput', () => {
       expect(component.spinnerModel.value).toEqual(10);
     });
 
+    fit("Should not have default value as min", () => {
+      component.min = Number.MIN_SAFE_INTEGER;
+
+      expect(component.spinnerModel.value).toEqual(0);
+    });
+
     fit("Should have default value as value", () => {
       component.value = 4;
 
       expect(component.spinnerModel.value).toEqual(4);
+    });
+
+    fit("Should have default max", () => {
+      expect(component.max).toEqual(Number.MAX_SAFE_INTEGER);
+    });
+
+    fit("Should have default min", () => {
+      expect(component.min).toEqual(Number.MIN_SAFE_INTEGER);
+    });
+
+    fit("Should have default sign", () => {
+      expect(component.sign).toBeTrue();
     });
 
     fit("Should call unsubscribe on resize observable, when component destroyed", () => {

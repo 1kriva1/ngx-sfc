@@ -1,6 +1,10 @@
 import { TestBed } from "@angular/core/testing";
 import { FormBuilder, FormControl, FormGroup, UntypedFormControl } from "@angular/forms";
-import { equalOrInclude, match, maxArrayLength, minArrayLength } from "./common.validators";
+import { Compare } from "ngx-sfc-common";
+import {
+    compareThan, equalOrInclude, match,
+    maxArrayLength, minArrayLength
+} from "./common.validators";
 
 describe('Validations', () => {
 
@@ -238,6 +242,62 @@ describe('Validations', () => {
                 formGroup.setValue({ password: '123', confirmPassword: '123' });
 
                 expect(formGroup.get('confirmPassword')?.errors).toBeNull();
+            });
+        });
+
+        describe('CompareThan', () => {
+            fit('Should be invalid with compare is more', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        from: new FormControl(null),
+                        to: new FormControl(null, [compareThan('from', Compare.More, false)])
+                    });
+
+                formGroup.setValue({ from: new Date(2001, 10, 25), to: new Date(2000, 10, 25) });
+
+                expect(formGroup.get('to')?.errors).toEqual({ 'sfc-compare-than': true });
+            });
+
+            fit('Should be invalid with compare is less', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        from: new FormControl(null),
+                        to: new FormControl(null, [compareThan('from', Compare.Less, false)])
+                    });
+
+                formGroup.setValue({ from: new Date(2000, 10, 25), to: new Date(2001, 10, 25) });
+
+                expect(formGroup.get('to')?.errors).toEqual({ 'sfc-compare-than': true });
+            });
+
+            fit('Should be valid when parent group not exist', () => {
+                const validationResult = compareThan('from', Compare.More, false)(new UntypedFormControl('123'))
+
+                expect(validationResult).toBeNull();
+            });
+
+            fit('Should be valid when reversed', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        from: new FormControl(null),
+                        to: new FormControl(null, [compareThan('from', Compare.More, true)])
+                    });
+
+                formGroup.setValue({ from: new Date(2001, 10, 25), to: new Date(2000, 10, 25) });
+
+                expect(formGroup.get('to')?.errors).toBeNull();
+            });
+
+            fit('Should be valid when values compares', () => {
+                const fb: FormBuilder = new FormBuilder(),
+                    formGroup: FormGroup<any> = fb.group({
+                        from: new FormControl(null),
+                        to: new FormControl(null, [compareThan('from', Compare.More, false)])
+                    });
+
+                formGroup.setValue({ from: new Date(2000, 10, 25), to: new Date(2001, 10, 25) });
+
+                expect(formGroup.get('to')?.errors).toBeNull();
             });
         });
     });

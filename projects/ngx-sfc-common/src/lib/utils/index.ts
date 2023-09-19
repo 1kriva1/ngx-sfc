@@ -54,7 +54,9 @@ export {
     parseFileSize,
     getFileExtension,
     readAsDataURL,
-    isImage
+    isImage,
+    convertToBase64String,
+    convertFromBase64String
 } from './file.utils'
 
 export {

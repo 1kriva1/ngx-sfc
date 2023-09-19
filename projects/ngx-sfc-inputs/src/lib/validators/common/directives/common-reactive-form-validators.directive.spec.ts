@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
-import { equalOrInclude, match, maxArrayLength, minArrayLength } from "../common.validators";
+import { compareThan, equalOrInclude, match, maxArrayLength, minArrayLength } from "../common.validators";
 import { TagsInputComponent } from "../../../components/tags/tags-input.component";
 import { ValidationConstants } from "../../../constants/validation.constants";
+import { Compare, ShowHideElementDirective } from "ngx-sfc-common";
 
 @Component({
     template: `
@@ -20,8 +21,13 @@ export class CommonReactiveFormValidatorsTestComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.fb.group({
-            formField: [null, [equalOrInclude(['a', 'b', 'c']), maxArrayLength(3), minArrayLength(1), match('compareField')]],
-            compareField: [null]
+            formField: [null, [
+                equalOrInclude(['a', 'b', 'c']),
+                maxArrayLength(3),
+                minArrayLength(1),
+                match('compareField')
+            ]],
+            compareField: [null, [compareThan('formField', Compare.More)]]
         });
     }
 }
@@ -34,7 +40,7 @@ describe('Validators-ReactiveForm: Common', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule],
-            declarations: [TagsInputComponent, CommonReactiveFormValidatorsTestComponent]
+            declarations: [ShowHideElementDirective, TagsInputComponent, CommonReactiveFormValidatorsTestComponent]
         }).compileComponents();
     });
 
@@ -123,8 +129,8 @@ describe('Validators-ReactiveForm: Common', () => {
             formField.setValue('123');
             compareField.setValue('12');
 
-            expect(component.form.valid).toBeFalsy();
-            expect(formField.valid).toBeFalsy();
+            expect(component.form.valid).toBeFalse();
+            expect(formField.valid).toBeFalse();
             expect((formField.errors as ValidationErrors)[ValidationConstants.MATCH_VALIDATOR_KEY]).toBeTrue();
         });
 
@@ -133,6 +139,24 @@ describe('Validators-ReactiveForm: Common', () => {
             formField.setValue('123');
 
             expect((formField.errors as ValidationErrors)[ValidationConstants.MATCH_VALIDATOR_KEY]).toBeUndefined();
+        });
+    });
+
+    describe('CompareThan', () => {
+        fit('Should be invalid', () => {
+            formField.setValue(5);
+            compareField.setValue(4);
+
+            expect(component.form.valid).toBeFalse();
+            expect(compareField.valid).toBeFalse();
+            expect((compareField.errors as ValidationErrors)[ValidationConstants.COMPARE_THAN_VALIDATOR_KEY]).toBeTrue();
+        });
+
+        fit('Should be valid', () => {
+            formField.setValue(4);
+            compareField.setValue(5);
+
+            expect(compareField.errors).toBeNull();
         });
     });
 });

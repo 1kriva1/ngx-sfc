@@ -1,0 +1,185 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Common:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-area-label" label="Only label" formControlName="labelTextArea">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-placeholder" placeholder="Only Placeholder"
+                    formControlName="placeholderTextArea">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-label-placeholder" label="Placeholder label"
+                    placeholder="Label Placeholder" formControlName="placeholderlabelTextArea">
+                </sfc-text-area-input>
+            </div>
+
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-area-labeldis" label="Only label DISABLED"
+                    formControlName="labelTextAreaDis">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-placeholderdis" placeholder="Only Placeholder DISABLED"
+                    formControlName="placeholderTextAreaDis">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-labplacedis" label="Placeholder label DISABLED"
+                    placeholder="Label Placeholder DISABLED" formControlName="placlabelTextAreaDis">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-area-labelicon" label="Only label icon"
+                    formControlName="labelTextAreaIcon" [icon]="faUser">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-placeholdericon" placeholder="Only Placeholder icon"
+                    formControlName="placeholderTextAreaIcon" [icon]="faUser">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-labplaceicon" label="Placeholder label icon"
+                    placeholder="Label Placeholder icon" formControlName="placlabelTextAreaIcon" [icon]="faUser">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-area-labelhelper" label="Only label helper"
+                    formControlName="labelTextAreahelper" helperText="Only label helper">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-placeholderhelper" placeholder="Only Placeholder helper"
+                    formControlName="placeholderTextAreahelper" helperText="Only Placeholder helper">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-labplacehelper" label="Placeholder label helper"
+                    placeholder="Label Placeholder helper" formControlName="placlabelTextAreahelper"
+                    helperText="Label Placeholder helper">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationDef" label="Defined validation with valid value"
+                    placeholder="Defined validation with valid value" formControlName="defTextAreaValidation"
+                    [icon]="faUser" helperText="Defined validation with v value"
+                    [validations]="{required: 'First name is required', minlength: 'Min length is not valid', maxlength: 'Max length is not valid'}">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationUndfEmpty"
+                    formControlName="undefTextAreaValidationEmpty">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationUndf" label="Undefined validation with valid value"
+                    placeholder="Undefined validation with valid value" formControlName="undefTextAreaValidation"
+                    [icon]="faUser" helperText="Undefined validation with v value">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationDefVal" label="Defined validation with invalid value"
+                    placeholder="Defined validation with invalid value" formControlName="defTextAreaValidationVal"
+                    [icon]="faUser" helperText="Defined validation with invalid value"
+                    [validations]="{required: 'First name is required', minlength: 'Min length is not valid', maxlength: 'Max length is not valid'}">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationUndfEmptyVal"
+                    formControlName="undefTextAreaValidationEmptyVal">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationUndfVal"
+                    label="Undefined validation with invalid value"
+                    placeholder="Undefined validation with invalid value" formControlName="undefTextAreaValidationVal"
+                    [icon]="faUser" helperText="Undefined validation with invalid value">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationDefValUndf" label="Defined validation without value"
+                    placeholder="Defined validation without value" formControlName="defTextAreaValidationValUndf"
+                    [icon]="faUser" helperText="Defined validation without value"
+                    [validations]="{required: 'First name is required', minlength: 'Min length is not valid', maxlength: 'Max length is not valid'}">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationUndfEmptyValUndf"
+                    formControlName="undefTextAreaValidationEmptyValUndf">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-validationUndfValUndf"
+                    label="Undefined validation without value" placeholder="Undefined validation without value"
+                    formControlName="undefTextAreaValidationValUndf" [icon]="faUser"
+                    helperText="Undefined validation without value">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-small" label="Small label" placeholder="Small placeholder"
+                    formControlName="small" [sfcComponentSize]="ComponentSize.Small" [icon]="faUser">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-large" label="Large label" placeholder="Large placeholder"
+                    formControlName="large" [sfcComponentSize]="ComponentSize.Large" [icon]="faUser">
+                </sfc-text-area-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-text-area-input id="demo-text-input-custom" label="Custom label" placeholder="Custom placeholder"
+                    formControlName="customSize" [sfcComponentSize] [customSize]="4.2" [icon]="faUser">
+                </sfc-text-area-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

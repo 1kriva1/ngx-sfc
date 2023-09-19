@@ -143,7 +143,8 @@
   }
 
   &.full-size {
-    min-width: 25em;
+    min-width: 20em;
+    overflow: auto;
 
     .container {
       position: relative;

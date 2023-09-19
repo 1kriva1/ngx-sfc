@@ -13,6 +13,7 @@ export class InputNumberDirective {
     @Input()
     decimalSeparator: string = '.';
 
+    // TODO
     private previousValue: string = '';
 
     private integerUnsigned: string = '^(?!0.)\\d+$';
@@ -135,7 +136,7 @@ export class InputNumberDirective {
 
         const valid: boolean = (new RegExp(regex)).test(value);
 
-        this.element.nativeElement['value'] = valid ? value : this.previousValue;
+        this.element.nativeElement['value'] = valid ? value : 0; // this.previousValue
 
         return valid;
     }

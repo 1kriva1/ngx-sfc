@@ -29,6 +29,7 @@
 
       cursor: initial;
       overflow-y: auto;
+      overflow-x: hidden;
       height: inherit;
 
       @include load-container-sfc-load-more-button;

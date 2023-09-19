@@ -10,10 +10,10 @@ import { isDefined, isNullOrEmptyString } from '../../utils';
 export class IconComponent {
 
   @Input()
-  icon?: IconDefinition;
+  icon?: IconDefinition | null = null;
 
   @Input()
-  imageSrc?: string;
+  imageSrc?: string| null = null;
 
   get showImage(): boolean {
     return !isNullOrEmptyString(this.imageSrc) && !isDefined(this.icon);

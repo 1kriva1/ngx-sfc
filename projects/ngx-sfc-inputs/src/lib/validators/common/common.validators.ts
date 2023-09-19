@@ -114,7 +114,7 @@ export function match(matchTo: string, reverse?: boolean): ValidatorFn {
     }
 }
 
-export function compareThan(comparePropertyName: string, compare: Compare): ValidatorFn {
+export function compareThan(comparePropertyName: string, compare: Compare, reverse?: boolean): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const comparePropertyValue: any = control.parent?.controls
             ? (control.parent?.controls as any)[comparePropertyName]?.value
@@ -122,6 +122,15 @@ export function compareThan(comparePropertyName: string, compare: Compare): Vali
 
         if (!isDefined(comparePropertyValue))
             return null;
+
+        if (control.parent && reverse) {
+            const matchControl = (control.parent?.controls as any)[comparePropertyName] as AbstractControl;
+
+            if (matchControl)
+                matchControl.updateValueAndValidity();
+
+            return null;
+        }
 
         return !!control.parent &&
             !!control.parent.value &&

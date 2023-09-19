@@ -135,7 +135,7 @@
 
                 white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                text-overflow: ellipsis; // @include text-ellipsis;
                 user-select: none;
                 transition: color 0.25s linear;
               }

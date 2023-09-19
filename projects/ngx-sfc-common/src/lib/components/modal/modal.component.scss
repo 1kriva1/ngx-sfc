@@ -44,9 +44,10 @@
 
     > div {
       width: 100%;
-      overflow: hidden;
       white-space: nowrap;
-      text-overflow: ellipsis;
+
+      @include text-ellipsis;
+
       color: $color-default;
       flex-direction: row;
       display: flex;

@@ -9,6 +9,7 @@ $item-content-size: calc($item-size / 2);
   div {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-flow: row wrap;
     text-align: center;
     background-color: $color-0;
@@ -19,18 +20,27 @@ $item-content-size: calc($item-size / 2);
       height: $item-size;
       object-fit: cover;
       object-position: bottom;
-      margin-left: auto;
     }
 
     span {
       display: block;
+      margin-right: auto;
       font-size: $item-content-size;
       color: $color-default;
+      padding: 0.2em 0;
+      text-overflow: ellipsis;
+      overflow: hidden; // text-ellipsis
     }
 
     sfc-checkmark {
       font-size: $item-content-size;
       padding-right: 1em;
+
+      &:not(.active):not(.disabled) {
+        ::ng-deep .check {
+          border-color: $color-default;
+        }
+      }
     }
 
     &:hover {
@@ -46,9 +56,9 @@ $item-content-size: calc($item-size / 2);
     }
   }
 
-  &.active {
+  &:not(.multiple).active {
     div {
-      // background-color: $color-1;
+      background-color: $color-1;
     }
   }
 

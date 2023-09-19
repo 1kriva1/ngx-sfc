@@ -7,6 +7,6 @@ export interface ITimelineItemModel{
     dateTimeLabel?: string;
     description?: string;
     period?: boolean;    
-    icon?: IconDefinition;
-    image?: string;
+    icon?: IconDefinition | null;
+    image?: string | null;
 }

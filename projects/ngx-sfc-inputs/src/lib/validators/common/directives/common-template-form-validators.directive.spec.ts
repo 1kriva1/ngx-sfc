@@ -8,23 +8,26 @@ import { MaxArrayLengthValidatorDirective } from "./max-array-length-validator.d
 import { MinArrayLengthValidatorDirective } from "./min-array-length-validator.directive";
 import { TagsInputComponent } from "../../../components/tags/tags-input.component";
 import { TagsChipComponent } from "../../../components/tags/parts/chip/tags-chip.component";
-import { CloseComponent, ShowHideElementDirective } from "ngx-sfc-common";
+import { CloseComponent, Compare, ShowHideElementDirective } from "ngx-sfc-common";
 import { TextInputComponent } from "../../../components/text/text-input.component";
 import { MatchValidatorDirective } from "./match-validator.directive";
 import { ValidationConstants } from "../../../constants/validation.constants";
+import { CompareThanValidatorDirective } from "./compare-than-validator.directive";
 
 @Component({
     template: `
       <form>
         <sfc-tags-input id="input" name="input" [(ngModel)]="tags" [sfcEqualOrInclude]="['a', 'b', 'c']" [sfcMaxArrayLength]="3" [sfcMinArrayLength]="1">
         </sfc-tags-input>
-        <sfc-text-input id="compareValue" name="compareValue" ngModel></sfc-text-input>
+        <sfc-text-input id="compareValue" name="compareValue" [sfcCompareThan]="'primaryValue'" [compare]="Compare.Less" ngModel></sfc-text-input>
         <sfc-text-input id="primaryValue" name="primaryValue" ngModel [sfcMatch]="'compareValue'"></sfc-text-input>
       </form>
     `
 })
 class TagsInputFormTemplateTestComponent {
     public tags: [] = [];
+
+    Compare = Compare;
 }
 
 describe('Validators-TemplateForm: Common', () => {
@@ -37,7 +40,8 @@ describe('Validators-TemplateForm: Common', () => {
         TestBed.configureTestingModule({
             imports: [FormsModule, FontAwesomeModule, ReactiveFormsModule],
             declarations: [EqualOrIncludeValidatorDirective, MaxArrayLengthValidatorDirective, MinArrayLengthValidatorDirective, MatchValidatorDirective,
-                TagsInputComponent, TagsChipComponent, CloseComponent, ShowHideElementDirective, TextInputComponent, TagsInputFormTemplateTestComponent],
+                CompareThanValidatorDirective, TagsInputComponent, TagsChipComponent, CloseComponent, ShowHideElementDirective, TextInputComponent,
+                TagsInputFormTemplateTestComponent],
         }).compileComponents().then(() => {
             fixture = TestBed.createComponent(TagsInputFormTemplateTestComponent);
             el = fixture.debugElement;
@@ -193,6 +197,36 @@ describe('Validators-TemplateForm: Common', () => {
             fixture.detectChanges();
 
             expect(templateInputControl?.hasError(ValidationConstants.MATCH_VALIDATOR_KEY)).toBeFalse();
+            expect(templateInputControl?.errors).toBeNull();
+            expect(templateInputControl?.valid).toBeTrue();
+        }));
+    });
+
+    describe('CompareThan', () => {
+        fit('Should be invalid', (() => {
+            const templateInputControl = form.control.get('compareValue'),
+                compareInputEl = el.query(By.css('input[type="text"][id="sfc-compareValue"]')),
+                primaryInputEl = el.query(By.css('input[type="text"][id="sfc-primaryValue"]'));
+
+            compareInputEl.componentInstance.ngControl.control.setValue(5);
+            primaryInputEl.componentInstance.ngControl.control.setValue(4);
+            fixture.detectChanges();
+
+            expect(templateInputControl?.hasError(ValidationConstants.COMPARE_THAN_VALIDATOR_KEY)).toBeTrue();
+            expect((templateInputControl?.errors as ValidationErrors)[ValidationConstants.COMPARE_THAN_VALIDATOR_KEY]).toBeTrue();
+            expect(templateInputControl?.valid).toBeFalse();
+        }));
+
+        fit('Should be valid', (() => {
+            const templateInputControl = form.control.get('compareValue'),
+                compareInputEl = el.query(By.css('input[type="text"][id="sfc-compareValue"]')),
+                primaryInputEl = el.query(By.css('input[type="text"][id="sfc-primaryValue"]'));
+
+            primaryInputEl.componentInstance.ngControl.control.setValue(5);
+            compareInputEl.componentInstance.ngControl.control.setValue(4);
+            fixture.detectChanges();
+
+            expect(templateInputControl?.hasError(ValidationConstants.COMPARE_THAN_VALIDATOR_KEY)).toBeFalse();
             expect(templateInputControl?.errors).toBeNull();
             expect(templateInputControl?.valid).toBeTrue();
         }));
