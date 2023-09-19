@@ -197,6 +197,7 @@
         .content {
           .sfc-input {
             @include theme-value(border-color, $color-disabled-bordered-default, $color-disabled-dark);
+
             border-style: dotted;
           }
         }
