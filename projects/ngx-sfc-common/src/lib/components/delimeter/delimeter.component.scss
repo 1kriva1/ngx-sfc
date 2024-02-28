@@ -1,4 +1,7 @@
 @import "../../styles/index";
+/* stylelint-disable */
+@import "./delimeter.component.mixins.scss";
+/* stylelint-enable */
 
 :host {
   padding: 0.3em 0;
@@ -35,7 +38,7 @@
         top: 0;
         margin-bottom: 0.8em;
 
-        @include delimeter-color(bottom, 1 100%, $delimeter-common-color, $delimeter-dark-color);
+        @include sfc-delimeter-color(bottom, 1 100%, $delimeter-common-color, $delimeter-dark-color);
       }
 
       &::after {
@@ -43,7 +46,7 @@
         bottom: 0;
         margin-top: 0.8em;
 
-        @include delimeter-color(top, 1 100%, $delimeter-common-color, $delimeter-dark-color);
+        @include sfc-delimeter-color(top, 1 100%, $delimeter-common-color, $delimeter-dark-color);
       }
     }
 
@@ -69,11 +72,11 @@
     user-select: none;
 
     &::before {
-      @include delimeter-color(right, 100% 1, $delimeter-common-color, $delimeter-dark-color);
+      @include sfc-delimeter-color(right, 100% 1, $delimeter-common-color, $delimeter-dark-color);
     }
 
     &::after {
-      @include delimeter-color(left, 100% 1, $delimeter-common-color, $delimeter-dark-color);
+      @include sfc-delimeter-color(left, 100% 1, $delimeter-common-color, $delimeter-dark-color);
     }
 
     &::before,

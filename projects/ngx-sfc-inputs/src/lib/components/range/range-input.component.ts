@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Position } from 'ngx-sfc-common';
+import { Direction, Position } from 'ngx-sfc-common';
 import { RangeBaseComponent } from './base/range-base.component';
 
 @Component({
@@ -9,5 +9,7 @@ import { RangeBaseComponent } from './base/range-base.component';
 })
 export class RangeInputComponent extends RangeBaseComponent {
 
-  public override tooltipPosition: Position = Position.Top;
+  public tooltipPosition: Position = Position.Top;
+
+  protected direction: Direction = Direction.Horizontal;
 }

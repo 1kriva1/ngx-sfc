@@ -1,3 +1,6 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "../../styles/mixins";
+
 :host {
   .container {
     .icon {
@@ -7,14 +10,53 @@
     }
 
     .range-container {
-      .limits {
-        &.after {
-          width: 10%;
+      .component {
+        position: relative;
+        width: 100%;
+
+        .value {
+          position: absolute;
+          font-size: 0.6em;
+          font-weight: bold;
+          right: 0.1em;
+          bottom: 2.2em;
+
+          @include theme-value(color, $color-8, $color-dark);
         }
       }
+    }
+  }
 
-      .component {
-        width: 90%;
+  &.disabled {
+    .container {
+      .content {
+        .range-container {
+          .component {
+            .value {
+              @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+
+              sfc-stars {
+                ::ng-deep .container button {
+                  pointer-events: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.multiple {
+    .container {
+      .content {
+        .range-container {
+          .component {
+            .value {
+              bottom: 2.4em;
+            }
+          }
+        }
       }
     }
   }

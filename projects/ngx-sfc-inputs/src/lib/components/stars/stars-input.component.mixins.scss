@@ -1,0 +1,47 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+@mixin sfc-stars-input-as-default() {
+  .container {
+    .content {
+      .component {
+        .stars {
+          sfc-star {
+            ::ng-deep > .container {
+              label {
+                color: $color-default;
+              }
+            }
+
+            &.common {
+              ::ng-deep > .container {
+                label {
+                  color: $color-yellow-0;
+                }
+              }
+            }
+
+            &.max {
+              ::ng-deep > .container {
+                label {
+                  color: $color-yellow-2;
+                }
+              }
+            }
+
+            &.min {
+              ::ng-deep > .container {
+                label {
+                  color: $color-orange-0;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .side-info {
+        color: $color-default;
+      }
+    }
+  }
+}

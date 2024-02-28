@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+
+@mixin sfc-close-as-default() {
+  color: $color-default;
+
+  &:hover {
+    color: $color-hover-default;
+  }
+}

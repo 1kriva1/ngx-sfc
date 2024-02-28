@@ -1,7 +1,8 @@
 @import "../../styles/index";
 
 :host {
-  color: $color-default;
+  @include theme-value(color, $color-default, $color-dark);
+
   cursor: pointer;
 
   &:hover {

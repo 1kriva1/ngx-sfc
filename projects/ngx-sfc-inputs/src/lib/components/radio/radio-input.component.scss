@@ -1,63 +1,9 @@
 @use "ngx-sfc-common/styles/index" as *;
 @import "../../styles/mixins";
+@import "../radio/radio-input.component.mixins.scss";
 
 :host {
   width: initial;
-
-  @mixin validation($state-color) {
-    .content {
-      .radios {
-        .radio-container {
-          input[type="radio"]:not([disabled]) {
-            &:checked {
-              & + label {
-                .icon-radio {
-                  color: $color-0 !important;
-                  background-color: $state-color;
-                }
-              }
-            }
-          }
-
-          &:hover {
-            input[type="radio"]:not([disabled]) {
-              & + label {
-                .circle {
-                  .radio {
-                    border-color: $state-color;
-                  }
-                }
-
-                .icon-radio {
-                  color: $state-color;
-                }
-
-                span {
-                  color: $state-color;
-                }
-              }
-
-              &:checked {
-                & + label {
-                  .circle {
-                    .radio {
-                      &::before {
-                        background: $state-color;
-                      }
-                    }
-                  }
-
-                  .icon-radio {
-                    background-color: $state-color;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 
   .container {
     .icon {
@@ -67,6 +13,10 @@
     }
 
     .content {
+      label {
+        overflow: visible;
+      }
+
       .radios {
         .radio-container {
           margin: 0.31em 0;
@@ -78,12 +28,12 @@
 
             & + label {
               position: initial;
-              font-size: 1em;
               transition: none;
               transform: none;
               display: flex;
               align-items: center;
               cursor: pointer;
+              overflow: visible;
 
               .circle {
                 .radio {
@@ -133,15 +83,13 @@
 
                 @include theme-value(color, $color-default, $color-dark);
 
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis; // @include text-ellipsis;
+                white-space: initial;
                 user-select: none;
                 transition: color 0.25s linear;
               }
             }
 
-            &:checked {
+            &.checked {
               & + label {
                 .circle {
                   .radio {
@@ -164,11 +112,7 @@
 
                 .circle {
                   .radio {
-                    @include theme-value(
-                      border-color,
-                      $color-disabled-default,
-                      $color-disabled-dark
-                    );
+                    @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
                   }
                 }
 
@@ -181,27 +125,19 @@
                 }
               }
 
-              &:checked {
+              &.checked {
                 & + label {
                   .circle {
                     .radio {
                       &::before {
-                        @include theme-value(
-                          background,
-                          $color-disabled-default,
-                          $color-disabled-dark
-                        );
+                        @include theme-value(background, $color-disabled-default, $color-disabled-dark);
                       }
                     }
                   }
 
                   .icon-radio {
                     @include theme-value(color, $color-0, $color-7);
-                    @include theme-value(
-                      background-color,
-                      $color-disabled-default,
-                      $color-disabled-dark
-                    );
+                    @include theme-value(background-color, $color-disabled-default, $color-disabled-dark);
                   }
                 }
               }

@@ -4,7 +4,6 @@ import {
   any, DateTimeConstants, getFirstDayOfMonthByYearAndMonth, getLastDayOfMonthByYearAndMonth, getWeeksNumberInMonth,
   hasItemBy, isDateGreat, isDateGreatOrEqual, isEqualDates
 } from 'ngx-sfc-common';
-import { DateTimeInputConstants } from '../../constants/datetime.constants';
 import { DateTimeFormatsConstants } from '../../constants/formats.constants';
 import { IDateTimeState } from '../../models/datetime-input-state.model';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
@@ -23,7 +22,7 @@ export class DateTimeCalendarComponent implements OnInit {
   DateTimeConstants = DateTimeConstants;
 
   @Input()
-  locale: string = DateTimeInputConstants.DEFAULT_LOCALE;
+  locale: string = DateTimeConstants.DEFAULT_LOCALE;
 
   @Input()
   weekStart: WeekDay = WeekDay.Monday;

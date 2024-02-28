@@ -1,3 +1,16 @@
 <span class="container">
-    <ng-content></ng-content>
+    <ng-template #content>
+        <span *ngIf="model.label" class="label">{{model.label}}</span>
+        <fa-icon *ngIf="model.icon" [icon]="model.icon"></fa-icon>
+    </ng-template>
+
+    <ng-container *ngIf="model.tooltip?.value">
+        <span class="tooltip" [sfc-tooltip]="model.tooltip?.value" [tooltipPosition]="model.tooltip?.position!">
+            <ng-container *ngTemplateOutlet="content"></ng-container>
+        </span>
+    </ng-container>
+
+    <ng-container *ngIf="!model.tooltip?.value">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </ng-container>
 </span>

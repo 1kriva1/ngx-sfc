@@ -1,3 +1,5 @@
+@import "./variables";
+
 @mixin valid {
   &.has-value.ng-dirty.ng-valid {
     .container {
@@ -29,10 +31,9 @@
     @include under-text;
 
     min-width: 1em;
-
-    // min-height: 1em;
     float: left;
-    position: absolute;
+    position: relative;
+    text-wrap: wrap;
 
     &::after {
       opacity: 1;
@@ -85,15 +86,7 @@
   box-shadow: 0 1px 0 0 $color-hover-default;
 }
 
-@mixin loader-background {
-  ::ng-deep sfc-bounce-loader {
-    .preloader {
-      @include theme-value(background, $color-0, transparent);
-    }
-  }
-}
-
-@mixin load-container-bordered {
+@mixin sfc-load-container-bordered {
   sfc-load-container {
     min-height: 2.3em;
 
@@ -104,11 +97,12 @@
         // @include scroll-round-bordered;
 
         &::-webkit-scrollbar {
-          width: 1em;
+          width: 0.8em;
         }
 
         &::-webkit-scrollbar-thumb {
-          border: 0.35em solid rgb(0 0 0 / 0%);
+          border: 0.25em solid rgb(0 0 0 / 0%);
+          border-radius: 0.8em;
           background-clip: padding-box;
         }
 
@@ -125,19 +119,6 @@
             border-radius: 1.6em;
           }
         }
-      }
-    }
-  }
-}
-
-@mixin modal-bordered($radius) {
-  .content {
-    border-radius: $radius;
-
-    .view {
-      .header {
-        border-top-right-radius: $radius;
-        border-top-left-radius: $radius;
       }
     }
   }

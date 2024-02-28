@@ -1,0 +1,172 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "../../styles/index";
+
+@mixin multiple-track-background($track-color: null, $disabled: null) {
+  --range-distance: calc(var(--max) - var(--min));
+  --from-position: calc(var(--from) - var(--min));
+  --to-position: calc(var(--to) - var(--min));
+
+  @if $track-color {
+    background:
+      linear-gradient(
+        to var(--direction),
+        $track-color 0%,
+        $track-color calc(var(--from-position) / var(--range-distance) * 100%),
+        $color-yellow-1 calc(var(--from-position) / var(--range-distance) * 100%),
+        $color-yellow-1 calc(var(--to-position) / var(--range-distance) * 100%),
+        $track-color calc(var(--to-position) / var(--range-distance) * 100%),
+        $track-color 100%
+      );
+  } @else {
+    @if $disabled {
+      @include theme-value(
+        background,
+        linear-gradient(
+          to var(--direction),
+          $color-disabled-default 0%,
+          $color-disabled-default calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--to-position) / var(--range-distance) * 100%),
+          $color-disabled-default calc(var(--to-position) / var(--range-distance) * 100%),
+          $color-disabled-default 100%
+        ),
+        linear-gradient(
+          to var(--direction),
+          $color-disabled-dark 0%,
+          $color-disabled-dark calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--to-position) / var(--range-distance) * 100%),
+          $color-disabled-dark calc(var(--to-position) / var(--range-distance) * 100%),
+          $color-disabled-dark 100%
+        )
+      );
+    } @else {
+      @include theme-value(
+        background,
+        linear-gradient(
+          to var(--direction),
+          $range-track-color 0%,
+          $range-track-color calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--to-position) / var(--range-distance) * 100%),
+          $range-track-color calc(var(--to-position) / var(--range-distance) * 100%),
+          $range-track-color 100%
+        ),
+        linear-gradient(
+          to var(--direction),
+          $color-dark 0%,
+          $color-dark calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--from-position) / var(--range-distance) * 100%),
+          $color-yellow-1 calc(var(--to-position) / var(--range-distance) * 100%),
+          $color-dark calc(var(--to-position) / var(--range-distance) * 100%),
+          $color-dark 100%
+        )
+      );
+    }
+  }
+}
+
+@mixin sfc-range-input-as-default() {
+  .container {
+    .range-container {
+      .component {
+        .value {
+          color: $color-8;
+        }
+
+        .range {
+          input[type="range"] {
+            background-color: $range-track-color;
+          }
+
+          .multiple {
+            input[type="range"] {
+              &:nth-child(2) {
+                background:
+                  linear-gradient(
+                    to var(--direction),
+                    $range-track-color 0%,
+                    $range-track-color calc(var(--from-position) / var(--range-distance) * 100%),
+                    $color-yellow-1 calc(var(--from-position) / var(--range-distance) * 100%),
+                    $color-yellow-1 calc(var(--to-position) / var(--range-distance) * 100%),
+                    $range-track-color calc(var(--to-position) / var(--range-distance) * 100%),
+                    $range-track-color 100%
+                  );
+              }
+            }
+          }
+        }
+      }
+
+      .limits {
+        color: $range-track-color;
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        .range-container {
+          .component {
+            .value {
+              color: $color-disabled-default;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include valid {
+    .content {
+      .range-container {
+        .component {
+          .range {
+            input[type="range"] {
+              background-color: $color-success;
+
+              &::-webkit-slider-thumb {
+                background-color: $color-success;
+              }
+            }
+
+            .multiple {
+              input[type="range"] {
+                &:nth-child(2) {
+                  @include multiple-track-background($color-success);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include invalid {
+    .content {
+      .range-container {
+        .component {
+          .range {
+            input[type="range"] {
+              background-color: $color-failed;
+
+              &::-webkit-slider-thumb {
+                background-color: $color-failed;
+              }
+            }
+
+            .multiple {
+              input[type="range"] {
+                &:nth-child(2) {
+                  @include multiple-track-background($color-failed);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

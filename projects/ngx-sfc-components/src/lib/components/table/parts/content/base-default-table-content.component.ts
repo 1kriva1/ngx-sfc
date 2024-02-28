@@ -1,34 +1,29 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewChild } from "@angular/core";
-import { Position } from "ngx-sfc-common";
+import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy, ViewChild } from "@angular/core";
+import { CheckmarkType, Position } from "ngx-sfc-common";
 import { fromEvent, Subscription } from "rxjs";
-import { ITableSelectEvent } from "../../service/select/table-select.event";
-import { IDefaultTableColumnInnerModel } from "../columns/table-column.model";
+import { ITableColumnExtendedModel } from "../columns/table-column.model";
 import { TableColumnType } from "../columns/table-column-type.enum";
 import { ITableModel } from "../../models/table.model";
 import { UIClass } from "ngx-sfc-common";
+import { TableSelectService } from "../../service/select/table-select.service";
 
 @Directive()
 export abstract class BaseDefaultTableContentComponent implements AfterViewInit, OnDestroy {
 
     TableColumnType = TableColumnType;
+    CheckmarkType = CheckmarkType;
 
     @Input()
-    model: ITableModel = { dataModel: { data: {} }, index: 0 };
+    model: ITableModel = {  data: {}, index: 0, sequence: 0 };
 
     @Input()
-    columns: IDefaultTableColumnInnerModel[] = [];
+    columns: ITableColumnExtendedModel[] = [];
 
     @Input()
     selectOnClick: boolean = false;
 
     @Input()
     position: Position = Position.Left;
-
-    @Input()
-    columnWidth: number = this.columns.length || 1;
-
-    @Output()
-    selected: EventEmitter<ITableSelectEvent> = new EventEmitter<ITableSelectEvent>();
 
     @ViewChild('columnCheckmark', { static: false })
     columnCheckmark!: ElementRef;
@@ -38,7 +33,7 @@ export abstract class BaseDefaultTableContentComponent implements AfterViewInit,
     @HostListener('click')
     onContentClick(): void {
         if (this.selectOnClick)
-            this.selected.emit(this.selectEvent);
+            this.select();
     }
 
     @HostBinding(`class.${UIClass.Even}`)
@@ -51,13 +46,16 @@ export abstract class BaseDefaultTableContentComponent implements AfterViewInit,
         return this.selectOnClick;
     }
 
+    constructor(private selectedService: TableSelectService) { }
+
     ngAfterViewInit(): void {
         if (this.columnCheckmark) {
             this._columnCheckmarkSubscription = fromEvent(this.columnCheckmark.nativeElement, 'click')
                 .subscribe((event: any) => {
                     if (this.selectOnClick)
                         event.stopPropagation();
-                    this.selected.emit(this.selectEvent);
+
+                    this.select();
                 });
         }
     }
@@ -67,7 +65,8 @@ export abstract class BaseDefaultTableContentComponent implements AfterViewInit,
             this._columnCheckmarkSubscription.unsubscribe();
     }
 
-    get selectEvent(): ITableSelectEvent {
-        return { index: this.model.index, selected: !this.model.dataModel.selected };
+    private select(): void {
+        this.model.selected = !this.model.selected;
+        this.selectedService.select(this.model.sequence, this.model.selected);
     }
 }

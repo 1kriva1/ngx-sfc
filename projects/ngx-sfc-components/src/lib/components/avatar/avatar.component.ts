@@ -1,17 +1,16 @@
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
-import { isNullOrEmptyString } from 'ngx-sfc-common';
+import { Component, Input, OnInit } from '@angular/core';
 import { AvatarConstants } from './avatar.constants';
 import { IAvatarDataModel } from './models/avatar-data.model';
 import { AvatarImageModel } from './models/avatar-image.model';
 import { IAvatarProgressModel } from './models/avatar-progress.model';
-import { AvatarBadgeComponent } from './parts/badge/avatar-badge.component';
+import { IAvatarBadgeModel } from './parts/badge/avatar-badge.model';
 
 @Component({
   selector: 'sfc-avatar',
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss']
 })
-export class AvatarComponent implements OnInit, AfterContentInit {
+export class AvatarComponent implements OnInit {
 
   readonly PROGRESS_MODEL_DEFAULT: IAvatarProgressModel = {
     color: AvatarConstants.PROGRESS_DEFAULT_COLOR,
@@ -49,8 +48,14 @@ export class AvatarComponent implements OnInit, AfterContentInit {
   /**
    * Progress colors model
    */
+  _progressModel: IAvatarProgressModel = this.PROGRESS_MODEL_DEFAULT
   @Input()
-  progressModel: IAvatarProgressModel = this.PROGRESS_MODEL_DEFAULT;
+  get progressModel(): IAvatarProgressModel {
+    return this._progressModel;
+  }
+  set progressModel(value: IAvatarProgressModel) {
+    this._progressModel = { ...this.PROGRESS_MODEL_DEFAULT, ...value }
+  }
 
   @Input()
   data: IAvatarDataModel = this.DATA_MODEL_DEFAULT;
@@ -61,8 +66,8 @@ export class AvatarComponent implements OnInit, AfterContentInit {
   @Input()
   starsValue: number = 0;
 
-  @ContentChildren(AvatarBadgeComponent, { read: AvatarBadgeComponent })
-  badges: QueryList<AvatarBadgeComponent> = new QueryList<AvatarBadgeComponent>();
+  @Input()
+  badges: IAvatarBadgeModel[] = [];
 
   /**
    * Avatar image calculated values
@@ -70,20 +75,8 @@ export class AvatarComponent implements OnInit, AfterContentInit {
   imageModel!: AvatarImageModel;
 
   ngOnInit(): void {
-    this.imageModel = new AvatarImageModel(this.radius, this.stroke, this.data.image as string);
-    this.progressModel = { ...this.PROGRESS_MODEL_DEFAULT, ...this.progressModel };
+    this.imageModel = new AvatarImageModel(this.radius, this.stroke, this.data.image!);
     this.data = { ...this.DATA_MODEL_DEFAULT, ...this.data };
-  }
-
-  ngAfterContentInit(): void {
-    this.badges.forEach(badge => {
-      badge.radius = this.radius;
-      badge.normalizedRadius = this.imageModel.NormalizedRadius;
-      badge.stroke = this.stroke;
-
-      if (isNullOrEmptyString(badge.background))
-        badge.background = this.progressModel.filledColor;
-    });
   }
 
   get strokeDashOffset(): number {

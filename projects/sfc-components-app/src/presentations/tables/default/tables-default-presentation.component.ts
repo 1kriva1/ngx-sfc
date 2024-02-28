@@ -1,37 +1,44 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { CommonConstants, Position } from 'ngx-sfc-common';
+import {
+  CommonConstants, ILoadContainerLoaderResultModel, ILoadContainerParameters, ILoadContainerPredicateParameters,
+  IPaginationModel,
+  isNullOrEmptyString, LoaderFunction, Position, skip, sortBy, where
+} from 'ngx-sfc-common';
 import { ComponentSize, SortingDirection } from 'ngx-sfc-common';
-import { IDefaultTableColumnModel, ITableDataModel, ITablePaginationModel, TableDataType } from 'ngx-sfc-components';
-import { BehaviorSubject, combineLatest, debounceTime, map, Observable, startWith, tap } from 'rxjs';
-import { faCar, faPen, faStar } from '@fortawesome/free-solid-svg-icons';
+import { ITableColumnModel, TableDataType } from 'ngx-sfc-components';
+import { BehaviorSubject, combineLatest, debounceTime, map, Observable, startWith, tap, delay } from 'rxjs';
+import { faCar, faPen, faSortAsc, faSortDesc, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './tables-default-presentation.component.html',
   styleUrls: ['../../../shared/styles/shared.component.scss'],
   styles: ['.component-column{ display: initial !important; text-align: center;}']
 })
-export class TablesDefaultPresentationComponent {
+export class TablesDefaultPresentationComponent implements OnInit, AfterViewChecked {
 
   ComponentSize = ComponentSize;
   Position = Position;
   TableDataType = TableDataType;
 
   // columns
-  columnsDefault: IDefaultTableColumnModel[] = [];
-  columnsSorting: IDefaultTableColumnModel[] = [];
-  columnsSelectable: IDefaultTableColumnModel[] = [];
-  columnsModification: IDefaultTableColumnModel[] = [];
+  columnsDefault: ITableColumnModel[] = [];
+  columnsSorting: ITableColumnModel[] = [];
+  columnsSelectable: ITableColumnModel[] = [];
+  columnsModification: ITableColumnModel[] = [];
+  columnsCards: ITableColumnModel[] = [];
+  columnsFull: ITableColumnModel[] = [];
 
   // data
-  dataDefault: ITableDataModel[] = [];
-  dataSync: ITableDataModel[] = [];
-  dataAsync: ITableDataModel[] = [];
-  dataColumnModifications: ITableDataModel[] = [];
-  filteredData$!: Observable<ITableDataModel[]>;
-  dataSubject!: BehaviorSubject<ITableDataModel[]>;
+  dataDefault: any[] = [];
+  dataSync: any[] = [];
+  dataAsync: any[] = [];
+  dataInitialSync: any[] = [];
+  dataColumnModifications: any[] = [];
+  dataAsync$!: Observable<any[]>;
+  dataSubject!: BehaviorSubject<any[]>;
 
-  paginationConfig: ITablePaginationModel = { enabled: true, page: 2, size: 2 };
+  pagination: IPaginationModel = { page: 2, size: 2 };
 
   // forms
   filterSyncFormGroup: UntypedFormGroup = new UntypedFormGroup({
@@ -41,6 +48,20 @@ export class TablesDefaultPresentationComponent {
   filterAsyncFormGroup: UntypedFormGroup = new UntypedFormGroup({
     searchAsyncData: new UntypedFormControl()
   });
+
+  filterLoaderFormGroup: UntypedFormGroup = new UntypedFormGroup({
+    searchLoaderData: new UntypedFormControl()
+  });
+
+  loaderPredicate$!: Observable<ILoadContainerPredicateParameters | null>;
+
+  asyncPredicate$!: Observable<ILoadContainerPredicateParameters | null>;
+
+  syncPredicate$!: Observable<ILoadContainerPredicateParameters | null>;
+
+  loader!: LoaderFunction;
+
+  constructor(private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     // default
@@ -53,7 +74,7 @@ export class TablesDefaultPresentationComponent {
       column.sorting = {
         enabled: true,
         direction: SortingDirection.Descending,
-        icons: [{ direction: SortingDirection.Ascending, icon: faCar }, { direction: SortingDirection.Descending, icon: faPen }]
+        icons: [{ direction: SortingDirection.Ascending, icon: faSortAsc }, { direction: SortingDirection.Descending, icon: faSortDesc }]
       }
     });
 
@@ -65,59 +86,102 @@ export class TablesDefaultPresentationComponent {
     });
 
     // sync data
-    const dataInitialSync = this.getData();
-    dataInitialSync.forEach((data, index) => {
-      if (index % 2 == 0)
-        data.selected = true;
-    });
-    this.filterSyncFormGroup.get('searchSyncData')?.valueChanges.pipe(
-      startWith(''),
-      debounceTime(500)
-    ).pipe(
-      tap(input => {
-        if (!input)
-          this.dataSync = dataInitialSync;
-        else
-          this.dataSync = dataInitialSync.filter(y => y.data.name.toLowerCase().indexOf(input) > -1);
-      })
-    ).subscribe();
-
+    this.dataInitialSync = this.getData();
+    this.dataSync = this.dataInitialSync;
+    this.syncPredicate$ = this.filterSyncFormGroup.get('searchSyncData')!.valueChanges.pipe(
+      startWith(CommonConstants.EMPTY_STRING),
+      debounceTime(500),
+      map(value => ({ value }))
+    );
     // async data
     this.dataAsync = this.getData();
     this.dataSubject = new BehaviorSubject(this.dataAsync);
-    this.filteredData$ = combineLatest([
-      this.dataSubject.asObservable(),
-      this.filterAsyncFormGroup.get('searchAsyncData')?.valueChanges.pipe(
-        startWith(CommonConstants.EMPTY_STRING),
-        debounceTime(500)
-      ) as Observable<string>]
-    ).pipe(
-      map(([data, input]) => {
-        return data.filter(y => y.data.name.toLowerCase().indexOf(input) > -1);
-      })
+    this.dataAsync$ = this.dataSubject.asObservable();
+    this.asyncPredicate$ = this.filterAsyncFormGroup.get('searchAsyncData')!.valueChanges.pipe(
+      startWith(CommonConstants.EMPTY_STRING),
+      debounceTime(500),
+      map(value => ({ value }))
     );
+
+    // Loader
+    this.loaderPredicate$ = this.filterLoaderFormGroup.get('searchLoaderData')!.valueChanges.pipe(
+      startWith(CommonConstants.EMPTY_STRING),
+      debounceTime(500),
+      map(value => ({ value }))
+    )
+
+    this.loader = this.getLoaderFunction(this.dataSubject.asObservable());
 
     // columns modification
     this.columnsModification = this.getColumns();
     this.dataColumnModifications = this.getData();
-    this.dataColumnModifications.forEach((item: ITableDataModel) => {
-      item.data.newColumn = "new value";
+    this.dataColumnModifications.forEach((item: any) => {
+      item.newColumn = "new value";
+    });
+
+    // cards
+    this.columnsCards = this.getColumns();
+
+    // full
+    this.columnsFull = this.getColumns();
+    this.columnsFull.forEach(column => {
+      column.sorting = {
+        enabled: true,
+        direction: SortingDirection.Descending,
+        icons: [{ direction: SortingDirection.Ascending, icon: faCar }, { direction: SortingDirection.Descending, icon: faPen }]
+      }
+    });
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetector.detectChanges();
+  }
+
+  public filter(data: any[], parameters: ILoadContainerParameters): any[] {
+    return parameters.params.value ? data.filter(y => y.name.toLowerCase().indexOf(parameters.params.value) > -1) : data;
+  }
+
+  private getLoaderFunction(data$: Observable<any[]>) {
+    return ((parameters: ILoadContainerParameters): Observable<ILoadContainerLoaderResultModel<any>> => {
+      return data$.pipe(
+        delay(1000),
+        map(items => {
+          let filtered = where(items, (item: any) => {
+            if (isNullOrEmptyString(parameters.params.value))
+              return true;
+
+            return item.name.toLowerCase().indexOf(parameters.params.value) > -1;
+          });
+
+          if (parameters.sorting) {
+            filtered = sortBy([...filtered!], parameters.sorting.id, parameters.sorting.direction);
+          }
+
+          const data: ILoadContainerLoaderResultModel<any> = filtered
+            ? {
+              items: skip(filtered, parameters.page, 3),
+              next: parameters.page < Math.ceil(filtered.length / 3),
+              total: filtered.length
+            }
+            : { items: [], next: false, total: items.length };
+
+          return data;
+        })
+      );
     });
   }
 
   // STUBS
 
-  private getColumns(): IDefaultTableColumnModel[] {
+  private getColumns(): ITableColumnModel[] {
     return [
       {
         name: 'Id',
-        field: 'id',
-        icon: undefined
+        field: 'id'
       },
       {
         name: 'Name',
-        field: 'name',
-        icon: undefined
+        field: 'name'
       },
       {
         name: 'Code',
@@ -138,115 +202,79 @@ export class TablesDefaultPresentationComponent {
     ];
   }
 
-  private getData(): ITableDataModel[] {
+  private getData(): any[] {
     return [
       {
-        data: {
-          id: 1,
-          name: 'name 1',
-          code: 111,
-          date: new Date()
-        },
-        selected: false
+        id: 1,
+        name: 'name 1',
+        code: 111,
+        date: new Date()
       },
       {
-        data: {
-          id: 2,
-          name: 'name 2',
-          code: 222,
-          date: new Date()
-        },
-        selected: false
+        id: 2,
+        name: 'name 2',
+        code: 222,
+        date: new Date()
       },
       {
-        data: {
-          id: 3,
-          name: 'name 3',
-          code: 333,
-          date: new Date()
-        },
-        selected: false
+        id: 3,
+        name: 'name 3',
+        code: 333,
+        date: new Date()
       },
       {
-        data: {
-          id: 4,
-          name: 'name 4',
-          code: 444,
-          date: new Date()
-        },
-        selected: false
+        id: 4,
+        name: 'name 4',
+        code: 444,
+        date: new Date()
       },
       {
-        data: {
-          id: 5,
-          name: 'name 5',
-          code: 555,
-          date: new Date()
-        },
-        selected: false
+        id: 5,
+        name: 'name 5',
+        code: 555,
+        date: new Date()
       },
       {
-        data: {
-          id: 6,
-          name: 'name 6',
-          code: 666,
-          date: new Date()
-        },
-        selected: false
+        id: 6,
+        name: 'name 6',
+        code: 666,
+        date: new Date()
       },
       {
-        data: {
-          id: 7,
-          name: 'name 7',
-          code: 777,
-          date: new Date()
-        },
-        selected: false
+        id: 7,
+        name: 'name 7',
+        code: 777,
+        date: new Date()
       },
       {
-        data: {
-          id: 8,
-          name: 'name 8',
-          code: 888,
-          date: new Date()
-        },
-        selected: false
+        id: 8,
+        name: 'name 8',
+        code: 888,
+        date: new Date()
       },
       {
-        data: {
-          id: 9,
-          name: 'name 9',
-          code: 8889,
-          date: new Date()
-        },
-        selected: false
+        id: 9,
+        name: 'name 9',
+        code: 8889,
+        date: new Date()
       },
       {
-        data: {
-          id: 10,
-          name: 'name 10',
-          code: 88810,
-          date: new Date()
-        },
-        selected: false
+        id: 10,
+        name: 'name 10',
+        code: 88810,
+        date: new Date()
       },
       {
-        data: {
-          id: 11,
-          name: 'name 11',
-          code: 88811,
-          date: new Date()
-        },
-        selected: false
+        id: 11,
+        name: 'name 11',
+        code: 88811,
+        date: new Date()
       },
       {
-        data: {
-          id: 12,
-          name: 'name 12',
-          code: 88812,
-          date: new Date()
-        },
-        selected: false
+        id: 12,
+        name: 'name 12',
+        code: 88812,
+        date: new Date()
       }
     ];
   }
@@ -256,7 +284,8 @@ export class TablesDefaultPresentationComponent {
   // SYNC DATA ACTIONS
 
   addItemSync() {
-    this.dataSync.push({ data: { id: 13, name: 'new one', code: 8889, date: new Date() } });
+    const newItem = { id: 13, name: 'new one', code: 8889, date: new Date() };
+    this.dataSync.push(newItem);
   }
 
   removeItemSync() {
@@ -268,7 +297,7 @@ export class TablesDefaultPresentationComponent {
   // ASYNC DATA ACTIONS
 
   addItemAsync() {
-    this.dataAsync.push({ data: { id: 13, name: 'new one', code: 8889, date: new Date() } });
+    this.dataAsync.push({ id: 13, name: 'new one', code: 8889, date: new Date() });
     this.dataSubject.next(this.dataAsync);
   }
 

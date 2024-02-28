@@ -18,5 +18,4 @@ export class DotsComponent {
 
   @HostListener('click')
   onClick = () => this.open = !this.open;
-
 }

@@ -9,7 +9,7 @@ import { IRadioItemModel } from './radio-item.model';
   templateUrl: './radio-input.component.html',
   styleUrls: ['../../styles/input.component.scss', './radio-input.component.scss']
 })
-export class RadioInputComponent extends BaseInputComponent<number> {
+export class RadioInputComponent extends BaseInputComponent<any> {
 
   RadioItemType = RadioItemType;
 

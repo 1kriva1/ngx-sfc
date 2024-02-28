@@ -1,0 +1,156 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "variables";
+@import "mixins";
+
+@mixin sfc-input-as-default() {
+  .container {
+    .icon {
+      color: $color-default;
+
+      &:hover {
+        color: $color-hover-default;
+      }
+    }
+
+    .content {
+      .sfc-input {
+        color: $color-default;
+      }
+
+      label {
+        color: $color-default;
+      }
+
+      .helper-text {
+        color: $color-default;
+      }
+    }
+  }
+
+  ::placeholder {
+    color: $color-5;
+  }
+
+  &.focus {
+    .container {
+      .icon {
+        color: $color-hover-default;
+      }
+
+      .content {
+        label {
+          color: $color-hover-default;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .icon {
+        color: $color-disabled-default;
+      }
+
+      .content {
+        .sfc-input {
+          color: $color-disabled-default;
+          border-color: $color-disabled-default;
+        }
+
+        label {
+          color: $color-disabled-default;
+        }
+      }
+    }
+
+    ::placeholder {
+      color: $color-disabled-default;
+    }
+  }
+
+  &.bordered {
+    .container {
+      .content {
+        .sfc-input {
+          border-color: $color-bordered-default;
+        }
+      }
+    }
+
+    &.disabled {
+      .container {
+        .content {
+          .sfc-input {
+            border-color: $color-disabled-bordered-default;
+          }
+        }
+      }
+    }
+
+    @include invalid {
+      .content {
+        .sfc-input {
+          border-color: $color-bordered-failed;
+
+          &:focus {
+            border-color: $color-bordered-failed;
+          }
+        }
+      }
+    }
+
+    @include valid {
+      .content {
+        .sfc-input {
+          border-color: $color-bordered-success;
+
+          &:focus {
+            border-color: $color-bordered-success;
+          }
+        }
+      }
+    }
+  }
+
+  @include invalid {
+    .content {
+      .sfc-input {
+        border-color: $color-failed;
+
+        &:focus {
+          border-color: $color-failed;
+        }
+      }
+
+      label,
+      .helper-text {
+        color: $color-failed !important;
+      }
+    }
+
+    .icon {
+      color: $color-failed;
+    }
+  }
+
+  @include valid {
+    .content {
+      .sfc-input {
+        border-color: $color-success;
+
+        &:focus {
+          border-color: $color-success;
+        }
+      }
+
+      label,
+      .helper-text {
+        color: $color-success;
+      }
+    }
+
+    .icon {
+      color: $color-success;
+    }
+  }
+}

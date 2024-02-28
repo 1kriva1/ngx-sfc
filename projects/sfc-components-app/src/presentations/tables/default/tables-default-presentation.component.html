@@ -18,15 +18,14 @@
 
         <div class="component-column full">
             <h4>Pagination: page=2, pageSize=2 (+ hide columns)</h4>
-            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [showColumns]="false"
-                [pagination]="paginationConfig">
+            <sfc-table [columns]="columnsDefault" [data]="dataDefault" [showColumns]="false" [pagination]="pagination">
             </sfc-table>
         </div>
 
         <div class="component-column full">
             <h4>Selectable (+ column position start, + column icons)</h4>
-            <sfc-table [columns]="columnsSelectable" [data]="dataDefault" [position]="Position.Left" [selectable]="true"
-                [selectOnClick]="false">
+            <sfc-table #selectableTable [columns]="columnsSelectable" [data]="dataDefault" [position]="Position.Left"
+                [selectable]="true" [selectOnClick]="false">
             </sfc-table>
         </div>
 
@@ -35,26 +34,43 @@
     <div class="component-row">
 
         <div class="component-column half">
-            <h4>Sync data (add new item, remove item and filtering data, + selected items on init)</h4>
+            <h4>Sync data (add new item, remove item and filtering data + pagination)</h4>
             <button (click)="addItemSync()" style="margin-right: 10px;">Add item</button>
             <button (click)="removeItemSync()">Remove item</button>
             <h6>Filter sync data:</h6>
             <div [formGroup]="filterSyncFormGroup">
                 <input formControlName="searchSyncData" type="text" placeholder="search">
             </div>
-            <sfc-table [columns]="columnsSorting" [data]="dataSync" [selectable]="true">
+            <sfc-table [columns]="columnsSorting" [data]="dataSync" [predicate$]="syncPredicate$" [filter]="filter"
+                [selectable]="true" [pagination]="{page: 2, size: 3}">
             </sfc-table>
         </div>
 
         <div class="component-column half">
-            <h4>Async data (add new item, remove item and filtering data + select-on-click)</h4>
+            <h4>Async data (add new item, remove item and filtering data + pagination)</h4>
             <button (click)="addItemAsync()" style="margin-right: 10px;">Add item</button>
             <button (click)="removeItemAsync()">Remove item</button>
-            <h6>Filter async data:</h6>
+            <h6>Filter sync data:</h6>
             <div [formGroup]="filterAsyncFormGroup">
                 <input formControlName="searchAsyncData" type="text" placeholder="search">
             </div>
-            <sfc-table [columns]="columnsSorting" [data$]="filteredData$" [selectable]="true" [selectOnClick]="true">
+            <sfc-table [columns]="columnsSorting" [data$]="dataAsync$" [predicate$]="asyncPredicate$" [filter]="filter"
+                [selectable]="true" [pagination]="{page: 2, size: 3}">
+            </sfc-table>
+        </div>
+
+    </div>
+
+    <div class="component-row">
+
+        <div class="component-column full">
+            <h4>Loader data (filtering data + select-on-click + pagination)</h4>
+            <h6>Filter loader data:</h6>
+            <div [formGroup]="filterLoaderFormGroup">
+                <input formControlName="searchLoaderData" type="text" placeholder="search">
+            </div>
+            <sfc-table [columns]="columnsSorting" [predicate$]="loaderPredicate$" [loader]="loader" [selectable]="true"
+                [selectOnClick]="true" [pagination]="{page: 2, size: 3}">
             </sfc-table>
         </div>
 

@@ -2,32 +2,42 @@
     <div class="item" *ngFor="let item of data">
         <div [style.text-align]="position" class="row-columns-container">
             <div class="row-content">
-                <div class="column-data" [ngStyle]="columnStyle">
-                    <span class="domain">{{item.planName}}</span>
-                </div>
-
-                <div class="column-data" [ngStyle]="columnStyle">
-                    <span class="storage">{{item.storage}}M</span>
-                    <span class="square"></span>
-                </div>
-
-                <div class="column-data" [ngStyle]="columnStyle">
-                    <span *ngIf="item.monthlyVisitor" class="storage">{{item.monthlyVisitor}}M</span>
-                    <span *ngIf="!item.monthlyVisitor" class="storage">-</span>
-                    <span *ngIf="item.monthlyVisitor" class="square"></span>
-                </div>
-
-                <div class="column-data" [ngStyle]="columnStyle">
-                    <div class="status">
-                        <button>{{item.domain}}</button>
-                    </div>
-                </div>
-
-                <div class="column-data" [ngStyle]="columnStyle">
-                    <div class="status">
-                        <button>{{item.status}}</button>
-                    </div>
-                </div>
+                <ng-container *ngFor="let column of columns">
+                    <ng-container [ngSwitch]="column.field">
+                        <ng-container *ngSwitchCase="'domainAndPlanName'">
+                            <div class="column-data" [style.width]="column.calculatedWidth">
+                                <span class="domain">{{item.planName}}</span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'storage'">
+                            <div class="column-data" [style.width]="column.calculatedWidth">
+                                <span class="storage">{{item.storage}}M</span>
+                                <span class="square"></span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'monthlyVisitor'">
+                            <div class="column-data" [style.width]="column.calculatedWidth">
+                                <span *ngIf="item.monthlyVisitor" class="storage">{{item.monthlyVisitor}}M</span>
+                                <span *ngIf="!item.monthlyVisitor" class="storage">-</span>
+                                <span *ngIf="item.monthlyVisitor" class="square"></span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'domains'">
+                            <div class="column-data" [style.width]="column.calculatedWidth">
+                                <div class="status">
+                                    <button>{{item.domain}}</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'status'">
+                            <div class="column-data" [style.width]="column.calculatedWidth">
+                                <div class="status">
+                                    <button>{{item.status}}</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
             </div>
         </div>
     </div>

@@ -62,29 +62,31 @@ describe('Component: ColumnsToggle', () => {
     });
 
     fit('Should show icon be visible', () => {
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Visible);
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Hidden);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Hidden);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Visible);
     });
 
     fit('Should hide icon be visible', () => {
       service.toggle();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Hidden);
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Visible);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Visible);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Hidden);
     });
   });
 
   describe('Label', () => {
     fit('Should be show label', () => {
-      expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase()).toEqual(ColumnsToggleConstants.SHOW.LABEL.toUpperCase());
+      expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase())
+        .toEqual(ColumnsToggleConstants.SHOW_LABEL_DEFAULT.toUpperCase());
     });
 
     fit('Should be hide label', () => {
       service.toggle();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase()).toEqual(ColumnsToggleConstants.HIDE.LABEL.toUpperCase());
+      expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase())
+        .toEqual(ColumnsToggleConstants.HIDE_LABEL_DEFAULT.toUpperCase());
     });
   });
 });

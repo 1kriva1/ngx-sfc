@@ -4,7 +4,7 @@ import { ToggleSwitcherComponent } from './toggle-switcher.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
-describe('Component: ToggleSwitcherComponent', () => {
+describe('Component: ToggleSwitcher', () => {
   let component: ToggleSwitcherComponent;
   let fixture: ComponentFixture<ToggleSwitcherComponent>;
 
@@ -90,6 +90,13 @@ describe('Component: ToggleSwitcherComponent', () => {
       expect(fixture.nativeElement.querySelector('p.left').innerText).toEqual('test left');
     });
 
+    fit("Should label not exist", () => {
+      component.leftModel.label = '';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('p.left span')).toBeNull();
+    });
+
     fit("Should not have icon", () => {
       expect(fixture.nativeElement.querySelector('p.left > fa-icon svg')).toBeNull();
     });
@@ -116,6 +123,13 @@ describe('Component: ToggleSwitcherComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('p.right').innerText).toEqual('test right');
+    });
+
+    fit("Should label not exist", () => {
+      component.rightModel.label = '';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('p.right span')).toBeNull();
     });
 
     fit("Should not have icon", () => {

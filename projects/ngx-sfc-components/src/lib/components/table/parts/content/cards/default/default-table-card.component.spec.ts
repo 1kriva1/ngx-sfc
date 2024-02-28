@@ -1,18 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CheckmarkComponent, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { CheckmarkComponent, CheckmarkType, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { TableSelectService } from '../../../../service/select/table-select.service';
 import { TableColumnType } from '../../../columns/table-column-type.enum';
 import { DefaultTableCardComponent } from './default-table-card.component';
 
 describe('Component: DefaultTableCard', () => {
   let component: DefaultTableCardComponent;
   let fixture: ComponentFixture<DefaultTableCardComponent>;
+  let tableSelectServiceSpy: jasmine.SpyObj<TableSelectService>;
 
   beforeEach(async () => {
+    tableSelectServiceSpy = jasmine.createSpyObj('TableSelectService', ['select']);
+
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [ShowHideElementDirective, CheckmarkComponent, DefaultTableCardComponent]
+      declarations: [ShowHideElementDirective, CheckmarkComponent, DefaultTableCardComponent],
+      providers: [{ provide: TableSelectService, useValue: tableSelectServiceSpy }]
     }).compileComponents();
   });
 
@@ -68,72 +73,65 @@ describe('Component: DefaultTableCard', () => {
     });
 
     fit('Should emit selected', () => {
-      spyOn(component.selected, 'emit');
+      component.model = { data: {}, index: 0, sequence: 1, selected: false };
       component.selectOnClick = true;
       fixture.detectChanges();
 
       selectCard();
 
-      expect(component.selected.emit).toHaveBeenCalled();
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(1);
     });
 
     fit('Should not emit selected', () => {
-      spyOn(component.selected, 'emit');
       component.selectOnClick = false;
       fixture.detectChanges();
 
       selectCard();
 
-      expect(component.selected.emit).not.toHaveBeenCalled();
+      expect(tableSelectServiceSpy.select).not.toHaveBeenCalled();
     });
 
     fit('Should emit selected for unselected card', () => {
-      spyOn(component.selected, 'emit');
+      component.model = { data: {}, index: 0, sequence: 1, selected: false };
       component.selectOnClick = true;
-      component.model.index = 10;
       fixture.detectChanges();
 
       selectCard();
 
-      expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: true });
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, true);
     });
 
     fit('Should emit selected for selected card', () => {
-      spyOn(component.selected, 'emit');
+      component.model = { data: {}, index: 0, sequence: 1, selected: true };
       component.selectOnClick = true;
-      component.model.index = 10;
-      component.model.dataModel.selected = true;
       fixture.detectChanges();
 
       selectCard();
 
-      expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
     });
 
     fit('Should toggle selected', () => {
-      // fake selected call
-      spyOn(component.selected, 'emit').and.callFake(() => component.model.dataModel.selected = !component.model.dataModel.selected);
       component.selectOnClick = true;
-      component.model.index = 10;
-      component.model.dataModel.selected = true;
+      component.model = { data: {}, index: 0, sequence: 1, selected: true };
       fixture.detectChanges();
 
       selectCard();
 
-      expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
 
       selectCard();
 
-      expect((component.selected.emit as any).calls.allArgs()).toEqual([
-        [{ index: component.model.index, selected: false }],
-        [{ index: component.model.index, selected: true }]
+      expect((tableSelectServiceSpy.select as any).calls.allArgs()).toEqual([
+        [1, false],
+        [1, true]
       ]);
 
-      expect(component.selected.emit).toHaveBeenCalledTimes(2);
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(2);
     });
 
     fit("Should call unsubscribe on checkmark subscription, when directive destroyed", () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: 'column', field: 'field', type: TableColumnType.Selectable }];
       fixture.detectChanges();
 
@@ -156,7 +154,7 @@ describe('Component: DefaultTableCard', () => {
     });
 
     fit('Should exist columns container', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
@@ -164,7 +162,7 @@ describe('Component: DefaultTableCard', () => {
     });
 
     fit('Should have columns content as columns count', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: 'column', field: 'field' }, { name: 'column1', field: 'field1' }];
       fixture.detectChanges();
 
@@ -172,7 +170,7 @@ describe('Component: DefaultTableCard', () => {
     });
 
     fit('Should be created checkmark column', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: 'column', field: 'field', type: TableColumnType.Selectable }];
       fixture.detectChanges();
 
@@ -181,7 +179,7 @@ describe('Component: DefaultTableCard', () => {
     });
 
     fit('Should be created sequence column', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: '', field: '', type: TableColumnType.Sequence }];
       fixture.detectChanges();
 
@@ -190,7 +188,7 @@ describe('Component: DefaultTableCard', () => {
     });
 
     fit('Should be created data column', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: '', field: '', type: TableColumnType.Data }];
       fixture.detectChanges();
 
@@ -200,7 +198,7 @@ describe('Component: DefaultTableCard', () => {
 
     describe('Checkmark', () => {
       fit('Should not be checked', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -208,7 +206,7 @@ describe('Component: DefaultTableCard', () => {
       });
 
       fit('Should be checked', () => {
-        component.model = { dataModel: { data: { field: 1 }, selected: true }, index: 10 };
+        component.model = { data: { field: 1 }, selected: true, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -216,10 +214,8 @@ describe('Component: DefaultTableCard', () => {
       });
 
       fit('Should be checked after click on component', () => {
-        // fake selected call
-        spyOn(component.selected, 'emit').and.callFake(() => component.model.dataModel.selected = !component.model.dataModel.selected);
         component.selectOnClick = true;
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -228,9 +224,17 @@ describe('Component: DefaultTableCard', () => {
         expect(fixture.debugElement.query(By.css('sfc-checkmark')).attributes['ng-reflect-active']).toEqual('true');
       });
 
+      fit('Should have constant type', () => {
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
+        component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('sfc-checkmark')).componentInstance.type)
+          .toEqual(CheckmarkType.Circle);
+      });
+
       fit('Should emit selected', () => {
-        spyOn(component.selected, 'emit');
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -239,12 +243,11 @@ describe('Component: DefaultTableCard', () => {
 
         selectCardByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalled();
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(1);
       });
 
       fit('Should selected emit for unselected card', () => {
-        spyOn(component.selected, 'emit');
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -253,12 +256,11 @@ describe('Component: DefaultTableCard', () => {
 
         selectCardByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: true });
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, true);
       });
 
       fit('Should selected emit for selected card', () => {
-        spyOn(component.selected, 'emit');
-        component.model = { dataModel: { data: { field: 1 }, selected: true }, index: 10 };
+        component.model = { data: { field: 1 }, selected: true, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -267,13 +269,11 @@ describe('Component: DefaultTableCard', () => {
 
         selectCardByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
       });
 
       fit('Should toggle selected', () => {
-        // fake selected call
-        spyOn(component.selected, 'emit').and.callFake(() => component.model.dataModel.selected = !component.model.dataModel.selected);
-        component.model = { dataModel: { data: { field: 1 }, selected: true }, index: 10 };
+        component.model = { data: { field: 1 }, selected: true, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -282,31 +282,31 @@ describe('Component: DefaultTableCard', () => {
 
         selectCardByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
 
         selectCardByCheckmark();
 
-        expect((component.selected.emit as any).calls.allArgs()).toEqual([
-          [{ index: component.model.index, selected: false }],
-          [{ index: component.model.index, selected: true }]
+        expect((tableSelectServiceSpy.select as any).calls.allArgs()).toEqual([
+          [1, false],
+          [1, true]
         ]);
 
-        expect(component.selected.emit).toHaveBeenCalledTimes(2);
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(2);
       });
     });
 
     describe('Sequence', () => {
       fit('Should have appropriate values by default', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Sequence }];
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('span.name').innerText).toEqual('');
-        expect(fixture.nativeElement.querySelector('span.name ~ span').innerText).toEqual('');
+        expect(fixture.nativeElement.querySelector('span.name ~ span').innerText).toEqual('1');
       });
 
       fit('Should have defined value', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10, sequence: 100 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 100 };
         component.columns = [{ name: 'Sequence column', field: '', type: TableColumnType.Sequence }];
         fixture.detectChanges();
 
@@ -317,7 +317,7 @@ describe('Component: DefaultTableCard', () => {
 
     describe('Data', () => {
       fit('Should have appropriate values when default state', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Data }];
         fixture.detectChanges();
 
@@ -326,7 +326,7 @@ describe('Component: DefaultTableCard', () => {
       });
 
       fit('Should have appropriate values', () => {
-        component.model = { dataModel: { data: { field: 'test-data' } }, index: 10 };
+        component.model = { data: { field: 'test-data' }, index: 10, sequence: 1 };
         component.columns = [{ name: 'Column name', field: 'field', type: TableColumnType.Data }];
         fixture.detectChanges();
 

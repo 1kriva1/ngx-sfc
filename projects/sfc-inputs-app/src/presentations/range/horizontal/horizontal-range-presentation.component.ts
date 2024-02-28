@@ -61,7 +61,7 @@ export class HorizontalRangePresentationComponent extends BasePresentationCompon
                     disabled: true
                 }],
                 inputRangeHelperDisabled: [{
-                    value: 1,
+                    value: {from:10, to:57},
                     disabled: true
                 }],
                 inputRangeLabelIconDisabled: [{
@@ -110,7 +110,10 @@ export class HorizontalRangePresentationComponent extends BasePresentationCompon
                 }],
                 inputRangeSmall: [10],
                 inputRangeLarge: [60],
-                inputRangeCustom: [90]
+                inputRangeCustom: [90],
+                inputRangeMultipleSmall: [{from:10, to:57}],
+                inputRangeMultipleLarge: [{from:0, to:99}],
+                inputRangeMultipleCustom: [{from:90, to:91}]
             }
         );
     }

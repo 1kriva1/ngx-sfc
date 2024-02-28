@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { faAutomobile, faBan, faStar } from '@fortawesome/free-solid-svg-icons';
-import { CheckmarkType } from 'ngx-sfc-common';
 import { BasePresentationComponent } from '../base-presentations.component';
 
 @Component({

@@ -1,4 +1,6 @@
 @use "ngx-sfc-common/styles/index" as *;
+@use "ngx-sfc-common/components/loader/bounce/bounce-loader.component.mixins.scss" as bounce-loader;
+@use "ngx-sfc-common/components/load-container/load-container.component.mixins.scss" as load-container;
 @import "../../styles/mixins";
 
 :host {
@@ -9,7 +11,7 @@
         z-index: 2;
       }
 
-      sfc-load-container {
+      ::ng-deep sfc-load-container {
         position: absolute;
         top: 0;
         left: 0;
@@ -17,6 +19,8 @@
         min-height: 2em;
         z-index: 1;
         cursor: text;
+
+        @include load-container.sfc-load-container-as-default;
 
         &.open {
           z-index: 9999;
@@ -27,7 +31,7 @@
           z-index: 9999;
 
           &:not(.open) {
-            @include loader-background;
+            @include bounce-loader.sfc-bounce-loader-background-transparent;
           }
         }
       }
@@ -36,8 +40,8 @@
 
   &.loading {
     &:not(.any) {
-      sfc-load-container:not(.empty) {
-        @include loader-background;
+      ::ng-deep sfc-load-container:not(.empty) {
+        @include bounce-loader.sfc-bounce-loader-background-transparent;
       }
     }
   }

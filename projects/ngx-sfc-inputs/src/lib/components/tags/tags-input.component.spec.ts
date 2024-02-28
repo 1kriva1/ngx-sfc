@@ -124,7 +124,7 @@ describe('Component: TagsInput', () => {
 
       fixture.debugElement.queryAll(By.css('sfc-tags-chip')).forEach(chip => {
         expect(chip.componentInstance.disabled).toBeTruthy();
-      })
+      });
     });
 
     fit("Should have defined labels", () => {

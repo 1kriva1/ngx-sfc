@@ -1,6 +1,8 @@
+import { empty } from "ngx-sfc-common";
+
 export interface IAvatarDataModel {
-    firstName?: string;
-    lastName?: string;
-    image?: string;
-    title?: string;
+    firstName?: string | empty;
+    lastName?: string | empty;
+    image?: string | File | empty;
+    title?: string | empty;
 }

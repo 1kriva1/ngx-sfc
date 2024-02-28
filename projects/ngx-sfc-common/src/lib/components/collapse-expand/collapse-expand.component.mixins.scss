@@ -1,0 +1,7 @@
+@import "../../styles/variables";
+
+@mixin sfc-collapse-expand-as-default() {
+  .container {
+    color: $color-default;
+  }
+}

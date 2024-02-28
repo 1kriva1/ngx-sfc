@@ -59,15 +59,17 @@
             </div>
         </div>
         <div class="actions">
-            <sfc-button *ngIf="nowButton" [text]="buttonsModel.nowLabel" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onNow()">
-            </sfc-button>
-            <sfc-button *ngIf="clearButton" [text]="buttonsModel.clearLabel" [types]="[ButtonType.Rounded]"
-                (sfcMouseDown)="onClear($event)">
-            </sfc-button>
             <sfc-button [disabled]="isDisabled" [text]="buttonsModel.okLabel" [types]="[ButtonType.Rounded]"
                 (sfcMouseDown)="onOk($event)">
             </sfc-button>
-            <sfc-button [text]="buttonsModel.cancelLabel" [types]="[ButtonType.Rounded]" (sfcMouseDown)="onCancel($event)">
+            <sfc-button [text]="buttonsModel.cancelLabel" [types]="[ButtonType.Rounded]"
+                (sfcMouseDown)="onCancel($event)">
+            </sfc-button>
+            <sfc-button *ngIf="nowButton" [text]="buttonsModel.nowLabel" [types]="[ButtonType.Rounded]"
+                (sfcMouseDown)="onNow()">
+            </sfc-button>
+            <sfc-button *ngIf="clearButton" [text]="buttonsModel.clearLabel" [types]="[ButtonType.Rounded]"
+                (sfcMouseDown)="onClear($event)">
             </sfc-button>
         </div>
     </div>

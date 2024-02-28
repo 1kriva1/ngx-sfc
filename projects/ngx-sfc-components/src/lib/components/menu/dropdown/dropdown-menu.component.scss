@@ -16,7 +16,8 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        transition: all $transition-duration-default $transition-timing-function-default;
+        transition: color $transition-duration-default $transition-timing-function-default,
+          background $transition-duration-default $transition-timing-function-default;
 
         @include theme-value(color, $color-default, $color-dark);
 
@@ -69,16 +70,20 @@
       }
     }
   }
-
+  
+  /* stylelint-disable no-descending-specificity */
   &.bordered {
     ul {
       li {
         .container {
-          border: 0.15em solid;
+          @include square-size(1.3em);
+
+          border: 0.1em solid;
 
           @include theme-value(border-color, $color-default, $color-dark);
 
           border-radius: 0.3em;
+          padding: 0;
 
           &:hover {
             border-color: $color-hover-default;
@@ -91,6 +96,35 @@
       }
     }
   }
+
+  &.filled {
+    ul {
+      li {
+        .container {
+          @include square-size(1.3em);
+
+          border: 0.1em solid transparent;
+          border-radius: 1.3em;
+          padding: 0;
+
+          sfc-dots {
+            ::ng-deep > .container {
+              > .dots-container {
+                > .dot {
+                  @include theme-value(background, $color-default, $color-dark);
+                }
+              }
+            }
+          }
+
+          &:hover {
+            background: $color-hover-default;
+          }
+        }
+      }
+    }
+  }
+  /* stylelint-enable no-descending-specificity */
 
   &.top {
     ul {

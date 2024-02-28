@@ -18,7 +18,8 @@ import {
   RangeInputVerticalComponent,
   RadioInputComponent,
   AutoCompleteInputComponent,
-  SelectInputComponent
+  SelectInputComponent,
+  BubblesInputComponent
 } from './components';
 import {
   TagsChipComponent,
@@ -31,14 +32,20 @@ import {
   DateTimeModalComponent,
   ImageEditorComponent,
   AutoCompleteItemComponent,
-  SelectItemComponent
+  SelectItemComponent,
+  BubbleComponent
 } from '../lib/components/no-export-index';
-import { InputReferenceDirective, InputNumberDirective } from './directives';
+import {
+  InputReferenceDirective,
+  InputNumberDirective,
+  InputFocusDirective
+} from './directives';
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
+import { NgxSfcComponentsModule } from 'ngx-sfc-components';
 
 @NgModule({
   declarations: [
-    // components
+    // text
     TextInputComponent,
     InputReferenceDirective,
     TextAreaInputComponent,
@@ -75,12 +82,18 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     AutoCompleteItemComponent,
     // select
     SelectInputComponent,
-    SelectItemComponent
+    SelectItemComponent,
+    // bubbles
+    BubblesInputComponent,
+    BubbleComponent,
+    // directives
+    InputFocusDirective
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
-    NgxSfcCommonModule
+    NgxSfcCommonModule,
+    NgxSfcComponentsModule
   ],
   exports: [
     // components
@@ -98,9 +111,12 @@ import { NgxSfcCommonModule } from 'ngx-sfc-common';
     RadioInputComponent,
     AutoCompleteInputComponent,
     SelectInputComponent,
+    BubblesInputComponent,
     // range
     RangeInputComponent,
-    RangeInputVerticalComponent
+    RangeInputVerticalComponent,
+    // directives
+    InputFocusDirective
   ],
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true },

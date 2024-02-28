@@ -1,15 +1,10 @@
 @import "../../../styles/index";
+/* stylelint-disable */
+@import "./loader.component.mixins.scss";
+/* stylelint-enable */
 
 .preloader {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  @include sfc-loader-background;
 
   &.background {
     @include theme-value(background-color, $color-0, $color-disabled-dark);

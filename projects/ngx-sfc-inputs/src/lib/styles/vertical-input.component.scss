@@ -10,14 +10,11 @@
       flex-direction: column;
 
       label {
-        transform: scale(0.8);
         cursor: pointer;
-        font-size: 0.8em;
-        position: relative;
         transform-origin: initial;
-        user-select: none;
         white-space: nowrap;
         text-align: center;
+        transform: translateY(-1.2em) scale(0.8);
       }
 
       .component {
@@ -27,9 +24,9 @@
       span.helper-text {
         @include center;
 
+        text-align: center;
         margin-top: 0.3em;
         float: none;
-        position: relative;
       }
     }
   }

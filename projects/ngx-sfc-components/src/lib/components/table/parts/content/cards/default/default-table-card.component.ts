@@ -6,5 +6,4 @@ import { BaseDefaultTableContentComponent } from '../../base-default-table-conte
   templateUrl: './default-table-card.component.html',
   styleUrls: ['./default-table-card.component.scss']
 })
-export class DefaultTableCardComponent extends BaseDefaultTableContentComponent {
-}
+export class DefaultTableCardComponent extends BaseDefaultTableContentComponent { }

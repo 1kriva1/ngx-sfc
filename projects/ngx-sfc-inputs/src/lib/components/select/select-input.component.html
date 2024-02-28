@@ -7,9 +7,9 @@
                 [value]="displayValue" [disabled]="disabled" readonly="true" (focus)="onFocus()">
         </div>
         <span class="helper-text">{{helperTextValue}}</span>
-        <sfc-load-container [id]="inputId" [open]="isFocused" [showLoadMoreButton]="showLoadMoreButton"
-            [showEmpty]="false" [model]="loadModel" [scrollTarget]="selectedItem"
-            (handleSuccess)="handleSuccess($event)" (handleError)="handleError()">
+        <sfc-load-container [id]="inputId" [open]="isFocused" [showEmpty]="false"
+            [model]="loadModel" [scrollTarget]="selectedItem" (handleSuccess)="handleSuccess($event)"
+            (handleError)="handleError()">
             <sfc-select-item *ngFor="let item of items" [active]="isSelected(item)" [multiple]="multiple"
                 [hasGroup]="hasGroup" [item]="item" (selected)="onSelect($event)">
             </sfc-select-item>

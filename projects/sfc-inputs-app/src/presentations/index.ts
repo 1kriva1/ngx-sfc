@@ -39,3 +39,4 @@ export { CommonSelectPresentationComponent } from './select/common/select-common
 export { MultipleSelectPresentationComponent } from './select/multiple/select-multiple-presentation.component';
 export { GroupSelectPresentationComponent } from './select/group/select-group-presentation.component';
 export { BorderedCommonSelectPresentationComponent } from './select/bordered/bordered-select-common-presentation.component';
+export { BubblesPresentationComponent } from './bubbles/bubbles-presentation.component';

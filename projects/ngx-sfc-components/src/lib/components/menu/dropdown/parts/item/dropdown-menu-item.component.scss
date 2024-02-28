@@ -36,10 +36,6 @@
     }
   }
 
-  ::ng-deep sfc-delimeter {
-    @include theme-value(background, $background-gradient-default, $background-gradient-default);
-  }
-
   &.active {
     li {
       background: $color-3;

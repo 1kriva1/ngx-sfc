@@ -5,7 +5,8 @@
 
   .container {
     text-align: center;
-    background-color: $color-0;
+
+    @include theme-value(background, $color-0, transparent, "&", false);
 
     .button {
       display: inline-flex;

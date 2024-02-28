@@ -1,0 +1,137 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Bubbles:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-null" formControlName="inputBubblesNull" [items]="items">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-label" formControlName="inputBubblesLabel" label="label test"
+                    [items]="items">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-empty" formControlName="inputBubblesEmpty" label="Empty">
+                </sfc-bubbles-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-icon" formControlName="inputBubblesIcon" [icon]="faStar"
+                    [items]="items">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-label-icon" formControlName="inputBubblesLabelIcon" [icon]="faStar"
+                    [items]="items" label="label test">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-helper-text" formControlName="inputBubblesHelperText"
+                    [items]="items" label="label test" helperText="helper is as test">
+                </sfc-bubbles-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-label-icon-helper-text"
+                    formControlName="inputBubblesLabelIconHelperText" [icon]="faStar" [items]="items" label="label test"
+                    helperText="helper is as test">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-one-item" formControlName="inputBubblesOneItem" [icon]="faStar"
+                    [items]="items.slice(0, 1)" label="One item" helperText="helper one item">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-disabled" formControlName="inputBubblesDisabled" [icon]="faStar"
+                    [items]="items" label="label with disabled" helperText="helper with disabled">
+                </sfc-bubbles-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-value" formControlName="inputBubblesValue" [icon]="faStar"
+                    [items]="items" label="label with value" helperText="helper with value">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-two-item" formControlName="inputBubblesTwoItem" [icon]="faStar"
+                    [items]="items.slice(0, 2)" label="Two item" helperText="helper two item">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-value-disabled" formControlName="inputBubblesValueDisabled"
+                    [icon]="faStar" [items]="items" label="label with value disabled"
+                    helperText="helper with value disabled">
+                </sfc-bubbles-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-validation" formControlName="inputBubblesValidation" [icon]="faStar"
+                    [items]="items" label="should has 5th item" helperText="should has 5th item">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-validation-value" formControlName="inputBubblesValidationValue"
+                    [icon]="faStar" [items]="items" label="label no more than 4 items"
+                    helperText="no more than 4 items">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-validation-message" formControlName="inputBubblesValidationMessage"
+                    [icon]="faStar" [items]="items" label="label should has 5th item" helperText="should has 5th item"
+                    [validations]="{'sfc-equal-or-include': 'Value must be equal 5.'}">
+                </sfc-bubbles-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-small" formControlName="inputBubblesSmall" [icon]="faStar"
+                    [items]="items" label="label small" helperText="helper is small"
+                    [sfcComponentSize]="ComponentSize.Small">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-large" formControlName="inputBubblesLarge" [icon]="faStar"
+                    [items]="items" label="label large" helperText="helper is large"
+                    [sfcComponentSize]="ComponentSize.Large">
+                </sfc-bubbles-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-bubbles-input id="demo-bubbles-custom" formControlName="inputBubblesCustom" [icon]="faStar"
+                    [items]="items" label="label custom" helperText="helper is custom" [sfcComponentSize]
+                    [customSize]="4.2">
+                </sfc-bubbles-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

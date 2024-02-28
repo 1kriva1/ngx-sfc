@@ -1,3 +1,4 @@
+import { formatDate } from "@angular/common";
 import { DateTimeConstants } from "../constants";
 import { isDefined } from "./common.utils";
 
@@ -320,7 +321,7 @@ export function isDateTimeGreatOrEqual(date1: Date, date2: Date): boolean {
  * @param date Date value
  * @returns Locale date
  */
-export function convertUTCDateToLocalDate(date: Date) {
+export function convertUTCDateToLocalDate(date: Date): Date {
     return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
 }
 
@@ -329,11 +330,38 @@ export function convertUTCDateToLocalDate(date: Date) {
  * @param timestamp Timestamp for example - 12:23:45
  * @returns Date value
  */
-export function convertTimestampToDate(timestamp: string) {
+export function convertTimestampToDate(timestamp: string): Date {
     const tempTime = timestamp.split(":"),
         result = new Date();
     result.setHours(+tempTime[0]);
     result.setMinutes(+tempTime[1]);
     result.setSeconds(+tempTime[2]);
     return result;
+}
+
+/**
+ * Convert Date object to timestamp string
+ * @param date Date value
+ * @param locale Locale value
+ * @returns String representation of date value, for example - 12:23
+ */
+export function convertDateToTimestamp(date: Date, locale: string = DateTimeConstants.DEFAULT_LOCALE): string {
+    return `${formatDate(date, 'HH', locale)}:${formatDate(date, 'mm', locale)}`;
+}
+
+/**
+ * Get age from
+ * @param birthdate Date of birth
+ * @returns Age
+ */
+export function getAge(birthdate: Date): number {
+    const now = new Date();
+    let age = now.getFullYear() - birthdate.getFullYear();
+    const monthDifference = now.getMonth() - birthdate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && now.getDate() < birthdate.getDate())) {
+        age--;
+    }
+
+    return age;
 }

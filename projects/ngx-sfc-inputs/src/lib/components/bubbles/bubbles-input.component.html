@@ -1,0 +1,14 @@
+<div class="container">
+    <input sfcInput id="{{inputId}}" type="text" [disabled]="disabled" [value]="value" />
+    <div class="content">
+        <label for="{{inputId}}" *ngIf="label" (click)="onLabelClick()">{{label}}</label>
+        <div class="component">
+            <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+            <div class="bubbles">
+                <sfc-bubble *ngFor="let bubble of bubbles" [model]="bubble" (check)="onCheck($event)">
+                </sfc-bubble>
+            </div>
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+</div>

@@ -1,7 +1,8 @@
 import { formatDate } from '@angular/common';
 import {
-  any, CommonConstants, getNextDate, getNextMonth, getNextYear, getPreviousMonth, getPreviousYear,
-  hasItemBy, isEqualDates, setDefaultSecondsAndMiliseconds, setHours, setMinutes, setYear
+  any, CommonConstants, DateTimeConstants, getNextDate, getNextMonth, getNextYear,
+  getPreviousMonth, getPreviousYear, hasItemBy, isEqualDates, setDefaultSecondsAndMiliseconds,
+  setHours, setMinutes, setYear
 } from 'ngx-sfc-common';
 import { map, Observable, startWith, Subject } from 'rxjs';
 import { DateTimeInputConstants } from '../../constants/datetime.constants';
@@ -20,7 +21,7 @@ export class DateTimeValueService {
     value: new Date(),
     currentValue: null,
     format: CommonConstants.EMPTY_STRING,
-    locale: DateTimeInputConstants.DEFAULT_LOCALE,
+    locale: DateTimeConstants.DEFAULT_LOCALE,
     disabledDays: []
   };
 
@@ -50,7 +51,7 @@ export class DateTimeValueService {
         startWith({ type: DateTimeValueActionType.Init, value: this.model.value }),
         map((event: IDateTimeValueEvent) => {
           this.value = this.calculate(event);
-          
+
           return {
             value: this.value,
             day: this.day,

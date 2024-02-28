@@ -4,7 +4,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UIClass } from 'ngx-sfc-common';
 import { StarsState } from '../../stars.enum';
 import { StarComponent } from './star.component';
-import { InputConstants } from '../../../../constants/input.constants';
 
 describe('Component: Star', () => {
   let component: StarComponent;
@@ -106,35 +105,6 @@ describe('Component: Star', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('input[type=radio]').disabled).toBeTrue();
-    });
-
-    fit('Should emit selected action', () => {
-      spyOn(component.selected, 'emit');
-
-      fixture.debugElement.query(By.css('input[type=radio]')).nativeElement
-        .dispatchEvent(new MouseEvent('click'));
-
-      expect(component.selected.emit).toHaveBeenCalledTimes(1);
-    });
-
-    fit('Should emit default value', () => {
-      spyOn(component.selected, 'emit');
-
-      fixture.debugElement.query(By.css('input[type=radio]')).nativeElement
-        .dispatchEvent(new MouseEvent('click'));
-
-      expect(component.selected.emit).toHaveBeenCalledOnceWith(undefined);
-    });
-
-    fit('Should emit defined value', () => {
-      spyOn(component.selected, 'emit');
-
-      component.value = 3;
-
-      fixture.debugElement.query(By.css('input[type=radio]')).nativeElement
-        .dispatchEvent(new MouseEvent('click'));
-
-      expect(component.selected.emit).toHaveBeenCalledOnceWith(3);
     });
   });
 

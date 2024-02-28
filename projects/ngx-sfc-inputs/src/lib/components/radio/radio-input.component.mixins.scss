@@ -1,0 +1,112 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "../../styles/mixins";
+
+@mixin validation($state-color) {
+  .content {
+    .radios {
+      .radio-container {
+        input[type="radio"]:not([disabled]) {
+          &.checked {
+            & + label {
+              .icon-radio {
+                color: $color-0 !important;
+                background-color: $state-color;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          input[type="radio"]:not([disabled]) {
+            & + label {
+              .circle {
+                .radio {
+                  border-color: $state-color;
+                }
+              }
+
+              .icon-radio {
+                color: $state-color;
+              }
+
+              span {
+                color: $state-color;
+              }
+            }
+
+            &.checked {
+              & + label {
+                .circle {
+                  .radio {
+                    &::before {
+                      background: $state-color;
+                    }
+                  }
+                }
+
+                .icon-radio {
+                  background-color: $state-color;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin sfc-radio-input-as-default() {
+  .container {
+    .content {
+      .radios {
+        .radio-container {
+          input[type="radio"] {
+            & + label {
+              .circle {
+                .radio {
+                  border-color: $color-default;
+                }
+              }
+
+              .icon-radio {
+                color: $color-default;
+              }
+
+              span {
+                color: $color-default;
+              }
+            }
+
+            &.checked {
+              & + label {
+                .circle {
+                  .radio {
+                    &::before {
+                      background: $color-default;
+                    }
+                  }
+                }
+
+                .icon-radio {
+                  color: $color-0;
+                  background-color: $color-hover-default;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include validation($color-hover-default);
+  }
+
+  @include valid {
+    @include validation($color-success);
+  }
+
+  @include invalid {
+    @include validation($color-failed);
+  }
+}

@@ -7,77 +7,71 @@
         <div class="component-row">
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-empty"
-                    formControlName="inputRangeNull"></sfc-range-input-vertical>
-            </div>
-
-            <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label"
-                    formControlName="inputRangeLabel" label="test label">
+                <sfc-range-input-vertical id="demo-range-empty" formControlName="inputRangeNull">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-icon" formControlName="inputRangeIcon"
-                    [icon]="faUser">
-                </sfc-range-input-vertical>
-            </div>
-        </div>
-
-        <div class="component-row">
-            <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-helper"
-                    formControlName="inputRangeHelper" helperText="helper test">
+                <sfc-range-input-vertical id="demo-range-label" formControlName="inputRangeLabel" label="test label">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-icon"
-                    formControlName="inputRangeLabelIcon" label="test label and icon" [icon]="faUser">
-                </sfc-range-input-vertical>
-            </div>
-
-            <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-icon-helper"
-                    formControlName="inputRangeLabelIconHelper" label="test label and icon and helper" [icon]="faUser"
-                    helperText="helper test and icon and helper">
+                <sfc-range-input-vertical id="demo-range-icon" formControlName="inputRangeIcon" [icon]="faUser">
                 </sfc-range-input-vertical>
             </div>
         </div>
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-empty-limits"
-                    formControlName="inputRangeNullLimits" [showLimits]="true" [max]="10" [min]="2">
+                <sfc-range-input-vertical id="demo-range-helper" formControlName="inputRangeHelper"
+                    helperText="helper test">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-limits"
-                    formControlName="inputRangeLabelLimits" label="test label limit 20-80" [showLimits]="true"
-                    [max]="80" [min]="20">
+                <sfc-range-input-vertical id="demo-range-label-icon" formControlName="inputRangeLabelIcon"
+                    label="test label and icon" [icon]="faUser">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-icon-limits"
-                    formControlName="inputRangeIconLimits" [icon]="faUser" [showLimits]="true" [max]="8000" [min]="200">
+                <sfc-range-input-vertical id="demo-range-label-icon-helper" formControlName="inputRangeLabelIconHelper"
+                    label="test label and icon and helper" [icon]="faUser" helperText="helper test and icon and helper">
                 </sfc-range-input-vertical>
             </div>
         </div>
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-helper-limits"
-                    formControlName="inputRangeHelperLimits" [showLimits]="true" helperText="helper test" [max]="10"
-                    [min]="0" [step]="2">
+                <sfc-range-input-vertical id="demo-range-empty-limits" formControlName="inputRangeNullLimits"
+                    [showLimits]="true" [max]="10" [min]="2">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-icon-limits"
-                    formControlName="inputRangeLabelIconLimits" [showLimits]="true" label="test label" [icon]="faUser"
-                    [max]="100" [min]="1" [step]="2">
+                <sfc-range-input-vertical id="demo-range-label-limits" formControlName="inputRangeLabelLimits"
+                    label="test label limit 20-80" [showLimits]="true" [max]="80" [min]="20">
+                </sfc-range-input-vertical>
+            </div>
+
+            <div class="component-column">
+                <sfc-range-input-vertical id="demo-range-icon-limits" formControlName="inputRangeIconLimits"
+                    [icon]="faUser" [showLimits]="true" [max]="8000" [min]="200">
+                </sfc-range-input-vertical>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-range-input-vertical id="demo-range-helper-limits" formControlName="inputRangeHelperLimits"
+                    [showLimits]="true" helperText="helper test" [max]="10" [min]="0" [step]="2">
+                </sfc-range-input-vertical>
+            </div>
+
+            <div class="component-column">
+                <sfc-range-input-vertical id="demo-range-label-icon-limits" formControlName="inputRangeLabelIconLimits"
+                    [showLimits]="true" label="test label" [icon]="faUser" [max]="100" [min]="1" [step]="2">
                 </sfc-range-input-vertical>
             </div>
 
@@ -91,33 +85,31 @@
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-empty-limit-icon"
-                    formControlName="inputRangeNullLimitIcons" [showLimits]="false" [max]="10" [min]="2"
-                    [startIcon]="faMinus" [endIcon]="faPlus">
+                <sfc-range-input-vertical id="demo-range-empty-limit-icon" formControlName="inputRangeNullLimitIcons"
+                    [showLimits]="false" [max]="10" [min]="2" [startIcon]="faMinus" [endIcon]="faPlus">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-limit-icon"
-                    formControlName="inputRangeLabelLimitIcons" label="test label limit 20-80" [showLimits]="false"
-                    [max]="80" [min]="20" [startIcon]="faMinus" [endIcon]="faPlus">
+                <sfc-range-input-vertical id="demo-range-label-limit-icon" formControlName="inputRangeLabelLimitIcons"
+                    label="test label limit 20-80" [showLimits]="false" [max]="80" [min]="20" [startIcon]="faMinus"
+                    [endIcon]="faPlus">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-icon-limit-icon"
-                    formControlName="inputRangeIconLimitIcons" [icon]="faUser" [showLimits]="false" [max]="8000"
-                    [min]="200" [startIcon]="faMinus" [endIcon]="faPlus">
+                <sfc-range-input-vertical id="demo-range-icon-limit-icon" formControlName="inputRangeIconLimitIcons"
+                    [icon]="faUser" [showLimits]="false" [max]="8000" [min]="200" [startIcon]="faMinus"
+                    [endIcon]="faPlus">
                 </sfc-range-input-vertical>
             </div>
         </div>
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-helper-limit-icon"
-                    formControlName="inputRangeHelperLimitIcons" [showLimits]="false"
-                    helperText="helper test limit 0-10" [max]="10" [min]="0" [step]="2" [startIcon]="faMinus"
-                    [endIcon]="faPlus">
+                <sfc-range-input-vertical id="demo-range-helper-limit-icon" formControlName="inputRangeHelperLimitIcons"
+                    [showLimits]="false" helperText="helper test limit 0-10" [max]="10" [min]="0" [step]="2"
+                    [startIcon]="faMinus" [endIcon]="faPlus">
                 </sfc-range-input-vertical>
             </div>
 
@@ -140,28 +132,28 @@
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-empty-show-value"
-                    formControlName="inputRangeNullShowValue" [showValue]="true">
+                <sfc-range-input-vertical id="demo-range-empty-show-value" formControlName="inputRangeNullShowValue"
+                    [showValue]="true">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-show-value"
-                    formControlName="inputRangeLabelShowValue" label="test label" [showValue]="true">
+                <sfc-range-input-vertical id="demo-range-label-show-value" formControlName="inputRangeLabelShowValue"
+                    label="test label" [showValue]="true">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-icon-show-value"
-                    formControlName="inputRangeIconShowValue" [icon]="faUser" [showValue]="true">
+                <sfc-range-input-vertical id="demo-range-icon-show-value" formControlName="inputRangeIconShowValue"
+                    [icon]="faUser" [showValue]="true" [stars]="true">
                 </sfc-range-input-vertical>
             </div>
         </div>
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-helper-show-value"
-                    formControlName="inputRangeHelperShowValue" [showValue]="true" helperText="helper test">
+                <sfc-range-input-vertical id="demo-range-helper-show-value" formControlName="inputRangeHelperShowValue"
+                    [showValue]="true" helperText="helper test">
                 </sfc-range-input-vertical>
             </div>
 
@@ -205,29 +197,27 @@
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-empty-disabled"
-                    formControlName="inputRangeNullDisabled">
+                <sfc-range-input-vertical id="demo-range-empty-disabled" formControlName="inputRangeNullDisabled">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-disabled"
-                    formControlName="inputRangeLabelDisabled" label="test label DISABLED" [showValue]="true">
+                <sfc-range-input-vertical id="demo-range-label-disabled" formControlName="inputRangeLabelDisabled"
+                    label="test label DISABLED" [showValue]="true" [multiple]="true">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-icon-disabled"
-                    formControlName="inputRangeIconDisabled" [icon]="faUser" [showLimits]="true">
+                <sfc-range-input-vertical id="demo-range-icon-disabled" formControlName="inputRangeIconDisabled"
+                    [icon]="faUser" [showLimits]="true">
                 </sfc-range-input-vertical>
             </div>
         </div>
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-helper-disabled"
-                    formControlName="inputRangeHelperDisabled" helperText="helper test DISABLED" [startIcon]="faMinus"
-                    [endIcon]="faPlus">
+                <sfc-range-input-vertical id="demo-range-helper-disabled" formControlName="inputRangeHelperDisabled"
+                    helperText="helper test DISABLED" [startIcon]="faMinus" [endIcon]="faPlus">
                 </sfc-range-input-vertical>
             </div>
 
@@ -247,30 +237,28 @@
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-empty-validation"
-                    formControlName="inputRangeNullValidation" label="test label maximum 10">
+                <sfc-range-input-vertical id="demo-range-empty-validation" formControlName="inputRangeNullValidation"
+                    label="test label maximum 10">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-label-validation"
-                    formControlName="inputRangeLabelValidation" label="test label minimum 20" [showValue]="true">
+                <sfc-range-input-vertical id="demo-range-label-validation" formControlName="inputRangeLabelValidation"
+                    label="test label minimum 20" [showValue]="true">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-icon-validation"
-                    formControlName="inputRangeIconValidation" [icon]="faUser" [showLimits]="true"
-                    label="test label equal 12">
+                <sfc-range-input-vertical id="demo-range-icon-validation" formControlName="inputRangeIconValidation"
+                    [icon]="faUser" [showLimits]="true" label="test label equal 12">
                 </sfc-range-input-vertical>
             </div>
         </div>
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-helper-validation"
-                    formControlName="inputRangeHelperValidation" helperText="helper test equal 100"
-                    [startIcon]="faMinus" [endIcon]="faPlus">
+                <sfc-range-input-vertical id="demo-range-helper-validation" formControlName="inputRangeHelperValidation"
+                    helperText="helper test equal 100" [startIcon]="faMinus" [endIcon]="faPlus">
                 </sfc-range-input-vertical>
             </div>
 
@@ -338,23 +326,46 @@
 
         <div class="component-row">
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-small"
-                    formControlName="inputRangeSmall" label="Small" helperText="Small helper" [icon]="faUser"
-                    [startIcon]="faMinus" [endIcon]="faPlus" [sfcComponentSize]="ComponentSize.Small">
+                <sfc-range-input-vertical id="demo-rangemultiple-small" formControlName="inputRangeMultipleSmall"
+                    label="Small" helperText="Small helper" [icon]="faUser" [startIcon]="faMinus"
+                    [multiple]="true" [showValue]="true" [stars]="false">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-large"
-                    formControlName="inputRangeLarge" label="Large" helperText="Large helper" [icon]="faUser"
-                    [startIcon]="faMinus" [endIcon]="faPlus" [sfcComponentSize]="ComponentSize.Large">
+                <sfc-range-input-vertical id="demo-rangemultiple-large" formControlName="inputRangeMultipleLarge"
+                    label="Large" helperText="Large helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus"
+                    [multiple]="true" [sfcComponentSize]="ComponentSize.Large">
                 </sfc-range-input-vertical>
             </div>
 
             <div class="component-column">
-                <sfc-range-input-vertical id="demo-range-custom"
-                    formControlName="inputRangeCustom" label="Custom" helperText="Custom helper" [icon]="faUser"
-                    [startIcon]="faMinus" [endIcon]="faPlus" [sfcComponentSize] [customSize]="4.2">
+                <sfc-range-input-vertical id="demo-rangemultiple-custom" formControlName="inputRangeMultipleCustom"
+                    label="Custom" helperText="Custom helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus"
+                    [multiple]="true" [sfcComponentSize] [customSize]="4.2">
+                </sfc-range-input-vertical>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-range-input-vertical id="demo-range-small" formControlName="inputRangeSmall" label="Small"
+                    helperText="Small helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus"
+                    [sfcComponentSize]="ComponentSize.Small">
+                </sfc-range-input-vertical>
+            </div>
+
+            <div class="component-column">
+                <sfc-range-input-vertical id="demo-range-large" formControlName="inputRangeLarge" label="Large"
+                    helperText="Large helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus"
+                    [sfcComponentSize]="ComponentSize.Large">
+                </sfc-range-input-vertical>
+            </div>
+
+            <div class="component-column">
+                <sfc-range-input-vertical id="demo-range-custom" formControlName="inputRangeCustom" label="Custom"
+                    helperText="Custom helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus"
+                    [sfcComponentSize] [customSize]="4.2">
                 </sfc-range-input-vertical>
             </div>
         </div>

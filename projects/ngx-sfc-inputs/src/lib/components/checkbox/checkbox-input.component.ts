@@ -5,7 +5,7 @@ import { BaseLogicalInputComponent } from '../base/logical/logical-input.compone
 @Component({
   selector: 'sfc-checkbox-input',
   templateUrl: './checkbox-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', './checkbox-input.component.scss',
+  styleUrls: ['../../styles/input.component.scss',
     '../../styles/vertical-input.component.scss']
 })
 export class CheckboxInputComponent extends BaseLogicalInputComponent {

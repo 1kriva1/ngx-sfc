@@ -3,7 +3,12 @@
   height: $value * $multiplier;
 }
 
-@mixin theme-value($property, $value-common, $value-dark: null, $selector: "&") {
+@mixin max-size($value) {
+  max-width: $value;
+  max-height: $value;
+}
+
+@mixin theme-value($property, $value-common, $value-dark: null, $selector: "&", $transition: true) {
   @if not $value-dark {
     $value-dark: $value-common;
   }
@@ -16,7 +21,9 @@
     #{$property}: $value-dark;
   }
 
-  transition: #{$property} $transition-duration-default $transition-timing-function-default;
+  @if $transition {
+    transition: #{$property} $transition-duration-default $transition-timing-function-default;
+  }
 }
 
 @mixin visibility($show) {
@@ -50,4 +57,43 @@
 @mixin text-ellipsis() {
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+@mixin scroll($selector: "::ng-deep") {
+  #{$selector} ::-webkit-scrollbar {
+    @include square-size(0.375em);
+  }
+
+  #{$selector} ::-webkit-scrollbar-track {
+    border-radius: 0.625em;
+    background: $color-4;
+  }
+
+  #{$selector} ::-webkit-scrollbar-thumb {
+    border-radius: 0.625em;
+    background: rgb(0 0 0 / 20%);
+  }
+
+  #{$selector} ::-webkit-scrollbar-thumb:hover {
+    background: rgb(0 0 0 / 40%);
+  }
+
+  #{$selector} ::-webkit-scrollbar-thumb:active {
+    background: rgb(0 0 0 / 60%);
+  }
+}
+
+@mixin scroll-round-bordered($selector: "::ng-deep") {
+  #{$selector} ::-webkit-scrollbar {
+    width: 1em;
+  }
+
+  #{$selector} ::-webkit-scrollbar-thumb {
+    border: 0.35em solid rgb(0 0 0 / 0%);
+    background-clip: padding-box;
+  }
+
+  #{$selector} ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }

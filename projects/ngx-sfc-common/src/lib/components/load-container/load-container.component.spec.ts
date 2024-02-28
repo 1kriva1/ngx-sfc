@@ -2,19 +2,25 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BehaviorSubject, EMPTY, map, of, Subject } from 'rxjs';
+import { BehaviorSubject, EMPTY, map, of, startWith, Subject } from 'rxjs';
 import { CommonConstants } from '../../constants';
-import { ComponentSizeDirective, MouseDownDirective, ScrollIntoViewDirective, ScrollTrackerDirective } from '../../directives';
+import { 
+    ComponentSizeDirective, MouseDownDirective, ScrollIntoViewDirective, 
+    ScrollTrackerDirective, ShowHideElementDirective 
+} from '../../directives';
 import { ComponentSize, Position, UIClass } from '../../enums';
 import { DelimeterComponent } from '../delimeter/delimeter.component';
 import { LoadMoreButtonComponent } from '../load-more-button/load-more-button.component';
 import { BounceLoaderComponent } from '../loader/bounce/bounce-loader.component';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { PaginationConstants } from '../pagination/pagination.constants';
+import { LoadContainerLoadType } from './enums/load-container-load-type.enum';
+import { LoadContainerType } from './enums/load-container-type.enum';
 import { LoadContainerComponent } from './load-container.component';
 import { LoadContainerConstants } from './load-container.constants';
-import { LoadContainerType } from './load-container.enum';
-import { ILoadMoreParameters } from './models/load-more-parameters.model';
-import { ILoadMorePredicateParameters } from './models/load-more-predicate-parameters.model';
-import { ILoadMoreModel } from './models/load-more.model';
+import { ILoadContainerParameters } from './models/load-container-parameters.model';
+import { ILoadContainerPredicateParameters } from './models/load-container-predicate-parameters.model';
+import { ILoadContainerResultModel } from './models/load-container-result.model';
 
 @Component({
     template: ` <div style="height:2em">
@@ -29,7 +35,7 @@ class TestLoadContainerComponent {
 
     items: number[] = [];
 
-    handleSuccess(result: ILoadMoreModel<any>) {
+    handleSuccess(result: ILoadContainerResultModel<any>) {
         if (result.reset)
             this.items = result.items;
         else
@@ -43,8 +49,11 @@ describe('Component: LoadContainer', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [DelimeterComponent, MouseDownDirective, LoadMoreButtonComponent, ScrollIntoViewDirective,
-                BounceLoaderComponent, ComponentSizeDirective, ScrollTrackerDirective, LoadContainerComponent, TestLoadContainerComponent]
+            declarations: [
+                DelimeterComponent, MouseDownDirective, LoadMoreButtonComponent, ScrollIntoViewDirective,
+                BounceLoaderComponent, ComponentSizeDirective, ScrollTrackerDirective, PaginationComponent,
+                ShowHideElementDirective, LoadContainerComponent, TestLoadContainerComponent
+            ]
         }).compileComponents();
     });
 
@@ -60,14 +69,15 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should have main elements", () => {
-            expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('sfc-bounce-loader')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('div.content')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('sfc-load-more-button')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('div.container')).toBeDefined();
+            expect(fixture.nativeElement.querySelector('div.content')).toBeDefined();
+            expect(fixture.nativeElement.querySelector('div.items')).toBeDefined();
+            expect(fixture.nativeElement.querySelector('div.actions')).toBeDefined();
+            expect(fixture.nativeElement.querySelector('sfc-load-more-button')).toBeDefined();
         });
 
         fit("Should prevent default on content click", () => {
-            const buttonEl = fixture.debugElement.query(By.css('div.content > div')),
+            const buttonEl = fixture.debugElement.query(By.css('div.content > div.actions')),
                 event: MouseEvent = new MouseEvent('mousedown');
 
             spyOn(event, 'preventDefault');
@@ -100,7 +110,7 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should call unsubscribe", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             const unsubscribeSpy = spyOn(
@@ -114,7 +124,7 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should call unsubscribe on new model", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
 
             const unsubscribeSpy = spyOn(
                 (component.loadContainer as any)._subscription,
@@ -123,13 +133,27 @@ describe('Component: LoadContainer', () => {
 
             expect(unsubscribeSpy).not.toHaveBeenCalled()
 
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
 
             expect(unsubscribeSpy).toHaveBeenCalledTimes(1);
         });
     });
 
     describe('Loader', () => {
+        fit("Should not exist", () => {
+            component.loadContainer.showLoading = false;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('sfc-bounce-loader')).toBeNull();
+        });
+
+        fit("Should exist", () => {
+            component.loadContainer.showLoading = true;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('sfc-bounce-loader')).toBeDefined();
+        });
+
         fit("Should have defined attributes", () => {
             component.loadContainer.id = 'test-id';
             fixture.detectChanges();
@@ -144,7 +168,7 @@ describe('Component: LoadContainer', () => {
             const loaderService = (component.loadContainer as any).loaderService;
             spyOn(loaderService, 'show');
 
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(loaderService.show).toHaveBeenCalledTimes(1);
@@ -154,7 +178,7 @@ describe('Component: LoadContainer', () => {
             const loaderService = (component.loadContainer as any).loaderService;
             spyOn(loaderService, 'hide');
 
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(loaderService.hide).toHaveBeenCalledTimes(1);
@@ -163,7 +187,7 @@ describe('Component: LoadContainer', () => {
         fit("Should emit loading", () => {
             spyOn(component.loadContainer.handleLoading, 'emit');
 
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect((component.loadContainer.handleLoading.emit as any).calls.allArgs()).toEqual([
@@ -178,7 +202,7 @@ describe('Component: LoadContainer', () => {
             spyOn(loaderService, 'show');
             spyOn(component.loadContainer.handleLoading, 'emit');
 
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
@@ -205,7 +229,8 @@ describe('Component: LoadContainer', () => {
 
             component.loadContainer.model = {
                 data$: of([]),
-                filter: (_: any[], __: ILoadMoreParameters) => {
+                loadType: LoadContainerLoadType.Button,
+                filter: (_: any[], __: ILoadContainerParameters) => {
                     throw { errorMsg: 'Error occurred' }
                 }
             };
@@ -222,14 +247,18 @@ describe('Component: LoadContainer', () => {
 
     describe('Scroll', () => {
         fit('Should have not positions for scrolling in case showLoadMoreButton is true', () => {
-            component.loadContainer.showLoadMoreButton = true;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Button
+            };
             fixture.detectChanges();
             expect(fixture.debugElement.query(By.css('div.content')).attributes['ng-reflect-positions'])
                 .toEqual(CommonConstants.EMPTY_STRING)
         });
 
         fit('Should have not positions for scrolling in case loadMore is false', () => {
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             component.loadContainer.loadMore = false;
             fixture.detectChanges();
 
@@ -238,7 +267,9 @@ describe('Component: LoadContainer', () => {
         });
 
         fit('Should have not positions for scrolling in case next is false', () => {
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             component.loadContainer.loadMore = true;
             component.loadContainer.next = false;
             fixture.detectChanges();
@@ -248,7 +279,9 @@ describe('Component: LoadContainer', () => {
         });
 
         fit('Should have bottom position for scrolling', () => {
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             component.loadContainer.loadMore = true;
             component.loadContainer.next = true;
             fixture.detectChanges();
@@ -260,7 +293,9 @@ describe('Component: LoadContainer', () => {
         fit('Should call load more', () => {
             const loadMoreService = (component.loadContainer as any).loadMoreService;
             spyOn(loadMoreService, 'more');
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             component.loadContainer.next = true;
             fixture.detectChanges();
 
@@ -272,7 +307,9 @@ describe('Component: LoadContainer', () => {
         fit('Should not call load more, because of next = false', () => {
             const loadMoreService = (component.loadContainer as any).loadMoreService;
             spyOn(loadMoreService, 'more');
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             component.loadContainer.next = false;
             fixture.detectChanges();
 
@@ -284,7 +321,9 @@ describe('Component: LoadContainer', () => {
         fit('Should not call load more, because of loadMore = false', () => {
             const loadMoreService = (component.loadContainer as any).loadMoreService;
             spyOn(loadMoreService, 'more');
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             component.loadContainer.loadMore = false;
             fixture.detectChanges();
 
@@ -294,10 +333,9 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should scroll to top after predicate value was changed", () => {
-            const subject = new Subject<ILoadMorePredicateParameters>(),
+            const subject = new Subject<ILoadContainerPredicateParameters>(),
                 predicate$ = subject.asObservable();
-            component.loadContainer.model = { predicate$: predicate$, data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = { predicate$: predicate$, data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Scroll };
             component.loadContainer.loadMore = false;
             component.loadContainer.type = LoadContainerType.Table;
             fixture.detectChanges();
@@ -321,7 +359,7 @@ describe('Component: LoadContainer', () => {
 
         fit('Should scroll to target', () => {
             component.loadContainer.open = true;
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Scroll };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('div.content').scrollTop === 0).toBeTrue();
@@ -350,7 +388,9 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should be hidden", () => {
-            component.loadContainer.showLoadMoreButton = false;
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button'));
@@ -359,7 +399,7 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should be hidden if no more data", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(fixture.debugElement.query(By.css('sfc-load-more-button')).attributes['hidden']).toBeUndefined();
@@ -374,7 +414,7 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should be not hidden", () => {
-            component.loadContainer.next = true;
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button'));
@@ -397,24 +437,70 @@ describe('Component: LoadContainer', () => {
         });
     });
 
-    describe('Empty', () => {
+    describe('Pagination', () => {
         fit("Should not exist", () => {
-            expect(fixture.nativeElement.querySelector('div.empty')).toBeNull();
+            component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Scroll
+            };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('sfc-pagination')).toBeNull();
         });
 
         fit("Should exist", () => {
-            component.loadContainer.model = { data$: of([]) };
+            component.loadContainer.model = {
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                loadType: LoadContainerLoadType.Pagination
+            };
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.empty')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('sfc-pagination')).toBeDefined();
+        });
+
+        fit("Should have defined attributes", () => {
+            component.loadContainer.model = {
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                pagination: { page: 2, size: 3 },
+                loadType: LoadContainerLoadType.Pagination
+            };
+            fixture.detectChanges();
+
+            const pagination = fixture.debugElement.query(By.css('sfc-pagination'));
+
+            expect(pagination.componentInstance.limits).toEqual(component.loadContainer.paginationLimits);
+            expect(pagination.componentInstance.count).toEqual(component.loadContainer.paginationCount);
+            expect(pagination.componentInstance.full).toBeFalse();
+            expect(pagination.componentInstance.total).toEqual(9);
+            expect(pagination.componentInstance.size).toEqual(component.loadContainer.model.pagination?.size);
+            expect(pagination.componentInstance.page).toEqual(component.loadContainer.model.pagination?.page);
+        });
+
+        fit("Should not exist if no data", () => {
+            component.loadContainer.model = { data$: of([]), loadType: LoadContainerLoadType.Pagination };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('sfc-pagination')).toBeNull();
+        });
+    });
+
+    describe('Empty', () => {
+        fit("Should not exist", () => {
+            expect(fixture.nativeElement.querySelector('div.actions > sfc-delimeter')).toBeNull();
+        });
+
+        fit("Should exist", () => {
+            component.loadContainer.model = { data$: of([]), loadType: LoadContainerLoadType.Button };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('div.actions > sfc-delimeter')).toBeTruthy();
         });
 
         fit("Should not exist if showEmpty is false", () => {
-            component.loadContainer.model = { data$: of([]) };
+            component.loadContainer.model = { data$: of([]), loadType: LoadContainerLoadType.Button };
             component.loadContainer.showEmpty = false;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.empty')).toBeNull();
+            expect(fixture.nativeElement.querySelector('div.actions > sfc-delimeter')).toBeNull();
         });
 
         fit("Should not have empty class by default", () => {
@@ -422,7 +508,7 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should not have empty class", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector(`sfc-load-container.${UIClass.Empty}`)).toBeNull();
@@ -430,6 +516,7 @@ describe('Component: LoadContainer', () => {
 
         fit("Should not have empty class when error", () => {
             component.loadContainer.model = {
+                loadType: LoadContainerLoadType.Button,
                 data$: of([]).pipe(map(_ => {
                     throw { msg: 'Error occurred' };
                 }))
@@ -440,52 +527,56 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should have empty class", () => {
-            component.loadContainer.model = { data$: of([]) };
+            component.loadContainer.model = { data$: of([]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector(`sfc-load-container.${UIClass.Empty}`)).toBeTruthy();
         });
 
         fit("Should have default label", () => {
-            component.loadContainer.model = { data$: of([]) };
+            component.loadContainer.model = { data$: of([]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.empty').innerText).toEqual(LoadContainerConstants.DEFAULT_NOT_FOUND_LABEL);
+            expect(fixture.nativeElement.querySelector('div.actions > sfc-delimeter').innerText).toEqual(LoadContainerConstants.DEFAULT_EMPTY_LABEL);
         });
 
         fit("Should have defined label", () => {
-            component.loadContainer.model = { data$: of([]) };
-            component.loadContainer.notFoundLabel = 'Test not found';
+            component.loadContainer.model = { data$: of([]), loadType: LoadContainerLoadType.Button };
+            component.loadContainer.emptyLabel = 'Test not found';
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.empty').innerText).toEqual('Test not found');
+            expect(fixture.nativeElement.querySelector('div.actions > sfc-delimeter').innerText).toEqual('Test not found');
         });
     });
 
     describe('Data', () => {
         fit("Should load default size", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(LoadContainerConstants.DEFAULT_PAGE_SIZE);
+            expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(PaginationConstants.DEFAULT_SIZE);
         });
 
         fit("Should load defined size", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), size: 3 };
+            component.loadContainer.model = {
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                loadType: LoadContainerLoadType.Button,
+                pagination: { size: 3, page: 1 }
+            };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(3);
         });
 
         fit("Should load data without predicate", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length > 0).toBeTrue();
         });
 
         fit("Should not load data with predicate", () => {
-            component.loadContainer.model = { predicate$: EMPTY, data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { predicate$: EMPTY, data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length > 0).toBeFalse();
@@ -495,14 +586,19 @@ describe('Component: LoadContainer', () => {
             const loadMoreService = (component.loadContainer as any).loadMoreService;
             spyOn(loadMoreService, 'reset');
 
-            const subject = new Subject<ILoadMorePredicateParameters>(),
-                predicate$ = subject.asObservable();
-            component.loadContainer.model = { predicate$: predicate$, data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            const subject = new Subject<ILoadContainerPredicateParameters>(),
+                predicate$ = subject.asObservable()
+                    .pipe(startWith({ value: 1 }));
+            component.loadContainer.model = {
+                predicate$: predicate$,
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                loadType: LoadContainerLoadType.Button
+            };
             fixture.detectChanges();
 
             expect(loadMoreService.reset).not.toHaveBeenCalled();
 
-            subject.next({ value: 1 });
+            subject.next({ value: 2 });
             fixture.detectChanges();
 
             expect(loadMoreService.reset).toHaveBeenCalledTimes(1);
@@ -512,9 +608,13 @@ describe('Component: LoadContainer', () => {
             const loadMoreService = (component.loadContainer as any).loadMoreService;
             spyOn(loadMoreService, 'reset');
 
-            const subject = new Subject<ILoadMorePredicateParameters | null>(),
+            const subject = new Subject<ILoadContainerPredicateParameters | null>(),
                 predicate$ = subject.asObservable();
-            component.loadContainer.model = { predicate$: predicate$, data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = {
+                predicate$: predicate$,
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                loadType: LoadContainerLoadType.Button
+            };
             fixture.detectChanges();
 
             expect(loadMoreService.reset).not.toHaveBeenCalled();
@@ -531,7 +631,7 @@ describe('Component: LoadContainer', () => {
                 loadMoreService = (component.loadContainer as any).loadMoreService;
             spyOn(loadMoreService, 'reset');
 
-            component.loadContainer.model = { data$: data$ };
+            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
@@ -547,14 +647,14 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should load first page", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             fixture.nativeElement.querySelectorAll('.load-item').forEach((item: any, index: number) => expect(item.innerText).toEqual((index + 1).toString()));
         });
 
         fit("Should load second page", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
@@ -568,7 +668,7 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should not load third page", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]) };
+            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
@@ -588,7 +688,7 @@ describe('Component: LoadContainer', () => {
             const subject = new BehaviorSubject<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 data$ = subject.asObservable();
 
-            component.loadContainer.model = { data$: data$ };
+            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(5);
@@ -609,33 +709,19 @@ describe('Component: LoadContainer', () => {
 
         fit("Should load data with loader", () => {
             component.loadContainer.model = {
-                loader: (_: ILoadMoreParameters) => {
-                    return of({ next: true, items: [1, 2], reset: false })
-                }
+                loader: (_: ILoadContainerParameters) => {
+                    return of({ next: true, items: [1, 2], reset: false, total: 10 })
+                }, loadType: LoadContainerLoadType.Button
             };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(2);
         });
 
-        fit("Should reset load more service, when loader data changed", () => {
-            const loadMoreService = (component.loadContainer as any).loadMoreService;
-            spyOn(loadMoreService, 'reset');
-
-            component.loadContainer.model = {
-                loader: (_: ILoadMoreParameters) => {
-                    return of({ next: true, items: [1, 2], reset: true })
-                }
-            };
-            fixture.detectChanges();
-
-            expect(loadMoreService.reset).toHaveBeenCalledTimes(1);
-        });
-
         fit("Should filter data with custom filter method", () => {
             component.loadContainer.model = {
-                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
-                filter: (data: any[], _: ILoadMoreParameters) => {
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button,
+                filter: (data: any[], _: ILoadContainerParameters) => {
                     return data.filter(number => { return number % 2 === 0; });
                 }
             };
@@ -652,7 +738,7 @@ describe('Component: LoadContainer', () => {
             component.loadContainer.model = {
                 data$: of([]).pipe(map(items => {
                     throw assertException;
-                }))
+                })), loadType: LoadContainerLoadType.Button
             };
             fixture.detectChanges();
 
@@ -663,22 +749,23 @@ describe('Component: LoadContainer', () => {
             spyOn(component.loadContainer.handleSuccess, 'emit');
 
             component.loadContainer.model = {
-                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9])
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button
             };
             fixture.detectChanges();
 
-            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledOnceWith({ next: true, items: [1, 2, 3, 4, 5], reset: true });
+            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledOnceWith({ next: true, items: [1, 2, 3, 4, 5], reset: true, total: 9, page: 1 });
         });
 
         fit("Should return default model when data is not provided", () => {
             spyOn(component.loadContainer.handleSuccess, 'emit');
 
             component.loadContainer.model = {
-                data$: of(null as unknown as any)
+                data$: of([]),
+                loadType: LoadContainerLoadType.Button
             };
             fixture.detectChanges();
 
-            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledOnceWith({ next: false, items: [], reset: true });
+            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledOnceWith({ next: false, items: [], reset: true, total: 0, page: 1 });
         });
 
         fit("Should return reset: true, when data changed", () => {
@@ -687,13 +774,13 @@ describe('Component: LoadContainer', () => {
             const subject = new BehaviorSubject<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 data$ = subject.asObservable();
 
-            component.loadContainer.model = { data$: data$ };
+            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             subject.next([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
             fixture.detectChanges();
 
-            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledWith({ next: true, items: [1, 2, 3, 4, 5], reset: true });
+            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledWith({ next: true, items: [1, 2, 3, 4, 5], reset: true, total: 10, page: 1 });
         });
 
         fit("Should return reset: false, when changed parameters", () => {
@@ -704,24 +791,24 @@ describe('Component: LoadContainer', () => {
                 loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
                 event = new MouseEvent('mousedown');
 
-            component.loadContainer.model = { data$: data$ };
+            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
             fixture.detectChanges();
 
             loadMoreBtn.triggerEventHandler('mousedown', event);
             fixture.detectChanges();
 
-            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledWith({ next: false, items: [6, 7, 8, 9], reset: false });
+            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledWith({ next: false, items: [6, 7, 8, 9], reset: false, total: 9, page: 2 });
         });
 
         fit("Should return default model when loader and data not provided", () => {
             spyOn(component.loadContainer.handleSuccess, 'emit');
 
             component.loadContainer.model = {
-                data$: null as unknown as any
+                data$: null as unknown as any, loadType: LoadContainerLoadType.Button
             };
             fixture.detectChanges();
 
-            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledOnceWith({ next: false, items: [], reset: true });
+            expect(component.loadContainer.handleSuccess.emit).toHaveBeenCalledOnceWith({ next: false, items: [], reset: true, total: 0, page: 1 });
         });
     });
 

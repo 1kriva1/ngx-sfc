@@ -12,7 +12,6 @@
     text-transform: uppercase;
     width: 100%;
     text-align: end;
-    display: none;
     cursor: pointer;
     user-select: none;
 
@@ -25,13 +24,7 @@
     }
 
     span.label {
-      padding-left: 1.3em;
-    }
-  }
-
-  @media all and (max-width: 767px) {
-    .container {
-      display: block;
+      padding-left: 2em;
     }
   }
 }

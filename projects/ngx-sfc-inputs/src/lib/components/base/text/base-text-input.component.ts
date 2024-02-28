@@ -1,10 +1,20 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { CommonConstants } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base-input.component';
 import { ValidationConstants } from '../../../constants/validation.constants';
 
 @Directive()
 export abstract class BaseTextInputComponent<T extends string | string[]> extends BaseInputComponent<T> {
+
+    @Input()
+    showPlaceholderOnFocus: boolean = false;
+
+    override get placeholderValue(): string {
+        return this.placeholder && (!this.isFocused || this.showPlaceholderOnFocus)
+            ? this.placeholder
+            : CommonConstants.EMPTY_STRING;
+    }
+
     get requiredLengthValue(): number | null {
         let requiredLength = null;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ILoadMoreModel, ILoadMoreParameters, LoaderFunction, skip } from 'ngx-sfc-common';
+import { ILoadContainerLoaderResultModel, ILoadContainerParameters, LoaderFunction, skip } from 'ngx-sfc-common';
 import { equalOrInclude, SelectItemModel } from 'ngx-sfc-inputs';
 import { of, BehaviorSubject, Observable, map, delay } from 'rxjs';
 import { BasePresentationComponent } from '../../base-presentations.component';
@@ -354,17 +354,17 @@ export class GroupSelectPresentationComponent extends BasePresentationComponent
   // END LOADER DATA ACTIONS
 
   private getLoaderFynction(data$: Observable<SelectItemModel[]>) {
-    return ((parameters: ILoadMoreParameters): Observable<ILoadMoreModel<any>> => {
+    return ((parameters: ILoadContainerParameters): Observable<ILoadContainerLoaderResultModel<any>> => {
       return data$.pipe(
         delay(1000),
-        map(items => {
-          const data: ILoadMoreModel<any> = items
+        map((items: any) => {
+          const data: ILoadContainerLoaderResultModel<any> = items
             ? {
               items: skip(items, parameters.page, 3),
               next: parameters.page < Math.ceil(items.length / 3),
-              reset: false
+              total: items.length
             }
-            : { items: [], next: false, reset: false };
+            : { items: [], next: false, total: items.length };
 
           return data;
         })

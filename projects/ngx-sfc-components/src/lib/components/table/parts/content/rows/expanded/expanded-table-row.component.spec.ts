@@ -93,9 +93,8 @@ describe('Component: ExpandedTableRow', () => {
 
         fit('Should context data have default value', () => {
             expect(component.contextData).toEqual({
-                model: { dataModel: { data: {} }, index: 0 },
+                model: { data: {}, index: 0, sequence: 0 },
                 columns: [],
-                columnWidth: 1,
                 position: Position.Left,
                 expanded: false,
                 even: false,
@@ -103,9 +102,9 @@ describe('Component: ExpandedTableRow', () => {
         });
 
         fit('Should context data have defined value', () => {
-            component.columnWidth = 6;
+            // component.columnWidth = 6;
             component.position = Position.Left;
-            component.model = { dataModel: { data: { field: 1 } }, index: 1 };
+            component.model = { data: { field: 1 }, sequence: 1, index: 1 };
             component.columns = [
                 { name: '', field: '' }, { name: '', field: '' }, { name: '', field: '' },
                 { name: '', field: '' }, { name: '', field: '' }, { name: '', field: '' }];
@@ -117,7 +116,6 @@ describe('Component: ExpandedTableRow', () => {
             expect(component.contextData).toEqual({
                 model: component.model,
                 columns: component.columns,
-                columnWidth: component.columnWidth,
                 position: component.position,
                 expanded: true,
                 even: true
@@ -129,22 +127,22 @@ describe('Component: ExpandedTableRow', () => {
 @Component({
     template: `<ng-template #contentRef let-row>
                 <div class="content-ref">
-                  <span class="content-width">{{row.columnWidth}}</span>
+                  <span class="content-width">{{row.columns[0].calculatedWidth}}</span>
                   <span class="content-position">{{row.position}}</span>
                   <span class="content-expanded">{{row.expanded}}</span>
                   <span class="content-column-first">{{row.columns[0].name}}</span>
-                  <span class="content-data">{{row.model.dataModel.data.field}}</span>
+                  <span class="content-data">{{row.model.data.field}}</span>
                   <span class="content-even">{{row.even}}</span>
                 </div>
               </ng-template>  
               
               <ng-template #expandedContentRef let-content>
                 <div class="expanded-content-ref">
-                  <span class="content-width">{{content.columnWidth}}</span>
+                  <span class="content-width">{{content.columns[0].calculatedWidth}}</span>
                   <span class="content-position">{{content.position}}</span>
                   <span class="content-expanded">{{content.expanded}}</span>
                   <span class="content-column-first">{{content.columns[0].name}}</span>
-                  <span class="content-data">{{content.model.dataModel.data.field}}</span>
+                  <span class="content-data">{{content.model.data.field}}</span>
                   <span class="content-even">{{content.even}}</span>
                 </div>
               </ng-template>
@@ -153,22 +151,22 @@ describe('Component: ExpandedTableRow', () => {
   
              <ng-template *ngIf="showContent" [sfcTemplateReference]="ExpandedTableRowTemplate.Row" let-row>
                 <div class="content-template">
-                  <span class="content-width">{{row.columnWidth}}</span>
+                  <span class="content-width">{{row.columns[0].calculatedWidth}}</span>
                   <span class="content-position">{{row.position}}</span>
                   <span class="content-expanded">{{row.expanded}}</span>
                   <span class="content-column-first">{{row.columns[0].name}}</span>
-                  <span class="content-data">{{row.model.dataModel.data.field}}</span>
+                  <span class="content-data">{{row.model.data.field}}</span>
                   <span class="content-even">{{row.even}}</span>
                 </div>
                </ng-template>
   
                <ng-template *ngIf="showContent" [sfcTemplateReference]="ExpandedTableRowTemplate.Content" let-content>
                 <div class="expanded-content-template">
-                  <span class="content-width">{{content.columnWidth}}</span>
+                  <span class="content-width">{{content.columns[0].calculatedWidth}}</span>
                   <span class="content-position">{{content.position}}</span>
                   <span class="content-expanded">{{content.expanded}}</span>
                   <span class="content-column-first">{{content.columns[0].name}}</span>
-                  <span class="content-data">{{content.model.dataModel.data.field}}</span>
+                  <span class="content-data">{{content.model.data.field}}</span>
                   <span class="content-even">{{content.even}}</span>
                 </div>
                </ng-template>
@@ -210,7 +208,7 @@ describe('Component: ExpandedTableRow: Templates', () => {
         fit('Should not be expanded', () => {
             component.showContent = true;
             component.expandedTableRow.columns = [{ name: '', field: '' }];
-            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 1 };
+            component.expandedTableRow.model = { data: { field: 'test' }, index: 1, sequence: 1 };
             fixture.detectChanges();
 
             expect(fixture.debugElement.query(By.css('div.expanded')).nativeElement.clientHeight > 0).toBeFalsy();
@@ -219,7 +217,7 @@ describe('Component: ExpandedTableRow: Templates', () => {
         fit('Should be expanded', () => {
             component.showContent = true;
             component.expandedTableRow.columns = [{ name: '', field: '' }];
-            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 1 };
+            component.expandedTableRow.model = { data: { field: 'test' }, index: 1, sequence: 1 };
             fixture.detectChanges();
 
             fixture.nativeElement.querySelector('div.content').dispatchEvent(new MouseEvent('click', {}));
@@ -231,14 +229,13 @@ describe('Component: ExpandedTableRow: Templates', () => {
 
     describe('Row', () => {
         fit("Should add content from template reference", () => {
-            component.expandedTableRow.columns = [{ name: 'content-column-name-reference', field: '' }];
-            component.expandedTableRow.columnWidth = 6;
+            component.expandedTableRow.columns = [{ name: 'content-column-name-reference', field: '', calculatedWidth: '6px' }];
             component.expandedTableRow.position = Position.Right;
-            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 0 };
+            component.expandedTableRow.model = { data: { field: 'test' }, index: 0, sequence: 1 };
             (component.expandedTableRow as ExpandedTableRowComponent).row = component.contentTemplateRef;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.content-ref > span.content-width').innerText).toEqual('6');
+            expect(fixture.nativeElement.querySelector('div.content-ref > span.content-width').innerText).toEqual('6px');
             expect(fixture.nativeElement.querySelector('div.content-ref > span.content-position').innerText).toEqual('right');
             expect(fixture.nativeElement.querySelector('div.content-ref > span.content-expanded').innerText).toEqual('false');
             expect(fixture.nativeElement.querySelector('div.content-ref > span.content-column-first').innerText).toEqual('content-column-name-reference');
@@ -248,13 +245,12 @@ describe('Component: ExpandedTableRow: Templates', () => {
 
         fit("Should add content from template content", () => {
             component.showContent = true;
-            component.expandedTableRow.columns = [{ name: 'content-column-name-content', field: '' }];
-            component.expandedTableRow.columnWidth = 6;
+            component.expandedTableRow.columns = [{ name: 'content-column-name-content', field: '', calculatedWidth: '6px' }];
             component.expandedTableRow.position = Position.Right;
-            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 1 };
+            component.expandedTableRow.model = { data: { field: 'test' }, index: 1, sequence: 1 };
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.content-template > span.content-width').innerText).toEqual('6');
+            expect(fixture.nativeElement.querySelector('div.content-template > span.content-width').innerText).toEqual('6px');
             expect(fixture.nativeElement.querySelector('div.content-template > span.content-position').innerText).toEqual('right');
             expect(fixture.nativeElement.querySelector('div.content-template > span.content-expanded').innerText).toEqual('false');
             expect(fixture.nativeElement.querySelector('div.content-template > span.content-column-first').innerText).toEqual('content-column-name-content');
@@ -265,14 +261,13 @@ describe('Component: ExpandedTableRow: Templates', () => {
 
     describe('Content', () => {
         fit("Should add expanded content from template reference", () => {
-            component.expandedTableRow.columns = [{ name: 'expanded-content-column-name-reference', field: '' }];
-            component.expandedTableRow.columnWidth = 6;
+            component.expandedTableRow.columns = [{ name: 'expanded-content-column-name-reference', field: '', calculatedWidth: '6px' }];
             component.expandedTableRow.position = Position.Right;
-            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 0 };
+            component.expandedTableRow.model = { data: { field: 'test' }, index: 0, sequence: 1 };
             (component.expandedTableRow as ExpandedTableRowComponent).content = component.expandedContentTemplateRef;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.expanded-content-ref > span.content-width').innerText).toEqual('6');
+            expect(fixture.nativeElement.querySelector('div.expanded-content-ref > span.content-width').innerText).toEqual('6px');
             expect(fixture.nativeElement.querySelector('div.expanded-content-ref > span.content-position').innerText).toEqual('right');
             expect(fixture.nativeElement.querySelector('div.expanded-content-ref > span.content-expanded').innerText).toEqual('false');
             expect(fixture.nativeElement.querySelector('div.expanded-content-ref > span.content-column-first').innerText).toEqual('expanded-content-column-name-reference');
@@ -282,13 +277,12 @@ describe('Component: ExpandedTableRow: Templates', () => {
 
         fit("Should add expanded content from template content", () => {
             component.showContent = true;
-            component.expandedTableRow.columns = [{ name: 'expanded-content-column-name-content', field: '' }];
-            component.expandedTableRow.columnWidth = 6;
+            component.expandedTableRow.columns = [{ name: 'expanded-content-column-name-content', field: '', calculatedWidth: '6px' }];
             component.expandedTableRow.position = Position.Left;
-            component.expandedTableRow.model = { dataModel: { data: { field: 'test' } }, index: 1 };
+            component.expandedTableRow.model = { data: { field: 'test' }, index: 1, sequence: 1 };
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('div.expanded-content-template > span.content-width').innerText).toEqual('6');
+            expect(fixture.nativeElement.querySelector('div.expanded-content-template > span.content-width').innerText).toEqual('6px');
             expect(fixture.nativeElement.querySelector('div.expanded-content-template > span.content-position').innerText).toEqual('left');
             expect(fixture.nativeElement.querySelector('div.expanded-content-template > span.content-expanded').innerText).toEqual('false');
             expect(fixture.nativeElement.querySelector('div.expanded-content-template > span.content-column-first').innerText).toEqual('expanded-content-column-name-content');

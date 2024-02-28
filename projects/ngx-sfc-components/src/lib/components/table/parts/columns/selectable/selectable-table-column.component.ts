@@ -1,6 +1,7 @@
 import { Component, HostBinding, HostListener, Input } from '@angular/core';
-import { UIClass } from 'ngx-sfc-common';
+import { CheckmarkType, UIClass } from 'ngx-sfc-common';
 import { TableSelectService } from '../../../service/select/table-select.service';
+import { SelectableTableColumnConstants } from './selectable-table-column.constants';
 
 @Component({
   selector: 'sfc-selectable-table-column',
@@ -8,6 +9,8 @@ import { TableSelectService } from '../../../service/select/table-select.service
   styleUrls: ['./selectable-table-column.component.scss']
 })
 export class SelectableTableColumnComponent {
+
+  CheckmarkType = CheckmarkType;
 
   @Input()
   @HostBinding(`class.${UIClass.Active}`)
@@ -17,6 +20,12 @@ export class SelectableTableColumnComponent {
   selectAll() {
     this.selected = !this.selected;
     this.service.selectAll(this.selected);
+  }
+
+  public get label(): string {
+    return this.selected
+      ? SelectableTableColumnConstants.LABEL_UNSELECT
+      : SelectableTableColumnConstants.LABEL_SELECT
   }
 
   constructor(private service: TableSelectService) { }

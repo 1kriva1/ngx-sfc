@@ -1,79 +1,103 @@
 <div class="row-container">
-    <div [style.text-align]="position" class="column-checkmark" [ngStyle]="columnStyle">
-        <sfc-checkmark #columnCheckmark [active]="isSelected"></sfc-checkmark>
-    </div>
-    <div [style.text-align]="position" class="row-columns-container" [ngStyle]="columnStyle">
-        <div class="row-content">
-            <div class="column-data">
-                <span class="column-name">Domain & Plan Name</span>
-                <div class="domain">
-                    <span>{{data.domain}}</span>
+    <ng-container *ngFor="let column of columns">
+        <ng-container [ngSwitch]="column.type">
+            <ng-container *ngSwitchCase="TableColumnType.Selectable">
+                <div [style.text-align]="position" class="column-checkmark" [style.width]="column.calculatedWidth">
+                    <sfc-checkmark #columnCheckmark [active]="isSelected" [type]="CheckmarkType.Circle"></sfc-checkmark>
                 </div>
-                <div class="plan-name">
-                    <fa-icon [icon]="data.icon"></fa-icon>
-                    <span>{{data.planName}}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div [style.text-align]="position" class="row-columns-container" [ngStyle]="columnStyle">
-        <div class="row-content">
-            <div class="column-data">
-                <span class="column-name">Storage</span>
-                <div [style.alignItems]="position" class="progress">
-                    <sfc-progress-line [progress]="36" [hideEnd]="true"></sfc-progress-line>
-                    <span class="storage">{{data.storageMax}} GB of {{data.storageMin}}
-                        GB</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div [style.text-align]="position" class="row-columns-container" [ngStyle]="columnStyle">
-        <div class="row-content">
-            <div class="column-data">
-                <span class="column-name">Monthly Visitor</span>
-                <div [style.alignItems]="position" class="progress">
-                    <sfc-progress-line [progress]="76" [hideEnd]="true"></sfc-progress-line>
-                    <span class="storage">{{data.monthlyVisitorMax}} GB of
-                        {{data.monthlyVisitorMin}}
-                        GB</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div [style.text-align]="position" class="row-columns-container" [ngStyle]="columnStyle">
-        <div class="row-content">
-            <div class="column-data">
-                <span class="column-name">Domains</span>
-                <div [style.alignItems]="position" class="progress">
-                    <sfc-progress-circle [progress]="data.domainsMin * 10" [sfcComponentSize] [customSize]="0.8">
-                    </sfc-progress-circle>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div [style.text-align]="position" class="row-columns-container" [ngStyle]="columnStyle">
-        <div class="row-content">
-            <div class="column-data">
-                <span class="column-name">Status</span>
-                <div class="status">
-                    <button>{{data.status}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div [style.text-align]="position" class="row-columns-container" [ngStyle]="columnStyle">
-        <div class="row-content">
-            <div class="column-data">
-                <div class="toggler">
-                    <fa-icon [icon]="icon"></fa-icon>
-                </div>
-            </div>
-        </div>
-    </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <ng-container [ngSwitch]="column.field">
+                    <ng-container *ngSwitchCase="'domainAndPlanName'">
+                        <div [style.text-align]="position" class="row-columns-container"
+                            [style.width]="column.calculatedWidth">
+                            <div class="row-content">
+                                <div class="column-data">
+                                    <span class="column-name">Domain & Plan Name</span>
+                                    <div class="domain">
+                                        <span>{{data.domain}}</span>
+                                    </div>
+                                    <div class="plan-name">
+                                        <fa-icon [icon]="data.icon"></fa-icon>
+                                        <span>{{data.planName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'storage'">
+                        <div [style.text-align]="position" class="row-columns-container"
+                            [style.width]="column.calculatedWidth">
+                            <div class="row-content">
+                                <div class="column-data">
+                                    <span class="column-name">Storage</span>
+                                    <div [style.alignItems]="position" class="progress">
+                                        <sfc-progress-line [progress]="36" [hideEnd]="true"></sfc-progress-line>
+                                        <span class="storage">{{data.storageMax}} GB of {{data.storageMin}}
+                                            GB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'monthlyVisitor'">
+                        <div [style.text-align]="position" class="row-columns-container"
+                            [style.width]="column.calculatedWidth">
+                            <div class="row-content">
+                                <div class="column-data">
+                                    <span class="column-name">Monthly Visitor</span>
+                                    <div [style.alignItems]="position" class="progress">
+                                        <sfc-progress-line [progress]="76" [hideEnd]="true"></sfc-progress-line>
+                                        <span class="storage">{{data.monthlyVisitorMax}} GB of
+                                            {{data.monthlyVisitorMin}}
+                                            GB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'domains'">
+                        <div [style.text-align]="position" class="row-columns-container"
+                            [style.width]="column.calculatedWidth">
+                            <div class="row-content">
+                                <div class="column-data">
+                                    <span class="column-name">Domains</span>
+                                    <div [style.alignItems]="position" class="progress">
+                                        <sfc-progress-circle [progress]="data.domainsMin * 10" [sfcComponentSize]
+                                            [customSize]="0.8">
+                                        </sfc-progress-circle>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'status'">
+                        <div [style.text-align]="position" class="row-columns-container"
+                            [style.width]="column.calculatedWidth">
+                            <div class="row-content">
+                                <div class="column-data">
+                                    <span class="column-name">Status</span>
+                                    <div class="status">
+                                        <button>{{data.status}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        <div [style.text-align]="position" class="row-columns-container"
+                            [style.width]="column.calculatedWidth">
+                            <div class="row-content">
+                                <div class="column-data">
+                                    <div class="toggler">
+                                        <fa-icon [icon]="icon"></fa-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </ng-container>
 </div>

@@ -12,7 +12,6 @@ import {
   NavigationMenuComponent,
   StarsComponent,
   AvatarComponent,
-  AvatarBadgeComponent,
   ProgressLineComponent,
   ProgressSemiCircleComponent,
   ProgressCircleComponent,
@@ -44,7 +43,9 @@ import {
   TimelineItemComponent,
   NotificationContentComponent,
   CarouselStageComponent,
-  CarouselSlideDirective
+  CarouselSlideDirective,
+  AvatarBadgeComponent,
+  SortingColumnComponent
 } from './components/no-export-index';
 
 import {
@@ -132,6 +133,7 @@ Chart.register(
     DefaultTableColumnComponent,
     SelectableTableColumnComponent,
     ColumnsToggleComponent,
+    SortingColumnComponent,
     DefaultTableRowComponent,
     ExpandedTableRowComponent,
     DefaultTableCardComponent,
@@ -160,7 +162,6 @@ Chart.register(
     StarsComponent,
     // Avatar
     AvatarComponent,
-    AvatarBadgeComponent,
     // Progress
     ProgressLineComponent,
     ProgressSemiCircleComponent,

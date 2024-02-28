@@ -1,29 +1,85 @@
 <div class="container">
     <div class="content">
-        <label for="{{inputId}}" *ngIf="label">{{label}}</label>
         <div class="component">
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
             <div class="range-container">
+                <label for="{{inputId}}" *ngIf="label">{{label}}</label>
                 <span *ngIf="showAfterLabel" class="limits after">
-                    <span *ngIf="!endIcon">{{showValue ? value : max}}</span>
+                    <ng-container *ngIf="!endIcon">
+                        <ng-container *ngIf="showValue">
+                            <span class="value" *ngIf="!stars">{{valueLabel}}</span>
+                            <sfc-stars *ngIf="stars && !multiple" [value]="starsValue!" [count]="Constants.STARS_COUNT"
+                                [sfcComponentSize] [customSize]="0.8">
+                            </sfc-stars>
+                        </ng-container>
+                        <span *ngIf="!showValue">{{max}}</span>
+                    </ng-container>
+
                     <fa-icon *ngIf="endIcon" [icon]="endIcon"></fa-icon>
                 </span>
-                <div class="component" [ngStyle]="{'height': componentHeight}">
-                    <div class="range" >
-                        <span *ngIf="tooltip" class="tooltip" [ngStyle]="{'left': tooltipModel.left}"
-                            [sfc-tooltip]="tooltipModel.value" [tooltipShow]="tooltipModel.show"
-                            [tooltipPosition]="tooltipPosition"></span>
-                        <input sfcInput id="{{inputId}}" type="range" min="{{min}}" max="{{max}}" step="{{step}}"
-                            [value]="value" [disabled]="disabled" (input)="onChange($any($event.target).value)"
-                            (mousedown)="onHover(true)" (mouseup)="onHover(false)">
+                <div class="component">
+                    <div class="range">
+                        <ng-template #tooltip let-type>
+                            <span *ngIf="getTooltipModel(type) as model" class="tooltip"
+                                [ngStyle]="{'bottom': model.position}" [sfc-tooltip]="model.value"
+                                [tooltipShow]="model.show" [tooltipPosition]="tooltipPosition"></span>
+                        </ng-template>
+
+                        <ng-container *ngIf="!multiple">
+                            <ng-container *ngTemplateOutlet="tooltip;context:{$implicit: RangeInputType.Single}">
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-container *ngIf="multiple">
+                            <ng-container *ngTemplateOutlet="tooltip;context:{$implicit: RangeInputType.From}">
+                            </ng-container>
+                            <ng-container *ngTemplateOutlet="tooltip;context:{$implicit: RangeInputType.To}">
+                            </ng-container>
+                        </ng-container>
+
+                        <div *ngIf="multiple" class="multiple" [ngStyle]="{
+                                'height': componentHeight,
+                                '--from': $any(value).from, 
+                                '--to': $any(value).to, 
+                                '--max': max, 
+                                '--min': min, 
+                                '--index-from': indexModel.from, 
+                                '--index-to': indexModel.to,
+                                '--direction': trackPosition
+                            }">
+                            <input #fromRange sfcInput id="{{inputId}}-from" orient="vertical" type="range"
+                                min="{{min}}" max="{{max}}" step="{{step}}" [value]="$any(value).from"
+                                [disabled]="disabled" (mousedown)="onHover(true, RangeInputType.From)"
+                                (mouseup)="onHover(false, RangeInputType.From)"
+                                (touchstart)="onHover(true, RangeInputType.From)"
+                                (touchend)="onHover(false, RangeInputType.From)"
+                                (input)="onChangeMultiple(+$any($event.target).value, RangeInputType.From)" />
+                            <input #toRange sfcInput id="{{inputId}}-to" orient="vertical" type="range" min="{{min}}"
+                                max="{{max}}" step="{{step}}" [value]="$any(value).to" [disabled]="disabled"
+                                (mousedown)="onHover(true, RangeInputType.To)"
+                                (mouseup)="onHover(false, RangeInputType.To)"
+                                (touchstart)="onHover(true, RangeInputType.To)"
+                                (touchend)="onHover(false, RangeInputType.To)"
+                                (input)="onChangeMultiple(+$any($event.target).value, RangeInputType.To)" />
+                        </div>
+
+                        <input *ngIf="!multiple" sfcInput id="{{inputId}}" orient="vertical" type="range" min="{{min}}"
+                            max="{{max}}" step="{{step}}" [value]="value" [disabled]="disabled"
+                            (mousedown)="onHover(true, RangeInputType.Single)"
+                            (mouseup)="onHover(false, RangeInputType.Single)"
+                            (touchstart)="onHover(true, RangeInputType.Single)"
+                            (touchend)="onHover(false, RangeInputType.Single)"
+                            (input)="onChange($any($event.target).value)">
                     </div>
                 </div>
                 <span *ngIf="showBeforeLabel" class="limits before">
                     <span *ngIf="!startIcon">{{min}}</span>
                     <fa-icon *ngIf="startIcon" [icon]="startIcon"></fa-icon>
                 </span>
+
+                <span class="helper-text">{{helperTextValue}}</span>
             </div>
         </div>
-        <span class="helper-text">{{helperTextValue}}</span>
+
     </div>
 </div>

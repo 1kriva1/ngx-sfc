@@ -1,0 +1,13 @@
+@import "../../../styles/mixins";
+
+@mixin sfc-loader-background() {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  @include center;
+
+  text-align: center;
+}

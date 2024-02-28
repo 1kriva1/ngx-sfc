@@ -1,10 +1,6 @@
 export interface ITableModel {
     index: number;
-    sequence?: number;
-    dataModel: ITableDataModel;
-}
-
-export interface ITableDataModel {
-    data: any;
+    sequence: number;
     selected?: boolean;
+    data: any;
 }

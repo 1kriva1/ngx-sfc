@@ -1,4 +1,6 @@
 @use "ngx-sfc-common/styles/index" as *;
+@use "ngx-sfc-common/components/loader/styles/loader.component.mixins.scss" as loader;
+@use "ngx-sfc-common/components/load-container/load-container.component.mixins.scss" as load-container;
 @import "../../styles/mixins";
 
 :host {
@@ -10,11 +12,13 @@
         text-overflow: ellipsis;
       }
 
-      sfc-load-container {
+      ::ng-deep sfc-load-container {
         position: absolute;
         top: 0;
         left: 0;
         min-height: 2em;
+
+        @include load-container.sfc-load-container-as-default;
 
         &.open {
           z-index: 9999;
@@ -25,7 +29,7 @@
           z-index: 9999;
 
           &:not(.open) {
-            @include loader-background;
+            @include loader.sfc-loader-background;
           }
         }
       }
@@ -42,15 +46,17 @@
     }
   }
 
+  /* stylelint-disable no-descending-specificity */
   &.initialization {
     .container {
       .content {
         sfc-load-container {
           &.loading {
-            @include loader-background;
+            @include loader.sfc-loader-background;
           }
         }
       }
     }
   }
+  /* stylelint-enable no-descending-specificity */
 }

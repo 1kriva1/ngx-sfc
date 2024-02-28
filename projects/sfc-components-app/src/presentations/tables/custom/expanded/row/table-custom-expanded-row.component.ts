@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { getCalcValue, Position, UIClass } from 'ngx-sfc-common';
-import { ITableDataModel, ITableSelectEvent } from 'ngx-sfc-components';
+import { CheckmarkType, Position, UIClass } from 'ngx-sfc-common';
+import { ITableColumnExtendedModel, ITableModel, TableColumnType, TableSelectService } from 'ngx-sfc-components';
 import { fromEvent, Subscription } from 'rxjs';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,14 +12,17 @@ import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class TableCustomExpandedRowComponent implements AfterViewInit, OnDestroy {
 
+  TableColumnType = TableColumnType;
+  CheckmarkType = CheckmarkType;
+
+  @Input()
+  columns!: ITableColumnExtendedModel[];
+
   @Input()
   index: number = 0;
 
   @Input()
-  model!: ITableDataModel;
-
-  @Input()
-  columnWidth: number = 0;
+  model!: ITableModel;
 
   @Input()
   position: Position = Position.Center;
@@ -27,9 +30,6 @@ export class TableCustomExpandedRowComponent implements AfterViewInit, OnDestroy
   @Input()
   @HostBinding(`class.` + UIClass.Expanded)
   expanded: boolean = false;
-
-  @Output()
-  selected: EventEmitter<ITableSelectEvent> = new EventEmitter<ITableSelectEvent>();
 
   @ViewChild('columnCheckmark', { static: false, read: ElementRef })
   columnCheckmarkEl!: ElementRef;
@@ -39,6 +39,8 @@ export class TableCustomExpandedRowComponent implements AfterViewInit, OnDestroy
   get icon(): IconDefinition {
     return this.expanded ? faAngleUp : faAngleDown;
   }
+
+  constructor(private selectedService: TableSelectService) { }
 
   ngAfterViewInit(): void {
     if (this.columnCheckmarkEl) {
@@ -54,13 +56,7 @@ export class TableCustomExpandedRowComponent implements AfterViewInit, OnDestroy
       this.columnCheckmarkOnClickSubscription.unsubscribe();
   }
 
-  get columnStyle(): { width: string } {
-    return {
-      width: getCalcValue(this.columnWidth)
-    };
-  }
-
-  get isSelected() {
+  get isSelected(): boolean {
     return this.model.selected || false;
   }
 
@@ -68,7 +64,8 @@ export class TableCustomExpandedRowComponent implements AfterViewInit, OnDestroy
     return this.model.data;
   }
 
-  selectRow() {
-    this.selected.emit({ index: this.index, selected: !this.isSelected });
+  selectRow(): void {
+    this.model.selected = !this.model.selected;
+    this.selectedService.select(this.model.sequence, this.model.selected);
   }
 }

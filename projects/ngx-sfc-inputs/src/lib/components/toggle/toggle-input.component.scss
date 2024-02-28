@@ -1,0 +1,40 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "../../styles/mixins";
+
+:host {
+  @include valid {
+    .content {
+      .component {
+        sfc-toggle {
+          ::ng-deep .container {
+            label {
+              border-color: $color-success;
+
+              &::after {
+                background: $color-success;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include invalid {
+    .content {
+      .component {
+        sfc-toggle {
+          ::ng-deep .container {
+            label {
+              border-color: $color-failed;
+
+              &::after {
+                background: $color-failed;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,13 +2,20 @@
     <input sfcInput id="{{inputId}}" type="checkbox" [disabled]="disabled" [checked]="value" [value]="value"
         (input)="onChange($any($event.target).checked)" style="display: none;" />
     <div class="content">
-        <label for="{{inputId}}" *ngIf="labelValue">{{labelValue}}</label>
+        <label for="{{inputId}}" *ngIf="label">{{labelValue}}</label>
         <div class="component">
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
-            <sfc-toggle-switcher [active]="value || false" [disabled]="disabled" [leftModel]="leftModel"
-                [rightModel]="rightModel" (click)="onChange(!value)">
-            </sfc-toggle-switcher>
+            <ng-container [ngSwitch]="toggleType">
+                <sfc-toggle-switcher *ngSwitchCase="ToggleType.Complex" [active]="value || false" [disabled]="disabled"
+                    [leftModel]="leftModel" [rightModel]="rightModel" (click)="onChange(!value)">
+                </sfc-toggle-switcher>
+
+                <sfc-toggle *ngSwitchCase="ToggleType.Simple" [active]="value || false" [disabled]="disabled"
+                    (click)="onChange(!value)">
+                </sfc-toggle>
+            </ng-container>
+            <label tabindex="0" *ngIf="sideLabel" class="side" for="{{inputId}}">{{sideLabel}}</label>
         </div>
-        <span class="helper-text">{{helperTextValue}}</span>     
-    </div>    
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
 </div>

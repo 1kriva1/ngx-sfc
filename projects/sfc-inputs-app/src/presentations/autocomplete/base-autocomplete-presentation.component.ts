@@ -1,10 +1,9 @@
-import { Component, Directive, OnInit } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import {
-  hasItemBy, ILoadMoreModel, ILoadMoreParameters,
-  LoadChangesSource, LoaderFunction, skip, where
+  hasItemBy, ILoadContainerLoaderResultModel, ILoadContainerParameters, LoaderFunction, skip, where
 } from 'ngx-sfc-common';
 import { equalOrInclude, IAutoCompleteItemModel } from 'ngx-sfc-inputs';
-import { BehaviorSubject, map, Observable, of, delay } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, delay, tap } from 'rxjs';
 import { BasePresentationComponent } from '../base-presentations.component';
 
 @Directive()
@@ -219,8 +218,8 @@ export abstract class BaseAutoCompletePresentationComponent extends BasePresenta
       }
     );
 
-    this.loader = this.getLoaderFynction(this.loaderData$);
-    this.loaderModification = this.getLoaderFynction(this.loaderDataModification$);
+    this.loader = this.getLoaderFunction(this.loaderData$);
+    this.loaderModification = this.getLoaderFunction(this.loaderDataModification$);
   }
 
   // SYNC DATA ACTIONS
@@ -272,31 +271,23 @@ export abstract class BaseAutoCompletePresentationComponent extends BasePresenta
 
   // END LOADER DATA ACTIONS
 
-  private getLoaderFynction(data$: Observable<IAutoCompleteItemModel[]>) {
-    return ((parameters: ILoadMoreParameters, source: LoadChangesSource): Observable<ILoadMoreModel<any>> => {
+  private getLoaderFunction(data$: Observable<IAutoCompleteItemModel[]>) {
+    return ((parameters: ILoadContainerParameters): Observable<ILoadContainerLoaderResultModel<any>> => {
       return data$.pipe(
         delay(1000),
-        map(items => {
-          const reset = source == LoadChangesSource.Data;
-
-          if (reset) {
-            parameters = { params: parameters.params, page: 1 };
-          }
-
+        map((items: any) => {
           const filtered = where(items, (item: IAutoCompleteItemModel) => {
             const itemParts = item.value.trim().split(' ');
             return item.value.includes(parameters.params.value) || hasItemBy(itemParts, part => part.includes(parameters.params.value));
           });
 
-          const data: ILoadMoreModel<any> = filtered
+          const data: ILoadContainerLoaderResultModel<any> = filtered
             ? {
               items: skip(filtered, parameters.page, 3),
               next: parameters.page < Math.ceil(filtered.length / 3),
-              reset: reset
+              total: items.length
             }
-            : { items: [], next: false, reset: reset };
-
-          source = LoadChangesSource.Data;
+            : { items: [], next: false, total: items.length };
 
           return data;
         })

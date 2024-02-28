@@ -10,7 +10,8 @@ export {
     isChromeBrowser,
     isEmail,
     parseBoolean,
-    isEqual
+    isEqual,
+    generateGuid
 } from './common.utils'
 
 export {
@@ -47,7 +48,9 @@ export {
     isDateTimeGreat,
     isDateTimeGreatOrEqual,
     convertUTCDateToLocalDate,
-    convertTimestampToDate
+    convertTimestampToDate,
+    convertDateToTimestamp,
+    getAge
 } from './date-time.utils'
 
 export {
@@ -95,4 +98,6 @@ export {
     updateItemBy,
     getCollectionOrEmpty,
     count
-} from './collections.utils'
+} from './collections.utils';
+
+export { buildHttpParams } from './http.utils';

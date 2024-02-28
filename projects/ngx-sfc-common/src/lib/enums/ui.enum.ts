@@ -23,5 +23,6 @@ export enum UIClass {
     Even = 'even',
     Pointer = 'pointer',
     Default = 'default',
-    Initialization = 'initialization'
+    Initialization = 'initialization',
+    Filled = 'filled'
 };

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
 import { ShowHideElementDirective } from '../../directives';
 import { UIClass } from '../../enums';
 import { DelimeterComponent } from '../delimeter/delimeter.component';
@@ -31,25 +30,16 @@ describe('Component: PaginationComponent', () => {
     });
 
     fit('Should have main elements', () => {
-      component.data$ = of([1, 2, 3]);
-      component.ngOnInit();
-      fixture.detectChanges();
-
       expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
       expect(fixture.nativeElement.querySelectorAll('sfc-delimeter').length).toEqual(2);
     });
 
     fit('Should not have pages if data is empty', () => {
-      component.data$ = of([]);
-      component.ngOnInit();
-      fixture.detectChanges();
-
       expect(fixture.nativeElement.querySelector('ul')).toBeNull();
     });
 
     fit('Should not have pages', () => {
-      component.data$ = of([1, 2, 3]);
-      component.ngOnInit();
+      component.total = 10;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('ul')).toBeTruthy();
@@ -58,44 +48,40 @@ describe('Component: PaginationComponent', () => {
 
   describe('Previous button', () => {
     fit('Should not show', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[0].style.visibility).toEqual(UIClass.Hidden);
     });
 
     fit('Should show', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       // second page
-      clickPaginationButton(2);
+      clickPaginationButton(2, 2);
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[0].style.visibility).toEqual(UIClass.Visible);
     });
 
     fit('Should have static icon', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[0].querySelector('fa-icon svg.fa-chevron-left')).toBeTruthy();
     });
 
     fit('Should return to previous page', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       assertActivePage(0);
 
-      clickPaginationButton(2);
+      clickPaginationButton(2, 2);
 
       assertActivePage(1);
 
-      clickPaginationButton(0);
+      clickPaginationButton(1, 1);
 
       assertActivePage(0);
     });
@@ -103,39 +89,35 @@ describe('Component: PaginationComponent', () => {
 
   describe('Next button', () => {
     fit('Should not show', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
-      clickPaginationButton(2);
+      clickPaginationButton(2, 2);
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[3].style.visibility).toEqual(UIClass.Hidden);
     });
 
     fit('Should show', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[3].style.visibility).toEqual(UIClass.Visible);
     });
 
     fit('Should have static icon', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[3].querySelector('fa-icon svg.fa-chevron-right')).toBeTruthy();
     });
 
     fit('Should move to next page', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       assertActivePage(0);
 
-      clickPaginationButton(3);
+      clickPaginationButton(3, 2);
 
       assertActivePage(1);
     });
@@ -144,8 +126,7 @@ describe('Component: PaginationComponent', () => {
   describe('First page', () => {
     fit('Should not exist (by default)', () => {
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expectLimitPageExist(true, false);
@@ -155,8 +136,7 @@ describe('Component: PaginationComponent', () => {
       component.limits = true;
       component.full = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expectLimitPageExist(true, false);
@@ -165,8 +145,7 @@ describe('Component: PaginationComponent', () => {
     fit('Should not exist (already first page)', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expectLimitPageExist(true, false);
@@ -174,8 +153,7 @@ describe('Component: PaginationComponent', () => {
 
     fit('Should not exist (found in range)', () => {
       component.limits = true;
-      component.data$ = of([1, 2, 3]);
-      component.ngOnInit();
+      component.total = 3;
       fixture.detectChanges();
 
       expectLimitPageExist(true, false);
@@ -184,11 +162,10 @@ describe('Component: PaginationComponent', () => {
     fit('Should exist', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(4);
+      clickPaginationButton(4, 3);
 
       expectLimitPageExist(true, true);
     });
@@ -196,11 +173,10 @@ describe('Component: PaginationComponent', () => {
     fit('Should have valid text', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(4);
+      clickPaginationButton(4, 4);
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[1].querySelector('button').innerText)
         .toEqual(PaginationConstants.DEFAULT_PAGE.toString());
@@ -209,15 +185,14 @@ describe('Component: PaginationComponent', () => {
     fit('Should return to first page', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(4);
+      clickPaginationButton(4, 3);
 
       assertActivePage(2);
 
-      clickPaginationButton(1);
+      clickPaginationButton(1, 1);
 
       assertActivePage(0);
     });
@@ -226,8 +201,7 @@ describe('Component: PaginationComponent', () => {
   describe('Last page', () => {
     fit('Should not exist (by default)', () => {
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expectLimitPageExist(false, false);
@@ -237,8 +211,7 @@ describe('Component: PaginationComponent', () => {
       component.limits = true;
       component.full = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expectLimitPageExist(false, false);
@@ -247,11 +220,10 @@ describe('Component: PaginationComponent', () => {
     fit('Should not exist (already last page)', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(4);
+      clickPaginationButton(4, 3);
 
       expectLimitPageExist(false, false);
     });
@@ -259,13 +231,12 @@ describe('Component: PaginationComponent', () => {
     fit('Should not exist (found in range)', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(5);
+      clickPaginationButton(5, 2);
 
-      clickPaginationButton(5);
+      clickPaginationButton(5, 3);
 
       expectLimitPageExist(false, false);
     });
@@ -273,8 +244,7 @@ describe('Component: PaginationComponent', () => {
     fit('Should exist', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expectLimitPageExist(false, true);
@@ -283,8 +253,7 @@ describe('Component: PaginationComponent', () => {
     fit('Should have valid text', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li')[4].querySelector('button').innerText)
@@ -294,11 +263,10 @@ describe('Component: PaginationComponent', () => {
     fit('Should move to last page', () => {
       component.limits = true;
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(4);
+      clickPaginationButton(4, 3);
 
       assertActivePage(2);
     });
@@ -306,8 +274,7 @@ describe('Component: PaginationComponent', () => {
 
   describe('Pages', () => {
     fit('Should have expected pages count', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li').length).toEqual(4);
@@ -315,8 +282,7 @@ describe('Component: PaginationComponent', () => {
 
     fit('Should have expected pages count, when input count more than data count', () => {
       component.count = 14;
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li').length).toEqual(4);
@@ -324,8 +290,7 @@ describe('Component: PaginationComponent', () => {
 
     fit('Should have expected pages count, when input count less than data count', () => {
       component.count = 1;
-      component.data$ = of([1, 2, 3, 4, 5, 6]);
-      component.ngOnInit();
+      component.total = 6;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li').length).toEqual(3);
@@ -333,8 +298,7 @@ describe('Component: PaginationComponent', () => {
 
     fit('Should have expected pages count with full count', () => {
       component.full = true;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelectorAll('ul li').length).toEqual(5);
@@ -342,13 +306,12 @@ describe('Component: PaginationComponent', () => {
 
     fit('Should show only part of pages range', () => {
       component.count = 2;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-      component.ngOnInit();
+      component.total = 16;
       fixture.detectChanges();
 
-      clickPaginationButton(2);
+      clickPaginationButton(2, 2);
 
-      clickPaginationButton(3);
+      clickPaginationButton(3, 3);
 
       const pageBtns = fixture.nativeElement.querySelectorAll('ul li button');
 
@@ -359,8 +322,7 @@ describe('Component: PaginationComponent', () => {
 
     fit('Should have appropriate page numbers', () => {
       component.full = true;
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       const pageBtns: any[] = fixture.nativeElement.querySelectorAll('ul li button');
@@ -370,19 +332,17 @@ describe('Component: PaginationComponent', () => {
     });
 
     fit('Should be active first page by default', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
       assertActivePage(0);
     });
 
     fit('Should change active page on click', () => {
-      component.data$ = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-      component.ngOnInit();
+      component.total = 11;
       fixture.detectChanges();
 
-      clickPaginationButton(2);
+      clickPaginationButton(2, 2);
 
       assertActivePage(1);
     });
@@ -397,9 +357,10 @@ describe('Component: PaginationComponent', () => {
       expect(buttons[index].querySelector('span')).toBeNull();
   }
 
-  function clickPaginationButton(index: number) {
+  function clickPaginationButton(index: number, page: number) {
     fixture.debugElement.queryAll(By.css('ul li'))[index]
       .nativeElement.dispatchEvent(new MouseEvent('click'));
+    component.page = page;
     fixture.detectChanges();
   }
 

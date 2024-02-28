@@ -1,9 +1,11 @@
 @import "../../styles/mixins";
 
 :host {
+  display: block;
   width: 100%;
   cursor: pointer;
   user-select: none;
+  margin-top: 1em;
 
   .expanded {
     max-height: 0;

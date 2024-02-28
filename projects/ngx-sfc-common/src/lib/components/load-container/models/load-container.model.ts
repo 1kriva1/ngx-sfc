@@ -1,15 +1,20 @@
 import { Observable } from "rxjs";
-import { ILoadMoreModel } from "./load-more.model";
-import { ILoadMoreParameters } from "./load-more-parameters.model";
-import { ILoadMorePredicateParameters } from "./load-more-predicate-parameters.model";
-import { LoadChangesSource } from "../load-container.enum";
+import { ILoadContainerLoaderResultModel } from "./load-container-result.model";
+import { ILoadContainerParameters } from "./load-container-parameters.model";
+import { ILoadContainerPredicateParameters } from "./load-container-predicate-parameters.model";
+import { LoadContainerLoadType } from "../enums/load-container-load-type.enum";
+import { IPaginationModel } from "../../pagination/pagination.model";
+import { ISortingModel } from "../../../services";
+import { empty } from "../../../types";
 
-export type LoaderFunction = (parameters: ILoadMoreParameters, source: LoadChangesSource) => Observable<ILoadMoreModel<any>>;
-export type FilterFunction = (data: any[], parameters: ILoadMoreParameters) => any[];
+export type LoaderFunction = (parameters: ILoadContainerParameters) => Observable<ILoadContainerLoaderResultModel<any>>;
+export type FilterFunction = (data: any[], parameters: ILoadContainerParameters) => any[];
 export interface ILoadContainerModel {
-    size?: number;
-    predicate$?: Observable<ILoadMorePredicateParameters | null>;
-    data$?: Observable<any[]>;
-    loader?: LoaderFunction;
-    filter?: FilterFunction;
+    loadType: LoadContainerLoadType;
+    predicate$?: Observable<ILoadContainerPredicateParameters | null> | empty;
+    data$?: Observable<any[]> | empty;
+    loader?: LoaderFunction | empty;
+    filter?: FilterFunction | empty;    
+    pagination?: IPaginationModel | empty;
+    sorting?: ISortingModel | empty;
 }

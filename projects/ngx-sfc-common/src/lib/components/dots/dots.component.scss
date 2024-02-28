@@ -52,7 +52,7 @@
 
       .dots-container {
         .dot {
-          @include theme-value(background, $color-hover-default, $color-hover-default);
+          @include theme-value(background, $color-hover-default);
         }
       }
     }

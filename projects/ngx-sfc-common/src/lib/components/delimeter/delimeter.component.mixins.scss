@@ -1,0 +1,37 @@
+@import "../../styles/index";
+
+@mixin sfc-delimeter-color($direction, $slice, $value-common, $value-dark: null) {
+  @if not $value-dark {
+    $value-dark: $value-common;
+  }
+
+  @include theme-value(
+    border-image,
+    linear-gradient(to $direction, $value-common) $slice,
+    linear-gradient(to $direction, $value-dark) $slice
+  );
+}
+
+@mixin sfc-delimeter-as-theme($delimeter-color, $label-color) {
+  &.horizontal {
+    &::before {
+      @include sfc-delimeter-color(right, 100% 1, $delimeter-color);
+    }
+
+    &::after {
+      @include sfc-delimeter-color(left, 100% 1, $delimeter-color);
+    }
+
+    span {
+      color: $label-color;
+    }
+  }
+}
+
+@mixin sfc-delimeter-as-default() {
+  @include sfc-delimeter-as-theme($delimeter-common-color, $color-default);
+}
+
+@mixin sfc-delimeter-as-dark() {
+  @include sfc-delimeter-as-theme($delimeter-dark-color, $color-dark);
+}

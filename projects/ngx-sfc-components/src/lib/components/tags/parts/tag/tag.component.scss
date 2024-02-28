@@ -14,7 +14,13 @@
       border-radius: 1em;
       font-weight: bold;
       color: $color-default;
-      background-color: $color-2;
+
+      @include theme-value(color, $color-dark, $color-default);
+      @include theme-value(background-color, $color-default, $color-dark);
+
+      transition:
+        color $transition-duration-default $transition-timing-function-default,
+        background-color $transition-duration-default $transition-timing-function-default;
       border: 0.125em solid transparent;
       padding: 0.3em;
 

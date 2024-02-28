@@ -4,9 +4,8 @@
     </div>
 
     <div class="component-row">
-
         <div class="component-column">
-            <button class="app" (click)="load()">Reset</button>
+            <button class="app" (click)="reset()">Reset</button>
             <sfc-load-container id="load-container-reset" [type]="LoadContainerType.Table" [model]="modelReset"
                 (handleSuccess)="handleSuccess($event)">
                 <load-container-item *ngFor="let item of items" [value]="item"></load-container-item>
@@ -14,8 +13,8 @@
         </div>
 
         <div class="component-column">
-            <sfc-load-container id="load-container-size" [type]="LoadContainerType.Table" [model]="modelSize"
-                (handleSuccess)="itemsSize = itemsSize.concat($event.items)">
+            <sfc-load-container id="load-container-size" [type]="LoadContainerType.Table" [model]="model"
+                 (handleSuccess)="itemsSize = itemsSize.concat($event.items)">
                 <load-container-item *ngFor="let item of itemsSize" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
@@ -26,11 +25,9 @@
                 <load-container-item *ngFor="let item of itemsLabel" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
-
     </div>
 
     <div class="component-row">
-
         <div class="component-column">
             <button class="app" (click)="open()">Open</button>
             <sfc-load-container id="load-container-dropdown" [model]="modelDropdown" [open]="isOpen"
@@ -41,43 +38,80 @@
 
         <div class="component-column">
             <sfc-load-container id="load-container-empty" [type]="LoadContainerType.Table" [model]="modelEmpty"
-                notFoundLabel="NOT FOUND!!!" (handleSuccess)="itemsEmpty = itemsEmpty.concat($event.items)">
+                [emptyLabel]="'NOT FOUND!!!'" (handleSuccess)="itemsEmpty = itemsEmpty.concat($event.items)">
                 <load-container-item *ngFor="let item of itemsEmpty" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
 
         <div class="component-column scroll">
-            <sfc-load-container id="load-container-scroll" [type]="LoadContainerType.Table" [model]="model"
-                [showLoadMoreButton]="false" (handleSuccess)="itemsScroll = itemsScroll.concat($event.items)">
+            <sfc-load-container id="load-container-scroll" [type]="LoadContainerType.Table" [model]="modelScroll"
+                (handleSuccess)="itemsScroll = itemsScroll.concat($event.items)">
                 <load-container-item *ngFor="let item of itemsScroll" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
-
     </div>
 
     <div class="component-row">
+        <div class="component-column">
+            <sfc-load-container id="load-container-filter" [type]="LoadContainerType.Table" [model]="modelFilter"
+                (handleSuccess)="itemsFilter = itemsFilter.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsFilter" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
 
         <div class="component-column">
-            <sfc-load-container id="load-container-small" [type]="LoadContainerType.Table" [model]="model"
+            <sfc-load-container id="load-container-loader" [type]="LoadContainerType.Table" [model]="modelLoader"
+                (handleSuccess)="itemsLoader = itemsLoader.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsLoader" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <sfc-load-container id="load-container-loader-pagination" [type]="LoadContainerType.Table"
+                [model]="modelLoaderPagination" (handleSuccess)="itemsLoaderPagination = $event.items">
+                <load-container-item *ngFor="let item of itemsLoaderPagination" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column scroll">
+            <sfc-load-container id="load-container-loader-scroll" [type]="LoadContainerType.Table"
+                [model]="modelLoaderScroll"
+                (handleSuccess)="itemsLoaderScroll = itemsLoaderScroll.concat($event.items)">
+                <load-container-item *ngFor="let item of itemsLoaderScroll" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+
+        <div class="component-column">
+            <button class="app" (click)="resetLoader()">Reset</button>
+            <sfc-load-container id="load-container-loader-reset" [type]="LoadContainerType.Table"
+                [model]="modelLoaderReset" (handleSuccess)="handleLoaderSuccess($event)">
+                <load-container-item *ngFor="let item of itemsLoaderReset" [value]="item"></load-container-item>
+            </sfc-load-container>
+        </div>
+    </div>
+
+    <div class="component-row">
+        <div class="component-column">
+            <sfc-load-container id="load-container-small" [type]="LoadContainerType.Table" [model]="modelSize"
                 (handleSuccess)="itemsSmall = itemsSmall.concat($event.items)" [sfcComponentSize]="ComponentSize.Small">
                 <load-container-item *ngFor="let item of itemsSmall" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
 
         <div class="component-column">
-            <sfc-load-container id="load-container-large" [type]="LoadContainerType.Table" [model]="model"
+            <sfc-load-container id="load-container-large" [type]="LoadContainerType.Table" [model]="modelSize"
                 (handleSuccess)="itemsLarge = itemsLarge.concat($event.items)" [sfcComponentSize]="ComponentSize.Large">
                 <load-container-item *ngFor="let item of itemsLarge" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
 
         <div class="component-column">
-            <sfc-load-container id="load-container-custom" [type]="LoadContainerType.Table" [model]="model"
+            <sfc-load-container id="load-container-custom" [type]="LoadContainerType.Table" [model]="modelSize"
                 (handleSuccess)="itemsCustom = itemsCustom.concat($event.items)" [sfcComponentSize] [customSize]="3.2">
                 <load-container-item *ngFor="let item of itemsCustom" [value]="item"></load-container-item>
             </sfc-load-container>
         </div>
-
     </div>
-
 </div>

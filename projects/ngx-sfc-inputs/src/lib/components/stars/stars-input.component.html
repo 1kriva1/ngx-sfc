@@ -6,12 +6,12 @@
             <fa-icon *ngIf="icon" class="icon" [icon]="icon" (click)="selectAll()"></fa-icon>
             <div class="stars">
                 <sfc-star *ngFor="let item of items" id="{{inputId}}" [value]="item" [disabled]="disabled"
-                    (selected)="onChange(+$event)" [state]="getStarsState(item)">
+                    (click)="onChange(item)" [state]="getStarsState(item)">
                 </sfc-star>
             </div>
         </div>
         <span class="helper-text">{{helperTextValue}}</span>
-        <div [sfcShowHideElement]="showSideInfo" class="right-side-info">
+        <div *ngIf="showSideInfo" class="side-info">
             <ng-container *ngIf="counter">
                 <div class="counter">
                     <span *ngFor="let _ of [value]" @counterAnimation>{{index}}</span>
@@ -19,7 +19,7 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="reset && !disabled">
-                <span class="reset" (click)="onChange(null)">reset</span>
+                <span class="reset" (click)="onChange(null)">{{resetLabel}}</span>
             </ng-container>
         </div>
     </div>

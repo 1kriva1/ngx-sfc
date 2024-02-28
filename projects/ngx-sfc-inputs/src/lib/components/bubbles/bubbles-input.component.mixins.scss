@@ -1,0 +1,59 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+@mixin sfc-bubbles-input-as-default() {
+  .container {
+    .content {
+      .component {
+        .bubbles {
+          sfc-bubble {
+            ::ng-deep > .container {
+              .bubble {
+                color: $color-dark;
+                background-color: $color-default;
+              }
+            }
+
+            &.active {
+              ::ng-deep > .container {
+                .bubble {
+                  background-color: $color-hover-default;
+                  color: $color-0;
+                }
+              }
+            }
+
+            &.disabled {
+              pointer-events: none;
+
+              ::ng-deep > .container {
+                .bubble {
+                  color: $color-disabled-default;
+                  background-color: $color-1;
+                }
+              }
+            }
+
+            &:not(.active) {
+              ::ng-deep > .container {
+                &:hover {
+                  .bubble {
+                    background-color: $color-9;
+                  }
+                }
+              }
+            }
+
+            &.disabled.active {
+              ::ng-deep > .container {
+                .bubble {
+                  background-color: $color-hover-default;
+                  color: $color-0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -34,7 +34,6 @@ export class ExpandedTableRowComponent extends BaseDefaultTableContentComponent 
     return {
       model: this.model,
       columns: this.columns,
-      columnWidth: Math.max(1, this.columnWidth),
       position: this.position,
       expanded: this.expanded,
       even: this.even

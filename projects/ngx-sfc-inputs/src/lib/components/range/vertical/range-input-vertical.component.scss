@@ -9,23 +9,26 @@
 
         .limits {
           margin: 0;
+
+          &.after {
+            span.value {
+              font-size: 0.7em;
+              font-weight: bold;
+            }
+          }
         }
 
         .component {
           display: block;
-          max-width: 1.43em;
 
           .range {
-            writing-mode: tb-rl;
-            white-space: nowrap;
-            overflow: visible;
-            transform: rotate(-90deg) translateX(-100%);
-            transform-origin: top left;
-            width: initial;
+            writing-mode: vertical-lr;
+            position: relative;
+            padding-left: 0.4em;
 
             .tooltip {
               position: absolute;
-              bottom: -0.1em;
+              transform: rotate(-90deg) translateY(1em);
 
               &::before {
                 padding: 0.7em 0.4em;
@@ -33,7 +36,13 @@
             }
 
             input[type="range"] {
-              width: 15em;
+              width: 0.5em;
+              min-height: 15em;
+              margin: 0;
+            }
+
+            .multiple {
+              min-width: 0.8em;
             }
           }
         }

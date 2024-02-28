@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IDefaultTableColumnModel, ITableModel } from 'ngx-sfc-components';
+import { ITableColumnModel, ITableModel } from 'ngx-sfc-components';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,12 +12,12 @@ export class TableCustomCardComponent {
   faStar = faStar;
 
   @Input()
-  columns!: IDefaultTableColumnModel[];
+  columns!: ITableColumnModel[];
 
   @Input()
   data!: ITableModel;
 
   get model(): any {
-    return this.data.dataModel.data;
+    return this.data;
   }
 }

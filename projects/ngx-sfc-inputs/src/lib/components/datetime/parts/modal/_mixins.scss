@@ -1,0 +1,12 @@
+@mixin modal-bordered($radius) {
+  .content {
+    border-radius: $radius;
+
+    .view {
+      .header {
+        border-top-right-radius: $radius;
+        border-top-left-radius: $radius;
+      }
+    }
+  }
+}

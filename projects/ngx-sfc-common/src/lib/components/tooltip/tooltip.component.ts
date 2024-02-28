@@ -5,6 +5,7 @@ import {
 import { startWith, Subscription } from 'rxjs';
 import { Position, MediaLimits } from '../../enums';
 import { ResizeService, WINDOW } from '../../services';
+import { empty } from '../../types';
 import { TooltipType } from './tooltip-type.enum';
 
 @Component({
@@ -17,7 +18,7 @@ export class TooltipComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @Input('sfc-tooltip')
   @HostBinding('attr.value')
-  value?: string;
+  value?: string | empty;
 
   @Input()
   @HostBinding('attr.type')
@@ -30,6 +31,9 @@ export class TooltipComponent implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   @HostBinding('class.show')
   tooltipShow: boolean = false;
+
+  @Input()
+  resize: boolean = true;
 
   @HostListener('click')
   click() {
@@ -50,10 +54,12 @@ export class TooltipComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this._resizeSubscription = this.resizeService.onResize$
-      .pipe(startWith(this.window))
-      .subscribe(window => this.tooltipPosition = window.innerWidth <= MediaLimits.Tablet
-        ? Position.Bottom : this._position);
+    if (this.resize) {
+      this._resizeSubscription = this.resizeService.onResize$
+        .pipe(startWith(this.window))
+        .subscribe(window => this.tooltipPosition = window.innerWidth <= MediaLimits.Tablet
+          ? Position.Bottom : this._position);
+    }
   }
 
   ngOnDestroy(): void {

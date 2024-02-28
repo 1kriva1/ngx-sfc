@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { CommonConstants, getNextDate, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
-import { DateTimeInputConstants } from '../../constants/datetime.constants';
+import { CommonConstants, DateTimeConstants, getNextDate, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
 import { DateTimeFormatsConstants } from '../../constants/formats.constants';
 import { DateTimeValueActionType } from './datetime-value.enum';
 import { DateTimeValueService } from './datetime-value.service';
@@ -45,7 +44,7 @@ describe('Service: DateTimeValueService', () => {
         shortTime: false,
         value: new Date(),
         format: CommonConstants.EMPTY_STRING,
-        locale: DateTimeInputConstants.DEFAULT_LOCALE,
+        locale: DateTimeConstants.DEFAULT_LOCALE,
         currentValue: new Date(),
         disabledDays: []
       };
@@ -71,7 +70,7 @@ describe('Service: DateTimeValueService', () => {
           value: new Date(),
           currentValue: new Date(),
           format: CommonConstants.EMPTY_STRING,
-          locale: DateTimeInputConstants.DEFAULT_LOCALE,
+          locale: DateTimeConstants.DEFAULT_LOCALE,
           disabledDays: [new Date()]
         };
       subscribeToExpect(model => {
@@ -89,7 +88,7 @@ describe('Service: DateTimeValueService', () => {
           value: new Date(),
           currentValue: new Date(),
           format: CommonConstants.EMPTY_STRING,
-          locale: DateTimeInputConstants.DEFAULT_LOCALE,
+          locale: DateTimeConstants.DEFAULT_LOCALE,
           disabledDays: [getNextDate(new Date())]
         };
       subscribeToExpect(model => {
@@ -131,7 +130,7 @@ describe('Service: DateTimeValueService', () => {
           value: new Date(),
           currentValue: new Date(),
           format: CommonConstants.EMPTY_STRING,
-          locale: DateTimeInputConstants.DEFAULT_LOCALE,
+          locale: DateTimeConstants.DEFAULT_LOCALE,
           disabledDays: []
         };
       subscribeToExpect(model => {
@@ -149,7 +148,7 @@ describe('Service: DateTimeValueService', () => {
           value: new Date(),
           currentValue: new Date(),
           format: DateTimeFormatsConstants.DEFAULT_DATE_TIME_FORMAT,
-          locale: DateTimeInputConstants.DEFAULT_LOCALE,
+          locale: DateTimeConstants.DEFAULT_LOCALE,
           disabledDays: []
         };
       subscribeToExpect(model => {
@@ -207,7 +206,7 @@ describe('Service: DateTimeValueService', () => {
           value: new Date(),
           currentValue: new Date(),
           format: DateTimeFormatsConstants.DEFAULT_DATE_TIME_FORMAT,
-          locale: DateTimeInputConstants.DEFAULT_LOCALE,
+          locale: DateTimeConstants.DEFAULT_LOCALE,
           disabledDays: []
         };
       subscribeToExpect(model => {
@@ -288,7 +287,7 @@ describe('Service: DateTimeValueService', () => {
         value: new Date(),
         currentValue: new Date(),
         format: CommonConstants.EMPTY_STRING,
-        locale: DateTimeInputConstants.DEFAULT_LOCALE,
+        locale: DateTimeConstants.DEFAULT_LOCALE,
         disabledDays: []
       };
       subscribeToExpect((model, index) => {
@@ -395,7 +394,7 @@ describe('Service: DateTimeValueService', () => {
       value: new Date(),
       currentValue: new Date(),
       format: CommonConstants.EMPTY_STRING,
-      locale: DateTimeInputConstants.DEFAULT_LOCALE,
+      locale: DateTimeConstants.DEFAULT_LOCALE,
       disabledDays: []
     }) {
     initModel.value = value;
