@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import {
-  any, CommonConstants, hasItemBy, ILoadMoreModel,
-  ILoadMoreParameters, ILoadMorePredicateParameters, isDefined, isNullOrEmptyString, UIClass, where
+  any, CommonConstants, hasItemBy, ILoadContainerParameters,
+  ILoadContainerPredicateParameters, ILoadContainerResultModel, isDefined, isNullOrEmptyString,
+  LoadContainerLoadType, UIClass, where
 } from 'ngx-sfc-common';
 import { fromEvent, map, debounceTime, tap, filter, Observable, distinctUntilChanged } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -46,11 +47,16 @@ export class AutoCompleteInputComponent
     return super.hasValue && isDefined(this.value?.key);
   }
 
-  private newValue: boolean = false;
+  private get loadType(): LoadContainerLoadType {
+    return this.showLoadMoreButton
+      ? LoadContainerLoadType.Button
+      : LoadContainerLoadType.Scroll;
+  }
+
   private searchValue: string | undefined;
 
   override ngAfterViewInit(): void {
-    const predicate$: Observable<ILoadMorePredicateParameters> = fromEvent<InputEvent>(this.inputElementRef.nativeElement, 'input').pipe(
+    const predicate$: Observable<ILoadContainerPredicateParameters> = fromEvent<InputEvent>(this.inputElementRef.nativeElement, 'input').pipe(
       // get value
       map(event => (event.target as any).value),
 
@@ -68,7 +74,6 @@ export class AutoCompleteInputComponent
 
       tap(value => {
         this.searchValue = value;
-        this.newValue = true;
 
         if (this.hasValue)
           this.onChange({ key: undefined, value: value })
@@ -84,7 +89,8 @@ export class AutoCompleteInputComponent
       predicate$,
       data$: this.data$,
       loader: this.loader,
-      filter: this.filter
+      filter: this.filter,
+      loadType: this.loadType
     };
 
     super.ngAfterViewInit();
@@ -97,10 +103,10 @@ export class AutoCompleteInputComponent
     this.onChange({ key: value.key, value: value.value });
   }
 
-  public handleSuccess(result: ILoadMoreModel<IAutoCompleteItemModel>): void {
+  public handleSuccess(result: ILoadContainerResultModel<IAutoCompleteItemModel>): void {
     this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, true);
 
-    if (this.newValue || result.reset)
+    if (result.reset)
       this.items = result.items;
     else
       this.items = this.items.concat(result.items);
@@ -108,7 +114,6 @@ export class AutoCompleteInputComponent
     if (!this.isFocused)
       this.inputElementRef.nativeElement.focus();
 
-    this.newValue = false;
     this.loadMore = this.showEmpty = true;
   }
 
@@ -120,7 +125,7 @@ export class AutoCompleteInputComponent
     this.loading = value;
   }
 
-  private filter(items: IAutoCompleteItemModel[], parameters: ILoadMoreParameters): IAutoCompleteItemModel[] {
+  private filter(items: IAutoCompleteItemModel[], parameters: ILoadContainerParameters): IAutoCompleteItemModel[] {
     const valueParts: string[] = parameters.params.value.trim().split(' '),
       filtered = where(items, (item: IAutoCompleteItemModel) => {
         const itemParts = item.value.trim().split(' ');

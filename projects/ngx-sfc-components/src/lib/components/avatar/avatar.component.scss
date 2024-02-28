@@ -3,20 +3,17 @@
 :host {
   .container {
     .avatar-image-container {
-      display: flex;
-      justify-content: center;
+      @include center;
+
       flex-direction: column;
-      align-items: center;
 
       .avatar {
         position: relative;
-        margin-bottom: 0.5em;
 
         .avatar-image {
-          display: flex;
+          @include center;
+
           overflow: hidden;
-          align-items: center;
-          justify-content: center;
 
           circle {
             transform-origin: 50% 50%;
@@ -27,6 +24,10 @@
             }
           }
         }
+      }
+
+      sfc-stars {
+        margin-top: 0.5em;
       }
     }
 

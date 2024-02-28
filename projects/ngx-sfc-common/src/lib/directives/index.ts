@@ -17,3 +17,5 @@ export { ImageLoadDirective } from './image-size/image-load.directive';
 export { ImageSize } from './image-size/services/image-size.model';
 export { ImageLoadEvent } from './image-size/services/image-load.event';
 export { ImageLoadService } from './image-size/services/image-load.service';
+export { CollapseExpandDirective } from './collapse-expand/collapse-expand.directive';
+export { ComponentReferenceDirective } from './component-reference/component-reference.directive';

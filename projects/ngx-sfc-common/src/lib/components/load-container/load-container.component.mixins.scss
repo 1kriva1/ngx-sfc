@@ -1,0 +1,26 @@
+@import "../../styles/index";
+/* stylelint-disable */
+@import "../delimeter/delimeter.component.mixins.scss";
+/* stylelint-enable */
+
+@mixin sfc-load-container-as-default {
+  .container {
+    @include sfc-delimeter-as-default;
+
+    .content {
+      @include theme-value(background, $color-0);
+
+      .actions {
+        sfc-load-more-button {
+          .button {
+            color: $color-default;
+
+            &:hover {
+              color: $color-hover-default;
+            }
+          }
+        }
+      }
+    }
+  }
+}

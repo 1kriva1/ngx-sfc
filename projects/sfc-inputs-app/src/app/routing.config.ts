@@ -40,7 +40,8 @@ import {
     BorderedDateTimeInputPresentationComponent,
     CommonAutoCompletePresentationComponent,
     BorderedAutoCompletePresentationComponent,
-    BorderedCommonSelectPresentationComponent
+    BorderedCommonSelectPresentationComponent,
+    BubblesPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -292,11 +293,11 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                component: CommonSelectPresentationComponent
+                component: CommonAutoCompletePresentationComponent
             },
             {
                 path: '**',
-                component: CommonSelectPresentationComponent
+                component: CommonAutoCompletePresentationComponent
             }
         ]
     },
@@ -329,6 +330,10 @@ export const routes: Routes = [
                 component: CommonSelectPresentationComponent
             }
         ]
+    },
+    {
+        path: 'bubbles',
+        component: BubblesPresentationComponent
     },
     fallbackRoute,
     indexRoute

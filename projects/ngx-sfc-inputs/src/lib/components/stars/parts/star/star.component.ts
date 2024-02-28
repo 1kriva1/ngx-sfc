@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { UIClass } from 'ngx-sfc-common';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
@@ -24,9 +24,6 @@ export class StarComponent {
   @Input()
   @HostBinding(`class.${UIClass.Disabled}`)
   disabled: boolean = false;
-
-  @Output()
-  selected = new EventEmitter<number>();
 
   get starId(): string {
     return `${this.id}-${this.value}`;

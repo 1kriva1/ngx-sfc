@@ -152,6 +152,23 @@ describe('Component: TooltipComponent', () => {
       expect(component.tooltipComponent?.tooltipPosition).toEqual(Position.Bottom);
     });
 
+    fit("Should have defined value even, when window size is less or equal Tablet limit", () => {
+      component.position = Position.Right;
+      (component.tooltipComponent as any).resize = false;
+      fixture.detectChanges();
+
+      component.tooltipComponent?.ngOnInit();
+      component.tooltipComponent?.ngOnDestroy();
+      component.tooltipComponent?.ngAfterContentInit();
+      fixture.detectChanges();
+
+      windowMock.innerWidth = MediaLimits.Tablet;
+      component.tooltipComponent?.ngAfterContentInit();
+      fixture.detectChanges();
+
+      expect(component.tooltipComponent?.tooltipPosition).toEqual(Position.Right);
+    });
+
     fit("Should have initial value after size become more than Tablet limit", () => {
       component.position = Position.Right;
       fixture.detectChanges();

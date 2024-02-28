@@ -5,9 +5,9 @@
 
     <form [formGroup]="formGroup" autocomplete="off">
         <div class="component-row">
-
             <div class="component-column">
-                <sfc-range-input id="demo-range-empty" formControlName="inputRangeNull"></sfc-range-input>
+                <sfc-range-input id="demo-range-empty" formControlName="inputRangeNull" [multiple]="false">
+                </sfc-range-input>
             </div>
 
             <div class="component-column">
@@ -130,13 +130,13 @@
         <div class="component-row">
             <div class="component-column">
                 <sfc-range-input id="demo-range-empty-show-value" formControlName="inputRangeNullShowValue"
-                    [showValue]="true">
+                    [showValue]="true" [stars]="true" [showLimits]="true">
                 </sfc-range-input>
             </div>
 
             <div class="component-column">
                 <sfc-range-input id="demo-range-label-show-value" formControlName="inputRangeLabelShowValue"
-                    label="test label" [showValue]="true">
+                    label="test label" [showValue]="true" [stars]="true">
                 </sfc-range-input>
             </div>
 
@@ -204,7 +204,7 @@
 
             <div class="component-column">
                 <sfc-range-input id="demo-range-icon-disabled" formControlName="inputRangeIconDisabled" [icon]="faUser"
-                    [showLimits]="true">
+                    [showLimits]="true" [showValue]="true" [stars]="true">
                 </sfc-range-input>
             </div>
         </div>
@@ -212,7 +212,7 @@
         <div class="component-row">
             <div class="component-column">
                 <sfc-range-input id="demo-range-helper-disabled" formControlName="inputRangeHelperDisabled"
-                    helperText="helper test DISABLED" [startIcon]="faMinus" [endIcon]="faPlus">
+                    helperText="helper test DISABLED" [startIcon]="faMinus" [endIcon]="faPlus" [multiple]="true">
                 </sfc-range-input>
             </div>
 
@@ -312,6 +312,29 @@
                     formControlName="inputRangeLabelIconHelperValidationMessage" label="test label and icon and helper"
                     [icon]="faUser" helperText="helper test and icon and helper minimum 100"
                     [validations]="{min: 'Value must be minimum 100.'}">
+                </sfc-range-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-range-input id="demo-multiple-small" formControlName="inputRangeMultipleSmall" label="Small"
+                    helperText="Small helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus" [multiple]="true"
+                    [showValue]="true" [stars]="false">
+                </sfc-range-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-range-input id="demo-multiple-large" formControlName="inputRangeMultipleLarge" label="Large"
+                    helperText="Large helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus" [multiple]="true"
+                    [sfcComponentSize]="ComponentSize.Large">
+                </sfc-range-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-range-input id="demo-multiple-custom" formControlName="inputRangeMultipleCustom" label="Custom"
+                    helperText="Custom helper" [icon]="faUser" [startIcon]="faMinus" [endIcon]="faPlus"
+                    [multiple]="true" [sfcComponentSize] [customSize]="4.2">
                 </sfc-range-input>
             </div>
         </div>

@@ -1,13 +1,13 @@
 <div class="container">
     <div class="toggle"></div>
     <div class="names">
-        <p class="left">
+        <p class="left" *ngIf="leftModel">
             <fa-icon *ngIf="leftModel.icon" [icon]="leftModel.icon"></fa-icon>
-            <span>{{leftModel.label}}</span>
+            <span *ngIf="leftModel.label">{{leftModel.label}}</span>
         </p>
-        <p class="right">
+        <p class="right" *ngIf="rightModel">
             <fa-icon *ngIf="rightModel.icon" [icon]="rightModel.icon"></fa-icon>
-            <span>{{rightModel.label}}</span>
+            <span *ngIf="rightModel.label">{{rightModel.label}}</span>
         </p>
     </div>
 </div>

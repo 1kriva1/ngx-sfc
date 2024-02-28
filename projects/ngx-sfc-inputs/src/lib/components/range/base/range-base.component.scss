@@ -1,5 +1,6 @@
 @use "ngx-sfc-common/styles/index" as *;
 @import "../../../styles/mixins";
+@import "../range-input.component.mixins.scss";
 
 :host {
   .container {
@@ -9,7 +10,7 @@
       justify-content: center;
 
       .limits {
-        @include theme-value(color, $color-8, $color-dark);
+        @include theme-value(color, $range-track-color, $color-dark);
 
         white-space: nowrap;
         font-weight: 700;
@@ -44,7 +45,7 @@
             box-shadow: none !important;
             appearance: none;
 
-            @include theme-value(background-color, $color-8, $color-dark);
+            @include theme-value(background-color, $range-track-color, $color-dark);
 
             height: 0.3125em;
             border-radius: 0.3125em;
@@ -54,9 +55,9 @@
 
             &::-webkit-slider-thumb {
               appearance: none;
-              background-color: $color-8;
+              background-color: $range-track-color;
 
-              @include square-size(2em);
+              @include square-size($thumb-size);
 
               border-radius: 50%;
               border: 0.125em solid $color-0;
@@ -70,6 +71,35 @@
 
               &:hover {
                 background-color: $color-hover-default;
+              }
+            }
+          }
+
+          .multiple {
+            min-height: 1.6em;
+            position: relative;
+
+            input[type="range"] {
+              pointer-events: none;
+              position: absolute;
+
+              &::-webkit-slider-thumb {
+                pointer-events: auto;
+                position: relative;
+              }
+
+              &:first-child {
+                &::-webkit-slider-thumb {
+                  z-index: var(--index-from);
+                }
+              }
+
+              &:nth-child(2) {
+                @include multiple-track-background;
+
+                &::-webkit-slider-thumb {
+                  z-index: var(--index-to);
+                }
               }
             }
           }
@@ -104,6 +134,14 @@
                   }
                 }
               }
+
+              .multiple {
+                input[type="range"] {
+                  &:nth-child(2) {
+                    @include multiple-track-background(null, true);
+                  }
+                }
+              }
             }
           }
         }
@@ -123,6 +161,14 @@
                 background-color: $color-success;
               }
             }
+
+            .multiple {
+              input[type="range"] {
+                &:nth-child(2) {
+                  @include multiple-track-background($color-success);
+                }
+              }
+            }
           }
         }
       }
@@ -139,6 +185,14 @@
 
               &::-webkit-slider-thumb {
                 background-color: $color-failed;
+              }
+            }
+
+            .multiple {
+              input[type="range"] {
+                &:nth-child(2) {
+                  @include multiple-track-background($color-failed);
+                }
               }
             }
           }

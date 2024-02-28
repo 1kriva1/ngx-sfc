@@ -1,0 +1,9 @@
+<div class="container">
+    <sfc-collapse-expand [expand]="expand" [labelExpand]="labelExpand" [labelCollapse]="labelCollapse"
+        (click)="expand = !expand" [sfcComponentSize] [customSize]="0.8">
+    </sfc-collapse-expand>
+    <div class="content" [sfcIf]="expand">
+        <ng-content></ng-content>
+    </div>
+    <sfc-delimeter *ngIf="delimeter"></sfc-delimeter>
+</div>

@@ -147,6 +147,8 @@ ng generate component components/load-dropdown --project ngx-sfc-common --export
 
 ng generate component components/load-more-button --project ngx-sfc-common --export true --flat false --style scss --skip-tests false -d
 
+ng generate component components/toggle --project ngx-sfc-common --export true --flat false --style scss --skip-tests false --dry-run
+
 // COMPONENTS
 
 ng generate component components/tabs --project ngx-sfc-components --export true --flat false --style scss --skip-tests false -d
@@ -346,6 +348,10 @@ ng generate component components/autocomplete/parts/option/autocomplete-option -
 ng generate component components/select/select-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false -d
 
 ng generate component components/select/parts/option/select-option --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false -d
+
+ng generate component components/bubbles/bubbles-input --project ngx-sfc-inputs --export true --flat true --style scss --skip-tests false --dry-run
+
+ng generate component components/bubbles/parts/bubble/bubble --project ngx-sfc-inputs --export false --flat true --style scss --skip-tests false --dry-run
 
 APPLICATION:
 

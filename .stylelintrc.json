@@ -8,6 +8,7 @@
                     "ng-deep"
                 ]
             }
-        ]
+        ],
+        "scss/at-import-partial-extension": null
     }
 }

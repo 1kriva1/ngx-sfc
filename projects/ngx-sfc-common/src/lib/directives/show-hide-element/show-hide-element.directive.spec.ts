@@ -17,7 +17,6 @@ class TestShowHideElementDirectiveComponent {
 }
 
 describe('Directive: ShowHideElement', () => {
-
     let component: TestShowHideElementDirectiveComponent;
     let fixture: ComponentFixture<TestShowHideElementDirectiveComponent>;
 

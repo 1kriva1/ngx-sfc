@@ -43,6 +43,7 @@
     border-style: solid;
     transition-duration: 0s;
     transform: translateX(-50%) scaleY(0);
+    z-index: 9999;
   }
 
   &[type="hover"]::before,

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { addItem, removeItem } from 'ngx-sfc-common';
 import { Observable, Subject } from 'rxjs';
 import { ITableSelectEvent } from './table-select.event';
 
@@ -11,11 +12,25 @@ export class TableSelectService {
 
   public select$: Observable<ITableSelectEvent> = this.selectSubject.asObservable();
 
-  public selectAll(selected: boolean) {
+  public selectedItems: number[] = [];
+
+  public unselectedItems: number[] = [];
+
+  public selectAll(selected: boolean): void {
+    this.unselectedItems = [];
+    this.selectedItems = [];
     this.selectSubject.next({ index: null, selected: selected });
   }
 
-  public select(index: number | null, selected: boolean) {
+  public select(index: number | null, selected: boolean): void {    
+    if (selected) {
+      removeItem(this.unselectedItems, index)
+      addItem(this.selectedItems, index)
+    } else {
+      addItem(this.unselectedItems, index)
+      removeItem(this.selectedItems, index)
+    }
+
     this.selectSubject.next({ index, selected });
   }
 }

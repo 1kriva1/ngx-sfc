@@ -157,13 +157,14 @@
             <div class="component-column">
                 <sfc-select-input id="demo-select-group-loader-validation-msg"
                     formControlName="inputSelectGroupLoaderValidationMessage" [loader]="loader"
-                    label="validation label test" placeholder="validation placeholder test" [icon]="faUser"
-                    helperText="validation test helper"
+                    [showLoadMoreButton]="false" label="validation label test" placeholder="validation placeholder test"
+                    [icon]="faUser" helperText="validation test helper"
                     [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-select-input>
             </div>
 
-            <div class="component-column column-direction">
+            <!-- Q: Loader data can changes on their own will? If yes, than need fix, otherwise this example not relevant. -->
+            <!-- <div class="component-column column-direction">
                 <div>
                     <h4>Loader data (add new item, remove item)</h4>
                     <button (click)="addItemLoader()" style="margin-right: 10px;">Add item</button>
@@ -172,7 +173,7 @@
                 <sfc-select-input id="demo-select-group-loader-modification"
                     formControlName="inputSelectGroupLoaderModification" [loader]="loaderModification">
                 </sfc-select-input>
-            </div>
+            </div> -->
 
         </div>
 

@@ -1,7 +1,9 @@
 /* stylelint-disable */
 
 :host {
+  display: block;
   width: 100%;
+  margin: 1em 0;
 
   .row-container {
     background-color: #f6f6f6;

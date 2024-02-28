@@ -1,8 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { sort } from 'ngx-sfc-common';
-import { any, Direction, firstItem, lastItem } from 'ngx-sfc-common';
+import { any, Direction, firstItem, lastItem, isEqual, sort } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base/base-input.component';
+import { StarsInputConstants } from './stars-input.constants';
 import { StarsState } from './stars.enum';
 
 @Component({
@@ -14,7 +14,7 @@ import { StarsState } from './stars.enum';
     trigger('counterAnimation', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate(800)
+        animate(400)
       ]),
       transition(':leave',
         animate(0, style({ opacity: 0 })))
@@ -28,6 +28,9 @@ export class StarsInputComponent extends BaseInputComponent<number> implements O
 
   @Input()
   reset: boolean = false;
+
+  @Input()
+  resetLabel: string = StarsInputConstants.RESET_LABEL_DEFAULT;
 
   @Input()
   @HostBinding('class')
@@ -53,11 +56,16 @@ export class StarsInputComponent extends BaseInputComponent<number> implements O
       : null;
   }
 
-  selectAll(): void {
+  override onChange(value: number | null): void {
+    if (!isEqual(this.value, value))
+      super.onChange(value);
+  }
+
+  public selectAll(): void {
     this.onChange(lastItem(this.items) as number);
   }
 
-  getStarsState(item: number): StarsState {
+  public getStarsState(item: number): StarsState {
     if (this.hasValue && any(this.items)) {
       if (lastItem(this.items) === this.value)
         return StarsState.Max;

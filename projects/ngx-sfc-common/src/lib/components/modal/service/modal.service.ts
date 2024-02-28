@@ -9,7 +9,7 @@ export class ModalService {
 
   private subject = new BehaviorSubject<IModalEvent>({ open: false });
 
-  public modal$: Observable<any> = this.subject.asObservable();
+  public modal$: Observable<IModalEvent> = this.subject.asObservable();
 
   public get isOpen(): boolean {
     return this.subject.value.open;

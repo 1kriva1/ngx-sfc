@@ -1,0 +1,46 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  cursor: default;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  // @include text-ellipsis;
+
+  &.enabled {
+    cursor: pointer;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 0;
+
+    @include theme-value(color, $color-default, $color-dark);
+
+    transition: color $transition-duration-default $transition-timing-function-default;
+
+    &:hover {
+      color: $color-hover-default;
+    }
+
+    .content {
+      display: flex;
+      user-select: none;
+    }
+
+    .icons {
+      margin: 0 0.31em;
+      font-size: 0.7em;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &.active {
+    .container {
+      color: $color-hover-default;
+    }
+  }
+}

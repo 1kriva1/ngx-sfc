@@ -8,7 +8,6 @@
         <h3>Static:</h3>
 
         <div class="component-row">
-
             <div class="component-column">
                 <sfc-autocomplete-input id="demo-autocomplete-empty" formControlName="inputAutoCompleteNull"
                     [data]="data">
@@ -26,11 +25,9 @@
                     formControlName="inputAutoCompletePlaceholder" [data]="data" placeholder="placeholder test">
                 </sfc-autocomplete-input>
             </div>
-
         </div>
 
         <div class="component-row">
-
             <div class="component-column">
                 <sfc-autocomplete-input id="demo-autocomplete-label-placeholder"
                     formControlName="inputAutoCompleteLabelPlaceholder" [data]="data" label="label test"
@@ -50,11 +47,9 @@
                     placeholder="placeholder test" [icon]="faUser">
                 </sfc-autocomplete-input>
             </div>
-
         </div>
 
         <div class="component-row">
-
             <div class="component-column">
                 <sfc-autocomplete-input id="demo-autocomplete-helper" formControlName="inputAutoCompleteHelper"
                     [data]="data" helperText="test helper">
@@ -73,7 +68,6 @@
                     label="label test" placeholder="placeholder test">
                 </sfc-autocomplete-input>
             </div>
-
         </div>
 
         <div class="component-row">
@@ -100,7 +94,6 @@
         </div>
 
         <div class="component-row">
-
             <div class="component-column">
                 <sfc-autocomplete-input id="demo-autocomplete-validation" formControlName="inputAutoCompleteValidation"
                     [data]="data" label="validation label test" placeholder="validation placeholder test"
@@ -121,11 +114,9 @@
                     placeholder="validation placeholder test" [icon]="faUser" helperText="validation test helper">
                 </sfc-autocomplete-input>
             </div>
-
         </div>
 
         <div class="component-row">
-
             <div class="component-column">
                 <sfc-autocomplete-input id="demo-autocomplete-validation-msg"
                     formControlName="inputAutoCompleteValidationMessage" [data]="data" label="validation label test"
@@ -151,7 +142,6 @@
                     [validations]="{'sfc-equal-or-include': 'Include invalid (must be anita 3)'}">
                 </sfc-autocomplete-input>
             </div>
-
         </div>
 
         <div class="component-row">
@@ -234,7 +224,6 @@
         <h3>Loader:</h3>
 
         <div class="component-row">
-
             <div class="component-column">
                 <sfc-autocomplete-input id="demo-autocomplete-loader-helper-icon"
                     formControlName="inputAutoCompleteLoaderHelperIcon" [loader]="loader" helperText="test helper"
@@ -251,6 +240,7 @@
                 </sfc-autocomplete-input>
             </div>
 
+            <!-- Q: Loader data can changes on their own will? If yes, than need fix, otherwise this example not relevant. -->
             <div class="component-column column-direction">
                 <div>
                     <h4>Loader data (add new item, remove item)</h4>
@@ -261,7 +251,6 @@
                     formControlName="inputAutoCompleteLoaderModification" [loader]="loaderModification">
                 </sfc-autocomplete-input>
             </div>
-
         </div>
 
         <div>

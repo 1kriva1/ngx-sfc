@@ -1,35 +1,53 @@
-<div class="row-container" [ngClass]="model.status">
+<div class="row-container" [ngClass]="data.status">
     <div class="row-columns-container" [style.text-align]="position">
         <div class="row-content">
-            <div class="column-checkmark" #columnCheckmark [ngStyle]="columnStyle">
-                <sfc-checkmark [active]="isSelected" (click)="selectRow()"></sfc-checkmark>
-            </div>
-            <div class="column-data phono-container" [ngStyle]="columnStyle">
-                <div>
-                    <div class="photo" [style.backgroundImage]="'url('+ model.photo + ')'"></div>
-                </div>
-                <div>
-                    <span class="column-name">Client</span>
-                    <span>
-                        {{model.client}}
-                        <fa-icon [icon]="faStar"></fa-icon>
-                    </span>
-                    <div class="client-number">{{model.clientNumber}}</div>
-                </div>
-            </div>
-            <div class="column-data" [ngStyle]="columnStyle">
-                <span class="column-name">Activity</span>
-                <span>{{model.activity}}</span>
-            </div>
-            <div class="column-data" [ngStyle]="columnStyle">
-                <span class="column-name">On date</span>
-                <span>{{model.onDate}}</span>
-            </div>
-            <div class="column-data" [ngStyle]="columnStyle">
-                <span class="column-name">Status</span>
-                <div class="point"></div>
-                <span>{{model.status}}</span>
-            </div>
+            <ng-container *ngFor="let column of columns">
+                <ng-container [ngSwitch]="column.type">
+                    <ng-container *ngSwitchCase="TableColumnType.Selectable">
+                        <div class="column-checkmark" #columnCheckmark [style.width]="column.calculatedWidth">
+                            <sfc-checkmark [active]="isSelected" (click)="selectRow()" [type]="CheckmarkType.Circle"></sfc-checkmark>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        <ng-container [ngSwitch]="column.field">
+                            <ng-container *ngSwitchCase="'client'">
+                                <div class="column-data phono-container" [style.width]="column.calculatedWidth">
+                                    <div>
+                                        <div class="photo" [style.backgroundImage]="'url('+ data.photo + ')'"></div>
+                                    </div>
+                                    <div>
+                                        <span class="column-name">Client</span>
+                                        <span>
+                                            {{data.client}}
+                                            <fa-icon [icon]="faStar"></fa-icon>
+                                        </span>
+                                        <div class="client-number">{{data.clientNumber}}</div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'activity'">
+                                <div class="column-data" [style.width]="column.calculatedWidth">
+                                    <span class="column-name">Activity</span>
+                                    <span>{{data.activity}}</span>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'onDate'">
+                                <div class="column-data" [style.width]="column.calculatedWidth">
+                                    <span class="column-name">On date</span>
+                                    <span>{{data.onDate}}</span>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'status'">
+                                <div class="column-data" [style.width]="column.calculatedWidth">
+                                    <span class="column-name">Status</span>
+                                    <div class="point"></div>
+                                    <span>{{data.status}}</span>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
         </div>
     </div>
 </div>

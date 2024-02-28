@@ -11,7 +11,7 @@ import { IDropdownMenuItemModel } from './parts/item/dropdown-menu-item.model';
   styleUrls: ['./dropdown-menu.component.scss'],
   animations: [
     trigger(
-      'openClose', 
+      'openClose',
       [
         state('true', style({
           opacity: 1
@@ -20,7 +20,7 @@ import { IDropdownMenuItemModel } from './parts/item/dropdown-menu-item.model';
           opacity: 0,
         })),
         transition('true <=> false', [
-          animate('0.5s')
+          animate('0.1s')
         ])
       ]
     )
@@ -49,6 +49,10 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
   @Input()
   @HostBinding('class.' + UIClass.Bordered)
   bordered: boolean = false;
+
+  @Input()
+  @HostBinding('class.' + UIClass.Filled)
+  filled: boolean = false;
 
   @Input()
   @HostBinding('class')
@@ -95,7 +99,9 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
     this._resizeSubscription?.unsubscribe();
   }
 
-  onClick(item: IDropdownMenuItemModel) {
+  onClick(item: IDropdownMenuItemModel, event: Event): void {
+    this.preventPropagation(event);
+
     if (this.hideOnClick)
       this.open = false;
 
@@ -105,9 +111,19 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
     this.selected.emit(item);
   }
 
-  onClickOutside(event: ClickOutsideEvent) {
+  toggle(event: Event): void {
+    this.preventPropagation(event);
+    this.open = !this.open;
+  }
+
+  onClickOutside(event: ClickOutsideEvent): void {
     if (event.value && this.open) {
       this.open = false;
     }
+  }
+
+  private preventPropagation(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
   }
 }

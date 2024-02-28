@@ -56,7 +56,7 @@ export class VerticalRangePresentationComponent extends BasePresentationComponen
           disabled: true
         }],
         inputRangeLabelDisabled: [{
-          value: 44,
+          value: {from:10, to:57},
           disabled: true
         }],
         inputRangeIconDisabled: [{
@@ -113,7 +113,10 @@ export class VerticalRangePresentationComponent extends BasePresentationComponen
         }],
         inputRangeSmall: [10],
         inputRangeLarge: [60],
-        inputRangeCustom: [90]
+        inputRangeCustom: [90],
+        inputRangeMultipleSmall: [{from:10, to:57}],
+        inputRangeMultipleLarge: [{from:0, to:99}],
+        inputRangeMultipleCustom: [{from:90, to:91}]
       }
     );
   }

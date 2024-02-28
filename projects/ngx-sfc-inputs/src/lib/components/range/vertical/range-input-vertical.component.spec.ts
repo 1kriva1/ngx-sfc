@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { getCssLikeValue, Position, TooltipComponent, WINDOW } from "ngx-sfc-common";
+import { Direction, getCssLikeValue, Position, TooltipComponent, WINDOW } from "ngx-sfc-common";
 import { InputReferenceDirective } from "../../../directives";
 import { RangeInputVerticalComponent } from "./range-input-vertical.component";
 
@@ -44,11 +44,40 @@ describe('Component: RangeInputVertical', () => {
             expect(component.tooltipPosition).toEqual(Position.Bottom);
         });
 
-        fit("Should have height of input", () => {
-            const heightValueAssert = getCssLikeValue(fixture.debugElement.query(By.css('input[type=range]')).nativeElement.getBoundingClientRect().height),
-                containerEl = fixture.nativeElement.querySelectorAll('.component')[1];
+        fit('Should have constant track position', () => {
+            expect(component.trackPosition).toEqual(Position.Top);
+        });
+    });
 
-            expect(containerEl.style.height).toEqual(heightValueAssert);
+    describe('Limits', () => {
+        describe('After', () => {
+            fit("Should exist, when show value", () => {
+                component.showValue = true;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('.limits.after')).toBeTruthy();
+            });
+        });
+    });
+
+    describe('Input', () => {
+        fit("Should have vertical orient", () => {
+            expect(fixture.debugElement.query(By.css('input[type=range]')).attributes['orient'])
+                .toEqual(Direction.Vertical);
+        });
+
+        describe('Multiple', () => {
+            fit("Should have default style variables", () => {
+                component.multiple = true;
+                fixture.changeDetectorRef.detectChanges();
+                fixture.detectChanges();
+
+                const heightValueAssert = getCssLikeValue(fixture.debugElement
+                    .query(By.css('input[type=range]')).nativeElement.getBoundingClientRect().height);
+
+                expect(fixture.debugElement.query(By.css('div.multiple')).attributes['style'])
+                    .toEqual(`height: ${heightValueAssert}; --from: 0; --to: 100; --max: 100; --min: 0; --index-from: 1; --index-to: 2; --direction: top;`);
+            });
         });
     });
 });

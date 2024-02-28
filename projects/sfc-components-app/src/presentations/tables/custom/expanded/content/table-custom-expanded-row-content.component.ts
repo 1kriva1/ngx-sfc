@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { getCalcValue, Position } from 'ngx-sfc-common';
+import { Position } from 'ngx-sfc-common';
+import { TableColumnType, ITableColumnExtendedModel } from 'ngx-sfc-components';
 
 @Component({
   selector: 'table-custom-expanded-row-content',
@@ -7,18 +8,15 @@ import { getCalcValue, Position } from 'ngx-sfc-common';
   styleUrls: ['./table-custom-expanded-row-content.component.scss']
 })
 export class TableCustomExpandedRowContentComponent {
+  
+  TableColumnType = TableColumnType;
+
+  @Input()
+  columns!: ITableColumnExtendedModel[];
+
   @Input()
   data!: any[];
 
   @Input()
-  columnWidth: number = 0;
-
-  @Input()
   position: Position = Position.Center;
-
-  get columnStyle(): { width: string } {
-    return {
-      width: getCalcValue(this.columnWidth)
-    };
-  }
 }

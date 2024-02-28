@@ -68,12 +68,12 @@ describe('Directive: InputReference', () => {
       inputEl.triggerEventHandler('focus', null);
       fixture.detectChanges();
 
-      expect(component.directive.isFocused).toBeTruthy();
+      expect(component.directive.isFocused).toBeTrue();
 
       inputEl.triggerEventHandler('blur', null);
       fixture.detectChanges();
 
-      expect(component.directive.isFocused).toBeFalsy();
+      expect(component.directive.isFocused).toBeFalse();
     });
   });
 

@@ -3,6 +3,7 @@ import { getCssLikeValue, UIConstants } from 'ngx-sfc-common';
 import { AvatarConstants } from '../../avatar.constants';
 import { AvatarBadgePosition } from './avatar-badge-position.enum';
 import { AvatarBadgeConstants } from './avatar-badge.constants';
+import { IAvatarBadgeModel } from './avatar-badge.model';
 
 @Component({
   selector: 'sfc-avatar-badge',
@@ -12,15 +13,18 @@ import { AvatarBadgeConstants } from './avatar-badge.constants';
 export class AvatarBadgeComponent {
 
   @Input()
-  position: AvatarBadgePosition = AvatarBadgePosition.Right;
-
-  @Input()
   background?: string;
 
+  @Input()
+  model: IAvatarBadgeModel = { position: AvatarBadgePosition.Bottom };
+
+  @Input()
   radius: number = AvatarConstants.DEFAULT_RADIUS;
 
+  @Input()
   normalizedRadius: number = AvatarConstants.DEFAULT_RADIUS;
 
+  @Input()
   stroke: number = AvatarConstants.DEFAULT_STROKE;
 
   @HostBinding('style')
@@ -30,7 +34,7 @@ export class AvatarBadgeComponent {
       ...{
         height: badgeSize,
         width: badgeSize,
-        background: this.background,
+        background: this.model.background || this.background,
         fontSize: getCssLikeValue(this.radius * AvatarBadgeConstants.TEXT_SIZE_MULTIPLIER)
       },
       ...this.positionStyle
@@ -45,7 +49,7 @@ export class AvatarBadgeComponent {
       positionPart = `calc(50${UIConstants.CSS_PERCENTAGE} - ${getCssLikeValue((this.sizePart / 2))}`,
       positionBottomPart = `calc(25${UIConstants.CSS_PERCENTAGE} - ${halfNormilizedSizePartPx}`,
       positionTopPart = `calc(75${UIConstants.CSS_PERCENTAGE} - ${halfNormilizedSizePartPx}`;
-    switch (this.position) {
+    switch (this.model.position) {
       case AvatarBadgePosition.Top:
         return {
           right: positionPart,

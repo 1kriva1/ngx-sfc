@@ -3,7 +3,8 @@ import { ITagModel } from './parts/tag/tag.model';
 
 @Component({
   selector: 'sfc-tags',
-  templateUrl: './tags.component.html'
+  templateUrl: './tags.component.html',
+  styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent {
 

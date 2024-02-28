@@ -1,8 +1,8 @@
 import { formatDate, WeekDay } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { CommonConstants, ComponentSizeDirective, ModalService, ModalTemplate, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
-import { isNullOrEmptyString } from 'ngx-sfc-common';
+import { CommonConstants, ComponentSizeDirective, DateTimeConstants, ModalService, ModalTemplate, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
+import { isNullOrEmptyString, IModalEvent } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base/base-input.component';
 import { DateTimeInputConstants } from './constants/datetime.constants';
 import { DateTimeFormatsConstants } from './constants/formats.constants';
@@ -64,7 +64,7 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
   disabledDays: Date[] = [];
 
   @Input()
-  locale: string = DateTimeInputConstants.DEFAULT_LOCALE;
+  locale: string = DateTimeConstants.DEFAULT_LOCALE;
 
   @Input()
   weekStart: WeekDay = WeekDay.Monday;
@@ -98,7 +98,14 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
     nowLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.NOW
   };
 
+  override get placeholderValue(): string {
+    return this.fullSize
+      ? this.placeholder ? this.placeholder : CommonConstants.EMPTY_STRING
+      : super.placeholderValue;
+  }
+
   private _valueChangeSubscription!: Subscription;
+  private _modalSubscription!: Subscription;
 
   get displayDate() {
     return this.value ? formatDate(this.value, this.format, this.locale) : CommonConstants.EMPTY_STRING;
@@ -123,10 +130,19 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
 
     this._valueChangeSubscription = this.value$.subscribe((value: Date) =>
       this.valueService.update({ type: DateTimeValueActionType.Init, value: value }));
+
+    if (this.fullSize) {
+      this._modalSubscription = this.modalService.modal$.subscribe((event: IModalEvent) => {
+        if (!event.open && this.isFocused) {
+          this.inputElementRef.nativeElement.blur();
+        }
+      });
+    }
   }
 
   ngOnDestroy(): void {
     this._valueChangeSubscription.unsubscribe();
+    this._modalSubscription?.unsubscribe();
   }
 
   update(value: Date | null): void {

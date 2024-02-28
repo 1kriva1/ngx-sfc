@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { getCssLikeValue, Position } from 'ngx-sfc-common';
+import { Direction, getCssLikeValue, Position } from 'ngx-sfc-common';
 import { RangeBaseComponent } from '../base/range-base.component';
 
 @Component({
@@ -10,7 +10,13 @@ import { RangeBaseComponent } from '../base/range-base.component';
 })
 export class RangeInputVerticalComponent extends RangeBaseComponent {
 
-  public override tooltipPosition: Position = Position.Bottom;
+  public tooltipPosition: Position = Position.Bottom;
+
+  protected direction: Direction = Direction.Vertical;
+
+  override get showAfterLabel(): boolean {
+    return super.showAfterLabel || this.showValue;
+  }
 
   public get componentHeight(): string | null {
     return this.inputElementRef

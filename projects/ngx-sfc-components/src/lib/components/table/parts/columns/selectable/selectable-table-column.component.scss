@@ -3,29 +3,35 @@
 :host {
   display: inline-block;
 
-  &:hover {
-    color: $color-hover-default;
-
-    span {
-      color: $color-hover-default;
-    }
-  }
-
   .container {
     @include theme-value(color, $color-default, $color-dark);
 
-    text-transform: uppercase;
     font-size: 1em;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s;
     cursor: pointer;
     user-select: none;
+    transition: color $transition-duration-default $transition-timing-function-default;
 
     span {
       padding-left: 0.31em;
+    }
+  }
+
+  &:hover,
+  &.active {
+    .container {
+      color: $color-hover-default !important;
+
+      sfc-checkmark {
+        ::ng-deep > .container {
+          .check {
+            border-color: $color-hover-default;
+          }
+        }
+      }
     }
   }
 }

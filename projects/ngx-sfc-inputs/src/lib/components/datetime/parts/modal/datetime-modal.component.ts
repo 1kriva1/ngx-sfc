@@ -3,7 +3,7 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@an
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   any,
-  ButtonType, CommonConstants, getFirstDayOfMonth, getFirstDayOfYear,
+  ButtonType, CommonConstants, DateTimeConstants, getFirstDayOfMonth, getFirstDayOfYear,
   getLastDayOfMonth, getLastDayOfYear,
   hasItemBy,
   isDateGreat, isDateGreatOrEqual, isDateTimeGreat, isDateTimeGreatOrEqual, isEqualDates, ModalService, UIClass
@@ -48,7 +48,7 @@ export class DateTimeModalComponent implements OnInit {
   shortTime: boolean = false;
 
   @Input()
-  locale: string = DateTimeInputConstants.DEFAULT_LOCALE;
+  locale: string = DateTimeConstants.DEFAULT_LOCALE;
 
   @Input()
   minDate: Date | null = null;
@@ -226,9 +226,9 @@ export class DateTimeModalComponent implements OnInit {
   }
 
   onClear(event: MouseEvent): void {
-    this.valueService.update({ type: DateTimeValueActionType.Init, value: new Date() });
-    this.viewService.update({ type: DateTimeViewActionType.Hide, event: event });
+    this.valueService.update({ type: DateTimeValueActionType.Init, value: null });
     this.update.emit(null);
+    this.viewService.update({ type: DateTimeViewActionType.Hide, event: event });
   }
 
   onClose(event: MouseEvent | undefined, immediate: boolean = false): void {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { getCalcValue, Position } from 'ngx-sfc-common';
-import { IDefaultTableColumnModel, ITableModel, ITableSelectEvent } from 'ngx-sfc-components';
+import { CheckmarkType, Position } from 'ngx-sfc-common';
+import { ITableColumnExtendedModel, ITableModel, TableSelectService, TableColumnType } from 'ngx-sfc-components';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,37 +11,31 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 export class TableCustomRowComponent {
 
   faStar = faStar;
-  
-  @Input()
-  columns!: IDefaultTableColumnModel[];
+
+  CheckmarkType = CheckmarkType;
+  TableColumnType = TableColumnType;
 
   @Input()
-  data!: ITableModel;
+  columns!: ITableColumnExtendedModel[];
 
   @Input()
-  columnWidth: number = 0;
+  model!: ITableModel;
 
   @Input()
   position: Position = Position.Center;
 
-  @Output()
-  selected: EventEmitter<ITableSelectEvent> = new EventEmitter<ITableSelectEvent>();
-
-  get columnStyle(): { width: string } {
-    return {
-      width: getCalcValue(this.columnWidth)
-    };
+  get isSelected(): boolean {
+    return this.model.selected || false;
   }
 
-  get isSelected() {
-    return this.data.dataModel.selected || false;
+  get data(): any {
+    return this.model.data;
   }
 
-  get model(): any {
-    return this.data.dataModel.data;
-  }
+  constructor(private selectedService: TableSelectService) { }
 
-  selectRow() {
-    this.selected.emit({ index: this.data.index, selected: !this.isSelected });
+  selectRow(): void {
+    this.model.selected = !this.model.selected;
+    this.selectedService.select(this.model.sequence, this.model.selected);
   }
 }

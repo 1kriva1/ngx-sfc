@@ -10,8 +10,7 @@
     .content {
       .component {
         .stars {
-          display: flex;
-          flex-flow: row wrap;
+          @include center-wrap;
 
           sfc-star {
             padding: 0 0.2em;
@@ -23,10 +22,9 @@
         height: auto !important;
       }
 
-      .right-side-info {
-        @include right-side-info;
+      .side-info {
+        @include under-text;
 
-        bottom: 0;
         display: flex;
         align-items: center;
         margin-top: 0.5em;

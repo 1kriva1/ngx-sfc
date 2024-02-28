@@ -1,4 +1,4 @@
 export interface ISelectValue {
-    key: number| null;
+    key: number | null;
     value: string;
 }

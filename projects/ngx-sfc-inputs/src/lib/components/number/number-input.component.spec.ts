@@ -415,6 +415,20 @@ describe('Component: NumberInput', () => {
       expect(newWidth).toEqual(`1${UIConstants.CSS_CH}`);
     });
 
+    fit("Should update width on value set", () => {
+      component.edit = true;
+      fixture.detectChanges();
+
+      const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+
+      component.value = 4;
+      component.ngAfterViewInit();
+      fixture.detectChanges();
+
+
+      expect(inputEl.nativeElement.style.width).toEqual(`1${UIConstants.CSS_CH}`);
+    });
+
     fit("Should set value on input event", () => {
       component.edit = true;
       fixture.detectChanges();

@@ -5,7 +5,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import {
   CheckmarkComponent, ShowHideElementDirective,
   MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective, LoadContainerComponent,
-  ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent, ILoadMoreModel, ILoadMoreParameters, CommonConstants, UIClass
+  ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent, CommonConstants, UIClass, ILoadContainerLoaderResultModel,
+  ILoadContainerParameters,
+  PaginationConstants,
+  LoadContainerLoadType
 } from 'ngx-sfc-common';
 import { BehaviorSubject } from 'rxjs';
 import { InputConstants } from '../../constants/input.constants';
@@ -54,6 +57,14 @@ describe('Component: SelectInput', () => {
 
     fit('Should have default load on init', () => {
       expect(component.loadOnInit).toBeTrue();
+    });
+
+    fit('Should have default size', () => {
+      expect(component.size).toEqual(PaginationConstants.DEFAULT_SIZE);
+    });
+
+    fit('Should have default pagination', () => {
+      expect(component.pagination).toEqual({ size: component.size, page: PaginationConstants.DEFAULT_PAGE });
     });
 
     fit('Should have default show default item', () => {
@@ -397,6 +408,17 @@ describe('Component: SelectInput', () => {
       expect(loadContainerEl.componentInstance.open).toEqual(component.isFocused);
       expect(loadContainerEl.componentInstance.showLoadMoreButton).toEqual(component.showLoadMoreButton);
       expect(loadContainerEl.componentInstance.showEmpty).toBeFalse();
+      expect(loadContainerEl.componentInstance.model.loadType).toEqual(LoadContainerLoadType.Button);
+      expect(loadContainerEl.componentInstance.model.pagination).toEqual(component.pagination);
+    });
+
+    fit('Should have scroll load type', () => {
+      component.showLoadMoreButton = false;
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('sfc-load-container')).componentInstance.model.loadType)
+        .toEqual(LoadContainerLoadType.Scroll);
     });
 
     fit('Should scroll target be undefined', () => {
@@ -695,6 +717,17 @@ describe('Component: SelectInput', () => {
           expect(component.value).toEqual({ key: 1, value: 'Test 1' });
         });
 
+        fit('Should not select single value twice', () => {
+          spyOn(component.changeValue, 'emit');
+          initData(true, [{ key: 0, value: 'Test 0' }, { key: 1, value: 'Test 1' }]);
+
+          const itemEl = fixture.debugElement.queryAll(By.css('sfc-select-item'))[2].query(By.css('div'));
+          itemEl.triggerEventHandler('mousedown', new MouseEvent('mousedown'));
+          fixture.detectChanges();
+
+          expect(component.changeValue.emit).toHaveBeenCalledTimes(1);
+        });
+
         fit('Should select multiple values', () => {
           component.multiple = true;
           initData(true, [{ key: 0, value: 'Test 0' }, { key: 1, value: 'Test 1' }]);
@@ -826,11 +859,11 @@ describe('Component: SelectInput', () => {
     });
 
     fit('Should reset items on new data', () => {
-      initLoader({ next: true, items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }], reset: false });
+      initLoader({ next: true, items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }], total: 2 });
 
       expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(3);
 
-      initLoader({ next: true, items: [{ key: 0, value: 'test 0' }], reset: true });
+      initLoader({ next: true, items: [{ key: 0, value: 'test 0' }], total: 1 });
 
       expect(fixture.nativeElement.querySelectorAll('sfc-select-item').length).toEqual(2);
     });
@@ -838,7 +871,7 @@ describe('Component: SelectInput', () => {
 
   describe('Inner validation', () => {
     fit('Should raise validation error, when error occurred', () => {
-      component.loader = (_: ILoadMoreParameters) => {
+      component.loader = (_: ILoadContainerParameters) => {
         throw { errorMsg: 'Error occurred' }
       };
       component.ngOnInit();
@@ -849,7 +882,7 @@ describe('Component: SelectInput', () => {
     });
 
     fit('Should hide validation error, when load data successfully', () => {
-      component.loader = (_: ILoadMoreParameters) => {
+      component.loader = (_: ILoadContainerParameters) => {
         throw { errorMsg: 'Error occurred' }
       };
       component.ngOnInit();
@@ -883,10 +916,10 @@ describe('Component: SelectInput', () => {
     return dataSubject;
   }
 
-  function initLoader(model: ILoadMoreModel<SelectItemModel> = { next: true, items: [{ key: 0, value: 'test 0' }], reset: false })
-    : BehaviorSubject<ILoadMoreModel<SelectItemModel>> {
-    const dataSubject = new BehaviorSubject<ILoadMoreModel<SelectItemModel>>(model);
-    component.loader = (_: ILoadMoreParameters) => dataSubject.asObservable();
+  function initLoader(model: ILoadContainerLoaderResultModel<SelectItemModel> = { next: true, items: [{ key: 0, value: 'test 0' }], total: 1 })
+    : BehaviorSubject<ILoadContainerLoaderResultModel<SelectItemModel>> {
+    const dataSubject = new BehaviorSubject<ILoadContainerLoaderResultModel<SelectItemModel>>(model);
+    component.loader = (_: ILoadContainerParameters) => dataSubject.asObservable();
     component.ngOnInit();
     component.ngAfterViewInit();
     fixture.detectChanges();

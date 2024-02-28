@@ -1,19 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { CheckmarkType, getCalcValue, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
 import { CheckmarkComponent, Position, UIConstants } from 'ngx-sfc-common';
+import { TableSelectService } from '../../../../service/select/table-select.service';
 import { TableColumnType } from '../../../columns/table-column-type.enum';
 import { DefaultTableRowComponent } from './default-table-row.component';
 
 describe('Component: DefaultTableRow', () => {
   let component: DefaultTableRowComponent;
   let fixture: ComponentFixture<DefaultTableRowComponent>;
+  let tableSelectServiceSpy: jasmine.SpyObj<TableSelectService>;
 
   beforeEach(async () => {
+    tableSelectServiceSpy = jasmine.createSpyObj('TableSelectService', ['select']);
+
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [ShowHideElementDirective, CheckmarkComponent, DefaultTableRowComponent]
+      declarations: [ShowHideElementDirective, CheckmarkComponent, DefaultTableRowComponent],
+      providers: [{ provide: TableSelectService, useValue: tableSelectServiceSpy }]
     }).compileComponents();
   });
 
@@ -69,72 +74,64 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should emit selected', () => {
-      spyOn(component.selected, 'emit');
       component.selectOnClick = true;
       fixture.detectChanges();
 
       selectRow();
 
-      expect(component.selected.emit).toHaveBeenCalled();
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(1);
     });
 
     fit('Should not emit selected', () => {
-      spyOn(component.selected, 'emit');
       component.selectOnClick = false;
       fixture.detectChanges();
 
       selectRow();
 
-      expect(component.selected.emit).not.toHaveBeenCalled();
+      expect(tableSelectServiceSpy.select).not.toHaveBeenCalled();
     });
 
     fit('Should emit selected for unselected row', () => {
-      spyOn(component.selected, 'emit');
       component.selectOnClick = true;
       component.model.index = 10;
       fixture.detectChanges();
 
       selectRow();
 
-      expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: true });
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, true);
     });
 
     fit('Should emit selected for selected row', () => {
-      spyOn(component.selected, 'emit');
+      component.model = { data: {}, index: 0, sequence: 1, selected: true };
       component.selectOnClick = true;
-      component.model.index = 10;
-      component.model.dataModel.selected = true;
       fixture.detectChanges();
 
       selectRow();
 
-      expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
     });
 
     fit('Should toggle selected', () => {
-      // fake selected call
-      spyOn(component.selected, 'emit').and.callFake(() => component.model.dataModel.selected = !component.model.dataModel.selected);
       component.selectOnClick = true;
-      component.model.index = 10;
-      component.model.dataModel.selected = true;
+      component.model = { data: {}, index: 0, sequence: 1, selected: true };
       fixture.detectChanges();
 
       selectRow();
 
-      expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
 
       selectRow();
 
-      expect((component.selected.emit as any).calls.allArgs()).toEqual([
-        [{ index: component.model.index, selected: false }],
-        [{ index: component.model.index, selected: true }]
+      expect((tableSelectServiceSpy.select as any).calls.allArgs()).toEqual([
+        [1, false],
+        [1, true]
       ]);
 
-      expect(component.selected.emit).toHaveBeenCalledTimes(2);
+      expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(2);
     });
 
     fit("Should call unsubscribe on checkmark subscription, when directive destroyed", () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
       component.columns = [{ name: 'column', field: 'field', type: TableColumnType.Selectable }];
       fixture.detectChanges();
 
@@ -157,7 +154,7 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should exist columns container', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
@@ -165,7 +162,7 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should have columns content as columns count', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }, { name: 'column1', field: 'field1' }];
       fixture.detectChanges();
 
@@ -173,24 +170,23 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should have default width, if column width not provided', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
-      component.columns = [{ name: 'column', field: 'field' }];
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
+      component.columns = [{ name: 'column', field: 'field', calculatedWidth: getCalcValue(1) }];
       fixture.detectChanges();
 
       expect(fixture.debugElement.query(By.css('div.content-container')).styles['width']).toEqual(`calc(100%)`);
     });
 
     fit('Should have width that provideed for columnWidth', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
-      component.columns = [{ name: 'column', field: 'field' }];
-      component.columnWidth = 44;
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };
+      component.columns = [{ name: 'column', field: 'field', calculatedWidth: getCalcValue(44) }];
       fixture.detectChanges();
 
       expect(fixture.debugElement.query(By.css('div.content-container')).styles['width']).toEqual('calc(2.27273%)');
     });
 
     fit('Should have column position by default', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
@@ -199,7 +195,7 @@ describe('Component: DefaultTableRow', () => {
 
     fit('Should have column position by defined value', () => {
       component.position = Position.Right;
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
@@ -207,7 +203,7 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should have content position by default', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
@@ -216,16 +212,16 @@ describe('Component: DefaultTableRow', () => {
 
     fit('Should have content position by defined value (right)', () => {
       component.position = Position.Right;
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
       expect(fixture.debugElement.query(By.css('div.content')).styles['align-items']).toEqual((UIConstants.CSS_END));
     });
-    
+
     fit('Should have content position by defined value (center)', () => {
       component.position = Position.Center;
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field' }];
       fixture.detectChanges();
 
@@ -233,7 +229,7 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should be created checkmark column', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: 'column', field: 'field', type: TableColumnType.Selectable }];
       fixture.detectChanges();
 
@@ -242,7 +238,7 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should be created sequence column', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: '', field: '', type: TableColumnType.Sequence }];
       fixture.detectChanges();
 
@@ -251,7 +247,7 @@ describe('Component: DefaultTableRow', () => {
     });
 
     fit('Should be created data column', () => {
-      component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+      component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
       component.columns = [{ name: '', field: '', type: TableColumnType.Data }];
       fixture.detectChanges();
 
@@ -261,7 +257,7 @@ describe('Component: DefaultTableRow', () => {
 
     describe('Checkmark', () => {
       fit('Should not be checked', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -269,7 +265,7 @@ describe('Component: DefaultTableRow', () => {
       });
 
       fit('Should be checked', () => {
-        component.model = { dataModel: { data: { field: 1 }, selected: true }, index: 10 };
+        component.model = { data: { field: 1 }, selected: true, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -277,10 +273,8 @@ describe('Component: DefaultTableRow', () => {
       });
 
       fit('Should be checked after click on component', () => {
-        // fake selected call
-        spyOn(component.selected, 'emit').and.callFake(() => component.model.dataModel.selected = !component.model.dataModel.selected);
         component.selectOnClick = true;
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -289,9 +283,17 @@ describe('Component: DefaultTableRow', () => {
         expect(fixture.debugElement.query(By.css('sfc-checkmark')).attributes['ng-reflect-active']).toEqual('true');
       });
 
+      fit('Should have constant type', () => {
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
+        component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('sfc-checkmark')).componentInstance.type)
+          .toEqual(CheckmarkType.Circle);
+      });
+
       fit('Should emit selected', () => {
-        spyOn(component.selected, 'emit');
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -300,12 +302,11 @@ describe('Component: DefaultTableRow', () => {
 
         selectRowByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalled();
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(1);
       });
 
       fit('Should selected emit for unselected row', () => {
-        spyOn(component.selected, 'emit');
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -314,12 +315,11 @@ describe('Component: DefaultTableRow', () => {
 
         selectRowByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: true });
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, true);
       });
 
       fit('Should selected emit for selected row', () => {
-        spyOn(component.selected, 'emit');
-        component.model = { dataModel: { data: { field: 1 }, selected: true }, index: 10 };
+        component.model = { data: { field: 1 }, selected: true, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -328,13 +328,11 @@ describe('Component: DefaultTableRow', () => {
 
         selectRowByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
       });
 
       fit('Should toggle selected', () => {
-        // fake selected call
-        spyOn(component.selected, 'emit').and.callFake(() => component.model.dataModel.selected = !component.model.dataModel.selected);
-        component.model = { dataModel: { data: { field: 1 }, selected: true }, index: 10 };
+        component.model = { data: { field: 1 }, selected: true, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Selectable }];
         fixture.detectChanges();
 
@@ -343,31 +341,31 @@ describe('Component: DefaultTableRow', () => {
 
         selectRowByCheckmark();
 
-        expect(component.selected.emit).toHaveBeenCalledWith({ index: component.model.index, selected: false });
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledOnceWith(component.model.sequence, false);
 
         selectRowByCheckmark();
 
-        expect((component.selected.emit as any).calls.allArgs()).toEqual([
-          [{ index: component.model.index, selected: false }],
-          [{ index: component.model.index, selected: true }]
+        expect((tableSelectServiceSpy.select as any).calls.allArgs()).toEqual([
+          [1, false],
+          [1, true]
         ]);
 
-        expect(component.selected.emit).toHaveBeenCalledTimes(2);
+        expect(tableSelectServiceSpy.select).toHaveBeenCalledTimes(2);
       });
     });
 
     describe('Sequence', () => {
       fit('Should have appropriate values by default', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };
         component.columns = [{ name: '', field: '', type: TableColumnType.Sequence }];
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('span.name').innerText).toEqual('');
-        expect(fixture.nativeElement.querySelector('span.name ~ span').innerText).toEqual('');
+        expect(fixture.nativeElement.querySelector('span.name ~ span').innerText).toEqual('1');
       });
 
       fit('Should have defined value', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10, sequence: 100 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 100 };
         component.columns = [{ name: 'Sequence column', field: '', type: TableColumnType.Sequence }];
         fixture.detectChanges();
 
@@ -378,7 +376,7 @@ describe('Component: DefaultTableRow', () => {
 
     describe('Data', () => {
       fit('Should have appropriate values when default state', () => {
-        component.model = { dataModel: { data: { field: 1 } }, index: 10 };
+        component.model = { data: { field: 1 }, index: 10, sequence: 1 };;
         component.columns = [{ name: '', field: '', type: TableColumnType.Data }];
         fixture.detectChanges();
 
@@ -387,7 +385,7 @@ describe('Component: DefaultTableRow', () => {
       });
 
       fit('Should have appropriate values', () => {
-        component.model = { dataModel: { data: { field: 'test-data' } }, index: 10 };
+        component.model = { data: { field: 'test-data' }, index: 10, sequence: 1 };
         component.columns = [{ name: 'Column name', field: 'field', type: TableColumnType.Data }];
         fixture.detectChanges();
 

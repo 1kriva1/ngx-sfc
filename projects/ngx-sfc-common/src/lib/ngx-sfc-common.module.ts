@@ -8,6 +8,7 @@ import {
 import {
   ClickOutsideDirective,
   ShowHideElementDirective,
+  CollapseExpandDirective,
   IfDirective,
   ThrowElementOnHoverDirective,
   TemplateReferenceDirective,
@@ -17,9 +18,10 @@ import {
   DomChangesDirective,
   ScrollTrackerDirective,
   ScrollIntoViewDirective,
-  ImageLoadDirective
+  ImageLoadDirective,
+  ComponentReferenceDirective
 } from './directives';
-import { SwitchMultiCasePipe } from './pipes';
+import { SwitchMultiCasePipe, SortByPipe } from './pipes';
 import {
   ButtonComponent,
   TooltipComponent,
@@ -39,10 +41,12 @@ import {
   TemplateContentComponent,
   CloseComponent,
   PaginationComponent,
-  SortingComponent,
   LoadContainerComponent,
   LoadMoreButtonComponent,
-  IconComponent
+  IconComponent,
+  CollapseExpandComponent,
+  CollapseExpandContainerComponent,
+  ToggleComponent
 } from './components';
 
 @NgModule({
@@ -50,6 +54,7 @@ import {
     // directives
     ClickOutsideDirective,
     ShowHideElementDirective,
+    CollapseExpandDirective,
     IfDirective,
     ThrowElementOnHoverDirective,
     TemplateReferenceDirective,
@@ -60,6 +65,7 @@ import {
     ScrollTrackerDirective,
     ScrollIntoViewDirective,
     ImageLoadDirective,
+    ComponentReferenceDirective,
     // components
     ButtonComponent,
     TooltipComponent,
@@ -72,10 +78,12 @@ import {
     HamburgerMenuComponent,
     DotsComponent,
     PaginationComponent,
-    SortingComponent,
     LoadMoreButtonComponent,
     LoadContainerComponent,
     IconComponent,
+    CollapseExpandComponent,
+    CollapseExpandContainerComponent,
+    ToggleComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -86,7 +94,8 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // pipes
-    SwitchMultiCasePipe        
+    SwitchMultiCasePipe,
+    SortByPipe
   ],
   imports: [
     CommonModule,
@@ -96,6 +105,7 @@ import {
     // directives
     ClickOutsideDirective,
     ShowHideElementDirective,
+    CollapseExpandDirective,
     IfDirective,
     ThrowElementOnHoverDirective,
     TemplateReferenceDirective,
@@ -106,6 +116,7 @@ import {
     ScrollTrackerDirective,
     ScrollIntoViewDirective,
     ImageLoadDirective,
+    ComponentReferenceDirective,
     // components
     ButtonComponent,
     TooltipComponent,
@@ -118,10 +129,12 @@ import {
     HamburgerComponent,
     HamburgerMenuComponent,
     PaginationComponent,
-    SortingComponent,
     LoadMoreButtonComponent,
     LoadContainerComponent,
     IconComponent,
+    CollapseExpandComponent,
+    CollapseExpandContainerComponent,
+    ToggleComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -132,7 +145,8 @@ import {
     DefaultModalHeaderComponent,
     DefaultModalFooterComponent,
     // pipes
-    SwitchMultiCasePipe        
+    SwitchMultiCasePipe,
+    SortByPipe
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

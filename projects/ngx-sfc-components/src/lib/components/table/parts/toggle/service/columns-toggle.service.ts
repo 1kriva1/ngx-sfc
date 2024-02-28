@@ -1,6 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { MediaLimits, ResizeService, WINDOW } from 'ngx-sfc-common';
-import { map, merge, Observable, shareReplay, startWith, Subject, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,26 +7,14 @@ import { map, merge, Observable, shareReplay, startWith, Subject, tap } from 'rx
 export class ColumnsToggleService {
 
   // current state of toggle 
-  private showColumns: boolean = false;
+  public show: boolean = true;
 
-  private toggleSubject = new Subject<void>();
+  private toggleSubject = new BehaviorSubject<boolean>(this.show);
 
   // toggle state observable
-  private toggle$ = this.toggleSubject.asObservable()
-    .pipe(
-      tap(() => this.showColumns = !this.showColumns),
-      shareReplay()
-    );
+  public toggle$ = this.toggleSubject.asObservable();
 
-  constructor(@Inject(WINDOW) private window: Window, private resizeService: ResizeService) { }
-
-  // show column observable 
-  public showColumns$: Observable<boolean> = merge(
-    this.resizeService.onResize$.pipe(startWith(null)),
-    this.toggle$
-  ).pipe(map(() => this.window.innerWidth >= MediaLimits.Tablet ? true : this.showColumns));
-
-  public toggle() {
-    this.toggleSubject.next();
+  public toggle(): void {
+    this.toggleSubject.next(this.show = !this.show);
   }
 }

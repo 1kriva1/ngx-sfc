@@ -176,7 +176,7 @@ describe('Component: RadioInput', () => {
         component.items = [{ value: 1, label: 'test label' }];
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('input[type=radio]').checked).toBeFalse();
+        expect(fixture.nativeElement.querySelector('input[type=radio]').classList).not.toContain('checked');
       });
 
       fit("Should be checked", () => {
@@ -184,27 +184,27 @@ describe('Component: RadioInput', () => {
         component.writeValue(1);
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('input[type=radio]').checked).toBeTrue();
+        expect(fixture.nativeElement.querySelector('input[type=radio]').classList).toContain('checked');
       });
 
       fit("Should be checked by default", () => {
         component.items = [{ value: 1, label: 'test label', default: true }];
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('input[type=radio]').checked).toBeTrue();
+        expect(fixture.nativeElement.querySelector('input[type=radio]').classList).toContain('checked');
       });
 
       fit("Should change value", () => {
         component.items = [{ value: 1, label: 'test label' }];
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('input[type=radio]').checked).toBeFalse();
+        expect(fixture.nativeElement.querySelector('input[type=radio]').classList).not.toContain('checked');
 
-        const inputEl = fixture.debugElement.query(By.css('input[type=radio]'));
-        inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, checked: 1 } });
+        const labelEl = fixture.debugElement.query(By.css('input[type=radio] + label'));
+        labelEl.triggerEventHandler('click', { target: { nativeElement: labelEl.nativeElement } });
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('input[type=radio]').checked).toBeTrue();
+        expect(fixture.nativeElement.querySelector('input[type=radio]').classList).toContain('checked');
       });
     });
 

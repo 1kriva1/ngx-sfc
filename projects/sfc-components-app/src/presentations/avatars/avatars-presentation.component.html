@@ -30,16 +30,7 @@
         </div>
 
         <div class="component-column">
-            <sfc-avatar [stroke]="10">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Top">16</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Bottom">26</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right">36</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop">56</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Left">66</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftBottom">76</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftTop">86</sfc-avatar-badge>
-            </sfc-avatar>
+            <sfc-avatar [stroke]="10" [badges]="badges"></sfc-avatar>
         </div>
 
     </div>
@@ -72,16 +63,7 @@
         </div>
 
         <div class="component-column">
-            <sfc-avatar [progress]="67" [progressModel]="progressFullColor">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Top">16</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Bottom">26</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right">36</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop">56</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Left">66</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftBottom">76</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftTop">86</sfc-avatar-badge>
-            </sfc-avatar>
+            <sfc-avatar [progress]="67" [progressModel]="progressFullColor" [badges]="badges"></sfc-avatar>
         </div>
 
     </div>
@@ -106,41 +88,17 @@
 
         <div class="component-column">
             <sfc-avatar [radius]="40" [sfcComponentSize]="ComponentSize.Small" [stars]="true" [starsValue]="1.75"
-                [data]="dataImage">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right" [background]="'#8CC152'">
-                    <fa-icon [icon]="faCopyright"></fa-icon>
-                </sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop" [background]="'#ED5565'">
-                    <fa-icon [icon]="faPlus"></fa-icon>
-                </sfc-avatar-badge>
-            </sfc-avatar>
+                [data]="dataImage" [badges]="badgesIcons"></sfc-avatar>
         </div>
 
         <div class="component-column">
             <sfc-avatar [radius]="160" [sfcComponentSize]="ComponentSize.Large" [stars]="true" [starsValue]="2.15"
-                [data]="dataImage">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right" [background]="'#8CC152'">
-                    <fa-icon [icon]="faCopyright"></fa-icon>
-                </sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop" [background]="'#ED5565'">
-                    <fa-icon [icon]="faPlus"></fa-icon>
-                </sfc-avatar-badge>
-            </sfc-avatar>
+                [data]="dataImage" [badges]="badgesIcons"></sfc-avatar>
         </div>
 
         <div class="component-column">
             <sfc-avatar [radius]="336" [sfcComponentSize] [customSize]="4.2" [stars]="true" [starsValue]="3.85"
-                [data]="dataImage">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right" [background]="'#8CC152'">
-                    <fa-icon [icon]="faCopyright"></fa-icon>
-                </sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop" [background]="'#ED5565'">
-                    <fa-icon [icon]="faPlus"></fa-icon>
-                </sfc-avatar-badge>
-            </sfc-avatar>
+                [data]="dataImage" [badges]="badgesIcons"></sfc-avatar>
         </div>
 
     </div>
@@ -149,44 +107,17 @@
 
         <div class="component-column">
             <sfc-avatar [radius]="40" [sfcComponentSize]="ComponentSize.Small" [stars]="true" [starsValue]="1.75"
-                [data]="dataImage">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Top">16</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Bottom">26</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right">36</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop">56</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Left">66</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftBottom">76</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftTop">86</sfc-avatar-badge>
-            </sfc-avatar>
+                [data]="dataImage" [badges]="badges"></sfc-avatar>
         </div>
 
         <div class="component-column">
             <sfc-avatar [radius]="160" [sfcComponentSize]="ComponentSize.Large" [stars]="true" [starsValue]="2.15"
-                [data]="dataImage">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Top">16</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Bottom">26</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right">36</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop">56</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Left">66</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftBottom">76</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftTop">86</sfc-avatar-badge>
-            </sfc-avatar>
+                [data]="dataImage" [badges]="badges"></sfc-avatar>
         </div>
 
         <div class="component-column">
             <sfc-avatar [radius]="336" [sfcComponentSize] [customSize]="4.2" [stars]="true" [starsValue]="3.85"
-                [data]="dataImage">
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Top">16</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Bottom">26</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Right">36</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightBottom">46</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.RightTop">56</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.Left">66</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftBottom">76</sfc-avatar-badge>
-                <sfc-avatar-badge [position]="AvatarBadgePosition.LeftTop">86</sfc-avatar-badge>
-            </sfc-avatar>
+                [data]="dataImage" [badges]="badges"></sfc-avatar>
         </div>
 
     </div>

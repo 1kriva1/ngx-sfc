@@ -574,7 +574,7 @@ describe('Component: DateTimeModal', () => {
         component.nowButton = true;
         init();
 
-        const nowBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0];
+        const nowBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[2];
 
         expect(nowBtn.componentInstance.types).toEqual([ButtonType.Rounded]);
         expect(nowBtn.componentInstance.text).toEqual('Now');
@@ -584,7 +584,7 @@ describe('Component: DateTimeModal', () => {
         component.nowButton = true;
         init();
 
-        const nowBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0],
+        const nowBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[2],
           event = { target: nowBtn.nativeElement, button: 0 };
         nowBtn.triggerEventHandler('mousedown', event);
 
@@ -610,7 +610,7 @@ describe('Component: DateTimeModal', () => {
         component.clearButton = true;
         init();
 
-        const clearBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0];
+        const clearBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[2];
 
         expect(clearBtn.componentInstance.types).toEqual([ButtonType.Rounded]);
         expect(clearBtn.componentInstance.text).toEqual('Clear');
@@ -621,7 +621,7 @@ describe('Component: DateTimeModal', () => {
         component.clearButton = true;
         init();
 
-        const clearBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0],
+        const clearBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[2],
           event: any = { target: clearBtn.nativeElement, button: 0 };
         clearBtn.triggerEventHandler('mousedown', event);
 

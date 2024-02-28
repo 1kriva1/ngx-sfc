@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { faAngleLeft, faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { UIConstants } from 'ngx-sfc-common';
 import { getCssLikeValue, isDefined } from 'ngx-sfc-common';
@@ -9,12 +9,13 @@ import { INumberSpinnerModel } from './parts/spinner/number-spinner.model';
 @Component({
   selector: 'sfc-number-input',
   templateUrl: './number-input.component.html',
-  styleUrls: ['../../styles/input.component.scss', '../../styles/vertical-input.component.scss',
+  styleUrls: ['../../styles/input.component.scss',
+    '../../styles/vertical-input.component.scss',
     './number-input.component.scss']
 })
 export class NumberInputComponent
   extends BaseInputComponent<number>
-  implements OnInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy {
 
   @Input()
   max: number = Number.MAX_SAFE_INTEGER;
@@ -79,6 +80,13 @@ export class NumberInputComponent
   ngOnInit(): void {
     this._subscription =
       this.value$.subscribe(value => this.updateWidth(value));
+  }
+
+  override ngAfterViewInit(): void {
+    if (this.hasValue)
+      this.updateWidth(this.value!);
+
+    super.ngAfterViewInit();
   }
 
   ngOnDestroy(): void {

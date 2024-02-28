@@ -1,31 +1,40 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, DoCheck, HostBinding, Inject, Input, IterableDiffer, IterableDiffers, OnInit, QueryList, TemplateRef } from '@angular/core';
-import { all, firstOrDefault, getCalcValue, hasItemBy, isDefined, MediaLimits, PaginationService, Position, ResizeService, sortByPath, SortingDirection, SortingService, TemplateReferenceDirective, WINDOW } from 'ngx-sfc-common';
-import { IPaginationEvent } from 'ngx-sfc-common';
-import { ISortingEvent } from 'ngx-sfc-common';
-import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
+import {
+  AfterContentChecked, AfterViewChecked, ChangeDetectorRef, Component, ContentChildren,
+  DoCheck, EventEmitter, HostBinding, Inject, Input, IterableDiffer, IterableDiffers, OnDestroy,
+  OnInit, Output, QueryList, TemplateRef
+} from '@angular/core';
+import {
+  all, firstOrDefault, getCalcValue, getCssLikeValue, isDefined,
+  MediaLimits, Position, ResizeService, SortingDirection, TemplateReferenceDirective, WINDOW,
+  UIConstants, LoadContainerType, LoaderFunction, LoadContainerLoadType, ILoadContainerModel,
+  ILoadContainerResultModel, IPaginationModel, PaginationConstants, generateGuid, any,
+  hasItem, SortingService, ISortingModel, ILoadContainerPredicateParameters, FilterFunction, UIClass, IToggleSwitcherModel
+} from 'ngx-sfc-common';
+import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
 import { TableColumnType } from './parts/columns/table-column-type.enum';
-import { IDefaultTableColumnInnerModel, IDefaultTableColumnModel } from './parts/columns/table-column.model';
+import { ITableColumnExtendedModel, ITableColumnModel } from './parts/columns/table-column.model';
 import { ColumnsToggleService } from './parts/toggle/service/columns-toggle.service';
 import { ITableSelectEvent } from './service/select/table-select.event';
 import { TableSelectService } from './service/select/table-select.service';
 import { TableDataType } from './enums/table-data-type.enum';
-import { ITablePaginationModel } from './models/table-pagination.model';
 import { TableConstants } from './table.constants';
 import { TableTemplate } from './enums/table-template.enum';
-import { ITableDataModel, ITableModel } from './models/table.model';
+import { ITableModel } from './models/table.model';
+import { faTableList, faBorderAll } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [PaginationService, SortingService, TableSelectService, ColumnsToggleService, ResizeService]
+  providers: [SortingService, TableSelectService, ColumnsToggleService, ResizeService]
 })
-export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked, AfterViewChecked, DoCheck {
+export class TableComponent implements OnInit, AfterContentChecked, AfterViewChecked, DoCheck, OnDestroy {
 
   TableDataType = TableDataType;
   TableColumnType = TableColumnType;
   TableTemplate = TableTemplate;
   Constants = TableConstants;
+  LoadContainerType = LoadContainerType;
 
   @Input()
   position: Position = Position.Center;
@@ -44,7 +53,10 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, 
   showColumns: boolean = true;
 
   @Input()
-  pagination: ITablePaginationModel = { enabled: true, page: TableConstants.DEFAULT_PAGE, size: TableConstants.DEFAULT_PAGE_SIZE };
+  columnsToggle: boolean = false;
+
+  @Input()
+  pagination: IPaginationModel = PaginationConstants.DEFAULT_PAGINATION;
 
   @Input()
   sequence: boolean = false;
@@ -53,10 +65,22 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, 
   expanded: boolean = false;
 
   @Input()
-  selectable: boolean = false;
+  notFoundLabel: string = this.Constants.NOT_FOUND_LABEL_DEFAULT;
 
   @Input()
-  selectOnClick: boolean = false;
+  showTotal: boolean = false;
+
+  @Input()
+  totalLabel: string = this.Constants.TOTAL_LABEL_DEFAULT;
+
+  @Input()
+  paginationCount: number = PaginationConstants.DEFAULT_COUNT;
+
+  @Input()
+  paginationLimits: boolean = false;
+
+  @Input()
+  showLoading: boolean = true;
 
   // Template references 
 
@@ -74,62 +98,137 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, 
   //Data
 
   @Input()
-  data: ITableDataModel[] = [];
+  data: any[] = [];
 
   @Input()
-  set data$(value: Observable<ITableDataModel[]>) {
-    this._data$ = value;
-    this.paginationService.init(this._data$, this.pagination.page, this.pagination.size);
-  }
-
-  get data$(): Observable<ITableDataModel[]> {
-    return this._data$;
-  }
-  private _data$!: Observable<ITableDataModel[]>
+  data$!: Observable<any[]>;
 
   private dataDiffer!: IterableDiffer<any>;
 
-  private dataSubject!: BehaviorSubject<ITableDataModel[]>;
-
-  private dataValue$!: Observable<ITableModel[]>;
+  private dataSubject!: BehaviorSubject<any[]>;
 
   // End Data
 
   // Columns
 
   @Input()
-  columns: IDefaultTableColumnModel[] = [];
+  columns: ITableColumnModel[] = [];
 
-  private columnsDiffer!: IterableDiffer<IDefaultTableColumnModel>;
+  @Input()
+  showColumnsLabel!: string;
 
-  private columnsSubject: BehaviorSubject<IDefaultTableColumnModel[]> = new BehaviorSubject<IDefaultTableColumnModel[]>(this.columns);
+  @Input()
+  hideColumnsLabel!: string;
 
-  private columns$!: Observable<IDefaultTableColumnInnerModel[]>;
+  @Input()
+  resize: boolean = true;
 
-  private columnsSorting$!: Observable<IDefaultTableColumnInnerModel[]>;
+  private columnsDiffer!: IterableDiffer<ITableColumnModel>;
 
-  private columnWidth$!: Observable<number>;
+  private columnsSubject: BehaviorSubject<ITableColumnModel[]> = new BehaviorSubject<ITableColumnModel[]>(this.columns);
+
+  public tableColumns: ITableColumnExtendedModel[] = [];
 
   // End Columns  
 
-  public allRowsSelected: boolean = false;
+  // Load container
+
+  @Input()
+  loadType: LoadContainerLoadType = LoadContainerLoadType.Pagination;
+
+  @Input()
+  loader!: LoaderFunction;
+
+  @Input()
+  filter?: FilterFunction;
+
+  @Input()
+  predicate$!: Observable<ILoadContainerPredicateParameters | null>;
+
+  public loadModel!: ILoadContainerModel;
+
+  public loadContainerId: string = generateGuid();
+
+  public items: ITableModel[] = [];
+
+  public total: number = 0;
+
+  private page: number = PaginationConstants.DEFAULT_PAGE;
+
+  @HostBinding(`class.${UIClass.Loading}`)
+  public loading: boolean = false;
+
+  // End Load container
+
+  // Selection
+
+  @Input()
+  selectable: boolean = false;
+
+  @Input()
+  selectOnClick: boolean = false;
+
+  @Output()
+  selected: EventEmitter<ITableSelectEvent> = new EventEmitter<ITableSelectEvent>();
+
+  public get allRowsSelected(): boolean {
+    return (this.allSelected || this.total == this.selectedService.selectedItems.length)
+      && !any(this.selectedService.unselectedItems)
+      && any(this.items);
+  };
+
+  private allSelected: boolean = false;
+
+  private _allSelectionSubscription!: Subscription;
+
+  // End Selection
+
+  // Data toggle
+
+  @Input()
+  dataListLabel: string = this.Constants.DATA_LIST_LABEL;
+
+  @Input()
+  dataCardsLabel: string = this.Constants.DATA_CARDS_LABEL;
+
+  public toggleSwitcherLeftModel!: IToggleSwitcherModel;
+
+  public toggleSwitcherRightModel!: IToggleSwitcherModel;
+
+  // End data toggle
 
   public vm$!: Observable<any>;
+
+  private _columnsResizeSubscription!: Subscription;
+
+  private _columnsSubscription!: Subscription;
+
+  private _sortingSubscription!: Subscription;
+
+  private get initialSorting(): ISortingModel | null {
+    const activeSortingColumn = firstOrDefault(this.columns, column => column.sorting?.active!);
+
+    if (activeSortingColumn)
+      return { id: activeSortingColumn.field, direction: activeSortingColumn.sorting?.direction! };
+
+    const enabledSortingColumn = firstOrDefault(this.columns, column => column.sorting?.enabled!);
+
+    return enabledSortingColumn ? { id: enabledSortingColumn.field, direction: enabledSortingColumn.sorting?.direction! } : null;
+  }
 
   @ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
   templates: QueryList<TemplateReferenceDirective> | undefined;
 
   constructor(
+    public columnsToggleService: ColumnsToggleService,
     @Inject(WINDOW) private window: Window,
-    private paginationService: PaginationService,
     private selectedService: TableSelectService,
     private sortingService: SortingService,
     private changeDetector: ChangeDetectorRef,
     private resizeService: ResizeService,
-    private columnsToggleService: ColumnsToggleService,
     private iterableDiffers: IterableDiffers) {
-    this.dataDiffer = iterableDiffers.find([]).create<IterableDiffer<ITableDataModel>>(undefined);
-    this.columnsDiffer = iterableDiffers.find([]).create<IDefaultTableColumnModel>(undefined);
+    this.dataDiffer = iterableDiffers.find([]).create<IterableDiffer<any>>(undefined);
+    this.columnsDiffer = iterableDiffers.find([]).create<ITableColumnModel>(undefined);
   }
 
   ngOnInit(): void {
@@ -139,98 +238,36 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, 
       this.data$ = this.dataSubject.asObservable();
     }
 
-    // set up data models with indexes
-    const dataIndexed$: Observable<ITableModel[]> = this.data$.pipe(map((data) => data.map((dataModel, index) => { return { index, dataModel } }))),
-      // set up sorting observable
-      sorting$: Observable<ISortingEvent | null> = this.getSortingObservable(),
-      // set up selection observable
-      selection$: Observable<ITableSelectEvent | null> = this.selectedService.select$.pipe(
-        startWith(null)
-      );
+    if (this.selectable)
+      this.selectionSubscribe();
 
-    // set up columns (conditionally add sequence or selectable columns)
-    this.columns$ = this.columnsSubject.asObservable().pipe(
-      map(columns => {
-        let tableColumns = columns.slice(0);
+    // set up columns (conditionally add sequence, selectable and expand columns)
+    this.columnsSubscribe();
 
-        if (this.sequence)
-          tableColumns.unshift(TableConstants.SEQUENCE_COLUMN);
+    if (this.resize)
+      this.resizeSubscribe();
 
-        if (this.selectable)
-          tableColumns.unshift(TableConstants.SELECTABLE_COLUMN);
+    this.sortingSubscribe();
 
-        if (this.expanded)
-          tableColumns.push(TableConstants.EXPANDED_COLUMN);
+    this.loadModel = {
+      predicate$: this.predicate$,
+      data$: this.data$,
+      loader: this.loader,
+      filter: this.filter,
+      loadType: this.loadType,
+      pagination: this.pagination,
+      sorting: this.initialSorting
+    };
 
-        return tableColumns;
-      })
-    );
-
-    this.columnsSorting$ = combineLatest([this.columns$, sorting$]).pipe(
-      map(([columns, event]) => {
-        columns.forEach(column => {
-          if (column.sorting?.enabled) {
-            column.sorting.active = column.field == event?.id || false;
-
-            if (!column.sorting.active)
-              column.sorting.direction = SortingDirection.Ascending;
-          }
-        });
-
-        return columns;
-      })
-    );
-
-    // set up main data observable
-    this.dataValue$ = combineLatest([
-      dataIndexed$,
-      this.paginationService.pagination$,
-      sorting$,
-      selection$
-    ]).pipe(
-      map(([data, paginationEvent, sortingEvent, selectionEvent]) => {
-        // handle selection
-        this.handleSelectionEvent(data, selectionEvent);
-
-        // handle pagination and sorting
-        let sortedData = this.sortData(data, sortingEvent),
-          paginatedData = this.paginateData(sortedData, paginationEvent);
-
-        // handle data sequence  
-        if (this.sequence) {
-          this.updateRowSequenceValues(paginationEvent.page, paginatedData)
-        }
-
-        return paginatedData;
-      })
-    );
-  }
-
-  ngAfterViewInit(): void {
-    // combine all observable to view model
-    this.vm$ = combineLatest([
-      this.columnsSorting$,
-      this.dataValue$,
-      this.columnsToggleService.showColumns$,
-      this.columnWidth$
-    ]).pipe(
-      map(([columns, data, showColumns, columnWidth]) => {
-        return {
-          columns,
-          data,
-          columnWidth,
-          showColumns: this.showColumns && showColumns,
-          columnStyle: { width: getCalcValue(columnWidth), justifyContent: this.position }
-        }
-      }
-      ));
+    this.toggleSwitcherLeftModel = { label: this.dataListLabel, icon: faTableList };
+    this.toggleSwitcherRightModel = { label: this.dataCardsLabel, icon: faBorderAll };
   }
 
   ngAfterViewChecked(): void {
     this.changeDetector.detectChanges();
   }
 
-  ngDoCheck() {
+  ngDoCheck(): void {
     if (this.dataDiffer.diff(this.data)) {
       this.dataSubject.next(this.data);
     }
@@ -244,75 +281,121 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit, 
     this.changeDetector.detectChanges();
   }
 
-  ngAfterContentInit(): void {
-    this.columnWidth$ = combineLatest([
-      this.resizeService.onResize$.pipe(startWith({})),
-      this.columns$
-    ]).pipe(map(([_, columns]) => this.getColumnWidth(this.window.innerWidth, columns.length)));
+  ngOnDestroy(): void {
+    this._allSelectionSubscription?.unsubscribe();
+    this._columnsResizeSubscription?.unsubscribe();
+    this._columnsSubscription?.unsubscribe();
+    this._sortingSubscription?.unsubscribe();
   }
 
-  onDataTypeToggle(): void {
-    this.dataType = this.dataType == TableDataType.Rows ? TableDataType.Cards : TableDataType.Rows;
+  public onDataTypeToggle(): void {
+    this.dataType = this.dataType == TableDataType.Rows
+      ? TableDataType.Cards
+      : TableDataType.Rows;
   }
 
-  selectRow(model: ITableSelectEvent): void {
-    this.selectedService.select(model.index, model.selected);
-  }
+  public handleSuccess(result: ILoadContainerResultModel<any>): void {
+    this.page = result.page;
+    this.total = result.total;
 
-  private getSortingObservable(): Observable<ISortingEvent | null> {
-    const firstSortingColumn: IDefaultTableColumnModel | undefined = firstOrDefault(this.columns, column => column?.sorting?.enabled || false);
-    return this.sortingService.sorting$.pipe(
-      startWith(firstSortingColumn ? { id: firstSortingColumn.field, direction: firstSortingColumn.sorting?.direction || SortingDirection.Ascending } : null)
-    );
-  }
-
-  private getColumnWidth(windowWidth: number, columnsLength: number): number {
-    if (windowWidth <= MediaLimits.MobileLarge)
-      return 1;
-
-    if (windowWidth <= MediaLimits.Tablet)
-      return Math.ceil(columnsLength / 2);
-
-    return columnsLength;
-  }
-
-  private handleSelectionEvent(data: ITableModel[], selectionEvent: ITableSelectEvent | null): void {
-    if (selectionEvent != null) {
-      if (selectionEvent.index == null) {
-        data.forEach(item => item.dataModel.selected = selectionEvent.selected);
-      } else {
-        data.forEach(item => {
-          if (selectionEvent.index === item.index) {
-            item.dataModel.selected = selectionEvent.selected;
-          }
-        });
-      }
-    }
-
-    this.allRowsSelected = all(data, item => Boolean(item.dataModel.selected));
-  }
-
-  private paginateData(data: ITableModel[], paginationEvent: IPaginationEvent): ITableModel[] {
-    let pagedData = this.pagination.enabled
-      ? data.slice((paginationEvent.page - 1) * this.pagination.size, paginationEvent.page * this.pagination.size)
-      : data;
-
-    return pagedData;
-  }
-
-  private sortData(data: ITableModel[], sortingEvent: ISortingEvent | null): ITableModel[] {
-    const sortedData = sortingEvent && hasItemBy(this.columns, col => col.field == sortingEvent.id)
-      ? sortByPath(data, `dataModel.data.${sortingEvent.id}`, sortingEvent.direction)
-      : data;
-
-    return sortedData;
-  }
-
-  private updateRowSequenceValues(page: number, data: any[]) {
-    let from = (page - 1) * this.pagination.size;
-    data.forEach(item => {
-      item.sequence = from + 1;
-      from++;
+    const items: ITableModel[] = result.items.map((item, index) => {
+      const sequence = (index + 1) + ((this.page * this.pagination.size) - this.pagination.size);
+      return {
+        index: index,
+        sequence: sequence,
+        selected: this.getItemSelected(sequence),
+        data: item
+      };
     });
+
+    if (result.reset)
+      this.items = items;
+    else
+      this.items = this.items.concat(items);
+  }
+
+  private selectionSubscribe(): void {
+    this._allSelectionSubscription = this.selectedService.select$
+      .subscribe((event: ITableSelectEvent) => {
+        if (event.index == null) {
+          this.allSelected = event.selected;
+          this.items.forEach(item => item.selected = event.selected);
+        }
+
+        this.selected.emit(event);
+      });
+  }
+
+  private resizeSubscribe(): void {
+    this._columnsResizeSubscription = this.resizeService.onResize$
+      .subscribe(() => this.tableColumns.forEach(column =>
+        column.calculatedWidth = this.calculateColumnWidth(column, this.tableColumns.length)));
+  }
+
+  private columnsSubscribe(): void {
+    this._columnsSubscription = this.columnsSubject.asObservable().pipe(
+      filter(columns => any(columns)),
+      map((columns: ITableColumnModel[]) => {
+        let tableColumns = JSON.parse(JSON.stringify(columns));
+
+        if (this.sequence)
+          tableColumns.unshift(TableConstants.SEQUENCE_COLUMN);
+
+        if (this.selectable)
+          tableColumns.unshift(TableConstants.SELECTABLE_COLUMN);
+
+        if (this.expanded)
+          tableColumns.push(TableConstants.EXPANDED_COLUMN);
+
+        // calculated width not work without deep copy
+        return JSON.parse(JSON.stringify(tableColumns));
+      })
+    ).subscribe((columns: ITableColumnExtendedModel[]) => {
+      columns.forEach((column: ITableColumnExtendedModel) => {
+        column.calculatedWidth = this.calculateColumnWidth(column, columns.length);
+
+        const sortingColumn = this.initialSorting;
+        if (this.initialSorting) {
+          this.setColumnSorting(column, sortingColumn?.id!)
+        }
+      });
+
+      this.tableColumns = columns;
+    });
+  }
+
+  private sortingSubscribe(): void {
+    this._sortingSubscription = this.sortingService.sorting$.subscribe((sortingEvent) =>
+      this.tableColumns.forEach((column: ITableColumnExtendedModel) => this.setColumnSorting(column, sortingEvent?.id)));
+  }
+
+  private calculateColumnWidth(column: ITableColumnExtendedModel, columnsLength: number): string {
+    // defined width for all columns
+    if (all(this.columns, column => isDefined(column.width)))
+      return getCssLikeValue(column.width!, UIConstants.CSS_PERCENTAGE);
+
+    let width: number = columnsLength;
+
+    if (this.window.innerWidth <= MediaLimits.MobileLarge)
+      width = 1;
+    else if (this.window.innerWidth <= MediaLimits.Tablet)
+      width = Math.ceil(columnsLength / 2);
+
+    return getCalcValue(width);
+  }
+
+  private setColumnSorting(column: ITableColumnExtendedModel, sortingId: string): void {
+    if (column.sorting?.enabled) {
+      column.sorting.active = column.field == sortingId;
+
+      if (!column.sorting.active)
+        column.sorting.direction = SortingDirection.Ascending;
+    }
+  }
+
+  private getItemSelected(sequence: number): boolean {
+    return this.allSelected
+      ? !hasItem(this.selectedService.unselectedItems, sequence)
+      : hasItem(this.selectedService.selectedItems, sequence);
   }
 }

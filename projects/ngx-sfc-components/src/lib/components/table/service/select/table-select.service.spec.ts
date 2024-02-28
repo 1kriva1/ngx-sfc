@@ -35,6 +35,7 @@ describe('Service: TableSelect', () => {
     });
 
     service.select(11, true);
+    expect(service.selectedItems).toEqual([11]);
   });
 
   fit('Should unselect', done => {
@@ -45,6 +46,31 @@ describe('Service: TableSelect', () => {
     });
 
     service.select(11, false);
+    expect(service.unselectedItems).toEqual([11]);
+  });
+
+  fit('Should toggle', () => {
+    service.select(11, true);
+
+    expect(service.selectedItems).toEqual([11]);
+    expect(service.unselectedItems).toEqual([]);
+
+    service.select(11, false);
+
+    expect(service.selectedItems).toEqual([]);
+    expect(service.unselectedItems).toEqual([11]);
+  });
+
+  fit('Should toggle several items', () => {
+    service.select(11, true);
+
+    expect(service.selectedItems).toEqual([11]);
+    expect(service.unselectedItems).toEqual([]);
+
+    service.select(12, false);
+
+    expect(service.selectedItems).toEqual([11]);
+    expect(service.unselectedItems).toEqual([12]);
   });
 
   fit('Should select all', done => {
@@ -55,6 +81,8 @@ describe('Service: TableSelect', () => {
     });
 
     service.selectAll(true);
+    expect(service.unselectedItems).toEqual([]);
+    expect(service.selectedItems).toEqual([]);
   });
 
   fit('Should unselect all', done => {
@@ -65,5 +93,7 @@ describe('Service: TableSelect', () => {
     });
 
     service.selectAll(false);
+    expect(service.selectedItems).toEqual([]);
+    expect(service.unselectedItems).toEqual([]);
   });
 });

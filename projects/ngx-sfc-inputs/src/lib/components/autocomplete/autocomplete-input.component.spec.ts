@@ -2,10 +2,11 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, DelimeterComponent, ILoadMoreModel, ILoadMoreParameters, MouseDownDirective, ScrollIntoViewDirective, UIClass } from 'ngx-sfc-common';
-import { ComponentSizeDirective, ScrollTrackerDirective } from 'ngx-sfc-common';
-import { BounceLoaderComponent, LoadMoreButtonComponent } from 'ngx-sfc-common';
-import { LoadContainerComponent } from 'ngx-sfc-common';
+import {
+    CommonConstants, DelimeterComponent, MouseDownDirective, ScrollIntoViewDirective, UIClass,
+    ComponentSizeDirective, ScrollTrackerDirective, BounceLoaderComponent, LoadMoreButtonComponent,
+    LoadContainerComponent, ILoadContainerLoaderResultModel, ILoadContainerParameters, LoadContainerLoadType
+} from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { AutoCompleteInputComponent } from './autocomplete-input.component';
@@ -22,8 +23,10 @@ describe('Component: AutoCompleteInput', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [InputReferenceDirective, MouseDownDirective, BounceLoaderComponent, LoadMoreButtonComponent, ComponentSizeDirective,
-                LoadContainerComponent, ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent, AutoCompleteItemComponent, AutoCompleteInputComponent]
+            declarations: [InputReferenceDirective, MouseDownDirective, BounceLoaderComponent,
+                LoadMoreButtonComponent, ComponentSizeDirective, LoadContainerComponent,
+                ScrollTrackerDirective, ScrollIntoViewDirective, DelimeterComponent,
+                AutoCompleteItemComponent, AutoCompleteInputComponent]
         }).compileComponents();
     });
 
@@ -74,6 +77,18 @@ describe('Component: AutoCompleteInput', () => {
 
         fit('Should have undefined loader for load model', () => {
             expect(component.loadModel.loader).toBeUndefined();
+        });
+
+        fit('Should have default load type for load model', () => {
+            expect(component.loadModel.loadType).toEqual(LoadContainerLoadType.Button);
+        });
+
+        fit('Should have defined load type for load model', () => {
+            component.showLoadMoreButton = false;
+            component.ngAfterViewInit();
+            fixture.detectChanges();
+
+            expect(component.loadModel.loadType).toEqual(LoadContainerLoadType.Scroll);
         });
 
         fit('Should have defined loader for load model', () => {
@@ -692,7 +707,7 @@ describe('Component: AutoCompleteInput', () => {
             dataSubject?.next({
                 next: true,
                 items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }],
-                reset: false
+                total: 2
             });
             fixture.detectChanges();
 
@@ -703,7 +718,7 @@ describe('Component: AutoCompleteInput', () => {
             dataSubject?.next({
                 next: true,
                 items: [{ key: 0, value: 'test 0' }, { key: 1, value: 'test 1' }, { key: 2, value: 'test 2' }],
-                reset: false
+                total: 3
             });
             fixture.detectChanges();
 
@@ -754,7 +769,7 @@ describe('Component: AutoCompleteInput', () => {
 
     describe('Inner validation', () => {
         fit("Should raise validation error, when error occurred", fakeAsync(() => {
-            component.loader = (_: ILoadMoreParameters) => {
+            component.loader = (_: ILoadContainerParameters) => {
                 throw { errorMsg: 'Error occurred' }
             };
             component.ngAfterViewInit();
@@ -766,7 +781,7 @@ describe('Component: AutoCompleteInput', () => {
         }));
 
         fit("Should hide validation error, when load data successfully", fakeAsync(() => {
-            component.loader = (_: ILoadMoreParameters) => {
+            component.loader = (_: ILoadContainerParameters) => {
                 throw { errorMsg: 'Error occurred' }
             };
             component.ngAfterViewInit();
@@ -784,12 +799,12 @@ describe('Component: AutoCompleteInput', () => {
         }));
     });
 
-    function initLoader(model: ILoadMoreModel<IAutoCompleteItemModel> = {
-        next: true, items: [{ key: 0, value: 'test 0' }], reset: false
+    function initLoader(model: ILoadContainerLoaderResultModel<IAutoCompleteItemModel> = {
+        next: true, items: [{ key: 0, value: 'test 0' }], total: 1
     })
-        : BehaviorSubject<ILoadMoreModel<IAutoCompleteItemModel>> {
-        const dataSubject = new BehaviorSubject<ILoadMoreModel<IAutoCompleteItemModel>>(model);
-        component.loader = (_: ILoadMoreParameters) => {
+        : BehaviorSubject<ILoadContainerLoaderResultModel<IAutoCompleteItemModel>> {
+        const dataSubject = new BehaviorSubject<ILoadContainerLoaderResultModel<IAutoCompleteItemModel>>(model);
+        component.loader = (_: ILoadContainerParameters) => {
             return dataSubject.asObservable()
         };
         component.ngAfterViewInit();

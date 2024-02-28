@@ -1,4 +1,8 @@
 @import "../../../../styles";
+/* stylelint-disable */
+@import "../../../close/close.component.mixins.scss";
+@import "../../../delimeter/delimeter.component.mixins.scss";
+/* stylelint-enable */
 
 $left-right-limit: 1.5em;
 
@@ -31,9 +35,13 @@ $left-right-limit: 1.5em;
       sfc-close {
         position: absolute;
         right: $left-right-limit;
+
+        @include sfc-close-as-default;
       }
     }
 
-    @include delimeter-same-as-default;
+    sfc-delimeter {
+      @include sfc-delimeter-as-default;
+    }
   }
 }

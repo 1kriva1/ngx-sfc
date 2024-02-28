@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CheckmarkComponent, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { CheckmarkComponent, CheckmarkType, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
 import { TableSelectService } from '../../../service/select/table-select.service';
 import { SelectableTableColumnComponent } from './selectable-table-column.component';
+import { SelectableTableColumnConstants } from './selectable-table-column.constants';
 
 describe('Component: SelectableTableColumn', () => {
   let component: SelectableTableColumnComponent;
@@ -55,6 +56,11 @@ describe('Component: SelectableTableColumn', () => {
       expect(fixture.debugElement.query(By.css('sfc-checkmark')).attributes['ng-reflect-active']).toEqual('false');
     });
 
+    fit('Should have constant type', () => {
+      expect(fixture.debugElement.query(By.css('sfc-checkmark')).componentInstance.type)
+        .toEqual(CheckmarkType.Circle);
+    });
+
     fit('Should be checked, if component selected value equal true', () => {
       component.selected = true;
       fixture.detectChanges();
@@ -64,8 +70,17 @@ describe('Component: SelectableTableColumn', () => {
   });
 
   describe('Label', () => {
-    fit('Should have constant value', () => {
-      expect(fixture.nativeElement.querySelector('div.container sfc-checkmark ~ span').innerText).toEqual('ALL');
+    fit('Should have select constant value', () => {
+      expect(fixture.nativeElement.querySelector('div.container sfc-checkmark ~ span').innerText)
+        .toEqual(SelectableTableColumnConstants.LABEL_SELECT);
+    });
+
+    fit('Should have unselect constant value', () => {
+      component.selected = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('div.container sfc-checkmark ~ span').innerText)
+        .toEqual(SelectableTableColumnConstants.LABEL_UNSELECT);
     });
   });
 

@@ -1,0 +1,97 @@
+@use "ngx-sfc-common/styles/index" as *;
+@import "../../styles/variables";
+
+@mixin sfc-tags-input-as-default() {
+  .container {
+    .content {
+      .tags {
+        border-color: $color-default;
+
+        sfc-tags-chip {
+          ::ng-deep > .container {
+            background-color: $color-3;
+
+            &:hover {
+              background-color: $color-4;
+            }
+          }
+
+          &.disabled {
+            ::ng-deep > .container {
+              color: $color-disabled-default;
+              background-color: $color-1;
+
+              sfc-close {
+                color: $color-disabled-default;
+              }
+
+              &:hover {
+                background-color: initial;
+              }
+            }
+          }
+        }
+      }
+
+      .right-side-info {
+        color: $color-default;
+      }
+    }
+  }
+
+  /* stylelint-disable no-descending-specificity */
+  &.disabled {
+    .container {
+      .content {
+        .tags {
+          border-color: $color-disabled-default;
+        }
+      }
+    }
+  }
+
+  &.focus {
+    .container {
+      .content {
+        .tags {
+          border-color: $color-hover-default;
+        }
+      }
+    }
+  }
+
+  &.bordered {
+    .container {
+      .content {
+        .tags {
+          border-color: $color-bordered-default;
+        }
+      }
+    }
+
+    &.disabled {
+      .container {
+        .content {
+          .tags {
+            border-color: $color-disabled-bordered-default;
+          }
+        }
+      }
+    }
+  }
+
+  &.has-value.ng-dirty.ng-valid {
+    .container {
+      .content {
+        .tags {
+          border-color: $color-success;
+        }
+      }
+
+      .icon {
+        color: $color-success;
+      }
+    }
+  }
+  /* stylelint-enable no-descending-specificity */
+}

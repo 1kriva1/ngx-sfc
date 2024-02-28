@@ -4,7 +4,7 @@
   &.bordered {
     .container {
       .content {
-        @include load-container-bordered;
+        @include sfc-load-container-bordered;
 
         .input {
           .sfc-input {

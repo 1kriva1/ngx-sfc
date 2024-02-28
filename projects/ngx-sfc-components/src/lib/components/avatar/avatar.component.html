@@ -1,7 +1,7 @@
 <div class="container">
     <div class="avatar-image-container">
-        <div class="avatar" (mouseenter)="stroke = stroke * STROKE_HOVER_VALUE"
-            (mouseleave)="stroke = stroke / STROKE_HOVER_VALUE">
+        <div class="avatar" (mouseenter)="stroke = imageModel.Stroke * STROKE_HOVER_VALUE"
+            (mouseleave)="stroke = imageModel.Stroke">
 
             <div class="avatar-image">
                 <svg [attr.height]="imageModel.Height" [attr.width]="imageModel.Width">
@@ -26,7 +26,10 @@
                 </svg>
             </div>
 
-            <ng-content></ng-content>
+            <sfc-avatar-badge *ngFor="let badge of badges" [model]="badge" [radius]="radius"
+                [stroke]="imageModel.Stroke" [normalizedRadius]="imageModel.NormalizedRadius"
+                [background]="progressModel.filledColor">
+            </sfc-avatar-badge>
 
         </div>
 

@@ -452,7 +452,7 @@ export interface ITablePaginationModel {
 11. `[columns]` - columns for table
 
 ```typescript
-export interface IDefaultTableColumnModel {
+export interface ITableColumnModel {
     name: string;
     field: string; // identificator for sorting
     icon?: string;

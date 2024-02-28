@@ -1,8 +1,10 @@
 import { Component, ElementRef, HostBinding, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import {
-  any, CommonConstants, firstOrDefault, hasItemBy, hasObjectItem, ILoadMoreModel,
-  ILoadMorePredicateParameters,
-  isDefined, nameof, remove, removeItemBy, sortBy, SortingDirection, where
+  any, CommonConstants, firstOrDefault, hasItemBy, hasObjectItem,
+  ILoadContainerPredicateParameters, UIClass, isEqual,
+  isDefined, nameof, remove, removeItemBy, sortBy, SortingDirection, where,
+  ILoadContainerResultModel, LoadContainerLoadType, IPaginationModel,
+  PaginationConstants
 } from 'ngx-sfc-common';
 import { Subject } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -10,7 +12,6 @@ import { ISelectValue } from './models/select-value.model';
 import { ISelectItemModel } from './parts/item/models/select-item.model';
 import { SelectInputConstants } from './select-input.constants';
 import { SelectItemComponent } from './parts/item/select-item.component';
-import { UIClass } from 'ngx-sfc-common';
 import { BaseDataInputComponent } from '../base/data/data-input.component';
 import { ISelectGroupItemModel } from './parts/item/models/select-group-item.model';
 import { ISelectGroupValue } from './models/select-group-value.model';
@@ -41,7 +42,7 @@ export class SelectInputComponent
   multiple: boolean = false;
 
   @Input()
-  size!: number;
+  size: number = PaginationConstants.DEFAULT_SIZE;
 
   @ViewChildren(SelectItemComponent, { read: ElementRef })
   private itemsRef!: QueryList<ElementRef>;
@@ -59,13 +60,17 @@ export class SelectInputComponent
     return hasObjectItem(this.items, nameof<ISelectGroupItemModel>('group'), true);
   }
 
+  public get pagination(): IPaginationModel {
+    return { size: this.size, page: PaginationConstants.DEFAULT_PAGE }
+  }
+
   public selectedItem!: HTMLElement;
 
   override get placeholderValue(): string {
     return this.placeholder ? this.placeholder : CommonConstants.EMPTY_STRING;
   }
 
-  private initSubject!: Subject<ILoadMorePredicateParameters>;
+  private initSubject!: Subject<ILoadContainerPredicateParameters>;
   private _initialized: boolean = false;
   @HostBinding(`class.${UIClass.Initialization}`)
   private get needInitialization(): boolean {
@@ -88,17 +93,22 @@ export class SelectInputComponent
     return firstOrDefault(this.items, item => !isDefined(item.key) && !(item as ISelectGroupItemModel).group);
   }
 
+  private get loadType(): LoadContainerLoadType {
+    return this.showLoadMoreButton ? LoadContainerLoadType.Button : LoadContainerLoadType.Scroll;
+  }
+
   override ngOnInit(): void {
     super.ngOnInit();
 
     this.loadModel = {
-      size: this.size,
       data$: this.data$,
-      loader: this.loader
+      loader: this.loader,
+      loadType: this.loadType,
+      pagination: this.pagination
     };
 
     if (!this.loadOnInit) {
-      this.initSubject = new Subject<ILoadMorePredicateParameters>();
+      this.initSubject = new Subject<ILoadContainerPredicateParameters>();
       this.loadModel.predicate$ = this.initSubject.asObservable();
     }
   }
@@ -117,12 +127,15 @@ export class SelectInputComponent
     else if (this.hasGroup)
       this.onGroupChange(item as ISelectGroupItemModel);
     else {
-      const itemModel = item as ISelectItemModel;
-      this.onChange({ key: itemModel.key, value: itemModel.value });
+      const itemModel = item as ISelectItemModel,
+        newValue = { key: itemModel.key, value: itemModel.value };
+
+      if (!isEqual(this.value, newValue))
+        this.onChange(newValue);
     }
   }
 
-  public handleSuccess(result: ILoadMoreModel<SelectItemModel>): void {
+  public handleSuccess(result: ILoadContainerResultModel<SelectItemModel>): void {
     this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, true);
     if (this.needInitialization)
       this._initialized = true;

@@ -94,7 +94,7 @@ export function all<T>(collection: Array<T>, predicate: (item: T) => boolean): b
  * @param predicate Function to define check logic
  * @returns Items count
  */
- export function count<T>(collection: Array<T>, predicate: (item: T) => boolean): number {
+export function count<T>(collection: Array<T>, predicate: (item: T) => boolean): number {
     return collection.filter(predicate).length;
 }
 
@@ -252,12 +252,12 @@ export function remove<T>(collection: Array<T>, predicate: (item: T) => boolean)
  * @returns True if successfully added
  */
 export function addItem<T>(collection: Array<T>, item: T,
-    predicate: (item: T) => boolean): boolean {
+    predicate: ((item: T) => boolean) | null = null): boolean {
 
     if (!isDefined(collection))
         collection = new Array<T>();
 
-    if (isDefined(predicate) && predicate(item))
+    if (isDefined(predicate) && predicate!(item))
         return false;
 
     collection.push(item);

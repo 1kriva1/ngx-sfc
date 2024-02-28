@@ -41,7 +41,7 @@ export class DateTimeClockComponent implements OnInit {
   maxDate: Date | null = null;
 
   @Input()
-  locale: string = DateTimeInputConstants.DEFAULT_LOCALE;
+  locale: string = DateTimeConstants.DEFAULT_LOCALE;
 
   @Input()
   switchOnClick: boolean = false;

@@ -43,14 +43,15 @@ import {
   BorderedDateTimeInputPresentationComponent,
   CommonAutoCompletePresentationComponent,
   BorderedAutoCompletePresentationComponent,
-  BorderedCommonSelectPresentationComponent
+  BorderedCommonSelectPresentationComponent,
+  BubblesPresentationComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonSelectPresentationComponent,
     MultipleSelectPresentationComponent,
     GroupSelectPresentationComponent,
-    BorderedCommonSelectPresentationComponent
+    BorderedCommonSelectPresentationComponent,
+    BubblesPresentationComponent
   ],
   imports: [
     BrowserModule,

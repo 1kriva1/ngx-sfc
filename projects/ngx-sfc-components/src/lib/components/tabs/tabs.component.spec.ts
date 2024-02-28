@@ -300,7 +300,7 @@ describe('Component: TabsComponent', () => {
 
     function selectTab(index: number) {
         const tabEls: DebugElement[] = fixture.debugElement.queryAll(By.css('div.tab'));
-        tabEls[index].nativeElement.dispatchEvent(new KeyboardEvent("click"));
+        tabEls[index].nativeElement.dispatchEvent(new KeyboardEvent('click'));
         (tabServiceSpy.selected$ as any).next(index);
         fixture.detectChanges();
     }

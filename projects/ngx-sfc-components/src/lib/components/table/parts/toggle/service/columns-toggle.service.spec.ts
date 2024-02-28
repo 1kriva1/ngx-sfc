@@ -27,14 +27,14 @@ describe('Service:  ColumnsToggle', () => {
   });
 
   fit('Should showColumns observable be created', () => {
-    expect(service.showColumns$).toBeDefined();
+    expect(service.toggle$).toBeDefined();
   });
 
   fit('Should return False, when window innerWidth less than max value', done => {
     windowMock.innerWidth = MediaLimits.Tablet - 1;
 
-    subscription = service.showColumns$.subscribe(value => {
-      expect(value).toBeFalsy();
+    subscription = service.toggle$.subscribe(value => {
+      expect(value).toBeTrue();
     });
 
     done();
@@ -43,7 +43,7 @@ describe('Service:  ColumnsToggle', () => {
   fit('Should return True, when window innerWidth equal than max value', done => {
     windowMock.innerWidth = MediaLimits.Tablet;
 
-    subscription = service.showColumns$.subscribe(value => {
+    subscription = service.toggle$.subscribe(value => {
       expect(value).toBeTruthy();
     });
 
@@ -53,7 +53,7 @@ describe('Service:  ColumnsToggle', () => {
   fit('Should return True, when window innerWidth more than max value', done => {
     windowMock.innerWidth = MediaLimits.Tablet + 1;
 
-    subscription = service.showColumns$.subscribe(value => {
+    subscription = service.toggle$.subscribe(value => {
       expect(value).toBeTruthy();
     });
 
@@ -64,8 +64,8 @@ describe('Service:  ColumnsToggle', () => {
     windowMock.innerWidth = MediaLimits.Tablet - 1;
     let isFirstCalled: boolean = false;
 
-    subscription = service.showColumns$.subscribe(value => {
-      expect(value).toEqual(isFirstCalled ? true : false);
+    subscription = service.toggle$.subscribe(value => {
+      expect(value).toEqual(isFirstCalled ? false : true);
       isFirstCalled = true;
     });
 

@@ -1,0 +1,23 @@
+@import "../../styles/index";
+
+:host {
+  user-select: none;
+  cursor: pointer;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include theme-value(color, $color-default, $color-dark);
+
+    span {
+      padding-right: 0.5em;
+      font-weight: bold;
+    }
+
+    &:hover {
+      color: $color-hover-default;
+    }
+  }
+}

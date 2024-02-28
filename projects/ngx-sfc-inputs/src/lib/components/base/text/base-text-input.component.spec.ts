@@ -53,6 +53,33 @@ describe('Component: BaseTextInputComponent', () => {
         });
     });
 
+    describe('Placeholder', () => {
+        fit("Should have empty value when input focused and showPlaceholderOnFocus has default value", () => {
+            const placeholderAssertValue = "test placeholder",
+                inputEl = el.query(By.css('input'));
+            component.textComponent.placeholder = placeholderAssertValue;
+            fixture.detectChanges();
+
+            inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+            fixture.detectChanges();
+
+            expect(inputEl.nativeElement.placeholder).toEqual(CommonConstants.EMPTY_STRING);
+        });
+
+        fit("Should have value event when input focused", () => {
+            const placeholderAssertValue = "test placeholder",
+                inputEl = el.query(By.css('input'));
+            component.textComponent.placeholder = placeholderAssertValue;
+            component.textComponent.showPlaceholderOnFocus = true;
+            fixture.detectChanges();
+
+            inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+            fixture.detectChanges();
+
+            expect(inputEl.nativeElement.placeholder).toEqual(placeholderAssertValue);
+        });
+    });
+
     describe('Required length', () => {
         fit("Should be hidden", () => {
             expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);

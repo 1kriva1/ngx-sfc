@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, ShowHideElementDirective } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { StarComponent } from './parts/star/star.component';
@@ -39,7 +39,6 @@ describe('Component: StarsInput', () => {
       expect(fixture.nativeElement.querySelector('.component')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('label')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.stars')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('.right-side-info')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.helper-text')).toBeTruthy();
     });
 
@@ -189,6 +188,19 @@ describe('Component: StarsInput', () => {
       expect(component.value).toEqual(21);
     });
 
+    fit("Should not change value twice", () => {
+      spyOn(component.changeValue, 'emit');
+      component.items = [30, 21, 29];
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      fixture.nativeElement.querySelector('sfc-star label').dispatchEvent(new MouseEvent('click', {}));
+      fixture.nativeElement.querySelector('sfc-star label').dispatchEvent(new MouseEvent('click', {}));
+
+      expect(component.value).toEqual(21);
+      expect(component.changeValue.emit).toHaveBeenCalledTimes(1);
+    });
+
     describe('States', () => {
       fit("Should have mone state", () => {
         component.items = [3, 2, 1];
@@ -242,32 +254,32 @@ describe('Component: StarsInput', () => {
   });
 
   describe('Side info', () => {
-    fit("Should be hidden by default", () => {
-      expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);
+    fit("Should not exist by default", () => {
+      expect(fixture.nativeElement.querySelector('.side-info')).toBeNull();
     });
 
-    fit("Should be hidden, when counter and reset are false", () => {
+    fit("Should not exist, when counter and reset are false", () => {
       component.value = 3;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);
+      expect(fixture.nativeElement.querySelector('.side-info')).toBeNull();
     });
 
-    fit("Should be hidden, when value not defined", () => {
+    fit("Should not exist, when value not defined", () => {
       component.reset = true;
       component.counter = true;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Hidden);
+      expect(fixture.nativeElement.querySelector('.side-info')).toBeNull();
     });
 
-    fit("Should be visible", () => {
+    fit("Should exist", () => {
       component.reset = true;
       component.counter = true;
       component.value = 3;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('.right-side-info').style.visibility).toEqual(UIClass.Visible);
+      expect(fixture.nativeElement.querySelector('.side-info')).toBeTruthy();
     });
 
     describe('Counter', () => {
@@ -344,12 +356,14 @@ describe('Component: StarsInput', () => {
         expect(fixture.nativeElement.querySelector('span.reset')).toBeTruthy();
       });
 
-      fit("Should have permanent text", () => {
+      fit("Should have defined text", () => {
         component.reset = true;
         component.value = 1;
+        component.resetLabel = 'Test reset';
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span.reset').innerText).toEqual('RESET');
+        expect(fixture.nativeElement.querySelector('span.reset').innerText)
+          .toEqual(component.resetLabel.toUpperCase());
       });
 
       fit("Should reset value", () => {

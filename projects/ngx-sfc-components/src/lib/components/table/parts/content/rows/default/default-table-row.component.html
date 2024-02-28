@@ -1,9 +1,10 @@
 <div class="container">
-    <div [ngStyle]="width" [style.text-align]="position" class="content-container" *ngFor="let column of columns">
+    <div [style.width]="column.calculatedWidth" [style.text-align]="position" class="content-container"
+        *ngFor="let column of columns">
         <div class="content" [style.align-items]="contentPosition">
             <ng-container [ngSwitch]="column.type">
                 <div class="checkmark" #columnCheckmark *ngSwitchCase="TableColumnType.Selectable">
-                    <sfc-checkmark [active]="model.dataModel.selected || false"></sfc-checkmark>
+                    <sfc-checkmark [active]="model.selected || false" [type]="CheckmarkType.Circle"></sfc-checkmark>
                 </div>
                 <div *ngSwitchCase="TableColumnType.Sequence">
                     <span class="name">{{column.name}}</span>
@@ -11,7 +12,7 @@
                 </div>
                 <div *ngSwitchDefault>
                     <span class="name">{{column.name}}</span>
-                    <span>{{model.dataModel.data[column.field]}}</span>
+                    <span>{{model.data[column.field]}}</span>
                 </div>
             </ng-container>
         </div>

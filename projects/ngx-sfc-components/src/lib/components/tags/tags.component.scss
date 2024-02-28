@@ -1,0 +1,9 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  .container {
+    .tags {
+      @include center-wrap;
+    }
+  }
+}

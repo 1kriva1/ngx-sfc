@@ -2,10 +2,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, Position, TooltipComponent, UIClass, WINDOW } from 'ngx-sfc-common';
+import {
+    CommonConstants, ComponentSizeDirective, Position,
+    TooltipComponent, UIClass, WINDOW
+} from 'ngx-sfc-common';
+import { StarsComponent } from 'ngx-sfc-components';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
+import { RangeLimitInputState } from './enums/range-limit-input-state.enum';
 import { RangeInputComponent } from './range-input.component';
+import { RangeInputConstants } from './range-input.constants';
 
 describe('Component: RangeInput', () => {
     let component: RangeInputComponent;
@@ -14,7 +20,10 @@ describe('Component: RangeInput', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [TooltipComponent, InputReferenceDirective, RangeInputComponent],
+            declarations: [
+                TooltipComponent, StarsComponent, ComponentSizeDirective,
+                InputReferenceDirective, RangeInputComponent
+            ],
             providers: [
                 { provide: WINDOW, useFactory: (() => { return <any>{}; }) }
             ]
@@ -55,8 +64,22 @@ describe('Component: RangeInput', () => {
             expect(component.value).toEqual(component.min);
         });
 
+        fit('Should have default multiple value', () => {
+            component.multiple = true;
+
+            expect(component.value).toEqual({ from: 0, to: 100 });
+        });
+
         fit('Should have constant tooltip position', () => {
             expect(component.tooltipPosition).toEqual(Position.Top);
+        });
+
+        fit('Should default multiple index model', () => {
+            expect(component.indexModel).toEqual({ from: RangeLimitInputState.Default, to: RangeLimitInputState.Active });
+        });
+
+        fit('Should have constant track position', () => {
+            expect(component.trackPosition).toEqual(Position.Right);
         });
     });
 
@@ -151,21 +174,6 @@ describe('Component: RangeInput', () => {
                 expect(fixture.nativeElement.querySelector('.limits.after')).toBeTruthy();
             });
 
-            fit("Should exist, when show value", () => {
-                component.showValue = true;
-                fixture.detectChanges();
-
-                expect(fixture.nativeElement.querySelector('.limits.after')).toBeTruthy();
-            });
-
-            fit("Should has value  as display text", () => {
-                component.showValue = true;
-                component.writeValue(88);
-                fixture.detectChanges();
-
-                expect(fixture.nativeElement.querySelector('.limits.after').innerText).toEqual('88');
-            });
-
             fit("Should has default max value as display text", () => {
                 component.showLimits = true;
                 fixture.detectChanges();
@@ -195,6 +203,127 @@ describe('Component: RangeInput', () => {
                 fixture.detectChanges();
 
                 expect(fixture.nativeElement.querySelector('.limits.after svg.fa-user')).toBeTruthy();
+            });
+        });
+    });
+
+    describe('Value & Stars', () => {
+        fit("Should not exist by default", () => {
+            expect(fixture.nativeElement.querySelector('span.value')).toBeNull();
+        });
+
+        fit("Should not exist", () => {
+            component.showValue = false;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('span.value')).toBeNull();
+        });
+
+        fit("Should exist", () => {
+            component.showValue = true;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('span.value')).toBeTruthy();
+        });
+
+        describe('Value', () => {
+            fit("Should exist", () => {
+                component.showValue = true;
+                component.stars = false;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > span')).toBeTruthy();
+            });
+
+            fit("Should not exist", () => {
+                component.showValue = true;
+                component.stars = true;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > span')).toBeNull();
+            });
+
+            fit("Should have single value", () => {
+                component.showValue = true;
+                component.stars = false;
+                component.writeValue(45);
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > span').innerText)
+                    .toEqual('45');
+            });
+
+            fit("Should have multiple value", () => {
+                component.showValue = true;
+                component.stars = false;
+                component.multiple = true;
+                component.writeValue({ from: 10, to: 20 });
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > span').innerText)
+                    .toEqual('From: 10 - To: 20');
+            });
+
+            fit("Should have custom multiple value", () => {
+                component.showValue = true;
+                component.stars = false;
+                component.multiple = true;
+                component.generateMultipleLabel = (from: number, to: number) => `Test from: ${from} and to: ${to}`;
+                component.writeValue({ from: 10, to: 20 });
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > span').innerText)
+                    .toEqual('Test from: 10 and to: 20');
+            });
+        });
+
+        describe('Stars', () => {
+            fit("Should exist", () => {
+                component.showValue = true;
+                component.stars = true;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > sfc-stars')).toBeTruthy();
+            });
+
+            fit("Should not exist", () => {
+                component.showValue = true;
+                component.stars = false;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > sfc-stars')).toBeNull();
+            });
+
+            fit("Should not exist for multiple", () => {
+                component.showValue = true;
+                component.stars = true;
+                component.multiple = true;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.value > sfc-stars')).toBeNull();
+            });
+
+            fit("Should have default attributes", () => {
+                component.showValue = true;
+                component.stars = true;
+                fixture.detectChanges();
+
+                const starsEl = fixture.debugElement.query(By.css('span.value > sfc-stars'));
+
+                expect(starsEl.componentInstance.value).toEqual(0);
+                expect(starsEl.componentInstance.count).toEqual(RangeInputConstants.STARS_COUNT);
+                expect(starsEl.attributes['ng-reflect-custom-size']).toEqual('0.8');
+            });
+
+            fit("Should have defined value", () => {
+                component.showValue = true;
+                component.stars = true;
+                component.writeValue(45);
+                fixture.detectChanges();
+
+                const starsEl = fixture.debugElement.query(By.css('span.value > sfc-stars'));
+
+                expect(starsEl.componentInstance.value).toEqual(2.25);
             });
         });
     });
@@ -231,143 +360,594 @@ describe('Component: RangeInput', () => {
     });
 
     describe('Tooltip', () => {
-        fit("Should exist", () => {
-            expect(fixture.nativeElement.querySelector('span.tooltip')).toBeTruthy();
+        describe('Single', () => {
+            fit("Should exist", () => {
+                expect(fixture.nativeElement.querySelectorAll('span.tooltip').length).toEqual(1);
+            });
+
+            fit("Should not exist", () => {
+                component.tooltip = false;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('span.tooltip')).toBeNull();
+            });
+
+            fit("Should have default attributes", () => {
+                const tooltipEl = fixture.debugElement.query(By.css('span.tooltip')),
+                    tooltipComponent = tooltipEl.componentInstance;
+
+                expect(tooltipComponent.tooltipPosition).toEqual(Position.Top);
+                expect(tooltipComponent.tooltipShow).toBeFalse();
+                expect(tooltipComponent.value).toEqual('0');
+                expect(tooltipEl.nativeElement.style.left).toContain('calc(0% + ');
+            });
+
+            fit("Should have attributes reflected to value change", () => {
+                component.writeValue(44);
+                fixture.detectChanges();
+
+                const tooltipEl = fixture.debugElement.query(By.css('span.tooltip')),
+                    tooltipComponent = tooltipEl.componentInstance;
+
+                expect(tooltipComponent.value).toEqual('44');
+                expect(tooltipEl.nativeElement.style.left).toContain('calc(44% + ');
+            });
+
+            fit("Should show on hover", () => {
+                const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
+                inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeTrue();
+            });
+
+            fit("Should hide on hover end", () => {
+                const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
+                inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeTrue();
+
+                inputEl.triggerEventHandler('mouseup', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeFalse();
+            });
+
+            fit("Should toggle on touch events", () => {
+                const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
+                inputEl.triggerEventHandler('touchstart', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeTrue();
+
+                inputEl.triggerEventHandler('touchend', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeFalse();
+            });
+
+            fit("Should change left position according to value changes", () => {
+                component.writeValue(10);
+                fixture.detectChanges();
+
+                const tooltipEl = fixture.debugElement.query(By.css('span.tooltip')),
+                    tooltipComponent = tooltipEl.componentInstance;
+
+                expect(tooltipComponent.value).toEqual('10');
+                expect(tooltipEl.nativeElement.style.left).toContain('calc(10% + ');
+
+                const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
+                inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 44 } });
+                fixture.detectChanges();
+
+                const tooltipElAfter = fixture.debugElement.query(By.css('span.tooltip')),
+                    tooltipComponentAfter = tooltipElAfter.componentInstance;
+
+                expect(tooltipComponentAfter.value).toEqual('44');
+                expect(tooltipElAfter.nativeElement.style.left).toContain('calc(44% + ');
+            });
         });
 
-        fit("Should not exist", () => {
-            component.tooltip = false;
-            fixture.detectChanges();
+        describe('Multiple', () => {
+            fit("Should exist", () => {
+                component.multiple = true;
+                fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('span.tooltip')).toBeNull();
-        });
+                expect(fixture.nativeElement.querySelectorAll('span.tooltip').length).toEqual(2);
+            });
 
-        fit("Should have default attributes", () => {
-            const tooltipEl = fixture.debugElement.query(By.css('span.tooltip')),
-                tooltipComponent = tooltipEl.componentInstance;
+            fit("Should exist only single", () => {
+                component.multiple = false;
+                fixture.detectChanges();
 
-            expect(tooltipComponent.tooltipPosition).toEqual(Position.Top);
-            expect(tooltipComponent.tooltipShow).toBeFalse();
-            expect(tooltipComponent.value).toEqual('0');
-            expect(tooltipEl.nativeElement.style.left).toContain('calc(0% + ');
-        });
+                expect(fixture.nativeElement.querySelectorAll('span.tooltip').length).toEqual(1);
+            });
 
-        fit("Should have attributes reflected to value", () => {
-            component.writeValue(44);
-            fixture.detectChanges();
+            fit("Should have default attributes", () => {
+                component.multiple = true;
+                fixture.detectChanges();
 
-            const tooltipEl = fixture.debugElement.query(By.css('span.tooltip')),
-                tooltipComponent = tooltipEl.componentInstance;
+                const tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
 
-            expect(tooltipComponent.value).toEqual('44');
-            expect(tooltipEl.nativeElement.style.left).toContain('calc(44% + ');
-        });
+                tooltipEls.forEach((tooltipEl, index) => {
+                    const tooltipComponent = tooltipEl.componentInstance;
+                    expect(tooltipComponent.tooltipPosition).toEqual(Position.Top);
+                    expect(tooltipComponent.tooltipShow).toBeFalse();
+                    expect(tooltipComponent.value).toEqual(index === 0 ? '0' : '100');
+                    expect(tooltipEl.nativeElement.style.left)
+                        .toContain(`calc(${index === 0 ? 0 : 100}% ${index === 0 ? '+' : '-'} `);
+                });
+            });
 
-        fit("Should show on hover", () => {
-            const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
-            inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
-            fixture.detectChanges();
+            fit("Should have attributes reflected to value change", () => {
+                component.multiple = true;
+                component.writeValue({ from: 44, to: 88 });
+                fixture.detectChanges();
 
-            expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeTrue();
-        });
+                const tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
 
-        fit("Should hide on hover end", () => {
-            const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
-            inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
-            fixture.detectChanges();
+                expect(tooltipEls[0].componentInstance.value).toEqual('44');
+                expect(tooltipEls[0].nativeElement.style.left).toContain('calc(44% + ');
 
-            expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeTrue();
+                expect(tooltipEls[1].componentInstance.value).toEqual('88');
+                expect(tooltipEls[1].nativeElement.style.left).toContain('calc(88% - ');
+            });
 
-            inputEl.triggerEventHandler('mouseup', { target: inputEl.nativeElement });
-            fixture.detectChanges();
+            describe('From', () => {
+                fit("Should show on hover", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
 
-            expect(fixture.debugElement.query(By.css('span.tooltip')).componentInstance.tooltipShow).toBeFalse();
-        });
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-from`)),
+                        tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+                    inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
 
-        fit("Should change left position according to value changes", () => {
-            component.writeValue(10);
-            fixture.detectChanges();
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeTrue();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
+                });
 
-            const tooltipEl = fixture.debugElement.query(By.css('span.tooltip')),
-                tooltipComponent = tooltipEl.componentInstance;
+                fit("Should hide on hover end", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
 
-            expect(tooltipComponent.value).toEqual('10');
-            expect(tooltipEl.nativeElement.style.left).toContain('calc(10% + ');
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-from`)),
+                        tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+                    inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
 
-            const inputEl = fixture.debugElement.query(By.css('input[type="range"]'));
-            inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 44 } });
-            fixture.detectChanges();
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeTrue();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
 
-            const tooltipElAfter = fixture.debugElement.query(By.css('span.tooltip')),
-                tooltipComponentAfter = tooltipElAfter.componentInstance;
+                    inputEl.triggerEventHandler('mouseup', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
 
-            expect(tooltipComponentAfter.value).toEqual('44');
-            expect(tooltipElAfter.nativeElement.style.left).toContain('calc(44% + ');
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
+                });
+
+                fit("Should toggle on touch events", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-from`)),
+                        tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+                    inputEl.triggerEventHandler('touchstart', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeTrue();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
+
+                    inputEl.triggerEventHandler('touchend', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
+                });
+
+                fit("Should change left position according to value changes", () => {
+                    component.multiple = true;
+                    component.writeValue({ from: 10, to: 88 });
+                    fixture.detectChanges();
+
+                    const tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+
+                    expect(tooltipEls[0].componentInstance.value).toEqual('10');
+                    expect(tooltipEls[0].nativeElement.style.left).toContain('calc(10% + ');
+
+                    expect(tooltipEls[1].componentInstance.value).toEqual('88');
+                    expect(tooltipEls[1].nativeElement.style.left).toContain('calc(88% - ');
+
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-from`));
+                    inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 44 } });
+                    fixture.detectChanges();
+
+                    const tooltipElsAfter = fixture.debugElement.queryAll(By.css('span.tooltip'));
+
+                    expect(tooltipElsAfter[0].componentInstance.value).toEqual('44');
+                    expect(tooltipElsAfter[0].nativeElement.style.left).toContain('calc(44% + ');
+                    expect(tooltipElsAfter[1].componentInstance.value).toEqual('88');
+                    expect(tooltipElsAfter[1].nativeElement.style.left).toContain('calc(88% - ');
+                });
+            });
+
+            describe('To', () => {
+                fit("Should show on hover", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-to`)),
+                        tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+                    inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeTrue();
+                });
+
+                fit("Should hide on hover end", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-to`)),
+                        tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+                    inputEl.triggerEventHandler('mousedown', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeTrue();
+
+                    inputEl.triggerEventHandler('mouseup', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
+                });
+
+                fit("Should toggle on touch events", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-to`)),
+                        tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+                    inputEl.triggerEventHandler('touchstart', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeTrue();
+
+                    inputEl.triggerEventHandler('touchend', { target: inputEl.nativeElement });
+                    fixture.detectChanges();
+
+                    expect(tooltipEls[0].componentInstance.tooltipShow).toBeFalse();
+                    expect(tooltipEls[1].componentInstance.tooltipShow).toBeFalse();
+                });
+
+                fit("Should change left position according to value changes", () => {
+                    component.multiple = true;
+                    component.writeValue({ from: 10, to: 88 });
+                    fixture.detectChanges();
+
+                    const tooltipEls = fixture.debugElement.queryAll(By.css('span.tooltip'));
+
+                    expect(tooltipEls[0].componentInstance.value).toEqual('10');
+                    expect(tooltipEls[0].nativeElement.style.left).toContain('calc(10% + ');
+
+                    expect(tooltipEls[1].componentInstance.value).toEqual('88');
+                    expect(tooltipEls[1].nativeElement.style.left).toContain('calc(88% - ');
+
+                    const inputEl = fixture.debugElement.query(By.css(`.multiple input[type="range"]#${component.inputId}-to`));
+                    inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 44 } });
+                    fixture.detectChanges();
+
+                    const tooltipElsAfter = fixture.debugElement.queryAll(By.css('span.tooltip'));
+
+                    expect(tooltipElsAfter[0].componentInstance.value).toEqual('10');
+                    expect(tooltipElsAfter[0].nativeElement.style.left).toContain('calc(10% + ');
+                    expect(tooltipElsAfter[1].componentInstance.value).toEqual('44');
+                    expect(tooltipElsAfter[1].nativeElement.style.left).toContain('calc(44% + ');
+                });
+            });
         });
     });
 
     describe('Input', () => {
-        fit("Should have default id value", () => {
-            expect(fixture.debugElement.query(By.css('input[type=range]')).nativeElement.id).toEqual(`${InputConstants.ID_PREFIX}undefined`);
+        describe('Single', () => {
+            fit("Should have default id value", () => {
+                expect(fixture.debugElement.query(By.css('input[type=range]')).nativeElement.id).toEqual(`${InputConstants.ID_PREFIX}undefined`);
+            });
+
+            fit("Should have defined id value", () => {
+                component.id = 'test-id';
+                fixture.detectChanges();
+
+                expect(fixture.debugElement.query(By.css('input[type=range]')).nativeElement.id).toEqual(`${InputConstants.ID_PREFIX}test-id`);
+            });
+
+            fit("Should have default value", () => {
+                expect(fixture.nativeElement.querySelector('input[type=range]').value).toEqual('0');
+            });
+
+            fit("Should have default attributes", () => {
+                const rangeInputEl = fixture.nativeElement.querySelector('input[type=range]');
+
+                expect(rangeInputEl.min).toEqual(component.min.toString());
+                expect(rangeInputEl.max).toEqual(component.max.toString());
+                expect(rangeInputEl.step).toEqual(component.step.toString());
+            });
+
+            fit("Should have defined attributes", () => {
+                component.min = 20;
+                component.max = 80;
+                component.step = 4;
+                fixture.detectChanges();
+
+                const rangeInputEl = fixture.nativeElement.querySelector('input[type=range]');
+
+                expect(rangeInputEl.min).toEqual(component.min.toString());
+                expect(rangeInputEl.max).toEqual(component.max.toString());
+                expect(rangeInputEl.step).toEqual(component.step.toString());
+            });
+
+            fit("Should have defined value", () => {
+                component.writeValue(44);
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('input[type=range]').value).toEqual('44');
+            });
+
+            fit("Should not be disabled", () => {
+                expect(fixture.nativeElement.querySelector('input[type=range]').disabled).toBeFalse();
+            });
+
+            fit("Should be disabled", () => {
+                component.disabled = true;
+                fixture.detectChanges();
+
+                expect(fixture.nativeElement.querySelector('input[type=range]').disabled).toBeTrue();
+            });
+
+            fit("Should change value", () => {
+                const value = 44,
+                    inputEl = fixture.debugElement.query(By.css('input[type=range]'));
+                inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: value } });
+                fixture.detectChanges();
+
+                expect(inputEl.nativeElement.value).toEqual(value.toString());
+            });
         });
 
-        fit("Should have defined id value", () => {
-            component.id = 'test-id';
-            fixture.detectChanges();
+        describe('Multiple', () => {
+            fit("Should exist", () => {
+                component.multiple = true;
+                fixture.detectChanges();
 
-            expect(fixture.debugElement.query(By.css('input[type=range]')).nativeElement.id).toEqual(`${InputConstants.ID_PREFIX}test-id`);
-        });
+                expect(fixture.nativeElement.querySelector('div.multiple')).toBeTruthy();
+                expect(fixture.nativeElement.querySelectorAll('input[type=range]').length).toEqual(2);
+            });
 
-        fit("Should have default value", () => {
-            expect(fixture.nativeElement.querySelector('input[type=range]').value).toEqual('0');
-        });
+            fit("Should not exist", () => {
+                component.multiple = false;
+                fixture.detectChanges();
 
-        fit("Should have default attributes", () => {
-            const rangeInputEl = fixture.nativeElement.querySelector('input[type=range]');
+                expect(fixture.nativeElement.querySelector('div.multiple')).toBeNull();
+                expect(fixture.nativeElement.querySelectorAll('input[type=range]').length).toEqual(1);
+            });
 
-            expect(rangeInputEl.min).toEqual(component.min.toString());
-            expect(rangeInputEl.max).toEqual(component.max.toString());
-            expect(rangeInputEl.step).toEqual(component.step.toString());
-        });
+            fit("Should have default style variables", () => {
+                component.multiple = true;
+                fixture.detectChanges();
 
-        fit("Should have defined attributes", () => {
-            component.min = 20;
-            component.max = 80;
-            component.step = 4;
-            fixture.detectChanges();
+                expect(fixture.debugElement.query(By.css('div.multiple')).attributes['style'])
+                    .toEqual('--from: 0; --to: 100; --max: 100; --min: 0; --index-from: 1; --index-to: 2; --direction: right;');
+            });
 
-            const rangeInputEl = fixture.nativeElement.querySelector('input[type=range]');
+            describe('From', () => {
+                fit("Should have default id value", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
 
-            expect(rangeInputEl.min).toEqual(component.min.toString());
-            expect(rangeInputEl.max).toEqual(component.max.toString());
-            expect(rangeInputEl.step).toEqual(component.step.toString());
-        });
+                    expect(fixture.debugElement.queryAll(By.css('input[type=range]'))[0].nativeElement.id)
+                        .toEqual(`${InputConstants.ID_PREFIX}undefined-from`);
+                });
 
-        fit("Should have defined value", () => {
-            component.writeValue(44);
-            fixture.detectChanges();
+                fit("Should have defined id value", () => {
+                    component.multiple = true;
+                    component.id = 'test-id';
+                    fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('input[type=range]').value).toEqual('44');
-        });
+                    expect(fixture.debugElement.queryAll(By.css('input[type=range]'))[0].nativeElement.id)
+                        .toEqual(`${InputConstants.ID_PREFIX}test-id-from`);
+                });
 
-        fit("Should not be disabled", () => {
-            expect(fixture.nativeElement.querySelector('input[type=range]').disabled).toBeFalse();
-        });
+                fit("Should have default value", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
 
-        fit("Should be disabled", () => {
-            component.disabled = true;
-            fixture.detectChanges();
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-from`).value)
+                        .toEqual('0');
+                });
 
-            expect(fixture.nativeElement.querySelector('input[type=range]').disabled).toBeTrue();
-        });
+                fit("Should have default attributes", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
 
-        fit("Should change value", () => {
-            const value = 44,
-                inputEl = fixture.debugElement.query(By.css('input[type=range]'));
-            inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: value } });
-            fixture.detectChanges();
+                    const rangeInputEl = fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-from`);
 
-            expect(inputEl.nativeElement.value).toEqual(value.toString());
+                    expect(rangeInputEl.min).toEqual(component.min.toString());
+                    expect(rangeInputEl.max).toEqual(component.max.toString());
+                    expect(rangeInputEl.step).toEqual(component.step.toString());
+                });
+
+                fit("Should have defined attributes", () => {
+                    component.multiple = true;
+                    component.min = 20;
+                    component.max = 80;
+                    component.step = 4;
+                    fixture.detectChanges();
+
+                    const rangeInputEl = fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-from`);
+
+                    expect(rangeInputEl.min).toEqual(component.min.toString());
+                    expect(rangeInputEl.max).toEqual(component.max.toString());
+                    expect(rangeInputEl.step).toEqual(component.step.toString());
+                });
+
+                fit("Should have defined value", () => {
+                    component.multiple = true;
+                    component.writeValue({ from: 44, to: 100 });
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-from`).value)
+                        .toEqual('44');
+                });
+
+                fit("Should not be disabled", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-from`).disabled).toBeFalse();
+                });
+
+                fit("Should be disabled", () => {
+                    component.multiple = true;
+                    component.disabled = true;
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-from`).disabled).toBeTrue();
+                });
+
+                fit("Should change value", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const value = 44,
+                        inputEl = fixture.debugElement.query(By.css(`input[type="range"]#${component.inputId}-from`));
+                    inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: value } });
+                    fixture.detectChanges();
+
+                    expect(inputEl.nativeElement.value).toEqual(value.toString());
+                    expect(component.value).toEqual({ from: 44, to: 100 });
+                });
+
+                fit("Should prevent change value when from more than to", () => {
+                    component.multiple = true;
+                    component.writeValue({ from: 20, to: 30 });
+                    fixture.detectChanges();
+
+                    const inputEl = fixture.debugElement.query(By.css(`input[type="range"]#${component.inputId}-from`));
+                    inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 31 } });
+                    fixture.detectChanges();
+
+                    expect(inputEl.nativeElement.value).toEqual('30');
+                    expect(component.value).toEqual({ from: 30, to: 30 });
+                    expect(component.indexModel).toEqual({ from: RangeLimitInputState.Active, to: RangeLimitInputState.Default });
+                });
+            });
+
+            describe('To', () => {
+                fit("Should have default id value", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    expect(fixture.debugElement.queryAll(By.css('input[type=range]'))[1].nativeElement.id)
+                        .toEqual(`${InputConstants.ID_PREFIX}undefined-to`);
+                });
+
+                fit("Should have defined id value", () => {
+                    component.multiple = true;
+                    component.id = 'test-id';
+                    fixture.detectChanges();
+
+                    expect(fixture.debugElement.queryAll(By.css('input[type=range]'))[1].nativeElement.id)
+                        .toEqual(`${InputConstants.ID_PREFIX}test-id-to`);
+                });
+
+                fit("Should have default value", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-to`).value)
+                        .toEqual('100');
+                });
+
+                fit("Should have default attributes", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const rangeInputEl = fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-to`);
+
+                    expect(rangeInputEl.min).toEqual(component.min.toString());
+                    expect(rangeInputEl.max).toEqual(component.max.toString());
+                    expect(rangeInputEl.step).toEqual(component.step.toString());
+                });
+
+                fit("Should have defined attributes", () => {
+                    component.multiple = true;
+                    component.min = 20;
+                    component.max = 80;
+                    component.step = 4;
+                    fixture.detectChanges();
+
+                    const rangeInputEl = fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-to`);
+
+                    expect(rangeInputEl.min).toEqual(component.min.toString());
+                    expect(rangeInputEl.max).toEqual(component.max.toString());
+                    expect(rangeInputEl.step).toEqual(component.step.toString());
+                });
+
+                fit("Should have defined value", () => {
+                    component.multiple = true;
+                    component.writeValue({ from: 14, to: 44 });
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-to`).value)
+                        .toEqual('44');
+                });
+
+                fit("Should not be disabled", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-to`).disabled).toBeFalse();
+                });
+
+                fit("Should be disabled", () => {
+                    component.multiple = true;
+                    component.disabled = true;
+                    fixture.detectChanges();
+
+                    expect(fixture.nativeElement.querySelector(`input[type="range"]#${component.inputId}-to`).disabled).toBeTrue();
+                });
+
+                fit("Should change value", () => {
+                    component.multiple = true;
+                    fixture.detectChanges();
+
+                    const value = 44,
+                        inputEl = fixture.debugElement.query(By.css(`input[type="range"]#${component.inputId}-to`));
+                    inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: value } });
+                    fixture.detectChanges();
+
+                    expect(inputEl.nativeElement.value).toEqual(value.toString());
+                    expect(component.value).toEqual({ from: 0, to: 44 });
+                });
+
+                fit("Should prevent change value when to less than to", () => {
+                    component.multiple = true;
+                    component.writeValue({ from: 20, to: 30 });
+                    fixture.detectChanges();
+
+                    const inputEl = fixture.debugElement.query(By.css(`input[type="range"]#${component.inputId}-to`));
+                    inputEl.triggerEventHandler('input', { target: { nativeElement: inputEl.nativeElement, value: 19 } });
+                    fixture.detectChanges();
+
+                    expect(inputEl.nativeElement.value).toEqual('20');
+                    expect(component.value).toEqual({ from: 20, to: 20 });
+                    expect(component.indexModel).toEqual({ from: RangeLimitInputState.Default, to: RangeLimitInputState.Active });
+                });
+            });
         });
     });
 

@@ -1,0 +1,70 @@
+@import "../../styles/index";
+
+:host {
+  $width: 2.5em;
+
+  .container {
+    label {
+      display: block;
+      width: $width;
+      height: calc($width / 2);
+      box-sizing: border-box;
+      cursor: pointer;
+      padding: 0.125em;
+      background: transparent;
+      border: 0.1em solid;
+      border-radius: 2em;
+
+      @include theme-value(border-color, $color-default, $color-dark);
+
+      transition: all $transition-duration-default $transition-timing-function-default;
+
+      &::after,
+      &::before {
+        content: "";
+        position: relative;
+        display: block;
+        width: 50%;
+        height: 100%;
+      }
+
+      &::after {
+        content: "";
+        left: 0;
+
+        @include theme-value(background, $color-default, $color-dark);
+
+        transition: all $transition-duration-default $transition-timing-function-default;
+        border-radius: 1em;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &.active {
+    .container {
+      label {
+        &::after {
+          left: 50%;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .container {
+      label {
+        @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+
+        &::after {
+          @include theme-value(background, $color-disabled-default, $color-disabled-dark);
+        }
+      }
+    }
+  }
+}

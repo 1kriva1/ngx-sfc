@@ -2,10 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
-import { CommonConstants, ToggleSwitcherComponent } from 'ngx-sfc-common';
+import { CommonConstants, ToggleComponent, ToggleSwitcherComponent } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { ToggleInputComponent } from './toggle-input.component';
+import { ToggleType } from './toggle-type.enum';
 
 describe('Component: ToggleInput', () => {
   let component: ToggleInputComponent;
@@ -14,7 +15,7 @@ describe('Component: ToggleInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [ToggleSwitcherComponent, InputReferenceDirective, ToggleInputComponent]
+      declarations: [ToggleSwitcherComponent, ToggleComponent, InputReferenceDirective, ToggleInputComponent]
     }).compileComponents();
   });
 
@@ -107,14 +108,6 @@ describe('Component: ToggleInput', () => {
       expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
     });
 
-    fit("Should have defined placeholder value", () => {
-      const labelAssertValue = 'test placeholder';
-      component.placeholder = labelAssertValue;
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
-    });
-
     fit("Should be linked to input element", () => {
       component.label = 'test label';
       fixture.detectChanges();
@@ -147,49 +140,133 @@ describe('Component: ToggleInput', () => {
   });
 
   describe('Toggle', () => {
-    fit('Should have default attributes value', () => {
-      const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance;
+    describe('Complex', () => {
+      fit('Should have default attributes value', () => {
+        const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance;
 
-      expect(toggleSwitcher.disabled).toBeFalse();
-      expect(toggleSwitcher.leftModel).toEqual({ label: '', icon: faTimes });
-      expect(toggleSwitcher.rightModel).toEqual({ label: '', icon: faCheck });
-      expect(toggleSwitcher.active).toBeFalse();
+        expect(toggleSwitcher.disabled).toBeFalse();
+        expect(toggleSwitcher.leftModel).toEqual({ label: CommonConstants.EMPTY_STRING, icon: faTimes });
+        expect(toggleSwitcher.rightModel).toEqual({ label: CommonConstants.EMPTY_STRING, icon: faCheck });
+        expect(toggleSwitcher.active).toBeFalse();
+      });
+
+      fit("Should not be disabled", () => {
+        expect(fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance.disabled).toBeFalse();
+      });
+
+      fit("Should be disabled", () => {
+        component.disabled = true;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance.disabled).toBeTrue();
+      });
+
+      fit("Should have defined models", () => {
+        component.leftModel = { label: 'Left test', icon: faUser };
+        component.rightModel = { label: 'Right test', icon: faUser };
+        fixture.detectChanges();
+
+        const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance;
+
+        expect(toggleSwitcher.leftModel).toEqual(component.leftModel);
+        expect(toggleSwitcher.rightModel).toEqual(component.rightModel);
+      });
+
+      fit("Should change value", () => {
+        const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance;
+
+        component.writeValue(true);
+        fixture.detectChanges();
+
+        expect(toggleSwitcher.active).toBeTrue();
+
+        fixture.nativeElement.querySelector('sfc-toggle-switcher').dispatchEvent(new MouseEvent('click', {}));
+        fixture.detectChanges();
+
+        expect(toggleSwitcher.active).toBeFalse();
+      });
     });
 
-    fit("Should not be disabled", () => {
-      expect(fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance.disabled).toBeFalse();
+    describe('Simple', () => {
+      fit('Should have default attributes value', () => {
+        component.toggleType = ToggleType.Simple;
+        fixture.detectChanges();
+
+        const toggle = fixture.debugElement.query(By.css('sfc-toggle')).componentInstance;
+
+        expect(toggle.disabled).toBeFalse();
+        expect(toggle.active).toBeFalse();
+      });
+
+      fit("Should not be disabled", () => {
+        component.toggleType = ToggleType.Simple;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('sfc-toggle')).componentInstance.disabled).toBeFalse();
+      });
+
+      fit("Should be disabled", () => {
+        component.toggleType = ToggleType.Simple;
+        component.disabled = true;
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('sfc-toggle')).componentInstance.disabled).toBeTrue();
+      });
+
+      fit("Should change value", () => {
+        component.toggleType = ToggleType.Simple;
+        fixture.detectChanges();
+
+        const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle')).componentInstance;
+
+        component.writeValue(true);
+        fixture.detectChanges();
+
+        expect(toggleSwitcher.active).toBeTrue();
+
+        fixture.nativeElement.querySelector('sfc-toggle').dispatchEvent(new MouseEvent('click', {}));
+        fixture.detectChanges();
+
+        expect(toggleSwitcher.active).toBeFalse();
+      });
+    });
+  });
+
+  describe('Side label', () => {
+    fit("Should not exist", () => {
+      expect(fixture.nativeElement.querySelector('label.side')).toBeNull();
     });
 
-    fit("Should be disabled", () => {
-      component.disabled = true;
+    fit("Should exist", () => {
+      component.sideLabel = 'test label';
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance.disabled).toBeTrue();
+      expect(fixture.nativeElement.querySelector('label.side')).toBeTruthy();
     });
 
-    fit("Should have defined models", () => {
-      component.leftModel = { label: 'Left test', icon: faUser };
-      component.rightModel = { label: 'Right test', icon: faUser };
+    fit("Should have defined value", () => {
+      const labelAssertValue = 'test label';
+      component.sideLabel = labelAssertValue;
       fixture.detectChanges();
 
-      const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance;
-
-      expect(toggleSwitcher.leftModel).toEqual(component.leftModel);
-      expect(toggleSwitcher.rightModel).toEqual(component.rightModel);
+      expect(fixture.nativeElement.querySelector('label.side').innerText).toEqual(labelAssertValue);
     });
 
-    fit("Should change value", () => {
-      const toggleSwitcher = fixture.debugElement.query(By.css('sfc-toggle-switcher')).componentInstance;
-
-      component.writeValue(true);
+    fit("Should have tabindex", () => {
+      component.sideLabel = 'test label';
       fixture.detectChanges();
 
-      expect(toggleSwitcher.active).toBeTrue();
+      expect(fixture.debugElement.query(By.css('label.side')).attributes['tabindex']).toEqual('0');
+    });
 
-      fixture.nativeElement.querySelector('sfc-toggle-switcher').dispatchEvent(new MouseEvent('click', {}));
+    fit("Should be linked to input element", () => {
+      component.label = 'test label';
       fixture.detectChanges();
 
-      expect(toggleSwitcher.active).toBeFalse();
+      const inputEl = fixture.nativeElement.querySelector('input[type=checkbox]');
+      expect(inputEl.labels).toBeDefined();
+      expect(inputEl.labels.length).toEqual(1);
+      expect(inputEl.labels[0].htmlFor).toEqual(inputEl.id);
     });
   });
 

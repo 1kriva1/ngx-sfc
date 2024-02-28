@@ -1,0 +1,87 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  cursor: pointer;
+
+  .container {
+    user-select: none;
+
+    .bubble {
+      display: inline-flex;
+      border-radius: 1em;
+      font-size: 0.8em;
+      font-weight: bold;
+
+      @include theme-value(color, $color-dark, $color-default);
+      @include theme-value(background-color, $color-default, $color-dark);
+
+      padding: 0.4em 0.2em;
+      transition: color $transition-duration-default $transition-timing-function-default,
+        background-color $transition-duration-default $transition-timing-function-default;
+
+      .content {
+        @include center;
+
+        padding: 0 0.8em;
+
+        sfc-icon {
+          margin-right: 0.2em;
+        }
+      }
+    }
+  }
+
+  &.active {
+    .container {
+      .bubble {
+        background-color: $color-hover-default;
+        color: $color-0;
+      }
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .container {
+      .bubble {
+        @include theme-value(color, $color-disabled-default, $color-4);
+        @include theme-value(background-color, $color-1, $color-disabled-dark);
+
+        .content {
+          sfc-icon {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+
+  &.disabled.active {
+    .container {
+      .bubble {
+        @include theme-value(color, $color-0, $color-4);
+        @include theme-value(background-color, $color-3, $color-7);
+      }
+    }
+  }
+
+  &:not(.active) {
+    .container {
+      &:hover {
+        .bubble {
+          @include theme-value(background-color, $color-9, $color-3);
+        }
+      }
+    }
+  }
+
+  &.disabled.active {
+    .container {
+      .bubble {
+        background-color: $color-hover-default;
+        color: $color-0;
+      }
+    }
+  }
+}

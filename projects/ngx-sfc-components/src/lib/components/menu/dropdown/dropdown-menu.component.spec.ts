@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ClickOutsideDirective, DOCUMENT, DotsComponent, IconComponent, MediaLimits, nameof, Position, UIClass, WINDOW } from 'ngx-sfc-common';
+import {
+  ClickOutsideDirective, DOCUMENT, DotsComponent, IconComponent,
+  MediaLimits, nameof, Position, UIClass, WINDOW
+} from 'ngx-sfc-common';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuItemComponent } from './parts/item/dropdown-menu-item.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
@@ -50,6 +53,18 @@ describe('Component: DropdownMenuComponent', () => {
       fixture.nativeElement.querySelector('div.container').dispatchEvent(new MouseEvent('click'));
 
       expect(component.open).toBeFalse();
+    });
+
+    fit('Should stop propagation on toggle', () => {
+      const event: MouseEvent = new MouseEvent('click');
+
+      spyOn(event, 'preventDefault');
+      spyOn(event, 'stopPropagation');
+
+      fixture.nativeElement.querySelector('div.container').dispatchEvent(event);
+
+      expect(event.preventDefault).toHaveBeenCalledTimes(1);
+      expect(event.stopPropagation).toHaveBeenCalledTimes(1);
     });
 
     fit('Should exist dropdown container', () => {
@@ -162,6 +177,19 @@ describe('Component: DropdownMenuComponent', () => {
       fixture.detectChanges();
 
       expect(fixture.debugElement.nativeElement.className).toContain(UIClass.Open);
+    });
+  });
+
+  describe('Filled', () => {
+    fit('Should not have filled class', () => {
+      expect(fixture.debugElement.nativeElement.className).not.toContain(UIClass.Filled);
+    });
+
+    fit('Should have filled class', () => {
+      component.filled = true;
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.nativeElement.className).toContain(UIClass.Filled);
     });
   });
 
@@ -320,6 +348,21 @@ describe('Component: DropdownMenuComponent', () => {
       fixture.nativeElement.querySelector('sfc-dropdown-menu-item').dispatchEvent(new MouseEvent('click'));
 
       expect(component.selected.emit).toHaveBeenCalledOnceWith(component.items[0]);
+    });
+
+    fit('Should stop propagation on item click', () => {
+      const event: MouseEvent = new MouseEvent('click');
+
+      spyOn(event, 'preventDefault');
+      spyOn(event, 'stopPropagation');
+
+      component.items.push({ label: 'Test label1' });
+      fixture.detectChanges();
+
+      fixture.nativeElement.querySelector('sfc-dropdown-menu-item').dispatchEvent(event);
+
+      expect(event.preventDefault).toHaveBeenCalledTimes(1);
+      expect(event.stopPropagation).toHaveBeenCalledTimes(1);
     });
 
     fit('Should set open state to false', () => {

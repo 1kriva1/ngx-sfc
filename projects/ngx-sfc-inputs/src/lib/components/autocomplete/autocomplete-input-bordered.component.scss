@@ -1,12 +1,12 @@
 @import "../../styles/mixins";
 
-$bordered-load-container-top: 2.3em;
+$bordered-load-container-top: 2.5em;
 
 :host {
   &.bordered {
     .container {
       .content {
-        @include load-container-bordered;
+        @include sfc-load-container-bordered;
       }
     }
 

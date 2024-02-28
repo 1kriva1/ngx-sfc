@@ -192,7 +192,7 @@ describe('Component: CheckboxInput', () => {
 
     describe('Side', () => {
       fit("Should not exist", () => {
-        expect(fixture.nativeElement.querySelector('label')).toBeNull();
+        expect(fixture.nativeElement.querySelector('label.side')).toBeNull();
       });
 
       fit("Should have defined value", () => {
@@ -200,7 +200,7 @@ describe('Component: CheckboxInput', () => {
         component.sideLabel = labelAssertValue;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('label').innerText).toEqual(labelAssertValue);
+        expect(fixture.nativeElement.querySelector('label.side').innerText).toEqual(labelAssertValue);
       });
 
       fit("Should have tabindex", () => {
@@ -208,7 +208,7 @@ describe('Component: CheckboxInput', () => {
         component.sideLabel = labelAssertValue;
         fixture.detectChanges();
 
-        expect(fixture.debugElement.query(By.css('label')).attributes['tabindex']).toEqual('0');
+        expect(fixture.debugElement.query(By.css('label.side')).attributes['tabindex']).toEqual('0');
       });
 
       fit("Should have side-label class", () => {

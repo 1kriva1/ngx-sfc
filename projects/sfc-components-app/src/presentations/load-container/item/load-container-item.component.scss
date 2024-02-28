@@ -1,3 +1,5 @@
+@import "../../../../../ngx-sfc-common/src/lib/styles/index";
+
 :host {
   width: 100%;
   padding: 0 0.31em;
@@ -22,6 +24,8 @@
         justify-content: center;
         align-items: center;
         padding: 0.7em 0.5em;
+
+        @include theme-value(color, $color-default);
       }
     }
   }

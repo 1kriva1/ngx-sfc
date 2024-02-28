@@ -5,7 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import {
     ModalOpenDirective, ModalComponent, TemplateContentComponent,
-    CommonConstants, ShowHideElementDirective, UIClass
+    CommonConstants, ShowHideElementDirective, UIClass, IModalEvent
 } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
@@ -423,6 +423,26 @@ describe('Component: DateTimeInput', () => {
             expect((component as any).modalService.toggle).toHaveBeenCalledTimes(1);
         });
 
+        describe('Placeholder', () => {
+            fit("Should be empty", () => {
+                component.fullSize = true;
+                fixture.detectChanges();
+
+                const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+                expect(inputEl.nativeElement.placeholder).toEqual(CommonConstants.EMPTY_STRING);
+            });
+
+            fit("Should have defined value", () => {
+                const assertPlaceholder = 'Test placeholder';
+                component.fullSize = true;
+                component.placeholder = assertPlaceholder
+                fixture.detectChanges();
+
+                const inputEl = fixture.debugElement.query(By.css('input[type=text]'));
+                expect(inputEl.nativeElement.placeholder).toEqual(assertPlaceholder);
+            });
+        });
+
         describe('Focus', () => {
             fit("Should init value service on focus", () => {
                 const inputEl = fixture.debugElement.query(By.css('input')),
@@ -514,6 +534,34 @@ describe('Component: DateTimeInput', () => {
                 expect(modalEl.componentInstance.hideOnClickOutside).toEqual(component.hideOnClickOutside);
                 expect(modalEl.componentInstance.showHeader).toBeFalse();
                 expect(modalEl.componentInstance.showFooter).toBeFalse();
+            });
+
+            fit("Should call unsubscribe on modal subscription", () => {
+                component.fullSize = true;
+                component.ngOnInit();
+
+                const unsubscribeSpy = spyOn(
+                    (component as any)._modalSubscription,
+                    'unsubscribe'
+                ).and.callThrough();
+
+                component.ngOnDestroy();
+
+                expect(unsubscribeSpy).toHaveBeenCalled();
+            });
+
+            fit("Should blur input on modal close", () => {
+                spyOn(component.inputElementRef.nativeElement, 'blur');
+                component.fullSize = true;
+                component.ngOnInit();
+
+                const inputEl = fixture.debugElement.query(By.css('input'));
+                inputEl.triggerEventHandler('focus', { target: inputEl.nativeElement });
+                fixture.detectChanges();
+
+                (component as any).modalService.toggle();
+
+                expect(component.inputElementRef.nativeElement.blur).toHaveBeenCalledTimes(1);
             });
         });
     });

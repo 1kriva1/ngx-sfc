@@ -7,7 +7,7 @@
             <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
             <sfc-checkmark [type]="checkmarkType" [disabled]="disabled" [active]="value || false"
                 (click)="onChange(!value)"></sfc-checkmark>
-            <label tabindex="0" *ngIf="sideLabel" for="{{inputId}}">{{sideLabel}}</label>
+            <label tabindex="0" *ngIf="sideLabel" class="side" for="{{inputId}}">{{sideLabel}}</label>
         </div>
         <span [sfcShowHideElement]="!!helperTextValue" class="helper-text">{{helperTextValue}}</span>
     </div>
