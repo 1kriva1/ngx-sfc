@@ -16,7 +16,8 @@
       @include theme-value(background-color, $color-default, $color-dark);
 
       padding: 0.4em 0.2em;
-      transition: color $transition-duration-default $transition-timing-function-default,
+      transition:
+        color $transition-duration-default $transition-timing-function-default,
         background-color $transition-duration-default $transition-timing-function-default;
 
       .content {
@@ -57,15 +58,6 @@
     }
   }
 
-  &.disabled.active {
-    .container {
-      .bubble {
-        @include theme-value(color, $color-0, $color-4);
-        @include theme-value(background-color, $color-3, $color-7);
-      }
-    }
-  }
-
   &:not(.active) {
     .container {
       &:hover {
@@ -79,8 +71,8 @@
   &.disabled.active {
     .container {
       .bubble {
-        background-color: $color-hover-default;
-        color: $color-0;
+        @include theme-value(color, $color-0, $color-4);
+        @include theme-value(background-color, $color-3, $color-7);
       }
     }
   }

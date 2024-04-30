@@ -68,6 +68,9 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
   notFoundLabel: string = this.Constants.NOT_FOUND_LABEL_DEFAULT;
 
   @Input()
+  loadMoreLabel: string = this.Constants.LOAD_MORE_LABEL_DEFAULT;
+
+  @Input()
   showTotal: boolean = false;
 
   @Input()
