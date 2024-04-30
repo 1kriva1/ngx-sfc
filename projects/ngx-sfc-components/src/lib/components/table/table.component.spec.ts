@@ -561,6 +561,7 @@ describe('Component: Table', () => {
             expect(loadContainerEl.componentInstance.paginationLimits).toEqual(component.paginationLimits);
             expect(loadContainerEl.componentInstance.showLoading).toEqual(component.showLoading);
             expect(loadContainerEl.componentInstance.emptyLabel).toEqual(component.notFoundLabel);
+            expect(loadContainerEl.componentInstance.loadMoreLabel).toEqual(component.loadMoreLabel);
         });
 
         fit("Should have valid rows count for sync data", () => {

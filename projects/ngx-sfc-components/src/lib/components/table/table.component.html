@@ -46,7 +46,7 @@
     <div class="rows-container">
         <sfc-load-container [id]="loadContainerId" [type]="LoadContainerType.Table" [model]="loadModel"
             [paginationCount]="paginationCount" [paginationLimits]="paginationLimits" [showLoading]="showLoading"
-            (handleSuccess)="handleSuccess($event)" (handleLoading)="loading = $event" [emptyLabel]="notFoundLabel">
+            (handleSuccess)="handleSuccess($event)" (handleLoading)="loading = $event" [emptyLabel]="notFoundLabel" [loadMoreLabel]="loadMoreLabel">
             <div class="row" *ngFor="let item of items; index as i;">
                 <ng-container [ngSwitch]="dataType">
                     <sfc-template-content *ngSwitchCase="TableDataType.Rows" [referenceContent]="rowContent"
