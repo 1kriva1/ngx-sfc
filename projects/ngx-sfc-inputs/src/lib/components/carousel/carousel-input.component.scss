@@ -1,0 +1,47 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  display: inline-block;
+  width: 100%;
+
+  .container {
+    input[type="text"] {
+      display: none;
+    }
+
+    .content {
+      width: 100%;
+
+      .component {
+        width: 100%;
+
+        .carousel {
+          width: 100%;
+
+          sfc-carousel {
+            .item {
+              justify-self: center;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        .component {
+          .carousel {
+            sfc-carousel {
+              .item {
+                pointer-events: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

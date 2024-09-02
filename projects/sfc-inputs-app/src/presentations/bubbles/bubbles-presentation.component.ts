@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { equalOrInclude, maxArrayLength } from 'ngx-sfc-inputs';
-import { IBubbleModel } from 'projects/ngx-sfc-inputs/src/public-api';
+import { equalOrInclude, maxArrayLength, IBubbleModel } from 'ngx-sfc-inputs';
 import { BasePresentationComponent } from '../base-presentations.component';
 
 @Component({

@@ -1,21 +1,43 @@
 <div class="container" (mouseover)="pause()" (mouseleave)="play()">
-    <div *ngIf="carouselLoaded" class="stage">
-        <sfc-carousel-stage [stageModel]="stageModel" [slidesModel]="slidesModel"></sfc-carousel-stage>
+    <div class="upside">
+        <ng-container *ngIf="slides.toArray().length && !options.navBottom">
+            <div class="navigation" [class.disabled]="navigationModel.disabled">
+                <ng-container *ngTemplateOutlet="navigationAction;context:{$implicit: navigationContext.previous}">
+                </ng-container>
+            </div>
+        </ng-container>
+
+        <div *ngIf="carouselLoaded" class="stage">
+            <sfc-carousel-stage [stageModel]="stageModel" [slidesModel]="slidesModel"></sfc-carousel-stage>
+        </div>
+
+        <ng-container *ngIf="slides.toArray().length && !options.navBottom">
+            <div class="navigation" [class.disabled]="navigationModel.disabled">
+                <ng-container *ngTemplateOutlet="navigationAction;context:{$implicit: navigationContext.next}">
+                </ng-container>
+            </div>
+        </ng-container>
     </div>
-    <ng-container *ngIf="slides.toArray().length">
-        <div class="navigation" [class.disabled]="navigationModel.disabled">
-            <div class="action previous" [class.disabled]="navigationModel.previous.disabled" (click)="previous()">
-                {{navigationModel.previous.label}}
+
+    <div class="downside">
+        <ng-container *ngIf="slides.toArray().length">
+            <div class="navigation" *ngIf="options.navBottom" [class.disabled]="navigationModel.disabled">
+                <ng-container *ngTemplateOutlet="navigationAction;context:{$implicit: navigationContext.previous}">
+                </ng-container>
+                <ng-container *ngTemplateOutlet="navigationAction;context:{$implicit: navigationContext.next}">
+                </ng-container>
             </div>
-            <div class="action next" [class.disabled]="navigationModel.next.disabled" (click)="next()">
-                {{navigationModel.next.label}}
+            <div class="dots" *ngIf="!navigationDotsModel.disabled">
+                <sfc-dot *ngFor="let dot of navigationDotsModel?.dots" [disabled]="disabled" [active]="dot.active"
+                    (click)="moveByDot(dot.id)">
+                </sfc-dot>
             </div>
-        </div>
-        <div class="dots" [class.disabled]="navigationDotsModel.disabled">
-            <div *ngFor="let dot of navigationDotsModel?.dots" class="dot" [class.active]="dot.active"
-                (click)="moveByDot(dot.id)">
-                <span></span>
-            </div>
-        </div>
-    </ng-container>
+        </ng-container>
+    </div>
+
+    <ng-template #navigationAction let-context>
+        <sfc-button [disabled]="disabled" [text]="context.model?.label" [iconBefore]="context.model?.icon"
+            [types]="[ButtonType.Rounded]" (click)="context.action()" [sfcComponentSize] [customSize]="0.6">
+        </sfc-button>
+    </ng-template>
 </div>

@@ -1,13 +1,19 @@
 import {
   AfterContentInit, ChangeDetectorRef,
-  Component, ContentChildren, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input, OnDestroy, OnInit, Output, QueryList
+  Component, ContentChildren, ElementRef, EventEmitter,
+  HostBinding, HostListener, Inject, Input, OnDestroy,
+  OnInit, Output, QueryList
 } from '@angular/core';
-import { any, UIClass } from 'ngx-sfc-common';
+import { any, ButtonType, UIClass } from 'ngx-sfc-common';
 import { DOCUMENT, ResizeService } from 'ngx-sfc-common';
-import { switchMap, delay, tap, Observable, Subscription, filter, skip, take, map, from, of, toArray, merge } from 'rxjs';
+import {
+  switchMap, delay, tap, Observable, Subscription,
+  filter, skip, take, map, from, of, toArray, merge
+} from 'rxjs';
 import { CarouselProperty } from './carousel.enum';
 import { CarouselSlideDirective } from './directive/carousel-slide.directive';
 import { CarouselDOMModel } from './models/dom.model';
+import { INavigationContextModel } from './models/navigation-context.model';
 import { CarouselNavigationDotsModel, CarouselNavigationModel } from './models/navigation.model';
 import { CarouselOptionsModel } from './models/options.model';
 import { CarouselSlideModel, CarouselSlideEvent } from './models/slide.model';
@@ -33,8 +39,13 @@ import { CarouselNavigationService } from './service/navigation/carousel-navigat
 })
 export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
 
+  ButtonType = ButtonType;
+
   @Input()
   options!: CarouselOptionsModel;
+
+  @Input()
+  disabled: boolean = false;
 
   @Output()
   translated = new EventEmitter<CarouselSlideEvent>();
@@ -48,7 +59,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
   @Output()
   changed = new EventEmitter<CarouselSlideEvent>();
 
-  @ContentChildren(CarouselSlideDirective)
+  @ContentChildren(CarouselSlideDirective, { descendants: true })
   slides!: QueryList<CarouselSlideDirective>;
 
   // SUBSCRIPTIONS
@@ -78,6 +89,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
   slideEvent!: CarouselSlideEvent;
 
   carouselLoaded = false;
+
+  navigationContext!: INavigationContextModel;
 
   @HostBinding('class.rtl')
   get rtl(): boolean {
@@ -168,6 +181,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
         }
         this.navigationModel = data.navigationModel;
         this.navigationDotsModel = data.navigationDotsModel;
+        this.navigationContext = {
+          previous: { model: this.navigationModel?.previous, action: this.previous.bind(this) },
+          next: { model: this.navigationModel?.next, action: this.next.bind(this) }
+        };
         this.changeDetectorRef.markForCheck();
       })
     );

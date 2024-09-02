@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Direction, UIClass } from '../../enums';
+import { DotComponent } from '../dot/dot.component';
 import { DotsComponent } from './dots.component';
 
 describe('Component: Dots', () => {
@@ -8,7 +9,7 @@ describe('Component: Dots', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DotsComponent]
+      declarations: [DotComponent, DotsComponent]
     }).compileComponents();
   });
 
@@ -26,7 +27,7 @@ describe('Component: Dots', () => {
     fit("Should have main elements", () => {
       expect(fixture.nativeElement.querySelector('div.container')).toBeDefined();
       expect(fixture.nativeElement.querySelector('div.dots-container')).toBeDefined();
-      expect(fixture.nativeElement.querySelectorAll('div.dot').length).toEqual(3);
+      expect(fixture.nativeElement.querySelectorAll('sfc-dot').length).toEqual(3);
     });
   });
 

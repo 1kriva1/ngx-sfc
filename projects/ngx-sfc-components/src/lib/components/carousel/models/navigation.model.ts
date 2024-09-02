@@ -1,6 +1,10 @@
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { empty } from "ngx-sfc-common";
+
 export interface CarouselNavigationButtonModel {
     disabled: boolean;
-    label: string;
+    label?: string | empty;
+    icon?: IconDefinition | empty
 }
 
 export interface CarouselNavigationModel {

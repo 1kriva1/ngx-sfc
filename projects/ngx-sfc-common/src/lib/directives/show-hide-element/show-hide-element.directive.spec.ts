@@ -85,7 +85,7 @@ describe('Directive: ShowHideElement', () => {
     describe('Delay', () => {
         fit('Should have default delay', () => {
             const el = fixture.debugElement.query(By.css('div.target'));
-            expect(el.styles['transition']).toEqual('visibility 0.5s ease 0s, opacity 0.5s linear 0s');
+            expect(el.styles['transition']).toEqual('visibility 0.5s, opacity 0.5s linear');
         });
 
         fit('Should have defined delay', () => {
@@ -94,7 +94,7 @@ describe('Directive: ShowHideElement', () => {
 
             const el = fixture.debugElement.query(By.css('div.target'));
 
-            expect(el.styles['transition']).toEqual('visibility 4.2s ease 0s, opacity 4.2s linear 0s');
+            expect(el.styles['transition']).toEqual('visibility 4.2s, opacity 4.2s linear');
         });
     });
 });

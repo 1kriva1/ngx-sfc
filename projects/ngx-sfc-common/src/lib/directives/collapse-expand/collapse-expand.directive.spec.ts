@@ -93,7 +93,7 @@ describe('Directive: CollapseExpand', () => {
     describe('Delay', () => {
         fit('Should have default delay', () => {
             const el = fixture.debugElement.query(By.css('div.target'));
-            expect(el.styles['transition']).toEqual('max-height 0.5s ease-out 0s');
+            expect(el.styles['transition']).toEqual('max-height 0.5s ease-out');
         });
 
         fit('Should have defined delay', () => {
@@ -102,7 +102,7 @@ describe('Directive: CollapseExpand', () => {
 
             const el = fixture.debugElement.query(By.css('div.target'));
 
-            expect(el.styles['transition']).toEqual('max-height 4.2s ease-out 0s');
+            expect(el.styles['transition']).toEqual('max-height 4.2s ease-out');
         });
     });
 });

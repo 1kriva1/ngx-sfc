@@ -19,7 +19,9 @@ import {
   RadioInputComponent,
   AutoCompleteInputComponent,
   SelectInputComponent,
-  BubblesInputComponent
+  BubblesInputComponent,
+  CarouselInputComponent,
+  CarouselInputSlideDirective
 } from './components';
 import {
   TagsChipComponent,
@@ -86,6 +88,9 @@ import { NgxSfcComponentsModule } from 'ngx-sfc-components';
     // bubbles
     BubblesInputComponent,
     BubbleComponent,
+    // carousel
+    CarouselInputComponent,
+    CarouselInputSlideDirective,
     // directives
     InputFocusDirective
   ],
@@ -112,6 +117,8 @@ import { NgxSfcComponentsModule } from 'ngx-sfc-components';
     AutoCompleteInputComponent,
     SelectInputComponent,
     BubblesInputComponent,
+    CarouselInputComponent,
+    CarouselInputSlideDirective,
     // range
     RangeInputComponent,
     RangeInputVerticalComponent,

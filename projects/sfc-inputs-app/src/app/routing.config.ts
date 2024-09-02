@@ -41,7 +41,8 @@ import {
     CommonAutoCompletePresentationComponent,
     BorderedAutoCompletePresentationComponent,
     BorderedCommonSelectPresentationComponent,
-    BubblesPresentationComponent
+    BubblesPresentationComponent,
+    CarouselPresentationComponent
 } from "../presentations";
 
 const indexRoute: Route = {
@@ -334,6 +335,10 @@ export const routes: Routes = [
     {
         path: 'bubbles',
         component: BubblesPresentationComponent
+    },
+    {
+        path: 'carousel',
+        component: CarouselPresentationComponent
     },
     fallbackRoute,
     indexRoute

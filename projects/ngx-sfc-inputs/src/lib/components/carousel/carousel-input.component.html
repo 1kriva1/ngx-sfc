@@ -1,0 +1,21 @@
+<div class="container">
+    <input sfcInput id="{{inputId}}" type="text" [disabled]="disabled" [value]="value" />
+    <div class="content">
+        <label for="{{inputId}}" *ngIf="label">{{label}}</label>
+        <div class="component">
+            <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+            <div class="carousel">
+                <sfc-carousel [options]="carouselOptions" [disabled]="disabled">
+                    <ng-container *ngFor="let slide of slides">
+                        <ng-template sfcCarouselSlide>
+                            <div class="item" (click)="onCheck(slide)">
+                                <ng-template [ngTemplateOutlet]="slide.template"></ng-template>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </sfc-carousel>
+            </div>
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+@import "../../styles/index";
+
+:host {
+  display: inline-block;
+
+  @include square-size(0.6em);
+  @include theme-value(background-color, $color-default, $color-dark);
+
+  border-radius: 50%;
+  transition: background-color 0.5s ease;
+
+  &.active {
+    background-color: $color-hover-default;
+  }
+
+  &.disabled {
+    &:not(.active) {
+      background-color: $color-disabled-default;
+    }
+  }
+}
