@@ -44,7 +44,9 @@ import {
   CommonAutoCompletePresentationComponent,
   BorderedAutoCompletePresentationComponent,
   BorderedCommonSelectPresentationComponent,
-  BubblesPresentationComponent
+  BubblesPresentationComponent,
+  CarouselPresentationComponent,
+  CarouselSchemaComponent
 } from '../presentations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgxSfcCommonModule } from 'ngx-sfc-common';
 import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs';
+import { NgxSfcComponentsModule } from 'ngx-sfc-components';
 
 @NgModule({
   declarations: [
@@ -97,7 +100,9 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     MultipleSelectPresentationComponent,
     GroupSelectPresentationComponent,
     BorderedCommonSelectPresentationComponent,
-    BubblesPresentationComponent
+    BubblesPresentationComponent,
+    CarouselSchemaComponent,
+    CarouselPresentationComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +114,8 @@ import { NgxSfcInputsModule, NgxSfcInputsValidationModule } from 'ngx-sfc-inputs
     BrowserAnimationsModule,
     NgxSfcCommonModule,
     NgxSfcInputsValidationModule,
-    NgxSfcInputsModule
+    NgxSfcInputsModule,
+    NgxSfcComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

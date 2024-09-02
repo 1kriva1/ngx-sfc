@@ -111,7 +111,7 @@
           sfc-dots {
             ::ng-deep > .container {
               > .dots-container {
-                > .dot {
+                > sfc-dot {
                   @include theme-value(background, $color-default, $color-dark);
                 }
               }

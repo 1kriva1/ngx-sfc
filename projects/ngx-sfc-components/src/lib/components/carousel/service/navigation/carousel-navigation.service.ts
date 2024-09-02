@@ -5,6 +5,7 @@ import { CarouselProperty } from '../../carousel.enum';
 import { CarouselSlideDirective } from '../../directive/carousel-slide.directive';
 import { CarouselNavigationDotsModel, CarouselNavigationModel } from '../../models/navigation.model';
 import { CarouselOptionsModel } from '../../models/options.model';
+import { CarouselServiceConstants } from '../carousel/carousel-service.constants';
 import { CarouselService } from '../carousel/carousel.service';
 
 @Injectable({
@@ -106,6 +107,16 @@ export class CarouselNavigationService implements OnDestroy {
     if (this.carouselService.settings.navText) {
       this.navigationModel.previous.label = this.carouselService.settings.navText[0];
       this.navigationModel.next.label = this.carouselService.settings.navText[1];
+    }
+
+    if (this.carouselService.settings.navIcons) {
+      this.navigationModel.previous.icon = this.carouselService.settings.navIcons[0];
+      this.navigationModel.next.icon = this.carouselService.settings.navIcons[1];
+    }
+
+    if (!this.carouselService.settings.navText && !this.carouselService.settings.navIcons) {
+      this.navigationModel.previous.label = CarouselServiceConstants.DEFAULT_NAV_TEXT[0];
+      this.navigationModel.next.label = CarouselServiceConstants.DEFAULT_NAV_TEXT[1];
     }
 
     this.navigationDotsModel.disabled = true;

@@ -30,3 +30,5 @@ export { SelectItemModel } from "./select/parts/item/select-item.component";
 export { ISelectValueType } from "./select/select-input.component";
 export { BubblesInputComponent } from "./bubbles/bubbles-input.component";
 export { IBubbleModel } from "./bubbles/parts/bubble/bubble.model";
+export { CarouselInputComponent } from "./carousel/carousel-input.component";
+export { CarouselInputSlideDirective } from './carousel/directives/carousel-input-slide.directive';

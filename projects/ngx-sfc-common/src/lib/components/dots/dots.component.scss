@@ -33,14 +33,11 @@
       align-items: center;
       position: relative;
 
-      .dot {
+      sfc-dot {
         @include square-size(0.3125em);
         @include theme-value(background, $color-default, $color-dark);
 
-        transition: background 0.3s ease;
         margin: 0.06em;
-        border-radius: 50%;
-        display: block;
       }
     }
   }
@@ -51,7 +48,7 @@
       outline: none;
 
       .dots-container {
-        .dot {
+        sfc-dot {
           @include theme-value(background, $color-hover-default);
         }
       }

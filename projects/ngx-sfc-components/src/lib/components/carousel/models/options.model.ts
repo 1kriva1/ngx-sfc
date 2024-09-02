@@ -1,3 +1,5 @@
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+
 export interface CarouselOptions {
     items?: number;
     skip_validateItems?: boolean;
@@ -11,6 +13,7 @@ export interface CarouselOptions {
     autoWidth?: boolean;
     responsiveRefreshRate?: number;
     nav?: boolean;
+    navBottom?: boolean;
     navSpeed?: number | boolean;
     slideBy?: number | string;
     dots?: boolean;
@@ -35,6 +38,7 @@ export interface CarouselOptionsModel extends CarouselOptions {
     rtl?: boolean;
     responsive?: CarouselResponsiveModel;
     navText?: string[];
+    navIcons?: IconDefinition[];
     navigationDotsModel?: boolean;
     autoplayHoverPause?: boolean;
     lazyLoad?: boolean;

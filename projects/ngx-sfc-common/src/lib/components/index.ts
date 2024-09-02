@@ -21,6 +21,7 @@ export { IDefaultModalHeaderModel } from './modal/header/default/default-modal-h
 export { ModalTemplate } from './modal/modal-template.enum';
 export { HamburgerComponent } from './hamburger/default/hamburger.component';
 export { HamburgerMenuComponent } from './hamburger/menu/hamburger-menu.component';
+export { DotComponent } from './dot/dot.component';
 export { DotsComponent } from './dots/dots.component';
 export { ToggleSwitcherComponent } from './toggle-switcher/toggle-switcher.component';
 export { IToggleSwitcherModel } from './toggle-switcher/toggle-switcher.model';

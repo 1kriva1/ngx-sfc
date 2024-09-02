@@ -40,3 +40,5 @@ export { MultipleSelectPresentationComponent } from './select/multiple/select-mu
 export { GroupSelectPresentationComponent } from './select/group/select-group-presentation.component';
 export { BorderedCommonSelectPresentationComponent } from './select/bordered/bordered-select-common-presentation.component';
 export { BubblesPresentationComponent } from './bubbles/bubbles-presentation.component';
+export { CarouselPresentationComponent } from './carousel/carousel-presentation.component';
+export { CarouselSchemaComponent } from './carousel/parts/carousel-schema/carousel-schema.component';

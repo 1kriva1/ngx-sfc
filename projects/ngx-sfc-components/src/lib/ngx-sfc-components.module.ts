@@ -27,7 +27,8 @@ import {
   DefaultTableRowComponent,
   ExpandedTableRowComponent,
   DefaultTableCardComponent,
-  CarouselComponent
+  CarouselComponent,
+  CarouselSlideDirective
 } from './components';
 import {
   DropdownMenuItemComponent,
@@ -43,7 +44,6 @@ import {
   TimelineItemComponent,
   NotificationContentComponent,
   CarouselStageComponent,
-  CarouselSlideDirective,
   AvatarBadgeComponent,
   SortingColumnComponent
 } from './components/no-export-index';

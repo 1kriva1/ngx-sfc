@@ -2,6 +2,7 @@ import { CarouselOptionsModel } from "../../models/options.model";
 
 export class CarouselServiceConstants {
     static CLONE_ID_PREFIX: string = 'cloned-';
+    static DEFAULT_NAV_TEXT: string[] = ['prev', 'next'];
     static DEFAULT_OPTIONS: CarouselOptionsModel = {
         items: 3,
         skip_validateItems: false,
@@ -19,8 +20,10 @@ export class CarouselServiceConstants {
         responsiveRefreshRate: 200,
         // defaults to Navigation
         nav: false,
-        navText: ['prev', 'next'],
+        navText: [],
+        navIcons:[],
         navSpeed: false,
+        navBottom: true,
         slideBy: 1,
         dots: true,
         dotsEach: false,

@@ -1,0 +1,16 @@
+:host {
+  .component-container {
+    form {
+      .component-row {
+        .component-column {
+          max-width: 30%;
+          margin: 0 1em;
+
+          &.full {
+            max-width: 90%;
+          }
+        }
+      }
+    }
+  }
+}

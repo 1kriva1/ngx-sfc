@@ -1,0 +1,188 @@
+<div class="component-container">
+    <div class="title">
+        <h3>Carousel:</h3>
+    </div>
+
+    <form [formGroup]="formGroup" autocomplete="off">
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-carousel-input #carouselNull id="demo-carousel-null" formControlName="inputCarouselNull">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselNull, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselLabel id="demo-carousel-label" formControlName="inputCarouselLabel"
+                    label="Carousel with label">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselLabel, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselHelper id="demo-carousel-helper" formControlName="inputCarouselHelper"
+                    helperText="Carousel with helper">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselHelper, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-carousel-input #carouselIcon id="demo-carousel-icon" formControlName="inputCarouselIcon"
+                    [icon]="faUser">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselIcon, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselLabelHelperIcon id="demo-carousel-label-helper-icon"
+                    formControlName="inputCarouselLabelHelperIcon" [icon]="faUser" label="Carousel with label"
+                    helperText="Carousel with helper">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value"
+                            [active]="isActive(carouselLabelHelperIcon, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselDisabled id="demo-carousel-disabled"
+                    formControlName="inputCarouselDisabled" [icon]="faUser" label="Carousel with label"
+                    helperText="Carousel with helper">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselDisabled, schema.key)"
+                            [disabled]="true">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-carousel-input #carouselMultiple id="demo-carousel-multiple"
+                    formControlName="inputCarouselMultiple" [multiple]="true" [icon]="faUser" label="Carousel multiple"
+                    helperText="Carousel multiple">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselMultiple, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselDots id="demo-carousel-dots" formControlName="inputCarouselDots"
+                    [dots]="true" [icon]="faUser" label="Carousel dots" helperText="Carousel with perfect dots">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselDots, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselItems id="demo-carousel-items" formControlName="inputCarouselItems"
+                    [dots]="true" [navigation]="false" [items]="4" [icon]="faUser" label="Carousel dots"
+                    helperText="Carousel with perfect dots">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselItems, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column">
+                <sfc-carousel-input #carouselValue id="demo-carousel-value" formControlName="inputCarouselValue"
+                    [items]="4" [icon]="faUser" label="Carousel with value" helperText="Carousel with value">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselValue, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselMultipleValue id="demo-carousel-multiple-value"
+                    formControlName="inputCarouselMultipleValue" [items]="4" [multiple]="true" [icon]="faUser"
+                    label="Carousel with multiple value" helperText="Carousel with multiple value">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value"
+                            [active]="isActive(carouselMultipleValue, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+
+            <div class="component-column">
+                <sfc-carousel-input #carouselDisabledMultipleValue id="demo-carousel-disabled-multiple-value"
+                    formControlName="inputCarouselDisabledMultipleValue" [items]="4" [multiple]="true" [icon]="faUser"
+                    label="Carousel with disabled multiple value" helperText="Carousel with disabled multiple value">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value"
+                            [active]="isActive(carouselDisabledMultipleValue, schema.key)" [disabled]="true">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column full">
+                <sfc-carousel-input #carouselSmall id="demo-carousel-small" formControlName="inputCarouselSmall"
+                    [items]="4" [icon]="faUser" label="Carousel with value" helperText="Carousel with value"
+                    [sfcComponentSize]="ComponentSize.Small">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselSmall, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+        
+        <div class="component-row">
+            <div class="component-column full">
+                <sfc-carousel-input #carouselLarge id="demo-carousel-large" formControlName="inputCarouselLarge"
+                    [items]="3" [icon]="faUser" label="Carousel with value" helperText="Carousel with value"
+                    [sfcComponentSize]="ComponentSize.Large">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselLarge, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-column full">
+                <sfc-carousel-input #carouselCustom id="demo-carousel-custom" formControlName="inputCarouselCustom"
+                    [items]="2" [icon]="faUser" label="Carousel with value" helperText="Carousel with value"
+                    [sfcComponentSize] [customSize]="4.2">
+                    <ng-template *ngFor="let schema of schemas" [sfcCarouselInputSlide]="schema.key">
+                        <sfc-carousel-schema [schema]="schema.value" [active]="isActive(carouselCustom, schema.key)">
+                        </sfc-carousel-schema>
+                    </ng-template>
+                </sfc-carousel-input>
+            </div>
+        </div>
+
+        <div>
+            <pre><code>{{ formGroup.value | json }}</code></pre>
+            <h1>Valid: {{formGroup.valid}}</h1>
+        </div>
+    </form>
+</div>

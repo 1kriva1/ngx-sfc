@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="header">
+        <span>{{schema.join('-')}}</span>
+    </div>
+    <div class="content">
+        <div *ngFor="let row of schema" class="row">
+            <sfc-dot *ngFor="let dots of [].constructor(row)" [active]="active" [disabled]="disabled">
+            </sfc-dot>
+        </div>
+    </div>
+</div>

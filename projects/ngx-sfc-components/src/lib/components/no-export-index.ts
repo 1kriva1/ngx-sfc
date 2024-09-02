@@ -11,6 +11,5 @@ export { SliderPaginationComponent } from './slider/parts/pagination/slider-pagi
 export { TimelineItemComponent } from './timeline/parts/item/timeline-item.component';
 export { NotificationContentComponent } from './notification/parts/content/notification-content.component';
 export { CarouselStageComponent } from './carousel/parts/stage/carousel-stage.component';
-export { CarouselSlideDirective } from './carousel/directive/carousel-slide.directive';
 export { AvatarBadgeComponent } from './avatar/parts/badge/avatar-badge.component';
 export { SortingColumnComponent } from './table/parts/columns/sorting/sorting-column.component';

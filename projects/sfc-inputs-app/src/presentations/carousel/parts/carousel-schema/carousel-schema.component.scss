@@ -1,0 +1,61 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.1em;
+    width: 7em;
+    border: 2px solid;
+
+    @include theme-value(border-color, $color-default, $color-dark);
+
+    border-radius: 1em;
+    transition: border-color 0.5s ease;
+
+    .header {
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.8em;
+      padding-bottom: 0.5em;
+
+      @include theme-value(color, $color-default, $color-dark);
+
+      letter-spacing: 3px;
+      user-select: none;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        sfc-dot {
+          margin: 0.2em 0.3em;
+        }
+      }
+    }
+  }
+
+  &.active {
+    .container {
+      border-color: $color-hover-default;
+    }
+  }
+
+  &.disabled {
+    &:not(.active) {
+      .container {
+        @include theme-value(border-color, $color-disabled-default, $color-disabled-dark);
+
+        .header {
+          @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+        }
+      }
+    }
+  }
+}

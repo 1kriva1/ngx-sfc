@@ -56,6 +56,6 @@ export { ExpandedTableRowTemplate } from './table/parts/content/rows/expanded/ex
 export { DefaultTableCardComponent } from './table/parts/content/cards/default/default-table-card.component';
 export { CarouselComponent } from './carousel/carousel.component';
 export { CarouselSlideDirective } from './carousel/directive/carousel-slide.directive';
-export { CarouselOptionsModel } from './carousel/models/options.model';
+export { CarouselOptionsModel, CarouselResponsiveModel } from './carousel/models/options.model';
 export { CarouselSlideEvent } from './carousel/models/slide.model';
 
