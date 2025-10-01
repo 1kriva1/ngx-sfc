@@ -59,12 +59,6 @@ export function removePropertyFromObject(obj: any, property: string): void {
 }
 
 /**
-  * Deep merge object with others
-  * @param target Object to merge
-  * @param sources 
-  */
-
-/**
  * Deep merge object with others
  * @param target  Object to merge
  * @param sources Objects to be merged with target
@@ -99,11 +93,20 @@ export const nameof = <T>(name: keyof T) => name;
 
 /**
    * Determines if the input is a Number or something that can be coerced to a Number
-   * @param - The input to be tested
+   * @param number The input to be tested
    * @returns - An indication if the input is a Number or can be coerced to a Number
    */
 export function isNumeric(number: any): boolean {
   return !isNaN(parseFloat(number));
+}
+
+/**
+ *  Determines if the input is a string
+ * @param value The input to be tested
+ * @returns An indication if the input is a string
+ */
+export function isString(value: any): boolean {
+  return typeof value === 'string';
 }
 
 /**
@@ -139,7 +142,6 @@ export function parseBoolean(value: string): boolean {
  * @returns True if equal
  */
 export function isEqual(obj1: any, obj2: any) {
-
   /**
    * More accurately check the type of a JavaScript object
    * @param  {Object} obj The object
@@ -172,7 +174,6 @@ export function isEqual(obj1: any, obj2: any) {
     for (let key in obj1) {
       if (Object.prototype.hasOwnProperty.call(obj1, key)) {
         if (!isEqual(obj1[key], obj2[key])) {
-
           return false;
         }
       }
@@ -180,7 +181,12 @@ export function isEqual(obj1: any, obj2: any) {
 
     // If no errors, return true
     return true;
+  }
 
+  function areFilesEqual() {
+    return obj1.lastModified === obj2.lastModified
+      && obj1.size === obj2.size
+      && obj1.type === obj2.type;
   }
 
   function areFunctionsEqual() {
@@ -206,6 +212,8 @@ export function isEqual(obj1: any, obj2: any) {
 
   if (type === 'date') return areDatesEqual();
 
+  if (type === 'file') return areFilesEqual();
+
   if (type === 'object') return areObjectsEqual();
 
   if (type === 'function') return areFunctionsEqual();
@@ -222,4 +230,27 @@ export function generateGuid(): string {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
   return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+}
+
+/**
+ * Check if value is Json parsable string
+ * @param value string value
+ * @returns True if string can be JSON parsed
+ */
+export function isJsonString(value: string): boolean {
+  try {
+    const json = JSON.parse(value);
+    return (typeof json === 'object');
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Stop propagation and prevent default
+ * @param event Event object
+ */
+export function stopAndPreventPropagation(event: Event): void {
+  event.preventDefault();
+  event.stopPropagation();
 }

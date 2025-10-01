@@ -9,7 +9,9 @@
                     <ng-container *ngFor="let slide of slides">
                         <ng-template sfcCarouselSlide>
                             <div class="item" (click)="onCheck(slide)">
-                                <ng-template [ngTemplateOutlet]="slide.template"></ng-template>
+                                <ng-template [ngTemplateOutlet]="slide.template"
+                                    [ngTemplateOutletContext]="{ $implicit: buildSlideContext(slide) }">
+                                </ng-template>
                             </div>
                         </ng-template>
                     </ng-container>

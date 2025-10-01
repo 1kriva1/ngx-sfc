@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HamburgerComponent, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, HamburgerComponent, UIClass } from 'ngx-sfc-common';
 import { SideMenuHeaderComponent } from './side-menu-header.component';
 
 describe('Component: SideMenuHeaderComponent', () => {
@@ -10,7 +10,7 @@ describe('Component: SideMenuHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[FontAwesomeModule],
+      imports: [FontAwesomeModule],
       declarations: [HamburgerComponent, SideMenuHeaderComponent]
     }).compileComponents();
   });
@@ -35,7 +35,7 @@ describe('Component: SideMenuHeaderComponent', () => {
 
   describe('Label', () => {
     fit('Should have default text', () => {
-      expect(fixture.nativeElement.querySelector('span').innerText).toEqual('Menu');
+      expect(fixture.nativeElement.querySelector('span').innerText).toEqual(CommonConstants.EMPTY_STRING);
     });
 
     fit('Should have defined text', () => {

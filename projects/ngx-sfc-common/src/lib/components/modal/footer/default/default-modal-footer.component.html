@@ -1,8 +1,8 @@
 <div class="container">
-    <sfc-button *ngIf="model.applyButton" [sfcComponentSize] [customSize]="BUTTON_CUSTOM_SIZE" [text]="model.applyButtonText"
-        [types]="[ButtonType.Rounded]" (click)="onButtonClick()">
+    <sfc-button *ngIf="model.applyButton" [sfcComponentSize] [customSize]="Constants.BUTTON_CUSTOM_SIZE"
+        [text]="model.applyButtonText" [types]="[ButtonType.Rounded]" (click)="onButtonClick()">
     </sfc-button>
-    <sfc-button *ngIf="model.cancelButton" [sfcComponentSize] [customSize]="BUTTON_CUSTOM_SIZE" [text]="model.cancelButtonText"
-        [types]="[ButtonType.Rounded]" (click)="onButtonClick(true)">
+    <sfc-button *ngIf="model.cancelButton" [sfcComponentSize] [customSize]="Constants.BUTTON_CUSTOM_SIZE"
+        [text]="model.cancelButtonText" [types]="[ButtonType.Rounded]" (click)="onButtonClick(true)">
     </sfc-button>
 </div>

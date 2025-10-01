@@ -1,5 +1,5 @@
-import { Directive, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import { filter, Subscription } from 'rxjs';
 import { IModalEvent } from '../../service/modal.event';
 import { ModalService } from '../../service/modal.service';
 
@@ -8,13 +8,26 @@ import { ModalService } from '../../service/modal.service';
 })
 export class ModalOpenDirective implements OnDestroy {
 
+  /* Inputs */
+
+  @Input('sfcModalOpen')
+  public id!: string;
+
+  /* End Inputs */
+
+  /* Subscriptions */
+
   private _openSubscription: Subscription;
 
-  constructor(private templateRef: TemplateRef<any>,
+  /* End Subscriptions */
+
+  constructor(
+    private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private modalService: ModalService) {
 
     this._openSubscription = this.modalService.modal$
+      .pipe(filter((event: IModalEvent) => event.id === this.id))
       .subscribe((event: IModalEvent) => {
         this.viewContainer.clear();
 

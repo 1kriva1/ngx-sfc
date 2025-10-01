@@ -16,8 +16,11 @@ export function buildHttpParams(value: any): HttpParams {
 
     return httpParams;
 
-    function _build(params: any, value: any, path: string, isArray: boolean = false) {
+    function _build(params: any, value: any, path: string, isArray: boolean = false): void {
         const ARRAY_PART: string = ']';
+
+        if (!value) return;
+
         Object.keys(value).forEach(key => {
             if (value[key] instanceof Array) {
                 _build(params, value[key], `${path}${key}[`, true);

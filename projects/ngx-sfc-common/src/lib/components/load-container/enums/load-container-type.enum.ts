@@ -1,4 +1,5 @@
 export enum LoadContainerType {
     Dropdown = 'dropdown',
-    Table = 'table'
+    Table = 'table',
+    Container = 'container'
 }

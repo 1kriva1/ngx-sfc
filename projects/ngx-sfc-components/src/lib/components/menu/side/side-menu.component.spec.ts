@@ -107,7 +107,7 @@ describe('Component: SideMenuComponent', () => {
 
         const itemEl = fixture.debugElement.query(By.css('sfc-side-menu-item'));
 
-        expect(itemEl.componentInstance.item).toEqual(component.model.items[0]);
+        expect(itemEl.componentInstance.item).toEqual((component.model.items as ISideMenuItemModel[])[0]);
         expect(itemEl.attributes['ng-reflect-open']).toEqual('false');
         expect(itemEl.componentInstance.open).toEqual(component.open);
       });
@@ -123,7 +123,7 @@ describe('Component: SideMenuComponent', () => {
         itemContentEl.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
-        expect(component.selected.emit).toHaveBeenCalledOnceWith(component.model.items[0]);
+        expect(component.selected.emit).toHaveBeenCalledOnceWith((component.model.items as ISideMenuItemModel[])[0]);
       });
 
       fit('Should change active state', () => {
@@ -141,10 +141,10 @@ describe('Component: SideMenuComponent', () => {
         itemContentEl[0].nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
-        expect(component.model.items[0].active).toBeTrue();
-        expect(component.model.items[1].active).toBeFalse();
-        expect(component.model.items[2].active).toBeFalse();
-        expect((component.model.items[2].items as ISideMenuItemModel[])[0].active).toBeFalse();
+        expect((component.model.items as ISideMenuItemModel[])[0].active).toBeTrue();
+        expect((component.model.items as ISideMenuItemModel[])[1].active).toBeFalse();
+        expect((component.model.items as ISideMenuItemModel[])[2].active).toBeFalse();
+        expect(((component.model.items as ISideMenuItemModel[])[2].items as ISideMenuItemModel[])[0].active).toBeFalse();
       });
 
       fit('Should change active state for child', () => {
@@ -165,9 +165,9 @@ describe('Component: SideMenuComponent', () => {
         itemContentChildEl.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
-        expect(component.model.items[0].active).toBeFalse();
-        expect(component.model.items[1].active).toBeFalse();
-        expect((component.model.items[1].items as ISideMenuItemModel[])[0].active).toBeTrue();
+        expect((component.model.items as ISideMenuItemModel[])[0].active).toBeFalse();
+        expect((component.model.items as ISideMenuItemModel[])[1].active).toBeFalse();
+        expect(((component.model.items as ISideMenuItemModel[])[1].items as ISideMenuItemModel[])[0].active).toBeTrue();
       });
     });
 
@@ -182,7 +182,7 @@ describe('Component: SideMenuComponent', () => {
         expect(itemEl.componentInstance.open).toEqual(component.open);
 
         expect(itemEl.attributes['ng-reflect-label']).toEqual('Test title');
-        expect(itemEl.componentInstance.label).toEqual(component.model.items[0].label);
+        expect(itemEl.componentInstance.label).toEqual((component.model.items as ISideMenuItemModel[])[0].label);
       });
     });
   });

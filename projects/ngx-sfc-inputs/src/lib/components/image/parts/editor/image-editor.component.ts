@@ -75,45 +75,45 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
     });
   }
 
-  rotateRight() {
+  rotateRight(): void {
     this.cropper.rotate(ImageEditorConstants.IMAGE_ROTATE_ANGLE);
   }
 
-  rotateLeft() {
+  rotateLeft(): void {
     this.cropper.rotate(-ImageEditorConstants.IMAGE_ROTATE_ANGLE);
   }
 
-  crop() {
+  crop(): void {
     this.dragMode = CropperDragMode.Crop;
     this.cropper.setDragMode(this.dragMode);
   }
 
-  move() {
+  move(): void {
     this.dragMode = CropperDragMode.Move;
     this.cropper.setDragMode(this.dragMode);
   }
 
-  zoomIn() {
+  zoomIn(): void {
     this.cropper.zoom(ImageEditorConstants.ZOOM_VALUE);
   }
 
-  zoomOut() {
+  zoomOut(): void {
     this.cropper.zoom(-ImageEditorConstants.ZOOM_VALUE);
   }
 
-  flipH() {
+  flipH(): void {
     this.cropper.scaleX(-this.cropper.getImageData().scaleX);
   }
 
-  flipV() {
+  flipV(): void {
     this.cropper.scaleY(-this.cropper.getImageData().scaleY);
   }
 
-  reset() {
+  reset(): void {
     this.cropper.reset();
   }
 
-  private export() {
+  private export(): void {
     const cropedCanvas = this.cropper.getCroppedCanvas({
       imageSmoothingEnabled: ImageEditorConstants.IMAGE_SMOOTHING_ENABLED,
       imageSmoothingQuality: ImageEditorConstants.IMAGE_SMOOTHING_QUALITY

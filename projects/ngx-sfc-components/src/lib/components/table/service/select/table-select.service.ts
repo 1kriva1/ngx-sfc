@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { addItem, removeItem } from 'ngx-sfc-common';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs'
+import { addItem, removeItem, ObservableModel } from 'ngx-sfc-common';
 import { ITableSelectEvent } from './table-select.event';
 
 @Injectable({
@@ -8,9 +8,9 @@ import { ITableSelectEvent } from './table-select.event';
 })
 export class TableSelectService {
 
-  private selectSubject = new Subject<ITableSelectEvent>();
+  private model: ObservableModel<ITableSelectEvent> = new ObservableModel<ITableSelectEvent>();
 
-  public select$: Observable<ITableSelectEvent> = this.selectSubject.asObservable();
+  public get select$(): Observable<ITableSelectEvent> { return this.model.value$; }
 
   public selectedItems: number[] = [];
 
@@ -19,18 +19,30 @@ export class TableSelectService {
   public selectAll(selected: boolean): void {
     this.unselectedItems = [];
     this.selectedItems = [];
-    this.selectSubject.next({ index: null, selected: selected });
+    this.model.subject.next({ index: null, selected: selected });
   }
 
-  public select(index: number | null, selected: boolean): void {    
+  public select(index: number | null, selected: boolean): void {
     if (selected) {
-      removeItem(this.unselectedItems, index)
-      addItem(this.selectedItems, index)
+      removeItem(this.unselectedItems, index);
+      addItem(this.selectedItems, index);
     } else {
-      addItem(this.unselectedItems, index)
-      removeItem(this.selectedItems, index)
+      addItem(this.unselectedItems, index);
+      removeItem(this.selectedItems, index);
     }
 
-    this.selectSubject.next({ index, selected });
+    this.model.subject.next({ index, selected });
+  }
+
+  public selectSingle(event: ITableSelectEvent): void {
+    if (event.selected) {
+      this.unselectedItems = [];
+      this.selectedItems = [event.index!];
+    } else {
+      this.selectedItems = [];
+      this.unselectedItems = [event.index!];
+    }
+
+    this.model.subject.next(event);
   }
 }

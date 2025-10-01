@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { MouseDownDirective } from 'ngx-sfc-common';
 import { CommonConstants, Direction, UIClass } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
@@ -15,7 +16,7 @@ describe('Component: RadioInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [InputReferenceDirective, RadioInputComponent]
+      declarations: [MouseDownDirective, InputReferenceDirective, RadioInputComponent]
     }).compileComponents();
   });
 
@@ -201,7 +202,7 @@ describe('Component: RadioInput', () => {
         expect(fixture.nativeElement.querySelector('input[type=radio]').classList).not.toContain('checked');
 
         const labelEl = fixture.debugElement.query(By.css('input[type=radio] + label'));
-        labelEl.triggerEventHandler('click', { target: { nativeElement: labelEl.nativeElement } });
+        labelEl.triggerEventHandler('mousedown', new MouseEvent('mousedown'));
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('input[type=radio]').classList).toContain('checked');

@@ -48,6 +48,12 @@
   flex-wrap: wrap;
 }
 
+@mixin center-column() {
+  @include center;
+
+  flex-direction: column;
+}
+
 @mixin not-first-not-last {
   &:not(:first-child, :last-child) {
     @content;
@@ -96,4 +102,9 @@
   #{$selector} ::-webkit-scrollbar-track {
     background: transparent;
   }
+}
+
+@mixin host($cursor: default) {
+  cursor: $cursor;
+  user-select: none;
 }

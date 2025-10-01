@@ -16,6 +16,7 @@ import { BaseDataInputComponent } from '../base/data/data-input.component';
 import { ISelectGroupItemModel } from './parts/item/models/select-group-item.model';
 import { ISelectGroupValue } from './models/select-group-value.model';
 import { SelectItemModel } from './parts/item/select-item.component';
+import { CommonValidator } from '../../validators';
 
 export type ISelectValueType = ISelectValue | ISelectValue[] | ISelectGroupValue | null;
 
@@ -136,7 +137,7 @@ export class SelectInputComponent
   }
 
   public handleSuccess(result: ILoadContainerResultModel<SelectItemModel>): void {
-    this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, true);
+    this.toggleInnerErrors(CommonValidator.Data, true);
     if (this.needInitialization)
       this._initialized = true;
 
@@ -153,7 +154,7 @@ export class SelectInputComponent
   }
 
   public handleError(): void {
-    this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, false);
+    this.toggleInnerErrors(CommonValidator.Data, false);
   }
 
   public isSelected(item: SelectItemModel): boolean {

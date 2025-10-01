@@ -19,7 +19,7 @@ import { DateTimeValueActionType } from '../../service/value/datetime-value.enum
 import { DateTimeViewActionType } from '../../service/view/enums/datetime-view.enum';
 import { WeekDay } from '@angular/common';
 import { DebugElement } from '@angular/core';
-import { DateTimeInputConstants } from '../../constants/datetime.constants';
+import { DateTimeInputConstants } from '../../constants/datetime-input.constants';
 
 describe('Component: DateTimeModal', () => {
   let component: DateTimeModalComponent;

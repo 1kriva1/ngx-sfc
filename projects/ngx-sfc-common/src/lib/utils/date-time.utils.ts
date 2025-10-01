@@ -317,6 +317,41 @@ export function isDateTimeGreatOrEqual(date1: Date, date2: Date): boolean {
 }
 
 /**
+ * Return true if first time greater or equal to second time
+ * @param date1 First date time value
+ * @param date2 Second date time value
+ * @returns True if first time greater or equal to second time
+ */
+export function isTimeGreatOrEqual(date1: Date, date2: Date): boolean {
+    return new Date(0, 0, 0, date1.getHours(), date1.getMinutes())
+        >= new Date(0, 0, 0, date2.getHours(), date2.getMinutes());
+}
+
+/**
+ * Return true if first time less or equal to second time
+ * @param date1 First date time value
+ * @param date2 Second date time value
+ * @returns True if first time less or equal to second time
+ */
+export function isDateTimeLessOrEqual(date1: Date, date2: Date): boolean {
+    return new Date(0, 0, 0, date1.getHours(), date1.getMinutes())
+        <= new Date(0, 0, 0, date2.getHours(), date2.getMinutes());
+}
+
+/**
+ * Return true if first time less or equal to second time
+ * @param date1 First date time value
+ * @param date2 Second date time value
+ * @returns True if first time less or equal to second time
+ */
+export function isTimeLessOrEqual(date1: Date, date2: Date): boolean {
+    return new Date(date1.getFullYear(), date1.getMonth(), date1.getDate(),
+        date1.getHours(), date1.getMinutes())
+        <= new Date(date2.getFullYear(), date2.getMonth(), date2.getDate(),
+            date2.getHours(), date2.getMinutes());
+}
+
+/**
  * Convert UTC date to local
  * @param date Date value
  * @returns Locale date
@@ -354,7 +389,10 @@ export function convertDateToTimestamp(date: Date, locale: string = DateTimeCons
  * @param birthdate Date of birth
  * @returns Age
  */
-export function getAge(birthdate: Date): number {
+export function getAge(birthdate: Date | null): number | null {
+    if (!birthdate)
+        return null;
+
     const now = new Date();
     let age = now.getFullYear() - birthdate.getFullYear();
     const monthDifference = now.getMonth() - birthdate.getMonth();

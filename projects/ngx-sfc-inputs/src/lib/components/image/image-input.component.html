@@ -8,16 +8,16 @@
                 <label for="{{inputId}}">
                     <fa-icon [icon]="icon"></fa-icon>
                     <span *ngIf="label">{{label}}</span>
+                    <sfc-close *ngIf="showClearButton" (click)="onClear($event)"></sfc-close>
                 </label>
-                <sfc-close *ngIf="showClearButton" (click)="onClear()"></sfc-close>
             </div>
             <div class="overlay"></div>
         </div>
         <span class="helper-text">{{helperTextValue}}</span>
     </div>
 
-    <sfc-modal *sfcModalOpen [defaultHeaderModel]="headerModalModel" [defaultFooterModel]="footerModalModel"
-        [hideOnClickOutside]="hideOnClickOutside">
+    <sfc-modal *sfcModalOpen="Constants.MODAL_ID" [defaultHeaderModel]="headerModalModel"
+        [defaultFooterModel]="footerModalModel" [hideOnClickOutside]="hideOnClickOutside">
         <ng-template [sfcTemplateReference]="ModalTemplate.Body">
             <sfc-image-editor [type]="type"></sfc-image-editor>
         </ng-template>

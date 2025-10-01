@@ -13,11 +13,11 @@ export class ImageService {
 
   public imageFile!: File;
 
-  public crop() {
+  public crop():void {
     this.cropSubject.next();
   }
 
-  public export(event: IImageExportEvent) {
+  public export(event: IImageExportEvent):void {
     this.exportSubject.next(event);
   }
 }

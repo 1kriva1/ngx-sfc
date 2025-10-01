@@ -71,12 +71,10 @@ export class DateTimeCalendarComponent implements OnInit {
   }
 
   onSelectDate(event: MouseEvent, date: Date): void {
-    if (!isEqualDates(date, this.valueService.currentValue as Date)) {
-      this.valueService.update({ type: DateTimeValueActionType.Date, value: date });
+    this.valueService.update({ type: DateTimeValueActionType.Date, value: date });
 
-      if (this.switchOnClick)
-        this.viewService.update({ type: DateTimeViewActionType.Date, event: event });
-    }
+    if (this.switchOnClick)
+      this.viewService.update({ type: DateTimeViewActionType.Date, event: event });
   }
 
   private isDisabled(date: Date): boolean {

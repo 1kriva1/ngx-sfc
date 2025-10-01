@@ -8,7 +8,7 @@
     .content {
       .text-input {
         position: relative;
-        z-index: 2;
+        z-index: 1;
       }
 
       ::ng-deep sfc-load-container {
@@ -17,7 +17,7 @@
         left: 0;
         width: 100%;
         min-height: 2em;
-        z-index: 1;
+        z-index: 0;
         cursor: text;
 
         @include load-container.sfc-load-container-as-default;

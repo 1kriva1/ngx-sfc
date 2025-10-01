@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { UIClass } from '../../enums';
 import { IToggleSwitcherModel } from './toggle-switcher.model';
 
@@ -23,8 +23,14 @@ export class ToggleSwitcherComponent {
   @Input()
   rightModel: IToggleSwitcherModel;
 
+  @Output()
+  toggle: EventEmitter<boolean> = new EventEmitter<boolean>(this.active);
+
   @HostListener('click')
-  onClick = () => this.active = !this.active;
+  onClick = () => {
+    this.active = !this.active;
+    this.toggle.emit(this.active);
+  }
 
   constructor() {
     this.leftModel = { label: 'Left' };

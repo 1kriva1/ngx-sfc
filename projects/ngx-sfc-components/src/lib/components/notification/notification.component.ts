@@ -1,8 +1,8 @@
 import { Component, ContentChildren, EventEmitter, HostBinding, Input, OnInit, Output, QueryList, TemplateRef } from '@angular/core';
 import { isDefined, TemplateReferenceDirective } from 'ngx-sfc-common';
-import { INotificationAutoCloseModel } from './notification-auto-close.model';
 import { NotificationTemplate } from './enums/notification-template.enum';
 import { NotificationType } from './enums/notification-type.enum';
+import { INotificationAutoCloseModel } from './notification-auto-close.model';
 import { INotificationContentModel } from './parts/content/notification-content.model';
 
 @Component({

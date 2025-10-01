@@ -2,7 +2,6 @@ import { Component, Input, OnInit, Optional } from '@angular/core';
 import { ButtonType, ComponentSize, ComponentSizeDirective } from 'ngx-sfc-common';
 import { getRotateValue } from 'ngx-sfc-common';
 import { DateTimeConstants } from 'ngx-sfc-common';
-import { DateTimeInputConstants } from '../../constants/datetime.constants';
 import { DateTimeView } from '../../datetime-input-view.enum';
 import { IDateTimeState } from '../../models/datetime-input-state.model';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
@@ -130,21 +129,17 @@ export class DateTimeClockComponent implements OnInit {
   }
 
   onSelectHour(hour: number) {
-    if (!this.isHourSelected(hour)) {
-      this.valueService.update({ type: DateTimeValueActionType.Hour, parameter: this.getHourValue(hour) });
+    this.valueService.update({ type: DateTimeValueActionType.Hour, parameter: this.getHourValue(hour) });
 
-      if (this.switchOnClick)
-        this.viewService.update({ type: DateTimeViewActionType.Hour });
-    }
+    if (this.switchOnClick)
+      this.viewService.update({ type: DateTimeViewActionType.Hour });
   }
 
   onSelectMinute(minute: number, event: MouseEvent) {
-    if (!this.isMinuteSelected(minute)) {
-      this.valueService.update({ type: DateTimeValueActionType.Minute, parameter: minute });
+    this.valueService.update({ type: DateTimeValueActionType.Minute, parameter: minute });
 
-      if (this.switchOnClick)
-        this.viewService.update({ type: DateTimeViewActionType.Minute, event: event });
-    }
+    if (this.switchOnClick)
+      this.viewService.update({ type: DateTimeViewActionType.Minute, event: event });
   }
 
   onAM() {

@@ -99,7 +99,7 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
     this._resizeSubscription?.unsubscribe();
   }
 
-  onClick(item: IDropdownMenuItemModel, event: Event): void {
+  public onClick(item: IDropdownMenuItemModel, event: Event): void {
     this.preventPropagation(event);
 
     if (this.hideOnClick)
@@ -111,12 +111,12 @@ export class DropdownMenuComponent implements OnDestroy, OnInit, AfterContentIni
     this.selected.emit(item);
   }
 
-  toggle(event: Event): void {
+  public toggle(event: Event): void {
     this.preventPropagation(event);
     this.open = !this.open;
   }
 
-  onClickOutside(event: ClickOutsideEvent): void {
+  public onClickOutside(event: ClickOutsideEvent): void {
     if (event.value && this.open) {
       this.open = false;
     }

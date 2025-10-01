@@ -33,7 +33,8 @@ export class ClickOutsideDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this._clickSubscription = fromEvent(this.document, 'click')
+    // capture: true allow to catch event in early state (ignore stop propagation)
+    this._clickSubscription = fromEvent(this.document, 'click', { capture: true })
       .subscribe(event => this.onClick(event));
   }
 

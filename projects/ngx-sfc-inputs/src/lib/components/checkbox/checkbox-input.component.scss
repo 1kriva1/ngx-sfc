@@ -1,0 +1,19 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  .container {
+    .content {
+      &.side-label {
+        align-items: initial;
+
+        .component {
+          justify-content: initial;
+        }
+
+        .helper-text {
+          justify-content: initial;
+        }
+      }
+    }
+  }
+}

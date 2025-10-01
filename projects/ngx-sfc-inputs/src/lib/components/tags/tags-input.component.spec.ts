@@ -7,6 +7,7 @@ import { InputConstants } from '../../constants/input.constants';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { InputReferenceDirective } from '../../directives';
 import { InputUIClass } from '../../enums/input-ui.enum';
+import { CommonValidator } from '../../validators';
 import { TagsChipComponent } from './parts/chip/tags-chip.component';
 import { TagsInputComponent } from './tags-input.component';
 import { TagsInputConstants } from './tags-input.constants';
@@ -284,7 +285,7 @@ describe('Component: TagsInput', () => {
       inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[ValidationConstants.DUPLICATE_VALIDATOR_KEY]);
+      expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
       expect(inputEl.nativeElement.value).toEqual(assertValue);
 
       inputEl.triggerEventHandler('blur', { target: { target: inputEl.nativeElement } });
@@ -308,7 +309,7 @@ describe('Component: TagsInput', () => {
 
         const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
         expect(chips.length).toEqual(0);
-        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[ValidationConstants.EMPTY_VALIDATOR_KEY]);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[CommonValidator.Empty]);
       });
 
       fit("Should raise validation error, when try to add duplicate value", () => {
@@ -328,7 +329,7 @@ describe('Component: TagsInput', () => {
 
         const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
         expect(chips.length).toEqual(1);
-        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[ValidationConstants.DUPLICATE_VALIDATOR_KEY]);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
         expect(inputEl.nativeElement.value).toEqual(assertValue);
       });
 
@@ -351,7 +352,7 @@ describe('Component: TagsInput', () => {
 
         const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
         expect(chips.length).toEqual(1);
-        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[ValidationConstants.DUPLICATE_VALIDATOR_KEY]);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
         expect(inputEl.nativeElement.value).toEqual(extraSpacesValue);
       });
 
@@ -368,7 +369,7 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[ValidationConstants.EMPTY_VALIDATOR_KEY]);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[CommonValidator.Empty]);
         expect(inputEl.nativeElement.value).toEqual('');
 
         inputEl.triggerEventHandler('input', { target: { value: assertValue } });
@@ -379,7 +380,7 @@ describe('Component: TagsInput', () => {
 
         const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
         expect(chips.length).toEqual(2);
-        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[ValidationConstants.DUPLICATE_VALIDATOR_KEY]);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
         expect(inputEl.nativeElement.value).toEqual(assertValue);
       });
 
@@ -454,7 +455,7 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[ValidationConstants.EMPTY_VALIDATOR_KEY]);
+        expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[CommonValidator.Empty]);
         expect(inputEl.nativeElement.value).toEqual('');
 
         inputEl.triggerEventHandler('input', { target: { value: assertValue } });

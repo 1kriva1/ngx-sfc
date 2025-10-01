@@ -21,7 +21,9 @@ import {
   SelectInputComponent,
   BubblesInputComponent,
   CarouselInputComponent,
-  CarouselInputSlideDirective
+  CarouselInputSlideDirective,
+  SubmitButtonComponent,
+  AvatarInputComponent
 } from './components';
 import {
   TagsChipComponent,
@@ -91,6 +93,10 @@ import { NgxSfcComponentsModule } from 'ngx-sfc-components';
     // carousel
     CarouselInputComponent,
     CarouselInputSlideDirective,
+    // submit-button
+    SubmitButtonComponent,
+    // avatar
+    AvatarInputComponent,
     // directives
     InputFocusDirective
   ],
@@ -119,6 +125,8 @@ import { NgxSfcComponentsModule } from 'ngx-sfc-components';
     BubblesInputComponent,
     CarouselInputComponent,
     CarouselInputSlideDirective,
+    SubmitButtonComponent,
+    AvatarInputComponent,
     // range
     RangeInputComponent,
     RangeInputVerticalComponent,

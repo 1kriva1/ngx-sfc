@@ -25,7 +25,7 @@ export function getProgressColorDefaultFunc(value: number): string {
 
 export function getProgressColorDynamicallyFunc(value: number, total?: number): string {
     const colorsCount = Object.keys(ProgressColor).length,
-        part = Math.ceil((total || CommonConstants.FULL_PERCENTAGE) / colorsCount);
+        part = (total || CommonConstants.FULL_PERCENTAGE) / colorsCount;
 
     if (value < part) {
         return ProgressColor.MIN_LOW;

@@ -1,16 +1,15 @@
 import {
   AfterContentChecked, AfterViewChecked, ChangeDetectorRef, Component, ContentChildren,
   DoCheck, EventEmitter, HostBinding, Inject, Input, IterableDiffer, IterableDiffers, OnDestroy,
-  OnInit, Output, QueryList, TemplateRef
-} from '@angular/core';
+  OnInit, Output, QueryList, TemplateRef} from '@angular/core';
+import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
 import {
   all, firstOrDefault, getCalcValue, getCssLikeValue, isDefined,
   MediaLimits, Position, ResizeService, SortingDirection, TemplateReferenceDirective, WINDOW,
   UIConstants, LoadContainerType, LoaderFunction, LoadContainerLoadType, ILoadContainerModel,
   ILoadContainerResultModel, IPaginationModel, PaginationConstants, generateGuid, any,
-  hasItem, SortingService, ISortingModel, ILoadContainerPredicateParameters, FilterFunction, UIClass, IToggleSwitcherModel
-} from 'ngx-sfc-common';
-import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
+  hasItem, SortingService, ISortingModel, ILoadContainerPredicateParameters, FilterFunction,
+  UIClass, IToggleSwitcherModel} from 'ngx-sfc-common';
 import { TableColumnType } from './parts/columns/table-column-type.enum';
 import { ITableColumnExtendedModel, ITableColumnModel } from './parts/columns/table-column.model';
 import { ColumnsToggleService } from './parts/toggle/service/columns-toggle.service';
@@ -171,6 +170,9 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
   @Input()
   selectOnClick: boolean = false;
 
+  @Input()
+  selectMultiple: boolean = true;
+
   @Output()
   selected: EventEmitter<ITableSelectEvent> = new EventEmitter<ITableSelectEvent>();
 
@@ -225,7 +227,7 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
   constructor(
     public columnsToggleService: ColumnsToggleService,
     @Inject(WINDOW) private window: Window,
-    private selectedService: TableSelectService,
+    public selectedService: TableSelectService,
     private sortingService: SortingService,
     private changeDetector: ChangeDetectorRef,
     private resizeService: ResizeService,
@@ -306,23 +308,44 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
       return {
         index: index,
         sequence: sequence,
-        selected: this.getItemSelected(sequence),
+        selected: result.reset ? false : this.getItemSelected(sequence),
         data: item
       };
     });
 
-    if (result.reset)
+    if (result.reset) {
       this.items = items;
-    else
+
+      if (this.selectable) {
+        this.selectedService.selectAll(false);
+      }
+    }
+    else {
       this.items = this.items.concat(items);
+    }
   }
 
   private selectionSubscribe(): void {
     this._allSelectionSubscription = this.selectedService.select$
       .subscribe((event: ITableSelectEvent) => {
-        if (event.index == null) {
-          this.allSelected = event.selected;
-          this.items.forEach(item => item.selected = event.selected);
+
+        if (this.selectMultiple) {
+          if (event.index == null) {
+            this.allSelected = event.selected;
+            this.items.forEach((item: ITableModel) => item.selected = event.selected);
+          } else {
+            this.items.forEach((item: ITableModel) => {
+              if (item.sequence === event.index)
+                item.selected = event.selected;
+            });
+          }
+        } else {
+          this.items.forEach((item: ITableModel) => {
+            if (item.sequence === event.index)
+              item.selected = event.selected;
+            else
+              item.selected = false;
+          });
         }
 
         this.selected.emit(event);
@@ -344,7 +367,7 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
         if (this.sequence)
           tableColumns.unshift(TableConstants.SEQUENCE_COLUMN);
 
-        if (this.selectable)
+        if (this.selectable && this.selectMultiple)
           tableColumns.unshift(TableConstants.SELECTABLE_COLUMN);
 
         if (this.expanded)

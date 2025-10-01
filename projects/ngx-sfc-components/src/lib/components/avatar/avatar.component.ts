@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { isDefined } from 'ngx-sfc-common';
 import { AvatarConstants } from './avatar.constants';
 import { IAvatarDataModel } from './models/avatar-data.model';
 import { AvatarImageModel } from './models/avatar-image.model';
@@ -57,8 +58,16 @@ export class AvatarComponent implements OnInit {
     this._progressModel = { ...this.PROGRESS_MODEL_DEFAULT, ...value }
   }
 
+  _data: IAvatarDataModel = this.DATA_MODEL_DEFAULT;
   @Input()
-  data: IAvatarDataModel = this.DATA_MODEL_DEFAULT;
+  set data(value: IAvatarDataModel) {
+    this._data = { ...this.DATA_MODEL_DEFAULT, ...value };
+
+    if (!isDefined(this._data.image)) {
+      this._data.image = AvatarConstants.DATA_DEFAULT_IMAGE;
+    }
+  }
+  get data(): IAvatarDataModel { return this._data; }
 
   @Input()
   stars: boolean = false;
@@ -76,7 +85,6 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageModel = new AvatarImageModel(this.radius, this.stroke, this.data.image!);
-    this.data = { ...this.DATA_MODEL_DEFAULT, ...this.data };
   }
 
   get strokeDashOffset(): number {

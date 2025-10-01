@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
-  ClickOutsideDirective, DOCUMENT, DotsComponent, IconComponent,
+  ClickOutsideDirective, DOCUMENT, DotComponent, DotsComponent, IconComponent,
   MediaLimits, nameof, Position, UIClass, WINDOW
 } from 'ngx-sfc-common';
 import { DropdownMenuComponent } from './dropdown-menu.component';
@@ -18,7 +18,7 @@ describe('Component: DropdownMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, FontAwesomeModule],
-      declarations: [ClickOutsideDirective, IconComponent, DropdownMenuItemComponent, DotsComponent, DropdownMenuComponent],
+      declarations: [ClickOutsideDirective, IconComponent, DropdownMenuItemComponent, DotComponent, DotsComponent, DropdownMenuComponent],
       providers: [
         { provide: DOCUMENT, useValue: document },
         { provide: WINDOW, useFactory: (() => { return windowMock; }) }
@@ -312,7 +312,7 @@ describe('Component: DropdownMenuComponent', () => {
 
       expect(component.open).toBeTrue();
 
-      fixture.debugElement.nativeElement.dispatchEvent(new MouseEvent('click'));
+      fixture.nativeElement.querySelector('ul').dispatchEvent(new MouseEvent('click'));
 
       expect(component.open).toBeTrue();
     });

@@ -3,6 +3,7 @@ import { IDefaultModalHeaderModel } from './default-modal-header.model';
 import { isDefined } from '../../../../utils';
 import { ModalService } from '../../service/modal.service';
 import { faWindowRestore, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { DefaultModalHeaderConstants } from './default-modal-header.constants';
 
 @Component({
   selector: 'sfc-default-modal-header',
@@ -11,27 +12,30 @@ import { faWindowRestore, IconDefinition } from '@fortawesome/free-solid-svg-ico
 })
 export class DefaultModalHeaderComponent implements OnInit {
 
-  private readonly DEFAULT_MODAL_HEADER_MODEL: IDefaultModalHeaderModel = {
-    icon: faWindowRestore,
-    showCloseIcon: true,
-    text: 'Modal'
-  }
+  /* Inputs */
+
+  @Input()
+  id!: string;
 
   @Input()
   model!: IDefaultModalHeaderModel;
 
-  get icon(): IconDefinition {
-    return this.model?.icon || faWindowRestore;
-  }
+  /* End Inputs */
+
+  /* Properties */
+
+  public get icon(): IconDefinition { return this.model?.icon || faWindowRestore; }
+
+  /* End Properties */
 
   constructor(private modalService: ModalService) { }
 
   ngOnInit(): void {
     if (!isDefined(this.model))
-      this.model = this.DEFAULT_MODAL_HEADER_MODEL;
+      this.model = DefaultModalHeaderConstants.DEFAULT_MODAL_HEADER_MODEL;
   }
 
   public onClose(): void {
-    this.modalService.close();
+    this.modalService.close(this.id);
   }
 }

@@ -4,6 +4,7 @@ import { isDefined, isNullOrEmptyString } from '../../../../utils';
 import { ButtonType } from '../../../button/button-type.enum';
 import { ComponentSize } from '../../../../enums';
 import { ModalService } from '../../service/modal.service';
+import { DefaultModalFooterConstants } from './default-modal-footer.constants';
 
 @Component({
   selector: 'sfc-default-modal-footer',
@@ -12,38 +13,39 @@ import { ModalService } from '../../service/modal.service';
 })
 export class DefaultModalFooterComponent implements OnInit {
 
-  private readonly DEFAULT_MODAL_FOOTER_MODEL: IDefaultModalFooterModel = {
-    cancelButton: true,
-    applyButton: true,
-    applyButtonText: 'Ok',
-    cancelButtonText: 'Cancel'
-  }
-
-  readonly BUTTON_CUSTOM_SIZE = 0.9;
-
   ComponentSize = ComponentSize;
   ButtonType = ButtonType;
 
+  // component
+  Constants = DefaultModalFooterConstants;
+
+  /* Inputs */
+
+  @Input()
+  id!: string;
+
   @Input()
   model!: IDefaultModalFooterModel;
+
+  /* End Inputs */
 
   constructor(private modalService: ModalService) { }
 
   ngOnInit(): void {
     if (!this.model) {
-      this.model = Object.assign({}, this.DEFAULT_MODAL_FOOTER_MODEL);
+      this.model = Object.assign({}, DefaultModalFooterConstants.DEFAULT_MODAL_FOOTER_MODEL);
     } else {
       if (isNullOrEmptyString(this.model.applyButtonText))
-        this.model.applyButtonText = this.DEFAULT_MODAL_FOOTER_MODEL.applyButtonText;
+        this.model.applyButtonText = DefaultModalFooterConstants.DEFAULT_MODAL_FOOTER_MODEL.applyButtonText;
 
       if (isNullOrEmptyString(this.model.cancelButtonText))
-        this.model.cancelButtonText = this.DEFAULT_MODAL_FOOTER_MODEL.cancelButtonText;
+        this.model.cancelButtonText = DefaultModalFooterConstants.DEFAULT_MODAL_FOOTER_MODEL.cancelButtonText;
 
       if (!isDefined(this.model.applyButton))
-        this.model.applyButton = this.DEFAULT_MODAL_FOOTER_MODEL.applyButton;
+        this.model.applyButton = DefaultModalFooterConstants.DEFAULT_MODAL_FOOTER_MODEL.applyButton;
 
       if (!isDefined(this.model.cancelButton))
-        this.model.cancelButton = this.DEFAULT_MODAL_FOOTER_MODEL.cancelButton;
+        this.model.cancelButton = DefaultModalFooterConstants.DEFAULT_MODAL_FOOTER_MODEL.cancelButton;
     }
   }
 
@@ -58,6 +60,6 @@ export class DefaultModalFooterComponent implements OnInit {
       }
     }
 
-    this.modalService.toggle();
+    this.modalService.toggle(this.id);
   }
 }

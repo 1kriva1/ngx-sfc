@@ -3,7 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   CommonConstants, DefaultModalFooterComponent, DelimeterComponent, ModalService, TemplateReferenceDirective,
   ModalComponent, ModalOpenDirective, CloseComponent, TemplateContentComponent, DefaultModalHeaderComponent,
-  ComponentSizeDirective, ButtonComponent
+  ComponentSizeDirective, ButtonComponent, DOCUMENT
 } from 'ngx-sfc-common';
 import { InputReferenceDirective } from '../../directives';
 import { ImageEditorComponent } from './parts/editor/image-editor.component';
@@ -17,6 +17,7 @@ import { ImageInputConstants } from './image-input.constants';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ImageInputType } from './image-input-type.enum';
 import { IImageExportEvent } from './service/image-export.event';
+import { CommonValidator } from '../../validators';
 
 describe('Component: ImageInput', () => {
   let component: ImageInputComponent;
@@ -28,7 +29,11 @@ describe('Component: ImageInput', () => {
       declarations: [InputReferenceDirective, CloseComponent, DelimeterComponent, ModalComponent, ModalOpenDirective, TemplateContentComponent,
         DefaultModalHeaderComponent, DefaultModalFooterComponent, ButtonComponent, ComponentSizeDirective,
         TemplateReferenceDirective, ImageEditorComponent, ImageInputComponent],
-      providers: [ModalService, ImageService]
+      providers: [
+        ModalService,
+        ImageService,
+        { provide: DOCUMENT, useValue: document }
+      ]
     }).compileComponents();
   });
 
@@ -115,7 +120,7 @@ describe('Component: ImageInput', () => {
 
       expect(component.isInnerInvalid).toBeTrue();
       expect(Object.keys(component.innerErrors).length).toEqual(1);
-      expect(component.innerErrors[ValidationConstants.FORMAT_VALIDATOR_KEY]).toBeTrue();
+      expect(component.innerErrors[CommonValidator.Format]).toBeTrue();
     });
 
     fit("Should still have inner error", () => {
@@ -124,7 +129,7 @@ describe('Component: ImageInput', () => {
 
       expect(component.isInnerInvalid).toBeTrue();
       expect(Object.keys(component.innerErrors).length).toEqual(1);
-      expect(component.innerErrors[ValidationConstants.FORMAT_VALIDATOR_KEY]).toBeTrue();
+      expect(component.innerErrors[CommonValidator.Format]).toBeTrue();
     });
 
     fit("Should not have inner error", () => {
@@ -227,7 +232,7 @@ describe('Component: ImageInput', () => {
 
       expect(component.isInnerInvalid).toBeTrue();
       expect(Object.keys(component.innerErrors).length).toEqual(1);
-      expect(component.innerErrors[ValidationConstants.FORMAT_VALIDATOR_KEY]).toBeTrue();
+      expect(component.innerErrors[CommonValidator.Format]).toBeTrue();
     });
   });
 
@@ -303,7 +308,7 @@ describe('Component: ImageInput', () => {
         fixture.detectChanges();
 
         const clearBtn = fixture.debugElement.query(By.css('sfc-close'));
-        clearBtn.triggerEventHandler('click', { target: clearBtn.nativeElement });
+        clearBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
         expect(component.value).toBeNull();
@@ -315,7 +320,7 @@ describe('Component: ImageInput', () => {
         fixture.detectChanges();
 
         const clearBtn = fixture.debugElement.query(By.css('sfc-close'));
-        clearBtn.triggerEventHandler('click', { target: clearBtn.nativeElement });
+        clearBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
         expect(component.url).toEqual(ImageInputConstants.DEFAULT_IMAGE);
@@ -332,7 +337,7 @@ describe('Component: ImageInput', () => {
         expect(Object.keys(component.innerErrors).length).toEqual(1);
 
         const clearBtn = fixture.debugElement.query(By.css('sfc-close'));
-        clearBtn.triggerEventHandler('click', { target: clearBtn.nativeElement });
+        clearBtn.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
         expect(component.isInnerInvalid).toBeFalse();

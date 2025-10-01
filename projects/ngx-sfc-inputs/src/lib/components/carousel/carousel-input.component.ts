@@ -1,9 +1,10 @@
 import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from "@angular/core";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { addItem, any, isDefined, removeItem, firstItem, firstOrDefault } from "ngx-sfc-common";
+import { addItem, any, isDefined, removeItem, firstItem, firstOrDefault, hasItem } from "ngx-sfc-common";
 import { CarouselOptionsModel, CarouselResponsiveModel } from "ngx-sfc-components";
 import { BaseInputComponent } from "../base/base-input.component";
 import { CarouselInputSlideDirective } from "./directives/carousel-input-slide.directive";
+import { ICarouselInputSlideContextModel } from "./directives/models/carousel-input-slide-context.model";
 
 @Component({
     selector: 'sfc-carousel-input',
@@ -46,6 +47,8 @@ export class CarouselInputComponent
         navIcons: [faChevronLeft, faChevronRight]
     }
 
+    private get multipleValue(): number[] { return this.value as number[]; }
+
     ngOnInit(): void {
         this.carouselOptions.dots = this.dots;
         this.carouselOptions.loop = this.loop;
@@ -65,19 +68,28 @@ export class CarouselInputComponent
     }
 
     public onCheck(slide: CarouselInputSlideDirective): void {
-        if (this.multiple && Array.isArray(this.value)) {
-            const item: number | undefined = firstOrDefault(this.value!,
+        if (this.multiple) {
+            const item: number | undefined = firstOrDefault(this.multipleValue,
                 value => value === slide.key);
 
             if (isDefined(item))
-                removeItem(this.value!, item);
+                removeItem(this.multipleValue, item);
             else
-                addItem(this.value!, slide.key);
-        } else {
-            this.value = this.value == slide.key ? null : slide.key;
-        }
+                addItem(this.multipleValue, slide.key);
 
-        this.onChange(this.value);
+            this.onChange(this.value);
+        } else {
+            if (this.value != slide.key) {
+                this.value = slide.key;
+                this.onChange(this.value);
+            }
+        }
+    }
+
+    public buildSlideContext(slide: CarouselInputSlideDirective): ICarouselInputSlideContextModel {
+        return {
+            selected: this.multiple ? hasItem(this.multipleValue, slide.key) : this.value === slide.key
+        };
     }
 
     private initValue(): void {

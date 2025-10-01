@@ -7,11 +7,14 @@ export {
     mergeDeep,
     nameof,
     isNumeric,
+    isString,
     isChromeBrowser,
     isEmail,
     parseBoolean,
     isEqual,
-    generateGuid
+    generateGuid,
+    isJsonString,
+    stopAndPreventPropagation
 } from './common.utils'
 
 export {
@@ -47,6 +50,9 @@ export {
     isDateGreatOrEqual,
     isDateTimeGreat,
     isDateTimeGreatOrEqual,
+    isDateTimeLessOrEqual,
+    isTimeGreatOrEqual,
+    isTimeLessOrEqual,
     convertUTCDateToLocalDate,
     convertTimestampToDate,
     convertDateToTimestamp,
@@ -79,6 +85,7 @@ export {
     hasItem,
     hasItemBy,
     hasObjectItem,
+    hasAnyItem,
     firstOrDefault,
     firstItem,
     lastItem,
@@ -97,7 +104,8 @@ export {
     removeItemBy,
     updateItemBy,
     getCollectionOrEmpty,
-    count
+    count,
+    isArraysEquals
 } from './collections.utils';
 
 export { buildHttpParams } from './http.utils';

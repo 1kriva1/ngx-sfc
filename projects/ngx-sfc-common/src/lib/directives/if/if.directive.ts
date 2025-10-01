@@ -6,6 +6,8 @@ import { UIConstants } from '../../constants';
 })
 export class IfDirective {
 
+  /* Inputs */
+
   @Input()
   set sfcIf(show: boolean) {
     this.style.display = show
@@ -13,9 +15,15 @@ export class IfDirective {
       : UIConstants.CSS_NONE;
   }
 
-  private display: string;
+  /* End Inputs */
+
+  /* Properties */
 
   private get style(): any { return this.el.nativeElement.style; }
+
+  private display: string;
+
+  /* End Properties */
 
   constructor(private el: ElementRef) {
     this.display = this.style.display;

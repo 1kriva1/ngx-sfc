@@ -1,0 +1,142 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+@mixin avatar-opacity($opacity) {
+  ::ng-deep .container {
+    .avatar-image-container {
+      .avatar {
+        .avatar-image {
+          > svg {
+            opacity: $opacity;
+            transition: opacity $transition-duration-default $transition-timing-function-default;
+          }
+        }
+      }
+    }
+  }
+}
+
+:host {
+  display: inline-block;
+  width: 100%;
+
+  .container {
+    input[type="text"] {
+      display: none;
+    }
+
+    .content {
+      .component {
+        position: relative;
+
+        sfc-close {
+          position: absolute;
+          top: 0;
+          right: 1em;
+          z-index: 2;
+          transition:
+            color $transition-duration-default $transition-timing-function-default,
+            transform $transition-duration-default $transition-timing-function-default;
+
+          &:hover {
+            transform: scale(1.3);
+            color: $color-red-0;
+          }
+        }
+
+        sfc-avatar {
+          cursor: pointer;
+          z-index: 1;
+
+          @include avatar-opacity(0.4);
+
+          .icons {
+            position: absolute;
+            z-index: 2;
+            cursor: pointer;
+
+            fa-icon {
+              font-size: 1.3em;
+              color: $color-default;
+              transition:
+                color $transition-duration-default $transition-timing-function-default,
+                font-size $transition-duration-default $transition-timing-function-default;
+
+              &.add {
+                display: block;
+              }
+
+              &.change {
+                display: none;
+              }
+            }
+          }
+
+          &:hover {
+            .icons {
+              fa-icon {
+                font-size: 1.6em;
+                color: $color-hover-default;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    sfc-modal {
+      ::ng-deep .overlay {
+        > .content {
+          max-width: 50%;
+        }
+      }
+    }
+  }
+
+  /* stylelint-disable */
+  &.disabled {
+    .container {
+      .content {
+        .component {
+          pointer-events: none;
+
+          sfc-avatar {
+            @include avatar-opacity(1);
+
+            .icons {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.has-value:not(.disabled) {
+    .container {
+      .content {
+        .component {
+          sfc-avatar {
+            @include avatar-opacity(1);
+
+            &:hover {
+              @include avatar-opacity(0.4);
+
+              .icons {
+                .change {
+                  display: block;
+                }
+              }
+            }
+
+            .icons {
+              .add {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  /* stylelint-enable */
+}

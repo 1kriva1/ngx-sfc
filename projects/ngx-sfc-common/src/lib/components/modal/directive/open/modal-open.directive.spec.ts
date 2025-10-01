@@ -4,7 +4,7 @@ import { ModalService } from "../../service/modal.service";
 import { ModalOpenDirective } from "./modal-open.directive";
 
 @Component({
-    template: `<div *sfcModalOpen>
+    template: `<div *sfcModalOpen="'id'">
                     <span class="modal-content">Modal content</span>
                 </div>
                 `
@@ -56,7 +56,7 @@ describe('Directive: ModalOpen', () => {
         });
 
         fit('Should content exist', () => {
-            component.modalService.open();
+            component.modalService.open('id');
 
             expect(fixture.nativeElement.querySelector('span.modal-content')).toBeTruthy();
         });
@@ -64,11 +64,11 @@ describe('Directive: ModalOpen', () => {
 
     describe('Close', () => {
         fit('Should hide content', () => {
-            component.modalService.open();
+            component.modalService.open('id');
 
             expect(fixture.nativeElement.querySelector('span.modal-content')).toBeTruthy();
 
-            component.modalService.close();
+            component.modalService.close('id');
 
             expect(fixture.nativeElement.querySelector('span.modal-content')).toBeNull();
         });

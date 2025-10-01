@@ -20,6 +20,7 @@ export class UIConstants {
     static CSS_CLASS_FIXED = 'fixed';
     static CSS_CLASS_BACKGROUND = 'background';
     static CSS_CLASS_TOP = 'top';
+    static CSS_CLASS_SCROLL = 'scroll';
 
     static RGB_OPACITY_PLACEHOLDER = '{opacity}';
 }

@@ -26,8 +26,9 @@ export class SideMenuItemComponent implements OnInit {
 
   @Input()
   item: ISideMenuItemModel = {
-    icon: undefined,
+    id: CommonConstants.EMPTY_STRING,
     label: CommonConstants.EMPTY_STRING,
+    icon: null,
     type: SideMenuItemType.Item,
     items: [],
     active: false
@@ -42,30 +43,30 @@ export class SideMenuItemComponent implements OnInit {
 
   openParent: boolean = false;
 
-  private get hasActiveChild() {
-    return isDefined(firstOrDefault(this.item.items, (item: ISideMenuItemModel) => item.active));
+  private get hasActiveChild(): boolean {
+    return isDefined(firstOrDefault(this.item.items, (item: ISideMenuItemModel) => item.active || false));
   }
 
-  hasChildren(item: ISideMenuItemModel) {
+  public hasChildren(item: ISideMenuItemModel): boolean {
     return any(item.items);
   }
 
-  isActive(item: ISideMenuItemModel) {
+  public isActive(item: ISideMenuItemModel): boolean {
     return this.hasChildren(item)
       ? this.hasActiveChild && !this.openParent
-      : item.active
+      : item.active || false
   }
 
-  ngOnInit() {
-    this.openParent = this.hasActiveChild;
+  ngOnInit(): void {
+    this.openParent = this.hasActiveChild || (this.item.open || false);
   }
 
-  onParentClick(item: ISideMenuItemModel){
+  public onParentClick(item: ISideMenuItemModel): void {
     this.openParent = !this.openParent;
     this.selectItem.emit(item);
   }
 
-  onChildClick(item: ISideMenuItemModel, child: ISideMenuItemModel) {
+  public onChildClick(item: ISideMenuItemModel, child: ISideMenuItemModel): void {
     item.items?.forEach((item) => item.active = false);
     this.selectItem.emit(child);
   }

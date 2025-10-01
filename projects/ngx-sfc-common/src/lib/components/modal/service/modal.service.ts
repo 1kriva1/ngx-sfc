@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ObservableModel } from '../../../models';
 import { IModalEvent } from './modal.event';
 
 @Injectable({
@@ -7,26 +8,33 @@ import { IModalEvent } from './modal.event';
 })
 export class ModalService {
 
-  private subject = new BehaviorSubject<IModalEvent>({ open: false });
+  private model: ObservableModel<IModalEvent> = new ObservableModel<IModalEvent>();
 
-  public modal$: Observable<IModalEvent> = this.subject.asObservable();
+  /* Properties */
 
-  public get isOpen(): boolean {
-    return this.subject.value.open;
-  }
+  public get modal$(): Observable<IModalEvent> { return this.model.value$; }
+
+  public isOpen: boolean = false;
 
   public args: any;
 
-  public toggle(): void {
-    this.subject.next({ open: !this.isOpen });
+  /* End Properties */
+
+  public toggle(id: any, args?: any): void {
+    this.emit({ open: !this.isOpen, id: id, args: args });
   }
 
-  public close(): void {
-    this.subject.next({ open: false });
+  public close(id: any, args?: any): void {
+    this.emit({ open: false, id: id, args: args });
   }
 
-  public open(args?: any): void {
-    this.args = args;
-    this.subject.next({ open: true, args: args });
+  public open(id: any, args?: any): void {
+    this.emit({ open: true, id: id, args: args });
+  }
+
+  private emit(event: IModalEvent): void {
+    this.args = event.args;
+    this.isOpen = event.open;
+    this.model.subject.next(event);
   }
 }

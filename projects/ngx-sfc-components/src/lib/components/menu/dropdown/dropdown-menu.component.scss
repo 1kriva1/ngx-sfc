@@ -1,5 +1,15 @@
 @use "ngx-sfc-common/styles/index" as *;
 
+@mixin filled-dots($color-default, $color-dark: null) {
+  ::ng-deep > .container {
+    > .dots-container {
+      > sfc-dot {
+        @include theme-value(background, $color-default, $color-dark);
+      }
+    }
+  }
+}
+
 :host {
   display: inline-flex;
 
@@ -109,17 +119,15 @@
           padding: 0;
 
           sfc-dots {
-            ::ng-deep > .container {
-              > .dots-container {
-                > sfc-dot {
-                  @include theme-value(background, $color-default, $color-dark);
-                }
-              }
-            }
+            @include filled-dots($color-default, $color-dark);
           }
 
           &:hover {
             background: $color-hover-default;
+
+            sfc-dots {
+              @include filled-dots($color-dark);
+            }
           }
         }
       }

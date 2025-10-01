@@ -26,10 +26,13 @@ $left-right-limit: 1.5em;
       }
 
       .label {
+        width: 80%;
         font-size: 1.2em;
         font-weight: bold;
         user-select: none;
         padding: 0 0.7em;
+        white-space: normal;
+        text-align: center;
       }
 
       sfc-close {
