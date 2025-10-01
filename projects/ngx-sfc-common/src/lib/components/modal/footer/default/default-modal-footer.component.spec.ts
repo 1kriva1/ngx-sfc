@@ -7,6 +7,7 @@ import { IDefaultModalFooterModel } from './default-modal-footer.model';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ButtonType } from '../../../button/button-type.enum';
+import { DefaultModalFooterConstants } from './default-modal-footer.constants';
 
 describe('Component: DefaultModalFooterComponent', () => {
   let component: DefaultModalFooterComponent;
@@ -71,7 +72,7 @@ describe('Component: DefaultModalFooterComponent', () => {
       const applyBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[0];
 
       expect(applyBtn.componentInstance.types).toEqual([ButtonType.Rounded]);
-      expect(applyBtn.attributes['ng-reflect-custom-size']).toEqual(component.BUTTON_CUSTOM_SIZE.toString());
+      expect(applyBtn.attributes['ng-reflect-custom-size']).toEqual(DefaultModalFooterConstants.BUTTON_CUSTOM_SIZE.toString());
     });
 
     fit('Should not exist', () => {
@@ -144,7 +145,7 @@ describe('Component: DefaultModalFooterComponent', () => {
       const cancelBtn: DebugElement = fixture.debugElement.queryAll(By.css('sfc-button'))[1];
 
       expect(cancelBtn.componentInstance.types).toEqual([ButtonType.Rounded]);
-      expect(cancelBtn.attributes['ng-reflect-custom-size']).toEqual(component.BUTTON_CUSTOM_SIZE.toString());
+      expect(cancelBtn.attributes['ng-reflect-custom-size']).toEqual(DefaultModalFooterConstants.BUTTON_CUSTOM_SIZE.toString());
     });
 
     fit('Should not exist', () => {

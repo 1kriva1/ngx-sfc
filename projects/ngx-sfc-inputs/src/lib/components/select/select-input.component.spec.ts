@@ -14,6 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 import { InputConstants } from '../../constants/input.constants';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { InputReferenceDirective } from '../../directives';
+import { CommonValidator } from '../../validators';
 import { SelectItemComponent } from '../no-export-index';
 import { ISelectGroupValue } from './models/select-group-value.model';
 import { ISelectGroupItemModel } from './parts/item/models/select-group-item.model';
@@ -88,10 +89,6 @@ describe('Component: SelectInput', () => {
 
     fit('Should have defined load model for container', () => {
       expect(component.loadModel).toBeDefined();
-    });
-
-    fit('Should have undefined predicate observable for load model', () => {
-      expect(component.loadModel.predicate$).toBeUndefined();
     });
 
     fit('Should have defined predicate observable for load model', () => {
@@ -878,7 +875,7 @@ describe('Component: SelectInput', () => {
       component.ngAfterViewInit();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[ValidationConstants.DATA_VALIDATOR_KEY]);
+      expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[CommonValidator.Data]);
     });
 
     fit('Should hide validation error, when load data successfully', () => {
@@ -889,7 +886,7 @@ describe('Component: SelectInput', () => {
       component.ngAfterViewInit();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[ValidationConstants.DATA_VALIDATOR_KEY]);
+      expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[CommonValidator.Data]);
 
       initLoader();
 

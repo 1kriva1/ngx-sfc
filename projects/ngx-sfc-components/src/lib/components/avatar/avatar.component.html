@@ -24,13 +24,14 @@
                     <circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="imageModel.ImageRadius"
                         attr.fill="url('#{{imageModel.ImageId}}')" />
                 </svg>
-            </div>
+
+                <ng-content></ng-content>
+            </div>            
 
             <sfc-avatar-badge *ngFor="let badge of badges" [model]="badge" [radius]="radius"
                 [stroke]="imageModel.Stroke" [normalizedRadius]="imageModel.NormalizedRadius"
                 [background]="progressModel.filledColor">
             </sfc-avatar-badge>
-
         </div>
 
         <sfc-stars *ngIf="stars" [value]="starsValue"></sfc-stars>

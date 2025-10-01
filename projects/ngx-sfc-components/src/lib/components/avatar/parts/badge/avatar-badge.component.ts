@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
+import { empty } from 'ngx-sfc-common';
 import { getCssLikeValue, UIConstants } from 'ngx-sfc-common';
 import { AvatarConstants } from '../../avatar.constants';
 import { AvatarBadgePosition } from './avatar-badge-position.enum';
@@ -13,7 +14,7 @@ import { IAvatarBadgeModel } from './avatar-badge.model';
 export class AvatarBadgeComponent {
 
   @Input()
-  background?: string;
+  background?: string | empty;
 
   @Input()
   model: IAvatarBadgeModel = { position: AvatarBadgePosition.Bottom };

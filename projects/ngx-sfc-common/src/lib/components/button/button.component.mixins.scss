@@ -1,0 +1,28 @@
+@import "../../styles/index";
+
+@mixin sfc-button-as-default() {
+  .button {
+    color: $color-default;
+
+    &.rounded {
+      border-color: $color-default;
+    }
+  }
+
+  &.disabled {
+    .button {
+      color: $color-disabled-default;
+
+      &.rounded {
+        border-color: $color-disabled-default;
+      }
+    }
+  }
+
+  &:not(.disabled):hover {
+    .button {
+      color: $color-hover-default;
+      border-color: $color-hover-default;
+    }
+  }
+}

@@ -37,7 +37,7 @@
 
     <ng-template #navigationAction let-context>
         <sfc-button [disabled]="disabled" [text]="context.model?.label" [iconBefore]="context.model?.icon"
-            [types]="[ButtonType.Rounded]" (click)="context.action()" [sfcComponentSize] [customSize]="0.6">
+            [types]="[ButtonType.Rounded]" (click)="context.action()">
         </sfc-button>
     </ng-template>
 </div>

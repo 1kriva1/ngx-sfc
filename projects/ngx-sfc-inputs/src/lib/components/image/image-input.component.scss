@@ -43,6 +43,8 @@
           font-size: 1em;
 
           label {
+            display: flex;
+            justify-content: center;
             color: $color-0 !important;
             position: initial;
             overflow: hidden;
@@ -62,12 +64,18 @@
             }
 
             span {
+              font-size: 0.9em;
               margin-left: 0.31em;
             }
-          }
 
-          sfc-close {
-            color: $color-red-0;
+            sfc-close {
+              margin-left: 0.1em;
+              color: $color-red-0;
+
+              &:hover {
+                color: $color-red-1;
+              }
+            }
           }
         }
 

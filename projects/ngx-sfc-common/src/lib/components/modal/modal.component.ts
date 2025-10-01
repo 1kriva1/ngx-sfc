@@ -3,14 +3,19 @@ import {
     state, style, transition, trigger
 } from '@angular/animations';
 import {
-    Component, ContentChildren, HostListener, Input,
-    QueryList, TemplateRef
+    AfterViewInit, Component, ContentChildren, HostListener, Inject, Input, OnDestroy,
+    Optional, QueryList, TemplateRef
 } from '@angular/core';
+import { ModalOpenDirective } from './directive/open/modal-open.directive';
+import { UIConstants } from '../../constants';
 import { TemplateReferenceDirective } from '../../directives';
+import { DOCUMENT } from '../../services';
 import { IDefaultModalFooterModel } from './footer/default/default-modal-footer.model';
 import { IDefaultModalHeaderModel } from './header/default/default-modal-header.model';
 import { ModalTemplate } from './modal-template.enum';
 import { ModalService } from './service/modal.service';
+import { ModalOpenOnClickDirective } from './directive/click/modal-open-on-click.directive';
+import { isDefined } from '../../utils';
 
 @Component({
     selector: 'sfc-modal',
@@ -40,7 +45,7 @@ import { ModalService } from './service/modal.service';
         ])
     ]
 })
-export class ModalComponent {
+export class ModalComponent implements AfterViewInit, OnDestroy {
 
     ModalTemplate = ModalTemplate;
 
@@ -90,9 +95,39 @@ export class ModalComponent {
     @ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
     templates: QueryList<TemplateReferenceDirective> | undefined;
 
-    constructor(private modalService: ModalService) { }
+    /* Properties */
+
+    public get id(): string {
+        return isDefined(this.openOnClickDirective)
+            ? this.openOnClickDirective.id : this.openDirective.id;
+    }
+
+    // value of body overflow style when modal created
+    // this prevent scrolling when modal has opened
+    private bodyOverflow: string;
+
+    /* End Properties */
+
+    constructor(
+        public modalService: ModalService,
+        @Inject(DOCUMENT) private document: Document,
+        @Optional() private openDirective: ModalOpenDirective,
+        @Optional() private openOnClickDirective: ModalOpenOnClickDirective) {
+        // remember body overflow
+        this.bodyOverflow = this.document.body.style.overflow;
+    }
+
+    ngAfterViewInit(): void {
+        // set body overflow to hidden, to prevent page scrolling
+        this.document.body.style.overflow = UIConstants.CSS_VISIBILITY_HIDDEN;
+    }
+
+    ngOnDestroy(): void {
+        // return back body overflow value when modal has closed
+        this.document.body.style.overflow = this.bodyOverflow;
+    }
 
     public close(): void {
-        this.modalService.close();
+        this.modalService.close(this.id);
     }
 }

@@ -15,8 +15,9 @@ export class SideMenuItemContentComponent {
 
   @Input()
   item: ISideMenuItemModel = {
-    icon: undefined,
+    id: CommonConstants.EMPTY_STRING,
     label: CommonConstants.EMPTY_STRING,
+    icon: null,
     type: SideMenuItemType.Item,
     active: false
   };
@@ -40,7 +41,10 @@ export class SideMenuItemContentComponent {
 
   @HostListener('click')
   onClick() {
-    this.selectItem.emit(this.item)
+    this.selectItem.emit(this.item);
+
+    if (this.item.click)
+      this.item.click(this.item);
   }
 
   get expandIcon(): IconDefinition {

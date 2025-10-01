@@ -1,0 +1,48 @@
+@import "../../styles/variables";
+
+:host {
+  .container {
+    .content {
+      .message {
+        text-align: center;
+        font-weight: bold;
+        font-size: 0.8em;
+        padding: 0;
+
+        &:empty {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.info {
+    .container {
+      .content {
+        .message {
+          color: $color-info;
+        }
+      }
+    }
+  }
+
+  &.success {
+    .container {
+      .content {
+        .message {
+          color: $color-success;
+        }
+      }
+    }
+  }
+
+  &.failed {
+    .container {
+      .content {
+        .message {
+          color: $color-failed;
+        }
+      }
+    }
+  }
+}

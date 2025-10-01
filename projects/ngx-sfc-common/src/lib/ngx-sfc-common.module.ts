@@ -21,7 +21,11 @@ import {
   ImageLoadDirective,
   ComponentReferenceDirective
 } from './directives';
-import { SwitchMultiCasePipe, SortByPipe } from './pipes';
+import { 
+  SwitchMultiCasePipe, 
+  SortByPipe,
+  RepeatPipe
+ } from './pipes';
 import {
   ButtonComponent,
   TooltipComponent,
@@ -47,7 +51,8 @@ import {
   IconComponent,
   CollapseExpandComponent,
   CollapseExpandContainerComponent,
-  ToggleComponent
+  ToggleComponent,
+  MessageComponent
 } from './components';
 
 @NgModule({
@@ -86,6 +91,7 @@ import {
     CollapseExpandComponent,
     CollapseExpandContainerComponent,
     ToggleComponent,
+    MessageComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -97,7 +103,8 @@ import {
     DefaultModalFooterComponent,
     // pipes
     SwitchMultiCasePipe,
-    SortByPipe
+    SortByPipe,
+    RepeatPipe
   ],
   imports: [
     CommonModule,
@@ -138,6 +145,7 @@ import {
     CollapseExpandComponent,
     CollapseExpandContainerComponent,
     ToggleComponent,
+    MessageComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -149,7 +157,8 @@ import {
     DefaultModalFooterComponent,
     // pipes
     SwitchMultiCasePipe,
-    SortByPipe
+    SortByPipe,
+    RepeatPipe
   ],
   providers: [DOCUMENT_PROVIDERS, WINDOW_PROVIDERS]
 })

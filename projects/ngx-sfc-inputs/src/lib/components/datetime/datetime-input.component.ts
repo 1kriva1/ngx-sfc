@@ -4,7 +4,7 @@ import { NgControl } from '@angular/forms';
 import { CommonConstants, ComponentSizeDirective, DateTimeConstants, ModalService, ModalTemplate, setDefaultSecondsAndMiliseconds } from 'ngx-sfc-common';
 import { isNullOrEmptyString, IModalEvent } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base/base-input.component';
-import { DateTimeInputConstants } from './constants/datetime.constants';
+import { DateTimeInputConstants } from './constants/datetime-input.constants';
 import { DateTimeFormatsConstants } from './constants/formats.constants';
 import { DateTimeValueService } from './service/value/datetime-value.service';
 import { DateTimeViewActionType } from './service/view/enums/datetime-view.enum';
@@ -23,6 +23,8 @@ import { IDateTimeModalButtonsModel } from './parts/modal/datetime-modal.model';
 export class DateTimeInputComponent extends BaseInputComponent<Date> implements OnInit, OnDestroy {
 
   ModalTemplate = ModalTemplate;
+
+  Constants = DateTimeInputConstants;
 
   @Input()
   date: boolean = true;
@@ -98,6 +100,9 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
     nowLabel: DateTimeInputConstants.DEFAULT_BUTTONS_TEXT.NOW
   };
 
+  @Input()
+  default: Date = new Date();
+
   override get placeholderValue(): string {
     return this.fullSize
       ? this.placeholder ? this.placeholder : CommonConstants.EMPTY_STRING
@@ -152,15 +157,15 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
 
     // when we set value - close modal
     if (this.fullSize)
-      this.modalService.toggle();
+      this.modalService.toggle(DateTimeInputConstants.MODAL_ID);
   }
 
   onFocus(): void {
     if (this.fullSize) {
       this.initValue();
 
-      if (!this.modalService.isOpen)
-        this.modalService.toggle();
+      if (!this.modalService.isOpen)        
+        this.modalService.toggle(DateTimeInputConstants.MODAL_ID);
     }
   }
 
@@ -172,7 +177,7 @@ export class DateTimeInputComponent extends BaseInputComponent<Date> implements 
       locale: this.locale,
       shortTime: this.shortTime,
       disabledDays: this.disabledDays,
-      value: this.hasValue ? this.value as Date : new Date(),
+      value: this.hasValue ? this.value as Date : (this.default || new Date),
       currentValue: this.value
     };
 

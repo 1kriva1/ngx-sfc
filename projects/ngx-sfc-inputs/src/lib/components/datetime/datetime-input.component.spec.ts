@@ -5,12 +5,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import {
     ModalOpenDirective, ModalComponent, TemplateContentComponent,
-    CommonConstants, ShowHideElementDirective, UIClass, IModalEvent
+    CommonConstants, ShowHideElementDirective, UIClass, DOCUMENT
 } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { InputReferenceDirective } from '../../directives';
 import { DateTimeModalComponent } from '../no-export-index';
-import { DateTimeInputConstants } from './constants/datetime.constants';
+import { DateTimeInputConstants } from './constants/datetime-input.constants';
 import { DateTimeInputComponent } from './datetime-input.component';
 import { DateTimeValueActionType } from './service/value/datetime-value.enum';
 import { DateTimeValueService } from './service/value/datetime-value.service';
@@ -29,6 +29,9 @@ describe('Component: DateTimeInput', () => {
             declarations: [
                 ShowHideElementDirective, ModalOpenDirective, ModalComponent, TemplateContentComponent,
                 InputReferenceDirective, DateTimeModalComponent, DateTimeInputComponent
+            ],
+            providers: [
+                { provide: DOCUMENT, useValue: document }
             ]
         }).compileComponents();
 

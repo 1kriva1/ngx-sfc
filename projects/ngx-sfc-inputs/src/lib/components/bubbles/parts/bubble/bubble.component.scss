@@ -8,17 +8,13 @@
 
     .bubble {
       display: inline-flex;
+      padding: 0.5em 0.6em;
       border-radius: 1em;
-      font-size: 0.8em;
+      font-size: 0.7em;
       font-weight: bold;
 
       @include theme-value(color, $color-dark, $color-default);
       @include theme-value(background-color, $color-default, $color-dark);
-
-      padding: 0.4em 0.2em;
-      transition:
-        color $transition-duration-default $transition-timing-function-default,
-        background-color $transition-duration-default $transition-timing-function-default;
 
       .content {
         @include center;
@@ -27,6 +23,7 @@
 
         sfc-icon {
           margin-right: 0.2em;
+          padding: 0 0.2em;
         }
       }
     }

@@ -9,17 +9,16 @@ import { ILoadContainerModel, LoaderFunction } from './models/load-container.mod
 import { LoadContainerLoadType } from './enums/load-container-load-type.enum';
 import { LoadContainerConstants } from './load-container.constants';
 import { ILoadContainerPredicateParameters } from './models/load-container-predicate-parameters.model';
-import { LoadMoreService, PaginationService, SortingService } from '../../services';
+import { LoadMoreService, PaginationService, ReloadService, SortingService } from '../../services';
 import { LoadContainerChangesSource } from './enums/load-container-changes-source.enum';
 import { LoadContainerType } from './enums/load-container-type.enum';
 import { PaginationConstants } from '../pagination/pagination.constants';
-import { empty } from '../../types';
 
 @Component({
   selector: 'sfc-load-container',
   templateUrl: './load-container.component.html',
   styleUrls: ['./load-container.component.scss'],
-  providers: [LoadMoreService, PaginationService]
+  providers: [LoadMoreService, PaginationService, ReloadService]
 })
 export class LoadContainerComponent implements OnDestroy {
 
@@ -128,7 +127,7 @@ export class LoadContainerComponent implements OnDestroy {
       this.source == LoadContainerChangesSource.Data;
   }
 
-  private get pagination(): boolean { return this.model.loadType == LoadContainerLoadType.Pagination; }
+  private get pagination(): boolean { return this.model.loadType == LoadContainerLoadType.Pagination && isDefined(this.model.pagination); }
 
   private _subscription!: Subscription;
 
@@ -141,7 +140,8 @@ export class LoadContainerComponent implements OnDestroy {
     private loaderService: LoaderService,
     private loadMoreService: LoadMoreService,
     private paginationService: PaginationService,
-    private sortingService: SortingService) { }
+    private sortingService: SortingService,
+    private reloadService: ReloadService) { }
 
   ngOnDestroy(): void {
     if (this._subscription)
@@ -177,12 +177,17 @@ export class LoadContainerComponent implements OnDestroy {
   private subscribe(): void {
     if (!this.model) return;
 
-    if (!isDefined(this.model.pagination))
-      this.model.pagination = PaginationConstants.DEFAULT_PAGINATION;
-    else
-      this.paginationService.pageValue = this.model.pagination?.page!;
+    this.paginationService.pageValue = this.model.pagination?.page || PaginationConstants.DEFAULT_PAGINATION.page;
 
-    const parameters$ = this.buildParameters(this.model.predicate$),
+    if (!this.model.predicate$) {
+      this.model.predicate$ = EMPTY.pipe(startWith(null));
+    }
+
+    const predicate$: Observable<ILoadContainerPredicateParameters | null> = combineLatest([
+      this.model.predicate$,
+      this.reloadService.reload$.pipe(startWith(null))
+    ]).pipe(map(([model, _]) => model)),
+      parameters$ = this.buildParameters(predicate$),
       data$: Observable<ILoadContainerResultModel<any>> = isDefined(this.model.loader)
         ? this.buildDynamic(parameters$, this.model.loader as LoaderFunction)
         : this.buildStatic(parameters$, this.model);
@@ -198,17 +203,17 @@ export class LoadContainerComponent implements OnDestroy {
     );
   }
 
-  private buildParameters(predicate$: Observable<ILoadContainerPredicateParameters | null> | empty)
+  private buildParameters(predicate$: Observable<ILoadContainerPredicateParameters | null>)
     : Observable<ILoadContainerParameters> {
-    const parameters$ = (predicate$ || EMPTY.pipe(startWith(null))).pipe(
-      tap(() => {
-        if (this.source != LoadContainerChangesSource.Initial)
+    const parameters$ = predicate$.pipe(
+      tap((params: ILoadContainerPredicateParameters | null) => {
+        if (this.source != LoadContainerChangesSource.Initial && !params?.reload)
           this.resetParameters();
 
         this.source = LoadContainerChangesSource.Predicate;
         this.predicateChanged = true;
       }),
-      switchMap((params) => {
+      switchMap((params: ILoadContainerPredicateParameters | null) => {
         const more$ = this.loadMoreService.more$.pipe(
           startWith(PaginationConstants.DEFAULT_PAGE),
           tap(() => {
@@ -270,8 +275,8 @@ export class LoadContainerComponent implements OnDestroy {
         const filtered = model.filter ? model.filter(items, parameters) : items,
           sorted = parameters.sorting ? sortBy([...filtered], parameters.sorting.id, parameters.sorting.direction) : filtered,
           data: ILoadContainerResultModel<any> = sorted ? {
-            items: skip(sorted, parameters.page, this.model.pagination?.size!),
-            next: parameters.page < Math.ceil(sorted.length / this.model.pagination?.size!),
+            items: this.model.pagination ? skip(sorted, parameters.page, this.model.pagination?.size!) : sorted,
+            next: this.model.pagination ? parameters.page < Math.ceil(sorted.length / this.model.pagination?.size!) : false,
             reset: this.reset,
             total: sorted.length,
             page: parameters.page

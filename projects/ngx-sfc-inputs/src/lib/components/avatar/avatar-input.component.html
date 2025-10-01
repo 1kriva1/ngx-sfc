@@ -1,0 +1,33 @@
+<div class="container">
+    <input sfcInput id="{{inputId}}" type="text" [disabled]="disabled" [value]="value" />
+    <div class="content">
+        <label for="{{inputId}}" *ngIf="label" (click)="openModal()">{{label}}</label>
+        <div class="component" (click)="openModal()">
+            <sfc-close *ngIf="clear && hasValue" (click)="onClear($event)"></sfc-close>
+            <sfc-avatar [data]="avatarData" [progressModel]="avatarProgressModel" [progress]="avatarProgress"
+                [stars]="hasValue" [starsValue]="avatarStars" [badges]="avatarBadges" [stroke]="Constants.AVATAR.STROKE"
+                [radius]="radius">
+                <div class="icons">
+                    <fa-icon class="add" [icon]="faPlus"></fa-icon>
+                    <fa-icon class="change" [icon]="faArrowsSpin"></fa-icon>
+                </div>
+
+                <div class="loader">
+                    <sfc-template-content [referenceContent]="loader" [templatesContent]="templates"
+                        [templateType]="Template.Loader">
+                    </sfc-template-content>
+                </div>
+            </sfc-avatar>
+        </div>
+        <span class="helper-text">{{helperTextValue}}</span>
+    </div>
+
+    <sfc-modal *sfcModalOpen="Constants.MODAL.ID" [defaultHeaderModel]="headerModalModel"
+        [defaultFooterModel]="footerModalModel" [hideOnClickOutside]="hideOnClickOutside">
+        <ng-template [sfcTemplateReference]="ModalTemplate.Body">
+            <sfc-template-content [referenceContent]="body" [templatesContent]="templates"
+                [templateType]="Template.ModalBody" [contextData]="modalContextData">
+            </sfc-template-content>
+        </ng-template>
+    </sfc-modal>
+</div>

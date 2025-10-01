@@ -49,6 +49,16 @@ export function hasObjectItem<T>(collection: Array<any>, // TODO <-- Array<T>
 }
 
 /**
+ * Return true if first collection has item in second collection
+ * @param collection1 Array of objects where search
+ * @param collection2 Array of objects where try to find
+ * @returns 
+ */
+export function hasAnyItem<T>(collection1: T[], collection2: T[]): boolean {
+    return collection1.some(item => collection2.includes(item));
+}
+
+/**
  * Return value from collection by predicate function
  * @param collection Array of items
  * @param predicate Function to define search logic
@@ -325,4 +335,23 @@ export function updateItemBy<T>(collection: Array<T>, predicate: (item: T) => bo
  */
 export function getCollectionOrEmpty<T>(collection: Array<T>): Array<T> {
     return isDefined(collection) ? collection : [];
+}
+
+/**
+ * Check if arrays are equal
+ * @param a First array
+ * @param b Second array
+ * @returns True if arrays are equal
+ */
+export function isArraysEquals<T>(a: Array<T>, b: Array<T>): boolean {
+    if (a.length !== b.length) return false;
+
+    a.sort();
+    b.sort();
+
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+
+    return true;
 }

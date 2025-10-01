@@ -19,44 +19,46 @@ describe('Service: Modal', () => {
     });
 
     fit('Should emit on open', done => {
-        const assertArgs = { data: 'test' };
-        let assertEvent: IModalEvent = { open: false };
+        const assertArgs = { data: 'test' }, id: string = 'id';
+        let assertEvent: IModalEvent = { id: id, open: false };
 
         service.modal$.subscribe((event: IModalEvent) => {
             expect(event).toEqual(assertEvent);
         });
 
-        assertEvent = { open: true, args: assertArgs };
+        assertEvent = { id: id, open: true, args: assertArgs };
 
-        service.open(assertArgs);
+        service.open(id, assertArgs);
 
         done();
     });
 
     fit('Should emit on close', done => {
+        const id: string = 'id';
         service.modal$.subscribe((event: IModalEvent) => {
-            expect(event).toEqual({ open: false });
+            expect(event).toEqual({ id: id, open: false, args: undefined });
         });
 
-        service.close();
+        service.close(id);
 
         done();
     });
 
     fit('Should emit on toggle', done => {
+        const id: string = 'id';
         let firstToggle = false;
 
         service.modal$.subscribe((event: IModalEvent) => {
-            expect(event).toEqual({ open: firstToggle });
+            expect(event).toEqual({ id: id, open: firstToggle, args: undefined });
         });
 
         firstToggle = true;
 
-        service.toggle();
+        service.toggle(id);
 
         firstToggle = false;
 
-        service.toggle();
+        service.toggle(id);
 
         done();
     });
@@ -68,7 +70,7 @@ describe('Service: Modal', () => {
     fit('Should isOpen change value', () => {
         expect(service.isOpen).toBeFalse();
 
-        service.toggle();
+        service.toggle('id');
 
         expect(service.isOpen).toBeTrue();
     });

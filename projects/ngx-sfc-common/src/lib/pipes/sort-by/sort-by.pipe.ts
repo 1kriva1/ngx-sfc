@@ -2,8 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { SortingDirection } from '../../enums';
 import { any, isNullOrEmptyString, sortByPath } from '../../utils';
 
-@Pipe({ name: 'sfcSortBy' })
+// This pipe has "pure: false" (impure pipe) which has huge impact on performance!
+@Pipe({ name: 'sfcSortBy', pure: false })
 export class SortByPipe implements PipeTransform {
+
   transform(value: any[], path: string, direction: SortingDirection = SortingDirection.Ascending): any[] {
     if (!any(value)) { return value; } // no array
     if (value.length <= 1) { return value; } // array with only one item
@@ -11,4 +13,5 @@ export class SortByPipe implements PipeTransform {
 
     return sortByPath(value, path, direction)
   }
+  
 }

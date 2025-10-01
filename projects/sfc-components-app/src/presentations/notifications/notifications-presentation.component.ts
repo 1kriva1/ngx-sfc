@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ComponentSize } from 'ngx-sfc-common';
-import { INotificationContentModel, NotificationTemplate, NotificationType } from 'ngx-sfc-components';
+import { ComponentSize, NotificationType } from 'ngx-sfc-common';
+import { INotificationContentModel, NotificationTemplate } from 'ngx-sfc-components';
 import { BasePresentationComponent } from '../base-presentations.component';
-import { faInfo
-} from '@fortawesome/free-solid-svg-icons';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './notifications-presentation.component.html',

@@ -1,14 +1,18 @@
 import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, NgZone, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ModalTemplate, readAsDataURL, IDefaultModalFooterModel, isImage, isNullOrEmptyString, IDefaultModalHeaderModel, ModalService, CommonConstants, ComponentSizeDirective } from 'ngx-sfc-common';
 import { Subscription } from 'rxjs';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import {
+  ModalTemplate, readAsDataURL, IDefaultModalFooterModel, isImage, isNullOrEmptyString,
+  IDefaultModalHeaderModel, ModalService, CommonConstants, ComponentSizeDirective
+} from 'ngx-sfc-common';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { BaseInputComponent } from '../base/base-input.component';
 import { ImageInputConstants } from './image-input.constants';
 import { ImageInputType } from './image-input-type.enum';
 import { IImageExportEvent } from './service/image-export.event';
 import { ImageService } from './service/image.service';
+import { CommonValidator } from '../../validators';
 
 @Component({
   selector: 'sfc-image-input',
@@ -21,6 +25,8 @@ export class ImageInputComponent
   implements OnInit, OnDestroy {
 
   ModalTemplate = ModalTemplate;
+
+  Constants = ImageInputConstants;
 
   @Input()
   defaultPhoto!: string;
@@ -113,10 +119,10 @@ export class ImageInputComponent
 
   onEmitFile(event: FileList): void {
     const file = event.item(0) as File;
-    
+
     if (this.validateFormat(file)) {
       this.imageService.imageFile = file;
-      this.modalService.toggle();
+      this.modalService.toggle(ImageInputConstants.MODAL_ID);
     }
 
     this.inputElementRef.nativeElement.value = CommonConstants.EMPTY_STRING;
@@ -124,18 +130,19 @@ export class ImageInputComponent
 
   onExport(event: IImageExportEvent): void {
     this.ngZone.run(() => this.onChange(event.file));
-    this.modalService.toggle();
+    this.modalService.toggle(ImageInputConstants.MODAL_ID);
   }
 
-  onClear(): void {
-    this.toggleInnerErrors(ValidationConstants.FORMAT_VALIDATOR_KEY, true);
+  onClear(event: MouseEvent): void {
+    event.preventDefault();
+    this.toggleInnerErrors(CommonValidator.Format, true);
     this.url = null;
     this.onChange(null);
   }
 
   private validateFormat(file: File): boolean {
     const result = isImage(file);
-    this.toggleInnerErrors(ValidationConstants.FORMAT_VALIDATOR_KEY, result);
+    this.toggleInnerErrors(CommonValidator.Format, result);
     return result;
   }
 }

@@ -4,11 +4,14 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ComponentSizeDirective, TemplateReferenceDirective } from '../../directives';
+import { DOCUMENT } from '../../services';
 import { nameof } from '../../utils';
 import { ButtonComponent } from '../button/button.component';
 import { CloseComponent } from '../close/close.component';
 import { DelimeterComponent } from '../delimeter/delimeter.component';
 import { TemplateContentComponent } from '../template-content/template-content.component';
+import { ModalOpenOnClickDirective } from './directive/click/modal-open-on-click.directive';
+import { ModalOpenDirective } from './directive/open/modal-open.directive';
 import { DefaultModalFooterComponent } from './footer/default/default-modal-footer.component';
 import { DefaultModalHeaderComponent } from './header/default/default-modal-header.component';
 import { ModalTemplate } from './modal-template.enum';
@@ -85,12 +88,18 @@ describe('Component: ModalComponent', () => {
 
   beforeEach(async () => {
     modalServiceSpy = jasmine.createSpyObj('ModalService', ['close']);
+    const directive = { id: 'id' };
 
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, FontAwesomeModule],
       declarations: [TemplateContentComponent, CloseComponent, DelimeterComponent, ModalComponent, DefaultModalHeaderComponent, DefaultModalFooterComponent,
         ButtonComponent, ComponentSizeDirective, TemplateReferenceDirective, TestSfcModalComponent],
-      providers: [{ provide: ModalService, useValue: modalServiceSpy }]
+      providers: [
+        { provide: ModalService, useValue: modalServiceSpy },
+        { provide: DOCUMENT, useValue: document },
+        { provide: ModalOpenDirective, useValue: directive },
+        { provide: ModalOpenOnClickDirective, useValue: directive }
+      ]
     }).compileComponents();
   });
 

@@ -7,3 +7,7 @@ export { Theme } from './theme.enum';
 export { UIClass } from './ui.enum';
 export { Sequence } from './sequence.enum';
 export { Compare } from './compare.enum';
+export { State } from './state.enum';
+export { NotificationType } from './notification-type.enum';
+export { Select } from './select.enum';
+export { ItemsView } from './items-view.enum';

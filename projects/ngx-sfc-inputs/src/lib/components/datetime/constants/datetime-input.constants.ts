@@ -7,4 +7,5 @@ export class DateTimeInputConstants {
         CLEAR: 'Clear'
     };
     static FULL_SIZE_CLASS = 'full-size';
+    static MODAL_ID: string = 'datetime-input-modal';
 }

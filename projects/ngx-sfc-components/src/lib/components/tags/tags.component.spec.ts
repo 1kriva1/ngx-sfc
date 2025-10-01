@@ -4,6 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagComponent } from '../no-export-index';
 import { TagsComponent } from './tags.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { IconComponent } from 'ngx-sfc-common';
 
 describe('Component: TagsComponent', () => {
   let component: TagsComponent;
@@ -12,7 +13,7 @@ describe('Component: TagsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [TagComponent, TagsComponent]
+      declarations: [IconComponent, TagComponent, TagsComponent]
     }).compileComponents();
   });
 

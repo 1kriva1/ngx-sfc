@@ -9,7 +9,7 @@ import { ModalOpenOnClickDirective } from './modal-open-on-click.directive';
 @Component({
     template: `<button #button1>Modal Button 1</button>     
              <button #button2>Modal Button 2</button>         
-             <div *sfcModalOpenOnClick="[button1, button2]">
+             <div  *sfcModalOpenOnClick="{id: 'id', elements: [button1, button2]}">
                   <span class="modal-content">Modal content</span>
               </div>
               `
@@ -21,7 +21,6 @@ class TestModalOpenOnClickComponent {
 }
 
 describe('Directive: ModalOpenOnClick', () => {
-
     let component: TestModalOpenOnClickComponent;
     let fixture: ComponentFixture<TestModalOpenOnClickComponent>;
     let modalServiceSpy: jasmine.SpyObj<ModalService>;
@@ -29,7 +28,7 @@ describe('Directive: ModalOpenOnClick', () => {
 
     beforeEach(async () => {
         modalServiceSpy = jasmine.createSpyObj('ModalService', ['toggle', 'modal$']);
-        modalServiceSpy.modal$ = modalSubject.asObservable();
+        (modalServiceSpy.modal$ as any) = modalSubject.asObservable();
 
         await TestBed.configureTestingModule({
             declarations: [ModalOpenOnClickDirective, TestModalOpenOnClickComponent],
@@ -65,7 +64,7 @@ describe('Directive: ModalOpenOnClick', () => {
                 'clear'
             ).and.callThrough();
 
-            modalSubject.next({ open: false });
+            modalSubject.next({ id: 'id', open: false });
 
             expect(clearSpy).toHaveBeenCalled();
         });
@@ -76,7 +75,7 @@ describe('Directive: ModalOpenOnClick', () => {
                 'clear'
             ).and.callThrough();
 
-            modalSubject.next({ open: true });
+            modalSubject.next({ id: 'id', open: true });
 
             expect(clearSpy).not.toHaveBeenCalled();
         });
@@ -94,7 +93,7 @@ describe('Directive: ModalOpenOnClick', () => {
         });
 
         fit('Should have one button(second)', () => {
-            component.directive.modalOpenOnClick = fixture.nativeElement.querySelectorAll('button')[1];
+            component.directive.modalOpenOnClick = {id: 'id', elements: fixture.nativeElement.querySelectorAll('button')[1]};
             fixture.detectChanges();
 
             const elements: any = (<any>component.directive).elements;
@@ -105,7 +104,7 @@ describe('Directive: ModalOpenOnClick', () => {
         });
 
         fit('Should have previous elements', () => {
-            component.directive.modalOpenOnClick = null as unknown as HTMLElement;
+            component.directive.modalOpenOnClick = { id: 'id', elements: null as unknown as HTMLElement };
             fixture.detectChanges();
 
             const elements: any = (<any>component.directive).elements;
@@ -140,7 +139,7 @@ describe('Directive: ModalOpenOnClick', () => {
             component.directive.ngOnDestroy();
             fixture.detectChanges();
 
-            component.directive.modalOpenOnClick = fixture.nativeElement.querySelectorAll('button')[1];
+            component.directive.modalOpenOnClick = {id: 'id', elements: fixture.nativeElement.querySelectorAll('button')[1]};
             fixture.detectChanges();
 
             const btnEls: any = fixture.debugElement.queryAll(By.css('button'));

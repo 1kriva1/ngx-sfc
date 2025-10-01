@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent, ButtonType, CommonConstants } from 'ngx-sfc-common';
-import { NotificationType } from '../../enums/notification-type.enum';
 import { NotificationContentComponent } from './notification-content.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { NotificationType } from '../../enums/notification-type.enum';
 
 describe('Component: NotificationContentComponent', () => {
   let component: NotificationContentComponent;

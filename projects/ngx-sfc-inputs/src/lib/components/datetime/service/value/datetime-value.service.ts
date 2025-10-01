@@ -5,7 +5,7 @@ import {
   setHours, setMinutes, setYear
 } from 'ngx-sfc-common';
 import { map, Observable, startWith, Subject } from 'rxjs';
-import { DateTimeInputConstants } from '../../constants/datetime.constants';
+import { DateTimeInputConstants } from '../../constants/datetime-input.constants';
 import { DateTimeFormatsConstants } from '../../constants/formats.constants';
 import { DateTimeValueActionType } from './datetime-value.enum';
 import { IDateTimeValueEvent } from './datetime-value.event';

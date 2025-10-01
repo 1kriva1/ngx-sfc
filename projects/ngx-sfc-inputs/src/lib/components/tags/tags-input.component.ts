@@ -4,6 +4,7 @@ import { CommonConstants } from 'ngx-sfc-common';
 import { any, isNullOrEmptyString } from 'ngx-sfc-common';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { InputUIClass } from '../../enums/input-ui.enum';
+import { CommonValidator } from '../../validators';
 import { IInnerValidation } from '../../validators/inner-validation.model';
 import { BaseTextInputComponent } from '../base/text/base-text-input.component';
 import { TagsInputConstants } from './tags-input.constants';
@@ -58,11 +59,11 @@ export class TagsInputComponent extends BaseTextInputComponent<string[]> impleme
 
   override innerValidations: IInnerValidation[] = [
     {
-      key: ValidationConstants.DUPLICATE_VALIDATOR_KEY,
+      key: CommonValidator.Duplicate,
       validate: (value: any | null, newValue: string) => !hasItem(value || [], newValue)
     },
     {
-      key: ValidationConstants.EMPTY_VALIDATOR_KEY,
+      key: CommonValidator.Empty,
       validate: (_: any | null, newValue: string) => !isNullOrEmptyString(newValue)
     },
     {

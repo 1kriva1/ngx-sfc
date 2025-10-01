@@ -1,16 +1,22 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { empty } from "ngx-sfc-common";
 
 export interface ISideMenuModel {
-    open: boolean;
-    items: ISideMenuItemModel[];
+    open?: boolean;
+    switch?: boolean | empty;
+    label?: string | empty;
+    items?: ISideMenuItemModel[];
 }
 
 export interface ISideMenuItemModel {
-    active: boolean;
     label: string;
-    icon?: IconDefinition;
+    active?: boolean;
     type: SideMenuItemType;
+    id?: string | empty;    
+    open?: boolean;    
+    icon?: IconDefinition | empty;    
     items?: ISideMenuItemModel[];
+    click?: (item: ISideMenuItemModel) => void;
 }
 
 export enum SideMenuItemType {

@@ -13,6 +13,9 @@ export class ProgressCircleComponent
   @Input()
   total: number = CommonConstants.FULL_PERCENTAGE;
 
+  @Input()
+  partition: boolean = false;
+
   @HostBinding('class.reversed')
   get reversed(): boolean {
     return (this.progress / this.total) * CommonConstants.FULL_PERCENTAGE > 50;

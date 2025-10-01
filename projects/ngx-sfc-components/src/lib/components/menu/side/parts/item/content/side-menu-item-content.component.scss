@@ -16,6 +16,8 @@
 
       transition: color $transition-duration-default $transition-timing-function-default;
       width: 0;
+      font-size: 0.8em;
+      margin-left: 1em;
 
       > fa-icon {
         font-weight: bold;
@@ -68,8 +70,7 @@
     }
   }
 
-  &.active,
-  &:hover {
+  &.active {
     li {
       color: $color-0;
 

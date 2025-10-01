@@ -20,8 +20,8 @@
         <sfc-template-content *ngIf="!fullSize" [referenceContent]="modal"></sfc-template-content>
 
         <ng-container *ngIf="fullSize">
-            <sfc-modal *sfcModalOpen [hideOnClickOutside]="hideOnClickOutside" [showHeader]="false" [showFooter]="false"
-                [body]="modal">
+            <sfc-modal *sfcModalOpen="Constants.MODAL_ID" [hideOnClickOutside]="hideOnClickOutside" [showHeader]="false"
+                [showFooter]="false" [body]="modal">
             </sfc-modal>
         </ng-container>
     </div>

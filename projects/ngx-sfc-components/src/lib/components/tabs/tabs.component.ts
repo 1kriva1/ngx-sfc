@@ -1,4 +1,4 @@
-import { Component, ContentChildren, Input, OnInit, QueryList, TemplateRef } from '@angular/core';
+import { Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef } from '@angular/core';
 import { CommonConstants, firstOrDefault, isDefined, TemplateReferenceDirective } from 'ngx-sfc-common';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { TabService } from './service/tab.service';
@@ -31,6 +31,9 @@ export class TabsComponent implements OnInit {
   body?: TemplateRef<any>;
 
   // End Template references
+
+  @Output()
+  selected: EventEmitter<ITabModel> = new EventEmitter<ITabModel>();
 
   @ContentChildren(TemplateReferenceDirective, { read: TemplateReferenceDirective })
   templates: QueryList<TemplateReferenceDirective> | undefined;
@@ -68,9 +71,10 @@ export class TabsComponent implements OnInit {
     );
   }
 
-  selectTab(tab: ITabModel, index: number) {
+  public selectTab(tab: ITabModel, index: number) {
     if (!tab.disabled && !tab.selected) {
       this.tabService.select(index);
+      this.selected.emit(tab);
     }
   }
 

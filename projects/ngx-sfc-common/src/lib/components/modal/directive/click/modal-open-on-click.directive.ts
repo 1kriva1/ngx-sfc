@@ -3,36 +3,52 @@ import { filter, Subscription } from 'rxjs';
 import { ModalService } from '../../service/modal.service';
 import { isDefined } from '../../../../utils/index';
 import { IModalEvent } from '../../service/modal.event';
+import { IModalOpenOnClickModel } from './modal-open-on-click.model';
 
 @Directive({
   selector: '[sfcModalOpenOnClick]'
 })
 export class ModalOpenOnClickDirective implements OnInit, OnDestroy {
 
+  /* Inputs */
+
   @Input('sfcModalOpenOnClick')
-  set modalOpenOnClick(elements: HTMLElement | HTMLElement[]) {
-    if (!isDefined(elements))
+  set modalOpenOnClick(model: IModalOpenOnClickModel) {
+    if (!isDefined(model.elements) || !isDefined(model.id))
       return;
 
-    if (elements instanceof HTMLElement)
-      this.elements = [elements];
-    else
-      this.elements = elements;
+    this._id = model.id;
 
-    this.elements.forEach(el => {
-      el.addEventListener('click', this.clickHandler);
-    });
+    if (model.elements instanceof HTMLElement)
+      this.elements = [model.elements];
+    else
+      this.elements = model.elements;
+
+    this.elements.forEach(el => el.addEventListener('click', this.clickHandler));
   }
+
+  /* End Inputs */
+
+  /* Properties */
+
+  private _id!: string;
+  public get id(): string { return this._id; }
+
+  private elements: HTMLElement[] = [];
 
   private clickHandler = ((): void => {
     this.viewContainer.clear();
     this.viewContainer.createEmbeddedView(this.templateRef);
-    this.modalService.toggle();
+    this.modalService.toggle(this.id);
   }).bind(this);
 
-  private elements: HTMLElement[] = [];
+  /* End Properties */
+
+  /* Subscriptions */
 
   private _closeSubscription?: Subscription;
+
+  /* End Subscriptions */
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -42,7 +58,7 @@ export class ModalOpenOnClickDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._closeSubscription = this.modalService.modal$
-      .pipe(filter((event: IModalEvent) => !event.open))
+      .pipe(filter((event: IModalEvent) => !event.open && this.id === event.id))
       .subscribe(() => this.viewContainer.clear());
   }
 

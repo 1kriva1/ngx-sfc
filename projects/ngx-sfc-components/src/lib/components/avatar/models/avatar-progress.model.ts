@@ -1,4 +1,6 @@
+import { empty } from "ngx-sfc-common";
+
 export interface IAvatarProgressModel {
-    color?: string;
-    filledColor?: string;
+    color?: string | empty;
+    filledColor?: string | empty;
 }

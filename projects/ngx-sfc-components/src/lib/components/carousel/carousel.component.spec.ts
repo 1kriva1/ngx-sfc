@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DOCUMENT, WINDOW } from 'ngx-sfc-common';
+import { DOCUMENT, DotComponent, WINDOW } from 'ngx-sfc-common';
 import { CarouselStageComponent } from '../no-export-index';
 import { CarouselComponent } from './carousel.component';
 
@@ -11,7 +11,7 @@ describe('Component: Carousel', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CarouselStageComponent, CarouselComponent],
+      declarations: [DotComponent, CarouselStageComponent, CarouselComponent],
       providers: [
         { provide: WINDOW, useFactory: (() => { return windowMock; }) },
         { provide: DOCUMENT, useFactory: (() => { return documentMock; }) }

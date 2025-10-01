@@ -4,9 +4,9 @@ import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BehaviorSubject, EMPTY, map, of, startWith, Subject } from 'rxjs';
 import { CommonConstants } from '../../constants';
-import { 
-    ComponentSizeDirective, MouseDownDirective, ScrollIntoViewDirective, 
-    ScrollTrackerDirective, ShowHideElementDirective 
+import {
+    ComponentSizeDirective, MouseDownDirective, ScrollIntoViewDirective,
+    ScrollTrackerDirective, ShowHideElementDirective
 } from '../../directives';
 import { ComponentSize, Position, UIClass } from '../../enums';
 import { DelimeterComponent } from '../delimeter/delimeter.component';
@@ -399,7 +399,11 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should be hidden if no more data", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = {
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
+            };
             fixture.detectChanges();
 
             expect(fixture.debugElement.query(By.css('sfc-load-more-button')).attributes['hidden']).toBeUndefined();
@@ -414,7 +418,11 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should be not hidden", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = {
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
+            };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button'));
@@ -450,7 +458,8 @@ describe('Component: LoadContainer', () => {
         fit("Should exist", () => {
             component.loadContainer.model = {
                 data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]),
-                loadType: LoadContainerLoadType.Pagination
+                loadType: LoadContainerLoadType.Pagination,
+                pagination: { page: 1, size: 5 }
             };
             fixture.detectChanges();
 
@@ -551,7 +560,11 @@ describe('Component: LoadContainer', () => {
 
     describe('Data', () => {
         fit("Should load default size", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = { 
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), 
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
+            };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(PaginationConstants.DEFAULT_SIZE);
@@ -654,7 +667,11 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should load second page", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = { 
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), 
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 } 
+            };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
@@ -668,7 +685,11 @@ describe('Component: LoadContainer', () => {
         });
 
         fit("Should not load third page", () => {
-            component.loadContainer.model = { data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = { 
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), 
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
+             };
             fixture.detectChanges();
 
             const loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
@@ -688,7 +709,11 @@ describe('Component: LoadContainer', () => {
             const subject = new BehaviorSubject<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 data$ = subject.asObservable();
 
-            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = { 
+                data$: data$, loadType: 
+                LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
+            };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelectorAll('.load-item').length).toEqual(5);
@@ -749,7 +774,9 @@ describe('Component: LoadContainer', () => {
             spyOn(component.loadContainer.handleSuccess, 'emit');
 
             component.loadContainer.model = {
-                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), loadType: LoadContainerLoadType.Button
+                data$: of([1, 2, 3, 4, 5, 6, 7, 8, 9]), 
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
             };
             fixture.detectChanges();
 
@@ -774,7 +801,11 @@ describe('Component: LoadContainer', () => {
             const subject = new BehaviorSubject<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 data$ = subject.asObservable();
 
-            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = { 
+                data$: data$, 
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 } 
+            };
             fixture.detectChanges();
 
             subject.next([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
@@ -791,7 +822,11 @@ describe('Component: LoadContainer', () => {
                 loadMoreBtn = fixture.debugElement.query(By.css('sfc-load-more-button div.button')),
                 event = new MouseEvent('mousedown');
 
-            component.loadContainer.model = { data$: data$, loadType: LoadContainerLoadType.Button };
+            component.loadContainer.model = { 
+                data$: data$, 
+                loadType: LoadContainerLoadType.Button,
+                pagination: { page: 1, size: 5 }
+            };
             fixture.detectChanges();
 
             loadMoreBtn.triggerEventHandler('mousedown', event);

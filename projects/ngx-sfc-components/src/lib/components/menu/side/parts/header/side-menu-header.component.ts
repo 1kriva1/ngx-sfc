@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
-import { CommonConstants, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, empty, isDefined, UIClass } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-side-menu-header',
@@ -11,7 +11,10 @@ export class SideMenuHeaderComponent implements OnInit {
   private readonly DEFAULT_MENU_HEADER_TEXT = 'Menu';
 
   @Input()
-  label: string = CommonConstants.EMPTY_STRING;
+  label?: string | empty = CommonConstants.EMPTY_STRING;
+
+  @Input()
+  switch: boolean = true;
 
   @Input()
   @HostBinding('class.' + UIClass.Open)
@@ -21,6 +24,6 @@ export class SideMenuHeaderComponent implements OnInit {
   toggle: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {
-    this.label = this.label || this.DEFAULT_MENU_HEADER_TEXT;
+    this.label = isDefined(this.label) ? this.label : this.DEFAULT_MENU_HEADER_TEXT;
   }
 }

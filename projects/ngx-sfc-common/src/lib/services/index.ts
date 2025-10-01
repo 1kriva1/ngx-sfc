@@ -6,3 +6,4 @@ export { LoadMoreService } from './load-more/load-more.service';
 export { PaginationService } from './pagination/pagination.service';
 export { SortingService } from './sorting/sorting.service';
 export { ISortingModel } from './sorting/sorting.model';
+export { ReloadService } from './reload/reload.service';

@@ -15,6 +15,7 @@ import { IAutoCompleteItemModel } from './parts/item/autocomplete-item.model';
 import { AutoCompleteItemComponent } from './parts/item/autocomplete-item.component';
 import { BehaviorSubject } from 'rxjs';
 import { ValidationConstants } from '../../constants/validation.constants';
+import { CommonValidator } from '../../validators';
 
 describe('Component: AutoCompleteInput', () => {
     let component: AutoCompleteInputComponent;
@@ -777,7 +778,7 @@ describe('Component: AutoCompleteInput', () => {
 
             emitSearching();
 
-            expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[ValidationConstants.DATA_VALIDATOR_KEY]);
+            expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[CommonValidator.Data]);
         }));
 
         fit("Should hide validation error, when load data successfully", fakeAsync(() => {
@@ -789,7 +790,7 @@ describe('Component: AutoCompleteInput', () => {
 
             emitSearching();
 
-            expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[ValidationConstants.DATA_VALIDATOR_KEY]);
+            expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DATA_VALIDATION[CommonValidator.Data]);
 
             initLoader();
 

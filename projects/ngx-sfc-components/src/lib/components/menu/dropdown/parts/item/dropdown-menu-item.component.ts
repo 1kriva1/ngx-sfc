@@ -9,15 +9,27 @@ import { IDropdownMenuItemModel } from './dropdown-menu-item.model';
 })
 export class DropdownMenuItemComponent {
 
+  /* Inputs */
+
   @Input()
   item: IDropdownMenuItemModel = { label: CommonConstants.EMPTY_STRING };
+
+  /* End Inputs */
+
+  /* Host bindings */
 
   @HostBinding(`class.${UIClass.Active}`)
   private get _active(): boolean { return this.item.active || false; }
 
+  /* End Host bindings */
+
+  /* Host listeners */
+
   @HostListener('click')
-  click() {
+  click(): void {
     if (this.item.click)
       this.item.click(this.item);
   }
+
+  /* End Host listeners */
 }

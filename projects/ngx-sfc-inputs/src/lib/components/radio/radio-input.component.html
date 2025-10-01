@@ -6,7 +6,7 @@
             <div class="radio-container" *ngFor="let item of items">
                 <input sfcInput type="radio" id="{{inputId}}-{{item.value}}" [disabled]="disabled || item.disabled"
                     [value]="item.value" [ngClass]="{checked:isChecked(item)}">
-                <label for="{{inputId}}-{{item.value}}" (click)="onChange(item.value)">
+                <label for="{{inputId}}-{{item.value}}" (sfcMouseDown)="onChange(item.value)">
                     <div [ngClass]="item.icon ? RadioItemType.Icon : RadioItemType.Circle">
                         <div *ngIf="!item.icon" class="radio"></div>
                         <fa-icon *ngIf="item.icon" [icon]="item.icon"></fa-icon>

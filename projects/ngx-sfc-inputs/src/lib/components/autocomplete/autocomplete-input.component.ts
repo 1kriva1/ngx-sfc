@@ -2,14 +2,14 @@ import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import {
   any, CommonConstants, hasItemBy, ILoadContainerParameters,
   ILoadContainerPredicateParameters, ILoadContainerResultModel, isDefined, isNullOrEmptyString,
-  LoadContainerLoadType, UIClass, where
+  LoadContainerLoadType, PaginationConstants, UIClass, where
 } from 'ngx-sfc-common';
 import { fromEvent, map, debounceTime, tap, filter, Observable, distinctUntilChanged } from 'rxjs';
-import { ValidationConstants } from '../../constants/validation.constants';
 import { IAutoCompleteItemModel } from './parts/item/autocomplete-item.model';
 import { IAutoCompleteValue } from './autocomplete-input-value.model';
 import { AutoCompleteInputConstants } from './autocomplete-input.constants';
 import { BaseDataInputComponent } from '../base/data/data-input.component';
+import { CommonValidator } from '../../validators';
 
 @Component({
   selector: 'sfc-autocomplete-input',
@@ -90,7 +90,8 @@ export class AutoCompleteInputComponent
       data$: this.data$,
       loader: this.loader,
       filter: this.filter,
-      loadType: this.loadType
+      loadType: this.loadType,
+      pagination: PaginationConstants.DEFAULT_PAGINATION
     };
 
     super.ngAfterViewInit();
@@ -104,7 +105,7 @@ export class AutoCompleteInputComponent
   }
 
   public handleSuccess(result: ILoadContainerResultModel<IAutoCompleteItemModel>): void {
-    this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, true);
+    this.toggleInnerErrors(CommonValidator.Data, true);
 
     if (result.reset)
       this.items = result.items;
@@ -118,7 +119,7 @@ export class AutoCompleteInputComponent
   }
 
   public handleError(): void {
-    this.toggleInnerErrors(ValidationConstants.DATA_VALIDATOR_KEY, false);
+    this.toggleInnerErrors(CommonValidator.Data, false);
   }
 
   public handleLoading(value: boolean): void {

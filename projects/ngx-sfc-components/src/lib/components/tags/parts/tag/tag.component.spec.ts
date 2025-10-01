@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommonConstants } from 'ngx-sfc-common';
+import { CommonConstants, IconComponent } from 'ngx-sfc-common';
 import { TagComponent } from './tag.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,7 @@ describe('Component: TagComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [TagComponent]
+      declarations: [IconComponent, TagComponent]
     }).compileComponents();
   });
 

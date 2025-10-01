@@ -1,7 +1,7 @@
 import { Directive, Input } from '@angular/core';
 import { CommonConstants } from 'ngx-sfc-common';
 import { BaseInputComponent } from '../base-input.component';
-import { ValidationConstants } from '../../../constants/validation.constants';
+import { CommonValidator } from '../../../validators';
 
 @Directive()
 export abstract class BaseTextInputComponent<T extends string | string[]> extends BaseInputComponent<T> {
@@ -19,8 +19,8 @@ export abstract class BaseTextInputComponent<T extends string | string[]> extend
         let requiredLength = null;
 
         if (this.validationErrors) {
-            const minLengthError = this.validationErrors[ValidationConstants.MIN_LENGTH_VALIDATOR_KEY],
-                maxLengthError = this.validationErrors[ValidationConstants.MAX_LENGTH_VALIDATOR_KEY];
+            const minLengthError = this.validationErrors[CommonValidator.MinLength],
+                maxLengthError = this.validationErrors[CommonValidator.MaxLength];
 
             if (minLengthError) {
                 requiredLength = minLengthError.requiredLength;

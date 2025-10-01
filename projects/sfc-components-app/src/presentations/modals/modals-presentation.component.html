@@ -33,17 +33,18 @@
     <div class="component-row">
         <div class="component-column">
             <button class="app" #defaultModalBtn>Default modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultModalBtn"></sfc-modal>
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultModalBtn}"></sfc-modal>
         </div>
 
         <div class="component-column">
             <button class="app" #defaultBodyRefModalBtn>Default with body ref modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultBodyRefModalBtn" [body]="bodyRef"></sfc-modal>
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultBodyRefModalBtn}" [body]="bodyRef">
+            </sfc-modal>
         </div>
 
         <div class="component-column">
             <button class="app" #defaultBodyTmpltModalBtn>Default with body template modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultBodyTmpltModalBtn">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultBodyTmpltModalBtn}">
                 <ng-template [sfcTemplateReference]="ModalTemplate.Body">
                     <div>
                         <div>{{BODY_TEMPLATE_MODEL.Title}}</div>
@@ -58,19 +59,22 @@
     <div class="component-row">
         <div class="component-column">
             <button class="app" #defaultNotEscModalBtn>Default not ESC modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultNotEscModalBtn" [hideOnEsc]="false" [body]="bodyRef"></sfc-modal>
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultNotEscModalBtn}" [hideOnEsc]="false"
+                [body]="bodyRef"></sfc-modal>
         </div>
 
         <div class="component-column">
             <button class="app" #defaultNotOutModalBtn>Default not click out modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultNotOutModalBtn" [hideOnClickOutside]="false" [body]="bodyRef">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultNotOutModalBtn}"
+                [hideOnClickOutside]="false" [body]="bodyRef">
             </sfc-modal>
         </div>
 
         <div class="component-column">
             <button class="app" #defaultOneModalBtn>Button 1</button>
             <button class="app" #defaultSecondModalBtn>Button 1</button>
-            <sfc-modal *sfcModalOpenOnClick="[defaultOneModalBtn, defaultSecondModalBtn]" [body]="bodyRef">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: [defaultOneModalBtn, defaultSecondModalBtn]}"
+                [body]="bodyRef">
             </sfc-modal>
         </div>
     </div>
@@ -78,14 +82,14 @@
     <div class="component-row">
         <div class="component-column">
             <button class="app" #defaultHeaderCustomModalBtn>Default header custom modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultHeaderCustomModalBtn"
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultHeaderCustomModalBtn}"
                 [defaultHeaderModel]="{text: 'Test header', showCloseIcon: false, icon:faStar}" [body]="bodyRef">
             </sfc-modal>
         </div>
 
         <div class="component-column">
             <button class="app" #defaultFooterCustomModalBtn>Default footer custom modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultFooterCustomModalBtn"
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultFooterCustomModalBtn}"
                 [defaultFooterModel]="{cancelButton: false, applyButton:true, onApply:clickFunc}" [body]="bodyRef">
             </sfc-modal>
         </div>
@@ -94,7 +98,7 @@
     <div class="component-row">
         <div class="component-column">
             <button class="app" #defaultTemplateHeaderModalBtn>Template header modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultTemplateHeaderModalBtn" [body]="bodyRef">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultTemplateHeaderModalBtn}" [body]="bodyRef">
                 <ng-template [sfcTemplateReference]="ModalTemplate.Header">
                     <div>
                         <div>{{HEADER_MODEL.Title}}</div>
@@ -107,7 +111,7 @@
 
         <div class="component-column">
             <button class="app" #defaultTemplateFooterModalBtn>Template footer modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultTemplateFooterModalBtn" [body]="bodyRef">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultTemplateFooterModalBtn}" [body]="bodyRef">
                 <ng-template [sfcTemplateReference]="ModalTemplate.Footer">
                     <div>
                         <div>{{FOOTER_MODEL.Title}}</div>
@@ -122,13 +126,15 @@
     <div class="component-row">
         <div class="component-column">
             <button class="app" #defaultRefHeaderModalBtn>Reference header modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultRefHeaderModalBtn" [body]="bodyRef" [header]="headerRef">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultRefHeaderModalBtn}" [body]="bodyRef"
+                [header]="headerRef">
             </sfc-modal>
         </div>
 
         <div class="component-column">
             <button class="app" #defaultRefFooterModalBtn>Reference footer modal</button>
-            <sfc-modal *sfcModalOpenOnClick="defaultRefFooterModalBtn" [body]="bodyRef" [footer]="footerRef">
+            <sfc-modal *sfcModalOpenOnClick="{id: 'test-id', elements: defaultRefFooterModalBtn}" [body]="bodyRef"
+                [footer]="footerRef">
             </sfc-modal>
         </div>
     </div>

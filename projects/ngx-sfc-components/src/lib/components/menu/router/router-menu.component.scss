@@ -1,0 +1,20 @@
+@use "ngx-sfc-common/styles/index" as *;
+
+:host {
+  width: 100%;
+
+  .container {
+    .content {
+      .items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 0.625em;
+
+        sfc-router-menu-item {
+          flex: 50%;
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import {
   SideMenuComponent,
   DropdownMenuComponent,
   NavigationMenuComponent,
+  RouterMenuComponent,
   StarsComponent,
   AvatarComponent,
   ProgressLineComponent,
@@ -37,6 +38,7 @@ import {
   SideMenuItemComponent,
   SideMenuItemContentComponent,
   SideMenuTitleComponent,
+  RouterMenuItemComponent,
   TagComponent,
   SliderItemComponent,
   SliderButtonComponent,
@@ -103,6 +105,8 @@ Chart.register(
     DropdownMenuItemComponent,
     NavigationMenuComponent,
     NavigationMenuItemComponent,
+    RouterMenuComponent,
+    RouterMenuItemComponent,
     // Stars
     StarsComponent,
     // Avatar
@@ -158,6 +162,7 @@ Chart.register(
     SideMenuComponent,
     DropdownMenuComponent,
     NavigationMenuComponent,
+    RouterMenuComponent,
     // Stars
     StarsComponent,
     // Avatar

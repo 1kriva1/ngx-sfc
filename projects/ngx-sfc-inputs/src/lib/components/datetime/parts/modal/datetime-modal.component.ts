@@ -9,7 +9,7 @@ import {
   isDateGreat, isDateGreatOrEqual, isDateTimeGreat, isDateTimeGreatOrEqual, isEqualDates, ModalService, UIClass
 } from 'ngx-sfc-common';
 import { combineLatest, map, Observable } from 'rxjs';
-import { DateTimeInputConstants } from '../../constants/datetime.constants';
+import { DateTimeInputConstants } from '../../constants/datetime-input.constants';
 import { DateTimeValueActionType } from '../../service/value/datetime-value.enum';
 import { DateTimeValueService } from '../../service/value/datetime-value.service';
 import { DateTimeViewActionType } from '../../service/view/enums/datetime-view.enum';
@@ -18,7 +18,6 @@ import { DateTimeViewService } from '../../service/view/datetime-view.service';
 import { DateTimeView } from '../../datetime-input-view.enum';
 import { IDateTimeModalButtonsModel, IDateTimeModalModel } from './datetime-modal.model';
 import { DateTimeState } from '../../service/view/enums/datetime-state.enum';
-import { IDateTimeValueModel } from '../../service/value/models/datetime-value.model';
 
 @Component({
   selector: 'sfc-datetime-modal',
@@ -233,7 +232,7 @@ export class DateTimeModalComponent implements OnInit {
 
   onClose(event: MouseEvent | undefined, immediate: boolean = false): void {
     if (this.fullSize && immediate)
-      this.modalService.toggle();
+      this.modalService.toggle(DateTimeInputConstants.MODAL_ID);
 
     event?.stopPropagation();
   }
