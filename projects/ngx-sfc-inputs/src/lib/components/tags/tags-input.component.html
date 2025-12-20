@@ -2,8 +2,9 @@
     <fa-icon *ngIf="icon" #iconRef class="icon" [icon]="icon"></fa-icon>
     <div class="content">
         <div class="tags">
-            <sfc-tags-chip *ngFor="let tag of value" [disabled]="disabled" label="{{tag}}" (remove)="onRemove($event)">
-            </sfc-tags-chip>
+            <sfc-tag *ngFor="let tag of value" [model]="{label: tag, allowRemove: true}" [disabled]="disabled"
+                (remove)="onRemove($event)">
+            </sfc-tag>
             <label for="{{inputId}}" [ngClass]="labelClass">{{label}}</label>
             <input sfcInput id="{{inputId}}" type="text" class="text-input" [placeholder]="placeholderValue"
                 [disabled]="disabled" [value]="newTagValue" (input)="newTagValue = $any($event.target).value"

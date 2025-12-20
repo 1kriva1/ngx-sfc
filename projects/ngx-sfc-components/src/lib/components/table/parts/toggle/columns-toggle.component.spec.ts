@@ -51,34 +51,34 @@ describe('Component: ColumnsToggle', () => {
 
   describe('Icons', () => {
     fit('Should show icon has relevant class', () => {
-      expect(fixture.nativeElement.querySelectorAll('fa-icon svg')[0].classList).toContain('fa-eye');
+      expect(fixture.nativeElement.querySelectorAll('fa-icon svg')[0].classList).toContain('fa-eye-slash');
     });
 
     fit('Should hide icon has relevant class', () => {
       service.toggle();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelectorAll('fa-icon svg')[1].classList).toContain('fa-eye-slash');
+      expect(fixture.nativeElement.querySelectorAll('fa-icon svg')[1].classList).toContain('fa-eye');
     });
 
     fit('Should show icon be visible', () => {
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Hidden);
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Visible);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Visible);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Hidden);
     });
 
     fit('Should hide icon be visible', () => {
       service.toggle();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Visible);
-      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Hidden);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[0].style.visibility).toEqual(UIClass.Hidden);
+      expect(fixture.nativeElement.querySelectorAll('span.icon')[1].style.visibility).toEqual(UIClass.Visible);
     });
   });
 
   describe('Label', () => {
     fit('Should be show label', () => {
       expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase())
-        .toEqual(ColumnsToggleConstants.SHOW_LABEL_DEFAULT.toUpperCase());
+        .toEqual(ColumnsToggleConstants.HIDE_LABEL_DEFAULT.toUpperCase());
     });
 
     fit('Should be hide label', () => {
@@ -86,7 +86,7 @@ describe('Component: ColumnsToggle', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('span.label').innerText.toUpperCase())
-        .toEqual(ColumnsToggleConstants.HIDE_LABEL_DEFAULT.toUpperCase());
+        .toEqual(ColumnsToggleConstants.SHOW_LABEL_DEFAULT.toUpperCase());
     });
   });
 });

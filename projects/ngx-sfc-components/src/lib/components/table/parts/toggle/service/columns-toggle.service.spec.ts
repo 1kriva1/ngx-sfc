@@ -34,7 +34,7 @@ describe('Service:  ColumnsToggle', () => {
     windowMock.innerWidth = MediaLimits.Tablet - 1;
 
     subscription = service.toggle$.subscribe(value => {
-      expect(value).toBeTrue();
+      expect(value).toBeFalse();
     });
 
     done();
@@ -44,7 +44,7 @@ describe('Service:  ColumnsToggle', () => {
     windowMock.innerWidth = MediaLimits.Tablet;
 
     subscription = service.toggle$.subscribe(value => {
-      expect(value).toBeTruthy();
+      expect(value).toBeFalse();
     });
 
     done();
@@ -54,7 +54,7 @@ describe('Service:  ColumnsToggle', () => {
     windowMock.innerWidth = MediaLimits.Tablet + 1;
 
     subscription = service.toggle$.subscribe(value => {
-      expect(value).toBeTruthy();
+      expect(value).toBeFalse();
     });
 
     done();
@@ -65,7 +65,7 @@ describe('Service:  ColumnsToggle', () => {
     let isFirstCalled: boolean = false;
 
     subscription = service.toggle$.subscribe(value => {
-      expect(value).toEqual(isFirstCalled ? false : true);
+      expect(value).toEqual(isFirstCalled ? true : false);
       isFirstCalled = true;
     });
 

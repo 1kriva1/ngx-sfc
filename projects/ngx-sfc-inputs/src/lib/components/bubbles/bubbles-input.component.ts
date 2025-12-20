@@ -27,7 +27,16 @@ export class BubblesInputComponent
 
   public bubbles: IBubbleInnerModel[] = [];
 
-  private get multipleValue(): number[] | null { return this.multiple ? this.value as number[] : null }
+  private get multipleValue(): number[] | null {
+    if (this.multiple) {
+      if (!this.value)
+        this.value = [];
+
+      return this.value as number[];
+    }
+
+    return null;
+  }
 
   private _subscription!: Subscription;
 
@@ -93,7 +102,7 @@ export class BubblesInputComponent
     else
       removeItem(this.multipleValue!, bubble);
 
-    this.onChange(this.value);
+    this.onChange(this.multipleValue);
   }
 
   private getIsActive(value: number | number[], model: IBubbleModel): boolean {

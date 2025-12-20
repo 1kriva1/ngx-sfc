@@ -52,7 +52,8 @@ import {
   CollapseExpandComponent,
   CollapseExpandContainerComponent,
   ToggleComponent,
-  MessageComponent
+  MessageComponent,
+  TagComponent
 } from './components';
 
 @NgModule({
@@ -92,6 +93,7 @@ import {
     CollapseExpandContainerComponent,
     ToggleComponent,
     MessageComponent,
+    TagComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,
@@ -146,6 +148,7 @@ import {
     CollapseExpandContainerComponent,
     ToggleComponent,
     MessageComponent,
+    TagComponent,
     // loaders
     BounceLoaderComponent,
     CircleLoaderComponent,

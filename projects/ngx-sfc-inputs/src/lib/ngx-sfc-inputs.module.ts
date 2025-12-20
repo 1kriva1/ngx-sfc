@@ -26,7 +26,6 @@ import {
   AvatarInputComponent
 } from './components';
 import {
-  TagsChipComponent,
   BaseInputComponent,
   NumberSpinnerComponent,
   StarComponent,
@@ -61,7 +60,6 @@ import { NgxSfcComponentsModule } from 'ngx-sfc-components';
     RadioInputComponent,
     //tags
     TagsInputComponent,
-    TagsChipComponent,
     // number
     NumberInputComponent,
     NumberSpinnerComponent,

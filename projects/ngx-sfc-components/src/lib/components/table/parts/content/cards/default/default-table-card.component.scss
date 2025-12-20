@@ -5,14 +5,13 @@
   box-shadow: 0 0.625em 1.25em $color-shadow-2, 0 0.3753em 0.3753em $color-shadow-3;
   transition: all 0.2s ease-in-out;
   border-radius: 0.75em;
-  margin: 0.5em;
+  width: calc(33.3% - 1em);
 
   @include host;
 
   .container {
     flex-flow: column wrap;
     justify-content: center;
-    width: min-content;
 
     @include container;
 

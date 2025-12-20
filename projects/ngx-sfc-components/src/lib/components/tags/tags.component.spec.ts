@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TagComponent } from '../no-export-index';
 import { TagsComponent } from './tags.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
-import { IconComponent } from 'ngx-sfc-common';
+import { ComponentSizeDirective, IconComponent, TagComponent } from 'ngx-sfc-common';
 
 describe('Component: TagsComponent', () => {
   let component: TagsComponent;
@@ -13,7 +12,7 @@ describe('Component: TagsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [IconComponent, TagComponent, TagsComponent]
+      declarations: [IconComponent, ComponentSizeDirective, TagComponent, TagsComponent]
     }).compileComponents();
   });
 
@@ -30,7 +29,7 @@ describe('Component: TagsComponent', () => {
 
     fit('Should create main elements', () => {
       expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('div.tags')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div.content')).toBeTruthy();
     });
   });
 

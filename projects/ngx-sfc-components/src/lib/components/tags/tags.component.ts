@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ITagModel } from './parts/tag/tag.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ITagModel } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-tags',
@@ -9,6 +9,12 @@ import { ITagModel } from './parts/tag/tag.model';
 export class TagsComponent {
 
   @Input()
-  tags: ITagModel[] = [];
+  tags: any[] = [];
 
+  @Output()
+  remove = new EventEmitter<ITagModel>();
+
+  public onRemove(model: ITagModel): void {
+    this.remove.emit(model);
+  }
 }

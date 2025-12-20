@@ -83,7 +83,7 @@
 
                 @include theme-value(color, $color-default, $color-dark);
 
-                white-space: initial;
+                white-space: nowrap;
                 user-select: none;
                 transition: color 0.25s linear;
               }

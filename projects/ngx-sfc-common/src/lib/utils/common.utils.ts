@@ -1,4 +1,6 @@
 import { Observable } from 'rxjs';
+import { empty } from '../types';
+import { addItem, hasItem, removeItem } from './collections.utils';
 import { isEqualDateTimes } from './date-time.utils';
 
 /**
@@ -253,4 +255,99 @@ export function isJsonString(value: string): boolean {
 export function stopAndPreventPropagation(event: Event): void {
   event.preventDefault();
   event.stopPropagation();
+}
+
+/**
+ * Update property in object by key
+ * @param obj Object to change
+ * @param propertyKey Property to change
+ * @param newPropertyValue New property value
+ * @param oldPropertyValue Old property value
+ * @returns Updated object
+ */
+export function updatePropertyByKey(
+  obj: any,
+  propertyKey: string,
+  newPropertyValue: any,
+  oldPropertyValue: any
+): any {
+  if (Array.isArray(obj)) {
+    return obj.map(item => {
+      return isObject(item) && item !== null
+        ? updatePropertyByKey(item, propertyKey, newPropertyValue, oldPropertyValue)
+        : item;
+    });
+  } else if (isObject(obj) && obj !== null) {
+    const updatedObj: any = {};
+    for (const key in obj) {
+      if (key === propertyKey) {
+        if (Array.isArray(obj[key])) {
+          if (hasItem(obj[key], oldPropertyValue)) {
+            removeItem(obj[key], oldPropertyValue);
+          } else {
+            addItem(obj[key], oldPropertyValue);
+          }
+
+          updatedObj[key] = obj[key];
+        } else {
+          updatedObj[key] = newPropertyValue;
+        }
+      } else {
+        updatedObj[key] = updatePropertyByKey(obj[key], propertyKey, newPropertyValue, oldPropertyValue);
+      }
+    }
+
+    return updatedObj;
+  }
+
+  return obj;
+}
+
+/**
+ * Get changed property path
+ * @param previous Previous value 
+ * @param current Currency value
+ * @param parentKey Parent object key name
+ * @returns Path of property that was changed
+ */
+export function findChangedPropertyPath(previous: any, current: any, parentKey = ''): string | empty {
+  for (const key of Object.keys(current)) {
+    const fullKey: string = parentKey ? `${parentKey}.${key}` : key;
+
+    if (isObject(current[key]) && current[key] !== null && previous[key]) {
+      const nestedChange = findChangedPropertyPath(previous[key], current[key], fullKey);
+
+      if (nestedChange) {
+        return nestedChange;
+      }
+    } else {
+      if (previous[key] !== current[key]) {
+        return fullKey;
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Get changed property key
+ * @param previous Previous value
+ * @param current Currency value
+ * @returns Key of property that was changed
+ */
+export function findChangedPropertyKey(previous: any, current: any): string | empty {
+  const path: string | empty = findChangedPropertyPath(previous, current),
+    parts = path?.split('.');
+
+  return parts && parts.length ? parts[parts.length - 1] : undefined;
+}
+
+/**
+ * Clone object without any reference
+ * @param value  Object to clone
+ * @returns Cloned object
+ */
+export function deepClone(value: any): any {
+  return JSON.parse(JSON.stringify(value));
 }

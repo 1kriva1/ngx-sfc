@@ -39,7 +39,6 @@ import {
   SideMenuItemContentComponent,
   SideMenuTitleComponent,
   RouterMenuItemComponent,
-  TagComponent,
   SliderItemComponent,
   SliderButtonComponent,
   SliderPaginationComponent,
@@ -118,7 +117,6 @@ Chart.register(
     ProgressCircleComponent,
     // Tags
     TagsComponent,
-    TagComponent,
     // Slider
     SliderComponent,
     SliderItemComponent,

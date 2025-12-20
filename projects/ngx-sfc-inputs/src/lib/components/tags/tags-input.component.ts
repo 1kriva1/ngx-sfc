@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { hasItem, isDefined, removeItemBy, trim, UIClass } from 'ngx-sfc-common';
+import { hasItem, isDefined, ITagModel, removeItemBy, trim, UIClass } from 'ngx-sfc-common';
 import { CommonConstants } from 'ngx-sfc-common';
 import { any, isNullOrEmptyString } from 'ngx-sfc-common';
 import { ValidationConstants } from '../../constants/validation.constants';
@@ -50,6 +50,15 @@ export class TagsInputComponent extends BaseTextInputComponent<string[]> impleme
       ...this.validations
     };
     this.value = this.value || [];
+  }
+
+  override set value(value: string[] | null) {
+    this._value = value;
+  }
+  override get value(): string[] | null {
+    if (!this._value)
+      this._value = [];
+    return this._value || [];
   }
 
   @HostBinding(`class.${InputUIClass.HasValue}`)
@@ -116,14 +125,14 @@ export class TagsInputComponent extends BaseTextInputComponent<string[]> impleme
       this.addNewTag();
   }
 
-  onRemove(removeValue: string): void {
-    removeItemBy(this.value as string[], (item: string) => item === removeValue);
+  onRemove(model: ITagModel): void {
+    removeItemBy(this.value as string[], (item: string) => item === model.label);
     this.onChange(this.value);
   }
 
   private addNewTag(): void {
     // add new tag
-    this.value?.push(this.newTagValue as string);
+    this.value!.push(this.newTagValue as string);
 
     // update component value with new value
     this.onChange(this.value);

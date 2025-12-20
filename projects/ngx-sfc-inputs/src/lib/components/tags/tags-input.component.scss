@@ -12,6 +12,38 @@
 
         @include border-bottom;
 
+        sfc-tag {
+          ::ng-deep .container {
+            .content {
+              font-size: 0.8em;
+              font-weight: normal;
+              margin: 0.1em 0.31em 0.1em 0;
+
+              sfc-close {
+                font-size: 1em;
+              }
+            }
+          }
+
+          &:not(.disabled) {
+            ::ng-deep .container {
+              .content {
+                @include theme-value(background-color, $color-3, $color-2);
+
+                color: $color-default;
+
+                sfc-close {
+                  color: $color-default;
+
+                  &:hover {
+                    color: $color-red-0;
+                  }
+                }
+              }
+            }
+          }
+        }
+
         .text-input {
           border: none !important;
           box-shadow: none !important;

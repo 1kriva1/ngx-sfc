@@ -403,6 +403,19 @@ npm publish
 
 cd ../../
 
+By powershell script:
+.tools/publish.ps1
+.tools/publish.ps1 -projects common
+
+NPM key name: 1111
+NPM recovery pin: 123456
+NPM Recovery code:
+e2decd02f0d52a73001e4ce3d855496946d79e38d6fee794b8b5c84a8f0619af
+50310cb6cd426067ef2366100008e59a1796ac703cbbb94c9518b721abd269ea
+a2fceb041ddafb21f35149f69f112e3697595d71035dd14ed92a7b2afa7c5a79
+c09f4782ab085c624d3d8505bed05a69f731427d93742db82fe79a52f57a653e
+6d48748f9df5648204691b2872561ab9a769398f88a24cea0b8e99b5b0504dca
+
 NPM Link (C:\Users\andriik\AppData\Roaming\npm\node_modules):
 ----------------------------------------------------------
 source:

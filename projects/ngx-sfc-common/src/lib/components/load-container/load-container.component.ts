@@ -243,7 +243,7 @@ export class LoadContainerComponent implements OnDestroy {
 
     return combineLatest([this.sortingService.sorting$.pipe(startWith(this.model.sorting)), parameters$]).pipe(
       tap(() => this.loading = true),
-      map(([sorting, parameters]) => ({ params: parameters.params!, page: parameters.page, sorting: sorting }))
+      map(([sorting, parameters]) => ({ params: parameters.params!, page: parameters.page, size: this.model.pagination?.size!, sorting: sorting }))
     );
   }
 
@@ -269,7 +269,7 @@ export class LoadContainerComponent implements OnDestroy {
         if (this.source == LoadContainerChangesSource.Data
           && parameters.page != LoadMoreService.START_PAGE) {
           this.resetParameters();
-          parameters = { params: parameters.params, page: this.page, sorting: parameters.sorting };
+          parameters = { params: parameters.params, page: this.page, size: this.model.pagination?.size!, sorting: parameters.sorting };
         }
 
         const filtered = model.filter ? model.filter(items, parameters) : items,

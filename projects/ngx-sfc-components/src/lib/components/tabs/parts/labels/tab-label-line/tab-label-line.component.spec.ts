@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommonConstants, IconComponent, UIClass } from 'ngx-sfc-common';
+import { CommonConstants, ComponentSize, IconComponent, UIClass } from 'ngx-sfc-common';
 import { TabLabelLineComponent } from './tab-label-line.component';
 import { faTShirt } from '@fortawesome/free-solid-svg-icons';
+import { ComponentSizeDirective } from 'ngx-sfc-common';
 
 describe('Component: TabLabelLineComponent', () => {
     let component: TabLabelLineComponent;
@@ -11,7 +12,7 @@ describe('Component: TabLabelLineComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FontAwesomeModule],
-            declarations: [IconComponent, TabLabelLineComponent]
+            declarations: [IconComponent, ComponentSizeDirective, TabLabelLineComponent]
         }).compileComponents();
     });
 
@@ -56,34 +57,30 @@ describe('Component: TabLabelLineComponent', () => {
     });
 
     describe('Icon', () => {
-        fit('Should have wrap', () => {
-            expect(fixture.nativeElement.querySelector('sfc-icon')).toBeTruthy();
-        });
-
         fit('Should have default value', () => {
-            expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('sfc-icon')).toBeTruthy();
         });
 
         fit('Should have defined value', () => {
             component.icon = faTShirt;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('fa-icon svg').classList).toContain('fa-shirt');
+            expect(fixture.nativeElement.querySelector('sfc-icon fa-icon svg').classList).toContain('fa-shirt');
         });
 
         fit('Should have image instead of icon', () => {
             component.image = 'test.png';
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('fa-icon')).toBeNull();
-            expect(fixture.nativeElement.querySelector('img')).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('sfc-icon fa-icon')).toBeNull();
+            expect(fixture.nativeElement.querySelector('sfc-icon img')).toBeTruthy();
         });
 
         fit('Should have defined image value', () => {
             component.image = 'test.png';
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('img').src).toContain(component.image);
+            expect(fixture.nativeElement.querySelector('sfc-icon img').src).toContain(component.image);
         });
     });
 

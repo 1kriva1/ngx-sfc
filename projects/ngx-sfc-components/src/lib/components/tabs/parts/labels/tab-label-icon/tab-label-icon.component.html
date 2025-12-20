@@ -1,5 +1,5 @@
 <div class="container">
-  <fa-icon [icon]="tabIcon"></fa-icon>
+  <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
   <span>{{label}}</span>
   <ng-content></ng-content>
 </div>
