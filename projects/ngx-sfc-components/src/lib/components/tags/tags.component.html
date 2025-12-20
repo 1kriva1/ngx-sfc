@@ -1,5 +1,7 @@
 <div class="container">
-    <div class="tags">
-        <sfc-tag *ngFor="let tag of tags" [model]="tag"></sfc-tag>
+    <div class="content">
+        <sfc-tag *ngFor="let tag of tags" [model]="tag" [sfcComponentSize] [customSize]="0.8"
+            (remove)="onRemove($event)">
+        </sfc-tag>
     </div>
 </div>

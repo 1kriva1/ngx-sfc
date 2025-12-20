@@ -3,7 +3,8 @@ import { empty } from "../../../types";
 import { ILoadContainerPredicateParameters } from "./load-container-predicate-parameters.model";
 
 export interface ILoadContainerParameters {
-    params: ILoadContainerPredicateParameters,
-    page: number
+    params: ILoadContainerPredicateParameters;
+    page: number;
+    size: number;
     sorting?: ISortingModel | empty;
 }

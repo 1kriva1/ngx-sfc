@@ -68,12 +68,18 @@
       flex-wrap: wrap;
       justify-content: center;
       transition: 0.5s;
-      gap: 1em;
       margin-block: 1em 2em;
 
       sfc-load-container {
-        ::ng-deep > .content {
-          background: transparent;
+        ::ng-deep > .container {
+          .content {
+            background: transparent;
+
+            .items {
+              gap: 1em;
+              margin: 1em 0;
+            }
+          }
         }
 
         &.loading {
@@ -111,7 +117,6 @@
         .row {
           display: block;
           width: 100%;
-          margin: 0.5em 0;
         }
       }
     }

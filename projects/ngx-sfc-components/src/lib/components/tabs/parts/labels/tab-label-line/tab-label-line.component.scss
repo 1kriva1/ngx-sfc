@@ -4,21 +4,24 @@
   width: 100%;
   cursor: pointer;
 
-  @include theme-value(color, $color-default, $color-dark);
-
-  font-weight: bold;
-  user-select: none;
-
   &.disabled {
-    @include theme-value(color, $color-disabled-default, $color-disabled-dark);
-
     cursor: default;
     pointer-events: none;
+
+    .container {
+      .content {
+        @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+      }
+    }
   }
 
   &.selected:not(.disabled),
   &:hover:not(.disabled) {
-    color: $color-hover-default;
+    .container {
+      .content {
+        color: $color-hover-default;
+      }
+    }
   }
 
   .container {
@@ -34,18 +37,23 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
+      flex-flow: column wrap;
       text-align: center;
       padding: 1.25em 0;
       overflow: hidden;
+      font-weight: bold;
+      user-select: none;
+
+      @include theme-value(color, $color-default, $color-dark);
 
       span {
         text-overflow: ellipsis;
         overflow: hidden; // @include text-ellipsis;
+        font-size: 0.8em;
       }
 
       sfc-icon {
-        display: none;
+        margin: 0.2em 0;
       }
     }
   }

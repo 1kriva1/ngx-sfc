@@ -1,7 +1,8 @@
 import {
   AfterContentChecked, AfterViewChecked, ChangeDetectorRef, Component, ContentChildren,
   DoCheck, EventEmitter, HostBinding, Inject, Input, IterableDiffer, IterableDiffers, OnDestroy,
-  OnInit, Output, QueryList, TemplateRef} from '@angular/core';
+  OnInit, Output, QueryList, TemplateRef
+} from '@angular/core';
 import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
 import {
   all, firstOrDefault, getCalcValue, getCssLikeValue, isDefined,
@@ -9,7 +10,8 @@ import {
   UIConstants, LoadContainerType, LoaderFunction, LoadContainerLoadType, ILoadContainerModel,
   ILoadContainerResultModel, IPaginationModel, PaginationConstants, generateGuid, any,
   hasItem, SortingService, ISortingModel, ILoadContainerPredicateParameters, FilterFunction,
-  UIClass, IToggleSwitcherModel} from 'ngx-sfc-common';
+  UIClass, IToggleSwitcherModel, where, sum
+} from 'ngx-sfc-common';
 import { TableColumnType } from './parts/columns/table-column-type.enum';
 import { ITableColumnExtendedModel, ITableColumnModel } from './parts/columns/table-column.model';
 import { ColumnsToggleService } from './parts/toggle/service/columns-toggle.service';
@@ -20,6 +22,7 @@ import { TableConstants } from './table.constants';
 import { TableTemplate } from './enums/table-template.enum';
 import { ITableModel } from './models/table.model';
 import { faTableList, faBorderAll } from '@fortawesome/free-solid-svg-icons';
+import { CommonConstants } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-table',
@@ -53,6 +56,9 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
 
   @Input()
   columnsToggle: boolean = false;
+
+  @Input()
+  columnsShowOnInit: boolean = true;
 
   @Input()
   pagination: IPaginationModel = PaginationConstants.DEFAULT_PAGINATION;
@@ -266,6 +272,10 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
 
     this.toggleSwitcherLeftModel = { label: this.dataListLabel, icon: faTableList };
     this.toggleSwitcherRightModel = { label: this.dataCardsLabel, icon: faBorderAll };
+
+    if (this.columnsShowOnInit) {
+      this.columnsToggleService.set(true);
+    }
   }
 
   ngAfterViewChecked(): void {
@@ -397,8 +407,21 @@ export class TableComponent implements OnInit, AfterContentChecked, AfterViewChe
 
   private calculateColumnWidth(column: ITableColumnExtendedModel, columnsLength: number): string {
     // defined width for all columns
-    if (all(this.columns, column => isDefined(column.width)))
+    if (all(this.columns, column => isDefined(column.width))) {
       return getCssLikeValue(column.width!, UIConstants.CSS_PERCENTAGE);
+    }
+
+    if (isDefined(column.width)) {
+      return getCssLikeValue(column.width!, UIConstants.CSS_PERCENTAGE);
+    }
+
+    const columnsWithWidth: ITableColumnModel[] = where(this.columns, column => isDefined(column.width))!,
+      columnsWidth: number = sum(columnsWithWidth, column => column.width!);
+
+    if (columnsWidth > 0) {
+      const proportionalWidth: number = (CommonConstants.FULL_PERCENTAGE - columnsWidth) / (this.columns.length - columnsWithWidth.length);
+      return getCssLikeValue(proportionalWidth, UIConstants.CSS_PERCENTAGE);
+    }
 
     let width: number = columnsLength;
 

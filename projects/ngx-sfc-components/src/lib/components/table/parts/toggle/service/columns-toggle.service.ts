@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ColumnsToggleService {
 
   // current state of toggle 
-  public show: boolean = true;
+  public show: boolean = false;
 
   private toggleSubject = new BehaviorSubject<boolean>(this.show);
 
@@ -16,5 +16,10 @@ export class ColumnsToggleService {
 
   public toggle(): void {
     this.toggleSubject.next(this.show = !this.show);
+  }
+
+  public set(show: boolean): void {
+    this.show = show;
+    this.toggleSubject.next(this.show);
   }
 }

@@ -46,3 +46,5 @@ export { CollapseExpandComponent } from './collapse-expand/collapse-expand.compo
 export { CollapseExpandContainerComponent } from './collapse-expand-container/collapse-expand-container.component';
 export { ToggleComponent } from './toggle/toggle.component';
 export { MessageComponent } from './message/message.component';
+export { TagComponent } from './tag/tag.component';
+export { ITagModel } from './tag/tag.model';

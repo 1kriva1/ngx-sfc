@@ -2,13 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { CloseComponent, CommonConstants, ShowHideElementDirective, UIClass } from 'ngx-sfc-common';
+import { CloseComponent, CommonConstants, IconComponent, ShowHideElementDirective, TagComponent, UIClass } from 'ngx-sfc-common';
 import { InputConstants } from '../../constants/input.constants';
 import { ValidationConstants } from '../../constants/validation.constants';
 import { InputReferenceDirective } from '../../directives';
 import { InputUIClass } from '../../enums/input-ui.enum';
 import { CommonValidator } from '../../validators';
-import { TagsChipComponent } from './parts/chip/tags-chip.component';
 import { TagsInputComponent } from './tags-input.component';
 import { TagsInputConstants } from './tags-input.constants';
 
@@ -19,8 +18,11 @@ describe('Component: TagsInput', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
-      declarations: [CloseComponent, ShowHideElementDirective, InputReferenceDirective,
-        TagsChipComponent, TagsInputComponent]
+      declarations: [
+        CloseComponent, IconComponent,
+        ShowHideElementDirective, InputReferenceDirective,
+        TagComponent, TagsInputComponent
+      ]
     }).compileComponents();
   });
 
@@ -104,18 +106,18 @@ describe('Component: TagsInput', () => {
     });
   });
 
-  describe('Chips', () => {
+  describe('Tags', () => {
     fit("Should not exist", () => {
-      const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-      expect(chips.length).toEqual(0);
+      const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+      expect(tags.length).toEqual(0);
     });
 
     fit("Should exist", () => {
       setTags();
       fixture.detectChanges();
 
-      const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-      expect(chips.length).toEqual(2);
+      const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+      expect(tags.length).toEqual(2);
     });
 
     fit("Should be disabled disabled", () => {
@@ -123,7 +125,7 @@ describe('Component: TagsInput', () => {
       setTags();
       fixture.detectChanges();
 
-      fixture.debugElement.queryAll(By.css('sfc-tags-chip')).forEach(chip => {
+      fixture.debugElement.queryAll(By.css('sfc-tag')).forEach(chip => {
         expect(chip.componentInstance.disabled).toBeTruthy();
       });
     });
@@ -132,9 +134,9 @@ describe('Component: TagsInput', () => {
       setTags();
       fixture.detectChanges();
 
-      const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-      for (let index = 0; index < chips.length; index++) {
-        expect(chips[index].componentInstance.label).toEqual('test' + (index + 1))
+      const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+      for (let index = 0; index < tags.length; index++) {
+        expect(tags[index].componentInstance.model.label).toEqual('test' + (index + 1))
       }
     });
 
@@ -142,14 +144,14 @@ describe('Component: TagsInput', () => {
       setTags();
       fixture.detectChanges();
 
-      const chipsBeforeRemove = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-      expect(chipsBeforeRemove.length).toEqual(2);
+      const tagsBeforeRemove = fixture.debugElement.queryAll(By.css('sfc-tag'));
+      expect(tagsBeforeRemove.length).toEqual(2);
 
-      const chipToRemove = chipsBeforeRemove[0].query(By.css('sfc-close'));
+      const chipToRemove = tagsBeforeRemove[0].query(By.css('sfc-close'));
       chipToRemove.triggerEventHandler('click', { target: chipToRemove.nativeElement });
       fixture.detectChanges();
 
-      const chipsAfterRemove = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
+      const chipsAfterRemove = fixture.debugElement.queryAll(By.css('sfc-tag'));
       expect(chipsAfterRemove.length).toEqual(1);
     });
   });
@@ -268,8 +270,8 @@ describe('Component: TagsInput', () => {
       inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
       fixture.detectChanges();
 
-      const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-      expect(chips.length).toEqual(1);
+      const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+      expect(tags.length).toEqual(1);
     });
 
     fit("Should hide inner validation message on blur event", () => {
@@ -291,8 +293,8 @@ describe('Component: TagsInput', () => {
       inputEl.triggerEventHandler('blur', { target: { target: inputEl.nativeElement } });
       fixture.detectChanges();
 
-      const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-      expect(chips.length).toEqual(2);
+      const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+      expect(tags.length).toEqual(2);
       expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(CommonConstants.EMPTY_STRING);
       expect(inputEl.nativeElement.value).toEqual(assertValue);
     });
@@ -307,8 +309,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(0);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(0);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.EMPTY_VALIDATION[CommonValidator.Empty]);
       });
 
@@ -327,8 +329,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(1);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(1);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
         expect(inputEl.nativeElement.value).toEqual(assertValue);
       });
@@ -350,8 +352,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(1);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(1);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
         expect(inputEl.nativeElement.value).toEqual(extraSpacesValue);
       });
@@ -378,8 +380,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(2);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(2);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual(ValidationConstants.DUPLICATE_VALIDATION[CommonValidator.Duplicate]);
         expect(inputEl.nativeElement.value).toEqual(assertValue);
       });
@@ -397,8 +399,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(0);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(0);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText)
           .toEqual(TagsInputConstants.LENGTH_VALIDATION(component.maxTagLength, component.minTagLength)[TagsInputConstants.LENGTH_VALIDATOR_KEY]);
       });
@@ -417,8 +419,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(0);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(0);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText)
           .toEqual(TagsInputConstants.LENGTH_VALIDATION(component.maxTagLength, component.minTagLength)[TagsInputConstants.LENGTH_VALIDATOR_KEY]);
       });
@@ -436,8 +438,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(0);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(0);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText)
           .toEqual(TagsInputConstants.LENGTH_VALIDATION(component.maxTagLength, component.minTagLength)[TagsInputConstants.LENGTH_VALIDATOR_KEY]);
       });
@@ -464,8 +466,8 @@ describe('Component: TagsInput', () => {
         inputEl.triggerEventHandler('keyup.enter', { target: inputEl.nativeElement });
         fixture.detectChanges();
 
-        const chips = fixture.debugElement.queryAll(By.css('sfc-tags-chip'));
-        expect(chips.length).toEqual(3);
+        const tags = fixture.debugElement.queryAll(By.css('sfc-tag'));
+        expect(tags.length).toEqual(3);
         expect(fixture.nativeElement.querySelector('span.helper-text').innerText).toEqual('');
         expect(inputEl.nativeElement.value).toEqual('');
       });

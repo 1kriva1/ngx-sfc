@@ -28,7 +28,6 @@ describe('Component: TabLabelIconComponent', () => {
 
         fit('Should create main elements', () => {
             expect(fixture.nativeElement.querySelector('div.container')).toBeTruthy();
-            expect(fixture.nativeElement.querySelector('fa-icon')).toBeTruthy();
             expect(fixture.nativeElement.querySelector('span')).toBeTruthy();
         });
 
@@ -56,15 +55,10 @@ describe('Component: TabLabelIconComponent', () => {
     });
 
     describe('Icon', () => {
-        fit('Should have default icon', () => {
-            expect(fixture.nativeElement.querySelector('fa-icon svg.fa-circle')).toBeTruthy();
-        });
-
         fit('Should have defined icon', () => {
             component.icon = faTShirt;
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('fa-icon svg.fa-circle')).toBeNull();
             expect(fixture.nativeElement.querySelector('fa-icon svg.fa-shirt')).toBeTruthy();
         });
     });

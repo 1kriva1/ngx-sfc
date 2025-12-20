@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="content">
+        <sfc-icon [icon]="model.icon" [imageSrc]="model.imageSrc"></sfc-icon>
+        <span>{{model.label}}</span>
+        <sfc-close *ngIf="model.allowRemove" (click)="onRemove()"></sfc-close>
+    </div>
+</div>

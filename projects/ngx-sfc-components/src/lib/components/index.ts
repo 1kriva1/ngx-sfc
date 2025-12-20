@@ -24,7 +24,6 @@ export { ProgressSemiCircleComponent } from './progress/semi-circle/progress-sem
 export { ProgressCircleComponent } from './progress/circle/progress-circle.component';
 export { getProgressColorDefaultFunc, getProgressColorDynamicallyFunc } from './progress/progress.utils';
 export { ProgressColor } from './progress/progress-color.enum';
-export { ITagModel } from './tags/parts/tag/tag.model';
 export { TagsComponent } from './tags/tags.component';
 export { SliderComponent } from './slider/slider.component';
 export { SliderType } from './slider/slider-type.enum';

@@ -4,8 +4,12 @@
   display: inline-block;
 
   .container {
-    .tags {
+    .content {
       @include center-wrap;
+
+      sfc-tag {
+        margin: 0.2em;
+      }
     }
   }
 }

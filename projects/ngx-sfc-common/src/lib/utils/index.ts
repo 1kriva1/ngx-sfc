@@ -14,7 +14,11 @@ export {
     isEqual,
     generateGuid,
     isJsonString,
-    stopAndPreventPropagation
+    stopAndPreventPropagation,
+    updatePropertyByKey,
+    findChangedPropertyPath,
+    findChangedPropertyKey,
+    deepClone
 } from './common.utils'
 
 export {

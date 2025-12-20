@@ -1,0 +1,77 @@
+@import "../../styles";
+
+:host {
+  @include host;
+
+  display: inline-block;
+
+  .container {
+    .content {
+      align-items: center;
+      text-align: center;
+      padding: 0.3em 0.8em;
+      display: inline-flex;
+      border-radius: 1em;
+      font-weight: bold;
+      user-select: none;
+
+      @include theme-value(color, $color-dark, $color-default);
+      @include theme-value(background-color, $color-default, $color-dark);
+
+      transition:
+        color $transition-duration-default $transition-timing-function-default,
+        background-color $transition-duration-default $transition-timing-function-default,
+        border-color $transition-duration-default $transition-timing-function-default;
+      border: 0.125em solid transparent;
+
+      sfc-icon {
+        margin-right: 0.2em;
+
+        ::ng-deep .container {
+          img {
+            max-width: 1em;
+            max-height: 1em;
+          }
+        }
+      }
+
+      sfc-close {
+        margin-left: 0.6em;
+        color: $color-red-0;
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  &:hover {
+    .container {
+      .content {
+        background-color: $color-hover-default;
+        color: $color-0;
+      }
+    }
+  }
+
+  &.disabled {
+    .container {
+      .content {
+        pointer-events: none;
+
+        @include theme-value(color, $color-disabled-default, $color-4);
+        @include theme-value(background-color, $color-1, $color-disabled-dark);
+
+        sfc-close {
+          @include theme-value(color, $color-disabled-default, $color-disabled-dark);
+        }
+      }
+    }
+
+    &:hover {
+      .container {
+        .content {
+          background-color: initial;
+        }
+      }
+    }
+  }
+}

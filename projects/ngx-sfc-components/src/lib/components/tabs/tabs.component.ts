@@ -5,6 +5,7 @@ import { TabService } from './service/tab.service';
 import { TabsTemplate } from './tabs-template.enum';
 import { ITabsViewModel } from './models/tabs-view.model';
 import { ITabModel } from './models/tab.model';
+import { empty } from 'ngx-sfc-common';
 
 @Component({
   selector: 'sfc-tabs',
@@ -41,6 +42,8 @@ export class TabsComponent implements OnInit {
   public vm$?: Observable<ITabsViewModel>;
 
   private tabsSubject?: BehaviorSubject<ITabModel[]>;
+
+  public data: any | empty = null;
 
   constructor(private tabService: TabService) { }
 
@@ -93,6 +96,10 @@ export class TabsComponent implements OnInit {
   private updateSelected(tabs: ITabModel[], selectedIndex: number): void {
     tabs.forEach((item: ITabModel, index: number) => {
       item.selected = index == selectedIndex;
+
+      if (item.selected) {
+        this.data = item.data;
+      }
     });
   }
 }
