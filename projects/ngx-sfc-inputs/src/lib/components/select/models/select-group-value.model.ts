@@ -1,5 +1,5 @@
 export interface ISelectGroupValue {
-    key: number| null;
+    key: any | null;
     value: string;
-    groupKey: number;
+    groupKey: any;
 }

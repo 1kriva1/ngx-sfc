@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { empty } from '../types';
-import { addItem, hasItem, removeItem } from './collections.utils';
+import { segment } from '../types/segment.type';
+import { toggleItem } from './collections.utils';
 import { isEqualDateTimes } from './date-time.utils';
 
 /**
@@ -260,47 +261,220 @@ export function stopAndPreventPropagation(event: Event): void {
 /**
  * Update property in object by key
  * @param obj Object to change
- * @param propertyKey Property to change
+ * @param key Property to change
  * @param newPropertyValue New property value
- * @param oldPropertyValue Old property value
+ * @param options Options for array types
  * @returns Updated object
  */
-export function updatePropertyByKey(
+export function updatePropertyByKey<T>(
   obj: any,
-  propertyKey: string,
-  newPropertyValue: any,
-  oldPropertyValue: any
+  key: string,
+  newPropertyValue: T,
+  options: { arrayMode?: "toggle" | "replace"; arrayToggleValue?: T; } = {}
 ): any {
-  if (Array.isArray(obj)) {
-    return obj.map(item => {
-      return isObject(item) && item !== null
-        ? updatePropertyByKey(item, propertyKey, newPropertyValue, oldPropertyValue)
-        : item;
-    });
-  } else if (isObject(obj) && obj !== null) {
-    const updatedObj: any = {};
-    for (const key in obj) {
-      if (key === propertyKey) {
-        if (Array.isArray(obj[key])) {
-          if (hasItem(obj[key], oldPropertyValue)) {
-            removeItem(obj[key], oldPropertyValue);
-          } else {
-            addItem(obj[key], oldPropertyValue);
-          }
+  const {
+    arrayMode = "toggle",
+    arrayToggleValue = (newPropertyValue as T)
+  } = options;
 
-          updatedObj[key] = obj[key];
+  // Arrays: map recursively over items
+  if (Array.isArray(obj)) {
+    let changed = false;
+    const mapped = obj.map(item => {
+      const updated = updatePropertyByKey(item, key, newPropertyValue, options);
+      if (updated !== item) changed = true;
+      return updated;
+    });
+    return changed ? mapped : obj;
+  }
+
+  // Plain objects: iterate over keys immutably
+  if (isObject(obj)) {
+    const source = obj as Record<string, unknown>;
+    let changed = false;
+    const result: Record<string, unknown> = {};
+
+    for (const propertyKey of Object.keys(source)) {
+      const value = source[propertyKey];
+
+      if (propertyKey === key) {
+        // Matched key: apply update
+        if (Array.isArray(value)) {
+          if (arrayMode === "toggle") {
+            const updatedArray = toggleItem(value as T[], arrayToggleValue);
+            result[propertyKey] = updatedArray;
+            if (updatedArray !== value) changed = true;
+          } else {
+            // replace mode
+            if (!Array.isArray(newPropertyValue)) {
+              throw new Error("arrayMode 'replace' requires newPropertyValue to be an array.");
+            }
+            const replaced = [...(newPropertyValue as unknown as unknown[])];
+            result[propertyKey] = replaced;
+            changed = true;
+          }
         } else {
-          updatedObj[key] = newPropertyValue;
+          // Non-array leaf -> set to newPropertyValue
+          result[propertyKey] = newPropertyValue as unknown;
+          if (result[propertyKey] !== value) changed = true;
         }
       } else {
-        updatedObj[key] = updatePropertyByKey(obj[key], propertyKey, newPropertyValue, oldPropertyValue);
+        // Recurse into nested values
+        const updatedVal = updatePropertyByKey(value, key, newPropertyValue, options);
+        result[propertyKey] = updatedVal;
+        if (updatedVal !== value) changed = true;
       }
     }
 
-    return updatedObj;
+    return changed ? result : obj;
   }
 
+  // Primitives or non-plain objects (Date, Map, etc.): return as-is
   return obj;
+}
+
+/**
+ * Update property in object by path
+ * @param obj Object to change
+ * @param path Property to change
+ * @param newPropertyValue New property value
+ * @param previousPropertyValue New property value
+ * @param options Options for array types
+ * @returns Updated object
+ */
+export function updatePropertyByPath<T>(
+  obj: any,
+  path: string | segment[],
+  newPropertyValue: T,
+  previousPropertyValue: T,
+  options: { arrayMode?: "toggle" | "replace"; } = {}
+): any {
+  const {    arrayMode = "toggle"  } = options;
+
+  const segments = Array.isArray(path) ? path : _pathToSegments(path);
+
+  /**
+  * Parses a path string like:
+  *  - "a.b.c"
+  *  - "a.b[0].c"
+  *  - "items[*].tags"
+  * into segments: ["a","b",0,"c"] or ["items","*", "tags"]
+  *
+  * Supported:
+  *  - Dot notation
+  *  - Bracket numbers: [0]
+  *  - Wildcard: [*] or .* (as a segment "*")
+  *
+  * Not supported:
+  *  - Quoted property names in brackets (e.g., ["foo bar"])
+  *  - Escaped dots in keys
+  * @param path Property path
+  * @returns Path segments
+  */
+ function _pathToSegments(path: string): segment[] {
+   // Normalize brackets to dot form (e.g., a[0].b -> a.0.b, a[*].b -> a.*.b)
+   const normalized = path
+     .replace(/\[(\d+)\]/g, ".$1")
+     .replace(/\[\*\]/g, ".*");
+ 
+   const rawSegments = normalized.split(".").filter(s => s.length > 0);
+   return rawSegments.map<segment>(seg => {
+     if (seg === "*") return "*";
+     const n = Number(seg);
+     if (!Number.isNaN(n) && seg.trim() !== "" && String(n) === seg) {
+       return n;
+     }
+     return seg;
+   });
+ }
+
+  function _apply(current: unknown, remaining: segment[]): unknown {
+    // Base: reached target path
+    if (remaining.length === 0) {
+      if (Array.isArray(current)) {
+        if (arrayMode === "toggle") {
+          return toggleItem(current as T[], previousPropertyValue);
+        }
+        // replace mode
+        if (!Array.isArray(newPropertyValue)) {
+          throw new Error("arrayMode 'replace' requires newPropertyValue to be an array.");
+        }
+        return [...(newPropertyValue as unknown as unknown[])];
+      }
+      // Non-array leaf -> set to newPropertyValue
+      return newPropertyValue as unknown;
+    }
+
+    const [seg, ...rest] = remaining;
+
+    // Wildcard handling
+    if (seg === "*") {
+      if (Array.isArray(current)) {
+        // Map each element
+        return (current as unknown[]).map(item => _apply(item, rest));
+      }
+      if (isObject(current)) {
+        const objCurr = current as Record<string, unknown>;
+        const result: Record<string, unknown> = {};
+        for (const key of Object.keys(objCurr)) {
+          result[key] = _apply(objCurr[key], rest);
+        }
+        return result;
+      }
+      // If not object/array, nothing to expand -> return as-is
+      return current;
+    }
+
+    // Numeric index -> navigate arrays
+    if (typeof seg === "number") {
+      if (!Array.isArray(current)) {
+        // Path expects array here, but current isn't an array => no-op
+        return current;
+      }
+      const arr = current as unknown[];
+      if (seg < 0 || seg >= arr.length) {
+        // Out of bounds -> no-op (alternatively, you could extend the array)
+        return current;
+      }
+      const updatedItem = _apply(arr[seg], rest);
+      if (updatedItem === arr[seg]) {
+        return current; // no structural change
+      }
+      const newArr = arr.slice();
+      newArr[seg] = updatedItem;
+      return newArr;
+    }
+
+    // String key -> navigate objects
+    if (isObject(current)) {
+      const objCurr = current as Record<string, unknown>;
+      const nextVal = objCurr[seg];
+      const updatedVal = _apply(nextVal, rest);
+
+      if (updatedVal === nextVal) {
+        return current; // no structural change
+      }
+      return { ...objCurr, [seg]: updatedVal };
+    }
+
+    // If we cannot traverse further (e.g., null, primitive, or array when expecting object) -> no-op
+    return current;
+  }
+
+  return _apply(obj, segments);
+}
+
+/**
+ * Get changed property key
+ * @param previous Previous value
+ * @param current Currency value
+ * @returns Key of property that was changed
+ */
+export function findChangedPropertyKey(previous: any, current: any): string | empty {
+  const path: string | empty = findChangedPropertyPath(previous, current),
+    parts = path?.split('.');
+
+  return parts && parts.length ? parts[parts.length - 1] : undefined;
 }
 
 /**
@@ -310,7 +484,7 @@ export function updatePropertyByKey(
  * @param parentKey Parent object key name
  * @returns Path of property that was changed
  */
-export function findChangedPropertyPath(previous: any, current: any, parentKey = ''): string | empty {
+export function findChangedPropertyPath(previous: any, current: any, parentKey: string = ''): string | empty {
   for (const key of Object.keys(current)) {
     const fullKey: string = parentKey ? `${parentKey}.${key}` : key;
 
@@ -328,19 +502,6 @@ export function findChangedPropertyPath(previous: any, current: any, parentKey =
   }
 
   return null;
-}
-
-/**
- * Get changed property key
- * @param previous Previous value
- * @param current Currency value
- * @returns Key of property that was changed
- */
-export function findChangedPropertyKey(previous: any, current: any): string | empty {
-  const path: string | empty = findChangedPropertyPath(previous, current),
-    parts = path?.split('.');
-
-  return parts && parts.length ? parts[parts.length - 1] : undefined;
 }
 
 /**

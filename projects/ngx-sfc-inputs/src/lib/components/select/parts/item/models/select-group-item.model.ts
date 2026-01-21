@@ -1,7 +1,7 @@
 export interface ISelectGroupItemModel {
-    key?: number;
+    key?: any;
     value: string;
     group?: boolean;
-    groupKey?: number;
+    groupKey?: any;
     image?: string;
 }

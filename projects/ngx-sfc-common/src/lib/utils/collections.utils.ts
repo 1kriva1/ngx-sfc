@@ -329,6 +329,23 @@ export function updateItemBy<T>(collection: Array<T>, predicate: (item: T) => bo
 }
 
 /**
+ * Toggle item in array
+ * @param arr Array of items
+ * @param item Item to toggle
+ * @returns Toggling result array
+ */
+export function toggleItem<T>(array: T[], item: T): T[] {
+    if (hasItem(array, item)) {
+        removeItem(array, item);
+    }
+    else {
+        addItem(array, item);
+    }
+
+    return array;
+}
+
+/**
  * Return collection or empty if collection is not defined
  * @param collection Array of items
  * @returns Collection or empty

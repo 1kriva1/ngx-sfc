@@ -11,3 +11,4 @@ export { State } from './state.enum';
 export { NotificationType } from './notification-type.enum';
 export { Select } from './select.enum';
 export { ItemsView } from './items-view.enum';
+export { Color } from './color.enum';

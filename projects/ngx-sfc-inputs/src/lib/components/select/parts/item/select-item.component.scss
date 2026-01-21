@@ -10,7 +10,7 @@ $item-content-size: calc($item-size / 2);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     text-align: center;
     background-color: $color-0;
     min-height: $item-size;
@@ -30,6 +30,7 @@ $item-content-size: calc($item-size / 2);
       padding: 0.2em 0;
       text-overflow: ellipsis;
       overflow: hidden; // text-ellipsis
+      text-align: start;
     }
 
     sfc-checkmark {

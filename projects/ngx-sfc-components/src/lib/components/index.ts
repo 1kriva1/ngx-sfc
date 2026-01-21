@@ -40,6 +40,7 @@ export { ChartComponent } from './chart/chart.component';
 export { ChartThemeService } from './chart/service/theme/chart-theme.service';
 export { ChartThemeModel } from './chart/service/theme/chart-theme.model';
 export { ChartOptionModel } from './chart/chart-option.model';
+export { DEFAULT_CHART_OPTIONS } from './chart/chart.constants';
 export { TableComponent } from './table/table.component';
 export { TableSelectService } from './table/service/select/table-select.service';
 export { ITableModel } from './table/models/table.model';
