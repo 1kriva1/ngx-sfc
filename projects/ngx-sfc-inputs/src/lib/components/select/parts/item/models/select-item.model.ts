@@ -1,5 +1,5 @@
 export interface ISelectItemModel {
-    key: number | null;
+    key: any | null;
     value: string;
     image?: string;
 }

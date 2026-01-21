@@ -7,7 +7,7 @@ import { EqualOrIncludeValidatorDirective } from "./equal-or-include-validator.d
 import { MaxArrayLengthValidatorDirective } from "./max-array-length-validator.directive";
 import { MinArrayLengthValidatorDirective } from "./min-array-length-validator.directive";
 import { TagsInputComponent } from "../../../components/tags/tags-input.component";
-import { CloseComponent, Compare, ShowHideElementDirective, TagComponent } from "ngx-sfc-common";
+import { CloseComponent, Compare, IconComponent, ShowHideElementDirective, TagComponent } from "ngx-sfc-common";
 import { TextInputComponent } from "../../../components/text/text-input.component";
 import { MatchValidatorDirective } from "./match-validator.directive";
 import { ValidationConstants } from "../../../constants/validation.constants";
@@ -39,7 +39,7 @@ describe('Validators-TemplateForm: Common', () => {
         TestBed.configureTestingModule({
             imports: [FormsModule, FontAwesomeModule, ReactiveFormsModule],
             declarations: [EqualOrIncludeValidatorDirective, MaxArrayLengthValidatorDirective, MinArrayLengthValidatorDirective, MatchValidatorDirective,
-                CompareThanValidatorDirective, TagsInputComponent, TagComponent, CloseComponent, ShowHideElementDirective, TextInputComponent,
+                CompareThanValidatorDirective, TagsInputComponent, IconComponent, TagComponent, CloseComponent, ShowHideElementDirective, TextInputComponent,
                 TagsInputFormTemplateTestComponent],
         }).compileComponents().then(() => {
             fixture = TestBed.createComponent(TagsInputFormTemplateTestComponent);

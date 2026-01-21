@@ -16,8 +16,9 @@ export {
     isJsonString,
     stopAndPreventPropagation,
     updatePropertyByKey,
-    findChangedPropertyPath,
+    updatePropertyByPath,
     findChangedPropertyKey,
+    findChangedPropertyPath,  
     deepClone
 } from './common.utils'
 
@@ -107,6 +108,7 @@ export {
     removeItem,
     removeItemBy,
     updateItemBy,
+    toggleItem,
     getCollectionOrEmpty,
     count,
     isArraysEquals

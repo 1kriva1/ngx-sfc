@@ -66,6 +66,16 @@ export abstract class RangeBaseComponent extends BaseInputComponent<number | IRa
   }
 
   override set value(value: number | IRangeLimitValueModel) {
+    if (this.multiple && value) {
+      if (!isDefined((value as IRangeLimitValueModel).from)) {
+        (value as IRangeLimitValueModel).from = this.min;
+      }
+
+      if (!isDefined((value as IRangeLimitValueModel).to)) {
+        (value as IRangeLimitValueModel).to = this.max;
+      }
+    }
+
     this._value = value;
   }
 
@@ -80,7 +90,7 @@ export abstract class RangeBaseComponent extends BaseInputComponent<number | IRa
   public showTooltip: boolean = false;
   public showFromTooltip: boolean = false;
   public showToTooltip: boolean = false;
-  public indexModel: IRangeLimitIndexModel = { from: RangeLimitInputState.Default, to: RangeLimitInputState.Active };  
+  public indexModel: IRangeLimitIndexModel = { from: RangeLimitInputState.Default, to: RangeLimitInputState.Active };
 
   public get valueLabel(): string {
     return this.multiple

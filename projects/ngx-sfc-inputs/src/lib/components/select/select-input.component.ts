@@ -45,6 +45,9 @@ export class SelectInputComponent
   @Input()
   size: number = PaginationConstants.DEFAULT_SIZE;
 
+  @Input()
+  loadMoreLabel: string = SelectInputConstants.DEFAULT_SHOW_MORE_LABEL;
+
   @ViewChildren(SelectItemComponent, { read: ElementRef })
   private itemsRef!: QueryList<ElementRef>;
 

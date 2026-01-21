@@ -1,6 +1,9 @@
 import { ChartConfiguration } from "chart.js";
 import { UIConstants, replaceRgbOpacity } from "ngx-sfc-common";
+import { ChartOptionModel } from "./chart-option.model";
 import { ChartThemeDataSetColors } from "./service/theme/chart-theme.model";
+
+export const DEFAULT_CHART_OPTIONS: ChartOptionModel = { defaultColors: false };
 
 const DEFAULT_BACKGROUND_COLORS = [
     `rgb(93%, 33%, 40%, ${UIConstants.RGB_OPACITY_PLACEHOLDER})`,

@@ -404,8 +404,8 @@ npm publish
 cd ../../
 
 By powershell script:
-.tools/publish.ps1
-.tools/publish.ps1 -projects common
+./tools/publish.ps1
+./tools/publish.ps1 -projects common
 
 NPM key name: 1111
 NPM recovery pin: 123456
