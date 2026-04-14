@@ -220,7 +220,7 @@ describe('Validations', () => {
                 expect(validationResult).toEqual({ 'sfc-match': true });
             });
 
-            fit('Should be valid when reversed', () => {
+            fit('Should be not valid', () => {
                 const fb: FormBuilder = new FormBuilder(),
                     formGroup: FormGroup<any> = fb.group({
                         password: new FormControl(null),
@@ -229,7 +229,7 @@ describe('Validations', () => {
 
                 formGroup.setValue({ password: '123', confirmPassword: '12' });
 
-                expect(formGroup.get('confirmPassword')?.errors).toBeNull();
+                expect(formGroup.get('confirmPassword')?.errors).toEqual({ 'sfc-match': true });
             });
 
             fit('Should be valid when values match', () => {
@@ -285,7 +285,7 @@ describe('Validations', () => {
 
                 formGroup.setValue({ from: new Date(2001, 10, 25), to: new Date(2000, 10, 25) });
 
-                expect(formGroup.get('to')?.errors).toBeNull();
+                expect(formGroup.get('to')?.errors).toEqual({ 'sfc-compare-than': true });
             });
 
             fit('Should be valid when values compares', () => {

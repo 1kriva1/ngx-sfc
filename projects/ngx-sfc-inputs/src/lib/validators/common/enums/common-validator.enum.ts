@@ -9,5 +9,5 @@ export enum CommonValidator {
     Data = 'sfc-data',
     TagsLength = 'sfc-tags-length',
     MaxArrayLength = 'sfc-max-array-length',
-    MinArrayLength = 'sfc-max-array-length'
+    MinArrayLength = 'sfc-min-array-length'
 }

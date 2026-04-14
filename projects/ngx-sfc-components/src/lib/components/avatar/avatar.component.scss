@@ -36,11 +36,13 @@
       user-select: none;
 
       .fullname {
+        text-align: center;
+
         @include theme-value(color, $color-default, $color-2);
       }
 
       .title {
-        color: $color-7;
+        color: $color-yellow-0;
       }
 
       .fullname,
