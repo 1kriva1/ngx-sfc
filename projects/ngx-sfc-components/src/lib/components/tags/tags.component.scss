@@ -5,7 +5,7 @@
 
   .container {
     .content {
-      @include center-wrap;
+      @include center-wrap(0);
 
       sfc-tag {
         margin: 0.2em;

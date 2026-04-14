@@ -5,7 +5,7 @@
         <div class="component" (click)="openModal()">
             <sfc-close *ngIf="clear && hasValue" (click)="onClear($event)"></sfc-close>
             <sfc-avatar [data]="avatarData" [progressModel]="avatarProgressModel" [progress]="avatarProgress"
-                [stars]="hasValue" [starsValue]="avatarStars" [badges]="avatarBadges" [stroke]="Constants.AVATAR.STROKE"
+                [stars]="stars" [starsValue]="avatarStars" [badges]="avatarBadges" [stroke]="Constants.AVATAR.STROKE"
                 [radius]="radius">
                 <div class="icons">
                     <fa-icon class="add" [icon]="faPlus"></fa-icon>

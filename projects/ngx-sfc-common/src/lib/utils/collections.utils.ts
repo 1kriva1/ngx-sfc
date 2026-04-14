@@ -372,3 +372,38 @@ export function isArraysEquals<T>(a: Array<T>, b: Array<T>): boolean {
 
     return true;
 }
+
+/**
+ * Get previous item in array depend on key
+ * @param array Array of objects
+ * @param key Key name
+ * @param value Value for key
+ * @returns Previous item
+ */
+export function getPreviousItemByKey<T, K extends keyof T>(
+    array: T[],
+    key: K,
+    value: T[K]
+): T | undefined {
+    const index = array.findIndex(item => item[key] === value);
+    return index > 0 ? array[index - 1] : undefined;
+}
+
+/**
+ * Get next item in array depend on key
+ * @param array Array of objects
+ * @param key Key name
+ * @param value Value for key
+ * @returns Next item
+ */
+export function getNextItemByKey<T, K extends keyof T>(
+    array: T[],
+    key: K,
+    value: T[K]
+): T | undefined {
+    const index = array.findIndex(item => item[key] === value);
+    return index !== -1 && index < array.length - 1
+        ? array[index + 1]
+        : undefined;
+}
+``

@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Optional, Output, QueryList, Renderer2, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { faArrowsSpin, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { 
-    ModalTemplate, IDefaultModalFooterModel, IDefaultModalHeaderModel, 
+import {
+    ModalTemplate, IDefaultModalFooterModel, IDefaultModalHeaderModel,
     ComponentSizeDirective, TemplateReferenceDirective, ModalService,
     stopAndPreventPropagation
 } from 'ngx-sfc-common';
@@ -68,6 +68,12 @@ export class AvatarInputComponent
     @Input()
     progressColor: string | empty = AvatarInputConstants.AVATAR.PROGRESS_COLOR;
 
+    @Input()
+    stars: boolean = true;
+
+    @Input()
+    progress: boolean = true;
+
     // Template references
 
     @Input()
@@ -121,7 +127,7 @@ export class AvatarInputComponent
     }
 
     public get avatarBadges(): IAvatarBadgeModel[] {
-        return this.hasValue ? [
+        return this.hasValue && this.progress ? [
             {
                 position: AvatarBadgePosition.RightBottom,
                 label: `${this.avatarProgress}`

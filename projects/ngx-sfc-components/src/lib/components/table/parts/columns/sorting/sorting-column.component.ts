@@ -66,6 +66,6 @@ export class SortingColumnComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscription.unsubscribe();
+    this._subscription?.unsubscribe();
   }
 }

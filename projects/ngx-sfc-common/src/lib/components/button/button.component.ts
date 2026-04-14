@@ -4,6 +4,7 @@ import { distinct, isDefined, isNullOrEmptyString } from '../../utils';
 import { ButtonType } from './button-type.enum';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { IClassModel } from '../../models';
+import { empty } from '../../types';
 
 @Component({
   selector: 'sfc-button',
@@ -18,10 +19,10 @@ export class ButtonComponent {
   text?: string;
 
   @Input()
-  iconBefore?: IconDefinition;
+  iconBefore?: IconDefinition | empty;
 
   @Input()
-  iconAfter?: IconDefinition;
+  iconAfter?: IconDefinition | empty;
 
   @Input()
   @HostBinding(`class.${UIClass.Disabled}`)

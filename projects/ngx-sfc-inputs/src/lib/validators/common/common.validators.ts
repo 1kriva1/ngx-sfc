@@ -96,14 +96,17 @@ export function minArrayLength(minLength: number): ValidatorFn {
 }
 
 export function match(matchTo: string, reverse?: boolean): ValidatorFn {
+    let isValidating = false;
+    
     return (control: AbstractControl): ValidationErrors | null => {
         if (control.parent && reverse) {
             const matchControl = (control.parent?.controls as any)[matchTo] as AbstractControl;
 
-            if (matchControl)
-                matchControl.updateValueAndValidity();
-
-            return null;
+            if (matchControl && !isValidating) {
+                isValidating = true;
+                matchControl.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+                isValidating = false;
+            }
         }
 
         return !!control.parent &&
@@ -115,10 +118,13 @@ export function match(matchTo: string, reverse?: boolean): ValidatorFn {
 }
 
 export function compareThan(comparePropertyName: string, compare: Compare, reverse?: boolean): ValidatorFn {
+    let isValidating = false;
+
     return (control: AbstractControl): ValidationErrors | null => {
         const comparePropertyValue: any = control.parent?.controls
             ? (control.parent?.controls as any)[comparePropertyName]?.value
-            : null;
+            : null,
+            validationError = { 'sfc-compare-than': true };
 
         if (!isDefined(comparePropertyValue))
             return null;
@@ -126,20 +132,34 @@ export function compareThan(comparePropertyName: string, compare: Compare, rever
         if (control.parent && reverse) {
             const matchControl = (control.parent?.controls as any)[comparePropertyName] as AbstractControl;
 
-            if (matchControl)
-                matchControl.updateValueAndValidity();
-
-            return null;
+            if (matchControl && !isValidating) {
+                isValidating = true;
+                matchControl.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+                isValidating = false;
+            }
         }
 
-        return !!control.parent &&
-            !!control.parent.value &&
-            comparePropertyValue &&
-            (compare == Compare.More
-                ? control.value > comparePropertyValue
-                : control.value < comparePropertyValue)
-            ? null
-            : { 'sfc-compare-than': true };
+        if (!!control.parent && !!control.parent.value && comparePropertyValue) {
+            let isValid = false;
+
+            switch (compare) {
+                case Compare.More:
+                    isValid = control.value > comparePropertyValue;
+                    break;
+                case Compare.Less:
+                    isValid = control.value < comparePropertyValue;
+                    break;
+                case 'equal' as any: // Compare.Equal
+                    isValid = control.value === comparePropertyValue;
+                    break;
+                case 'not-equal' as any: // Compare.Equal
+                    isValid = control.value !== comparePropertyValue;
+                    break;
+            }
+
+            return isValid ? null : validationError;
+        }
+
+        return validationError;
     }
 }
-

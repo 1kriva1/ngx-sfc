@@ -17,15 +17,17 @@ export {
 
 export {
     // models, enums
-    FileValidator, 
-    IFileExtensionValidationModel, 
+    FileValidator,
+    IFileExtensionValidationModel,
     IFileSizeValidationModel,
     // directives
     FileExtensionsValidatorDirective,
-    FileMaxSizeValidatorDirective, 
+    FileMaxSizeValidatorDirective,
     FileMinSizeValidatorDirective,
     // functions
     fileExtensions,
     fileMaxSize,
     fileMinSize
 } from './file';
+
+export * from './utils';

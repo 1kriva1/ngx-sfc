@@ -3,5 +3,7 @@
  */
 export enum Compare {
     More = 'more',
-    Less = 'less'
+    Less = 'less',
+    Equal = 'equal',
+    NotEqual = 'not-equal'
 };

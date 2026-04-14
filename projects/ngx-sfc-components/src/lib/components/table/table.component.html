@@ -20,9 +20,12 @@
             <div class="column" [style.justifyContent]="position" [style.minWidth]="column.calculatedWidth"
                 *ngFor="let column of tableColumns">
                 <ng-container [ngSwitch]="column.type">
-                    <sfc-selectable-table-column *ngSwitchCase="TableColumnType.Selectable"
-                        [selected]="allRowsSelected">
-                    </sfc-selectable-table-column>
+
+                    <ng-container *ngIf="selectMultiple">
+                        <sfc-selectable-table-column *ngSwitchCase="TableColumnType.Selectable"
+                            [selected]="allRowsSelected">
+                        </sfc-selectable-table-column>
+                    </ng-container>
 
                     <sfc-sorting-column *ngSwitchDefault [model]="column.sorting!" [id]="column.field">
 

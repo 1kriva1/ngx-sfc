@@ -111,7 +111,9 @@ export {
     toggleItem,
     getCollectionOrEmpty,
     count,
-    isArraysEquals
+    isArraysEquals,
+    getPreviousItemByKey,
+    getNextItemByKey
 } from './collections.utils';
 
 export { buildHttpParams } from './http.utils';

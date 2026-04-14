@@ -1,7 +1,7 @@
 import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ButtonType, isDefined, UIClass } from 'ngx-sfc-common';
+import { ButtonType, empty, isDefined, UIClass } from 'ngx-sfc-common';
 import { markFormTouchedAndDirty } from '../../utils/form.utils';
 
 @Component({
@@ -17,10 +17,10 @@ export class SubmitButtonComponent {
   text?: string;
 
   @Input()
-  iconBefore?: IconDefinition;
+  iconBefore?: IconDefinition | empty;
 
   @Input()
-  iconAfter?: IconDefinition;
+  iconAfter?: IconDefinition | empty;
 
   @Input()
   types: Array<ButtonType> = [ButtonType.Bordered];
