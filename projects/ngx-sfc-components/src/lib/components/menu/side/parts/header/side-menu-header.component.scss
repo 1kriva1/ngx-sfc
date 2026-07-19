@@ -1,11 +1,12 @@
 @use "ngx-sfc-common/styles/index" as *;
 
 :host {
-  li {
+  div {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.25em;
+    height: 2em;
 
     span {
       display: none;
@@ -19,8 +20,9 @@
   }
 
   &.open {
-    li {
+    div {
       justify-content: space-between;
+      padding: 1.25em 0 1.25em 1.25em;
 
       span {
         display: block;

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { CommonConstants, UIClass } from 'ngx-sfc-common';
+import { any, CommonConstants, hasItemBy, UIClass } from 'ngx-sfc-common';
 import { ISideMenuItemModel, SideMenuItemType } from '../../../side-menu.model';
-import { faAngleUp, faAngleDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp, faAngleDown, IconDefinition, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sfc-side-menu-item-content',
@@ -12,6 +12,7 @@ export class SideMenuItemContentComponent {
 
   private readonly ANGLE_UP_ICON = faAngleUp;
   private readonly ANGLE_DOWM_ICON = faAngleDown;
+  public readonly INVALID_ICON = faCircleExclamation
 
   @Input()
   item: ISideMenuItemModel = {
@@ -19,7 +20,8 @@ export class SideMenuItemContentComponent {
     label: CommonConstants.EMPTY_STRING,
     icon: null,
     type: SideMenuItemType.Item,
-    active: false
+    active: false,
+    invalid: false
   };
 
   @Input()
@@ -49,5 +51,11 @@ export class SideMenuItemContentComponent {
 
   get expandIcon(): IconDefinition {
     return this.openParent ? this.ANGLE_UP_ICON : this.ANGLE_DOWM_ICON;
+  }
+
+  get invalidParent(): boolean {
+    return this.hasChildren &&
+      !this.openParent &&
+      hasItemBy(this.item.items!, (item: ISideMenuItemModel) => item.invalid || false);
   }
 }

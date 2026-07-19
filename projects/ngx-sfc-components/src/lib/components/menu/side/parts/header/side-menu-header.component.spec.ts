@@ -27,7 +27,7 @@ describe('Component: SideMenuHeaderComponent', () => {
     });
 
     fit('Should create main elements', () => {
-      expect(fixture.nativeElement.querySelector('li')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('div')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('span')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('sfc-hamburger')).toBeTruthy();
     });

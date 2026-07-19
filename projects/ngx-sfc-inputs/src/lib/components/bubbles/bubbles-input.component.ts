@@ -23,6 +23,9 @@ export class BubblesInputComponent
   @Input()
   multiple: boolean = true;
 
+  @Input()
+  allowEmptyValue: boolean = true;
+
   protected override get hasValue(): boolean { return this.multiple ? any(this.multipleValue) : super.hasValue; }
 
   public bubbles: IBubbleInnerModel[] = [];
@@ -84,12 +87,12 @@ export class BubblesInputComponent
       this.bubbles.forEach(item => item.active = false);
       model.active = !model.active;
       this.value = model.key;
-    } else {
+      this.onChange(this.value);
+    } else if (this.allowEmptyValue) {
       this.bubbles.forEach(item => item.active = false);
       this.value = null;
+      this.onChange(this.value);
     }
-
-    this.onChange(this.value);
   }
 
   private onMultipleCheck(model: IBubbleInnerModel): void {

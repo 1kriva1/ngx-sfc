@@ -141,6 +141,34 @@
   }
 }
 
+@mixin scroll-hide($selector: "&") {
+  #{$selector}::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  #{$selector}::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@mixin scroll-show($selector: "&") {
+  #{$selector}::-webkit-scrollbar-thumb {
+    background: rgb(0 0 0 / 20%);
+
+    &:hover {
+      background: rgb(0 0 0 / 40%);
+    }
+
+    &:active {
+      background: rgb(0 0 0 / 60%);
+    }
+  }
+
+  #{$selector}::-webkit-scrollbar-track {
+    background: $color-4;
+  }
+}
+
 @mixin host($cursor: default) {
   cursor: $cursor;
   user-select: none;

@@ -8,7 +8,11 @@
         <span class="label">{{item.label}}</span>
     </div>
 
+    <div class="invalid" *ngIf="item.invalid || invalidParent">
+        <fa-icon [icon]="INVALID_ICON"></fa-icon> 
+    </div>
+
     <div *ngIf="hasChildren" class="expand-container">
         <fa-icon [icon]="expandIcon"></fa-icon>
-    </div>
-</li>
+    </div>    
+</li> 

@@ -11,6 +11,7 @@ export interface ISideMenuModel {
 export interface ISideMenuItemModel {
     label: string;
     active?: boolean;
+    invalid?: boolean | empty;
     type: SideMenuItemType;
     id?: string | empty;    
     open?: boolean;    
