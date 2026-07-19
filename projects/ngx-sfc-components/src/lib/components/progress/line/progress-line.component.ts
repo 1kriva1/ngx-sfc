@@ -45,7 +45,7 @@ export class ProgressLineComponent
     return {
       width: getCssLikeValue((this.progress / this.total) * CommonConstants.FULL_PERCENTAGE,
         UIConstants.CSS_PERCENTAGE),
-      backgroundColor: this.getColor(this.progress, this.total)
+      backgroundColor: this.disabled ? '#bdbdbd' : this.getColor(this.progress, this.total)
     }
   }
 }

@@ -368,9 +368,11 @@ export function convertUTCDateToLocalDate(date: Date): Date {
 export function convertTimestampToDate(timestamp: string): Date {
     const tempTime = timestamp.split(":"),
         result = new Date();
+
     result.setHours(+tempTime[0]);
     result.setMinutes(+tempTime[1]);
     result.setSeconds(+tempTime[2]);
+
     return result;
 }
 

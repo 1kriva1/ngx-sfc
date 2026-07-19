@@ -11,5 +11,8 @@ export abstract class ProgressBaseComponent {
     background?: string;
 
     @Input()
+    disabled: boolean = false;
+
+    @Input()
     getColor: (value: number, total?: number) => string = getProgressColorDefaultFunc;
 }

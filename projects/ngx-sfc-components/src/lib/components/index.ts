@@ -50,7 +50,7 @@ export { ITableSelectEvent } from './table/service/select/table-select.event';
 export { DefaultTableColumnComponent } from './table/parts/columns/default/default-table-column.component';
 export { ITableColumnModel, ITableColumnExtendedModel } from './table/parts/columns/table-column.model';
 export { TableColumnType } from './table/parts/columns/table-column-type.enum';
-export { ISortingModel } from './table/parts/columns/sorting/sorting-column.model';
+export { ISortingModel,ISortingIcon } from './table/parts/columns/sorting/sorting-column.model';
 export { SelectableTableColumnComponent } from './table/parts/columns/selectable/selectable-table-column.component';
 export { ColumnsToggleComponent } from './table/parts/toggle/columns-toggle.component';
 export { DefaultTableRowComponent } from './table/parts/content/rows/default/default-table-row.component';
