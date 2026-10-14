@@ -4,12 +4,14 @@ import {
   ILoadContainerPredicateParameters, ILoadContainerResultModel, isDefined, isNullOrEmptyString,
   LoadContainerLoadType, PaginationConstants, UIClass, where
 } from 'ngx-sfc-common';
-import { fromEvent, map, debounceTime, tap, filter, Observable, distinctUntilChanged } from 'rxjs';
+import { EMPTY, fromEvent, map, debounceTime, tap, Observable, distinctUntilChanged, merge, of } from 'rxjs';
 import { IAutoCompleteItemModel } from './parts/item/autocomplete-item.model';
 import { IAutoCompleteValue } from './autocomplete-input-value.model';
 import { AutoCompleteInputConstants } from './autocomplete-input.constants';
 import { BaseDataInputComponent } from '../base/data/data-input.component';
 import { CommonValidator } from '../../validators';
+import { IAutoCompleteInputEvent } from './autocomplete-input-event.model';
+import { AutoCompleteInputEventType } from './autocomplete-input-event-type.enum';
 
 @Component({
   selector: 'sfc-autocomplete-input',
@@ -27,7 +29,10 @@ export class AutoCompleteInputComponent
   @Input()
   chars: number = AutoCompleteInputConstants.DEFAULT_CHARS;
 
-  public get displayValue(): string { return this.value?.value || CommonConstants.EMPTY_STRING; }
+  @Input()
+  loadOnStart: boolean = false;
+
+  public get displayValue(): string { return this.searchValue || CommonConstants.EMPTY_STRING; }
 
   public loadMore: boolean = true;
 
@@ -55,34 +60,43 @@ export class AutoCompleteInputComponent
 
   private searchValue: string | undefined;
 
+  private firstLoadOnStart: boolean = false;
+
   override ngAfterViewInit(): void {
-    const predicate$: Observable<ILoadContainerPredicateParameters> = fromEvent<InputEvent>(this.inputElementRef.nativeElement, 'input').pipe(
-      // get value
-      map(event => (event.target as any).value),
+    const input$ = fromEvent<InputEvent>(this.inputElementRef.nativeElement, 'input').pipe(
+      map(event => ({ type: AutoCompleteInputEventType.Input, value: (event.target as HTMLInputElement).value })),
+      debounceTime(this.debounceTime)
+    );
 
-      // time in milliseconds between key events
-      debounceTime(this.debounceTime),
+    const focus$ = fromEvent<FocusEvent>(this.inputElementRef.nativeElement, 'focus').pipe(
+      map(() => ({ type: AutoCompleteInputEventType.Focus, value: this.inputElementRef.nativeElement.value }))
+    );
 
-      tap(value => {
-        if (isNullOrEmptyString(value)) {
+    const init$ = this.loadOnStart
+      ? of({ type: AutoCompleteInputEventType.Start, value: this.inputElementRef.nativeElement.value })
+      : EMPTY;
+
+    const predicate$: Observable<ILoadContainerPredicateParameters> = merge(init$, input$, focus$).pipe(
+      tap((event: IAutoCompleteInputEvent) => {
+        if (isNullOrEmptyString(event.value)) {
           this.items = [];
           this.loadMore = this.showEmpty = false;
         }
       }),
 
-      distinctUntilChanged((_, current) => this.searchValue === current),
+      distinctUntilChanged((previous, current) =>
+        current.type === AutoCompleteInputEventType.Input && previous.value === current.value
+      ),
 
-      tap(value => {
-        this.searchValue = value;
+      tap((event: IAutoCompleteInputEvent) => {
+        this.searchValue = event.value;
 
-        if (this.hasValue)
-          this.onChange({ key: undefined, value: value })
+        if (event.type === AutoCompleteInputEventType.Input && this.hasValue) {
+          this.onChange(null);
+        }
       }),
 
-      // if character length greater then 1
-      filter(value => value.length >= this.chars),
-
-      map(value => { return { value } })
+      map((event: IAutoCompleteInputEvent) => ({ value: event.value }))
     );
 
     this.loadModel = {
@@ -112,10 +126,19 @@ export class AutoCompleteInputComponent
     else
       this.items = this.items.concat(result.items);
 
-    if (!this.isFocused)
-      this.inputElementRef.nativeElement.focus();
-
     this.loadMore = this.showEmpty = true;
+
+    if (this.loadOnStart) {
+      if (!this.firstLoadOnStart && this.items.length) {
+        this.onSelect(this.items[0]);
+      }
+
+      this.firstLoadOnStart = true;
+    } else {
+      if (!this.isFocused) {
+        this.inputElementRef.nativeElement.focus();
+      }
+    }
   }
 
   public handleError(): void {

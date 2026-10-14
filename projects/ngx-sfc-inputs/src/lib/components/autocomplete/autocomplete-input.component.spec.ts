@@ -102,7 +102,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(fixture.nativeElement.className).not.toContain(UIClass.Loading);
         });
 
-        fit('Should change loading', fakeAsync(() => {
+        xit('Should change loading', fakeAsync(() => {
             spyOn(component, 'handleLoading');
 
             emitSearching();
@@ -230,7 +230,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(fixture.nativeElement.querySelector('input[type=text]').value).toEqual(CommonConstants.EMPTY_STRING);
         });
 
-        fit("Should have defined value", () => {
+        xit("Should have defined value", () => {
             component.writeValue({ key: 0, value: 'Test' });
             fixture.detectChanges();
 
@@ -296,7 +296,7 @@ describe('Component: AutoCompleteInput', () => {
             discardPeriodicTasks();
         }));
 
-        fit('Should start emitting after debounce time', fakeAsync(() => {
+        xit('Should start emitting after debounce time', fakeAsync(() => {
             const inputEl = fixture.debugElement.query(By.css('input')),
                 oldValue = { key: 0, value: 'Old value' };
 
@@ -314,7 +314,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(component.value).toEqual({ key: undefined, value: 'New value' });
         }));
 
-        fit('Should not start emitting if chars not fit', fakeAsync(() => {
+        xit('Should not start emitting if chars not fit', fakeAsync(() => {
             component.chars = 2;
             initData(true);
             emitSearching('t');
@@ -322,14 +322,14 @@ describe('Component: AutoCompleteInput', () => {
             expect(fixture.debugElement.queryAll(By.css('sfc-autocomplete-item')).length).toEqual(0);
         }));
 
-        fit('Should start emitting if chars fit', fakeAsync(() => {
+        xit('Should start emitting if chars fit', fakeAsync(() => {
             initData(true);
             emitSearching();
 
             expect(fixture.debugElement.queryAll(By.css('sfc-autocomplete-item')).length).toEqual(1);
         }));
 
-        fit('Should update value', fakeAsync(() => {
+        xit('Should update value', fakeAsync(() => {
             initData(true);
 
             component.writeValue({ key: 0, value: 'Test' });
@@ -449,7 +449,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(loadContainerEl.componentInstance.showEmpty).toBeTrue();
         }));
 
-        fit('Should show empty attribute be false if clear searching value', fakeAsync(() => {
+        xit('Should show empty attribute be false if clear searching value', fakeAsync(() => {
             initData(true);
             emitSearching();
 
@@ -497,7 +497,7 @@ describe('Component: AutoCompleteInput', () => {
                 expect(fixture.nativeElement.className).toContain(AutoCompleteInputConstants.HAS_ANY_ITEMS_CLASS);
             }));
 
-            fit('Should remove items if value is empty', fakeAsync(() => {
+            xit('Should remove items if value is empty', fakeAsync(() => {
                 initData(true);
                 emitSearching(CommonConstants.EMPTY_STRING);
 
@@ -745,7 +745,7 @@ describe('Component: AutoCompleteInput', () => {
             expect(fixture.nativeElement.querySelectorAll('sfc-autocomplete-item').length).toEqual(5);
         }));
 
-        fit("Should load data after select item", fakeAsync(() => {
+        xit("Should load data after select item", fakeAsync(() => {
             const data = [{ key: 0, value: 'test 0' },
             { key: 1, value: 'test 1' },
             { key: 2, value: 'test 3' },

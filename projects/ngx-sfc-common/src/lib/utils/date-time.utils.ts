@@ -387,6 +387,28 @@ export function convertDateToTimestamp(date: Date, locale: string = DateTimeCons
 }
 
 /**
+ * Convert DateTime to date only string
+ * @param date Date value
+ * @returns Date only string
+ */
+export function convertDateTimeToDateOnly(value: Date): string {
+    const year: number = value.getFullYear(),
+        month: string = String(value.getMonth() + 1).padStart(2, '0'),
+        day: string = String(value.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
+/**
+ * Convert date only string to date object
+ * @param value Date only string
+ * @returns Date object
+ */
+export function convertFromDateOnlyToDate(value: string): Date {
+    return new Date(value + "T00:00:00.000Z");
+}
+
+/**
  * Get age from
  * @param birthdate Date of birth
  * @returns Age

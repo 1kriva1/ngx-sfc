@@ -61,6 +61,8 @@ export {
     convertUTCDateToLocalDate,
     convertTimestampToDate,
     convertDateToTimestamp,
+    convertDateTimeToDateOnly,
+    convertFromDateOnlyToDate,
     getAge
 } from './date-time.utils'
 
