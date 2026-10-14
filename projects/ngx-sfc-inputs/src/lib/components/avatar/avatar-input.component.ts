@@ -180,7 +180,7 @@ export class AvatarInputComponent
             avatarModel: this.avatarModel,
         };
         this.modalService.args = modalArgs;
-        this.modalService.toggle(AvatarInputConstants.MODAL.ID);
+        this.modalService.toggle(AvatarInputConstants.MODAL.ID, modalArgs);
     }
 
     public onClear(event: Event): void {
