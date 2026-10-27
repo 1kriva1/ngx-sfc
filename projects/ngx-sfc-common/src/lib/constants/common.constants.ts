@@ -9,4 +9,5 @@ export class CommonConstants {
     static PERCENTAGE_SYMBOL = '%';
     static DOT = '.';
     static ASTERISK = '*';
+    static HYPHEN = '-';
 }

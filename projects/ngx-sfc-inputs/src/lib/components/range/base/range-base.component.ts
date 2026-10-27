@@ -61,7 +61,7 @@ export abstract class RangeBaseComponent extends BaseInputComponent<number | IRa
     return this._value
       ? this._value
       : this.multiple
-        ? { from: this.min, to: this.max }
+        ? { from: this.min, to: this.max, max: this.max, min: this.min }
         : this.min;
   }
 

@@ -67,7 +67,7 @@ describe('Component: RangeInput', () => {
         fit('Should have default multiple value', () => {
             component.multiple = true;
 
-            expect(component.value).toEqual({ from: 0, to: 100 });
+            expect(component.value).toEqual({ from: 0, to: 100, min: 0, max: 100 });
         });
 
         fit('Should have constant tooltip position', () => {
@@ -828,7 +828,7 @@ describe('Component: RangeInput', () => {
                     fixture.detectChanges();
 
                     expect(inputEl.nativeElement.value).toEqual(value.toString());
-                    expect(component.value).toEqual({ from: 44, to: 100 });
+                    expect(component.value).toEqual({ from: 44, to: 100, min: 0, max: 100 });
                 });
 
                 fit("Should prevent change value when from more than to", () => {
@@ -931,7 +931,7 @@ describe('Component: RangeInput', () => {
                     fixture.detectChanges();
 
                     expect(inputEl.nativeElement.value).toEqual(value.toString());
-                    expect(component.value).toEqual({ from: 0, to: 44 });
+                    expect(component.value).toEqual({ from: 0, to: 44, min: 0, max: 100 });
                 });
 
                 fit("Should prevent change value when to less than to", () => {

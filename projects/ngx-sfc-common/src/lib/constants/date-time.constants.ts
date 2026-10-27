@@ -7,4 +7,5 @@ export class DateTimeConstants {
     static DAYS_OF_WEEK = ["S", "M", "T", "W", "T", "F", "S"];
     static DAYS_OF_WEEK_3 = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     static DEFAULT_LOCALE = 'en-US';
+    static DEFAULT_DATE_TIME_FORMAT = 'd/M/yyyy';
 }
